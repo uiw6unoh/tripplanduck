@@ -1,0 +1,26 @@
+.owl-dots {
+  display: none;
+}
+.owl-item img {
+  height: 385px;
+}
+.customPrevBtn,
+.customNextBtn {
+  background: none;
+  border: none;
+  color: #999999;
+  font-size: 20px;
+  font-weight: bold;
+}
+@media (max-width: 400px) {
+  .pbPrevBtn,
+  .pbNextBtn {
+    display: none;
+  }
+}
+
+.carousel-item h3 {
+  color: #fff8c6;
+  float: left;
+  padding-bottom: 100px;
+}
