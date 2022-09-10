@@ -1,5 +1,5 @@
 ## ✈트립플랜덕 - 국내여행 플래너
-
+![홈페이지로고](https://user-images.githubusercontent.com/88029104/189465194-06cf441a-66f2-4b9e-83fd-597ccb641eb8.png)
 * '국내여행'을 주제로 기획/제작한 프로젝트입니다.
 * KH정보교육원 강남지원 (디지털컨버런스) 자바(JAVA) 기반 클라우드 융합 개발자 양성과정의 파이널 프로젝트로 기획되었습니다.
 
@@ -22,3 +22,6 @@
 -   ORACLE DB
 -   Spring Framework
 -   HTML5, CSS3, JavaScript, JSP, Jquery
+
+## 🗒유스케이스다이어그램
+<img width="1123" alt="유스케이스다이어그램" src="https://user-images.githubusercontent.com/88029104/189465265-c097f47c-80ba-4b26-9d73-036a33b22bf8.png">
