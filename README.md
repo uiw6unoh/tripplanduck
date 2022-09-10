@@ -25,3 +25,7 @@
 
 ## 🗒유스케이스다이어그램
 <img width="1123" alt="유스케이스다이어그램" src="https://user-images.githubusercontent.com/88029104/189465265-c097f47c-80ba-4b26-9d73-036a33b22bf8.png">
+
+
+## 📝ERD
+![트립플랜덕](https://user-images.githubusercontent.com/88029104/189465392-4495d0c9-bff0-4d34-9cd7-32601fcea8a2.png)
