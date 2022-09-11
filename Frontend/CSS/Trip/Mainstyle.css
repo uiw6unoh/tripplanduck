@@ -1,3 +1,4 @@
+/* owl-carousel */
 .owl-dots {
   display: none;
 }
@@ -19,15 +20,21 @@
   }
 }
 
+/* main slide */
 .carousel-item h3 {
   color: #fff8c6;
   float: left;
 }
 
+/* dropdown */
 #dropdownMenuButton1 {
   color: black;
 }
 
 .dropdown-toggle::after {
   display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
 }
