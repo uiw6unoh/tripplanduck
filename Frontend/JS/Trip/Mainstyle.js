@@ -18,3 +18,26 @@ $(document).ready(function () {
     owl.trigger("prev.owl.carousel", [300]);
   });
 });
+
+$(document).ready(function () {
+  $("#tabs").tabs({
+    collapsible: true,
+    event: "mouseover",
+    show: {
+      effect: "fade",
+      duration: 400,
+    },
+  });
+});
+
+$(document).ready(function () {
+  $("ul.tab-nav li").click(function () {
+    var tab_id = $(this).attr("data-tab");
+
+    $("ul.tab-nav li").removeClass("ui-tabs-active");
+    $(".tab-content").removeClass("ui-tabs-active");
+
+    $(this).addClass("ui-tabs-active");
+    $("#" + tab_id).addClass("ui-tabs-active");
+  });
+});

@@ -118,7 +118,7 @@
   </div>
 
  <!-- Product section-->
- <section class="py-5">
+ <section>
     <div class="container px-4 px-lg-4 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg" alt="..." /></div>
@@ -128,7 +128,7 @@
                 </div>
             </div>
         </div>
-        <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-3" data-items-lg="5" data-stage-padding="20">
+        <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-4" data-items-lg="5" data-stage-padding="20">
             <div class="owl-stage-outer">
                 <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1591px;">
                     <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
@@ -138,7 +138,7 @@
                     </div>
                     <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
                         <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 2"></a>
+                            <a href="#"><img src="https://dummyimage.com/4  00x300/dee2e6/6c757d.jpg" alt="Image 2"></a>
                         </div>
                     </div>
                     <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
@@ -174,7 +174,7 @@
             </div>
         </div>
 
-        <p class="h3 mt-5 mb-0">경험해볼 만한 것들</p>
+        <p class="h3 mb-0">경험해볼 만한 것들</p>
         <div class="row mt-2">
             <div class="col-md-6 col-lg-4">
               <div class="card">
@@ -204,9 +204,27 @@
               </div>
             </div>
           </div>
+        
+          <div class="tabs tabs-alt tabs-tb clearfix ui-tabs ui-corner-all ui-widget ui-widget-content mt-4" id="tab-8">
+            <ul class="tab-nav clearfix ui-tabs-nav" role="tablist">
+              <li role="tab" class="ui-tabs-tab ui-corner-top ui-state-default ui-tabs-active " data-tab="tab-1"><a href="#tab-1">여행지 정보</a></li>
+              <li role="tab" class="ui-tabs-tab ui-corner-top ui-state-default" data-tab="tab-2"><a href="#tab-2">별점</a></li>
+            </ul>
 
-        <div class="gmap" style="height: 250px;" data-address="Melbourne, Australia" data-zoom="12" data-markers='[{address: "Melbourne, Australia",html: "Melbourne, Australia"}]' data-icon='{image: "one-page/images/icons/map-icon-red.png",iconsize: [32, 32],iconanchor: [14,44]}'></div>
-    </div>
+            <div class="tab-container">
+              <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
+                구글 맵스, 날씨, 등 넣어야함 ~~
+                <div class="gmap" style="height: 250px;" data-address="Melbourne, Australia" data-zoom="12" data-markers='[{address: "Melbourne, Australia",html: "Melbourne, Australia"}]' data-icon='{image: "one-page/images/icons/map-icon-red.png",iconsize: [32, 32],iconanchor: [14,44]}'></div>
+              </div>
+              <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
+                별점, 댓글 넣어야함~~
+              </div>
+            </div>
+          </div>
+
+        
+        
+      </div>
 </section>
 
 <!-- 푸터 임의로 넣음-->
@@ -242,6 +260,6 @@
   <script src="../../JS/Trip/Mainstyle.js"></script>
 
   <script src="https://maps.google.com/maps/api/js?key=YOUR-API-KEY"></script>
+
 </body>
 </html>
-
