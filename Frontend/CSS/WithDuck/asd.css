@@ -1,0 +1,13 @@
+ul {
+    list-style: none;
+    padding: 0px;
+}
+
+.chatListContainer {
+    display: inline-block;
+    width: 240px;
+}
+
+.chatList {
+    width: 100%;
+} 
