@@ -28,8 +28,3 @@ A:link {
   text-decoration: none;
   color: black;
 }
-
-/* 캐러셀 이미지 크기 조정 */
-.carousel-inner > .carousel-item > img {
-  height: 900px;
-}
