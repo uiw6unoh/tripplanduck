@@ -1,5 +1,9 @@
-* {
+/* * {
   border: 1px solid salmon;
+} */
+
+p {
+  margin: 0;
 }
 
 /* owl-carousel */
@@ -123,7 +127,7 @@ html {
   display: flex;
   flex-direction: row-reverse;
   font-size: 1.25rem;
-  line-height: 2.5rem;
+  line-height: 2rem;
   justify-content: space-around;
   padding: 0 0.1em;
   text-align: center;
@@ -139,6 +143,7 @@ html {
   -webkit-text-stroke-width: 1.2px;
   -webkit-text-stroke-color: #2b2a29;
   cursor: pointer;
+  margin-bottom: 0%;
 }
 
 .star-rating :checked ~ label {
@@ -148,4 +153,20 @@ html {
 .star-rating label:hover,
 .star-rating label:hover ~ label {
   -webkit-text-fill-color: #fff58c;
+}
+
+/* 버튼 CSS */
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-outline-warning {
+  background-color: #fff8c6;
+  color: black;
+}
+
+.btn-outline-warning:hover {
+  background-color: #fff8c6;
 }

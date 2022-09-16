@@ -116,8 +116,8 @@
     <hr class="mt-1">
   </div>
 
- <!-- Product section-->
- <section>
+<!-- Product section-->
+<section>
     <div class="container px-4 px-lg-4 my-5">
         <div class="row gx-4 gx-lg-5 align-items-center">
             <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg" alt="..." /></div>
@@ -205,68 +205,94 @@
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
                 <p>구글 맵스, 날씨, 등 넣어야함 ~~</p>
+                <div id="map" style="width:350px; height:350px;"></div>
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
+                <section class="mb-5">
                   <div class="card bg-light">
-                    <div class="card-body">
-                        <!-- Comment form-->
-                        <form class="mb-4">
-                          <div class="star-rating space-x-4 mx-auto float-left ">
-                            <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
-                            <label for="5-stars" class="star pr-4">★</label>
-                            <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
-                            <label for="4-stars" class="star">★</label>
-                            <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
-                            <label for="3-stars" class="star">★</label>
-                            <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
-                            <label for="2-stars" class="star">★</label>
-                            <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-                            <label for="1-star" class="star ml-3">★</label>
+                      <div class="card-body pt-2">
+                          <!-- Comment form-->
+                          <form class="mb-2 ">
+                            <div class="star-rating space-x-4 mx-auto float-left ">
+                              <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                              <label for="5-stars" class="star">★</label>
+                              <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                              <label for="4-stars" class="star">★</label>
+                              <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                              <label for="3-stars" class="star">★</label>
+                              <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                              <label for="2-stars" class="star">★</label>
+                              <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                              <label for="1-star" class="star">★</label>
+                            </div>
+                            <button class="btn btn-outline-warning btn-sm float-right" type="submit">등록</button>
+                            <p class="pt-2" style="font-size: 0.9em;">별점을 선택해주세요</p>
+                            
+                            <textarea class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
+                              <p class="mt-1 col p-0" style="font-size: 11px;">2022.09.16 01:30
+                              </p>
+                            
+                          </form>
+                          <!-- Comment with nested comments-->
+                          <div class="d-flex mb-4">
+                              <!-- Parent comment-->
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
+                              <div class="ms-3 w-100">
+                                <p style="font-weight: bold;">짹짹이 김여울</p>
+                                  <div class="float-right">
+                                    <button class="btn btn-outline-warning py-0">수정</button>
+                                    <button class="btn btn-outline-warning py-0">삭제</button>
+                                  </div>
+                                    <p>아싸 해산!!!</p>
+                                  <!-- Child comment 1-->
+                                  <div class="d-flex mt-2">
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="ms-3 w-100">
+                                        <p style="font-weight: bold;">선긋기 김민주</p>
+                                          <div class="float-right">
+                                            <button class="btn btn-outline-warning py-0">수정</button>
+                                            <button class="btn btn-outline-warning py-0">삭제</button>
+                                          </div>
+                                            <p>저 빼고 재밌는 이야기하지 마세여</p>
+                                      </div>
+                                  </div>
+                                  <!-- Child comment 2-->
+                                  <div class="d-flex mt-3">
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="ms-3 w-100">
+                                        <p style="font-weight: bold;"></p>코드의마법사 박노경</p>
+                                          <div class="float-right">
+                                            <button class="btn btn-outline-warning py-0">수정</button>
+                                            <button class="btn btn-outline-warning py-0">삭제</button>
+                                          </div>
+                                            <p>사는게 쉽지가 않네요...</p>
+                                      </div>
+                                  </div>
+                              </div>
                           </div>
-                          <p class="my-2" style="font-size: 0.9em;">별점을 선택해주세요</p>
-                        <textarea class="form-control float-left" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-                      </form>
-                        <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">짹짹이 김여울</div>
-                                아싸 해산!!!
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">선긋기 김민주</div>
-                                        저 빼고 재밌는 이야기하지 마세여
-                                    </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">코드의마법사 박노경</div>
-                                        사는게 쉽지가 않네요...
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">무게치는 이건호</div>
-                                계란후라이 먹었어요
-                            </div>
-                        </div>
-                    </div>
+                          
+
+                          <!-- Single comment-->
+                          <div class="d-flex">
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                              <div class="ms-3 w-100">
+                                <p style="font-weight: bold;">무게치는 이건호</p>
+                                  <div class="float-right">
+                                    <button class="btn btn-outline-warning py-0">수정</button>
+                                    <button class="btn btn-outline-warning py-0">삭제</button>
+                                  </div>
+                                    <p>계란후라이 먹었어요</p>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                </section>
                 </div>
               </div>
-
-
-              
             </div>
           </div>
+        </div>
+
 
         
         
@@ -301,6 +327,31 @@
   <script src="../../JS/Trip/Mainstyle.js"></script>
 
   <script src="https://maps.google.com/maps/api/js?key=YOUR-API-KEY"></script>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
+<script>
+  var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+      mapOption = { 
+          center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+          level: 3 // 지도의 확대 레벨
+      };
+  
+  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+  
+  // 마커가 표시될 위치입니다 
+  var markerPosition = new kakao.maps.LatLng(33.450701, 126.570667); 
+  
+  // 마커를 생성합니다
+  var marker = new kakao.maps.Marker({
+      position: markerPosition
+  });
+  
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
+  
+  // 마커가 드래그 가능하도록 설정합니다 
+  marker.setDraggable(true); 
+  </script>
 
 </body>
 </html>
