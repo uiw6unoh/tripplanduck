@@ -47,6 +47,7 @@
 .chatList {
     width: 100%;
     height: 75%;
+    overflow: scroll;
 }
 
 .chatList ul {
@@ -54,8 +55,9 @@
     padding-left: 0;
 }
 
-.chatList img {
-    width: 30px;
+.chatList .profile {
+    width: 15%;
+    float: left;
 }
 
 .chatPerContainer {
@@ -66,12 +68,72 @@
 .chatPer {
     border-bottom: 1px solid;
     width: 100%;
-    height: 60px;
+    height: 10%;
+    text-align: center;
+    display: table;
 }
 
 .chatPerList {
-    height: 513px;
+    height: 90%;
 }
+
+.withTitle{
+    display: inline-block;
+    font-size: 0.5rem;
+    overflow: hidden !important;
+    float: left;
+    width: 85%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.withTitle a{
+    text-decoration: none;
+}
+
+.currentPerson {
+    font-size: 0.4rem;
+    display: inline-block;
+}
+
+.with {
+    margin-bottom: 10px;
+}
+
+.withOut {
+    display: inline-block;
+}
+
+.withOut .exit {
+    width: 50%;
+}
+
+.profile_name {
+    height: 9%;
+    display: block;
+}
+
+.chat_profile {
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+}
+
+.chat_profile img {
+    width: 30px;
+    position: relative;
+    top: 20%;
+    left: 10%;
+}
+
+.chat_name {
+    display: inline-block;
+    position: relative;
+    top: 2%;
+    left: -3%;
+}
+
+
 
 /* 오른쪽 zone */
 
@@ -92,3 +154,20 @@
     height: 10.88%;
     
 }
+
+.withChat_title {
+    display: inline-block;
+    position: relative;
+    left: 2%;
+    top: 11%;
+    font-weight: bold;
+}
+
+.exit {
+    width: 5%; 
+    float: left;
+    position: relative;
+    top: 22%;
+}
+
+
