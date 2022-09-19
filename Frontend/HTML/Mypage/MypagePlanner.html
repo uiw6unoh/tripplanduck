@@ -135,23 +135,23 @@
             <ul class="nav justify-content-center">
                 <li class="mr-4 nav-item">
                     <!-- <a class="nav-link" href="#likePlan">Like Plan</a> -->
-                    <a class="nav-link" href="../Mypage/MypageLike.html">Like Plan</a>
+                    <a class="nav-link" href="../Mypage/MypageLike.html#likePlan">Like Plan</a>
                 </li>
                 <li class="mr-4 nav-item">
-                    <a class="nav-link" href="../Mypage/MypagePlanner.html">내 여행지</a>
+                    <a class="nav-link" href="#myPlanner">내 여행지</a>
                 </li>
                 <li class="mr-4 nav-item">
-                    <a class="nav-link" href="../Mypage/MypageComment.html">나의 리뷰</a>
+                    <a class="nav-link" href="../Mypage/MypageComment.html#myComment">나의 리뷰</a>
                 </li>
             </ul>
         </div>
 
         <div class="content-container">
             <div id="myPlanner">
-                <h1 class="content-1">My Planner</h1>
+                <h1 class="display-5 mt-5">내 여행지</h1>
                 <div class="card mt-5 mb-3" style="max-width: 800px;">
                     <div class="row g-0">
-                        <div class="col-md-4">
+                        <div class="col-md-4" style="width: 200px;">
                         <img src="../../IMG/Trip/jeju.jpg" class="img-fluid rounded-start" alt="...">
                     </div>
                     <div class="col-md-8">
@@ -194,26 +194,27 @@
             </div>
         </div>
     </div>
+
     <!-- 비밀번호 확인 모달 -->
     <div class="modal fade" id="changeUserInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" style="width: 70%; height: 40px" placeholder="비밀번호 입력">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-warning">확인</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <input type="text" placeholder="비밀번호 입력">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-outline-warning">확인</button>
-            </div>
-          </div>
         </div>
-      </div>
+    </div>
 
     <!-- Bootstrap JS -->
     <!-- Option 1: Bootstrap Bundle with Popper -->
