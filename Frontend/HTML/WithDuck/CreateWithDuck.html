@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../../CSS/WithDuck/CreateWithDuck.css">
+</head>
+<body style="background-color: rgb(245, 243, 242)">
+    <section class="zone1">
+        <div class="filter">
+            <div class="filter_container">
+                <div class="filter_location">지역</div>
+                <div class="filter_gender">희망성별</div>
+                <div class="filter_personel">인원</div>
+                <div class="filter_personel">날짜</div>
+            </div>
+            <div class="filter_containerValue">
+                <div class="location_value">
+                    <div><a href="">서울</a></div>
+                    <div><a href="">강원</a></div>
+                    <div><a href="">제주</a></div>
+                    <div><a href="">부산</a></div>
+                    <div><a href="">경기</a></div>
+                    <div><a href="">인천</a></div>
+                    <div><a href="">충청</a></div>
+                    <div><a href="">경상</a></div>
+                    <div><a href="">전라</a></div>
+    
+                </div>
+                <div class="gender_value">
+                    <a href="" >남자만</a>
+                    <a href="" >여자만</a>
+                    <a href="" >성별무관</a>
+                </div>
+
+                <label for="customRange2" class="form-label"></label>
+                <div>
+                    <input type="range" class="form-range" min="0" step="1" max="20" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value;">
+                    <span id="value2"></span>
+                    명
+                </div>
+
+                <div class="date_container">
+                    <div class="start_container">
+                        <label for="start">Start date:</label>
+    
+                        <input type="date" id="start" name="trip-start"
+                            value="2018-07-22"
+                            min="2018-01-01" max="2018-12-31">
+                        </div>
+                        <div class="end_container">
+                            <label for="start">End date:</label>
+            
+                            <input type="date" id="start" name="trip-start"
+                                value="2018-07-22"
+                                min="2018-01-01" max="2018-12-31">
+                        </div>
+                    <div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="zone2">
+        <div style="border: 1px solid;" class="picture_container">
+            <div></div>
+            <div></div>
+        </div>
+
+    </section>
+
+    <section class="zone3">
+        <input type="text">
+        <textarea name="" id="" cols="30" rows="10"></textarea>
+    </section>
+
+    <button type="submit">취소</button>
+    <button type="submit">등록</button>
+</body>
+</html>
