@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="../../CSS/Admin/login.css" rel="stylesheet">
+  <link href="../../CSS/Login/login.css" rel="stylesheet">
 
   <title>로그인</title>
 </head>
@@ -30,19 +30,25 @@
         <div class="form-floating mb-3">
           <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
         </div>
-        <div class="checkbox mb-3">
+        <div class="checkbox mb-2">
           <label>
             <input type="checkbox" value="remember-id"> 아이디저장
             <input class="auto-login" type="checkbox" value="auto-login"> 자동로그인
           </label>
         </div>
-        <div class="lost-id-password">
-            <button type="button" class="btn btn-sm" type="submit" style="background-color: #FFF8C6; color:black;">아이디찾기</button>
-            <button type="button" class="btn btn-sm" type="submit" style="background-color: #FFF8C6; color:black;">비밀번호찾기</button>
+        <div class="lost-id-password mb-3">
+            <button type="button" class="btn btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;"">아이디찾기</button>
+            <button type="button" class="btn btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;"">비밀번호찾기</button>
         </div>
-        <button class="w-100 btn btn-lg mt-2 mb-3" type="submit" style="background-color: #FFF8C6; color:black;">Sign in</button>
-        <button class="w-100 btn btn-lg mb-3" type="submit" style="background-color: #FFF8C6; color:black;">회원가입</button>
+        <button class="w-100 btn btn-lg mt-2 mb-3" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">Sign in</button>
+        <button class="w-100 btn btn-lg mb-3" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;"">회원가입</button>
       </form>
+      <div class="hr-sect mb-3">OR</div>
+      <div class="sns-logo">
+        <img src="../../IMG/Login/google_logo.png">
+        <img src="../../IMG/Login/kakao_login.png" style="margin-left: 30px;">
+        <img src="../../IMG/Login/naver.png" style="margin-left: 30px;">
+      </div>
       </main>
 
 
