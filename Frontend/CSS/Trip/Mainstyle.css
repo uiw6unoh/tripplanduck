@@ -1,0 +1,196 @@
+/* * {
+  border: 1px solid salmon;
+} */
+
+p {
+  margin: 0;
+}
+
+/* owl-carousel */
+.owl-dots {
+  display: none;
+}
+
+.customPrevBtn,
+.customNextBtn {
+  background: none;
+  border: none;
+  color: #999999;
+  font-size: 20px;
+  font-weight: bold;
+}
+@media (max-width: 400px) {
+  .pbPrevBtn,
+  .pbNextBtn {
+    display: none;
+  }
+}
+
+/* 메인페이지 슬라이드 */
+.carousel-item h4 {
+  color: #fff8c6;
+}
+
+.carousel-caption {
+  top: 5rem;
+  bottom: auto;
+}
+
+.owl-text-overlay {
+  position: absolute;
+  text-align: center;
+  width: 60%;
+  top: 90%;
+  transform: translateY(-50%);
+  left: 0;
+  right: 0;
+  color: #fff;
+  padding-bottom: 20px;
+}
+
+.main-photo-linear {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+}
+
+/* 정렬 선택 드롭다운 */
+#dropdownMenuButton1 {
+  color: black;
+}
+
+.dropdown-toggle::after {
+  display: none !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 탭 */
+.tabs {
+  position: relative;
+  margin: 0 0 30px 0;
+}
+
+.tab-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0;
+  border-bottom: 1px solid #ddd;
+  list-style: none;
+  padding: 0 15px;
+}
+
+.tab-nav li {
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-bottom: 0;
+  border-left: 0;
+  height: 41px;
+  text-align: center;
+}
+
+.tabs-justify .tab-nav li {
+  -ms-flex-preferred-size: 0;
+  flex-basis: 0;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+}
+
+.tab-nav li:first-child {
+  border-left: 1px solid #ddd;
+}
+
+.tab-nav li a {
+  display: block;
+  padding: 0 15px;
+  color: #444;
+  height: 40px;
+  line-height: 40px;
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+@media (max-width: 767.98px) {
+  .tab-nav li a {
+    font-size: 0.875rem;
+  }
+}
+
+.tab-nav li.ui-tabs-active a {
+  position: relative;
+  top: 1px;
+  background-color: #fff;
+}
+
+.tabs-bb .tab-nav {
+  padding: 0;
+}
+
+.tabs-tb .tab-nav li.ui-tabs-active a {
+  top: -1px;
+  height: 43px;
+  line-height: 38px;
+  border-top: 2px solid #fff8c6;
+}
+
+.tabs-alt.tabs-tb .tab-nav li.ui-tabs-active a {
+  height: 42px;
+}
+
+/* 별점 */
+.star-rating {
+  display: flex;
+  flex-direction: row-reverse;
+  font-size: 1.25rem;
+  line-height: 2rem;
+  justify-content: space-around;
+  padding: 0 0.1em;
+  text-align: center;
+  width: 5em;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.2px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+  margin-bottom: 0%;
+}
+
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+
+/* 버튼 CSS */
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.btn-outline-warning {
+  background-color: #fff8c6;
+  color: black;
+}
+
+.btn-outline-warning:hover {
+  background-color: #fff8c6;
+}
