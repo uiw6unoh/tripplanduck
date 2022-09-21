@@ -6,12 +6,15 @@
 
 
 ## 🏃‍♀️🏃‍ 팀 구성 
-* 김여울(팀장)
-* 김민주
-* 김주한
-* 박노경
-* 신영민
-* 이건호
+|*Members*|*Contact*|
+|:---:|---|
+|**김여울(팀장)**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](http://github.com/yeorii) [![Gmail Badge](https://img.shields.io/badge/-yeoul940813@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:yeoul940813@gmail.com)](mailto:yeoul940813@gmail.com)|
+|**김민주**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/rn1nju) [![Gmail Badge](https://img.shields.io/badge/-rn1nju27@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:rn1nju27@gmail.com)](mailto:rn1nju27@gmail.com)|
+|**김주한**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/deffer34) [![Gmail Badge](https://img.shields.io/badge/-juhan2018@gmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:juhan2018@gmail.com)](mailto:juhan2018@gmail.com)|
+|**박노경**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/Parknogyung) [![Gmail Badge](https://img.shields.io/badge/-gerie99@naver.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:gerie99@naver.com )](mailto:gerie99@naver.com)|
+|**신영민**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/uiw6unoh) [![Gmail Badge](https://img.shields.io/badge/-uiw6unoh@naver.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:uiw6unoh@naver.com)](mailto:uiw6unoh@naver.com)|
+|**이건호**|[![Github Badge](https://img.shields.io/badge/-Github-000?style=flat-square&logo=Github&logoColor=white)](https://github.com/LEEGEONHO3810) [![Gmail Badge](https://img.shields.io/badge/-lkh2296@naver.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:lkh2296@naver.com)](mailto:lkh2296@naver.com)|
+
 
 ## 📆 개발기간
 2022-10-01 ~ 2022-10-31
