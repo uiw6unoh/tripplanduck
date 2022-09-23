@@ -1,0 +1,30 @@
+    /************************************************************* zone 1 *****************************************************************/
+    .carousel_container {
+        text-align: center;
+        margin: auto;
+        width: 80%;
+        height: 30%;
+        margin-top: 100px;
+    }
+
+    .slide {
+        width: 1000px;
+        height: 500px;
+        margin: auto;
+    }
+
+    .carousel-inner {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+    }
+
+    .car-img {
+        /* width: 1000px;
+        height: 500px !important;
+        object-fit: cover; */
+        
+        position: absolute; top:0; left: 0;
+        width: 100%;
+        height: 100%;
+    }
