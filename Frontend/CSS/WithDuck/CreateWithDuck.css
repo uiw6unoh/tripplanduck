@@ -1,5 +1,10 @@
 .all_title {
     background-image: url(../../IMG/WithDuck/동행이미지.png); background-position: center;
+    background-repeat : no-repeat;
+    background-size : cover;
+    height: 500px;
+    width: 1400px;
+    margin: auto;
 }
 
 .img_textContainer {

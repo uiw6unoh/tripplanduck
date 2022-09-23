@@ -1,7 +1,14 @@
        /************************************************************** zone 1 ******************************************************************/
     .zone1 {
-        background-image: url(../../IMG/WithDuck/동행이미지.png); background-position: center;
+        background-image: url(../../IMG/WithDuck/동행이미지_수정.png); 
+        /* background-position: center; */
+        background-repeat : no-repeat;
+        background-size : cover;
+        height: 500px;
+        width: 1400px;
+        margin: auto;
     }
+
 
     .img_textContainer {
         width: 100%; 
@@ -85,7 +92,7 @@
         margin-right: 10px;
     }
 
-    .zone1, .zone2 {
+    .zone2 {
         text-align: center;
         height: 340px;
     }
