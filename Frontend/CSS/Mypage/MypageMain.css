@@ -6,6 +6,7 @@ li {
     border: solid 1px red;
 } */
 
+/*상단*/
 .top-container {
     display: flex;
     flex-direction: column;
@@ -32,13 +33,34 @@ li {
     background-color: #fff8c6;
 }
 
+/*하단 메뉴*/
 .nav-container ul li a {
     color: black;
     font-size: 1.5rem;
 }
 
-.nav-container ul li a:hover {
-    color: #fff8c6;
+.nav-container a:after {
+    display: block;
+    width: 92px;
+    content: '';
+    border-bottom: solid 5px #fff8c6;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-container a:hover:after {
+    transform: scaleX(1);
+}
+
+#horizontal-underline {
+    position: absolute;
+    left: 0;
+    height: 4px;
+    width: 0;
+    border-radius: 3px;
+    transition: 0.5s;
+    background-color: #fff8c6;
+    top: 0;
 }
 
 .content-container {
@@ -47,4 +69,67 @@ li {
     justify-content: center;
     align-items: center;
 }
+
+/* 카드 */
+.card {
+    width: 800px;
+    height: 200px;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
+}
+
+.card:hover {
+    width: 810px;
+    height: 210px;
+    box-shadow: 5px 5px 7px #fff8c6;
+    border: solid 1px #fff8c6;
+    cursor: pointer;
+}
+
+.imgSize {
+    width: 240px;
+    height: 200px;
+}
+
+.imgSize:hover {
+    height: 210px;
+}
+
+
+.info-container-top {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.title {
+    color: #fabf42;
+}
+
+.text-content {
+    padding-left: 20px;
+}
+
+.fa-heart {
+    float: right;
+    margin-top: 10px;
+    color: #fabf42;
+}
+
+/* 도시명 필터 */
+.badge-warning {
+    background-color: white;
+    border: 1px solid #fff8c6;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+/* 코멘트 */
+
+
+/* 비밀번호 확인 모달 */
+.modal-header {
+    background-color: #fff8c6;
+}
+
 
