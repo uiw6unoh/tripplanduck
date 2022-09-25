@@ -106,20 +106,20 @@
     <!----------------------------------------------------------------------------------------------------------->
     <section class="zone1">
         <div class="carousel_container">
-            <div id="demo" class="carousel slide" data-ride="carousel">
+            <div id="demo" class="carousel slide pointer-event" data-ride="carousel">
                 <!-- Indicators -->
                 <ul class="carousel-indicators">
-                <li data-target="#demo" data-slide-to="0" class="active"></li>
-                <li data-target="#demo" data-slide-to="1"></li>
-                <li data-target="#demo" data-slide-to="2"></li>
+                <li data-target="#demo" data-slide-to="0" class=""></li>
+                <li data-target="#demo" data-slide-to="1" class="active"></li>
+                <li data-target="#demo" data-slide-to="2" class=""></li>
                 </ul>
             
                 <!-- The slideshow -->
                 <div class="carousel-inner">
-                <div class="carousel-item active">
+                <div class="carousel-item">
                     <img class="car-img" src="../../IMG/WithDuck/city1.PNG" alt="Los Angeles">
                 </div>
-                <div class="carousel-item">
+                <div class="carousel-item active">
                     <img class="car-img" src="../../IMG/WithDuck/flower1.PNG" alt="Chicago">
                 </div>
                 <div class="carousel-item">
@@ -134,18 +134,19 @@
                 <a class="carousel-control-next" href="#demo" data-slide="next">
                 <span class="carousel-control-next-icon"></span>
                 </a>
+            
             </div>
         </div>
     </section>
 
     <!-- 내용 -->
-    <section class="zone2" style="margin-top:3%;">
+    <section class="zone2">
         <!-- 제목 -->
         <div style="text-align: center;">
             <h5>8월 28일 ~ 8월 31일 제주도 갑니다!</h5>
         </div>
         <!-- 지역, 모집 인원 ,희망 성별, 요일 -->
-        <div style="margin-left: 10%;">
+        <div class="filter">
             <div>지역 
                 <span>제주</span>
             </div>
@@ -160,10 +161,18 @@
             </div>
         </div>
         <!-- 작성자 프로필, 이름, 나이, 성별 -->
-        <div style="margin-left: 10%; height: 30px; margin-top: 10px;">
-            <div style="display: inline-block; float: left;"><img src="../../IMG/WithDuck/girl.png" style="width: 30px; float: left;"></div>
-            <div><span style="font-size: 10pt;">박노경</span></div>
-            <div><span style="font-size: 10pt;">20대</span>/<span>남성</span></div>
+        <div class="profile-container">
+            <div class="profile-img">
+                <img src="../../IMG/WithDuck/girl.png">
+            </div>
+            <div class="profile-name" style="float: left;">
+                <span style="font-size: 10px;">박노경</span>
+            </div>
+            <br>
+            <div class="profile-age" style="float: left;">
+                <span style="font-size: 10px;">20대 /</span>
+                <span style="font-size: 10px;"> 남성</span>
+            </div>
         </div>
         <!-- 내용 -->
         <div style="margin-left: 10%; margin-top: 20px;">
@@ -171,14 +180,25 @@
                 같이 재밌게 놀다 와요
             </div>
 
-            <div>
-                #제주 #30대
+            <div class="tags">
+                <a href="">
+                    #제주
+                </a>
+                <a href="">
+                    #여행
+                </a>
             </div>
         </div>
     </section>
 <div style="text-align: center;">
-    <button >
+    <button id="join">
         동행참여
+    </button>
+    <button id="join">
+        목록으로
+    </button>
+    <button id="join">
+        수정하기
     </button>
 </div>
 </body>

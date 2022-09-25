@@ -128,12 +128,34 @@
                 <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img class="car-img" src="../../IMG/WithDuck/city1.PNG" alt="Los Angeles">
+                    <!-- <div>
+                        <img class="empty_img" src="../../IMG/WithDuck/image-gallery.png" style="width: 20px; height: 20px;" alt="">
+                    </div>
+                    <p>업로드할 사진을 추가해보세요!</p>
+                    <label for="file1" class="file">사진추가</label>
+                    <input type="file" name="file1" id="file1" style="display: none;"> -->
                 </div>
                 <div class="carousel-item">
-                    <img class="car-img" src="../../IMG/WithDuck/flower1.PNG" alt="Chicago">
+                    <!-- <img class="car-img" src="../../IMG/WithDuck/flower1.PNG" alt="Chicago"> -->
+                    <div class="empty">
+                        <div>
+                            <img class="empty_img" src="../../IMG/WithDuck/image-gallery.png" style="width: 20px; height: 20px;" alt="">
+                        </div>
+                        <p>업로드할 사진을 추가해보세요!</p>
+                        <label for="file2" class="file">사진추가</label>
+                        <input type="file" name="file2" id="file2" style="display: none;">
+                    </div>
                 </div>
                 <div class="carousel-item">
-                    <img class="car-img" src="../../IMG/WithDuck/flower2.PNG" alt="New York">
+                    <!-- <img class="car-img" src="../../IMG/WithDuck/flower2.PNG" alt="New York"> -->
+                    <div class="empty">
+                        <div>
+                            <img class="empty_img" src="../../IMG/WithDuck/image-gallery.png" style="width: 20px; height: 20px;" alt="">
+                        </div>
+                        <p>업로드할 사진을 추가해보세요!</p>
+                        <label for="file3" class="file">사진추가</label>
+                        <input type="file" name="file3" id="file3" style="display: none;">
+                    </div>
                 </div>
                 </div>
             
@@ -160,21 +182,21 @@
             </div>
             <div class="filter_containerValue">
                 <div class="location_value">
-                    <div><a href="">서울</a></div>
-                    <div><a href="">강원</a></div>
-                    <div><a href="">제주</a></div>
-                    <div><a href="">부산</a></div>
-                    <div><a href="">경기</a></div>
-                    <div><a href="">인천</a></div>
-                    <div><a href="">충청</a></div>
-                    <div><a href="">경상</a></div>
-                    <div><a href="">전라</a></div>
-    
+                    <div><button class="location_btn">서울</button></div>
+                    <div><button class="location_btn">강원</button></div>
+                    <div><button class="location_btn">제주</button></div>
+                    <div><button class="location_btn">부산</button></div>
+                    <div><button class="location_btn">경기</button></div>
+                    <div><button class="location_btn">인천</button></div>
+                    <div><button class="location_btn">충청</button></div>
+                    <div><button class="location_btn">경상</button></div>
+                    <div><button class="location_btn">전라</button></div>
                 </div>
+
                 <div class="gender_value">
-                    <a href="" >남자만</a>
-                    <a href="" >여자만</a>
-                    <a href="" >성별무관</a>
+                    <button class="gender_btn">남자만</button>
+                    <button class="gender_btn">여자만</button>
+                    <button class="gender_btn">성별무관</button>
                 </div>
 
                 <label for="customRange2" class="form-label"></label>
@@ -191,47 +213,47 @@
                         <input type="date" id="start" name="trip-start"
                             value="2018-07-22"
                             min="2018-01-01" max="2018-12-31">
-                        </div>
-                        <div class="end_container">
-                            <label for="start">End date:</label>
+                    </div>
+                    <div class="end_container">
+                        <label for="start">End date:</label>
             
-                            <input type="date" id="start" name="trip-start"
-                                value="2018-07-22"
-                                min="2018-01-01" max="2018-12-31">
-                        </div>
-                    <div>
-
-
+                        <input type="date" id="start" name="trip-start"
+                            value="2018-07-22"
+                            min="2018-01-01" max="2018-12-31">
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
 
     <!-- 내용, 제목 -->
     <section class="zone3">
-        <form>
-            <div class="input-group mb-3" style="width: 80%; margin:auto">
-            <div class="input-group-prepend">
-                <span class="input-group-text">제목</span>
-            </div>
-                <input type="text" class="form-control" placeholder="제목을 입력하세요.">
-            </div>
-        </form>
-        <form>
-            <div class="input-group mb-3 input-group-lg" style="width: 80%; height: 400px; margin: auto;">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">내용</span>
-                </div>
-                <input type="text" placeholder="내용을 입력하세요." class="form-control" style="height: 100%">
-            </div>
-        </form>
+        <div class="content_container">
+            <p>제목</p>
+                <input type="text" class="with_title" name="" id="" placeholder="제목을 입력하세요!" required>
+            
+            <p>내용</p>
+                <textarea class="with_content" name="" id="" cols="30" rows="10" placeholder="내용을 입력하세요!" required></textarea>
+        </div>
+
     </section>
 
     <div style="text-align: center; height: 100px; vertical-align: middle;">
-        <button>등록</button>
-        <button>취소</button>
+        <button id="submit">등록</button>
+        <button id="return">취소</button>
     </div>
 </body>
 </html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+$('.location_btn').on('click', function(){
+    $('.location_btn').removeClass('selected');
+    $(this).addClass('selected');
+});
+$('.gender_btn').on('click', function(){
+    $('.gender_btn').removeClass('selected');
+    $(this).addClass('selected');
+});
+
+</script>

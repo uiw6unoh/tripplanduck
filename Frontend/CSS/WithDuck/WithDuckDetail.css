@@ -25,6 +25,93 @@
         object-fit: cover; */
         
         position: absolute; top:0; left: 0;
-        width: 100%;
-        height: 100%;
+        width: 1000px;
+        height: 500px !important;
+        object-fit: cover;
+        /* position: relative;
+        top: 30%; */
     }
+
+    .carousel-inner {
+        background-color: rgb(192, 192, 192);
+    }
+
+    .carousel-item {
+        height: 500px;
+    }
+
+    /******************************************************zone2 ****************************************************************/
+    .zone2 {
+        margin-top: 3%;
+    }
+
+    .filter {
+        margin-left: 10%;
+    }
+
+    .filter span {
+        color: rgb(79, 248, 37);
+        font-weight: bold;
+    }
+
+    .profile-container {
+        margin-left: 10%;
+        height: 50px;
+        margin-top: 10px;
+    }
+
+    .profile-img {
+        height: 100%;
+        float: left;
+    }
+
+    .profile-name {
+        height: 50%;
+        float: left;
+        position: relative;
+        left: 14px;
+    }
+
+    .profile-img img {
+        width: 40px;
+    }
+
+    .profile-age {
+        height: 50%;
+        float: left;
+        position: relative;
+        right: 22px;
+        bottom: 10px;
+    }
+
+    .profile-container div {
+        display: inline-block;
+    }
+
+    .profile-name span {
+        font-size: 10px;
+        font-weight: bold;
+    }
+
+    .profile-age span {
+        font-size: 10px;
+        font-weight: bold;
+    }
+    
+    .tags a {
+        color: rgb(35, 35, 248);
+    }
+
+    #join {
+        border: 0;
+        outline: 0;
+        background-color: skyblue;
+        width: 100px;
+        height: 40px;
+        border-radius: 10px;
+    }
+
+    #join:hover {
+        background-color: rgb(97, 97, 224);
+    }
+    
