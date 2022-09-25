@@ -5,6 +5,8 @@
     height: 500px;
     width: 100%;
     margin: auto;
+    position: relative;
+    bottom: 20px;
 }
 
 .img_textContainer {

@@ -1,7 +1,6 @@
     body {
         background-color: rgb(245, 243, 242);
     }
-    
       /************************************************************** zone 1 ******************************************************************/
     .zone1 {
         background-image: url(../../IMG/WithDuck/동행이미지_수정.png); 
@@ -11,6 +10,8 @@
         height: 500px;
         width: 100%;
         margin: auto;
+        position: relative;
+        bottom: 20px;
     }
 
     .img_textContainer {
