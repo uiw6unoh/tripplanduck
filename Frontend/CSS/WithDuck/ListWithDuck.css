@@ -1,6 +1,17 @@
-       /************************************************************** zone 1 ******************************************************************/
+    body {
+        background-color: rgb(245, 243, 242);
+    }
+      /************************************************************** zone 1 ******************************************************************/
     .zone1 {
-        background-image: url(../../IMG/Common/nogyungIMG/동행이미지.png); background-position: center;
+        background-image: url(../../IMG/WithDuck/동행이미지_수정.png); 
+        /* background-position: center; */
+        background-repeat : no-repeat;
+        background-size : cover;
+        height: 500px;
+        width: 100%;
+        margin: auto;
+        position: relative;
+        bottom: 20px;
     }
 
     .img_textContainer {
@@ -17,23 +28,40 @@
     }
 
     /************************************************************** zone 2 ******************************************************************/
-    .zone2 div {
+    .filter div {
         height: 50px;
     }
 
-    .zone2 a {
-        text-decoration: none; color: black;
+    .zone2 {
+        position: relative;
+        top: -130px;
+    }
+
+    .filter_containerValue button {
+        border: 0;
+        outline: 0;
+        background-color: white;
+    }
+
+    .location_btn.selected{
+        color:greenyellow;
+    }
+
+    .gender_btn.selected{
+        color:greenyellow;
     }
 
     .filter {
         margin: auto;
         margin-top: 150px;
         width: 600px;
-        height: 150px !important; 
+        /* height: 150px !important;  */
         display: flex; 
         background-color: white; 
         border: 2px solid rgb(255, 248, 198);
-        
+        position: relative;
+        top: 25%;
+        left: 2%;
     }
 
     .filter_container {
@@ -47,6 +75,7 @@
 
     .filter_container div {
         display: block; width: 100%;
+
     }
 
     .filter_containerValue {
@@ -78,11 +107,116 @@
         margin-right: 10px;
     }
 
-    .zone1, .zone2 {
+    .zone2 {
         text-align: center;
         height: 340px;
     }
 
+    .date_container {
+        position: relative;
+        top: 60%;
+        text-align: initial;
+    }
+
+    .start_container {
+        display: inline-block;
+    }
+
+    .end_container {
+        display: inline-block;
+        position: relative;
+        left: 20%;
+    }
+
+    .filter-btn {
+        text-align: center;
+        position: relative;
+        top: 30%;
+    }
+
+    .styled1 {
+        border: 0;
+        width: 114px;
+        line-height: 2.5;
+        padding: 0 20px;
+        font-size: 1rem;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 10px;
+        background-color: royalblue;
+        background-image: linear-gradient(to top left,
+                                        rgba(0, 0, 0, .2),
+                                        rgba(0, 0, 0, .2) 30%,
+                                        rgba(0, 0, 0, 0));
+        box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                    inset -2px -2px 3px rgba(0, 0, 0, .6);
+    }
+    
+    .styled1:hover {
+        background-color: greenyellow;
+    }
+    
+    .styled1:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                    inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+
+    .styled2 {
+        border: 0;
+        width: 114px;
+        line-height: 2.5;
+        padding: 0 20px;
+        font-size: 1rem;
+        text-align: center;
+        color: #fff;
+        text-shadow: 1px 1px 1px #000;
+        border-radius: 10px;
+        background-color: wheat;
+        background-image: linear-gradient(to top left,
+                                        rgba(0, 0, 0, .2),
+                                        rgba(0, 0, 0, .2) 30%,
+                                        rgba(0, 0, 0, 0));
+        box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                    inset -2px -2px 3px rgba(0, 0, 0, .6);
+    }
+    
+    .styled2:hover {
+        background-color: greenyellow;
+    }
+    
+    .styled2:active {
+        box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                    inset 2px 2px 3px rgba(0, 0, 0, .6);
+    }
+
+    .sort button {
+        border-radius: 10px;
+        background-color: orange;
+    }
+
+    .go_withduck {
+        width: 100px;
+        height: 100px;
+        float: right;
+        position: relative;
+        right: 5%;
+    }
+
+    .go_withduck img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .go_withduck a {
+        color: #000;
+        font-size: 8pt;
+        font-weight: bold;
+    }
+
+    .go_withduck a:hover {
+        color: yellowgreen;
+    }
     /************************************************************** zone 3 ******************************************************************/
 
     .bg-light {
