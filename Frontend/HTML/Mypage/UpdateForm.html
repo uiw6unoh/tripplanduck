@@ -129,20 +129,52 @@
             </div>
         </div>
         <div class="updateInfo">
-          <div class="userId">
             <form class="needs-validation" novalidate>
-              <div class="form-row">
+              <div class="userId">
+                <h5>아이디</h5>
+                <input class="form-control" type="text" placeholder="아이디" readonly>
+              </div>
+              <div class="userName">
+                <h5>이름</h5>
+                <input class="form-control" type="text" placeholder="이름" readonly>
+              </div>
+              <div class="userNickname form-row">
                 <div class="col-md-6 mb-3">
-                  <label for="validationCustom01">닉네임</label>
+                  <label for="validationCustom01"><h5>닉네임</h5></label>
                   <input type="text" class="form-control" id="validationCustom01" required>
                   <div class="valid-feedback">
                     Looks good!
                   </div>
                 </div>
+                <div class="verification-btn pt-5">
+                  <button type="button" class="btn btn-warning">중복확인</button>
+                </div>
               </div>
-              <button class="btn btn-primary" type="submit">수정</button>
+              <div class="updatePwd form-group">
+                <label for="formGroupExampleInput"><h5>비밀번호 변경</h5></label>
+                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="변경할 비밀번호 입력">
+              </div>
+              <div class="updatePwd form-group">
+                <label for="formGroupExampleInput2"><h5>비밀번호 확인</h5></label>
+                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="비밀번호 재확인">
+              </div>
+              <div class="userEmail form-row">
+                <div class="col-md-6 mb-3">
+                  <label for="validationCustom01"><h5>이메일</h5></label>
+                  <input type="text" class="form-control" id="validationCustom01" required>
+                  <div class="valid-feedback">
+                    Looks good!
+                  </div>
+                </div>
+                <div class="verification-btn pt-5">
+                  <button type="button" class="btn btn-warning">중복확인</button>
+                </div>
+              </div>
+              
+
+              <button type="button" class="btn btn-secondary">취소</button>
+              <button class="btn btn-warning" type="submit">저장</button>
             </form>
-          </div>
         </div>
       </div>
     </div>
