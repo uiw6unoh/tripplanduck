@@ -1,0 +1,173 @@
+.allDiv {
+    width: 80%;
+    height: 800px;
+    border: 1px solid;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 100px;
+}
+
+.leftDiv {
+    border-right: 1px solid;
+    width: 28%;
+    height: 100%;
+    float: left;
+}
+
+.rightDiv {
+    width: 71.89%;
+    height: 100%;
+    float: right;
+}
+
+/* 왼쪽 zone */
+
+.chatListContainer {
+    border-bottom: 1px solid;
+    width: 100%;
+    height: 30%;
+}
+
+.chatListTitle {
+    border-bottom: 1px solid;
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    display: table;
+}
+
+.title {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.chatList {
+    width: 100%;
+    height: 75%;
+    overflow: scroll;
+}
+
+.chatList ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.chatList .profile {
+    width: 15%;
+    float: left;
+}
+
+.chatPerContainer {
+    width: 100%;
+    height: 70%;
+}
+
+.chatPer {
+    border-bottom: 1px solid;
+    width: 100%;
+    height: 10%;
+    text-align: center;
+    display: table;
+}
+
+.chatPerList {
+    height: 90%;
+}
+
+.withTitle{
+    display: inline-block;
+    font-size: 0.5rem;
+    overflow: hidden !important;
+    float: left;
+    width: 85%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.withTitle a{
+    text-decoration: none;
+}
+
+.currentPerson {
+    font-size: 0.4rem;
+    display: inline-block;
+}
+
+.with {
+    margin-bottom: 10px;
+}
+
+.withOut {
+    display: inline-block;
+}
+
+.withOut .exit {
+    width: 50%;
+}
+
+.profile_name {
+    height: 9%;
+    display: block;
+}
+
+.chat_profile {
+    width: 20%;
+    height: 100%;
+    display: inline-block;
+}
+
+.chat_profile img {
+    width: 30px;
+    position: relative;
+    top: 20%;
+    left: 10%;
+}
+
+.chat_name {
+    display: inline-block;
+    position: relative;
+    top: 2%;
+    left: -3%;
+}
+
+
+
+/* 오른쪽 zone */
+
+.chatTitle {
+    border-bottom: 1px solid;
+    width: 100%;
+    height: 9%;
+}
+
+.chatContent {
+    background-color: gainsboro;
+    width: 100%;
+    height: 80%
+}
+
+.inputChat {
+    width: 100%;
+    height: 10.88%;
+    
+}
+
+.withChat_title {
+    display: inline-block;
+    position: relative;
+    left: 2%;
+    top: 11%;
+    font-weight: bold;
+}
+
+.exit {
+    width: 5%; 
+    float: left;
+    position: relative;
+    top: 22%;
+}
+
+

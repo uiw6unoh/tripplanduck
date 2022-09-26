@@ -11,11 +11,9 @@
   margin-top: 0;
   border: none;
   /* box-shadow: 0px 10px 20px 0px rgba(0,0,0,0.1); */
-  /* border-top: none;
-    border-bottom: none; */
+  border-left: 2px solid #fff8c6;
   border-radius: 0;
   background-color: rgba(255, 255, 255, 0.8);
-  /* opacity : 0.5; */
 }
 
 /* 호버 메뉴 삼각형 안보이게 */
@@ -29,7 +27,32 @@ A:link {
   color: black;
 }
 
-/* 캐러셀 이미지 크기 조정 */
-.carousel-inner > .carousel-item > img {
-  height: 900px;
+A:visited {
+  text-decoration: none;
+  color: black;
+}
+
+/* 비디오 */
+video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  transition: opacity 0.3s 1s ease;
+}
+
+/* 비디오 텍스트 애니메이션 추가 */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 30%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0);
+  }
+}
+
+.fadeInUp {
+  position: relative;
+  animation: fadeInUp 1s;
 }
