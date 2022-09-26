@@ -17,7 +17,7 @@
     <!-- Mypage CSS -->
     <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css">
 
-    <title>Header</title>
+    <title>My Page</title>
 </head>
 
 <body>
@@ -131,7 +131,9 @@
             
         </div>
 
+        <!-- 하위 메뉴 -->
         <div class="nav-container">
+            <div id="horizontal-underline"></div>
             <ul class="nav justify-content-center">
                 <li class="mr-4 nav-item">
                     <a class="nav-link" href="../Mypage/MypageLike.html#likePlan">Like Plan</a>
@@ -147,51 +149,56 @@
 
         <div class="content-container">
             <div id="myComment">
-                <h1 class="display-5 mt-5">나의 리뷰</h1>
+                <h3>나의 리뷰</h3>
                 <div class="card mt-5 mb-3" style="max-width: 900px;">
-                    <div class="row g-0">
-                        <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">코멘트</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <h4 class="card-title">성산 일출봉 |</h4>
+                            <h5>제주도</h5>
+                            <p class="card-text">아름다웠어요</p>
+                            <p class="card-text"><small class="text-muted">2022-09-25</small></p>
+                            <div class="card-btns">
+                                <button type="button" class="btn btn-warning">수정</button>
+                                <button type="button" class="btn btn-secondary">삭제</button>
+                            </div>
                         </div>
                     </div>
                     </div>
                 </div>
                 <div class="card mb-3" style="max-width: 900px;">
-                    <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
+                    <!-- <div class="row g-0"> -->
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <h4 class="card-title">성산 일출봉 |</h4>
+                            <h5>제주도</h5>
+                            <p class="card-text">아름다웠어요</p>
+                            <p class="card-text"><small class="text-muted">2022-09-25</small></p>
+                            <div class="card-btns">
+                                <button type="button" class="btn btn-warning">수정</button>
+                                <button type="button" class="btn btn-secondary">삭제</button>
+                            </div>
                         </div>
                     </div>
-                    </div>
+                    <!-- </div> -->
                 </div>
                 <div class="card mb-3" style="max-width: 900px;">
-                    <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
                     <div class="col-md-8">
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                            <h4 class="card-title">성산 일출봉 |</h4>
+                            <h5>제주도</h5>
+                            <p class="card-text">아름다웠어요</p>
+                            <p class="card-text"><small class="text-muted">2022-09-25</small></p>
+                            <div class="card-btns">
+                                <button type="button" class="btn btn-warning">수정</button>
+                                <button type="button" class="btn btn-secondary">삭제</button>
+                            </div>
                         </div>
                     </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- <i class="fa-thin fa-angles-down"></i> -->
     </div>
 
     <!-- 비밀번호 확인 모달 -->
@@ -209,7 +216,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-outline-warning">확인</button>
+              <button type="button" class="btn btn-outline-warning" onclick="location.href='UpdateForm.html'">확인</button>
             </div>
           </div>
         </div>
@@ -223,6 +230,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
     crossorigin="anonymous"></script>
+
+    <!-- Mypage JS -->
+    <script src="../../JS/Mypage/MypageMain.js"></script>
 </body>
 
 </html>

@@ -17,7 +17,11 @@
     <!-- Mypage CSS -->
     <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css">
 
-    <title>Header</title>
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/f8167db045.js"
+crossorigin="anonymous"></script>
+
+    <title>My Page</title>
 </head>
 
 <body>
@@ -131,7 +135,9 @@
             
         </div>
 
+        <!-- 하위 메뉴 -->
         <div class="nav-container">
+            <div id="horizontal-underline"></div>
             <ul class="nav justify-content-center">
                 <li class="mr-4 nav-item">
                     <!-- <a class="nav-link" href="#likePlan">Like Plan</a> -->
@@ -148,51 +154,89 @@
 
         <div class="content-container">
             <div id="myPlanner">
-                <h1 class="display-5 mt-5">내 여행지</h1>
-                <div class="card mt-5 mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                        <div class="col-md-4" style="width: 200px;">
-                        <img src="../../IMG/Trip/jeju.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">플래너</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <h3 class="section-title">내 여행지</h1>
+                    <!-- 여행지 필터 div -->
+                    <div class="myPlanner-filter-container">
+                        <div class="myPlanner-filter-city-btn">
+
                         </div>
                     </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div class="card mt-5 mb-3" id="likeCard" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <!-- <div class="col-md-4" style="width: 200px; height: 200px;"> -->
+                            <div class="col-md-4">
+                                <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1000" class="img-fluid rounded-start imgSize" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                                    <div class="info-container-top">
+                                        <div class="card-title title"><h5>명소명</h5></div>
+                                        <div class="card-title text-content"><h5>성산 일출봉</h5></div>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">도시명</p>
+                                        <p class="card-text text-content">제주도</p>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">주소</p>
+                                        <p class="card-text text-content">제주특별자치도 제주시 특별자치도, 탑동로2길 3</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    </div>
-                </div>
-                <div class="card mb-3" style="max-width: 800px;">
-                    <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    <div class="card mb-3" id="likeCard" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1050" class="img-fluid rounded-start imgSize" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                                    <div class="info-container-top">
+                                        <div class="card-title title"><h5>명소명</h5></div>
+                                        <div class="card-title text-content"><h5>새별오름</h5></div>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">도시명</p>
+                                        <p class="card-text text-content">제주</p>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">주소</p>
+                                        <p class="card-text text-content">제주특별자치도 제주시 애월읍 봉성리 산 59-8</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <div class="card mb-3" id="likeCard" style="max-width: 800px;">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1195" class="img-fluid rounded-start imgSize" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card-body">
+                                    <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                                    <div class="info-container-top">
+                                        <div class="card-title title"><h5>명소명</h5></div>
+                                        <div class="card-title text-content"><h5>협재해수욕장</h5></div>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">도시명</p>
+                                        <p class="card-text text-content">제주</p>
+                                    </div>
+                                    <div class="info-container-top">
+                                        <p class="card-text title">주소</p>
+                                        <p class="card-text text-content">제주특별자치도 제주시 한림읍 한림로 329-10</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
             </div>
         </div>
+        <i class="fa-thin fa-angles-down"></i>
     </div>
 
     <!-- 비밀번호 확인 모달 -->
@@ -210,7 +254,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-outline-warning">확인</button>
+                    <button type="button" class="btn btn-outline-warning" onclick="location.href='UpdateForm.html'">확인</button>
                 </div>
             </div>
         </div>
@@ -224,6 +268,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
     crossorigin="anonymous"></script>
+
+    <!-- Mypage JS -->
+    <script src="../../JS/Mypage/MypageMain.js"></script>
 </body>
 
 </html>
