@@ -1,107 +1,137 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html dir="ltr" lang="en-US">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="SemiColonWeb" />
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
 
-  <!--BootStrap CSS-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Template/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="Template/css/font-icons.css" type="text/css" />
 
-  <!-- mainstyle CSS -->
-  <link rel="stylesheet" type="text/css" href="../../CSS/Common/mainstyle.css">
+    <title>Header</title>
+  </head>
 
-  <title>Header</title>
-</head>
+  <body class="stretched">
+    <div id="wrapper" class="clearfix">
+      <header id="header" class="full-header">
+        <div id="header-wrap">
+          <div class="container">
+            <div class="header-row">
+              <div id="logo">
+                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
+                  ><img src="../../IMG/Common/logo.png"
+                /></a>
+              </div>
+              <div class="header-misc">
+                <div id="top-search" class="header-misc-icon">
+                  <a href="#" id="top-search-trigger"
+                    ><i class="icon-line-search"></i><i class="icon-line-cross"></i
+                  ></a>
+                </div>
+              </div>
 
-<body>
-  <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
-  <header class="blog-header pt-5 py-5">
-    <div class="row flex-nowrap justify-content-between align-items-center">
-      <div class="col-4 pt-1"></div>
-      <div class="col-4 text-center">
-        <img src="../../IMG/Common/logo.png" width="200px">
-      </div>
-      <!-- 상단 우측 메뉴 -->
-      <div class="col-4 d-flex justify-content-center align-items-center mt-3">
-        <a class="mr-4 text-nowrap" href="#">로그인</a>
-        <a class="mr-4 text-nowrap" href="#">회원가입</a>
-      </div>
-    </div>
-    </div>
-  </header>
-
-  <div class="container">
-    <!-- 메인 메뉴 -->
-    <ul class="nav justify-content-between">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false" style="font-size: 1.1em">
-          HOME
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">@#$%#^ </a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          플래너
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          여행지
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-        </ul>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-          aria-expanded="false">
-          위드덕
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-        </ul>
-      </li>
-    
-      <ul class="nav justify-content-end" id="search">
-        <form class="d-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              <button type="submit" class="btn btn-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search"
-                  viewBox="0 0 16 16">
+              <div id="primary-menu-trigger">
+                <svg class="svg-trigger" viewBox="0 0 100 100">
                   <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                    d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
+                  ></path>
+                  <path d="m 30,50 h 40"></path>
+                  <path
+                    d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"
+                  ></path>
                 </svg>
-              </button>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item"><input class="form-control me-2 shadow-none" type="search" placeholder="Search"
-                    aria-label="Search"></a></li>
-            </ul>
-          </li>
-        </form>
-      </ul> 
-    </ul>
-    <hr class="mt-1">
-  </div>
-<!--BootStrap JS-->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-</body>
+              </div>
 
+              <!-- Primary Navigation
+						============================================= -->
+              <nav class="primary-menu">
+                <ul class="menu-container" style="font-size: 15px">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>Home</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>플래너</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>여행지</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                  </li>
+                </ul>
+              </nav>
+
+              <nav class="primary-menu">
+                <ul class="menu-container p-0">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>로그인</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>회원가입</div></a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- #primary-menu end -->
+
+              <form class="top-search-form" action="search.html" method="get">
+                <input
+                  type="text"
+                  name="q"
+                  class="form-control"
+                  value=""
+                  placeholder="도시, 키워드로 검색"
+                  autocomplete="off"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="header-wrap-clone"></div>
+      </header>
+      <!-- #header end -->
+    </div>
+    <!-- #wrapper end -->
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+
+    <!-- Go To Top
+	============================================= -->
+    <div id="gotoTop" class="icon-angle-up"></div>
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <!-- JavaScripts
+	============================================= -->
+    <script src="Template/js/jquery.js"></script>
+    <script src="Template/js/plugins.min.js"></script>
+
+    <!-- Footer Scripts
+	============================================= -->
+    <script src="Template/js/functions.js"></script>
+  </body>
 </html>
