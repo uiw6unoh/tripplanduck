@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+
+    <!-- mainstyle CSS -->
+    <link rel="stylesheet" href="../Common/Template/css/style.css" type="text/css" />
+    <link rel="stylesheet" href="../Common/Template/css/font-icons.css" type="text/css" />
+
+    <title>메인</title>
+  </head>
+
+<!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
+  <body class="stretched">
+    <div id="wrapper">
+      <header id="header" class="full-header">
+        <div id="header-wrap">
+          <div class="container">
+            <div class="header-row">
+              <div id="logo">
+                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
+                  ><img src="../../IMG/Common/logo.png"
+                /></a>
+              </div>
+              <div class="header-misc">
+                <div id="top-search" class="header-misc-icon">
+                  <a href="#" id="top-search-trigger"
+                    ><i class="icon-line-search"></i><i class="icon-line-cross"></i
+                  ></a>
+                </div>
+              </div>
+
+              <div id="primary-menu-trigger">
+                <svg class="svg-trigger" viewBox="0 0 100 100">
+                  <path
+                    d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
+                  ></path>
+                  <path d="m 30,50 h 40"></path>
+                  <path
+                    d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"
+                  ></path>
+                </svg>
+              </div>
+
+              <!-- Primary Navigation
+						============================================= -->
+              <nav class="primary-menu">
+                <ul class="menu-container">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>Home</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>플래너</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>여행지</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                  </li>
+                </ul>
+              </nav>
+
+              <nav class="primary-menu">
+                <ul class="menu-container p-0">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>로그인</div></a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#"><div>회원가입</div></a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- #primary-menu end -->
+
+              <form class="top-search-form" action="search.html" method="get">
+                <input
+                  type="text"
+                  name="q"
+                  class="form-control"
+                  value=""
+                  placeholder="도시, 키워드로 검색"
+                  autocomplete="off"
+                />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="header-wrap-clone"></div>
+      </header>
+
+    <!-- 내용 시작 -->
+      <!-- 내용 전체 컨테이너 -->
+      <section id="slider" class="slider-element dark">
+        <div class="slider-inner">
+          <div class="slider-caption d-flex h-100 slider-caption-center m-auto" style="z-index: 3">
+            <h2 data-animate="fadeInUp" class="fadeInUp animated">Welcome to TripPlanDuck</h2>
+          </div>
+          <div class="video-wrap m-auto" style="position: relative">
+            <video id="mainVideo" style="z-index: 1" preload="auto" loop autoplay muted playsinline></video>
+            <div class="video-overlay w-100" style="z-index: 2; background-color: rgba(0, 0, 0, 0.45)"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 푸터 -->
+    <div class="container-fluid p-0">
+      <footer id="footer" class="light">
+        <div id="copyrights">
+          <div class="container">
+            <div class="row col-mb-30">
+              <div class="col-md-6 text-center text-md-start">
+                Copyrights &copy; 2022 All Rights Reserved by TripPlanDuck Inc.<br />
+                <div class="copyright-links"><a href="#">이용약관</a> / <a href="#">개인정보처리방침</a></div>
+              </div>
+              <div class="col-md-6 text-center text-md-end">
+                <div class="d-flex justify-content-center justify-content-md-end">
+                  <a href="#" class="social-icon si-small si-borderless si-facebook">
+                    <i class="icon-facebook"></i>
+                    <i class="icon-facebook"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-twitter">
+                    <i class="icon-twitter"></i>
+                    <i class="icon-twitter"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-gplus">
+                    <i class="icon-gplus"></i>
+                    <i class="icon-gplus"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-github">
+                    <i class="icon-github"></i>
+                    <i class="icon-github"></i>
+                  </a>
+                </div>
+                <div class="clear"></div>
+                <i class="icon-envelope2"></i> info@TripPlanDuck.com <span class="middot">&middot;</span>
+                <i class="icon-headphones"></i> +82-02-1234-5678
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="../../JS/Common/Mainstyle.js"></script>
+    
+    <!--jQuery-->
+    <script src="../Common/Template/js/jquery.js"></script>
+
+    <!-- JavaScripts -->
+    <script src="../Common/Template/js/plugins.min.js"></script>
+    <script src="../Common/Template/js/functions.js"></script>
+
+    <style>
+      /* 비디오 */
+      video {
+        width: 100%;
+        height: 100vh;
+        object-fit: cover;
+        transition: opacity 0.3s 1s ease;
+      }
+
+      /* 비디오 텍스트 애니메이션 추가 */
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translate3d(0, 30%, 0);
+        }
+        to {
+          opacity: 1;
+          transform: translateZ(0);
+        }
+      }
+
+      .slider-inner {
+        margin-bottom: -0.35em;
+      }
+
+      .fadeInUp {
+        position: relative;
+        animation: fadeInUp 1s;
+      }
+
+      .video-overlay {
+        position: absolute;
+        height: 99.5%;
+        top: 0;
+        background: transparent url(../../IMG/Common/grid.png) repeat;
+        transform: translateZ(0);
+      }
+
+      /* 비디오 텍스트 */
+      .slider-caption.slider-caption-center {
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+      }
+
+      .slider-caption {
+        flex-flow: column;
+        justify-content: center;
+        font-size: 1.375rem;
+        font-weight: 300;
+      }
+
+      .slider-caption h2 {
+        font-size: 4rem;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        font-weight: 700;
+        line-height: 1;
+        color: #f7f7f7;
+        text-decoration: none;
+      }
+    </style>
+  </body>
+</html>
