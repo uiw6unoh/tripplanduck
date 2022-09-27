@@ -26,31 +26,25 @@ body {
   border: solid 1px red;
 } */
 
-
-
 .form-signin {
-  max-width: 350px;
   padding: 15px;
+  width: 600px;
 }
 
 .form-signin .form-floating:focus-within {
   z-index: 2;
 }
 
-.form-signin input[type="id"] {
+/* .form-signin input[type="id"] {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
-}
+} */
 
 .form-signin input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-}
-
-.auto-login {
-  margin-left: 20px;
 }
 
 .hr-sect {
@@ -61,6 +55,7 @@ body {
   font-size: 20px;
   margin: 8px 0px;
 }
+
 .hr-sect::before,
 .hr-sect::after {
   content: "";
@@ -72,7 +67,6 @@ body {
   margin: 0px 16px;
 }
 
-.sns-logo img{
-  width: 50px;
-  height: 50px;
+.checkbox a {
+  text-decoration: underline;
 }
