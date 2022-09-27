@@ -6,6 +6,10 @@ li {
     border: solid 1px red;
 } */
 
+.updateFormInfo {
+    font-size: 1.1rem;
+}
+
 /* 탈퇴 버튼 */
 .out-btn-container {
     padding-top: 70px;

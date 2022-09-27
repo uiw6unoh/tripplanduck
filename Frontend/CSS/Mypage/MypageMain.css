@@ -36,7 +36,7 @@ li {
 /*하단 메뉴*/
 .nav-container ul li a {
     color: black;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
 }
 
 .nav-container a:after {
@@ -70,6 +70,11 @@ li {
     align-items: center;
 }
 
+.section-title {
+    color: #fabf42;
+    font-size: 1.7rem;
+}
+
 /* 카드 */
 .card {
     width: 800px;
@@ -89,10 +94,14 @@ li {
 .imgSize {
     width: 240px;
     height: 200px;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
 }
 
-.imgSize:hover {
+.card:hover .imgSize {
     height: 210px;
+    transition: all 0.3s;
+    transition-delay: 0.2s;
 }
 
 .info-container-top {
