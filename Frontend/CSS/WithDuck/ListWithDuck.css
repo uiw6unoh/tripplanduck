@@ -115,7 +115,7 @@ body {
 }
 .styled1 {
     border: 0;
-    width: 114px;
+    width: 130px;
     line-height: 2.5;
     padding: 0 20px;
     font-size: 1rem;
@@ -142,7 +142,7 @@ body {
 }
 .styled2 {
     border: 0;
-    width: 114px;
+    width: 130px;
     line-height: 2.5;
     padding: 0 20px;
     font-size: 1rem;
@@ -192,7 +192,7 @@ body {
 }
 /************************************************************** zone 3 ******************************************************************/
 .bg-light {
-    background-color: rgb(245, 243, 242) !important;
+    background-color: white !important;
     border: none !important;
 }
 .title {
