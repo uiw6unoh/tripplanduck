@@ -1,3 +1,15 @@
+@font-face {
+  font-family: "Pretendard";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.eot");
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.eot?#iefix") format("embedded-opentype"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff2") format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.woff") format("woff"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/pretendard/Pretendard-Thin.ttf") format("truetype");
+  font-display: swap;
+}
+
 p {
   margin: 0;
 }
@@ -47,12 +59,40 @@ p {
   padding-bottom: 20px;
 }
 
+.owl-text-overlay h4 {
+  font-weight: 700;
+}
+
 .main-photo-linear {
   position: absolute;
   bottom: 0px;
   width: 100%;
   height: 50%;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+}
+
+/* 메인 페이지 카드 */
+.card {
+  overflow: hidden;
+  border: none;
+  box-shadow: 0px 0px 15px 1px rgba(201, 201, 201, 0.5);
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card:hover img {
+  transform: scale(1.3);
+  transition: transform 0.4s;
+}
+
+img {
+  transition: transform 0.4s;
+}
+
+.card-body p {
+  font-size: 0.9rem;
 }
 
 /* 정렬 선택 드롭다운 */
@@ -68,6 +108,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.card-title {
+  font-family: Montserrat;
+}
+
+/* === TripDetail.html ===*/
 /* 탭 */
 .tabs {
   position: relative;
@@ -80,7 +125,6 @@ html {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: 0;
-  border-bottom: 1px solid #ddd;
   list-style: none;
   padding: 0 15px;
 }
@@ -106,6 +150,10 @@ html {
 
 .tab-nav li:first-child {
   border-left: 1px solid #ddd;
+}
+
+.card-tab {
+  border: 1px solid #ddd;
 }
 
 .tab-nav li a {
@@ -178,6 +226,11 @@ html {
   -webkit-text-fill-color: #fff58c;
 }
 
+/* 카드 */
+.card-body h6 {
+  font-size: 0.9rem;
+}
+
 /* 버튼 CSS */
 .btn:focus,
 .btn:active {
@@ -192,6 +245,11 @@ html {
 
 .btn-outline-warning:hover {
   background-color: #fff8c6;
+}
+
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 /* 찜 버튼 */
@@ -248,4 +306,40 @@ html {
 .description p {
   padding: 0 30px 30px 0;
   overflow-y: auto;
+}
+
+/*=== TripPlace.html ===*/
+.img-box {
+  height: 470px;
+}
+
+.image-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.font {
+  font-size: 5rem;
+  transform: translateY(-250%);
+  color: white;
+  text-shadow: 2px 2px 2px grey;
+}
+
+.owl-carousel .item img {
+  border-radius: 5%;
+  max-width: 190px;
+  max-height: 190px;
+}
+
+.owl-text-over h6 {
+  font-size: 0.8rem;
+}
+
+.starTrip {
+  color: #fff;
+  margin-right: 7px;
+  position: absolute;
+  top: 160px;
+  left: 120px;
 }
