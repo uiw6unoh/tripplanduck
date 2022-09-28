@@ -72,7 +72,6 @@ p {
 }
 
 /* 메인 페이지 카드 */
-
 .card {
   overflow: hidden;
   border: none;
@@ -126,7 +125,6 @@ html {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   margin: 0;
-  border-bottom: 1px solid #ddd;
   list-style: none;
   padding: 0 15px;
 }
@@ -152,6 +150,10 @@ html {
 
 .tab-nav li:first-child {
   border-left: 1px solid #ddd;
+}
+
+.card-tab {
+  border: 1px solid #ddd;
 }
 
 .tab-nav li a {
@@ -334,7 +336,7 @@ html {
   font-size: 0.8rem;
 }
 
-.star {
+.starTrip {
   color: #fff;
   margin-right: 7px;
   position: absolute;
