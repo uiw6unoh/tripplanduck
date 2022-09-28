@@ -113,60 +113,32 @@ body {
     position: relative;
     top: 30%;
 }
-.styled1 {
-    border: 0;
-    width: 114px;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: royalblue;
-    background-image: linear-gradient(to top left,
-                                    rgba(0, 0, 0, .2),
-                                    rgba(0, 0, 0, .2) 30%,
-                                    rgba(0, 0, 0, 0));
-    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
-                inset -2px -2px 3px rgba(0, 0, 0, .6);
+
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.styled1:hover {
-    background-color: greenyellow;
+.favorite-styled {
+  background-color: #fff8c6;
+  color: black;
 }
 
-.styled1:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-                inset 2px 2px 3px rgba(0, 0, 0, .6);
-}
-.styled2 {
-    border: 0;
-    width: 114px;
-    line-height: 2.5;
-    padding: 0 20px;
-    font-size: 1rem;
-    text-align: center;
-    color: #fff;
-    text-shadow: 1px 1px 1px #000;
-    border-radius: 10px;
-    background-color: wheat;
-    background-image: linear-gradient(to top left,
-                                    rgba(0, 0, 0, .2),
-                                    rgba(0, 0, 0, .2) 30%,
-                                    rgba(0, 0, 0, 0));
-    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
-                inset -2px -2px 3px rgba(0, 0, 0, .6);
+.favorite-styled :hover {
+  background-color: #fff8c6;
 }
 
-.styled2:hover {
-    background-color: greenyellow;
+.favorite-styled :focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
-.styled2:active {
-    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
-                inset 2px 2px 3px rgba(0, 0, 0, .6);
+.form-control:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
+
 .sort button {
     border-radius: 10px;
     background-color: orange;

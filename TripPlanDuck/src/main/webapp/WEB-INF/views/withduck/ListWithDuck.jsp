@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="path" value="${ pageContext.request.contextPath }"/>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+
+<jsp:include page="../common/header.jsp"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,108 +18,6 @@
     <link rel="stylesheet" type="text/css" href="${path}/resources/css/withduck/ListWithDuck.css">
 </head>
 <body>
-    <section style="background: white;">
-
-        <header class="blog-header pt-5 py-5">
-            <div class="row flex-nowrap justify-content-between align-items-center">
-                <div class="col-4 pt-1"></div>
-                <div class="col-4 text-center">
-                <img src="../../IMG/Common/logo.png" width="200px">
-            </div>
-            <!-- 상단 우측 메뉴 -->
-            <div class="col-4 d-flex justify-content-center align-items-center mt-3">
-                <a class="mr-4 text-nowrap" href="#">로그인</a>
-                <a class="mr-4 text-nowrap" href="#">회원가입</a>
-                <!--
-                <a href="#" class="me-5 align-items-center mb-1">
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-cart2"
-                    viewBox="0 0 16 16">
-                    <path
-                    d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l1.25 5h8.22l1.25-5H3.14zM5 13a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-                </svg>
-                </a>
-                -->
-            </div>
-            </div>
-            </div>
-        </header>
-
-        <div class="container">
-            <!-- 메인 메뉴 -->
-            <ul class="nav justify-content-between">
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false" style="font-size: 1.1em">
-                HOME
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">@#$%#^ </a></li>
-                </ul>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                플래너
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-                <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-                <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-            </ul>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            여행지
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-            <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-        </ul>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-        aria-expanded="false">
-        위드덕
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">@#$%#^</a></li>
-        </ul>
-    </li>
-
-    <ul class="nav justify-content-end" id="search">
-        <form class="d-flex">
-            <li class="nav-item dropdown">
-            <a class="nav-link dropdown p-0" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <button type="submit" class="btn btn-white">
-                <svg xmlns="http://www.w3.org/2000/svg" width="21" height="21" fill="currentColor" class="bi bi-search"
-                viewBox="0 0 16 16">
-                <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg>
-            </button>
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item"><input class="form-control me-2" type="search" placeholder="Search"
-                    aria-label="Search"></a></li>
-            </ul>
-        </li>
-        </form>
-    </ul> 
-    </ul>
-    <hr class="mt-1">
-</div>
-<!-- Bootstrap JS -->
-<!-- Option 1: Bootstrap Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
-    crossorigin="anonymous"></script>
-</section>
-<!--------------------------------------------------------------------------------------->
 
 <section class="zone1">
 <div class="img_textContainer">
@@ -190,11 +90,12 @@
             </div>
         </div>
             <div class="filter-btn">
-                <button class="favorite styled1" type="button">
+            <input name="query" type="text" class="form-control" aria-label="search" aria-describedby="button-addon2">
+                <button class="btn favorite-styled" type="button">
                 필터 검색
                 </button>
-        
-                <button class="favorite styled2" type="button">
+        	<input name="query" type="text" class="form-control" aria-label="search" aria-describedby="button-addon2">
+                <button class="btn favorite-styled" type="button">
                 필터 초기화
                 </button>
             </div>

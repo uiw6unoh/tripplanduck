@@ -8,7 +8,7 @@ body {
     background-repeat : no-repeat;
     background-size : cover;
     height: 500px;
-    width: 100%;
+    width: 1140px;
     margin: auto;
     position: relative;
     bottom: 20px;
@@ -113,7 +113,30 @@ body {
     position: relative;
     top: 30%;
 }
+
+.filter-btn btn:focus,
+.filter-btn btn:active {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 .styled1 {
+    background-color: #fff8c6;
+    border-color: #ffc107;
+    border-radius: 0.25rem;
+} 
+
+.styled2 {
+    background-color: #fff8c6;
+    border-color: #ffc107;
+    border-radius: 0.25rem;
+}
+
+.styled1:hover {
+    background-color: #fff8c6;
+}
+
+/* .styled1 {
     border: 0;
     width: 130px;
     line-height: 2.5;
@@ -166,7 +189,7 @@ body {
 .styled2:active {
     box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
                 inset 2px 2px 3px rgba(0, 0, 0, .6);
-}
+} */
 .sort button {
     border-radius: 10px;
     background-color: orange;

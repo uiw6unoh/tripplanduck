@@ -72,7 +72,7 @@
                     <a class="menu-link" href="#"><div>여행지</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                    <a class="menu-link" href="${path}/withduck/list"><div>위드덕</div></a>
                   </li>
                 </ul>
               </nav>
