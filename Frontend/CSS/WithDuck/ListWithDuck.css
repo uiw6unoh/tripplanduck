@@ -1,119 +1,219 @@
-       /************************************************************** zone 1 ******************************************************************/
-    .zone1 {
-        background-image: url(../resources/image/동행이미지.png); background-position: center;
-    }
+body {
+    background-color: rgb(245, 243, 242);
+}
 
-    .img_textContainer {
-        width: 100%; 
-        height: 100%; 
-        display : flex; 
-        justify-content : center; 
-        align-items : center;
-    }
+  /************************************************************** zone 1 ******************************************************************/
+.zone1 {
+    background-image: url(../../IMG/WithDuck/동행이미지.png); background-position: center;
+    background-repeat : no-repeat;
+    background-size : cover;
+    height: 500px;
+    width: 100%;
+    margin: auto;
+    position: relative;
+    bottom: 20px;
+}
 
-    .img_text {
-        color: white;
-        font-weight: bold;
-    }
+.img_textContainer {
+    width: 100%; 
+    height: 100%; 
+    display : flex; 
+    justify-content : center; 
+    align-items : center;
+}
+.img_text {
+    color: white;
+    font-weight: bold;
+}
+/************************************************************** zone 2 ******************************************************************/
+.filter div {
+    height: 50px;
+}
+.zone2 {
+    position: relative;
+    top: -130px;
+}
+.filter_containerValue button {
+    border: 0;
+    outline: 0;
+    background-color: white;
+}
+.location_btn.selected{
+    color:greenyellow;
+}
+.gender_btn.selected{
+    color:greenyellow;
+}
+.filter {
+    margin: auto;
+    margin-top: 150px;
+    width: 600px;
+    /* height: 150px !important;  */
+    display: flex; 
+    background-color: white; 
+    border: 2px solid rgb(255, 248, 198);
+    position: relative;
+    top: 25%;
+    left: 2%;
+}
+.filter_container {
+    font-size: small; 
+    font-weight: bold; 
+    border-right: grey solid;  
+    width: 70px; 
+    height: 100% !important; 
+    display: block 
+}
+.filter_container div {
+    display: block; width: 100%;
+}
+.filter_containerValue {
+    display: block; 
+    margin-left: 30px; 
+    font-size: small;
+}
+.location_value {
+    text-align: left; 
+    width: 500px; 
+    height: 100%; 
+    display: flex;
+}
+.location_value div {
+    display: block; 
+    width: 100%;
+}
+.gender_value {
+    display: inline-block; 
+    float: left;
+}
+.form-range {
+    width: 85%;
+    transform: translate(-30px, 6px);
+    margin-right: 10px;
+}
+.zone2 {
+    text-align: center;
+    height: 340px;
+}
+.date_container {
+    position: relative;
+    top: 60%;
+    text-align: initial;
+}
+.start_container {
+    display: inline-block;
+}
+.end_container {
+    display: inline-block;
+    position: relative;
+    left: 20%;
+}
+.filter-btn {
+    text-align: center;
+    position: relative;
+    top: 30%;
+}
+.styled1 {
+    border: 0;
+    width: 114px;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: royalblue;
+    background-image: linear-gradient(to top left,
+                                    rgba(0, 0, 0, .2),
+                                    rgba(0, 0, 0, .2) 30%,
+                                    rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
 
-    /************************************************************** zone 2 ******************************************************************/
-    .zone2 div {
-        height: 50px;
-    }
+.styled1:hover {
+    background-color: greenyellow;
+}
 
-    .zone2 a {
-        text-decoration: none; color: black;
-    }
+.styled1:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+.styled2 {
+    border: 0;
+    width: 114px;
+    line-height: 2.5;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: wheat;
+    background-image: linear-gradient(to top left,
+                                    rgba(0, 0, 0, .2),
+                                    rgba(0, 0, 0, .2) 30%,
+                                    rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
 
-    .filter {
-        margin: auto;
-        margin-top: 150px;
-        width: 600px;
-        height: 150px !important; 
-        display: flex; 
-        background-color: white; 
-        border: 2px solid rgb(255, 248, 198);
-        
-    }
+.styled2:hover {
+    background-color: greenyellow;
+}
 
-    .filter_container {
-        font-size: small; 
-        font-weight: bold; 
-        border-right: grey solid;  
-        width: 70px; 
-        height: 100% !important; 
-        display: block 
-    }
-
-    .filter_container div {
-        display: block; width: 100%;
-    }
-
-    .filter_containerValue {
-        display: block; 
-        margin-left: 30px; 
-        font-size: small;
-    }
-
-    .location_value {
-        text-align: left; 
-        width: 500px; 
-        height: 100%; 
-        display: flex;
-    }
-
-    .location_value div {
-        display: block; 
-        width: 100%;
-    }
-
-    .gender_value {
-        display: inline-block; 
-        float: left;
-    }
-
-    .form-range {
-        width: 85%;
-        transform: translate(-30px, 6px);
-        margin-right: 10px;
-    }
-
-    .zone1, .zone2 {
-        text-align: center;
-        height: 340px;
-    }
-
-    /************************************************************** zone 3 ******************************************************************/
-
-    .bg-light {
-        background-color: rgb(245, 243, 242) !important;
-        border: none !important;
-    }
-
-    .title {
-        margin: 0px;
-    }
-
-    .intro-img {
-        width: 100%;
-        height: 156px;
-    }
-
-    .nickName {
-        display: inline-block;
-    }
-
-    .nickName img {
-        width: 24px; height: auto;
-    }
-
-    .good {
-        display: inline-block; 
-        float: right; 
-        margin-left: 10px;
-    }
-
-    .readCount {
-        display: inline-block; 
-        float: right;
-    }
+.styled2:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+.sort button {
+    border-radius: 10px;
+    background-color: orange;
+}
+.go_withduck {
+    width: 100px;
+    height: 100px;
+    float: right;
+    position: relative;
+    right: 5%;
+}
+.go_withduck img {
+    width: 100px;
+    height: 100px;
+}
+.go_withduck a {
+    color: #000;
+    font-size: 8pt;
+    font-weight: bold;
+}
+.go_withduck a:hover {
+    color: yellowgreen;
+}
+/************************************************************** zone 3 ******************************************************************/
+.bg-light {
+    background-color: rgb(245, 243, 242) !important;
+    border: none !important;
+}
+.title {
+    margin: 0px;
+}
+.intro-img {
+    width: 100%;
+    height: 156px;
+}
+.nickName {
+    display: inline-block;
+}
+.nickName img {
+    width: 24px; height: auto;
+}
+.good {
+    display: inline-block; 
+    float: right; 
+    margin-left: 10px;
+}
+.readCount {
+    display: inline-block; 
+    float: right;
+}
