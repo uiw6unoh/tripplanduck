@@ -25,11 +25,11 @@
   <link rel="stylesheet" href="${ path }/resources/css/common/style.css" type="text/css" />
   <link rel="stylesheet" href="${ path }/resources/css/common/font-icons.css" type="text/css" />
   
-  <title>Header</title>
+  <title>TripPlanDuck</title>
 </head>
 
 <body class="stretched">
-    <div id="wrapper" class="clearfix">
+    <div id="container" class="clearfix">
       <header id="header" class="full-header">
         <div id="header-wrap">
           <div class="container">
