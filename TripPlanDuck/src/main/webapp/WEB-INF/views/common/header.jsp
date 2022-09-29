@@ -22,8 +22,8 @@
   />
 
   <!-- Mainstyle CSS -->
-  <link rel="stylesheet" href="${ path }/resources/css/common/style.css" type="text/css" />
-  <link rel="stylesheet" href="${ path }/resources/css/common/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/style.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/font-icons.css" type="text/css" />
   
   <title>TripPlanDuck</title>
 </head>
