@@ -15,6 +15,26 @@
 		<org.slf4j-version>1.6.6</org.slf4j-version>
 	</properties>
 	<dependencies>
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>oraclepki</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_cert</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.oracle.database.security</groupId>
+		    <artifactId>osdt_core</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+
+	
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -48,7 +68,7 @@
 		    <scope>test</scope>
 		</dependency>
 		
-		<!-- Spring Security -->
+		<!-- Spring security -->
 		<dependency>
 		    <groupId>org.springframework.security</groupId>
 		    <artifactId>spring-security-core</artifactId>
@@ -66,7 +86,7 @@
 		    <artifactId>spring-security-config</artifactId>
 		    <version>${org.springsecurity-version}</version>
 		</dependency>
-				
+		
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
@@ -78,19 +98,6 @@
 		    <groupId>org.aspectj</groupId>
 		    <artifactId>aspectjweaver</artifactId>
 		    <version>${org.aspectj-version}</version>
-		</dependency>
-		
-		<!-- File Upload -->
-		<dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>2.11.0</version>
-		</dependency>
-		
-		<dependency>
-		    <groupId>commons-fileupload</groupId>
-		    <artifactId>commons-fileupload</artifactId>
-		    <version>1.4</version>
 		</dependency>
 		
 		<!-- Logging -->
@@ -182,46 +189,36 @@
 		    <version>1.2.5</version>
 		</dependency>	
 		
-		<!-- Database -->
-
+		<!-- DB 관련 라이브러리 
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>11.2.0.4</version>
+		</dependency>
+		-->
+		
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc8</artifactId>
+		    <version>21.5.0.0</version>
+		</dependency>
+		
+	  <!-- 스프링에서 mybatis를 사용하기 위한 라이브러리 	  -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis</artifactId>
 		    <version>3.5.10</version>
 		</dependency>
-		
-        <dependency>
-            <groupId>com.oracle.database.jdbc</groupId>
-            <artifactId>ojdbc8</artifactId>
-            <version>21.5.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.oracle.database.security</groupId>
-            <artifactId>oraclepki</artifactId>
-            <version>21.5.0.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.oracle.database.security</groupId>
-            <artifactId>osdt_cert</artifactId>
-            <version>21.5.0.0</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>com.oracle.database.security</groupId>
-            <artifactId>osdt_core</artifactId>
-            <version>21.5.0.0</version>
-        </dependency>
 			
-		<!-- Mybatis Spring -->
+		
 		<dependency>
 		    <groupId>org.mybatis</groupId>
 		    <artifactId>mybatis-spring</artifactId>
 		    <version>2.0.7</version>
 		</dependency>
+
 		
-		<!-- DBCP2 -->
+		<!-- 커넥션 풀 기능을 사용하기 위한 라이브러리 -->
 		<dependency>
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-dbcp2</artifactId>
@@ -241,6 +238,7 @@
 		    <artifactId>jackson-databind</artifactId>
 		    <version>2.13.3</version>
 		</dependency>
+				
 		
 		<!-- Test -->
 		<dependency>
@@ -262,7 +260,25 @@
 		    <artifactId>assertj-core</artifactId>
 		    <version>3.23.1</version>
 		    <scope>test</scope>
-		</dependency>              
+		</dependency>  
+		
+		
+		<!-- 파일 업로드 -->
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.4</version>
+		</dependency>
+		
+		
+		<dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.11.0</version>
+		</dependency>
+				
+		
+		            
 	</dependencies>
     <build>
         <plugins>
