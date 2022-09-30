@@ -27,6 +27,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.tripplan.duck" />	
-
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans:beans>
