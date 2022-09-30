@@ -5,7 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<jsp:include page="../views/common/header.jsp"/>
+<jsp:include page="common/header.jsp"/>
 
 <!-- 내용 시작 -->
 <section id="slider" class="slider-element dark">
@@ -84,4 +84,4 @@
       }
     </style>
     
-<jsp:include page="../views/common/footer.jsp"/>
+<jsp:include page="common/footer.jsp"/>
