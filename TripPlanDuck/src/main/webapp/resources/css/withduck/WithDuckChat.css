@@ -1,16 +1,11 @@
-@media ( max-width: 500px ) {
-    .chatList {
-        width: auto;
-    }
-}  
-
 .allDiv {
-    width: 80%;
+    width: 1100px;
     height: 800px;
     border: 1px solid;
     margin: auto;
     margin-top: 50px;
     margin-bottom: 100px;
+    border-radius: 15px;
 }
 
 .leftDiv {
@@ -52,18 +47,8 @@
     font-size: 14pt;
 }
 
-.chatList {
-    width: 100%;
-    height: 75%;
-    overflow: scroll;
-}
 
-.chatList ul {
-    list-style: none;
-    padding-left: 0;
-}
-
-.chatList .profile {
+.profile {
     /* width: 15%; */
     float: left;
     width: 17%;
@@ -86,36 +71,6 @@
 
 .chatPerList {
     height: 90%;
-}
-
-.withTitle{
-    display: inline-block;
-    font-size: 0.5rem;
-    overflow: hidden !important;
-    width: 83%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.withTitle a{
-    text-decoration: none;
-}
-
-.currentPerson {
-    font-size: 0.4rem;
-    display: inline-block;
-}
-
-.personExit {
-    position: relative;
-    bottom: 10%;
-    display: inline-block;
-}
-
-.with {
-    margin-bottom: 10px;
-    width: 100%;
-    height: 60px;
 }
 
 .withOut {
@@ -151,6 +106,57 @@
     left: -3%;
 }
 
+.withTitle {
+    overflow: scroll;
+    height: 80%;
+}
+
+.chatList{
+    display: flex;
+    width: 100%;
+    border-bottom: 1.8px solid #a7a2a28f;
+    padding-bottom: 8px;
+}
+.imgdiv {
+    width: 20%;
+}
+.chatList > .imgdiv > img {
+    width: 30px;
+}
+.textdiv {
+    width: 100%; 
+}
+.imgdiv img {
+    width: 30px;
+    margin-top: 10px;
+    margin-left: 4px;
+}
+
+.imgdiv-right {
+    width: 80%;
+    margin-top: 11px;
+}
+
+.textdiv1 a {
+    font-size: 10px;
+    color: black;
+}
+
+.textdiv1, .textdiv2 {
+    font-size: 10px;
+}
+
+.textdiv1 {
+    overflow: hidden;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.textdiv2 img {
+    width: 10px;
+    margin-left: 5px;
+}
 
 
 /* 오른쪽 zone */
@@ -171,8 +177,15 @@
 }
 
 .inputChat {
-    width: 100%;
-    height: 10.88%;
+    display: flex;
+    margin: auto;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-box {
+    width: 900px;
+    margin-left: 10px;
 }
 
 .message-box img {
@@ -205,6 +218,7 @@
     resize: none;
     position: relative;
     top: 15px;
+
 }
 
 .wrap {

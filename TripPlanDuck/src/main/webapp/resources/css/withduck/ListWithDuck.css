@@ -1,14 +1,11 @@
-body {
-    background-color: rgb(245, 243, 242);
-}
 
   /************************************************************** zone 1 ******************************************************************/
 .zone1 {
-    background-image: url(../../IMG/WithDuck/동행이미지.png); background-position: center;
+    background-image: url(../../images/WithDuck/동행이미지.png); background-position: center;
     background-repeat : no-repeat;
     background-size : cover;
     height: 500px;
-    width: 100%;
+    width: 1140px;
     margin: auto;
     position: relative;
     bottom: 20px;
@@ -20,15 +17,19 @@ body {
     display : flex; 
     justify-content : center; 
     align-items : center;
+    margin-top: 100px;
 }
 .img_text {
     color: white;
     font-weight: bold;
 }
 /************************************************************** zone 2 ******************************************************************/
-.filter div {
+/* .filter div {
     height: 50px;
-}
+} */
+
+
+
 .zone2 {
     position: relative;
     top: -130px;
@@ -39,132 +40,184 @@ body {
     background-color: white;
 }
 .location_btn.selected{
-    color:greenyellow;
+    color:#ffc107;
+    font-weight: bold;
 }
+
+.location_btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    width: 80px;
+}
+
+.gender_btn {
+    margin-left: 10px;
+}
+
+.age_btn {
+    margin-left: 10px;
+}
+
+#dropdownMenuButton1 {
+    color: black;
+  }
+  
+  .dropdown-toggle::after {
+    display: none !important;
+  }
+
 .gender_btn.selected{
-    color:greenyellow;
+    color:#ffc107;
+    font-weight: bold;
+}
+.age_btn.selected{
+    color:#ffc107;
+    font-weight: bold;
 }
 .filter {
     margin: auto;
     margin-top: 150px;
-    width: 600px;
+    width: 900px;
     /* height: 150px !important;  */
     display: flex; 
     background-color: white; 
-    border: 2px solid rgb(255, 248, 198);
+    border: 3px solid #a7a2a28f;
     position: relative;
     top: 25%;
-    left: 2%;
+    height: 307.8px;
+    border-left: none;
+    border-right: none;
 }
 .filter_container {
     font-size: small; 
     font-weight: bold; 
-    border-right: grey solid;  
+    border-right: 1.5px #a7a2a28f solid;  
     width: 70px; 
     height: 100% !important; 
-    display: block 
+    display: block; 
+    background-color: #a7a2a214;
 }
+
+
 .filter_container div {
     display: block; width: 100%;
 }
 .filter_containerValue {
     display: block; 
-    margin-left: 30px; 
     font-size: small;
+    width: 100%;
 }
 .location_value {
     text-align: left; 
-    width: 500px; 
-    height: 100%; 
+    width: 100%; 
+    height: 50.8px; 
     display: flex;
+    border-bottom: 1px solid #a7a2a28f ;
 }
 .location_value div {
-    display: block; 
+    display: flex; 
     width: 100%;
 }
 .gender_value {
-    display: inline-block; 
-    float: left;
+    display: flex;
+    height: 50.8px;
+    width: 100%;
+    border-bottom: 1px solid #a7a2a28f ;
 }
-.form-range {
+
+.age_value {
+    display: flex;
+    height: 50.8px;
+    width: 100%;
+    border-bottom: 1px solid #a7a2a28f ;
+}
+
+/* .form-range {
     width: 85%;
-    transform: translate(-30px, 6px);
-    margin-right: 10px;
+    margin-top: 15px;
+    position: relative;
+    right: 40px;
+} */
+
+.form-range {
+    width: 88%;
+    border-radius: 8px;
+    outline: none;
+    -webkit-appearance: none;
+    background: linear-gradient(to right, #ffe283 0%, #ffe283 50%, #ececec 50%, #ececec 100%);
+    accent-color: #ffca1d;
+    position: relative;
+    right: 20px;
+    margin-left: 35px;
+    width: 100%;
 }
+
 .zone2 {
     text-align: center;
     height: 340px;
 }
 .date_container {
     position: relative;
-    top: 60%;
+    bottom: 20px;
     text-align: initial;
+    display: flex;
+    align-items: center;
+    height: 50.8px;
 }
 .start_container {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
+    margin-left: 10px;
 }
 .end_container {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items:center ;
     position: relative;
     left: 20%;
 }
+
+.date_container label {
+    margin-bottom: 0px;
+}
+
 .filter-btn {
     text-align: center;
     position: relative;
-    top: 30%;
+    top: 130px;
+    display: block;
 }
+
+
 
 .btn:focus,
 .btn:active {
-  outline: none !important;
-  box-shadow: none !important;
+    outline: none !important;
+    box-shadow: none !important;
 }
 
-.favorite-styled {
-  background-color: #fff8c6;
-  color: black;
+.btn-outline-warning {
+    background-color: #fff8c6;
+    color: black;
+    width: 140px;
+    font-size: 14px;
+    margin-right: 10px;
 }
 
-.favorite-styled :hover {
-  background-color: #fff8c6;
+.btn-outline-warning:hover {
+    background-color: #fff8c6;
 }
 
-.favorite-styled :focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.form-control:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.sort button {
-    border-radius: 10px;
-    background-color: orange;
-}
-.go_withduck {
-    width: 100px;
-    height: 100px;
-    float: right;
+.go {
     position: relative;
-    right: 5%;
+    left: 160px;
 }
-.go_withduck img {
-    width: 100px;
-    height: 100px;
-}
-.go_withduck a {
-    color: #000;
-    font-size: 8pt;
-    font-weight: bold;
-}
-.go_withduck a:hover {
-    color: yellowgreen;
-}
+
 /************************************************************** zone 3 ******************************************************************/
 .bg-light {
-    background-color: rgb(245, 243, 242) !important;
+    background-color: white !important;
     border: none !important;
 }
 .title {
