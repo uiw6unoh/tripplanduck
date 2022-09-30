@@ -22,14 +22,14 @@
   />
 
   <!-- Mainstyle CSS -->
-  <link rel="stylesheet" href="${ path }/resources/css/common/style.css" type="text/css" />
-  <link rel="stylesheet" href="${ path }/resources/css/common/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/style.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/font-icons.css" type="text/css" />
   
-  <title>Header</title>
+  <title>TripPlanDuck</title>
 </head>
 
 <body class="stretched">
-    <div id="wrapper" class="clearfix">
+    <div id="container" class="clearfix">
       <header id="header" class="full-header">
         <div id="header-wrap">
           <div class="container">
@@ -66,7 +66,7 @@
                     <a class="menu-link" href="#"><div>Home</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>플래너</div></a>
+                    <a class="menu-link" href="${ path }/planner/myplanner"><div>플래너</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="#"><div>여행지</div></a>

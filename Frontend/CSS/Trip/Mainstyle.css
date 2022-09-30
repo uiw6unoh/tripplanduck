@@ -253,10 +253,19 @@ html {
 }
 
 /* 찜 버튼 */
-.heart-icon-btn {
+/* .heart-icon-btn {
   position: absolute;
-  top: 5px;
-  right: 10%;
+  top: 7px;
+  right: 9.5%;
+} */
+
+.Heart {
+  /* transform: translate(300%, -370%); */
+  width: 10%;
+  height: 10%;
+  position: absolute;
+  top: 90px;
+  right: 912px;
 }
 
 /* 메인 카드 */
