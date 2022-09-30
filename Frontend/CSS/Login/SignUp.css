@@ -15,8 +15,16 @@ body {
   align-items: center;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #F4F3F1;
+  background-color: #ffffff;
 }
+
+.signup {
+margin-left: 160px;
+}
+
+/* .title {
+  float: left;
+} */
 
 :root{
   accent-color: gold;
@@ -26,12 +34,17 @@ body {
   border: solid 1px red;
 } */
 
-.form-signin {
+table {
+  border-collapse: separate;
+  border-spacing: 0 10px;
+}
+
+.form-signup {
   padding: 15px;
   width: 600px;
 }
 
-.form-signin .form-floating:focus-within {
+.form-signup .form-floating:focus-within {
   z-index: 2;
 }
 
@@ -41,7 +54,7 @@ body {
   border-bottom-left-radius: 0;
 } */
 
-.form-signin input[type="password"] {
+.form-signup input[type="password"] {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
