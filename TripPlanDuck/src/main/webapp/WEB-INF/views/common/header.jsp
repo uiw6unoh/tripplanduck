@@ -66,7 +66,7 @@
                     <a class="menu-link" href="#"><div>Home</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>플래너</div></a>
+                    <a class="menu-link" href="${ path }/planner/myplanner"><div>플래너</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="#"><div>여행지</div></a>
