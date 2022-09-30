@@ -235,6 +235,7 @@
     <script src="${path }/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 
 </body>
+<jsp:include page="../common/footer.jsp"/>
 </html>
 
 <script>

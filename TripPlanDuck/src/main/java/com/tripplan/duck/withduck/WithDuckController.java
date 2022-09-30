@@ -12,6 +12,6 @@ public class WithDuckController {
 	
 	@GetMapping("/withduck/list")
 	public String login() {
-		return "withduck/WithDuckDetail";
+		return "withduck/ListWithDuck";
 	}
 }

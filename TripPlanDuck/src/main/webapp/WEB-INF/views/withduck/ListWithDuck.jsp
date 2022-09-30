@@ -116,7 +116,7 @@
         </div>
         <div style="text-align: center; position: relative; left: 470px; top: 36px; display: inline-block; padding: 0px;">
             <a href="">
-                <img src="../../IMG/WithDuck/airplane.gif" width="90px" alt="">
+                <img src="${path}/resources/images/WithDuck/airplane.gif" width="90px" alt="">
                 <p style="font-weight: bold;">CREATE WITHDUCK</p> 
             </a>
         </div>
@@ -270,6 +270,7 @@
     <script src="${path }/resources/js/common/functions.js"></script>
 
 </body>
+<jsp:include page="../common/footer.jsp"/>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>

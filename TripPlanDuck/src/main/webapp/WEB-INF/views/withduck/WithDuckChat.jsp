@@ -194,4 +194,5 @@
     <script src="${path }/resources/js/common/plugins.min.js"></script>
     <script src="${path }/resources/js/common/functions.js"></script>
 </body>
+<jsp:include page="../common/footer.jsp"/>
 </html>

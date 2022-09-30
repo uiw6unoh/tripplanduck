@@ -36,7 +36,7 @@
             <div class="header-row">
               <div id="logo">
                 <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
-                  ><img src="${ path }/resources/images/common/logo.png"
+                  ><img src="${ path }/resources/images/Common/logo.png"
                 /></a>
               </div>
               <div class="header-misc">
