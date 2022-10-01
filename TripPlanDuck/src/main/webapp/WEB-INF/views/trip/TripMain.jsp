@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
 <!--owl carousel CSS-->
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
 <!-- 내용 시작 -->
 <!-- 내용 전체 컨테이너 -->
@@ -250,9 +250,9 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <!--owl carousel JS -->
-<script src="${ path }/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>

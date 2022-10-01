@@ -63,13 +63,13 @@
               <nav class="primary-menu">
                 <ul class="menu-container" style="font-size: 15px">
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>Home</div></a>
+                    <a class="menu-link" href="${ path }"><div>Home</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="${ path }/planner/myplanner"><div>플래너</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>여행지</div></a>
+                    <a class="menu-link" href="${path}/trip/main""><div>여행지</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/withduck/list"><div>위드덕</div></a>

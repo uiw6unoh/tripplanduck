@@ -14,8 +14,8 @@
 <link rel="stylesheet" type="text/css" href="${ path }/css/common/heart.css">
 
 <!--owl carousel CSS-->
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
 <!-- 내용 시작 -->
 <section>
@@ -227,7 +227,7 @@
                           <!-- Comment with nested comments-->
                           <div class="d-flex mb-4">
                               <!-- Parent comment-->
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">짹짹이 김여울</p>
                                   <div class="float-right">
@@ -237,7 +237,7 @@
                                     <p>아싸 해산!!!</p>
                                   <!-- Child comment 1-->
                                   <div class="d-flex mt-2">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">선긋기 김민주</p>
                                           <div class="float-right">
@@ -249,7 +249,7 @@
                                   </div>
                                   <!-- Child comment 2-->
                                   <div class="d-flex mt-3">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">코드의마법사 박노경</p>
                                           <div class="float-right">
@@ -264,7 +264,7 @@
                           
                           <!-- Single comment-->
                           <div class="d-flex">
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">무게치는 이건호</p>
                                   <div class="float-right">
@@ -288,9 +288,9 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <!--owl carousel JS -->
-<script src="${ path }/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>
