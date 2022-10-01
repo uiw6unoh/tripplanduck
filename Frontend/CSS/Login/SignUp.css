@@ -26,6 +26,7 @@ margin-left: 160px;
   float: left;
 } */
 
+
 :root{
   accent-color: gold;
 }
@@ -82,4 +83,23 @@ table {
 
 .checkbox a {
   text-decoration: underline;
+}
+
+/* 연령대 버튼 */
+.test_obj input[type="radio"] {
+  display: none;
+}
+
+.test_obj input[type="radio"] + span {
+  display: inline-block;
+  padding: 15px 10px;
+  border: 1px solid #dfdfdf;
+  background-color: #ffffff;
+  text-align: center;
+  cursor: pointer;
+}
+
+.test_obj input[type="radio"]:checked + span {
+  background-color: gold;
+  color: #ffffff;
 }
