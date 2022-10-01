@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="${ path }/css/login/signup.css" rel="stylesheet">
+  <link href="${ path }/css/member/signup.css" rel="stylesheet">
 
   <title>회원가입</title>
 </head>
@@ -27,7 +27,7 @@
     <main class="form-signup m-auto">
       <div>
         <h1>SIGN UP</h1>
-        <img class="mb-4" src="../../IMG/Login/profile.png" alt="" width="200px">
+        <img class="mb-4" src="${ path }/images/member/profile.png" alt="" width="200px">
         <form>
             <table class="signup">
               <tr>

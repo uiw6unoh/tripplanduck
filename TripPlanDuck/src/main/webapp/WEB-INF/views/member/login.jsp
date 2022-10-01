@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
   <!-- Custom styles for this template -->
-  <link href="${ path }/css/login/login.css" rel="stylesheet">
+  <link href="${ path }/css/member/login.css" rel="stylesheet">
 
   <title>로그인</title>
 </head>
@@ -27,7 +27,7 @@
     <main class="form-signin w-300 m-auto">
       <form>
         <h1>LOGIN</h1>
-        <img class="mb-4" src="../../IMG/Common/logo.png" alt="" width="300">
+        <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300">
         <p>덕덕이와 함께 만드는 즐거운 국내여행 플래너</p>
     
         <div class="form-floating mb-3">
@@ -47,13 +47,13 @@
             <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">비밀번호찾기</button>
         </div>
         <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
-        <button class="w-100 btn-outline-warning btn-lg mb-3" type="button" id="signup" onclick="location.href='SignUp.html'" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+        <button class="w-100 btn-outline-warning btn-lg mb-3" type="button" id="signup" onclick="location.href='${path}/member/signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
       </form>
       <div class="hr-sect mb-3">OR</div>
       <div class="sns-logo">
-        <img src="../../IMG/Login/google_logo.png" style="width: 50px;">
-        <img src="../../IMG/Login/kakao_login.png" style="width: 50px; margin-left: 30px;">
-        <img src="../../IMG/Login/naver.png" style="width: 50px; margin-left: 30px;">
+        <img src="${ path }/images/member/google_logo.png" style="width: 50px;">
+        <img src="${ path }/images/member/kakao_login.png" style="width: 50px; margin-left: 30px;">
+        <img src="${ path }/images/member/naver.png" style="width: 50px; margin-left: 30px;">
       </div>
       </main>
  
