@@ -80,7 +80,7 @@
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>로그인</div></a>
+                    <a class="menu-link" href="{path}/login/login.jsp"><div>로그인</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="#"><div>회원가입</div></a>
