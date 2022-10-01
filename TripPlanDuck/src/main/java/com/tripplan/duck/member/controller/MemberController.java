@@ -23,4 +23,19 @@ public class MemberController {
 			
 		return "member/signup"; 
 	}
+	
+	@GetMapping("/member/privacy")
+	public String privacy() {
+		log.info("개인정보수집 페이지 요청");
+			
+		return "member/privacy"; 
+	}
+	
+	@GetMapping("/member/termconditions")
+	public String termconditions() {
+		log.info("이용약관 페이지 요청");
+			
+		return "member/termconditions"; 
+	}
+
 }

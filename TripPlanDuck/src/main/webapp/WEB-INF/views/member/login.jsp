@@ -27,7 +27,8 @@
     <main class="form-signin w-300 m-auto">
       <form>
         <h1>LOGIN</h1>
-        <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300">
+        <a href="${ path }">
+        <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300"></a>
         <p>덕덕이와 함께 만드는 즐거운 국내여행 플래너</p>
     
         <div class="form-floating mb-3">
@@ -47,7 +48,7 @@
             <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">비밀번호찾기</button>
         </div>
         <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
-        <button class="w-100 btn-outline-warning btn-lg mb-3" type="button" id="signup" onclick="location.href='${path}/member/signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+        <button class="w-100 btn-outline-warning btn-lg mb-3" id="signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
       </form>
       <div class="hr-sect mb-3">OR</div>
       <div class="sns-logo">
@@ -70,33 +71,40 @@
 
 <script>
 
-const id = document.getElementById('id')
-const password = document.getElementById('password')
-const login = document.getElementById('login')
-let errStack = 0;
+	const id = document.getElementById('id')
+	const password = document.getElementById('password')
+	const login = document.getElementById('login')
+	let errStack = 0;
+	
+	login.addEventListener('click', () => {
+	    if (id.value == 'admin') {
+	        if (password.value == '0000') {
+	          Swal.fire(
+	            'Good job!',
+	            'You clicked the button!',
+	            'success'
+	          )
+	        }
+	        else {
+	            alert('아이디와 비밀번호를 다시 한 번 확인해주세요!')
+	            errStack ++;
+	        }
+	    }
+	    else {
+	        alert('존재하지 않는 계정입니다.')
+	    }
+	 
+	    if (errStack >= 5) {
+	        alert('비밀번호를 5회 이상 틀리셨습니다. 비밀번호 찾기를 권장드립니다.')
+	    }
+	})
 
-login.addEventListener('click', () => {
-    if (id.value == 'admin') {
-        if (password.value == '0000') {
-          Swal.fire(
-            'Good job!',
-            'You clicked the button!',
-            'success'
-          )
-        }
-        else {
-            alert('아이디와 비밀번호를 다시 한 번 확인해주세요!')
-            errStack ++;
-        }
-    }
-    else {
-        alert('존재하지 않는 계정입니다.')
-    }
- 
-    if (errStack >= 5) {
-        alert('비밀번호를 5회 이상 틀리셨습니다. 비밀번호 찾기를 권장드립니다.')
-    }
-})
+	$(document).ready(function () {
+		$('#signup').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/signup';
+		});
+	});
 </script>
 
 </body>
