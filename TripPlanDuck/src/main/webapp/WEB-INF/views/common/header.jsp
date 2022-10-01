@@ -36,7 +36,7 @@
             <div class="header-row">
               <div id="logo">
                 <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
-                  ><img src="${ path }/resources/images/common/logo.png"
+                  ><img src="${ path }/resources/images/Common/logo.png"
                 /></a>
               </div>
               <div class="header-misc">
@@ -72,7 +72,7 @@
                     <a class="menu-link" href="#"><div>여행지</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                    <a class="menu-link" href="${path}/withduck/list"><div>위드덕</div></a>
                   </li>
                 </ul>
               </nav>
