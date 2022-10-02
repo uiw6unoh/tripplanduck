@@ -40,16 +40,10 @@ public class PlannerController {
 			return "/planner/myplanner";
      }
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		@PostMapping("/myplanner")
+			public ModelAndView routePlanner(ModelAndView model) {
+				return model;
+			}
 		
 		
  }
