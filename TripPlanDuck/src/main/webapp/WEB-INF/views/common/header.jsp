@@ -35,8 +35,8 @@
           <div class="container">
             <div class="header-row">
               <div id="logo">
-                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
-                  ><img src="${ path }/resources/images/common/logo.png"
+                <a href="${ path }" class="standard-logo" data-dark-logo="images/logo-dark.png"
+                  ><img src="${ path }/resources/images/common/logo.png" 
                 /></a>
               </div>
               <div class="header-misc">
@@ -72,7 +72,7 @@
                     <a class="menu-link" href="#"><div>여행지</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                    <a class="menu-link" href="${path}/withduck/list"><div>위드덕</div></a>
                   </li>
                 </ul>
               </nav>
@@ -80,10 +80,10 @@
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>로그인</div></a>
+                    <a class="menu-link" href="${path}/member/login"><div>로그인</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>회원가입</div></a>
+                    <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>
                   </li>
                 </ul>
               </nav>

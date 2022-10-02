@@ -3,6 +3,7 @@
 
 ### Eclipse ###
 Servers/
+pom.properties
 .metadata
 bin/
 tmp/
