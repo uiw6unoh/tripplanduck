@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tripplan.duck.planner.model.mapper.PlannerMapper">
+	<sql id="findLocation" >
+		<!-- 
+		 SELECT L.LOCATION_ID, L.LOCATION 
+		FROM MY_PLANNER MP 
+		JOIN LOCATION L ON(MP.LOCATION_ID = L.LOCATION_ID)
+		 SELECT * FROM LOCATION
+		 -->
+		 SELECT * FROM LOCATION
+	</sql>
+	<sql id="findRoute">
+		<!-- 
+		SELECT L.LOCATION_ID, L.LOCATION 
+		FROM MY_PLANNER MP 
+		JOIN LOCATION L ON(MP.LOCATION_ID = L.LOCATION_ID)
+		WHERE M_NO=#{M_NO}
+		 -->
+	</sql>
+	<sql id="locationSelect">
+		SELECT * FROM LOCATION
+		WHERE LOCATION_ID=#{locationId}
+	</sql>
+	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
+		<id property="pNo" column="P_NO" />
+		<result property="pPlace" column="P_PLACE" />
+		<result property="pStartDate" column="P_STARTDATE" />
+		<result property="pEndDate" column="P_ENDDATE" />
+		<result property="pLt" column="P_LT" />
+		<result property="pMapX" column="P_MAP_X" />
+		<result property="pMapY" column="P_MAP_Y" />
+		<result property="pMap" column="P_MAP" />
+		<result property="pLike" column="P_LIKE" />
+		<result property="pStatus" column="P_STATUS" />
+		<result property="pType" column="P_TYPE" />
+		<result property="pDestNo" column="DEST_NO" />
+		<result property="mNo" column="M_NO" />
+		<result property="locationId" column="LOCATION_ID" />
+		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.tripplan.duck.planner.model.vo.Location" id="locationInsertMap">
+		<id property="locationId" column="LOCATION_ID" />
+		<result property="location" column="LOCATION" />
+		<result property="lcenterx" column="LCENTERX" />
+		<result property="lcentery" column="LCENTERY" />
+	</resultMap>
+	
+	<select id="locationInsert" resultMap="locationInsertMap">
+		<include refid="findLocation"/>
+	</select>
+	
+	<select id="insertPlanner">
+		INSERT INTO MY_PLANNER (P_NO, P_STARTDATE,P_ENDDATE, M_NO,LOCATION_ID) VALUES
+			(SEQ_MY_PLANNER_NO, #{PSTARTDATE}, #{PENDDATE}, #{M_NO}, #{LOCATION_ID})
+	</select>
+</mapper>
