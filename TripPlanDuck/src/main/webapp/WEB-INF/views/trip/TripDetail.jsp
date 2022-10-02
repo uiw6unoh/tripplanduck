@@ -1,111 +1,21 @@
-<!DOCTYPE html>
-<html lang="ko">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<jsp:include page="../common/header.jsp"/>
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+<!-- Trip CSS-->
+<link rel="stylesheet" type="text/css" href="${ path }/css/trip/Mainstyle.css">
 
-  <!-- mainstyle CSS -->
-  <link rel="stylesheet" href="../Common/Template/css/style.css" type="text/css" />
-  <link rel="stylesheet" href="../Common/Template/css/font-icons.css" type="text/css" />
+<!-- Heart CSS-->
+<link rel="stylesheet" type="text/css" href="${ path }/css/common/heart.css">
 
-  <!-- Trip CSS-->
-  <link rel="stylesheet" type="text/css" href="../../CSS/Trip/Mainstyle.css">
-
-  <!-- Heart CSS-->
-  <link rel="stylesheet" type="text/css" href="../../CSS/Common/heart.css">
-
-  <!--owl carousel CSS-->
-  <link rel="stylesheet" type="text/css" href="../../OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-  <link rel="stylesheet" type="text/css" href="../../OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
-
-  <title>여행지 상세</title>
-</head>
-
-<body>
-  <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
-  <body class="stretched">
-    <div id="container">
-      <header id="header" class="full-header">
-        <div id="header-wrap">
-          <div class="container">
-            <div class="header-row">
-              <div id="logo">
-                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
-                  ><img src="../../IMG/Common/logo.png"
-                /></a>
-              </div>
-              <div class="header-misc">
-                <div id="top-search" class="header-misc-icon">
-                  <a href="#" id="top-search-trigger"
-                    ><i class="icon-line-search"></i><i class="icon-line-cross"></i
-                  ></a>
-                </div>
-              </div>
-  
-              <div id="primary-menu-trigger">
-                <svg class="svg-trigger" viewBox="0 0 100 100">
-                  <path
-                    d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20"
-                  ></path>
-                  <path d="m 30,50 h 40"></path>
-                  <path
-                    d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20"
-                  ></path>
-                </svg>
-              </div>
-  
-              <!-- Primary Navigation
-            ============================================= -->
-              <nav class="primary-menu">
-                <ul class="menu-container">
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>Home</div></a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>플래너</div></a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>여행지</div></a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>위드덕</div></a>
-                  </li>
-                </ul>
-              </nav>
-  
-              <nav class="primary-menu">
-                <ul class="menu-container p-0">
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>로그인</div></a>
-                  </li>
-                  <li class="menu-item">
-                    <a class="menu-link" href="#"><div>회원가입</div></a>
-                  </li>
-                </ul>
-              </nav>
-              <!-- #primary-menu end -->
-  
-              <form class="top-search-form" action="search.html" method="get">
-                <input
-                  type="text"
-                  name="q"
-                  class="form-control" 
-                  value=""
-                  placeholder="도시, 키워드로 검색"
-                  autocomplete="off"
-                />
-              </form>
-            </div>
-          </div>
-        </div>
-        <div class="header-wrap-clone"></div>
-      </header>
+<!--owl carousel CSS-->
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
 <!-- 내용 시작 -->
 <section>
@@ -180,8 +90,7 @@
               <div class="title">
                 <div>
                   <a href="#">홈 ></a>
-                  <a href="#">영국 ></a>
-                  <a href="#">런던</a>
+                  <a href="#">제주도</a>
                 </div>
                 <h2 class="stu_h2_title">내셔널갤러리</h2>
                 <p>런던 예술의 상징</p>
@@ -286,7 +195,9 @@
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
                 <p>구글 맵스, 날씨, 등 넣어야함 ~~</p>
-                <div id="map" style="width:350px; height:350px;"></div>
+                
+                   <div id="map" style="width:500px;height:400px;"></div>
+				    
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
                 <section class="mb-5">
@@ -317,7 +228,7 @@
                           <!-- Comment with nested comments-->
                           <div class="d-flex mb-4">
                               <!-- Parent comment-->
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">짹짹이 김여울</p>
                                   <div class="float-right">
@@ -327,7 +238,7 @@
                                     <p>아싸 해산!!!</p>
                                   <!-- Child comment 1-->
                                   <div class="d-flex mt-2">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">선긋기 김민주</p>
                                           <div class="float-right">
@@ -339,7 +250,7 @@
                                   </div>
                                   <!-- Child comment 2-->
                                   <div class="d-flex mt-3">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">코드의마법사 박노경</p>
                                           <div class="float-right">
@@ -352,10 +263,9 @@
                               </div>
                           </div>
                           
-
                           <!-- Single comment-->
                           <div class="d-flex">
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="../../IMG/Common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">무게치는 이건호</p>
                                   <div class="float-right">
@@ -373,74 +283,26 @@
             </div>
           </div>
         </div>
-
       </div>
 </section>
 
-<!-- 푸터 -->
-<div class="container-fluid p-0">
-  <footer id="footer" class="light">
-    <div id="copyrights">
-      <div class="container">
-        <div class="row col-mb-30">
-          <div class="col-md-6 text-center text-md-start">
-            Copyrights &copy; 2022 All Rights Reserved by TripPlanDuck Inc.<br />
-            <div class="copyright-links"><a href="#">이용약관</a> / <a href="#">개인정보처리방침</a></div>
-          </div>
-          <div class="col-md-6 text-center text-md-end">
-            <div class="d-flex justify-content-center justify-content-md-end">
-              <a href="#" class="social-icon si-small si-borderless si-facebook">
-                <i class="icon-facebook"></i>
-                <i class="icon-facebook"></i>
-              </a>
-              <a href="#" class="social-icon si-small si-borderless si-twitter">
-                <i class="icon-twitter"></i>
-                <i class="icon-twitter"></i>
-              </a>
-              <a href="#" class="social-icon si-small si-borderless si-gplus">
-                <i class="icon-gplus"></i>
-                <i class="icon-gplus"></i>
-              </a>
-              <a href="#" class="social-icon si-small si-borderless si-github">
-                <i class="icon-github"></i>
-                <i class="icon-github"></i>
-              </a>
-            </div>
-            <div class="clear"></div>
-            <i class="icon-envelope2"></i> info@TripPlanDuck.com <span class="middot">&middot;</span>
-            <i class="icon-headphones"></i> +82-02-1234-5678
-          </div>
-          <div id="gotoTop" class="icon-angle-up"></div>
-        </div>
-      </div>
-    </div>
-  </footer>
-</div>
+<jsp:include page="../common/footer.jsp"/>
 
-  <!-- Bootstrap JS -->
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+<!--owl carousel JS -->
+<script src="${ path }/owlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
 
-  <!--jQuery-->
-  <script src="../Common/Template/js/jquery.js"></script>
+<!-- Trip JS -->
+<script src="${ path }/js/trip/Mainstyle.js"></script>
 
-  <!-- JavaScripts -->
-  <script src="../Common/Template/js/plugins.min.js"></script>
-  <script src="../Common/Template/js/functions.js"></script>
+<!-- Heart JS -->
+<script src="${ path }/js/common/heart.js"></script>
 
-  <!--owl carousel JS -->
-  <script src="../../OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-  <script src="../../OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
-  <script src="../../OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
-  <script src="../../JS/Trip/Mainstyle.js"></script>
+<!-- sweetalert2 alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- sweetalert2 alert -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-  <!-- Heart JS -->
-  <script src="../../JS/Common/heart.js"></script>
-
-  <script>
+<script>
   // alertsweet 버튼
   $(document).ready(function () {
     $('[id="deleteAlert"]').on("click", function () {
@@ -508,7 +370,78 @@
       });
     });
   });
+</script>
 
-  </script>
-</body>
-</html>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
+<script>
+	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+	mapOption = {
+	    center: new kakao.maps.LatLng(33.231669365977254, 126.3147343832866), // 지도의 중심좌표
+	    level: 1 // 지도의 확대 레벨
+	};  
+	
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	
+	//주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
+	infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
+	
+	//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
+	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	
+	//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+	searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+	    if (status === kakao.maps.services.Status.OK) {
+	        var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
+	        detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
+	        
+	        var content = '<div class="bAddr">' +
+	                        '<span class="title">법정동 주소정보</span>' + 
+	                        detailAddr + 
+	                    '</div>';
+	
+	        // 마커를 클릭한 위치에 표시합니다 
+	        marker.setPosition(mouseEvent.latLng);
+	        marker.setMap(map);
+	
+	        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+	        infowindow.setContent(content);
+	        infowindow.open(map, marker);
+	    }   
+	});
+	});
+	
+	//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+	kakao.maps.event.addListener(map, 'idle', function() {
+	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	});
+	
+	function searchAddrFromCoords(coords, callback) {
+	// 좌표로 행정동 주소 정보를 요청합니다
+	geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	}
+	
+	function searchDetailAddrFromCoords(coords, callback) {
+	// 좌표로 법정동 상세 주소 정보를 요청합니다
+	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	}
+	
+	//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+	function displayCenterInfo(result, status) {
+	if (status === kakao.maps.services.Status.OK) {
+	    var infoDiv = document.getElementById('centerAddr');
+	
+	    for(var i = 0; i < result.length; i++) {
+	        // 행정동의 region_type 값은 'H' 이므로
+	        if (result[i].region_type === 'H') {
+	            infoDiv.innerHTML = result[i].address_name;
+	            break;
+	        }
+	    }
+	}    
+	}
+</script>
