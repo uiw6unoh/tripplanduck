@@ -1,10 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<c:set var="path" value="${ pageContext.request.contextPath }"/>
+
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>이용약관</title>
+<meta charset="UTF-8">
+<title>홈페이지 표준 이용약관</title>
 </head>
 <body>
   <div class="container">
@@ -253,7 +259,5 @@
           ② “트립플랜덕”과 이용자 간에 제기된 전자상거래 소송에는 한국법을 적용합니다.<br><br>
     </p>
 </div>
-
-
 </body>
 </html>
