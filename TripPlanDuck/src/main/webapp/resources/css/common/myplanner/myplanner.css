@@ -1,0 +1,25 @@
+.btn-success{
+	background-color: #fff8c6;
+	border-color: white;
+	color: black;
+}
+
+.btn-danger{
+	background-color: #fff8c6;
+	border-color: white;
+	color: black;
+}
+.list-group-item-primary{
+	background-color: white;
+	
+}
+.list-group-item-primary{
+	background-color: white;
+}
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 0.75rem 1.25rem;
+    background-color: #fff;
+    /* border: 1px solid rgba(0,0,0,.125); */
+}

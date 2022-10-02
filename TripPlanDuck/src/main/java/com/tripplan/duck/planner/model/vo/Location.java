@@ -13,4 +13,9 @@ public class Location {
 	private int locationId;
 	
 	private String location;
+	
+	private double lcenterx;
+	
+	private double lcentery;
+	
 }
