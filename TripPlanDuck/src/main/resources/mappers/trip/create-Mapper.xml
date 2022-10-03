@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.tripplan.duck.planner.model.mapper.LocationMapper">
+	<sql id="createTrip" >
+		SELECT * FROM LOCATION
+	</sql>
+	
+	<resultMap type="Location" id="locationResultMap">
+		<id property="locationId" column="LOCATION_ID" />
+		<result property="location" column="LOCATION" />
+		<result property="lcenterx" column="LCENTERX" />
+		<result property="lcentery" column="LCENTERY" />
+	</resultMap>
+	
+	<select id="locationAll" resultMap="locationResultMap">
+		<include refid="createTrip"/>
+	</select>
+	
+</mapper>

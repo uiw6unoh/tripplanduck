@@ -15,8 +15,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
 
 <!--owl carousel CSS-->
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
-<link rel="stylesheet" type="text/css" href="${ path }/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+<link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
 <!-- 내용 시작 -->
 <section>
@@ -32,7 +32,7 @@
       <div class="owl-carousel owl-theme mb-2">
         <div class="item">
           <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 1"></a>
-          <div class="star"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg> 1224</span></div>
           <div class="owl-text-over m-auto"> 
@@ -42,7 +42,7 @@
         </div>
         <div class="item">
           <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="star"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg> 1224</span></div>
           <div class="owl-text-over m-auto"> 
@@ -78,7 +78,7 @@
         </div>
         <div class="item">
           <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="star"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg> 1224</span></div>
           <div class="owl-text-over m-auto"> 
@@ -98,7 +98,7 @@
       <div class="owl-carousel owl-theme mb-5">
         <div class="item">
           <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 1"></a>
-          <div class="star"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg> 1224</span></div>
           <div class="owl-text-over m-auto"> 
@@ -108,7 +108,7 @@
         </div>
         <div class="item">
           <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="star"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
             <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
           </svg> 1224</span></div>
           <div class="owl-text-over m-auto"> 
@@ -133,9 +133,29 @@
 <jsp:include page="../common/footer.jsp"/>
 
 <!--owl carousel JS -->
-<script src="${ path }/OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
-<script src="${ path }/OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
+<script src="${ path }/owlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>
+
+<script>
+$('.owl-carousel').owlCarousel({
+    loop:false,
+    margin:10,
+    nav:true,
+    responsive:{
+        0:{
+            items:1
+        },
+        600:{
+            items:3
+        },
+        1000:{
+            items:5.6
+        }
+    }
+})
+
+</script>

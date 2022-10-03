@@ -3,6 +3,9 @@ package com.tripplan.duck.planner.model.vo;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import javax.swing.ListModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -22,7 +25,7 @@ public class MyPlanner {
 	private String pEndDate;
 	
 	// 굳이 있어야 하나 의문??
-	private Date lt;
+	private Date pLt;
 	
 	private String pMapX;
 	
@@ -30,7 +33,7 @@ public class MyPlanner {
 	
 	private int pLike;
 	
-	private String status;
+	private String pStatus;
 	
 	private String pType;
 	
@@ -38,32 +41,33 @@ public class MyPlanner {
 	
 	private int mNo;
 	
-	private int locationId;
+	private List<Location> loca;
+	
 	
 	// 생각 좀 해보자
-	public long Dateminus () {
-		String a = this.pStartDate;
-		String b = this.pEndDate;
-		long result=0L;
-		
-	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date start;
-		Date end;
-		try {
-			start = format.parse(a);
-			end = format.parse(b);
-			
-			long minus = end.getTime() - start.getTime();
-			
-			result = minus / ( 24*60*60*1000);
-
-			long  minusResult = Math.abs(result);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		return minusResult;
-	}
+//	public long Dateminus () {
+//		String a = this.pStartDate;
+//		String b = this.pEndDate;
+//		long result=0L;
+//		
+//	    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//		
+//		Date start;
+//		Date end;
+//		try {
+//			start = format.parse(a);
+//			end = format.parse(b);
+//			
+//			long minus = end.getTime() - start.getTime();
+//			
+//			result = minus / ( 24*60*60*1000);
+//
+//			long  minusResult = Math.abs(result);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//		return minusResult;
+//	}
 }
 
 
