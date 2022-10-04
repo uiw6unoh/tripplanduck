@@ -7,18 +7,22 @@
 
 <jsp:include page="../common/header.jsp" />
 
-<div class="container">
+<div class="container" style="margin-top: 70px; margin-bottom: 70px;">
     <div class="row contatiner">
 
     <!-- 왼쪽 그리드 -->
     <div class="col-sm-2">
         <!-- 사이드 메뉴바 -->
-        <div class="mySideMenu">
-            <p id="myListMain"> 방문자 관리 </p>
-            <p id="myListMain"> 회원 정보 관리 </p>
-            <p id="myListMain"> 리뷰 관리 </p>
-            <p id="myListMain"> 채팅 관리 </p>
-            <p id="myListMain"> 위드덕 관리 </p>
+        <div class="mySideMenu" style="display: grid;">
+            <a id="myListMain" href="${ path }/admin/visitor"> 방문자 관리 </a>
+            <p></p>
+            <a id="myListMain" href="${ path }/admin/member"> 회원 정보 관리 </a>
+            <p></p>
+            <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
+            <p></p>
+            <a id="myListMain" href="${ path }/admin/chat"> 채팅 관리 </a>
+            <p></p>
+            <a id="myListMain" href="${ path }/admin/withDuck"> 위드덕 관리 </a>
         </div>
     </div>
 
@@ -30,7 +34,7 @@
         <hr class="mt-1" style="border: 1px solid rgb(221, 221, 221);">
         <h5>총 방문자 수</h5>
         <div class="w-100 p-3" id="flag" style="text-align: center;">
-            <img src="../../IMG/admin/dukduk_plag.png" width="100%">
+            <img src="${ path }/images/admin/dukduk_plag.png" width="100%">
             <div class="text" id="count_all" style="position: absolute; top: 28%; left: 45%; color: rgb(255, 0, 0);">
                 <h1>총 1,000,000 명</h1>
             </div>
@@ -122,6 +126,8 @@
     </div>
     <!-- 컨테이너 끝 -->
     </div>
+    
+    <jsp:include page="../common/footer.jsp" />
     
 <!-- Bootstrap JS -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
