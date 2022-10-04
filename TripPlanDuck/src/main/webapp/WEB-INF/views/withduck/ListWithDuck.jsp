@@ -49,35 +49,35 @@
 
     <div class="filter_containerValue">
                 <div class="location_value" style="border-bottom: 0;">
-                    <div><button class="location_btn">서울특별시</button></div>
-                    <div><button class="location_btn">부산광역시</button></div>
-                    <div><button class="location_btn">인천광역시</button></div>
-                    <div><button class="location_btn">광주광역시</button></div>
-                    <div><button class="location_btn">대전광역시</button></div>
-                    <div><button class="location_btn">대구광역시</button></div>
+                    <div><button class="location_btn" value="서울특별시">서울특별시</button></div>
+                    <div><button class="location_btn" value="부산광역시">부산광역시</button></div>
+                    <div><button class="location_btn" value="인천광역시">인천광역시</button></div>
+                    <div><button class="location_btn" value="광주광역시">광주광역시</button></div>
+                    <div><button class="location_btn" value="대전광역시">대전광역시</button></div>
+                    <div><button class="location_btn" value="대구광역시">대구광역시</button></div>
 
                 </div>
 
                 <div class="location_value">
-                    <div><button class="location_btn">강원도</button></div>
-                    <div><button class="location_btn">제주도</button></div>
-                    <div><button class="location_btn">경기도</button></div>
-                    <div><button class="location_btn">충청도</button></div>
-                    <div><button class="location_btn">경상도</button></div>
-                    <div><button class="location_btn">전라도</button></div>
+                    <div><button class="location_btn" value="강원도">강원도</button></div>
+                    <div><button class="location_btn" value="제주도">제주도</button></div>
+                    <div><button class="location_btn" value="경기도">경기도</button></div>
+                    <div><button class="location_btn" value="충청도">충청도</button></div>
+                    <div><button class="location_btn" value="경상도">경상도</button></div>
+                    <div><button class="location_btn" value="전라도">전라도</button></div>
                 </div>
 
                 <div class="gender_value">
-                    <button class="gender_btn">남자</button>
-                    <button class="gender_btn">여자</button>
-                    <button class="gender_btn">성별무관</button>
+                    <button class="gender_btn" value="남자">남자</button>
+                    <button class="gender_btn" value="여자">여자</button>
+                    <button class="gender_btn" value="성별무관">성별무관</button>
                 </div>
 
                 <div class="age_value">
-                    <button class="age_btn">~20대</button>
-                    <button class="age_btn">30대</button>
-                    <button class="age_btn">40대</button>
-                    <button class="age_btn">50대 이상</button>
+                    <button class="age_btn" value="~20대">~20대</button>
+                    <button class="age_btn" value="30대">30대</button>
+                    <button class="age_btn" value="40대">40대</button>
+                    <button class="age_btn" value="50대 이상">50대 이상</button>
                 </div>
 
                 <label for="customRange2" class="form-label"></label>
@@ -106,7 +106,7 @@
 </div>
 
         <div class="btn filter-btn">
-            <button class="btn btn-outline-warning" type="button" >
+            <button class="btn btn-outline-warning" id="search" type="button" >
             필터 검색
             </button>
     
@@ -140,119 +140,64 @@
                 <button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;">모집중인 글만 보기</button>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
+            
+            <c:if test="${ not empty listFilter }">
+				<c:forEach var="withDuck" items="${ listFilter }">
                 <div class="col">
                     <div class="p-3 border bg-light">
                         <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="">
+                            <img class="intro-img" src="${path}/resources/images/WithDuck/${withDuck.withOriginFileName}" alt="">
                         </a>
                         <p class="title">안녕하세요</p>
                         <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
+                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>
                 </div>
+				</c:forEach>
+				</c:if>
+				<!-- 
+				<c:if test="${ empty listFilter && not empty list }">
+					<c:forEach var="withDuck" items="${ list }">
                 <div class="col">
                     <div class="p-3 border bg-light">
                         <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="">
+                            <img class="intro-img" src="${path}/resources/images/WithDuck/${withDuck.withOriginFileName}" alt="">
                         </a>
                         <p class="title">안녕하세요</p>
                         <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
+                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/river1.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/tower1.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div> 
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/tower1.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div> 
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/flower3.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div> 
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/flower4.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/flower4.PNG" alt="">
-                        </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png"> 바보</p> 
-                        <p class="good">12</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div>
+				</c:forEach>
+				</c:if>
+				
+				-->
+				 
+				
             </div>
         </div>
         <nav aria-label="..." style="margin-top: 50px;">
             <ul class="pagination justify-content-center">
             <li class="page-item disabled">
-                <span class="page-link">이전</span>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active" aria-current="page">
-                <span class="page-link">2</span>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">4</a></li>
-            <li class="page-item"><a class="page-link" href="#">5</a></li>
-            <li class="page-item">
-                <a class="page-link" href="#">다음</a>
-            </li>
+                
+                <!-- 
+                 <span class="page-link">이전</span>
+                 -->
+                          
+					<a class="page-link" href="${ path }/withduck/list?page=${ pageInfo.prevPage }" aria-label="Previous">
+	                            <span aria-hidden="true">이전</span>
+	                </a>
+		            </li>
+		            <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+		                    <li class="page-item"><a class="page-link" href="${ path }/withduck/list?page=${ status.current }">${ status.current }</a></li>
+		            </c:forEach>
+		            <li class="page-item">
+		                <a class="page-link" href="${path}/withduck/list?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
+		            </li>
             </ul>
         </nav>
     </section>
@@ -272,23 +217,48 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
-$('.location_btn').on('click', function(){
+var location_val; 
+var gender_val;
+var age_val;
+$(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
     $(this).addClass('selected');
+	location_val = $('.location_btn.selected').val();
 });
-$('.gender_btn').on('click', function(){
+$(document).on('click', '.gender_btn', function(){
     $('.gender_btn').removeClass('selected');
     $(this).addClass('selected');
+    gender_val = $('.gender_btn.selected').val();
 });
-$('.age_btn').on('click', function(){
+$(document).on('click', '.age_btn', function(){
     $('.age_btn').removeClass('selected');
     $(this).addClass('selected');
+    age_val = $('.age_btn.selected').val();
 });
 
 document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 });
+
+$('#search').click(
+        function () {
+            $.ajax({
+                url: "${path}/withduck/filter",
+                dataType: "html",
+                method: "get",
+                data: {
+                	location_val,
+                	gender_val,
+                	age_val
+                },
+                success: function(result) {
+                	console.log(result);
+                }
+            });
+        }
+    );
+
+
 </script>

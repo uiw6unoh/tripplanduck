@@ -1,0 +1,20 @@
+package com.tripplan.duck.withduck.model.mapper;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
+
+import com.tripplan.duck.withduck.model.vo.WithDuck;
+
+@Mapper
+public interface WithDuckMapper {
+	int selectWithDuckCount();
+	
+	List<WithDuck> withDuckSelectAll(RowBounds rowBownds);
+	
+	List<WithDuck> withDuckFilter(RowBounds rowBownds, @Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val);
+	
+	int selectWithDuckFilterCount(@Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val);
+}

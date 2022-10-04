@@ -80,7 +80,7 @@
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
                   <li class="menu-item">
-                    <a class="menu-link" href="${path}/member/login"><div>로그인</div></a>
+                    <a class="menu-link" href="${path}/login"><div>로그인</div></a>
                   </li>
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>

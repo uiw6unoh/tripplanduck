@@ -1,8 +1,13 @@
 package com.tripplan.duck.member.controller;
 
+import java.net.http.HttpRequest;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,11 +16,13 @@ import lombok.extern.slf4j.Slf4j;
 public class MemberController {
 
 	// 컨트롤러가 처리할 요청을 정의할 핸들러. (URL, Method 등)
-	@GetMapping("/member/login")
-	public String loginpage() {
-		log.info("로그인 페이지 요청");
+	@GetMapping("/login")
+	public String login(HttpServletRequest request) {
+		String userId = request.getParameter("userId");
+		String userpwd = request.getParameter("userPassword");
+		log.info("{}, {}", userId, userpwd);
 		
-		return "member/login"; 
+		return "/member/login";
 	}
 	
 	@GetMapping("/member/signup")
