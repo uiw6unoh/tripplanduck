@@ -17,16 +17,16 @@ var Daegu = new kakao.maps.LatLng(
 		128.60174803297681);
 // 5번
 var Gwangju = new kakao.maps.LatLng(
-		37.45586506841309,
-		126.98080883930932);
+		 35.1595454,
+		126.8526012);
 // 6번	
 var Busan = new kakao.maps.LatLng(
-		37.45586506841309,
-		126.98080883930932);
+		35.17977523319586,
+		129.0749925863485);
 // 7번
 var Ulsan = new kakao.maps.LatLng(
-		35.5390202078351,
-		129.311344398614);
+		35.53962603316087,
+		129.31151418501798);
 // 8번
 var Sejong = new kakao.maps.LatLng(
 		36.48013273645778,
@@ -67,20 +67,17 @@ var Jeju = new kakao.maps.LatLng(
 		126.50042271000662);	
 
 
-
-
-
-		
-
-
-
 // 지역별로 중심좌표 설정
 
 var locationValue = (target) => {
 	  // 선택한 option의 value 값
-	  console.log(target.value);
 	  
-	  if (target.value == 1) {
+	  var location = document.getElementById('location1');
+
+	  console.log(target.value);
+	  console.log(target.value.indexOf('Id=1'));
+	  
+	  if (target.value.indexOf('서울') != -1) {
 	  
 
 			var mapContainer = document
@@ -115,7 +112,7 @@ var locationValue = (target) => {
 							zoomControl,
 							kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 2){
+		}else if(target.value.indexOf('인천') != -1){
 
 				var mapContainer = document
 						.getElementById('map'), // 지도를 표시할 div 
@@ -148,7 +145,7 @@ var locationValue = (target) => {
 								zoomControl,
 								kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 3){
+		}else if(target.value.indexOf('대전') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -181,7 +178,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 4){
+		}else if(target.value.indexOf('대구') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -214,7 +211,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 5){
+		}else if(target.value.indexOf('광주') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -247,7 +244,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 6){
+		}else if(target.value.indexOf('부산') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -280,7 +277,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 7){
+		}else if(target.value.indexOf('울산') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -313,7 +310,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 8){
+		}else if(target.value.indexOf('세종') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -346,7 +343,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 32){
+		}else if(target.value.indexOf('강원') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -379,7 +376,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 33){
+		}else if(target.value.indexOf('충청북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -411,7 +408,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 34){
+		}else if(target.value.indexOf('충청남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -443,7 +440,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 35){
+		}else if(target.value.indexOf('경상북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -476,7 +473,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 					
-		}else if(target.value == 36){
+		}else if(target.value.indexOf('경상남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -508,7 +505,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 37){
+		}else if(target.value.indexOf('전라북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -540,7 +537,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 38){
+		}else if(target.value.indexOf('전라남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -572,7 +569,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 39){
+		}else if(target.value.indexOf('제주') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
