@@ -2,7 +2,6 @@ package com.tripplan.duck.member.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,7 +11,7 @@ public class MemberController {
 
 	// 컨트롤러가 처리할 요청을 정의할 핸들러. (URL, Method 등)
 	@GetMapping("/member/login")
-	public String loginpage() {
+	public String login() {
 		log.info("로그인 페이지 요청");
 		
 		return "member/login"; 
@@ -38,29 +37,5 @@ public class MemberController {
 			
 		return "member/termconditions"; 
 	}
-
-
-	// 컨트롤러가 처리할 요청을 정의한다. (URL, Method 등)
-//	@RequestMapping(value = "/login", method = {RequestMethod.POST})
-//	@GetMapping("/login")
-//	@PostMapping("/login")
-//	public String login() {
-//		
-//		
-//		return "home";
-//	}	
-
-	// 요청 시 사용자의 파라미터를 전송받는 방법
-//	// 1. HttpServletRequest 객체를 통해서 전송받기 (기존 Servlet 방식)
-//	@GetMapping("/login")
-//	public String login(HttpServletRequest request) {
-//		String userId = request.getParameter("userId");
-//		String userPassword = request.getParameter("userPassword");
-//		
-//		log.info("login() - 호출 : {} {}", userId, userPassword);
-//		
-//		return "home";
-//	}
-//	
 
 }
