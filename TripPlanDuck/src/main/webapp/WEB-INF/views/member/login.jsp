@@ -25,17 +25,17 @@
 
 <body class="text-center">
     <main class="form-signin w-300 m-auto">
-      <form action="login" method="GET">
+      <form action="login" method="POST">
         <h1>LOGIN</h1>
         <a href="${ path }">
         <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300"></a>
         <p>덕덕이와 함께 만드는 즐거운 국내여행 플래너</p>
         
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="userId" name="userId" placeholder="id">
+          <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id">
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password">
+          <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="Password">
         </div>
         <div class="checkbox mb-2">
           <label>
