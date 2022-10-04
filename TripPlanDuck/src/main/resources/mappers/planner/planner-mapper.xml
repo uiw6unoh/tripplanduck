@@ -81,12 +81,14 @@
 	
 		SELECT * FROM LOCATION L
 		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
-		WHERE L.LOCATION_ID = 39
+		WHERE L.LOCATION_ID = #{locationId}
 		
 	</select>
 	
-	<select id="">
-		
+	<select id="addDest" resultMap="DestFindResultMap">
+		SELECT L.LOCATION_ID ,D.DEST_NO, D.DEST_SUBJECT , D.DEST_MAP_X, D.DEST_MAP_Y  FROM LOCATION L
+		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
+		WHERE D.DEST_SUBJECT = #{destSubject}
 	</select>
 	
 </mapper>

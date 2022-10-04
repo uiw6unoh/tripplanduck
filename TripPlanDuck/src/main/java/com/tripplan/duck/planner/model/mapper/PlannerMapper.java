@@ -15,5 +15,7 @@ public interface PlannerMapper {
 	List<Location> locationInsert();
 
 	List<Destination> selectDest();
+
+	List<Destination> addDest();
 	
 }

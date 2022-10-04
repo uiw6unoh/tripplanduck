@@ -10,5 +10,7 @@ public interface PlannerService {
 	List<Location> getLocationList();
 
 	List<Destination> getDestination();
+
+	List<Destination> addDestination();
 	
 }
