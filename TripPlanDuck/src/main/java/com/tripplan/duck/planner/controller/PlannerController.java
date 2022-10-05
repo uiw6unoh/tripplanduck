@@ -54,24 +54,20 @@ public class PlannerController {
 			destination = service.getDestination();
 			
 			
-			
-			
-			
 			model.addObject("destination", destination);
 			model.addObject("location",location);
 			model.setViewName("planner/myplanner");
 			return model;
 		}
 		
-		@GetMapping("/addDesti")
-		public  ModelAndView addDesti(ModelAndView model ) {
-			List<Destination> destination;
-			destination = service.addDestination();
-			destination = service.getDestination();
-			model.addObject("destination", destination);
-			model.setViewName("planner/myplanner");
-			return model;
-		}
+//		@GetMapping("/addDesti")
+//		public  ModelAndView addDesti(ModelAndView model ) {
+//			List<Destination> destination;
+//			destination = service.addDestination();
+//			model.addObject("destination", destination);
+//			model.setViewName("planner/myplanner");
+//			return model;
+//		}
 			
 		
 //		@PostMapping("/myplanner")
