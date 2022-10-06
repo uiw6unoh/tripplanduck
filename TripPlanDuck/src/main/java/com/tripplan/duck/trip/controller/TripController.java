@@ -30,5 +30,7 @@ public class TripController {
 		return "trip/TripPlace";
 	}
 	
+	
+	
 
 }
