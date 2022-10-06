@@ -19,12 +19,12 @@
   <link rel="stylesheet" type="text/css" href="../../OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
   <!-- MyPage CSS -->
-  <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css">
+  <!-- <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css"> -->
 
   <!-- UpdateForm CSS -->
   <link rel="stylesheet" href="../../CSS/Mypage/UpdateForm.css">
 
-  <title>My Page</title>
+  <title>회원정보수정</title>
 </head>
 
 <body>
@@ -109,90 +109,110 @@
 
     <!-- 회원 정보 수정 -->
     <!-- 전체 컨테이너 -->
-    <div class="container">
-      <div class="p-3 top-container">
-        <div class="userMypageMenu">
-            <div class="userInfo">
-                <img src="../../IMG/Common/프사.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
-            </div>
-            <div class="out-btn-container">
-              <button type="button" class="btn btn-secondary out-btn" onclick="location.href='MemberOut.html'">회원 탈퇴</button>
-            </div>
+    <main class="form-signup m-auto">
+      <div>
+        <div class="updateFormInfo pt-5">
+          <h1>회원 정보 수정</h1>
+          <img class="mb-4" src="../../IMG/Common/프사.png" alt="">
         </div>
-        <div class="updateInfo">
-            <form class="needs-validation" novalidate>
-              <div class="userId">
-                <h5 class="updateFormInfo">아이디</h5>
-                <input class="form-control" type="text" placeholder="아이디" readonly>
-              </div>
-              <div class="userName">
-                <h5 class="updateFormInfo">이름</h5>
-                <input class="form-control" type="text" placeholder="이름" readonly>
-              </div>
-              <div class="userNickname form-row">
-                <div class="col-md-6 mb-3">
-                  <label for="validationCustom01"><h5 class="updateFormInfo">닉네임</h5></label>
-                  <input type="text" class="form-control" id="validationCustom01" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="verification-btn pt-5">
-                  <button type="button" class="btn btn-warning">중복확인</button>
-                </div>
-              </div>
-              <div class="updatePwd form-group">
-                <label for="formGroupExampleInput"><h5 class="updateFormInfo">비밀번호 변경</h5></label>
-                <input type="text" class="form-control" id="formGroupExampleInput" placeholder="변경할 비밀번호 입력">
-              </div>
-              <div class="updatePwd form-group">
-                <label for="formGroupExampleInput2"><h5 class="updateFormInfo">비밀번호 확인</h5></label>
-                <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="비밀번호 재확인">
-              </div>
-              <div class="userEmail form-row">
-                <div class="col-md-6 mb-3">
-                  <label for="validationCustom01"><h5 class="updateFormInfo">이메일</h5></label>
-                  <input type="text" class="form-control" id="validationCustom01" required>
-                  <div class="valid-feedback">
-                    Looks good!
-                  </div>
-                </div>
-                <div class="verification-btn pt-5">
-                  <button type="button" class="btn btn-warning">중복확인</button>
-                </div>
-              </div>
-              
-
+        <form>
+            <table class="signup">
+              <tr>
+                <td class="title">아이디</td>
+              </tr>
+              <tr>
+                <td>
+                  <input class="form-control" type="text" placeholder="아이디" readonly>
+                </td>
+              </tr> 
+              <tr>
+                <td class="title">닉네임</td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" id="nickname" placeholder="닉네임" required>
+                </td>
+                <td><button class="form-control">중복확인</button></td>
+              </tr> 
+              <tr>
+                <td class="title">비밀번호변경</td>
+              </tr>
+              <tr>               
+                <td>
+                  <input type="text" class="form-control" id="password" placeholder="비밀번호" required>
+                </td>
+              </tr>
+              <tr>
+                <td class="title">비밀번호 재입력</td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" id="confirm_password" placeholder="비밀번호확인" required>
+                </td>
+              </tr>
+              <tr>
+                <td class="title">이메일</td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" class="form-control" id="email" placeholder="abc@gmail.com" required>
+                </td>
+                <td><button class="form-control">인증하기</button></td>
+              </tr>
+              <tr>
+                <td>
+                <input type="text" class="form-control" id="email" required>
+                </td>
+                <td><button class="form-control">인증번호확인</button></td>
+              </tr>
+              <tr>
+                <td>성별</td>
+              </tr>
+              <tr>
+                <td class="form-control">
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="female" style="width:18px; height:18px; margin-left: 3px;">
+                  <label class="form-check-label" for="inlineRadio1" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" style="width:18px; height:18px;">
+                  <label class="form-check-label" for="inlineRadio1">남성</label>
+                </td>
+              </tr>
+              <tr>
+                <td>연령대</td>
+              </tr>
+              <tr>
+                <td>
+                  <label class="test_obj">
+                    <input type="radio" name="age" value="banana">
+                    <span>~20대</span>
+                  </label>
+                  <label class="test_obj">
+                      <input type="radio" name="age" value="lemon">
+                      <span>30대</span>
+                  </label>
+                  <label class="test_obj">
+                    <input type="radio" name="age" value="lemon">
+                    <span>40대</span>
+                  </label>
+                  <label class="test_obj">
+                    <input type="radio" name="age" value="lemon">
+                    <span>50대~</span>
+                  </label>
+                </td>
+              </tr>
+            </table>
+            <div class="updateBtn pt-2">
+              <button type="button" class="btn  btn-outline-warning btn-warning" onclick="location.href=''">저장</button>
               <button type="button" class="btn btn-secondary">취소</button>
-              <button class="btn btn-warning" type="submit">저장</button>
-            </form>
+            </div>
+        </form>
+        <div class="memberOutBtn">
+          <button type="button" class="btn btn-secondary" onclick="location.href='MemberOut.html'">회원탈퇴</button>
         </div>
-      </div>
-    </div>
+        </div>
+      </main>
 
-    <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-      (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-          // Fetch all the forms we want to apply custom Bootstrap validation styles to
-          var forms = document.getElementsByClassName('needs-validation');
-          // Loop over them and prevent submission
-          var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-              if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-              }
-              form.classList.add('was-validated');
-            }, false);
-          });
-        }, false);
-      })();
-      </script>
-
-   <!-- 푸터 -->
-<div class="container-fluid p-0">
+<!-- 푸터 -->
+<!-- <div class="container-fluid p-0">
   <footer id="footer" class="light">
     <div id="copyrights">
       <div class="container">
@@ -229,7 +249,7 @@
       </div>
     </div>
   </footer>
-</div>
+</div> -->
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

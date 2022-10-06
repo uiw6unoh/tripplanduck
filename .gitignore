@@ -225,3 +225,6 @@ buildNumber.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/maven
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,java,eclipse
+Frontend/JS/Mypage/UpdateForm.js
+TripPlanDuck/src/main/webapp/META-INF/MANIFEST.MF
+TripPlanDuck/src/main/webapp/META-INF/maven/com.tripplan/duck/pom.properties

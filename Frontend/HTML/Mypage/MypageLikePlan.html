@@ -25,8 +25,8 @@
   <!-- fontawesome CSS -->
   <script src="https://kit.fontawesome.com/f8167db045.js" crossorigin="anonymous"></script>
 
-  <!-- XEIcon CSS -->
-  <!-- <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css"> -->
+  <!-- heart CSS -->
+  <link rel="stylesheet" href="../../CSS/Mypage/heart.css">
 
   <title>My Page</title>
 </head>
@@ -139,107 +139,145 @@
           <div id="horizontal-underline"></div>
           <ul class="nav justify-content-center">
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="../Mypage/MypageLikePlan.html">Like Plan</a>
+              <a class="nav-link" href="#likePlan">Like Plan</a>
             </li>
             <li class="mr-4 nav-item">
               <a class="nav-link" href="../Mypage/MypagePlanner.html#myPlanner">내 여행지</a>
             </li>
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="#myComment">나의 리뷰</a>
+              <a class="nav-link" href="../Mypage/MypageComment.html#myComment">나의 리뷰</a>
             </li>
           </ul>
         </div>
 
+        <!-- 하위 컨테이너 -->
         <div class="content-container">
-          <div id="myComment">
-            <h3 class="section-title">나의 리뷰</h3>
-            <a>
-            <div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
-              <div>
-                <div class="card-body">
-                  <div class="destination">
-                    <h4 class="card-title">성산 일출봉</h4>
-                    <span class="separator">|</span>
-                    <h5 class="card-area">제주</h5>
-                  </div>
-                  <p class="card-text">아름다웠어요</p>
-                  <p class="card-text"><small class="text-muted">2022-09-25</small></p>
-                  <div class="card-btns">
-                    <button type="button" class="btn btn-warning" onclick="location.href=''">수정</button>
-                    <button type="button" class="btn btn-secondary">삭제</button>
-                  </div>
+          <div id="likePlan">
+            <h3 class="section-title">Like Plan</h3>
+            <div class="card mb-3 likeCard" style="max-width: 800px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="../../IMG/Trip/gyeongju.jpg" class="img-fluid rounded-start imgSize" alt="...">
                 </div>
-              </div>
-            </div>
-            </a>
-            <a>
-            <div class="card mb-2 commentCard" style="max-width: 900px;">
-              <div>
-                <div class="card-body">
-                  <div class="area">
-                    <div class="destination">
-                      <h4 class="card-title">성산 일출봉</h4>
-                      <span class="separator">|</span>
-                      <h5 class="card-area">제주</h5>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <i class="fa-sharp fa-solid far fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>경주</h5>
                     </div>
                   </div>
-                  <p class="card-text">아름다웠어요</p>
-                  <p class="card-text"><small class="text-muted">2022-09-25</small></p>
-                  <div class="card-btns">
-                    <button type="button" class="btn btn-warning" onclick="location.href=''">수정</button>
-                    <button type="button" class="btn btn-secondary">삭제</button>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        신둥이
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">3박 4일</p>
                   </div>
                 </div>
               </div>
             </div>
-            </a>
-            <a>
-            <div class="card mb-2 commentCard" style="max-width: 900px;">
-              <div class="card-body">
-                <div class="destination">
-                  <h4 class="card-title">성산 일출봉</h4>
-                  <span class="separator">|</span>
-                  <h5 class="card-area">제주</h5>
-                </div>
-                <p class="card-text">아름다웠어요</p>
-                <p class="card-text"><small class="text-muted">2022-09-25</small></p>
-                <div class="card-btns">
-                  <button type="button" class="btn btn-warning" onclick="location.href=''">수정</button>
-                  <button type="button" class="btn btn-secondary">삭제</button>
+          </div>
+          <div class="card mb-3 likeCard" style="max-width: 800px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="../../IMG/Trip/jeju.jpg" class="img-fluid rounded-start imgSize" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>제주</h5>
+                    </div>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        김짱구
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">7박 8일</p>
+                  </div>
                 </div>
               </div>
             </div>
-            </a>
           </div>
-          <div class="wrap-downChevron">
-            <img class="down-chevron" src="../../IMG/MyPage/down-chevron.png">
+          <div class="card mb-3 likeCard" style="max-width: 800px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="../../IMG/Trip/busan.jpg" class="img-fluid rounded-start imgSize" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>부산</h5>
+                    </div>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        김일심
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">4박 5일</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wrap-downChevron">
+          <img class="down-chevron" src="../../IMG/MyPage/down-chevron.png">
+        </div>
+      </div>
+
+      <!-- 비밀번호 확인 모달 -->
+      <div class="modal fade" id="changeUserInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="inputPwd" placeholder="비밀번호 입력">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-warning"
+                onclick="location.href='UpdateForm.html'">확인</button>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
-
-    <!-- 비밀번호 확인 모달 -->
-    <div class="modal fade" id="changeUserInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <input type="text" placeholder="비밀번호 입력">
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-outline-warning" onclick="location.href='UpdateForm.html'">확인</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- 푸터 -->
     <div class="container-fluid p-0">
       <footer id="footer" class="light">
@@ -300,6 +338,8 @@
     <script src="../../OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
     <script src="../../OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
     <script src="../../JS/Trip/Mainstyle.js"></script>
-  </body>
 
+    <!-- MyPage JS -->
+    <!-- <script src="../../JS/Mypage/MypageMain.js"></script> -->
+  </body>
 </html>

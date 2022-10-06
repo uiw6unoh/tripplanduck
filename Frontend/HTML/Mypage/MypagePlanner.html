@@ -21,6 +21,10 @@
   <!-- MyPage CSS -->
   <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css">
 
+    <!-- fontawesome CSS -->
+    <script src="https://kit.fontawesome.com/f8167db045.js"
+  crossorigin="anonymous"></script>   
+
   <title>My Page</title>
 </head>
 
@@ -116,7 +120,7 @@
                 </div>
                 <div class="py-4 px-2 btn-UserMypageMenu">
                     <button class="btn btn-outline-warning btn-sm btn-block">내 위드덕</button>
-                    <button class="btn btn-outline-warning btn-sm btn-block"  data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
+                    <button class="btn btn-outline-warning btn-sm btn-block" data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
                 </div>
             </div>
             
@@ -128,7 +132,7 @@
             <ul class="nav justify-content-center">
                 <li class="mr-4 nav-item">
                     <!-- <a class="nav-link" href="#likePlan">Like Plan</a> -->
-                    <a class="nav-link" href="../Mypage/MypageLike.html#likePlan">Like Plan</a>
+                    <a class="nav-link" href="../Mypage/MypageLikePlan.html">Like Plan</a>
                 </li>
                 <li class="mr-4 nav-item">
                     <a class="nav-link" href="#myPlanner">내 여행지</a>
@@ -143,61 +147,71 @@
             <div id="myPlanner">
                 <h3 class="section-title">내 여행지</h3>
                     <!-- 여행지 필터 div -->
-                    <!-- <div class="myPlanner-filter-container">
-                        <div class="myPlanner-filter-city-btn">
-
-                        </div>
-                    </div> -->
-                    <div class="card mt-4 mb-3" id="likeCard" style="max-width: 800px;">
+                    <div>
+                      <select class="form-control">
+                        <option>여행지 선택</option>
+                        <option>제주</option>
+                      </select>
+                    </div>
+                    <a>
+                    <div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
                         <div class="row g-0">
-                            <!-- <div class="col-md-4" style="width: 200px; height: 200px;"> -->
                             <div class="col-md-4">
                                 <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1000" class="img-fluid rounded-start imgSize" alt="...">
                             </div>
                             <div class="col-md-8">
-                                <div class="card-body">
-                                    <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
-                                    <div class="info-container-top">
-                                        <div class="card-title title"><h5>명소명</h5></div>
-                                        <div class="card-title text-content"><h5>성산 일출봉</h5></div>
-                                    </div>
-                                    <div class="info-container-top">
-                                        <p class="card-text title">도시명</p>
-                                        <p class="card-text text-content">제주도</p>
-                                    </div>
-                                    <div class="info-container-top">
-                                        <p class="card-text title">주소</p>
-                                        <p class="card-text text-content">제주특별자치도 제주시 특별자치도, 탑동로2길 3</p>
-                                    </div>
-                                </div>
-                            </div>
+                              <div class="card-body">
+                                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                                  <div class="info-container-top">
+                                      <div class="card-title title mt-3">
+                                        <h5>명소명</h5>
+                                      </div>
+                                      <div class="card-title text-content mt-3">
+                                        <h5>협재해수욕장</h5>
+                                      </div>
+                                  </div>
+                                  <div class="info-container-top">
+                                      <p class="card-text title">도시명</p>
+                                      <p class="card-text text-content">제주</p>
+                                  </div>
+                                  <div class="info-container-top">
+                                      <p class="card-text title">주소</p>
+                                      <p class="card-text text-content">제주특별자치도 제주시 한림읍 한림로 329-10</p>
+                                  </div>
+                              </div>
+                          </div>
                         </div>
                     </div>
-                    <div class="card mb-3" id="likeCard" style="max-width: 800px;">
-                        <div class="row g-0">
-                            <div class="col-md-4">
-                                <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1050" class="img-fluid rounded-start imgSize" alt="...">
-                            </div>
-                            <div class="col-md-8">
-                                <div class="card-body">
-                                    <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
-                                    <div class="info-container-top">
-                                        <div class="card-title title"><h5>명소명</h5></div>
-                                        <div class="card-title text-content"><h5>새별오름</h5></div>
-                                    </div>
-                                    <div class="info-container-top">
-                                        <p class="card-text title">도시명</p>
-                                        <p class="card-text text-content">제주</p>
-                                    </div>
-                                    <div class="info-container-top">
-                                        <p class="card-text title">주소</p>
-                                        <p class="card-text text-content">제주특별자치도 제주시 애월읍 봉성리 산 59-8</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card mb-3" id="likeCard" style="max-width: 800px;">
+                    </a>
+                    <div class="card mb-3 likeCard" style="max-width: 800px;">
+                      <div class="row g-0">
+                          <div class="col-md-4">
+                              <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1195" class="img-fluid rounded-start imgSize" alt="...">
+                          </div>
+                          <div class="col-md-8">
+                              <div class="card-body">
+                                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                                  <div class="info-container-top">
+                                      <div class="card-title title mt-3">
+                                        <h5>명소명</h5>
+                                      </div>
+                                      <div class="card-title text-content mt-3">
+                                        <h5>협재해수욕장</h5>
+                                      </div>
+                                  </div>
+                                  <div class="info-container-top">
+                                      <p class="card-text title">도시명</p>
+                                      <p class="card-text text-content">제주</p>
+                                  </div>
+                                  <div class="info-container-top">
+                                      <p class="card-text title">주소</p>
+                                      <p class="card-text text-content">제주특별자치도 제주시 한림읍 한림로 329-10</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                    <div class="card mb-3 likeCard" style="max-width: 800px;">
                         <div class="row g-0">
                             <div class="col-md-4">
                                 <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1195" class="img-fluid rounded-start imgSize" alt="...">
@@ -206,8 +220,12 @@
                                 <div class="card-body">
                                     <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
                                     <div class="info-container-top">
-                                        <div class="card-title title"><h5>명소명</h5></div>
-                                        <div class="card-title text-content"><h5>협재해수욕장</h5></div>
+                                        <div class="card-title title mt-3">
+                                          <h5>명소명</h5>
+                                        </div>
+                                        <div class="card-title text-content mt-3">
+                                          <h5>협재해수욕장</h5>
+                                        </div>
                                     </div>
                                     <div class="info-container-top">
                                         <p class="card-text title">도시명</p>
@@ -222,8 +240,10 @@
                         </div>
                     </div>
             </div>
-        </div>
-        <i class="fa-thin fa-angles-down"></i>
+            <div class="wrap-downChevron">
+              <img class="down-chevron" src="../../IMG/MyPage/down-chevron.png">
+            </div>
+          </div>
     </div>
 
     <!-- 비밀번호 확인 모달 -->
