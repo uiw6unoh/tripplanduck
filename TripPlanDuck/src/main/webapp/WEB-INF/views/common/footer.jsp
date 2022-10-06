@@ -61,13 +61,12 @@
     ></script>
     
     <!-- jQuery js -->  
-  	<script src="${ path }/resources/js/common/jquery-3.6.0.min.js"></script>
+  	<script src="${ path }/js/common/jquery-3.6.0.min.js"></script>
     
     <!-- JavaScripts -->
-    <script src="${ path }/resources/js/common/Mainstyle.js"></script>
-    <script src="${ path }/resources/js/common/plugins.min.js"></script>
+    <script src="${ path }/js/common/plugins.min.js"></script>
 
     <!-- Footer Scripts -->
-    <script src="${ path }/resources/js/common/functions.js"></script>
+    <script src="${ path }/js/common/functions.js"></script>
   </body>
 </html>

@@ -22,21 +22,21 @@
   />
 
   <!-- Mainstyle CSS -->
-  <link rel="stylesheet" href="${ path }/resources/css/common/style.css" type="text/css" />
-  <link rel="stylesheet" href="${ path }/resources/css/common/font-icons.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/style.css" type="text/css" />
+  <link rel="stylesheet" href="${ path }/css/common/font-icons.css" type="text/css" />
   
-  <title>Header</title>
+  <title>TripPlanDuck</title>
 </head>
 
 <body class="stretched">
-    <div id="wrapper" class="clearfix">
+    <div id="container" class="clearfix">
       <header id="header" class="full-header">
         <div id="header-wrap">
           <div class="container">
             <div class="header-row">
               <div id="logo">
-                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"
-                  ><img src="${ path }/resources/images/common/logo.png"
+                <a href="${ path }" class="standard-logo" data-dark-logo="images/logo-dark.png"
+                  ><img src="${ path }/resources/images/common/logo.png" 
                 /></a>
               </div>
               <div class="header-misc">
@@ -63,16 +63,16 @@
               <nav class="primary-menu">
                 <ul class="menu-container" style="font-size: 15px">
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>Home</div></a>
+                    <a class="menu-link" href="${ path }"><div>Home</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>플래너</div></a>
+                    <a class="menu-link" href="${ path }/planner/myplanner"><div>플래너</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>여행지</div></a>
+                    <a class="menu-link" href="${path}/trip/main""><div>여행지</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>위드덕</div></a>
+                    <a class="menu-link" href="${path}/withduck/list"><div>위드덕</div></a>
                   </li>
                 </ul>
               </nav>
@@ -80,10 +80,10 @@
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>로그인</div></a>
+                    <a class="menu-link" href="${path}/member/login"><div>로그인</div></a>
                   </li>
                   <li class="menu-item">
-                    <a class="menu-link" href="#"><div>회원가입</div></a>
+                    <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>
                   </li>
                 </ul>
               </nav>
