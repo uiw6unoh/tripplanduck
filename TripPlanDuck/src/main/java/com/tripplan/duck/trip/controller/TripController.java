@@ -30,5 +30,10 @@ public class TripController {
 		return "trip/TripPlace";
 	}
 	
+<<<<<<< HEAD
+=======
+	
+	
+>>>>>>> bc9210681e5a1c494a0cad8d0b6197c72e6e4906
 
 }
