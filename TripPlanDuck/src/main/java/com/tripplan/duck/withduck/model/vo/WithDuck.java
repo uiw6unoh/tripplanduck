@@ -1,5 +1,9 @@
 package com.tripplan.duck.withduck.model.vo;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,9 +24,13 @@ public class WithDuck {
 	
 	private String withAge;
 	
-	private String withPersonner;
+	private int withPersonner;
 	
 	private String withStatus;
+	
+	private String withStartDate;
+	
+	private String withEndDate;
 	
 	private String withOriginFileName;
 
