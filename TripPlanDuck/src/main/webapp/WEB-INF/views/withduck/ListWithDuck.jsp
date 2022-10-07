@@ -150,11 +150,11 @@
                 </div>
                 <!-- <input type="radio" name="radio" id="" value="최신순" checked>최신순
                 <input type="radio" name="radio" id="" value="조회순">조회순 -->
-                <c:if test="${empty listFilter }">
-                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter';">모집중인 글만 보기</button>
+                <c:if test="${empty listFilter && empty filter_val }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter'">모집중인 글만 보기</button>
             	</c:if>
-                <c:if test="${empty listFilter }">
-                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter';">모집중인 글만 보기</button>
+                <c:if test="${not empty listFilter }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}';">모집중인 글만 보기</button>
             	</c:if>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">

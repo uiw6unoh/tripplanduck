@@ -58,11 +58,6 @@
 		ORDER BY WITH_CREATEDATE
 	</select>
 	
-	<select id="withDuckSelectJoinCount" resultMap="withDuckResultMap">
-		<include refid="withDuckListSql" />
-		AND WITH_JOINSTATUS = '모집중'
-	</select>
-	
 	<select id="withDuckSelectReadCount" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql" />
 		ORDER BY WITH_READCOUNT DESC
@@ -89,10 +84,26 @@
 		ORDER BY WITH_READCOUNT DESC
 	</select>
 	
-	<select id="selectWithDuckFilterCount" resultType="_int" parameterType="map">
-		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+	<select id="selectWithDuckJoinCount" resultType="_int">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_JOINSTATUS = '모집중'
+	</select>
+	
+	<select id="withDuckSelectJoin" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql" />
 		AND WITH_JOINSTATUS = '모집중'
 	</select>
 	
 
+	<select id="selectWithDuckJoinValCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+		AND WITH_JOINSTATUS = '모집중'
+	</select>
+	
+	<select id="withDuckJoinFilter" resultMap="withDuckResultMap" parameterType="map">
+		<include refid="withDuckListSql" />
+		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val} AND WITH_JOINSTATUS = '모집중'
+		ORDER BY WITH_CREATEDATE
+	</select>
+	
+	
 </mapper>
