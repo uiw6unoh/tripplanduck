@@ -72,572 +72,81 @@ var Jeju = new kakao.maps.LatLng(
 var locationValue = (target) => {
 	  // 선택한 option의 value 값
 	  console.log(target.value);
+	  console.log(target);
 	  var location = document.getElementById('location1');
-		
-	
-	  
-	  if (target.value.indexOf('서울') != -1) {
-	  
-
-			var mapContainer = document
-					.getElementById('map'), // 지도를 표시할 div 
-
-			mapOption = {
-				// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-				center : Seoul,
-
-				// 지도의 중심좌표
-				level : 9
-			// 지도의 확대 레벨
-			};
-	
-			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(
-					mapContainer, mapOption);
-
-			var mapTypeControl = new kakao.maps.MapTypeControl();
-
-			// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-			// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-			map
-					.addControl(
-							mapTypeControl,
-							kakao.maps.ControlPosition.TOPRIGHT);
-
-			// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-			var zoomControl = new kakao.maps.ZoomControl();
-			map
-					.addControl(
-							zoomControl,
-							kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('인천') != -1){
-
-				var mapContainer = document
-						.getElementById('map'), // 지도를 표시할 div 
-
-				mapOption = {
-					// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-					center : Incheon,
-
-					// 지도의 중심좌표
-					level : 9
-				// 지도의 확대 레벨
-				};
-				// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-				var map = new kakao.maps.Map(
-						mapContainer, mapOption);
-
-				var mapTypeControl = new kakao.maps.MapTypeControl();
-
-				// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-				// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-				map
-						.addControl(
-								mapTypeControl,
-								kakao.maps.ControlPosition.TOPRIGHT);
-
-				// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-				var zoomControl = new kakao.maps.ZoomControl();
-				map
-						.addControl(
-								zoomControl,
-								kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('대전') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Daejon,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('대구') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Daegu,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('광주') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Gwangju,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('부산') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Busan,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('울산') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Ulsan,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('세종') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Sejong,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('강원') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Gangwon,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-
-		}else if(target.value.indexOf('충청북도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : ChungcheongBuk,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value.indexOf('충청남도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : ChungcheongNam,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value.indexOf('경상북도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : GyeongsangBuk,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-					
-		}else if(target.value.indexOf('경상남도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : GyeongsangNam,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value.indexOf('전라북도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : JeonlaBuk,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value.indexOf('전라남도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : JeonlaNam,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value.indexOf('제주') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Jeju,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					
-					kakao.maps.ControlPosition.RIGHT);
-					
-					
-					
-					
-		}else if(target.value.indexOf('경기도') != -1){
-			var mapContainer = document
-			.getElementById('map'), // 지도를 표시할 div 
-
-	mapOption = {
-		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
-		center : Gyeonggi,
-
-		// 지도의 중심좌표
-		level : 9
-	// 지도의 확대 레벨
-	};
-
-	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-	var map = new kakao.maps.Map(
-			mapContainer, mapOption);
-
-	var mapTypeControl = new kakao.maps.MapTypeControl();
-
-	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
-	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
-	map
-			.addControl(
-					mapTypeControl,
-					kakao.maps.ControlPosition.TOPRIGHT);
-
-	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
-	var zoomControl = new kakao.maps.ZoomControl();
-	map
-			.addControl(
-					zoomControl,
-					kakao.maps.ControlPosition.RIGHT);
+      
+	  $('.loca_1').hide();
+	  $('.loca_2').hide();
+	  $('.loca_3').hide();
+	  $('.loca_4').hide();
+	  $('.loca_5').hide();
+	  $('.loca_6').hide();
+	  $('.loca_7').hide();
+	  $('.loca_8').hide();
+	  $('.loca_31').hide();
+	  $('.loca_32').hide();
+	  $('.loca_33').hide();
+	  $('.loca_34').hide();
+	  $('.loca_35').hide();
+	  $('.loca_36').hide();
+	  $('.loca_37').hide();
+	  $('.loca_38').hide();
+	  $('.loca_39').hide();
+
+	  if (target.value == 1) {
+			asd(Seoul,map);
+			$('.loca_1').show();
+			
+		}else if(target.value == 2){
+			asd(Incheon);
+			$('.loca_2').show();
+		}else if(target.value == 3){
+			asd(Daejon);
+			$('.loca_3').show();
+		}else if(target.value == 4){
+			asd(Daegu);
+			$('.loca_4').show();
+		}else if(target.value == 5){
+			asd(Gwangju);
+			$('.loca_5').show();
+		}else if(target.value == 6){
+			asd(Busan);
+			$('.loca_6').show();
+		}else if(target.value == 7){
+			asd(Ulsan);
+			$('.loca_7').show();
+		}else if(target.value == 8){
+			asd(Sejong);
+			$('.loca_8').show();
+		}else if(target.value == 31){
+			asd(Gyeonggi);
+			$('.loca_31').show();
+		}else if(target.value == 32){
+			asd(Gangwon);
+			$('.loca_32').show();
+		}else if(target.value == 33){
+			asd(ChungcheongBuk);
+			$('.loca_33').show();
+		}else if(target.value == 34){
+			asd(ChungcheongNam);
+			$('.loca_34').show();
+		}else if(target.value == 35){
+			asd(GyeongsangBuk);
+			$('.loca_35').show();
+		}else if(target.value == 36){
+			asd(IncheoGyeongsangNam);
+			$('.loca_36').show();
+		}else if(target.value == 37){
+			asd(JeonlaBuk);
+			$('.loca_37').show();
+		}else if(target.value == 38){
+			asd(JeonlaNam);
+			$('.loca_38').show();
+		}else if(target.value == 39){
+			asd(Jeju);
+			$('.loca_39').show();
 		}
 		
 	}
+	
 	
