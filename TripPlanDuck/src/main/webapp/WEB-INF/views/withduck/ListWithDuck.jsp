@@ -136,13 +136,26 @@
                     </svg>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
-                    <li><a class="dropdown-item" href="${path}/withduck/list">최신순</a></li>
-                    <li><a class="dropdown-item" href="${path}/withduck/sort">조회순</a></li>
+                    <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
+                    <fmt:formatNumber value="${page}" type="number" var="page"/>
+                    <c:if test="${empty listFilter }">
+                    	<li><a class="dropdown-item" href="${path}/withduck/list">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortList">조회순</a></li>
+                    </c:if>
+                    <c:if test="${not empty listFilter }">
+                    	<li><a class="dropdown-item" href="${path}/withduck/filter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">조회순</a></li>
+                    </c:if>
                     </ul>
                 </div>
                 <!-- <input type="radio" name="radio" id="" value="최신순" checked>최신순
                 <input type="radio" name="radio" id="" value="조회순">조회순 -->
-                <button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;">모집중인 글만 보기</button>
+                <c:if test="${empty listFilter }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter';">모집중인 글만 보기</button>
+            	</c:if>
+                <c:if test="${empty listFilter }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter';">모집중인 글만 보기</button>
+            	</c:if>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             
@@ -237,6 +250,7 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
+
 <script>
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
@@ -260,6 +274,7 @@ $(document).on('click', '.age_btn', function(){
     $('#btnValueSaveAge').attr('value', age);
 });
 
+
 $(document).ready(function() {
     var date = new Date();
 
@@ -275,32 +290,16 @@ $(document).ready(function() {
     $("#end").attr("value", today);
 });
 
+
 document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 });
 
+
 function clickBtn(){
 	const btnValue = documnet.getElementsByClassName('location_btn selected');
 	document.getElementById("btnValueSaveLocation").value = btnValue.value;
 }
-/*
-$('#search').click(
-        function () {
-            $.ajax({
-                url: "${path}/withduck/filter",
-                dataType: "html",
-                method: "get",
-                data: {
-                	location_val,
-                	gender_val,
-                	age_val
-                },
-                success: function(result) {
-                	console.log(result);
-                }
-            });
-        }
-    );
-*/
+
 </script>

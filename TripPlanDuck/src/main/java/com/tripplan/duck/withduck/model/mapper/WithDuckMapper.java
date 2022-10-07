@@ -19,6 +19,11 @@ public interface WithDuckMapper {
 	
 	int selectWithDuckFilterCount(@Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val, @Param("start_val") String start_val, @Param("end_val") String end_val, @Param("personnel_val") int personnel_val);
 
-	List<WithDuck> withDuckReadcountSort(RowBounds rowBownds, @Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val, @Param("start_val") String start_val, @Param("end_val") String end_val, @Param("personnel_val") int personnel_val);;
+	List<WithDuck> withDuckReadcountSort(RowBounds rowBownds, @Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val, @Param("start_val") String start_val, @Param("end_val") String end_val, @Param("personnel_val") int personnel_val);
 
+	List<WithDuck> withDuckSelectReadCount(RowBounds rowBounds);
+
+	List<WithDuck> withDuckSelectJoinCount(RowBounds rowBounds);
+
+	int getWithDuckValJoinCount(@Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val, @Param("start_val") String start_val, @Param("end_val") String end_val, @Param("personnel_val") int personnel_val);
 }

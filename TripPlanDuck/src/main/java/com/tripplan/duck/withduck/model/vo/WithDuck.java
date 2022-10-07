@@ -44,6 +44,8 @@ public class WithDuck {
 	
 	private int withReadCount;
 	
+	private String withJoinStatus;
+	
 	private String createDate;
 	
 	private String updateDate;

@@ -64,12 +64,35 @@ public class WithDuckServiceImpl implements WithDuckService {
 		int limit = pageInfo.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
+		System.out.println("aaaaaaaaaa : " + location_val);
+		
 		return mapper.withDuckReadcountSort(rowBounds, location_val, gender_val, age_val, start_val, end_val, personnel_val);
 	}
 
-	
-	
+	@Override
+	public List<WithDuck> getWithDuckListReadCount(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.withDuckSelectReadCount(rowBounds);
+	}
 
+	@Override
+	public List<WithDuck> getWithDuckListJoinCount(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.withDuckSelectJoinCount(rowBounds);
+	}
+
+	@Override
+	public int getWithDuckValJoinCount(String location_val, String gender_val, String age_val, String start_val,
+			String end_val, int personnel_val) {
+		
+		return mapper.getWithDuckValJoinCount(location_val, gender_val, age_val, start_val, end_val, personnel_val);
+	}
 
 
 }

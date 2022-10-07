@@ -1,22 +1,17 @@
 package com.tripplan.duck.withduck.controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
-import com.fasterxml.jackson.databind.util.Converter;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.withduck.model.service.WithDuckService;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
@@ -61,6 +56,7 @@ public class WithDuckController {
 									   @RequestParam(value = "personnel_val") int personnel_val,
 									   @RequestParam(value = "page", defaultValue = "1") int page){
 		List<WithDuck> listFilter = null;
+		List<Object> filter_val = new ArrayList<Object>();
 		
 		System.out.println(location_val);
 		System.out.println(gender_val);
@@ -76,18 +72,24 @@ public class WithDuckController {
 		
 		System.out.println(listFilter);
 		
+		filter_val.add(location_val);
+		filter_val.add(gender_val);
+		filter_val.add(age_val);
+		filter_val.add(start_val);
+		filter_val.add(end_val);
+		filter_val.add(personnel_val);
+		filter_val.add(page);
+		
+		System.out.println("asdfasdfsadf : " + filter_val);
+		
+		model.addObject("filter_val", filter_val);
 		model.addObject("listFilter", listFilter);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");
 		return model;
 	}
 	
-	@GetMapping("/create")
-	public String create() {
-		return ("withduck/CreateWithDuck");
-	}
-	
-	@GetMapping("/sort")
+	@GetMapping("/sortfilter")
 	public ModelAndView withDuckReadcountSort(ModelAndView model,
 									   @RequestParam(value = "location_val") String location_val, 
 									   @RequestParam(value = "gender_val") String gender_val,
@@ -98,6 +100,7 @@ public class WithDuckController {
 									   @RequestParam(value = "page", defaultValue = "1") int page ) {
 		
 		List<WithDuck> listFilter = null;
+		List<Object> filter_val = new ArrayList<Object>();
 		
 		System.out.println(location_val);
 		System.out.println(gender_val);
@@ -113,9 +116,81 @@ public class WithDuckController {
 		
 		System.out.println(listFilter);
 		
+		filter_val.add(location_val);
+		filter_val.add(gender_val);
+		filter_val.add(age_val);
+		filter_val.add(start_val);
+		filter_val.add(end_val);
+		filter_val.add(personnel_val);
+		filter_val.add(page);
+		
+		model.addObject("filter_val", filter_val);
 		model.addObject("listFilter", listFilter);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");
+		return model;
+	}
+	
+	@GetMapping("/sortList")
+	public ModelAndView withDuckListSort(ModelAndView model, 
+										 @RequestParam(value = "page", defaultValue = "1") int page) {
+		
+		List<WithDuck> list = null;
+		PageInfo pageInfo = null;
+		
+		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
+		list = service.getWithDuckListReadCount(pageInfo);
+		
+		System.out.println(pageInfo +" " + list);
+		
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("withduck/ListWithDuck");
+		
+		return model;
+	}
+	
+	@GetMapping("/joinFilter")
+	public ModelAndView joinFilter(ModelAndView model
+								   ,@RequestParam(value = "page", defaultValue = "1") int page) {
+		List<WithDuck> list = null;
+		PageInfo pageInfo = null;
+		
+		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
+		list = service.getWithDuckListJoinCount(pageInfo);
+		
+		System.out.println(pageInfo +" " + list);
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("withduck/ListWithDuck");
+		
+		return model;
+	}
+	
+	@GetMapping("/joinValFilter")
+	public ModelAndView joinValFilter(ModelAndView model,
+			   @RequestParam(value = "location_val") String location_val, 
+			   @RequestParam(value = "gender_val") String gender_val,
+			   @RequestParam(value = "age_val") String age_val,
+			   @RequestParam(value = "start_val") String start_val,
+			   @RequestParam(value = "end_val") String end_val,
+			   @RequestParam(value = "personnel_val") int personnel_val,
+			   @RequestParam(value = "page", defaultValue = "1") int page ) {
+		List<WithDuck> listFilter = null;
+		List<Object> filter_val = new ArrayList<Object>();
+		
+		PageInfo pageInfo = null;
+		
+		pageInfo = new PageInfo(page, 8, service.getWithDuckValJoinCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
+		listFilter = service.getWithDuckValJoinList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		
+		model.addObject("filter_val", filter_val);
+		model.addObject("listFilter", listFilter);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("withduck/ListWithDuck");
+		
 		return model;
 	}
 }
