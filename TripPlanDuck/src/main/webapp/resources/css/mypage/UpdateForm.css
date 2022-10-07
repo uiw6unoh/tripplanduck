@@ -6,7 +6,7 @@ li {
     border: solid 1px red;
 } */
 
-/* font-family ëˆˆëˆ„í°íŠ¸ - pretendard */
+/* font-family ´«´©ÆùÆ® - pretendard */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 * {
@@ -81,7 +81,7 @@ table {
     text-decoration: underline;
 }
 
-/* ì—°ë ¹ëŒ€ ë²„íŠ¼ */
+/* ¿¬·É´ë ¹öÆ° */
 .test_obj input[type="radio"] {
     display: none;
 }

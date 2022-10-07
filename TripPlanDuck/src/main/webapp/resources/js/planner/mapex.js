@@ -17,16 +17,16 @@ var Daegu = new kakao.maps.LatLng(
 		128.60174803297681);
 // 5번
 var Gwangju = new kakao.maps.LatLng(
-		37.45586506841309,
-		126.98080883930932);
+		 35.1595454,
+		126.8526012);
 // 6번	
 var Busan = new kakao.maps.LatLng(
-		37.45586506841309,
-		126.98080883930932);
+		35.17977523319586,
+		129.0749925863485);
 // 7번
 var Ulsan = new kakao.maps.LatLng(
-		35.5390202078351,
-		129.311344398614);
+		35.53962603316087,
+		129.31151418501798);
 // 8번
 var Sejong = new kakao.maps.LatLng(
 		36.48013273645778,
@@ -67,20 +67,16 @@ var Jeju = new kakao.maps.LatLng(
 		126.50042271000662);	
 
 
-
-
-
-		
-
-
-
 // 지역별로 중심좌표 설정
 
 var locationValue = (target) => {
 	  // 선택한 option의 value 값
 	  console.log(target.value);
+	  var location = document.getElementById('location1');
+		
+	
 	  
-	  if (target.value == 1) {
+	  if (target.value.indexOf('서울') != -1) {
 	  
 
 			var mapContainer = document
@@ -91,7 +87,7 @@ var locationValue = (target) => {
 				center : Seoul,
 
 				// 지도의 중심좌표
-				level : 10
+				level : 9
 			// 지도의 확대 레벨
 			};
 	
@@ -115,7 +111,7 @@ var locationValue = (target) => {
 							zoomControl,
 							kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 2){
+		}else if(target.value.indexOf('인천') != -1){
 
 				var mapContainer = document
 						.getElementById('map'), // 지도를 표시할 div 
@@ -125,7 +121,7 @@ var locationValue = (target) => {
 					center : Incheon,
 
 					// 지도의 중심좌표
-					level : 10
+					level : 9
 				// 지도의 확대 레벨
 				};
 				// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -148,7 +144,7 @@ var locationValue = (target) => {
 								zoomControl,
 								kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 3){
+		}else if(target.value.indexOf('대전') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -157,7 +153,7 @@ var locationValue = (target) => {
 		center : Daejon,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -181,7 +177,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 4){
+		}else if(target.value.indexOf('대구') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -190,7 +186,7 @@ var locationValue = (target) => {
 		center : Daegu,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -214,7 +210,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 5){
+		}else if(target.value.indexOf('광주') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -223,7 +219,7 @@ var locationValue = (target) => {
 		center : Gwangju,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -247,7 +243,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 6){
+		}else if(target.value.indexOf('부산') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -256,7 +252,7 @@ var locationValue = (target) => {
 		center : Busan,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -280,7 +276,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 7){
+		}else if(target.value.indexOf('울산') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -289,7 +285,7 @@ var locationValue = (target) => {
 		center : Ulsan,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -313,7 +309,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 8){
+		}else if(target.value.indexOf('세종') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -322,7 +318,7 @@ var locationValue = (target) => {
 		center : Sejong,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -346,7 +342,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 32){
+		}else if(target.value.indexOf('강원') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -355,7 +351,7 @@ var locationValue = (target) => {
 		center : Gangwon,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -379,7 +375,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 
-		}else if(target.value == 33){
+		}else if(target.value.indexOf('충청북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -388,7 +384,7 @@ var locationValue = (target) => {
 		center : ChungcheongBuk,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -411,7 +407,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 34){
+		}else if(target.value.indexOf('충청남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -420,7 +416,7 @@ var locationValue = (target) => {
 		center : ChungcheongNam,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -443,7 +439,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 35){
+		}else if(target.value.indexOf('경상북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -452,7 +448,7 @@ var locationValue = (target) => {
 		center : GyeongsangBuk,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -476,7 +472,7 @@ var locationValue = (target) => {
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
 					
-		}else if(target.value == 36){
+		}else if(target.value.indexOf('경상남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -485,7 +481,7 @@ var locationValue = (target) => {
 		center : GyeongsangNam,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -508,7 +504,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 37){
+		}else if(target.value.indexOf('전라북도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -517,7 +513,7 @@ var locationValue = (target) => {
 		center : JeonlaBuk,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -540,7 +536,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 38){
+		}else if(target.value.indexOf('전라남도') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -549,7 +545,7 @@ var locationValue = (target) => {
 		center : JeonlaNam,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
 	// 지도의 확대 레벨
 	};
 
@@ -572,7 +568,7 @@ var locationValue = (target) => {
 			.addControl(
 					zoomControl,
 					kakao.maps.ControlPosition.RIGHT);
-		}else if(target.value == 39){
+		}else if(target.value.indexOf('제주') != -1){
 			var mapContainer = document
 			.getElementById('map'), // 지도를 표시할 div 
 
@@ -581,7 +577,44 @@ var locationValue = (target) => {
 		center : Jeju,
 
 		// 지도의 중심좌표
-		level : 10
+		level : 9
+	// 지도의 확대 레벨
+	};
+
+	// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+	var map = new kakao.maps.Map(
+			mapContainer, mapOption);
+
+	var mapTypeControl = new kakao.maps.MapTypeControl();
+
+	// 지도에 컨트롤을 추가해야 지도위에 표시됩니다
+	// kakao.maps.ControlPosition은 컨트롤이 표시될 위치를 정의하는데 TOPRIGHT는 오른쪽 위를 의미합니다
+	map
+			.addControl(
+					mapTypeControl,
+					kakao.maps.ControlPosition.TOPRIGHT);
+
+	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+	var zoomControl = new kakao.maps.ZoomControl();
+	map
+			.addControl(
+					zoomControl,
+					
+					kakao.maps.ControlPosition.RIGHT);
+					
+					
+					
+					
+		}else if(target.value.indexOf('경기도') != -1){
+			var mapContainer = document
+			.getElementById('map'), // 지도를 표시할 div 
+
+	mapOption = {
+		// 지역마다 지역 좌표를 받아오는 쪽으로 해야함
+		center : Gyeonggi,
+
+		// 지도의 중심좌표
+		level : 9
 	// 지도의 확대 레벨
 	};
 

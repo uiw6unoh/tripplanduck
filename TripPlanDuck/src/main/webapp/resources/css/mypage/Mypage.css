@@ -6,7 +6,7 @@ li {
     border: solid 1px red;
 } */
 
-/*ìƒë‹¨*/
+/*»ó´Ü*/
 .top-container {
     display: flex;
     flex-direction: column;
@@ -33,7 +33,7 @@ li {
     background-color: #fff8c6;
 }
 
-/*í•˜ë‹¨ ë©”ë‰´*/
+/*ÇÏ´Ü ¸Ş´º*/
 .nav-container ul li a {
     color: black;
     font-size: 1.5rem;
@@ -76,7 +76,7 @@ li {
     font-size: 1.7rem;
 }
 
-/* ì—¬í–‰ì§€ í•„í„° */
+/* ¿©ÇàÁö ÇÊÅÍ */
 .form-control {
     width: 150px;
     float: right;
@@ -94,7 +94,7 @@ li {
     background-color: #fff8c6;
 }
 
-/* ì¹´ë“œ */
+/* Ä«µå */
 .card-body {
     padding: 2.25rem;
 }
@@ -129,7 +129,7 @@ li {
     /* transform: scale(1.1); */
 }
 
-/* ë¦¬ë·° ì¹´ë“œ */
+/* ¸®ºä Ä«µå */
 .commentCard {
     width: 800px;
     height: 200px;
@@ -204,14 +204,14 @@ li {
     filter: opacity(.1) drop-shadow(1px 1px 1px #808080);
 }
 
-/* ì½”ë©˜íŠ¸ ë²„íŠ¼ */
+/* ÄÚ¸àÆ® ¹öÆ° */
 .card-btns {
     float: right;
     align-items: flex-end;
     transform: translate(7%, -103%);
 }
 
-/* ë¹„ë°€ë²ˆí˜¸ í™•ì¸ ëª¨ë‹¬ */
+/* ºñ¹Ğ¹øÈ£ È®ÀÎ ¸ğ´Ş */
 .modal-header {
     background-color: #fff8c6;
 }
