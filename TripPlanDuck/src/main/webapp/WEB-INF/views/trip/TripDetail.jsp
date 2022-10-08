@@ -92,11 +92,11 @@
                   <a href="#">홈 ></a>
                   <a href="#">제주도</a>
                 </div>
-                <h2 class="stu_h2_title">내셔널갤러리</h2>
-                <p>런던 예술의 상징</p>
+                <h2 class="stu_h2_title">섭지코지</h2>
+                <p>관광 명소</p>
               </div>
               <div class="description">
-                <p class="lead" style="font-size: 1rem;">런던 트라팔가르 광장에 있는 국립미술관 내셔널 갤러리는 영국 최초의 국립 미술관입니다. 레오나르도 다빈치부터 고흐까지 연대순으로 전시된 작품을 감상하면서 회화 변천사를 확인해 볼 수 있어요.</p>
+                <p class="lead" style="font-size: 1rem;">등대, 레스토랑, 상점, 경치 좋은 전망, 산책로를 갖추고 있는 조용한 해변 지역입니다.</p>
               </div>
             </div>
         </div>
@@ -194,10 +194,9 @@
 
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
-                <p>구글 맵스, 날씨, 등 넣어야함 ~~</p>
-                
+				<div class="mt-3 ml-2">               
                    <div id="map" style="width:500px;height:400px;"></div>
-				    
+				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
                 <section class="mb-5">
@@ -375,73 +374,21 @@
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-	    center: new kakao.maps.LatLng(33.231669365977254, 126.3147343832866), // 지도의 중심좌표
-	    level: 1 // 지도의 확대 레벨
-	};  
+	mapOption = { 
+	    center: new kakao.maps.LatLng(33.42404, 126.93073), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};
 	
-	//지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
-	//주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
+	//마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(33.42404, 126.93073); 
 	
-	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-	infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-	
-	//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-	
-	//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-	searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-	    if (status === kakao.maps.services.Status.OK) {
-	        var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-	        detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-	        
-	        var content = '<div class="bAddr">' +
-	                        '<span class="title">법정동 주소정보</span>' + 
-	                        detailAddr + 
-	                    '</div>';
-	
-	        // 마커를 클릭한 위치에 표시합니다 
-	        marker.setPosition(mouseEvent.latLng);
-	        marker.setMap(map);
-	
-	        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-	        infowindow.setContent(content);
-	        infowindow.open(map, marker);
-	    }   
-	});
+	//마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	position: markerPosition
 	});
 	
-	//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-	kakao.maps.event.addListener(map, 'idle', function() {
-	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-	});
-	
-	function searchAddrFromCoords(coords, callback) {
-	// 좌표로 행정동 주소 정보를 요청합니다
-	geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-	}
-	
-	function searchDetailAddrFromCoords(coords, callback) {
-	// 좌표로 법정동 상세 주소 정보를 요청합니다
-	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-	}
-	
-	//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-	function displayCenterInfo(result, status) {
-	if (status === kakao.maps.services.Status.OK) {
-	    var infoDiv = document.getElementById('centerAddr');
-	
-	    for(var i = 0; i < result.length; i++) {
-	        // 행정동의 region_type 값은 'H' 이므로
-	        if (result[i].region_type === 'H') {
-	            infoDiv.innerHTML = result[i].address_name;
-	            break;
-	        }
-	    }
-	}    
-	}
+	//마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
 </script>

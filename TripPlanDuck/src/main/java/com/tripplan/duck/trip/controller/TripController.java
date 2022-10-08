@@ -2,24 +2,33 @@ package com.tripplan.duck.trip.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@RequestMapping("/trip")
 public class TripController {
-	@GetMapping("/trip/main")
-	public String tripMain() {
+	
+//	@Autowired
+//	private TripService service;
+	
+	@GetMapping("/main")
+	public String TripMain() {
+		
 		return "trip/TripMain";
 	}
 	
-	@GetMapping("/trip/detail")
+	@GetMapping("/detail")
 	public String TripDetail() {
 		return "trip/TripDetail";
 	}
 	
-	@GetMapping("/trip/list")
-	public String login() {
+	@GetMapping("/list")
+	public String list() {
 		return "trip/TripPlace";
 	}
+	
+
 }

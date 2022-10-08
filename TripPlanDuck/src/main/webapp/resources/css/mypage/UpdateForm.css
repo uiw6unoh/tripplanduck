@@ -1,0 +1,140 @@
+/* div {
+    border: solid 1px red;
+}
+
+li {
+    border: solid 1px red;
+} */
+
+/* font-family 눈누폰트 - pretendard */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+        "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #ffffff;
+}
+
+.signup {
+    margin-left: 160px;
+}
+
+:root {
+    accent-color: gold;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+
+.form-signup {
+    padding: 15px;
+    width: 600px;
+}
+
+.form-signup .form-floating:focus-within {
+    z-index: 2;
+}
+
+.form-signup input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.hr-sect {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.35);
+    font-size: 20px;
+    margin: 8px 0px;
+}
+
+.hr-sect::before,
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 16px;
+}
+
+.checkbox a {
+    text-decoration: underline;
+}
+
+/* 연령대 버튼 */
+.test_obj input[type="radio"] {
+    display: none;
+}
+
+.test_obj input[type="radio"]+span {
+    display: inline-block;
+    padding: 15px 10px;
+    border: 1px solid #dfdfdf;
+    background-color: #ffffff;
+    text-align: center;
+    cursor: pointer;
+}
+
+.test_obj input[type="radio"]:checked+span {
+    background-color: gold;
+    color: #ffffff;
+    border: 1px solid gold;
+}
+
+.updateBtn {
+    text-align: center;
+}
+
+.updateFormInfo {
+    text-align: center;
+}
+
+.updateFormInfo img {
+    width: 150px;
+}
+
+.btn-outline-warning {
+    background-color: #fff8c6;
+    color: black;
+}
+
+.btn-outline-warning:hover {
+    background-color: #fff8c6;
+}
+
+.memberOutBtn {
+    text-align: center;
+    transform: translate(0, 20%);
+}
+
+.memberOutBtn button,
+.memberOutBtn button:hover {
+    border: none;
+    background-color: transparent;
+    color: gray;
+    text-decoration: underline;
+}
+
+.memberOutBtn button:hover {
+    color: #fabf42;
+}

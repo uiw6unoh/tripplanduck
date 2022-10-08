@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tripplan.duck.withduck.model.mapper.WithDuckMapper">
+	<sql id="withDuckListSql">
+	SELECT WITH_NO,
+	       WITH_MEM_NO,
+	       WITH_WRITER_NICK,
+	       WITH_LOCATION,
+	       WITH_GENDER,
+	       WITH_AGE,
+	       WITH_PERSONNER,
+	       WITH_STATUS,
+	       WITH_STARTDATE,
+	       WITH_ENDDATE,
+	       WITH_STARTDATE,
+	       WITH_ENDDATE,
+	       WITH_ORIGINFILENAME,
+	       WITH_RENAMEFILENAME,
+	       WITH_TITLE,
+	       WITH_CONTENT,
+	       WITH_KEYWORD,
+	       WITH_READCOUNT,
+	       WITH_CREATEDATE,
+	       WITH_UPDATEDATE
+	FROM WITHDUK
+	WHERE WITH_STATUS='Y'
+	</sql>
+	
+	
+	<resultMap type="WithDuck" id="withDuckResultMap">
+		<id property="withNo" column="WITH_NO"/>
+		<result property="withMemNo" column="WITH_MEM_NO"/>
+		<result property="withWriterNick" column="WITH_WRITER_NICK"/>
+		<result property="withLocation" column="WITH_LOCATION"/>
+		<result property="withGender" column="WITH_GENDER"/>
+		<result property="withAge" column="WITH_AGE"/>
+		<result property="withPersonner" column="WITH_PERSONNER"/>
+		<result property="withStatus" column="WITH_STATUS"/>
+		<result property="withStartDate" column="WITH_STARTDATE"/>
+		<result property="withEndDate" column="WITH_ENDDATE"/>
+		<result property="withOriginFileName" column="WITH_ORIGINFILENAME"/>
+		<result property="withRenameFileName" column="WITH_RENAMEFILENAME"/>
+		<result property="withTitle" column="WITH_TITLE"/>
+		<result property="withContent" column="WITH_CONTENT"/>
+		<result property="withkeyword" column="WITH_KEYWORD"/>
+		<result property="withReadCount" column="WITH_READCOUNT"/>
+		<result property="createDate" column="WITH_CREATEDATE"/>
+		<result property="updateDate" column="WITH_UPDATEDATE"/>
+	</resultMap>
+	
+	
+	<!-- 내림차순 조회 -->
+	<select id="withDuckSelectAll" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql" />
+		ORDER BY WITH_CREATEDATE
+	</select>
+	
+	<!-- 위드덕 게시물 카운트 -->
+	<select id="selectWithDuckCount" resultType="_int">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y'
+	</select>
+	
+	<select id="withDuckFilter" resultMap="withDuckResultMap" parameterType="map">
+		<include refid="withDuckListSql" />
+		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+		ORDER BY WITH_CREATEDATE
+	</select>
+	
+	<select id="selectWithDuckFilterCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+	</select>
+	
+	<select id="withDuckReadcountSort" resultMap="withDuckResultMap" parameterType="map">
+		<include refid="withDuckListSql" />
+		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+		ORDER BY WITH_READCOUNT DESC
+	</select>
+	
+</mapper>

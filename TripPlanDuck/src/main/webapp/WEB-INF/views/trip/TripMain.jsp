@@ -129,7 +129,7 @@
     <p class="h2 mt-5 font-weight-bold text-center">어디로 여행을 떠나시나요?</p>
     <p class="font-weight-light text-muted text-center mb-1">여행지를 검색해주세요.</p>
     <div class="mx-auto input-group justify-content-center w-50">
-          <input name="query" type="text" class="form-control" aria-label="search">
+          <input name="keyword" type="text" class="form-control" aria-label="search">
         <button class="btn btn-outline-warning" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-search" viewBox="0 0 16 18">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg></button>
@@ -146,9 +146,34 @@
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
-        <li><a class="dropdown-item" href="#">최신순</a></li>
-        <li><a class="dropdown-item" href="#">인기순</a></li>
-        <li><a class="dropdown-item" href="#">추천순</a></li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="sortByPopular()"
+			id="filterSortPopular"
+			>인기순</a >
+		</li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="sortByRecommend()"
+			id="filterSortRecommend"
+			>추천순</a >
+		</li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="sortByClimbingUp()"
+			id="filterSortClimbingUp"
+			>오름차순</a >
+		</li>
+ 		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="sortByClimbingDown()"
+			id="filterSortClimbingDown"
+			>내림차순</a >
+		</li>
       </ul>
     </div>
   
@@ -165,7 +190,7 @@
           </div>
         </div>
       <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
+        <div class="card" style="width: 16rem;" >
           <div style="overflow: hidden;">
             <img src="${ path }/images/trip/jeju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
           </div>

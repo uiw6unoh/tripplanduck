@@ -64,7 +64,6 @@
   	<script src="${ path }/js/common/jquery-3.6.0.min.js"></script>
     
     <!-- JavaScripts -->
-    <script src="${ path }/js/common/Mainstyle.js"></script>
     <script src="${ path }/js/common/plugins.min.js"></script>
 
     <!-- Footer Scripts -->
