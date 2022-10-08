@@ -1,10 +1,8 @@
 package com.tripplan.duck.member.model.service;
 
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tripplan.duck.member.model.dao.MemberDao;
 import com.tripplan.duck.member.model.mapper.MemberMapper;
 import com.tripplan.duck.member.model.vo.Member;
 

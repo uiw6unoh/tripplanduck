@@ -25,6 +25,7 @@
 
 <body class="text-center">
     <main class="form-signin w-300 m-auto">
+  
       <form action="login" method="POST">
         <h1>LOGIN</h1>
         <a href="${ path }">
