@@ -27,7 +27,8 @@ public class WithDuckController {
 	private WithDuckService service;
 	
 	@GetMapping("/list")
-	public ModelAndView withDuckList(ModelAndView model, 
+	public ModelAndView withDuckList(ModelAndView model,
+							  @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 							  @RequestParam(value = "page", defaultValue = "1") int page) {
 		
 		List<WithDuck> list = null;
@@ -38,7 +39,7 @@ public class WithDuckController {
 		
 		System.out.println(pageInfo +" " + list);
 		
-		
+		model.addObject("sort_name", sort_name);
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");
@@ -48,6 +49,7 @@ public class WithDuckController {
 	
 	@GetMapping("/filter") 
 	public ModelAndView withDuckFilter(ModelAndView model,
+									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 									   @RequestParam(value = "location_val") String location_val , 
 									   @RequestParam(value = "gender_val") String gender_val,
 									   @RequestParam(value = "age_val") String age_val,
@@ -82,6 +84,7 @@ public class WithDuckController {
 		
 		System.out.println("asdfasdfsadf : " + filter_val);
 		
+		model.addObject("sort_name", sort_name);
 		model.addObject("filter_val", filter_val);
 		model.addObject("listFilter", listFilter);
 		model.addObject("pageInfo", pageInfo);
@@ -91,6 +94,7 @@ public class WithDuckController {
 	
 	@GetMapping("/sortfilter")
 	public ModelAndView withDuckReadcountSort(ModelAndView model,
+									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 									   @RequestParam(value = "location_val") String location_val, 
 									   @RequestParam(value = "gender_val") String gender_val,
 									   @RequestParam(value = "age_val") String age_val,
@@ -124,6 +128,7 @@ public class WithDuckController {
 		filter_val.add(personnel_val);
 		filter_val.add(page);
 		
+		model.addObject("sort_name", sort_name);
 		model.addObject("filter_val", filter_val);
 		model.addObject("listFilter", listFilter);
 		model.addObject("pageInfo", pageInfo);
@@ -132,7 +137,8 @@ public class WithDuckController {
 	}
 	
 	@GetMapping("/sortList")
-	public ModelAndView withDuckListSort(ModelAndView model, 
+	public ModelAndView withDuckListSort(ModelAndView model,
+										 @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 										 @RequestParam(value = "page", defaultValue = "1") int page) {
 		
 		List<WithDuck> list = null;
@@ -143,7 +149,7 @@ public class WithDuckController {
 		
 		System.out.println(pageInfo +" " + list);
 		
-		
+		model.addObject("sort_name", sort_name);
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");

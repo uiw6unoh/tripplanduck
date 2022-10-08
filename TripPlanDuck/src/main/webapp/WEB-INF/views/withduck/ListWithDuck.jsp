@@ -130,21 +130,31 @@
         <div class="container">
             <div class="sort" style="text-align: right;">
                 <div class="dropdown d-flex justify-content-end" style="width: 100px; position:relative; top: 35px; left: 850px">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    최신순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                    </button>
+                	<c:if test="${empty sort_name }">
+	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+	                    최신순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+	                    </svg>
+	                    </button>
+                	</c:if>
+                	<c:if test="${not empty sort_name }">
+	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+	                    ${sort_name}  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+	                    </svg>
+	                    </button>
+                	</c:if>
+                    
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
                     <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
                     <fmt:formatNumber value="${page}" type="number" var="page"/>
                     <c:if test="${empty listFilter }">
-                    	<li><a class="dropdown-item" href="${path}/withduck/list">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/sortList">조회순</a></li>
+                    	<li><a class="dropdown-item" href="${path}/withduck/list?sort_name=최신순">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortList?sort_name=조회순">조회순</a></li>
                     </c:if>
                     <c:if test="${not empty listFilter }">
-                    	<li><a class="dropdown-item" href="${path}/withduck/filter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">조회순</a></li>
+                    	<li><a class="dropdown-item" href="${path}/withduck/filter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">조회순</a></li>
                     </c:if>
                     </ul>
                 </div>
@@ -267,13 +277,19 @@ $(document).on('click', '.gender_btn', function(){
     $('#btnValueSaveGender').attr('value', gender);
 });
 $(document).on('click', '.age_btn', function(){
-    $('#age_btn').removeClass('selected');
+    $('.age_btn').removeClass('selected');
     $(this).addClass('selected');
 //  $('.age_btn.selected').attr("name", "age_val");
     var age = $('.age_btn.selected').val();
     $('#btnValueSaveAge').attr('value', age);
 });
 
+$(document).on('click', ".dropdown-item", function() {
+	$('.dropdown-item').removeClass('selected');
+	$(this).addClass('selected');
+	var value = $('.dropdown-item.seleted').text();
+	$('#dropdownMenuButton1').attr('name', value);
+});
 
 $(document).ready(function() {
     var date = new Date();
