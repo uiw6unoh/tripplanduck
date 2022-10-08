@@ -84,8 +84,13 @@
                 </div>
 
                 <label for="customRange2" class="form-label"></label>
-                <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                    <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
+                    <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="
+                    		localStorage.setItem('personnel', $('.form-range').val())
+							$('.form-range').attr('value', localStorage.getItem('personnel') );
+							$('#value2').text(localStorage.getItem('personnel')+'명');	
+							document.getElementById('value2').innerHTML=this.value+'명';
+							">
                     <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                     
                 </div>
@@ -93,14 +98,14 @@
                     <div class="start_container">
                         <label for="start">출발일:</label>
     
-                        <input type="date" id="start" name="start_val"
+                        <input type="date" id="start" class="start" name="start_val"
                             value="2018-07-22"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
                     <div class="end_container">
                         <label for="start">도착일:</label>
             
-                        <input type="date" id="end" name="end_val"
+                        <input type="date" id="end" class="end" name="end_val"
                             value="2018-07-22"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
@@ -264,32 +269,40 @@
 <script>
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
+    localStorage.removeItem("location");
     $(this).addClass('selected');
+    localStorage.setItem("location", $('.location_btn.selected').val());
     //$('.location_btn.selected').attr("name", "location_val");
-    var location = $('.location_btn.selected').val();
-    $('#btnValueSaveLocation').attr('value', location);
+    //var location = $('.location_btn.selected').val();
+    $('#btnValueSaveLocation').attr('value', localStorage.getItem("location"));
+    
 });
 $(document).on('click', '.gender_btn', function(){
     $('.gender_btn').removeClass('selected');
+    localStorage.removeItem("gender");
     $(this).addClass('selected');
+    localStorage.setItem("gender", $('.gender_btn.selected').val());
    // $('.gender_btn.selected').attr("name", "gender_val");
-    var gender = $('.gender_btn.selected').val();
-    $('#btnValueSaveGender').attr('value', gender);
+    //var gender = $('.gender_btn.selected').val();
+    $('#btnValueSaveGender').attr('value', localStorage.getItem("gender"));
 });
 $(document).on('click', '.age_btn', function(){
     $('.age_btn').removeClass('selected');
+    localStorage.removeItem("age");
     $(this).addClass('selected');
-//  $('.age_btn.selected').attr("name", "age_val");
-    var age = $('.age_btn.selected').val();
-    $('#btnValueSaveAge').attr('value', age);
+    localStorage.setItem("age", $('.age_btn.selected').val());
+   // $('.gender_btn.selected').attr("name", "gender_val");
+    //var gender = $('.gender_btn.selected').val();
+    $('#btnValueSaveAge').attr('value', localStorage.getItem("age"));
+});
+$(document).on('onchange', '#start', function() {
+	//localStorage.removeItem("date");
+	new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
+	localStorage.setItem("date", $('#start').val());
+	alert("바보");
+
 });
 
-$(document).on('click', ".dropdown-item", function() {
-	$('.dropdown-item').removeClass('selected');
-	$(this).addClass('selected');
-	var value = $('.dropdown-item.seleted').text();
-	$('#dropdownMenuButton1').attr('name', value);
-});
 
 $(document).ready(function() {
     var date = new Date();
@@ -304,6 +317,37 @@ $(document).ready(function() {
     var today = year + "-" + month + "-" + day +"T00:00";       
     $("#start").attr("value", today);
     $("#end").attr("value", today);
+    
+	if(localStorage.getItem("location") !== undefined) {
+		for(var i = 0; i < $('button[class="location_btn"]').length; i ++){			
+			if($('button[class="location_btn"]').eq(i).attr("value") === localStorage.getItem("location")) {
+				$('button[class="location_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveLocation').attr('value', localStorage.getItem("location"));
+			}
+		}
+	}
+	if(localStorage.getItem("gender") !== undefined) {
+		for(var i = 0; i < $('button[class="gender_btn"]').length; i ++){			
+			if($('button[class="gender_btn"]').eq(i).attr("value") === localStorage.getItem("gender")) {
+				$('button[class="gender_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveGender').attr('value', localStorage.getItem("gender"));
+			}
+		}
+	}
+	if(localStorage.getItem("age") !== undefined) {
+		for(var i = 0; i < $('button[class="age_btn"]').length; i ++){			
+			if($('button[class="age_btn"]').eq(i).attr("value") === localStorage.getItem("age")) {
+				$('button[class="age_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveAge').attr('value', localStorage.getItem("age"));
+			}
+		}
+	}
+	
+	
+	$('.form-range').attr('value', localStorage.getItem('personnel') );
+	$('#value2').text(localStorage.getItem('personnel')+"명");		
+
+	
 });
 
 
@@ -311,11 +355,5 @@ document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 });
-
-
-function clickBtn(){
-	const btnValue = documnet.getElementsByClassName('location_btn selected');
-	document.getElementById("btnValueSaveLocation").value = btnValue.value;
-}
 
 </script>
