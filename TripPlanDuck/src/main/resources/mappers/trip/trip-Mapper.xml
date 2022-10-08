@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.tripplan.duck.trip.model.mapper.DestinationMapper">
+	
+	<insert id="insertData"  parameterType="java.util.Map">
+	INSERT INTO DESTINATION(
+		DEST_NO, 
+		DEST_CATEGORY, 
+		DEST_SUBJECT, 
+		DEST_SUMMARY, 
+		DEST_CONTENT, 
+		DEST_ADDRESS, 
+		DEST_MAP_X, 
+		DEST_MAP_Y, 
+		DEST_LIKE_SUM, 
+		DEST_RATING_AVG, 
+		DEST_HIT, 
+		DEST_CREATEDATE, 
+		DEST_UPDATEDATE, 
+		LOCATION_ID, 
+		DEST_IMAGE)
+	VALUES(
+		DEST_NO.NEXTVAL,
+		#{category},
+		#{title},
+		#{summary},
+		'nothing',
+		#{addr1},
+		#{mapx},
+		#{mapy},
+		0,
+		0,
+		0,
+		SYSDATE,
+		SYSDATE,
+		#{areacode},
+		#{firstimage}
+		)
+	</insert>
+	
+	<select id="getCategoryName" parameterType="int" resultType="string">
+	SELECT LOCATION FROM LOCATION WHERE LOCATION_ID = #{i}
+	</select>
+	
+</mapper>

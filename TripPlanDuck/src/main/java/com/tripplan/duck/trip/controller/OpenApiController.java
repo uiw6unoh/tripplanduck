@@ -6,14 +6,29 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.tripplan.duck.trip.model.service.DestinationService;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
-public class OpenApiController {		
+public class OpenApiController {	
+	
+	@Autowired
+	private static DestinationService destinationService;
 	
 	public static void main(String[] args) throws IOException {
 		   int[] areaCode = {1, 2, 3, 4, 5, 6, 7, 8, 31, 32, 33, 34, 35, 36, 37, 38 ,39};
@@ -50,13 +65,28 @@ public class OpenApiController {
 	            }
 	            rd.close();
 	            conn.disconnect();
-	            System.out.println(sb.toString());
-
+	            // System.out.println(sb.toString());
+	            
+	            ObjectMapper mapper = new ObjectMapper();
+//	            ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>(); 
+//	            
+//	            list = mapper.readValue(sb.toString(), new TypeReference<ArrayList<HashMap<String, String>>>() {});        
+//	            
+//	            System.out.println(list);
+	            
+	            Map<String, Object> map = mapper.readValue(sb.toString(), new TypeReference<Map<String, Object>>() {
+	            });
+	            
+	            Map<String, Object> response = (Map<String, Object>) map.get("response");
+	            Map<String, Object> body = (Map<String, Object>) response.get("body");
+	            Map<String, Object> items = (Map<String, Object>) body.get("items");
+	            List<Map<String, Object>> list = (ArrayList<Map<String, Object>>) items.get("item");
+	            
 	            // JSON Parsing
 //	            JsonParser parser = new JsonParser();
 //	            JsonObject obj = parser.parse(sb.toString()).getAsJsonObject();
 //	            
-//	            JsonArray arr = obj.get("response").getAsJsonObject()
+//	            JsonArray arr = obj.get("response")..getAsJsonObject()
 //	                    .get("body").getAsJsonObject()
 //	                    .get("items").getAsJsonObject()
 //	                    .get("item").getAsJsonArray();
