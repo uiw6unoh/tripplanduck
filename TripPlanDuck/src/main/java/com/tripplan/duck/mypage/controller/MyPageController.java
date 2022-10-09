@@ -11,35 +11,35 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/mypage")
 public class MyPageController {
 	
-	// ÁÁ¾Æ¿ä ÇÑ ÇÃ·¡³Ê
-	@GetMapping("/likeplan")
-	public String LikePlan() throws Exception {
+	// ì¢‹ì•„ìš” í•œ í”Œë˜ë„ˆ
+	@GetMapping("/")
+	public String Mypage() throws Exception {
 		
-		return "mypage/MyPageLikeplan";
+		return "mypage/MypageMain";
 	}
 	
-	// ÁÁ¾Æ¿ä ÇÑ ¿©ÇàÁö
+	// ì¢‹ì•„ìš” í•œ ì—¬í–‰ì§€
 	@GetMapping("/liketrip")
 	public String LikeTrip() throws Exception {
 		
 		return "mypage/MyPageLiketrip";
 	}
 	
-	// ÀÛ¼ºÇÑ ¸®ºä
+	// ì‘ì„±í•œ ë¦¬ë·°
 	@GetMapping("/comment")
 	public String Comment() throws Exception {
 		
 		return "mypage/MyPageComment";
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤
+	// íšŒì› ì •ë³´ ìˆ˜ì •
 	@GetMapping("/updateform")
 	public String UpdateForm() throws Exception {
 		
 		return "mypage/UpdateForm";
 	}
 	
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@GetMapping("/dropout")
 	public String DropOut() throws Exception {
 		

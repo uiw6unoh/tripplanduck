@@ -18,7 +18,7 @@
             <div class="userMypageMenu">
                 <div class="userInfo">
                     <img src="${ path }/images/common/프사.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
-                    <div class="pt-1 nickName">킹민주</div>
+                    <div class="pt-1 nickName">닉네임</div>
                 </div>
                 <div class="py-4 px-2 btn-UserMypageMenu">
                     <button class="btn btn-outline-warning btn-sm btn-block">내 위드덕</button>

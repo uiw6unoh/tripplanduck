@@ -6,7 +6,7 @@ li {
     border: solid 1px red;
 } */
 
-/*»ó´Ü*/
+/* ìƒìœ„ ì»¨í…Œì´ë„ˆ */
 .top-container {
     display: flex;
     flex-direction: column;
@@ -33,13 +33,15 @@ li {
     background-color: #fff8c6;
 }
 
-/*ÇÏ´Ü ¸Ş´º*/
-.nav-container ul li a {
+/* íƒ­ë©”ë‰´ */
+.nav-link {
     color: black;
     font-size: 1.5rem;
+    border: 0;
+    outline: 0;
 }
 
-.nav-container a:after:hover {
+.nav-link:after:hover {
     display: block;
     width: 92px;
     content: '';
@@ -49,7 +51,7 @@ li {
     transition: transform 250ms ease-in-out;
 }
 
-.nav-container a:hover:after {
+.nav-link:hover:after {
     transform: scaleX(1.2);
 }
 
@@ -76,7 +78,7 @@ li {
     font-size: 1.7rem;
 }
 
-/* ¿©ÇàÁö ÇÊÅÍ */
+/* ì—¬í–‰ì§€ í•„í„° */
 .form-control {
     width: 150px;
     float: right;
@@ -94,7 +96,7 @@ li {
     background-color: #fff8c6;
 }
 
-/* Ä«µå */
+/* ì¹´ë“œ */
 .card-body {
     padding: 2.25rem;
 }
@@ -129,7 +131,7 @@ li {
     /* transform: scale(1.1); */
 }
 
-/* ¸®ºä Ä«µå */
+/* ì‘ì„±í•œ ë¦¬ë·° ì¹´ë“œ */
 .commentCard {
     width: 800px;
     height: 200px;
@@ -204,14 +206,14 @@ li {
     filter: opacity(.1) drop-shadow(1px 1px 1px #808080);
 }
 
-/* ÄÚ¸àÆ® ¹öÆ° */
+/* ì¹´ë“œ ë²„íŠ¼ */
 .card-btns {
     float: right;
     align-items: flex-end;
     transform: translate(7%, -103%);
 }
 
-/* ºñ¹Ğ¹øÈ£ È®ÀÎ ¸ğ´Ş */
+/* ë¹„ë°€ë²ˆí˜¸ ëª¨ë‹¬ */
 .modal-header {
     background-color: #fff8c6;
 }
