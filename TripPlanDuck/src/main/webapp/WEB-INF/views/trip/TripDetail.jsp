@@ -81,25 +81,27 @@
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg" alt="..." />
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="..." />
             </div>
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg> 1224</span></div>
+              </svg> ${dest.destLikeSum}</span></div>
               <div class="title">
                 <div>
                   <a href="#">홈 ></a>
-                  <a href="#">제주도</a>
+                  <a href="#">${dest.destCategory}</a>
                 </div>
-                <h2 class="stu_h2_title">섭지코지</h2>
-                <p>관광 명소</p>
+                <h2 class="stu_h2_title">${dest.destSubject}</h2>
+                <p>${dest.destSummary}</p>
               </div>
               <div class="description">
-                <p class="lead" style="font-size: 1rem;">등대, 레스토랑, 상점, 경치 좋은 전망, 산책로를 갖추고 있는 조용한 해변 지역입니다.</p>
+                <p class="lead" style="font-size: 1rem;">${dest.destContent}</p>
               </div>
             </div>
         </div>
+        
+        <!--  
         <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-4" data-items-lg="5" data-stage-padding="20">
             <div class="owl-stage-outer">
                 <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1591px;">
@@ -137,53 +139,26 @@
                 </div>
             </div>
         </div>
+        -->
 
         <p class="h3 mb-0 mt-5">경험해볼 만한 것들</p>
         <div class="row mt-2">
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
+        	<c:forEach var="dest" items="${destnations}">
+	        	<div class="col-md-6 col-lg-3">
+		        	<a href="${path}/trip/detail?destNo=${dest.destNo}">
+		              <div class="card">
+		                <div style="overflow: hidden;">
+		                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" data-holder-rendered="true">
+		                </div>
+		                <div class="card-body">
+		                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+		                  <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+		                </div>
+		              </div>
+		              </a>
+	            </div>
+        	</c:forEach>
+            
           </div>
         
           <div class="tabs tabs-alt tabs-tb clearfix ui-tabs ui-corner-all ui-widget ui-widget-content mt-4" id="tab-8">
@@ -373,16 +348,24 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
 <script>
+	var mapX="${dest.destMapX}";
+	var mapY="${dest.destMapY}";
+	
+	if(mapX == "" || mapX == null){
+		mapX = 33.42404;
+		mapY = 126.93073;
+	}
+
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = { 
-	    center: new kakao.maps.LatLng(33.42404, 126.93073), // 지도의 중심좌표
+	    center: new kakao.maps.LatLng(mapX, mapY), // 지도의 중심좌표
 	    level: 3 // 지도의 확대 레벨
 	};
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
 	//마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(33.42404, 126.93073); 
+	var markerPosition  = new kakao.maps.LatLng(mapX, mapY); 
 	
 	//마커를 생성합니다
 	var marker = new kakao.maps.Marker({

@@ -30,101 +30,144 @@
   
       <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">인기명소</p>
       <div class="owl-carousel owl-theme mb-2">
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 1"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목2</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 3"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 4"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 5"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 5"></a>
-        </div>
+      	<c:forEach var="i" begin="0" end="10">
+			<div class="item">
+	          <a href="${path}/trip/detail?destNo=${destinations[i].destNo}"><img src="${destinations[i].destImage eq null ? '/duck/images/trip/busan.jpg' : destinations[i].destImage}" alt="Image 1"></a>
+	          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+	            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+	          </svg> ${destinations[i].destLikeSum}</span></div>
+	          <div class="owl-text-over m-auto"> 
+	            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${destinations[i].destSubject}</h6>
+	            <h6 class="mt-1 ml-1 text-secondary">${destinations[i].destContent}</h6>
+	          </div>
+	        </div>
+		</c:forEach>
       </div>
     
-      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">체험</p>
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">관광지</p>
       <div class="owl-carousel owl-theme mb-2">
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 1"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목2</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 3"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 4"></a>
-        </div>
+      	<c:forEach var="dest"  items="${destinations}">
+      		<c:if test="${dest.destSummary eq '관광지'}">
+				<div class="item">
+		          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+		          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+		            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+		          </svg> ${dest.destLikeSum}</span></div>
+		          <div class="owl-text-over m-auto"> 
+		            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+		            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+		          </div>
+		        </div>
+	        </c:if>
+		</c:forEach>
       </div>
-
-      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">미술관 / 박물관</p>
+	
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">레포츠</p>
       <div class="owl-carousel owl-theme mb-5">
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 1"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 2"></a>
-          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
-            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-          </svg> 1224</span></div>
-          <div class="owl-text-over m-auto"> 
-            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목2</h6>
-            <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-          </div>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 3"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 4"></a>
-        </div>
-        <div class="item">
-          <a href="#"><img src="https://dummyimage.com/200x200/dee2e6/6c757d.jpg" alt="Image 5"></a>
-        </div>
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '레포츠'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
+      </div>
+      
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">문화시설</p>
+      <div class="owl-carousel owl-theme mb-5">
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '문화시설'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
+      </div>
+      
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">쇼핑</p>
+      <div class="owl-carousel owl-theme mb-5">
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '쇼핑'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
+      </div>
+      
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">숙박</p>
+      <div class="owl-carousel owl-theme mb-5">
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '숙박'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
+      </div>
+      
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">여행코스</p>
+      <div class="owl-carousel owl-theme mb-5">
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '여행코스'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
+      </div>
+      
+      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">음식</p>
+      <div class="owl-carousel owl-theme mb-5">
+	      <c:forEach var="dest"  items="${destinations}">
+	      		<c:if test="${dest.destSummary eq '음식'}">
+					<div class="item">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
+			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+			          </svg> ${dest.destLikeSum}</span></div>
+			          <div class="owl-text-over m-auto"> 
+			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			          </div>
+			        </div>
+		        </c:if>
+		  </c:forEach>
       </div>
     </div>
   </div>
