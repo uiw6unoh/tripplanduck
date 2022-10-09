@@ -21,7 +21,7 @@
 			p:dataSource-ref="dataSource"
 			p:configuration-ref="mybatisConfig"
 			p:typeAliasesPackage="com.tripplan.duck.*.model.vo"
-			p:mapperLocations="classpath:mappers/**/*.xml"
+			p:mapperLocations="classpath*:mappers/**/*.xml"
 	/>
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"

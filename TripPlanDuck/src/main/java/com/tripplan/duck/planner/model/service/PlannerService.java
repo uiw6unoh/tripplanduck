@@ -13,4 +13,11 @@ public interface PlannerService {
 
 	List<Destination> addDestination();
 	
+	public int plannerInsert(String demo, 
+			String locationSelect, 
+			String destMapX, 
+			String destMapY, 
+			String destSubject, 
+			String destination2 );
+	
 }
