@@ -27,7 +27,13 @@ public class MemberServiceImpl implements MemberService {
 		
 		member = mapper.selectMemberById(memberId);
 		
-		return member;
+		if(member != null && member.getMemberPassword().equals(memberPassword)) {
+			return member;
+		} else {
+			return null;
+		}
+		
+	
 	}
 
 }
