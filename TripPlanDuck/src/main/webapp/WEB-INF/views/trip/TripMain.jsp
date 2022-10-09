@@ -183,7 +183,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <!-- <img src="${location.locationImage}" style="background-color: #f4f3f1;" width="100%" height="254px"> -->
+	            <%-- <img src="${location.locationImage}" style="background-color: #f4f3f1;" width="100%" height="254px"> --%>
 	            <img src="/duck/images/trip/busan.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	            <div class="card-body">
