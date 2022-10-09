@@ -43,7 +43,7 @@ var Gangwon = new kakao.maps.LatLng(
 var ChungcheongBuk = new kakao.maps.LatLng(
 		36.63567674729703, 127.49138343414079);
 // 34번
-var ChungcheongNam = new kakao.maps.LatLng(
+var GyeongsangNam = new kakao.maps.LatLng(
 		36.65883394285422, 126.67284926797313);
 // 35번
 var GyeongsangBuk = new kakao.maps.LatLng(
@@ -71,8 +71,6 @@ var Jeju = new kakao.maps.LatLng(
 
 var locationValue = (target) => {
 	  // 선택한 option의 value 값
-	  console.log(target.value);
-	  console.log(target);
 	  var location = document.getElementById('location1');
       
 	  $('.loca_1').hide();
@@ -134,7 +132,7 @@ var locationValue = (target) => {
 			asd(GyeongsangBuk);
 			$('.loca_35').show();
 		}else if(target.value == 36){
-			asd(IncheoGyeongsangNam);
+			asd(GyeongsangNam);
 			$('.loca_36').show();
 		}else if(target.value == 37){
 			asd(JeonlaBuk);

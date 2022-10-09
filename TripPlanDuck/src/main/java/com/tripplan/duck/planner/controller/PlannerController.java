@@ -46,22 +46,46 @@ public class PlannerController {
 //     }
 		
 		@GetMapping("/myplanner")
-		public ModelAndView locatinList(ModelAndView model) {
+		public String locatinList(Model model) {
 			
 			List<Location> location;
 			List<Destination> destination;			
 			
 			location = service.getLocationList();
-			destination = service.getDestination();
+			System.out.println("location"+location);
 			
-			model.addObject("destination", destination);
-			model.addObject("location",location);
-			model.setViewName("planner/myplanner");
-			return model;
+			destination = service.getDestination();
+			System.out.println("destination"+destination);
+			
+			model.addAttribute("destination", destination);
+			model.addAttribute("location",location);
+		//	model.setViewName("planner/myplanner");
+		//	return model;
+			
+			return "planner/myplanner";    //입력페이지
 		}
 		
+		
+		@RequestMapping("/myplannerAction")
+		public String myplannerAction(
+				@RequestParam("demo") String demo,
+				@RequestParam("locationSelect") String locationSelect,
+				@RequestParam("place") String place
+				
+				) {
+			
+			System.out.println("넘어오는 demo값은"+demo);	
+			System.out.println("넘어오는 locationSelect값은"+locationSelect);	
+			System.out.println("넘어는 오는  2값"+ place);
+			System.out.println("넘어오는 페이지");
+			
+			return "planner/myplanner";   //일단 다시 넘기는 페이지로
+		}
+		
+		
+		
 		@GetMapping("/addDesti")
-		public @ResponseBody List<Destination> addDesti(ModelAndView model ) {
+		public @ResponseBody List<Destination> addDesti(ModelAndView model) {
 			List<Destination> destination;
 			destination = service.addDestination();
 			model.addObject("destination", destination);
