@@ -79,9 +79,14 @@
 
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
+                <c:if test="${ loginMember == null }">
                   <li class="menu-item">
-                    <a class="menu-link" href="${path}/login"><div>로그인</div></a>
+                    <a class="menu-link" href="${path}/member/login"><div>로그인</div></a>
                   </li>
+                </c:if>
+                <c:if test="${ loginMember != null}">
+                	${ loginMember.memberNickname }님
+                </c:if>
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>
                   </li>

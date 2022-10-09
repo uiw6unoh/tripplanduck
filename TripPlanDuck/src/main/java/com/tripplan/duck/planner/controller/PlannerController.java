@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.planner.model.mapper.PlannerMapper;
@@ -53,21 +54,20 @@ public class PlannerController {
 			location = service.getLocationList();
 			destination = service.getDestination();
 			
-			
 			model.addObject("destination", destination);
 			model.addObject("location",location);
 			model.setViewName("planner/myplanner");
 			return model;
 		}
 		
-//		@GetMapping("/addDesti")
-//		public  ModelAndView addDesti(ModelAndView model ) {
-//			List<Destination> destination;
-//			destination = service.addDestination();
-//			model.addObject("destination", destination);
-//			model.setViewName("planner/myplanner");
-//			return model;
-//		}
+		@GetMapping("/addDesti")
+		public @ResponseBody List<Destination> addDesti(ModelAndView model ) {
+			List<Destination> destination;
+			destination = service.addDestination();
+			model.addObject("destination", destination);
+			model.setViewName("planner/myplanner");
+			return destination;
+		}
 			
 		
 //		@PostMapping("/myplanner")

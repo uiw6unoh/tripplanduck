@@ -1,13 +1,16 @@
 package com.tripplan.duck.member.controller;
 
-import java.net.http.HttpRequest;
+import javax.servlet.http.HttpSession;
 
-import javax.servlet.http.HttpServletRequest;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.tripplan.duck.member.model.service.MemberService;
+import com.tripplan.duck.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,59 +18,74 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class MemberController {
 
-	// 컨트롤러가 처리할 요청을 정의할 핸들러. (URL, Method 등)
-	@GetMapping("/login")
-	public String login(HttpServletRequest request) {
-		String userId = request.getParameter("userId");
-		String userpwd = request.getParameter("userPassword");
-		log.info("{}, {}", userId, userpwd);
-		
-		return "/member/login";
-	}
-	
-	@GetMapping("/member/signup")
-	public String signup() {
-		log.info("회원가입 페이지 요청");
-			
-		return "member/signup"; 
-	}
-	
-	@GetMapping("/member/privacy")
-	public String privacy() {
-		log.info("개인정보수집 페이지 요청");
-			
-		return "member/privacy"; 
-	}
-	
-	@GetMapping("/member/termconditions")
-	public String termconditions() {
-		log.info("이용약관 페이지 요청");
-			
-		return "member/termconditions"; 
-	}
+    
+    @GetMapping("/member/login")
+    public String loginpage() {
+        log.info("로그인 페이지 요청");
+
+        return "member/login"; 
+    }
+
+    @GetMapping("/member/signup")
+    public String signuppage() {
+        log.info("회원가입 페이지 요청");
+
+        return "member/signup"; 
+    }
+    
+    
+    @GetMapping("/member/privacy")
+    public String privacy() {
+        log.info("개인정보수집 페이지 요청");
+
+        return "member/privacy"; 
+    }
+
+    @GetMapping("/member/termconditions")
+    public String termconditions() {
+        log.info("이용약관 페이지 요청");
+
+        return "member/termconditions"; 
+    }
 
 
-	// 컨트롤러가 처리할 요청을 정의한다. (URL, Method 등)
-//	@RequestMapping(value = "/login", method = {RequestMethod.POST})
-//	@GetMapping("/login")
-//	@PostMapping("/login")
-//	public String login() {
-//		
-//		
-//		return "home";
-//	}	
-
-	// 요청 시 사용자의 파라미터를 전송받는 방법
-//	// 1. HttpServletRequest 객체를 통해서 전송받기 (기존 Servlet 방식)
-//	@GetMapping("/login")
-//	public String login(HttpServletRequest request) {
-//		String userId = request.getParameter("userId");
-//		String userPassword = request.getParameter("userPassword");
-//		
-//		log.info("login() - 호출 : {} {}", userId, userPassword);
-//		
-//		return "home";
-//	}
-//	
-
+    
+    
+    @Autowired // 빈으로 만들어서 주입
+    private MemberService service;
+    
+    /*
+     * 로그인처리
+     * 
+     * 1. HttpSession과 Model객체를 사용
+     * 	- Model 객체는 컨트롤러에서 데이터를 뷰로 전달하고자 할 때 사용하는 객체이다.
+     * 	- 전달하고자 하는 데이터를 맵 형식(key, value)으로 담을 수 있다.
+     * 	- Model 객체의 scope는 Request Scope 이다.
+     * 
+     */
+    
+    @PostMapping("/member/login")
+    public String login(HttpSession session, Model model,
+    		@RequestParam String memberId, @RequestParam String memberPassword) {
+    	
+    	log.info("{} {}", memberId, memberPassword);
+    	
+    	Member loginMember = service.login(memberId, memberPassword);
+    	
+    	if(loginMember != null) {
+    		session.setAttribute("loginMember", loginMember);
+    		
+    		// redirect 방식으로 여기서 리턴 한 경로로 브라우저에서 다시 요청 하도록 반환한다.
+    		return "redirect:/";
+    	} else {
+    		model.addAttribute("msg", "아이디나 패스워드가 일치하지 않습니다.");
+    		model.addAttribute("location", "/member/login");
+    		
+    		return "member/msg";
+    	}
+    	
+    }
+    
 }
+	
+

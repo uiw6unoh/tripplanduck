@@ -35,7 +35,7 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="id" placeholder="id" required>
+                  <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id" required>
                 </td>
                 <td><button class="form-control">중복확인</button></td>
               </tr> 
@@ -44,7 +44,7 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="nickname" placeholder="닉네임" required>
+                  <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
                 </td>
                 <td><button class="form-control">중복확인</button></td>
               </tr> 
@@ -53,7 +53,7 @@
               </tr>
               <tr>               
                 <td>
-                  <input type="text" class="form-control" id="password" placeholder="비밀번호" required>
+                  <input type="text" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호" required>
                 </td>
               </tr>
               <tr>
@@ -61,7 +61,7 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="confirm_password" placeholder="비밀번호확인" required>
+                  <input type="text" class="form-control" id="confirm_password" name="memberPassword" placeholder="비밀번호확인" required>
                 </td>
               </tr>
               <tr>
@@ -69,13 +69,13 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="email" placeholder="abc@gmail.com" required>
+                  <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="abc@gmail.com" required>
                 </td>
                 <td><button class="form-control">인증하기</button></td>
               </tr>
               <tr>
                 <td>
-                <input type="text" class="form-control" id="email" required>
+                <input type="text" class="form-control" id="memberEmailNumber" required>
                 </td>
                 <td><button class="form-control">인증번호확인</button></td>
               </tr>
@@ -84,9 +84,9 @@
               </tr>
               <tr>
                 <td class="form-control">
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="female" style="width:18px; height:18px; margin-left: 3px;">
+                  <input class="form-check-input" type="radio" name="memberGender1" id="inlineRadio1" value="female" style="width:18px; height:18px; margin-left: 3px;">
                   <label class="form-check-label" for="inlineRadio1" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" style="width:18px; height:18px;">
+                  <input class="form-check-input" type="radio" name="memberGender2" id="inlineRadio1" value="male" style="width:18px; height:18px;">
                   <label class="form-check-label" for="inlineRadio1">남성</label>
                 </td>
               </tr>
@@ -96,19 +96,19 @@
               <tr>
                 <td>
                   <label class="test_obj">
-                    <input type="radio" name="age" value="banana">
+                    <input type="radio" name="age" value="20">
                     <span>~20대</span>
                   </label>
                   <label class="test_obj">
-                      <input type="radio" name="age" value="lemon">
+                      <input type="radio" name="age" value="30">
                       <span>30대</span>
                   </label>
                   <label class="test_obj">
-                    <input type="radio" name="age" value="lemon">
+                    <input type="radio" name="age" value="40">
                     <span>40대</span>
                    </label>
                    <label class="test_obj">
-                    <input type="radio" name="age" value="lemon">
+                    <input type="radio" name="age" value="50">
                     <span>50대~</span>
                    </label>
 
@@ -137,6 +137,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 <script>
+
+
 	$(document).ready(function () {
 		$('#btnLogin').click(function (e) {
 			e.preventDefault();
