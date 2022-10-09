@@ -79,13 +79,21 @@
 
               <nav class="primary-menu">
                 <ul class="menu-container p-0">
-                <c:if test="${ loginMember == null }">
+                <c:if test="${ empty loginMember }">
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/login"><div>로그인</div></a>
                   </li>
                 </c:if>
-                <c:if test="${ loginMember != null}">
-                	${ loginMember.memberNickname }님
+                <c:if test="${ !empty loginMember }">
+                	<div class="dropdown">
+					  <button class="btn btn-warning btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">
+					    ${ loginMember.memberNickname }
+					  </button>
+					  <ul class="dropdown-menu">
+					    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+					    <li><a class="dropdown-item" href="#" onclick="location.replace('${ path }/logout')">로그아웃</a></li>
+					  </ul>
+					</div>
                 </c:if>
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>

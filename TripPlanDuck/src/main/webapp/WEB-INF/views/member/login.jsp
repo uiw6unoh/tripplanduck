@@ -26,7 +26,7 @@
 <body class="text-center">
     <main class="form-signin w-300 m-auto">
   
-      <form action="login" method="POST">
+      <form action="${ path }/member/login" method="POST">
         <h1>LOGIN</h1>
         <a href="${ path }">
         <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300"></a>
