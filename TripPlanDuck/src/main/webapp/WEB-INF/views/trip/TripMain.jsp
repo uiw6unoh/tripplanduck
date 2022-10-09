@@ -149,28 +149,28 @@
 		<li>
 		  <a
 		  	class="dropdown-item"
-			onclick="sortByPopular()"
+			onclick="changeSort(1)"
 			id="filterSortPopular"
 			>인기순</a >
 		</li>
 		<li>
 		  <a
 		  	class="dropdown-item"
-			onclick="sortByRecommend()"
+			onclick="changeSort(0)"
 			id="filterSortRecommend"
 			>추천순</a >
 		</li>
 		<li>
 		  <a
 		  	class="dropdown-item"
-			onclick="sortByClimbingUp()"
+			onclick="changeSort(2)"
 			id="filterSortClimbingUp"
 			>오름차순</a >
 		</li>
  		<li>
 		  <a
 		  	class="dropdown-item"
-			onclick="sortByClimbingDown()"
+			onclick="changeSort(3)"
 			id="filterSortClimbingDown"
 			>내림차순</a >
 		</li>
@@ -178,96 +178,22 @@
     </div>
   
     <div class="row mt-1">
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="${ path }/images/trip/busan.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">BUSAN</h5>
-              <p class="card-text">대한민국 부산</p>
-            </div>
-          </div>
-        </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;" >
-          <div style="overflow: hidden;">
-            <img src="${ path }/images/trip/jeju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">JEJU</h5>
-              <p class="card-text">대한민국 제주도</p>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-    </div>
-    <div class="row my-5">
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-        </div>
+    <c:forEach var="location" items="${list}">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <!-- <img src="${location.locationImage}" style="background-color: #f4f3f1;" width="100%" height="254px"> -->
+	            <img src="/duck/images/trip/busan.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	            <div class="card-body">
+	              <h5 class="card-title mb-1">${location.location}</h5>
+	              <p class="card-text">${location.location}</p>
+	            </div>
+	          </div>
+	          </a>
+	    </div>
+    </c:forEach>
     </div>
   </div>
 </div>
@@ -281,3 +207,8 @@
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>
+<script>
+function changeSort(sort){
+	window.location.href = "${path}" + "/trip/main?sort=" + sort;
+}
+</script>
