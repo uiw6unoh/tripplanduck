@@ -25,7 +25,7 @@ public class WithDuckController {
 	
 	@Autowired
 	private WithDuckService service;
-	
+	/////////////////////////////////////////////////위드덕 리스트////////////////////////////////////////////////////////////////////////
 	@GetMapping("/list")
 	public ModelAndView withDuckList(ModelAndView model,
 							  @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
@@ -218,4 +218,28 @@ public class WithDuckController {
 		model.setViewName("withduck/ListWithDuck");
 		return model;
 	}
+	
+	///////////////////////////////////////////////////위드덕 생성////////////////////////////////////////////////////////////
+	
+	@GetMapping("/create")
+	public ModelAndView createPage(ModelAndView model) {
+		model.setViewName("withduck/CreateWithDuck");
+		
+		return model;
+	}
+	
+	@GetMapping("/createWithduck")
+	public ModelAndView createWithDuck(ModelAndView model,
+									   @RequestParam(value = "location_val") String location_val,
+									   @RequestParam(value = "gender_val") String gender_val,
+									   @RequestParam(value = "age_val") String age_val) {
+		
+		System.out.println(location_val + " " + gender_val + " " + age_val);
+		
+		model.setViewName("withduck/ListWithDuck");
+		return model;
+	}
+		
+	
+	
 }

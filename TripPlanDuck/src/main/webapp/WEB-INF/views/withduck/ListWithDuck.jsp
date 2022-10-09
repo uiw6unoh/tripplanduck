@@ -50,7 +50,7 @@
 
     <div class="filter_containerValue">
                 <div class="location_value" style="border-bottom: 0;">
-                    <div><button class="location_btn" value="부산광역시" type="button" name="location" onclick="clickBtn">부산광역시</button></div>
+                    <div><button class="location_btn" value="부산광역시" type="button" name="location">부산광역시</button></div>
                     <input type="hidden" type="text" id="btnValueSaveLocation" name="location_val">
                     <div><button class="location_btn" value="서울특별시" type="button" name="location">서울특별시</button></div>
                     <div><button class="location_btn" value="인천광역시" type="button" name="location">인천광역시</button></div>
