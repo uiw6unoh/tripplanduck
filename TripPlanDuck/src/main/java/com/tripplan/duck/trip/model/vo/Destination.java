@@ -14,35 +14,35 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Destination {
 
-	int destNo;				// 여행지번호
+	private int destNo;				// 여행지번호
 	
-	String destCategory;	// 여행지카테고리
+	private String destCategory;	// 여행지카테고리
 	
-	String destSubject;		// 여행지제목
+	private String destSubject;		// 여행지제목
 	
-	String destSummary;		// 여행지요약정보
+	private String destSummary;		// 여행지요약정보
 	
-	String destContent;		// 여행지내용
+	private String destContent;		// 여행지내용
 	
-	String destAddress;		// 여행지주소
+	private String destAddress;		// 여행지주소
 	
-	double destMapX; 		// 여행지X좌표
+	private double destMapX; 		// 여행지X좌표
 	
-	double destMapY;		// 여행지Y좌표
+	private double destMapY;		// 여행지Y좌표
 	
-	int destLikeSum;		// 좋아요합
+	private int destLikeSum;		// 좋아요합
 	
-	int destRatingAvg; 		// 별점평균
+	private int destRatingAvg; 		// 별점평균
 	
-	int destHit;			// 조회수
+	private int destHit;			// 조회수
 	
-	Date destCreateDate;	// 등록일
+	private Date destCreateDate;	// 등록일
 	
-	Date destUpdateDate;	// 수정일
+	private Date destUpdateDate;	// 수정일
 	
-	int locationId;			// 지역번호
+	private int locationId;			// 지역번호
 	
-	String destImage;		// 여행지사진
+	private String destImage;		// 여행지사진
 	
 	private List<Location> loca;
 }

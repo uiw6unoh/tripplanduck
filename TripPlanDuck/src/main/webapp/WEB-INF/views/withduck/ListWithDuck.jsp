@@ -50,7 +50,7 @@
 
     <div class="filter_containerValue">
                 <div class="location_value" style="border-bottom: 0;">
-                    <div><button class="location_btn" value="부산광역시" type="button" name="location" onclick="clickBtn">부산광역시</button></div>
+                    <div><button class="location_btn" value="부산광역시" type="button" name="location">부산광역시</button></div>
                     <input type="hidden" type="text" id="btnValueSaveLocation" name="location_val">
                     <div><button class="location_btn" value="서울특별시" type="button" name="location">서울특별시</button></div>
                     <div><button class="location_btn" value="인천광역시" type="button" name="location">인천광역시</button></div>
@@ -84,8 +84,13 @@
                 </div>
 
                 <label for="customRange2" class="form-label"></label>
-                <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                    <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
+                    <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="
+                    		sessionStorage.setItem('personnel', $('.form-range').val())
+							$('.form-range').attr('value', sessionStorage.getItem('personnel') );
+							$('#value2').text(sessionStorage.getItem('personnel')+'명');	
+							document.getElementById('value2').innerHTML=this.value+'명';
+							">
                     <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                     
                 </div>
@@ -93,16 +98,16 @@
                     <div class="start_container">
                         <label for="start">출발일:</label>
     
-                        <input type="date" id="start" name="start_val"
+                        <input type="date" id="start" class="start" name="start_val"
                             value="2018-07-22"
-                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;" onchange="startValidity(event)";>
                     </div>
                     <div class="end_container">
                         <label for="start">도착일:</label>
             
-                        <input type="date" id="end" name="end_val"
+                        <input type="date" id="end" class="end" name="end_val"
                             value="2018-07-22"
-                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;" onchange="endValidity(event)";>
                     </div>
                 </div>
     </div>
@@ -113,7 +118,7 @@
             필터 검색
             </button>
     
-            <button class="btn btn-outline-warning" type="submit" onclick="javascript: form.action='${path}/withduck/list';">
+            <button class="btn btn-outline-warning" type="submit" onclick="javascript: sessionStorage.clear(); form.action='${path}/withduck/list';">
             필터 초기화
             </button>
         </div>
@@ -130,19 +135,42 @@
         <div class="container">
             <div class="sort" style="text-align: right;">
                 <div class="dropdown d-flex justify-content-end" style="width: 100px; position:relative; top: 35px; left: 850px">
-                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    최신순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
-                    </svg>
-                    </button>
+                	<c:if test="${empty sort_name }">
+	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+	                    최신순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+	                    </svg>
+	                    </button>
+                	</c:if>
+                	<c:if test="${not empty sort_name }">
+	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+	                    ${sort_name}  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+	                    </svg>
+	                    </button>
+                	</c:if>
+                    
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
-                    <li><a class="dropdown-item" href="${path}/withduck/list">최신순</a></li>
-                    <li><a class="dropdown-item" href="${path}/withduck/sort">조회순</a></li>
+                    <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
+                    <fmt:formatNumber value="${page}" type="number" var="page"/>
+                    <c:if test="${empty listFilter }">
+                    	<li><a class="dropdown-item" href="${path}/withduck/list?sort_name=최신순">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortList?sort_name=조회순">조회순</a></li>
+                    </c:if>
+                    <c:if test="${not empty listFilter }">
+                    	<li><a class="dropdown-item" href="${path}/withduck/filter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">최신순</a></li>
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">조회순</a></li>
+                    </c:if>
                     </ul>
                 </div>
                 <!-- <input type="radio" name="radio" id="" value="최신순" checked>최신순
                 <input type="radio" name="radio" id="" value="조회순">조회순 -->
-                <button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;">모집중인 글만 보기</button>
+                <c:if test="${empty listFilter && empty filter_val }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter'">모집중인 글만 보기</button>
+            	</c:if>
+                <c:if test="${not empty listFilter }">
+                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}';">모집중인 글만 보기</button>
+            	</c:if>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             
@@ -237,31 +265,34 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
+
 <script>
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
+    sessionStorage.removeItem("location");
     $(this).addClass('selected');
-    //$('.location_btn.selected').attr("name", "location_val");
-    var location = $('.location_btn.selected').val();
-    $('#btnValueSaveLocation').attr('value', location);
+    sessionStorage.setItem("location", $('.location_btn.selected').val());
+    $('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
+    
 });
 $(document).on('click', '.gender_btn', function(){
     $('.gender_btn').removeClass('selected');
+    sessionStorage.removeItem("gender");
     $(this).addClass('selected');
-   // $('.gender_btn.selected').attr("name", "gender_val");
-    var gender = $('.gender_btn.selected').val();
-    $('#btnValueSaveGender').attr('value', gender);
+    sessionStorage.setItem("gender", $('.gender_btn.selected').val());
+    $('#btnValueSaveGender').attr('value', sessionStorage.getItem("gender"));
 });
 $(document).on('click', '.age_btn', function(){
-    $('#age_btn').removeClass('selected');
+    $('.age_btn').removeClass('selected');
+    sessionStorage.removeItem("age");
     $(this).addClass('selected');
-//  $('.age_btn.selected').attr("name", "age_val");
-    var age = $('.age_btn.selected').val();
-    $('#btnValueSaveAge').attr('value', age);
+    sessionStorage.setItem("age", $('.age_btn.selected').val());
+    $('#btnValueSaveAge').attr('value', sessionStorage.getItem("age"));
 });
 
+
 $(document).ready(function() {
-    var date = new Date();
+	var date = new Date();
 
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -270,37 +301,70 @@ $(document).ready(function() {
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
 
-    var today = year + "-" + month + "-" + day +"T00:00";       
+    var today = year + "-" + month + "-" + day;       
     $("#start").attr("value", today);
     $("#end").attr("value", today);
+	   
+	if(sessionStorage.getItem("location") !== undefined) {
+		for(var i = 0; i < $('button[class="location_btn"]').length; i ++){			
+			if($('button[class="location_btn"]').eq(i).attr("value") === sessionStorage.getItem("location")) {
+				$('button[class="location_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
+			}
+		}
+	}
+	if(sessionStorage.getItem("gender") !== undefined) {
+		for(var i = 0; i < $('button[class="gender_btn"]').length; i ++){			
+			if($('button[class="gender_btn"]').eq(i).attr("value") === sessionStorage.getItem("gender")) {
+				$('button[class="gender_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveGender').attr('value', sessionStorage.getItem("gender"));
+			}
+		}
+	}
+	if(sessionStorage.getItem("age") !== undefined) {
+		for(var i = 0; i < $('button[class="age_btn"]').length; i ++){			
+			if($('button[class="age_btn"]').eq(i).attr("value") === sessionStorage.getItem("age")) {
+				$('button[class="age_btn"]').eq(i).addClass('selected');
+				$('#btnValueSaveAge').attr('value', sessionStorage.getItem("age"));
+			}
+		}
+	}
+	
+	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
+	$('#value2').text(sessionStorage.getItem('personnel')+"명");		
+	
+
+	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
+	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+	
+	if((sessionStorage.getItem('start') != undefined)){
+		$('#start').attr('value', sessionStorage.getItem("start"));
+	}
+	if((sessionStorage.getItem('end') != undefined)) {
+	$('#end').attr('value', sessionStorage.getItem("end"));
+	}
 });
+
+function startValidity(e){
+   var start = $('#start').val();
+	sessionStorage.setItem('start', start);
+}
+
+function endValidity(e){
+   var end = $('#end').val();
+	sessionStorage.setItem('end', end);
+}
+
+
 
 document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 });
 
-function clickBtn(){
-	const btnValue = documnet.getElementsByClassName('location_btn selected');
-	document.getElementById("btnValueSaveLocation").value = btnValue.value;
-}
-/*
-$('#search').click(
-        function () {
-            $.ajax({
-                url: "${path}/withduck/filter",
-                dataType: "html",
-                method: "get",
-                data: {
-                	location_val,
-                	gender_val,
-                	age_val
-                },
-                success: function(result) {
-                	console.log(result);
-                }
-            });
-        }
-    );
-*/
+
+
+
+
+
 </script>

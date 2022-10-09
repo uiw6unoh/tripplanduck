@@ -32,6 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
+<form action="${path }/withduck/createWithduck">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -46,7 +47,7 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="car-img" src="${path}/resources/images/WithDuck/flower4.PNG" alt="Los Angeles">
+                <img class="car-img" src="${path}/resources/images/WithDuck/flower4.PNG" name="photo1" alt="Los Angeles">
                 <!-- <div>
                     <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
                 </div>
@@ -58,7 +59,7 @@
                 <!-- <img class="car-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="Chicago"> -->
                 <div class="empty">
                     <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
+                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
                     </div>
                     <p>업로드할 사진을 추가해보세요!</p>
                     <label for="file2" class="file">사진추가</label>
@@ -69,7 +70,7 @@
                 <!-- <img class="car-img" src="${path}/resources/images/WithDuck/flower2.PNG" alt="New York"> -->
                 <div class="empty">
                     <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
+                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
                     </div>
                     <p>업로드할 사진을 추가해보세요!</p>
                     <label for="file3" class="file">사진추가</label>
@@ -107,60 +108,62 @@
         </div>
     
         <div class="filter_containerValue">
-                    <div class="location_value" style="border-bottom: 0;">
-                        <div><button class="location_btn">서울특별시</button></div>
-                        <div><button class="location_btn">부산광역시</button></div>
-                        <div><button class="location_btn">인천광역시</button></div>
-                        <div><button class="location_btn">광주광역시</button></div>
-                        <div><button class="location_btn">대전광역시</button></div>
-                        <div><button class="location_btn">대구광역시</button></div>
+				<div class="location_value" style="border-bottom: 0;">
+                    <div><button class="location_btn" value="부산광역시" type="button" name="location">부산광역시</button></div>
+                    <input type="hidden" type="text" id="btnValueSaveLocation" name="location_val">
+                    <div><button class="location_btn" value="서울특별시" type="button" name="location">서울특별시</button></div>
+                    <div><button class="location_btn" value="인천광역시" type="button" name="location">인천광역시</button></div>
+                    <div><button class="location_btn" value="광주광역시" type="button" name="location">광주광역시</button></div>
+                    <div><button class="location_btn" value="대전광역시" type="button" name="location">대전광역시</button></div>
+                    <div><button class="location_btn" value="대구광역시" type="button" name="location">대구광역시</button></div>
+                </div>
+
+                <div class="location_value">
+                    <div><button class="location_btn" value="강원도" type="button" name="location">강원도</button></div>
+                    <div><button class="location_btn" value="제주도" type="button" name="location">제주도</button></div>
+                    <div><button class="location_btn" value="경기도" type="button" name="location">경기도</button></div>
+                    <div><button class="location_btn" value="충청도" type="button" name="location">충청도</button></div>
+                    <div><button class="location_btn" value="경상도" type="button" name="location">경상도</button></div>
+                    <div><button class="location_btn" value="전라도" type="button" name="location">전라도</button></div>
+                </div>
     
-                    </div>
-    
-                    <div class="location_value">
-                        <div><button class="location_btn">강원도</button></div>
-                        <div><button class="location_btn">제주도</button></div>
-                        <div><button class="location_btn">경기도</button></div>
-                        <div><button class="location_btn">충청도</button></div>
-                        <div><button class="location_btn">경상도</button></div>
-                        <div><button class="location_btn">전라도</button></div>
-                    </div>
-    
-                    <div class="gender_value">
-                        <button class="gender_btn">남자</button>
-                        <button class="gender_btn">여자</button>
-                        <button class="gender_btn">성별무관</button>
-                    </div>
-    
-                    <div class="age_value">
-                        <button class="age_btn">~20대</button>
-                        <button class="age_btn">30대</button>
-                        <button class="age_btn">40대</button>
-                        <button class="age_btn">50대 이상</button>
-                    </div>
+                <div class="gender_value">
+                    <input type="hidden" type="text" id="btnValueSaveGender" name="gender_val">
+                    <button class="gender_btn" value="남자" type="button" name="gender">남자</button>
+                    <button class="gender_btn" value="여자" type="button" name="gender">여자</button>
+                    <button class="gender_btn" value="성별무관" type="button" name="gender">성별무관</button>
+                </div>
+
+                <div class="age_value">
+                	<input type="hidden" type="text" id="btnValueSaveAge" name="age_val">
+                    <button class="age_btn" value="~20대" type="button" name="age">~20대</button>
+                    <button class="age_btn" value="30대" type="button" name="age">30대</button>
+                    <button class="age_btn" value="40대" type="button" name="age">40대</button>
+                    <button class="age_btn" value="50대 이상" type="button" name="age">50대 이상</button>
+                </div>
     
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                        <input type="range" class="form-range" min="0" step="1" max="20" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
-                        <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">10명</span>
+                        <input type="range" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                        <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                         
                     </div>
-                    <div class="date_container">
-                        <div class="start_container">
-                            <label for="start">출발일:</label>
-        
-                            <input type="date" id="start" name="trip-start"
-                                value="2018-07-22"
-                                min="2018-01-01" max="2018-12-31" style="margin-left:10px;">
-                        </div>
-                        <div class="end_container">
-                            <label for="start">도착일:</label>
-                
-                            <input type="date" id="end" name="trip-end"
-                                value="2018-07-22"
-                                min="2018-01-01" max="2018-12-31" style="margin-left:10px;">
-                        </div>
+                <div class="date_container">
+                    <div class="start_container">
+                        <label for="start">출발일:</label>
+    
+                        <input type="date" id="start" class="start" name="start_val"
+                            value="2018-07-22"
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
+                    <div class="end_container">
+                        <label for="start">도착일:</label>
+            
+                        <input type="date" id="end" class="end" name="end_val"
+                            value="2018-07-22"
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
+                    </div>
+                </div>
         </div>
     </div>
     </section>
@@ -175,49 +178,11 @@
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
-        <button class="btn btn-outline-warning" type="button">등록</button>
-        <button class="btn btn-outline-warning" type="button">취소</button>
+        <button class="btn btn-outline-warning" type="submit">등록</button>
+        <button class="btn btn-outline-warning" type="submit">취소</button>
     </div>
-
-    <!-- 푸터 -->
-  <div class="container-fluid p-0">
-    <footer id="footer" class="light">
-      <div id="copyrights">
-        <div class="container">
-          <div class="row col-mb-30">
-            <div class="col-md-6 text-center text-md-start">
-              Copyrights &copy; 2022 All Rights Reserved by TripPlanDuck Inc.<br />
-              <div class="copyright-links"><a href="#">이용약관</a> / <a href="#">개인정보처리방침</a></div>
-            </div>
-            <div class="col-md-6 text-center text-md-end">
-              <div class="d-flex justify-content-center justify-content-md-end">
-                <a href="#" class="social-icon si-small si-borderless si-facebook">
-                  <i class="icon-facebook"></i>
-                  <i class="icon-facebook"></i>
-                </a>
-                <a href="#" class="social-icon si-small si-borderless si-twitter">
-                  <i class="icon-twitter"></i>
-                  <i class="icon-twitter"></i>
-                </a>
-                <a href="#" class="social-icon si-small si-borderless si-gplus">
-                  <i class="icon-gplus"></i>
-                  <i class="icon-gplus"></i>
-                </a>
-                <a href="#" class="social-icon si-small si-borderless si-github">
-                  <i class="icon-github"></i>
-                  <i class="icon-github"></i>
-                </a>
-              </div>
-              <div class="clear"></div>
-              <i class="icon-envelope2"></i> info@TripPlanDuck.com <span class="middot">&middot;</span>
-              <i class="icon-headphones"></i> +82-02-1234-5678
-            </div>
-            <div id="gotoTop" class="icon-angle-up"></div>
-          </div>
-        </div>
-      </div>
-    </footer>
   </div>
+</form>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -229,18 +194,50 @@
     <!-- JavaScripts -->
     <script src="${path }/resources/js/common/plugins.min.js"></script>
     <script src="${path }/resources/js/common/functions.js"></script>
+ 
 
-    <!-- summernote JS -->
-    <script src="${path }/resources/js/Summernote/summernote-lite.js"></script>
-    <script src="${path }/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 
 </body>
 <jsp:include page="../common/footer.jsp"/>
+
+<!-- summernote JS -->
+<script src="${path }/resources/js/Summernote/summernote-lite.js"></script>
+<script src="${path }/resources/js/Summernote/lang/summernote-ko-KR.js"></script>
 </html>
 
 <script>
+$(document).on('click', '.location_btn', function(){
+    $('.location_btn').removeClass('selected');
+    $(this).addClass('selected');
+    $('#btnValueSaveLocation').attr('value', $('.location_btn.selected').val());
+});
+$(document).on('click', '.gender_btn', function(){
+    $('.gender_btn').removeClass('selected');
+    $(this).addClass('selected');
+    $('#btnValueSaveGender').attr('value', $('.gender_btn.selected').val());
+});
+$(document).on('click', '.age_btn', function(){
+    $('.age_btn').removeClass('selected');
+    $(this).addClass('selected');
+    $('#btnValueSaveAge').attr('value', $('.age_btn.selected').val());
+});
+
+
     $(document).ready(function() {
-        //여기 아래 부분
+    	var date = new Date();
+
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+
+        var today = year + "-" + month + "-" + day;       
+        $("#start").attr("value", today);
+        $("#end").attr("value", today);
+        
+    	//여기 아래 부분
         $('#summernote').summernote({
               height: 300,                 // 에디터 높이
               minHeight: null,             // 최소 높이
@@ -261,5 +258,10 @@
         $('.age_btn').on('click', function(){
         $('.age_btn').removeClass('selected');
         $(this).addClass('selected');
-});
+ });
+        
+        document.querySelector('.form-range').addEventListener('input',function(event){
+            var gradient_value = 100 / event.target.attributes.max.value;
+          event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
+        });
 </script>

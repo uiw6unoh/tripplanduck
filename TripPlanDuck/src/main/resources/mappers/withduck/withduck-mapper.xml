@@ -21,6 +21,7 @@
 	       WITH_CONTENT,
 	       WITH_KEYWORD,
 	       WITH_READCOUNT,
+	       WITH_JOINSTATUS,
 	       WITH_CREATEDATE,
 	       WITH_UPDATEDATE
 	FROM WITHDUK
@@ -45,6 +46,7 @@
 		<result property="withContent" column="WITH_CONTENT"/>
 		<result property="withkeyword" column="WITH_KEYWORD"/>
 		<result property="withReadCount" column="WITH_READCOUNT"/>
+		<result property="withJoinStatus" column="WITH_JOINSTATUS"/>
 		<result property="createDate" column="WITH_CREATEDATE"/>
 		<result property="updateDate" column="WITH_UPDATEDATE"/>
 	</resultMap>
@@ -56,11 +58,16 @@
 		ORDER BY WITH_CREATEDATE
 	</select>
 	
+	<select id="withDuckSelectReadCount" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql" />
+		ORDER BY WITH_READCOUNT DESC
+	</select>
+	
 	<!-- 위드덕 게시물 카운트 -->
 	<select id="selectWithDuckCount" resultType="_int">
 		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y'
 	</select>
-	
+
 	<select id="withDuckFilter" resultMap="withDuckResultMap" parameterType="map">
 		<include refid="withDuckListSql" />
 		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
@@ -76,5 +83,27 @@
 		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
 		ORDER BY WITH_READCOUNT DESC
 	</select>
+	
+	<select id="selectWithDuckJoinCount" resultType="_int">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_JOINSTATUS = '모집중'
+	</select>
+	
+	<select id="withDuckSelectJoin" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql" />
+		AND WITH_JOINSTATUS = '모집중'
+	</select>
+	
+
+	<select id="selectWithDuckJoinValCount" resultType="_int" parameterType="map">
+		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+		AND WITH_JOINSTATUS = '모집중'
+	</select>
+	
+	<select id="withDuckJoinFilter" resultMap="withDuckResultMap" parameterType="map">
+		<include refid="withDuckListSql" />
+		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val} AND WITH_JOINSTATUS = '모집중'
+		ORDER BY WITH_CREATEDATE
+	</select>
+
 	
 </mapper>
