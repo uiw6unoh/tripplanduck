@@ -67,7 +67,7 @@
 	<select id="selectWithDuckCount" resultType="_int">
 		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y'
 	</select>
-	
+
 	<select id="withDuckFilter" resultMap="withDuckResultMap" parameterType="map">
 		<include refid="withDuckListSql" />
 		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
@@ -104,6 +104,6 @@
 		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val} AND WITH_JOINSTATUS = '모집중'
 		ORDER BY WITH_CREATEDATE
 	</select>
-	
+
 	
 </mapper>

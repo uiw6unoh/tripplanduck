@@ -86,9 +86,9 @@
                 <label for="customRange2" class="form-label"></label>
                 <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
                     <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="
-                    		localStorage.setItem('personnel', $('.form-range').val())
-							$('.form-range').attr('value', localStorage.getItem('personnel') );
-							$('#value2').text(localStorage.getItem('personnel')+'명');	
+                    		sessionStorage.setItem('personnel', $('.form-range').val())
+							$('.form-range').attr('value', sessionStorage.getItem('personnel') );
+							$('#value2').text(sessionStorage.getItem('personnel')+'명');	
 							document.getElementById('value2').innerHTML=this.value+'명';
 							">
                     <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
@@ -100,14 +100,14 @@
     
                         <input type="date" id="start" class="start" name="start_val"
                             value="2018-07-22"
-                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;" onchange="startValidity(event)";>
                     </div>
                     <div class="end_container">
                         <label for="start">도착일:</label>
             
                         <input type="date" id="end" class="end" name="end_val"
                             value="2018-07-22"
-                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
+                            min="2018-01-01" max="2030-12-31" style="margin-left:10px;" onchange="endValidity(event)";>
                     </div>
                 </div>
     </div>
@@ -118,7 +118,7 @@
             필터 검색
             </button>
     
-            <button class="btn btn-outline-warning" type="submit" onclick="javascript: form.action='${path}/withduck/list';">
+            <button class="btn btn-outline-warning" type="submit" onclick="javascript: sessionStorage.clear(); form.action='${path}/withduck/list';">
             필터 초기화
             </button>
         </div>
@@ -269,43 +269,30 @@
 <script>
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
-    localStorage.removeItem("location");
+    sessionStorage.removeItem("location");
     $(this).addClass('selected');
-    localStorage.setItem("location", $('.location_btn.selected').val());
-    //$('.location_btn.selected').attr("name", "location_val");
-    //var location = $('.location_btn.selected').val();
-    $('#btnValueSaveLocation').attr('value', localStorage.getItem("location"));
+    sessionStorage.setItem("location", $('.location_btn.selected').val());
+    $('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
     
 });
 $(document).on('click', '.gender_btn', function(){
     $('.gender_btn').removeClass('selected');
-    localStorage.removeItem("gender");
+    sessionStorage.removeItem("gender");
     $(this).addClass('selected');
-    localStorage.setItem("gender", $('.gender_btn.selected').val());
-   // $('.gender_btn.selected').attr("name", "gender_val");
-    //var gender = $('.gender_btn.selected').val();
-    $('#btnValueSaveGender').attr('value', localStorage.getItem("gender"));
+    sessionStorage.setItem("gender", $('.gender_btn.selected').val());
+    $('#btnValueSaveGender').attr('value', sessionStorage.getItem("gender"));
 });
 $(document).on('click', '.age_btn', function(){
     $('.age_btn').removeClass('selected');
-    localStorage.removeItem("age");
+    sessionStorage.removeItem("age");
     $(this).addClass('selected');
-    localStorage.setItem("age", $('.age_btn.selected').val());
-   // $('.gender_btn.selected').attr("name", "gender_val");
-    //var gender = $('.gender_btn.selected').val();
-    $('#btnValueSaveAge').attr('value', localStorage.getItem("age"));
-});
-$(document).on('onchange', '#start', function() {
-	//localStorage.removeItem("date");
-	new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-	localStorage.setItem("date", $('#start').val());
-	alert("바보");
-
+    sessionStorage.setItem("age", $('.age_btn.selected').val());
+    $('#btnValueSaveAge').attr('value', sessionStorage.getItem("age"));
 });
 
 
 $(document).ready(function() {
-    var date = new Date();
+	var date = new Date();
 
     var day = date.getDate();
     var month = date.getMonth() + 1;
@@ -314,42 +301,61 @@ $(document).ready(function() {
     if (month < 10) month = "0" + month;
     if (day < 10) day = "0" + day;
 
-    var today = year + "-" + month + "-" + day +"T00:00";       
+    var today = year + "-" + month + "-" + day;       
     $("#start").attr("value", today);
     $("#end").attr("value", today);
-    
-	if(localStorage.getItem("location") !== undefined) {
+	   
+	if(sessionStorage.getItem("location") !== undefined) {
 		for(var i = 0; i < $('button[class="location_btn"]').length; i ++){			
-			if($('button[class="location_btn"]').eq(i).attr("value") === localStorage.getItem("location")) {
+			if($('button[class="location_btn"]').eq(i).attr("value") === sessionStorage.getItem("location")) {
 				$('button[class="location_btn"]').eq(i).addClass('selected');
-				$('#btnValueSaveLocation').attr('value', localStorage.getItem("location"));
+				$('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
 			}
 		}
 	}
-	if(localStorage.getItem("gender") !== undefined) {
+	if(sessionStorage.getItem("gender") !== undefined) {
 		for(var i = 0; i < $('button[class="gender_btn"]').length; i ++){			
-			if($('button[class="gender_btn"]').eq(i).attr("value") === localStorage.getItem("gender")) {
+			if($('button[class="gender_btn"]').eq(i).attr("value") === sessionStorage.getItem("gender")) {
 				$('button[class="gender_btn"]').eq(i).addClass('selected');
-				$('#btnValueSaveGender').attr('value', localStorage.getItem("gender"));
+				$('#btnValueSaveGender').attr('value', sessionStorage.getItem("gender"));
 			}
 		}
 	}
-	if(localStorage.getItem("age") !== undefined) {
+	if(sessionStorage.getItem("age") !== undefined) {
 		for(var i = 0; i < $('button[class="age_btn"]').length; i ++){			
-			if($('button[class="age_btn"]').eq(i).attr("value") === localStorage.getItem("age")) {
+			if($('button[class="age_btn"]').eq(i).attr("value") === sessionStorage.getItem("age")) {
 				$('button[class="age_btn"]').eq(i).addClass('selected');
-				$('#btnValueSaveAge').attr('value', localStorage.getItem("age"));
+				$('#btnValueSaveAge').attr('value', sessionStorage.getItem("age"));
 			}
 		}
 	}
 	
-	$('.form-range').attr('value', localStorage.getItem('personnel'));
-	$('#value2').text(localStorage.getItem('personnel')+"명");		
+	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
+	$('#value2').text(sessionStorage.getItem('personnel')+"명");		
 	
+
 	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
 	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
-
+	
+	if((sessionStorage.getItem('start') != undefined)){
+		$('#start').attr('value', sessionStorage.getItem("start"));
+	}
+	if((sessionStorage.getItem('end') != undefined)) {
+	$('#end').attr('value', sessionStorage.getItem("end"));
+	}
 });
+
+function startValidity(e){
+   var start = $('#start').val();
+	sessionStorage.setItem('start', start);
+}
+
+function endValidity(e){
+   var end = $('#end').val();
+	sessionStorage.setItem('end', end);
+}
+
+
 
 document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
