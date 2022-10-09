@@ -32,6 +32,17 @@ public class PlannerServiceImpl implements PlannerService {
 	public List<Destination> addDestination() {
 		return plannerMapper.addDest();
 	}
+
+	@Override
+	public int plannerInsert(String demo, String locationSelect, String destMapX, String destMapY, String destSubject,
+			String destination2) {
+		
+		return 0;
+	}
+
+	
+
+	
 	
 	
 //	@Override
