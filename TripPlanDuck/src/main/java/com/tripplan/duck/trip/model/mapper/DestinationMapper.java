@@ -28,4 +28,6 @@ public interface DestinationMapper {
 
 	List<Location> getLocations(String string);
 
+	List<Location> getLocationsByName(String order);
+
 }

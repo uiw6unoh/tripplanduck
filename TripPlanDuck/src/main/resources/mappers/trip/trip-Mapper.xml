@@ -99,4 +99,10 @@
 		WHERE A.LOCATION_ID = B.LOCATION_ID 
 		ORDER BY A.SUM DESC
 	</select>
+	
+	<select id="getLocationsByName" parameterType="string" resultMap="locationResultMap">
+		SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY 
+		FROM LOCATION
+		ORDER BY ${value}
+	</select>
 </mapper>

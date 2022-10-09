@@ -1,5 +1,6 @@
 package com.tripplan.duck.trip.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,7 @@ public class TripController {
 	public ModelAndView TripMain(ModelAndView model, @RequestParam(value="sort", required = false)String sort){
 		
 		String order = "DEST_LIKE_SUM";
+		List<Location> list = new ArrayList<Location>();
 		
 		if(sort == null)
 			sort = "4";
@@ -37,18 +39,20 @@ public class TripController {
 		switch(sort){
 			case "1":
 				order = "DEST_RATING_AVG";
+				list = destinationService.getLocations(order);
 				break;
 			case "2":
-				order = "DEST_CATEGORY";
+				order = "LOCATION";
+				list = destinationService.getLocationsByName(order);
 				break;
 			case "3":
-				order = "DEST_CATEGORY DESC";
+				order = "LOCATION DESC";
+				list = destinationService.getLocationsByName(order);
 				break;
 			default:
+				list = destinationService.getLocations(order);
 				break;
 		}
-		
-		List<Location> list = destinationService.getLocations(order);
 		
 		model.addObject("list", list);
 		model.setViewName("trip/TripMain");
@@ -62,13 +66,9 @@ public class TripController {
 		Destination dest = destinationService.getDestination(destNo);
 		List<Destination> destnations = destinationService.getDestinationsByCategory(destNo);
 		
-		System.out.println(destnations);
-		
 		model.addObject("dest", dest);
 		model.addObject("destnations", destnations);
 		model.setViewName("trip/TripDetail");
-		
-		System.out.println(dest);
 		
 		return model;
 	}
@@ -77,7 +77,6 @@ public class TripController {
 	public ModelAndView list(ModelAndView model, @RequestParam(value="locationId")int locationId) {
 		
 		Location location = destinationService.getLocation(locationId);
-		
 		List<Destination> destinations = destinationService.getDestinationsByLocationId(locationId);
 
 		model.addObject("location", location);

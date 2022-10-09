@@ -52,5 +52,10 @@ public class DestinationServiceImpl implements DestinationService {
 		return destinationMapper.getLocations(string);
 	}
 
+	@Override
+	public List<Location> getLocationsByName(String order) {
+		return destinationMapper.getLocationsByName(order);
+	}
+
 
 }

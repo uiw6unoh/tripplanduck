@@ -23,5 +23,7 @@ public interface DestinationService {
 
 	List<Location> getLocations(String string);
 
+	List<Location> getLocationsByName(String order);
+
 
 }
