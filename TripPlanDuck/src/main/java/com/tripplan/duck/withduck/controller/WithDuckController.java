@@ -6,10 +6,15 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.common.util.PageInfo;
@@ -26,6 +31,9 @@ public class WithDuckController {
 	
 	@Autowired
 	private WithDuckService service;
+	
+	@Autowired
+	private ResourceLoader resourceLoader;
 	/////////////////////////////////////////////////위드덕 리스트////////////////////////////////////////////////////////////////////////
 	@GetMapping("/list")
 	public ModelAndView withDuckList(ModelAndView model,
@@ -238,23 +246,67 @@ public class WithDuckController {
 		return model;
 	}
 	
-	@GetMapping("/createWithduck")
+	@PostMapping("/create")
 	public ModelAndView createWithDuck(ModelAndView model,
-									   @RequestParam(value = "location_val") String location_val,
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "title") String title,
-									   @RequestParam(value = "editordata") String editordata,
-									   @RequestParam(value = "personnel_val") int personnel_val) {
+									   @ModelAttribute WithDuck withDuck, 
+									   @RequestParam(value = "file1", required = false) MultipartFile file1,
+									   @RequestParam(value = "file2", required = false) MultipartFile file2,
+									   @RequestParam(value = "file3", required = false) MultipartFile file3,
+									   @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
+		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
+		log.info("Upfile is Empty : {}", file1.isEmpty());
+		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
+		log.info("Upfile Name : {}", file1.getOriginalFilename());
+		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
+		log.info("Upfile is Empty : {}", file2.isEmpty());
+		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
+		log.info("Upfile Name : {}", file2.getOriginalFilename());
+		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
+		log.info("Upfile is Empty : {}", file3.isEmpty());
+		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
+		log.info("Upfile Name : {}", file3.getOriginalFilename());
 		
+		/*
+		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
+		if(upfile != null && !upfile.isEmpty()) {
+			// 파일을 저장하는 로직 작성
+			String location = null;
+			String renamedFileName = null;
+			
+			try {
+				location = resourceLoader.getResource("resources/upload/board").getFile().getAbsolutePath();
+				renamedFileName = MultipartFileUtil.save(upfile, location);
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			if(renamedFileName != null) {
+				board.setOriginalFileName(upfile.getOriginalFilename());
+				board.setRenamedFileName(renamedFileName);
+			}
+			
+		}
 		
-		model.setViewName("withduck/ListWithDuck");
+		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
+		board.setWriterNo(loginMember.getNo());
+		System.out.println("11111 " + board);
+		result = service.save(board);
+		
+		if(result > 0) {
+			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
+			model.addObject("location", "/board/view?no=" + board.getNo());
+		} else {
+			model.addObject("msg", "게시글 등록을 실패하였습니다.");
+			model.addObject("location", "/board/write");
+		}
+		
+		*/
+		model.setViewName("common/msg");
+		
 		return model;
 	}
-		
 	
 	
 }

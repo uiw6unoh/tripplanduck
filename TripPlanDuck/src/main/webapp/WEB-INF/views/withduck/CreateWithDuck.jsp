@@ -32,7 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/createWithduck">
+<form action="${path }/withduck/create" method="post">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -47,20 +47,25 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
             <div class="carousel-item active">
-                <!-- 
-                <img class="car-img" src="${path}/resources/images/WithDuck/flower4.PNG" name="photo1" alt="Los Angeles">
-                -->
-
+                <div id="image_preview1">
+	                <img class="car-img" name="photo1" style="">
+                </div>
+                
+                <div class="empty" id="empty1">
                 <div>
                     <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
                 </div>
                 <p>업로드할 사진을 추가해보세요!</p>
                 <label for="file1" class="file">사진추가</label>
                 <input type="file" name="file1" id="file1" style="display: none;">
+                </div>
             </div>
             <div class="carousel-item">
-                <!-- <img class="car-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="Chicago"> -->
-                <div class="empty">
+               	<div id="image_preview2">
+	                <img class="car-img" name="photo2" style="">
+                </div>
+                
+                <div class="empty" id="empty2">
                     <div>
                         <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
                     </div>
@@ -267,4 +272,36 @@ $(document).on('click', '.age_btn', function(){
             var gradient_value = 100 / event.target.attributes.max.value;
           event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
         });
+        
+        $('#file1').on('change', function() {
+            ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+            //배열에 추출한 확장자가 존재하는지 체크
+            if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                resetFormElement($(this)); //폼 초기화
+                window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+            } else {
+                file = $('#file1').prop("files")[0];
+                blobURL = window.URL.createObjectURL(file);
+                $('#image_preview1 img').attr('src', blobURL);
+                $('#image_preview1').slideDown(); //업로드한 이미지 미리보기 
+                $(this).slideUp(); //파일 양식 감춤
+            	$('#empty1').html('');
+            }
+         });
+        $('#file2').on('change', function() {
+            ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+            //배열에 추출한 확장자가 존재하는지 체크
+            if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                resetFormElement($(this)); //폼 초기화
+                window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+            } else {
+                file = $('#file2').prop("files")[0];
+                blobURL = window.URL.createObjectURL(file);
+                $('#image_preview2 img').attr('src', blobURL);
+                $('#image_preview2').slideDown(); //업로드한 이미지 미리보기 
+                $(this).slideUp(); //파일 양식 감춤
+            	$('#empty2').html('');
+            }
+         });
+        
 </script>
