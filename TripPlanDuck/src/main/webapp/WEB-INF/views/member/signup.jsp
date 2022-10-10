@@ -28,7 +28,7 @@
       <div>
         <h1>SIGN UP</h1>
         <img class="mb-4" src="${ path }/images/member/profile.png" alt="" width="200px">
-        <form>
+        <form name="memberSignup" action="${ path }/member/signup" method="POST">
             <table class="signup">
               <tr>
                 <td class="title">아이디</td>
@@ -37,7 +37,7 @@
                 <td>
                   <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id" required>
                 </td>
-                <td><button class="form-control">중복확인</button></td>
+                <td><input type="button" class="form-control" id="checkDuplicate" value="중복확인"></td>
               </tr> 
               <tr>
                 <td class="title">닉네임</td>
@@ -46,7 +46,7 @@
                 <td>
                   <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
                 </td>
-                <td><button class="form-control">중복확인</button></td>
+                <td><input type="button" class="form-control" id="checkDuplicate" value="중복확인"></td>
               </tr> 
               <tr>
                 <td class="title">비밀번호</td>
@@ -71,13 +71,13 @@
                 <td>
                   <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="abc@gmail.com" required>
                 </td>
-                <td><button class="form-control">인증하기</button></td>
+                <td><input type="button" class="form-control" id="checkDuplicate" value="인증하기"></td>
               </tr>
               <tr>
                 <td>
                 <input type="text" class="form-control" id="memberEmailNumber" required>
                 </td>
-                <td><button class="form-control">인증번호확인</button></td>
+                <td><input type="button" class="form-control" id="checkDuplicate" value="인증번호확인"></td>
               </tr>
               <tr>
                 <td>성별</td>
@@ -147,15 +147,43 @@
 		
 		$('#privacy').click(function (e) {
 			e.preventDefault();
-			location.href = '${path}/member/privacy';
+			location.href = '${path}/common/privacy';
 		});
 		
 		$('#termconditions').click(function (e) {
 			e.preventDefault();
-			location.href = '${path}/member/termconditions';
+			location.href = '${path}/common/termconditions';
 		});
-		
 	});
+	
+	// 아이디 중복 확인
+	$(document).ready(() => {
+		$("#checkDuplicate").on("click", () => {
+			let memberId = $("#memberId").val().trim();			
+			
+			$.ajax({
+				type: "POST",
+				url: "${ path }/member/idCheck",
+				dataType: "json",
+				data: {
+					memberId 
+				},
+				success: (obj) => {
+					console.log(obj);
+					
+					if(obj.duplicate === true) {
+						alert("이미 사용중인 아이디 입니다.");
+					} else {
+						alert("사용 가능한 아이디 입니다.");
+					}
+				}, 
+				error: (error) => {
+					console.log(error);
+				}
+			});
+		});
+	});
+	
 	
 
 </script>

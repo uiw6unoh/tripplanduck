@@ -22,9 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	public Member login(String memberId, String memberPassword) {
 
 		Member member = null;
-		
-//		member = dao.findMemberById(session, memberId);
-		
+				
 		member = mapper.selectMemberById(memberId);
 		
 		if(member != null && member.getMemberPassword().equals(memberPassword)) {
