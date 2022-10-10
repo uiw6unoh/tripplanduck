@@ -47,13 +47,16 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
             <div class="carousel-item active">
+                <!-- 
                 <img class="car-img" src="${path}/resources/images/WithDuck/flower4.PNG" name="photo1" alt="Los Angeles">
-                <!-- <div>
+                -->
+
+                <div>
                     <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
                 </div>
                 <p>업로드할 사진을 추가해보세요!</p>
                 <label for="file1" class="file">사진추가</label>
-                <input type="file" name="file1" id="file1" style="display: none;"> -->
+                <input type="file" name="file1" id="file1" style="display: none;">
             </div>
             <div class="carousel-item">
                 <!-- <img class="car-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="Chicago"> -->
@@ -144,7 +147,7 @@
     
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                        <input type="range" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                        <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
                         <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                         
                     </div>
@@ -171,7 +174,7 @@
     <section class="zone3">
     <div class="content_container">
         <p>제목</p>
-            <input type="text" class="with_title" name="" id="" placeholder="제목을 입력하세요!" required>
+            <input type="text" class="with_title" name="title" id="" placeholder="제목을 입력하세요!" required>
         
         <p style="margin-top: 10px;">내용</p>
         <textarea id="summernote" name="editordata" required></textarea>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.common.util.PageInfo;
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.withduck.model.service.WithDuckService;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
 
@@ -222,8 +223,17 @@ public class WithDuckController {
 	///////////////////////////////////////////////////위드덕 생성////////////////////////////////////////////////////////////
 	
 	@GetMapping("/create")
-	public ModelAndView createPage(ModelAndView model) {
-		model.setViewName("withduck/CreateWithDuck");
+	public ModelAndView createPage(ModelAndView model, HttpSession session) {
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if(loginMember == null) {
+			model.addObject("msg", "로그인 후 이용이 가능합니다.");
+			model.addObject("location", "/member/login");
+			model.setViewName("member/msg");
+		} else {
+			model.addObject("loginMember", loginMember);
+			model.setViewName("withduck/CreateWithDuck");
+		}
 		
 		return model;
 	}
@@ -232,9 +242,14 @@ public class WithDuckController {
 	public ModelAndView createWithDuck(ModelAndView model,
 									   @RequestParam(value = "location_val") String location_val,
 									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val) {
+									   @RequestParam(value = "age_val") String age_val,
+									   @RequestParam(value = "start_val") String start_val,
+									   @RequestParam(value = "end_val") String end_val,
+									   @RequestParam(value = "title") String title,
+									   @RequestParam(value = "editordata") String editordata,
+									   @RequestParam(value = "personnel_val") int personnel_val) {
+		int result = 0;
 		
-		System.out.println(location_val + " " + gender_val + " " + age_val);
 		
 		model.setViewName("withduck/ListWithDuck");
 		return model;

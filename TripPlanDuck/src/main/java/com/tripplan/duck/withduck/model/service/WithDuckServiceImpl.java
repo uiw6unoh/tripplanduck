@@ -121,6 +121,7 @@ public class WithDuckServiceImpl implements WithDuckService {
 		return mapper.withDuckJoinFilter(rowBounds, location_val, gender_val, age_val, start_val, end_val, personnel_val);
 	}
 
+
 	
 	
 

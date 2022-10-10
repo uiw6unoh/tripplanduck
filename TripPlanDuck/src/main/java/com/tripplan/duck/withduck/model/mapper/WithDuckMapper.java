@@ -34,4 +34,5 @@ public interface WithDuckMapper {
 	List<WithDuck> withDuckJoinFilter(RowBounds rowBounds, @Param("location_val") String location_val, @Param("gender_val") String gender_val, @Param("age_val") String age_val,
 			@Param("start_val") String start_val, @Param("end_val") String end_val, @Param("personnel_val") int personnel_val);
 
+
 }

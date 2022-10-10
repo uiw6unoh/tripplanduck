@@ -331,8 +331,9 @@ $(document).ready(function() {
 	}
 	
 	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
-	$('#value2').text(sessionStorage.getItem('personnel')+"명");		
-	
+	if(sessionStorage.getItem('personnel')!=null){
+		$('#value2').text(sessionStorage.getItem('personnel')+"명");		
+	}
 
 	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
 	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
