@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class WithDuck {
 	private int withNo;
 	
-	private int withMemNo;
+	private int withWriterNo;
 	
 	private String withWriterNick;
 	

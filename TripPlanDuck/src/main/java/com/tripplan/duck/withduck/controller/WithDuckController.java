@@ -1,5 +1,6 @@
 package com.tripplan.duck.withduck.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tripplan.duck.common.util.MultipartFileUtil;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.withduck.model.service.WithDuckService;
@@ -254,56 +256,50 @@ public class WithDuckController {
 									   @RequestParam(value = "file3", required = false) MultipartFile file3,
 									   @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
-		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
-		log.info("Upfile is Empty : {}", file1.isEmpty());
-		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
-		log.info("Upfile Name : {}", file1.getOriginalFilename());
-		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
-		log.info("Upfile is Empty : {}", file2.isEmpty());
-		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
-		log.info("Upfile Name : {}", file2.getOriginalFilename());
-		// 파일을 업로드하지 않으면 true, 파일을 업로드하면 false
-		log.info("Upfile is Empty : {}", file3.isEmpty());
-		// 파일을 업로드하지 않으면 "", 파일을 업로드하면 "파일명"
-		log.info("Upfile Name : {}", file3.getOriginalFilename());
 		
-		/*
+		System.out.println(withDuck + "\n" + file1.getOriginalFilename() + "\n" + file2.getOriginalFilename() + " ");
+		
+		
 		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
-		if(upfile != null && !upfile.isEmpty()) {
+		if((file1 != null && !file1.isEmpty()) || (file2 != null && !file2.isEmpty()) || (file3 != null && !file3.isEmpty()) ) {
 			// 파일을 저장하는 로직 작성
 			String location = null;
-			String renamedFileName = null;
+			String renamedFileName1 = null;
+			String renamedFileName2 = null;
+			String renamedFileName3 = null;
 			
 			try {
-				location = resourceLoader.getResource("resources/upload/board").getFile().getAbsolutePath();
-				renamedFileName = MultipartFileUtil.save(upfile, location);
-				
+				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
+				renamedFileName1 = MultipartFileUtil.save(file1, location);
+				renamedFileName2 = MultipartFileUtil.save(file2, location);
+				renamedFileName3 = MultipartFileUtil.save(file3, location);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 			
-			if(renamedFileName != null) {
-				board.setOriginalFileName(upfile.getOriginalFilename());
-				board.setRenamedFileName(renamedFileName);
+			if(renamedFileName1 != null || renamedFileName1 != null || renamedFileName1 != null) {
+				withDuck.setWithOriginFileName(file1.getOriginalFilename() + ", " + file2.getOriginalFilename() + ", " + file3.getOriginalFilename());
+				withDuck.setWithRenameFileName(renamedFileName1 + ", " + renamedFileName2 + ", " + renamedFileName3);
 			}
 			
 		}
 		
+		System.out.println(loginMember.getMemberNickname());
+		
 		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
-		board.setWriterNo(loginMember.getNo());
-		System.out.println("11111 " + board);
-		result = service.save(board);
+		withDuck.setWithWriterNo(loginMember.getMemberNo());
+		withDuck.setWithWriterNick(loginMember.getMemberNickname());
+		result = service.createWithDuck(withDuck);
 		
 		if(result > 0) {
 			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
-			model.addObject("location", "/board/view?no=" + board.getNo());
+			model.addObject("location", "/main");
 		} else {
 			model.addObject("msg", "게시글 등록을 실패하였습니다.");
-			model.addObject("location", "/board/write");
+			model.addObject("location", "/main");
 		}
 		
-		*/
-		model.setViewName("common/msg");
+		model.setViewName("/main");
 		
 		return model;
 	}

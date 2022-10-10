@@ -32,7 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/create" method="post">
+<form action="${path }/withduck/create" method="post" enctype="multipart/form-data">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -75,8 +75,10 @@
                 </div>
             </div>
             <div class="carousel-item">
-                <!-- <img class="car-img" src="${path}/resources/images/WithDuck/flower2.PNG" alt="New York"> -->
-                <div class="empty">
+               <div id="image_preview3">
+	                <img class="car-img" name="photo3" style="">
+                </div>
+                <div class="empty" id="empty3">
                     <div>
                         <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
                     </div>
@@ -118,7 +120,7 @@
         <div class="filter_containerValue">
 				<div class="location_value" style="border-bottom: 0;">
                     <div><button class="location_btn" value="부산광역시" type="button" name="location">부산광역시</button></div>
-                    <input type="hidden" type="text" id="btnValueSaveLocation" name="location_val">
+                    <input type="hidden" type="text" id="btnValueSaveLocation" name="withLocation">
                     <div><button class="location_btn" value="서울특별시" type="button" name="location">서울특별시</button></div>
                     <div><button class="location_btn" value="인천광역시" type="button" name="location">인천광역시</button></div>
                     <div><button class="location_btn" value="광주광역시" type="button" name="location">광주광역시</button></div>
@@ -136,14 +138,14 @@
                 </div>
     
                 <div class="gender_value">
-                    <input type="hidden" type="text" id="btnValueSaveGender" name="gender_val">
+                    <input type="hidden" type="text" id="btnValueSaveGender" name="withGender">
                     <button class="gender_btn" value="남자" type="button" name="gender">남자</button>
                     <button class="gender_btn" value="여자" type="button" name="gender">여자</button>
                     <button class="gender_btn" value="성별무관" type="button" name="gender">성별무관</button>
                 </div>
 
                 <div class="age_value">
-                	<input type="hidden" type="text" id="btnValueSaveAge" name="age_val">
+                	<input type="hidden" type="text" id="btnValueSaveAge" name="withAge">
                     <button class="age_btn" value="~20대" type="button" name="age">~20대</button>
                     <button class="age_btn" value="30대" type="button" name="age">30대</button>
                     <button class="age_btn" value="40대" type="button" name="age">40대</button>
@@ -152,7 +154,7 @@
     
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                        <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                        <input type="range" name="withPersonner" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
                         <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                         
                     </div>
@@ -160,14 +162,14 @@
                     <div class="start_container">
                         <label for="start">출발일:</label>
     
-                        <input type="date" id="start" class="start" name="start_val"
+                        <input type="date" id="start" class="start" name="withStartDate"
                             value="2018-07-22"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
                     <div class="end_container">
                         <label for="start">도착일:</label>
             
-                        <input type="date" id="end" class="end" name="end_val"
+                        <input type="date" id="end" class="end" name="withEndDate"
                             value="2018-07-22"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
@@ -179,10 +181,10 @@
     <section class="zone3">
     <div class="content_container">
         <p>제목</p>
-            <input type="text" class="with_title" name="title" id="" placeholder="제목을 입력하세요!" required>
+            <input type="text" class="with_title" name="withTitle" id="" placeholder="제목을 입력하세요!" required>
         
         <p style="margin-top: 10px;">내용</p>
-        <textarea id="summernote" name="editordata" required></textarea>
+        <textarea id="summernote" name="withContent" required></textarea>
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
@@ -285,7 +287,7 @@ $(document).on('click', '.age_btn', function(){
                 $('#image_preview1 img').attr('src', blobURL);
                 $('#image_preview1').slideDown(); //업로드한 이미지 미리보기 
                 $(this).slideUp(); //파일 양식 감춤
-            	$('#empty1').html('');
+                $('#empty1').css("visibility", "hidden");
             }
          });
         $('#file2').on('change', function() {
@@ -300,7 +302,22 @@ $(document).on('click', '.age_btn', function(){
                 $('#image_preview2 img').attr('src', blobURL);
                 $('#image_preview2').slideDown(); //업로드한 이미지 미리보기 
                 $(this).slideUp(); //파일 양식 감춤
-            	$('#empty2').html('');
+                $('#empty2').css("visibility", "hidden");
+            }
+         });
+        $('#file3').on('change', function() {
+            ext = $(this).val().split('.').pop().toLowerCase(); //확장자
+            //배열에 추출한 확장자가 존재하는지 체크
+            if($.inArray(ext, ['gif', 'png', 'jpg', 'jpeg']) == -1) {
+                resetFormElement($(this)); //폼 초기화
+                window.alert('이미지 파일이 아닙니다! (gif, png, jpg, jpeg 만 업로드 가능)');
+            } else {
+                file = $('#file3').prop("files")[0];
+                blobURL = window.URL.createObjectURL(file);
+                $('#image_preview3 img').attr('src', blobURL);
+                $('#image_preview3').slideDown(); //업로드한 이미지 미리보기 
+                $(this).slideUp(); //파일 양식 감춤
+                $('#empty3').css("visibility", "hidden");
             }
          });
         
