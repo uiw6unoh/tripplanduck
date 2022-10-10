@@ -50,7 +50,7 @@ public class TripRestController {
             StringBuilder urlBuilder = new StringBuilder("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList");
             urlBuilder.append("?" + URLEncoder.encode("ServiceKey", "UTF-8") + "=wEh3KeT58fDfUP6Nwnk4nbHqBqTEWa6AKNh44bDB%2BNc%2FSQHN%2BT3a4%2FovMkE1Lza%2BtuV6rNqMAs7ckQnfOjZiJA%3D%3D");
             urlBuilder.append("&" + URLEncoder.encode("ServiceKey", "UTF-8") + "=" + URLEncoder.encode("wEh3KeT58fDfUP6Nwnk4nbHqBqTEWa6AKNh44bDB%2BNc%2FSQHN%2BT3a4%2FovMkE1Lza%2BtuV6rNqMAs7ckQnfOjZiJA%3D%3D", "UTF-8"));
-            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("20", "UTF-8"));
+            urlBuilder.append("&" + URLEncoder.encode("numOfRows", "UTF-8") + "=" + URLEncoder.encode("30", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("pageNo", "UTF-8") + "=" + URLEncoder.encode("3", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("MobileOS", "UTF-8") + "=" + URLEncoder.encode("ETC", "UTF-8"));
             urlBuilder.append("&" + URLEncoder.encode("MobileApp", "UTF-8") + "=" + URLEncoder.encode("AppTest", "UTF-8"));

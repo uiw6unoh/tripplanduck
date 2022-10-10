@@ -1,8 +1,22 @@
 package com.tripplan.duck.mypage.controller;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.tripplan.duck.member.model.service.MemberService;
+import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.mypage.model.service.MyPageService;
+import com.tripplan.duck.planner.model.vo.MyPlanner;
+import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.trip.model.vo.Destination;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -11,35 +25,56 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/mypage")
 public class MyPageController {
 	
-	// ÁÁ¾Æ¿ä ÇÑ ÇÃ·¡³Ê
-	@GetMapping("/likeplan")
-	public String LikePlan() throws Exception {
+	@Autowired
+	private MyPageService myPageService;
+	
+	// ë§ˆì´í˜ì´ì§€ ë©”ì¸
+	@GetMapping("")
+	public String Mypage(@RequestParam(required = false, defaultValue = "1") int offset, @RequestParam(defaultValue = "planner") String select, Model model) throws Exception {
 		
-		return "mypage/MyPageLikeplan";
+		// ë¡œê·¸ì¸ ë°ì´í„°ë¡œ ê°ˆì•„ë¼ìš°ê¸°
+		Member member = new Member(2, "yeoul", "1234", "ê¹€ì—¬ìš¸", "ì—¬ë¦¬", "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20); 
+	
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("memberNo", member.getMemberNo());
+		param.put("offset", offset);
+		
+		if(select.equals("planner")) {
+			List<MyPlanner> myPlannerList = myPageService.selectMyPlannerByMNo(param);
+			model.addAttribute("myPlannerList", myPlannerList);
+		}else if(select.equals("trip")) {
+			List<Destination> tripList = myPageService.selectTripByMNo(param);
+			model.addAttribute("tripList", tripList);
+		}else if(select.equals("comment")) {
+			List<Comments> commentsList = myPageService.selectCommentsByMNo(param);
+			model.addAttribute("commentsList", commentsList);		
+		}
+		model.addAttribute("member", member);
+		return "mypage/MypageMain";
 	}
 	
-	// ÁÁ¾Æ¿ä ÇÑ ¿©ÇàÁö
+	// ì¢‹ì•„ìš” í•œ ì—¬í–‰ì§€
 	@GetMapping("/liketrip")
 	public String LikeTrip() throws Exception {
 		
 		return "mypage/MyPageLiketrip";
 	}
 	
-	// ÀÛ¼ºÇÑ ¸®ºä
+	// ì‘ì„±í•œ ë¦¬ë·°
 	@GetMapping("/comment")
 	public String Comment() throws Exception {
 		
 		return "mypage/MyPageComment";
 	}
 	
-	// È¸¿ø Á¤º¸ ¼öÁ¤
+	// íšŒì› ì •ë³´ ìˆ˜ì •
 	@GetMapping("/updateform")
 	public String UpdateForm() throws Exception {
 		
 		return "mypage/UpdateForm";
 	}
 	
-	// È¸¿ø Å»Åğ
+	// íšŒì› íƒˆí‡´
 	@GetMapping("/dropout")
 	public String DropOut() throws Exception {
 		

@@ -20,11 +20,7 @@
           <div class="userMypageMenu">
             <div class="userInfo">
               <img src="${ path }/images/common/프사.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
-              <div class="pt-1 nickName">
-              <%-- 테스트 데이터 --%>
-              	${member.memberNickname }
-              	
-              </div>
+              <div class="pt-1 nickName">닉네임</div>
             </div>
             <div class="py-4 px-2 btn-UserMypageMenu">
               <button class="btn btn-outline-warning btn-sm btn-block">내 위드덕</button>
@@ -39,13 +35,13 @@
           <div id="horizontal-underline"></div>
           <ul class="nav justify-content-center">
             <li class="mr-4 nav-item">
-              <button type="button" class="nav-link" onclick="location.href='/mypage?select=planner&offset=1'">Like Plan</button>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=planner&memberId=${ memberId }'">Like Plan</button>
             </li>
             <li class="mr-4 nav-item">
-              <button type="button" class="nav-link" onclick="location.href='/mypage?select=trip&offset=1'">내 여행지</button>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=trip&memberId=${ memberId }'">내 여행지</button>
             </li>
             <li class="mr-4 nav-item">
-              <button type="button" class="nav-link" onclick="location.href='/mypage?select=comment&offset=1'">나의 리뷰</button>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=comment&memberId=${ memberId }'">나의 리뷰</button>
             </li>
           </ul>
         </div>
@@ -53,10 +49,7 @@
         <!-- 하위 컨테이너 -->
         <div class="content-container">
           <!-- Like Plan -->
-          <%-- 테스트 데이터 --%>
-			${ myPlannerList}
-			${tripList }
-			${commentsList }
+
             <div id="likePlan">
               <h3 class="section-title">Like Plan</h3>
               <!-- Like Plan 카드 -->

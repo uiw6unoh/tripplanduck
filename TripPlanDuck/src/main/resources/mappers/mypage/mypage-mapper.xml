@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tripplan.duck.mypage.model.mapper.MyPageMapper">
+	<resultMap type="Destination" id="destinationResultMap">
+		<id property="destNo" column="DEST_NO"/>
+		<result property="destCategory" column="DEST_CATEGORY"/>
+		<result property="destSubject" column="DEST_SUBJECT"/>
+		<result property="destSummary" column="DEST_SUMMARY"/>
+		<result property="destContent" column="DEST_CONTENT"/>
+		<result property="destAddress" column="DEST_ADDRESS"/>
+		<result property="destMapX" column="DEST_MAP_X"/>
+		<result property="destMapY" column="DEST_MAP_Y"/>
+		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
+		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
+		<result property="destHit" column="DEST_HIT"/>
+		<result property="destCreateDate" column="DEST_CREATEDATE"/>
+		<result property="destUpdateDate" column="DEST_UPDATEDATE"/>
+		<result property="locationId" column="LOCATION_ID"/>
+		<result property="destImage" column="DEST_IMAGE"/>
+	</resultMap>
+	
+	<resultMap type="Location" id="locationResultMap">
+		<id property="locationId" column="LOCATION_ID" />
+		<result property="location" column="LOCATION" />
+		<result property="lcenterx" column="LCENTERX" />
+		<result property="lcentery" column="LCENTERY" />
+	</resultMap>
+
+	<resultMap type="Comments" id="commentsResultMap">
+		<id property="commentsId" column="COMMENTS_ID" />
+		<result property="memberNo" column="M_NO" />
+		<result property="commentsWriterId" column="COMMENTS_WRITER_ID" />
+		<result property="commentsWriterPw" column="COMMENTS_WRITER_PW" />
+		<result property="commentsContent" column="COMMENTS_CONTENT" />
+		<result property="commentsRating" column="COMMENTS_RATING" />
+		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
+		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
+		<result property="commentsIpAddress" column="COMMENTS_IP_ADDRESS" />
+		<result property="destNo" column="DEST_NO" />
+	</resultMap>
+	
+	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
+		<id property="pNo" column="P_NO" />
+		<result property="pPlace" column="P_PLACE" />
+		<result property="pStartDate" column="P_STARTDATE" />
+		<result property="pEndDate" column="P_ENDDATE" />
+		<result property="pLt" column="P_LT" />
+		<result property="pMapX" column="P_MAP_X" />
+		<result property="pMapY" column="P_MAP_Y" />
+		<result property="pLike" column="P_LIKE" />
+		<result property="pStatus" column="P_STATUS" />
+		<result property="pType" column="P_TYPE" />
+		<result property="destNo" column="DEST_NO" />
+		<result property="mNo" column="M_NO" />
+		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.tripplan.duck.planner.model.vo.Location" id="locationInsertMap">
+		<id property="locationId" column="LOCATION_ID" />
+		<result property="location" column="LOCATION" />
+		<result property="lcenterx" column="LCENTERX" />
+		<result property="lcentery" column="LCENTERY" />
+		
+	</resultMap>
+	
+	<resultMap type="com.tripplan.duck.trip.model.vo.Destination" id="DestFindResultMap">
+		<id property="pNo" column="P_NO" />
+		<result property="destNo" column="DEST_NO" />
+		<result property="destCategory" column="DEST_CATEGORY" />
+		<result property="destSubject" column="DEST_SUBJECT" />
+		<result property="destSummary" column="DEST_SUMMARY" />
+		<result property="destContent" column="DEST_CONTENT" />
+		<result property="destAddress" column="DEST_ADDRESS" />
+		<result property="destMapX" column="DEST_MAP_X" />
+		<result property="destMapY" column="DEST_MAP_Y" />
+		<result property="destLikeSum" column="DEST_LIKE_SUM" />
+		<result property="destRatingAvg" column="DEST_RATING_AVG" />
+		<result property="destHit" column="DEST_HIT" />
+		<result property="destCreateDate" column="DEST_CREATEDATE" />
+		<result property="destUpdateDate" column="DEST_UPDATEDATE" />
+		<result property="locationId" column="LOCATION_ID" />
+		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
+	</resultMap>
+	
+	<select id="selectMyPlannerByMNo" resultMap="MyPlannerResultMap">
+		SELECT
+			ROWNUM,
+			a.*
+		FROM
+			(SELECT
+				mp.p_no,
+				mp.p_place,
+				mp.p_startdate,
+				mp.p_enddate,
+				mp.p_lt,
+				mp.p_map_x,
+				mp.p_map_y,
+				mp.p_like,
+				mp.p_status,
+				mp.p_type,
+				mp.dest_no,
+				mp.m_no,
+				l.location_id,
+				l.location,
+				l.LCENTERX,
+				l.LCENTERY,
+				m.M_NICKNAME,
+				d.DEST_IMAGE
+			FROM 
+				MY_PLANNER mp JOIN LOCATION L
+				ON mp.LOCATION_ID = l.LOCATION_ID
+				JOIN MEMBER m ON mp.m_no = m.M_NO
+				JOIN DESTINATION d ON mp.dest_no = d.DEST_NO
+			WHERE
+				mp.M_NO = #{memberNo}
+			ORDER BY
+				mp.p_no DESC
+				) a
+		WHERE
+			ROWNUM &lt;= (#{offset} * 3)
+		
+	</select>
+	
+	<select id="selectCommentsByMNo" resultMap="commentsResultMap">
+		SELECT
+			rownum,
+			a.*
+		FROM
+			(SELECT
+				dc.COMMENTS_ID,
+				dc.M_NO,
+				dc.COMMENTS_WRITER_ID,
+				dc.COMMENTS_WRITER_PW,
+				dc.COMMENTS_CONTENT,
+				dc.COMMENTS_RATING,
+				dc.COMMENTS_CREATEDATE,
+				dc.COMMENTS_UPDATEDATE,
+				dc.COMMENTS_IP_ADDRESS,
+				dc.DEST_NO,
+				d.DEST_CATEGORY
+			FROM
+				DESTINATION_COMMENTS dc JOIN DESTINATION D
+				ON dc.DEST_NO = d.dest_no
+			WHERE
+				m_no = #{memberNo}
+			ORDER BY
+				dc.comments_id desc
+				) a
+		WHERE
+			rownum &lt;= (#{offset} * 3)
+	</select>
+	
+	<select id="selectTripByMNo" resultMap="destinationResultMap">
+		SELECT
+			rownum,
+			a.*
+		FROM
+			(SELECT
+				dl.DEST_NO,
+				dl.M_NO,
+				d.DEST_CATEGORY,
+				d.DEST_SUBJECT,
+				d.DEST_SUMMARY,
+				d.DEST_CONTENT,
+				d.DEST_ADDRESS,
+				d.DEST_MAP_X,
+				d.DEST_MAP_Y,
+				d.DEST_LIKE_SUM,
+				d.DEST_RATING_AVG,
+				d.DEST_HIT,
+				d.DEST_CREATEDATE,
+				d.DEST_UPDATEDATE,
+				d.LOCATION_ID,
+				d.DEST_IMAGE
+			FROM
+				DESTINATION_LIKE dl JOIN DESTINATION D
+				ON dl.DEST_NO = d.dest_no
+			WHERE
+				m_no = #{memberNo}
+			ORDER BY
+				d.dest_updatedate DESC) a
+		WHERE 
+			rownum &lt;= (#{offset} * 3)
+	</select>
+</mapper>

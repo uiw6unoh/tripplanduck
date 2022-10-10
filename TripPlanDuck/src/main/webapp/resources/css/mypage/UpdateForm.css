@@ -6,7 +6,7 @@ li {
     border: solid 1px red;
 } */
 
-/* font-family ´«´©ÆùÆ® - pretendard */
+/* font-family ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® - pretendard */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 * {
@@ -14,18 +14,10 @@ li {
         "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
 }
 
-html,
 body {
-    height: 100%;
-}
-
-body {
-    display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
     background-color: #ffffff;
 }
 
@@ -81,7 +73,7 @@ table {
     text-decoration: underline;
 }
 
-/* ¿¬·É´ë ¹öÆ° */
+/* ï¿½ï¿½ï¿½É´ï¿½ ï¿½ï¿½Æ° */
 .test_obj input[type="radio"] {
     display: none;
 }
@@ -106,11 +98,16 @@ table {
 }
 
 .updateFormInfo {
+	color: #fabf42;
     text-align: center;
 }
 
+.updateFormInfo h1 {
+	font-size: 2.1rem;
+}
+
 .updateFormInfo img {
-    width: 150px;
+    width: 120px;
 }
 
 .btn-outline-warning {

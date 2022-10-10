@@ -34,26 +34,26 @@ li {
 }
 
 /*하단 메뉴*/
-.nav-container ul li a {
+/* .nav-container ul li a {
     color: black;
     font-size: 1.5rem;
-}
+} */
 
-.nav-container a:after:hover {
+/* .nav-container a:after:hover {
     display: block;
     width: 92px;
     content: '';
-    /* border-bottom: solid 7px #fff8c6; */
+    border-bottom: solid 7px #fff8c6;
     background: linear-gradient(to top, yellow 50%, transparent 50%);
     transform: scaleX(0);
     transition: transform 250ms ease-in-out;
-}
+} */
 
-.nav-container a:hover:after {
+/* .nav-container a:hover:after {
     transform: scaleX(1.2);
-}
+} */
 
-#horizontal-underline {
+/* #horizontal-underline {
     position: absolute;
     left: 0;
     height: 4px;
@@ -62,7 +62,7 @@ li {
     transition: 0.5s;
     background-color: #fff8c6;
     top: 0;
-}
+} */
 
 .content-container {
     display: flex;
@@ -74,6 +74,28 @@ li {
 .section-title {
     color: #fabf42;
     font-size: 1.7rem;
+}
+
+.tabs .tab {
+    cursor: pointer;
+}
+
+.items {
+    display: none;
+}
+
+.items::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 500;
+    width: 90px;
+    height: 5px;
+    background-color: #fabf42;
+}
+
+.items.active {
+    display: inline-block;
 }
 
 /* 여행지 필터 */
