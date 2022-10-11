@@ -133,6 +133,16 @@ public class WithDuckServiceImpl implements WithDuckService {
 		return result;
 	}
 
+	
+	//////////////////////////////////////////////////////////////위드덕 상세 페이지 ///////////////////////////////////////////////////
+
+	@Override
+	public WithDuck detailWithDuck(int withNo) {
+		System.out.println(withNo);
+		
+		return mapper.detailWithDuck(withNo);
+	}
+
 
 	
 	

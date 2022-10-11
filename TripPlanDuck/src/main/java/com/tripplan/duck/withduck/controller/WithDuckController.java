@@ -371,5 +371,26 @@ public class WithDuckController {
 		return model;
 	}
 	
-	
+	///////////////////////////////////////////////////위드덕 상세페이지////////////////////////////////////////////////////////////
+	@GetMapping("/detail")
+	public ModelAndView detailWithDuck(ModelAndView model,
+									   @RequestParam(value = "withNo") int withNo) {
+		WithDuck withDuck = null;
+		String[] arr = null;
+		
+		withDuck = service.detailWithDuck(withNo);
+		
+		arr = withDuck.getWithRenameFileName().split(", ");
+		
+		withDuck.setReList(Arrays.asList(arr));
+		
+		System.out.println(withDuck.getReList());
+		
+		System.out.println(withNo);
+		System.out.println("상세페이지 : " + withDuck);
+		
+		model.addObject("withDuck", withDuck);
+		model.setViewName("withduck/WithDuckDetail");
+		return model;
+	}
 }

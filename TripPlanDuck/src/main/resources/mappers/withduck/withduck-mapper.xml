@@ -131,4 +131,9 @@
 		
 	</insert>
 	
+	<select id="detailWithDuck" resultMap="withDuckResultMap" resultType="WithDuck" parameterType="_int">
+		<include refid="withDuckListSql" />
+		AND WITH_NO = #{withNo}
+	</select>
+	
 </mapper>

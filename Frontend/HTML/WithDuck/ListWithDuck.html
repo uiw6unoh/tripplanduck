@@ -359,4 +359,19 @@ document.querySelector('.form-range').addEventListener('input',function(event){
     var gradient_value = 100 / event.target.attributes.max.value;
   event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
 });
+
+$(document).ready(function() {
+    $(document).on('click', '.dropdown-item', function() {
+    $('.dropdown-item').removeClass('selected');
+    $(this).addClass('selected');
+    sessionStorage.setItem('sort', $('.dropdown-item.selected').html());
+    $('#dropdownMenuButton1').html(sessionStorage.getItem('sort'));
+  });
+}); 
+
+
+
+
+
+
 </script>
