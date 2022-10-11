@@ -129,7 +129,7 @@
     <p class="h2 mt-5 font-weight-bold text-center">어디로 여행을 떠나시나요?</p>
     <p class="font-weight-light text-muted text-center mb-1">여행지를 검색해주세요.</p>
     <div class="mx-auto input-group justify-content-center w-50">
-          <input name="query" type="text" class="form-control" aria-label="search">
+          <input name="keyword" type="text" class="form-control" aria-label="search">
         <button class="btn btn-outline-warning" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-search" viewBox="0 0 16 18">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg></button>
@@ -141,108 +141,300 @@
     </p>
     <div class="dropdown d-flex justify-content-end">
       <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        추천순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+        선택  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
           <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
         </svg>
       </button>
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
-        <li><a class="dropdown-item" href="#">최신순</a></li>
-        <li><a class="dropdown-item" href="#">인기순</a></li>
-        <li><a class="dropdown-item" href="#">추천순</a></li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="changeSort(1)"
+			id="filterSortPopular"
+			>인기순</a >
+		</li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="changeSort(0)"
+			id="filterSortRecommend"
+			>추천순</a >
+		</li>
+		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="changeSort(2)"
+			id="filterSortClimbingUp"
+			>오름차순</a >
+		</li>
+ 		<li>
+		  <a
+		  	class="dropdown-item"
+			onclick="changeSort(3)"
+			id="filterSortClimbingDown"
+			>내림차순</a >
+		</li>
       </ul>
     </div>
   
     <div class="row mt-1">
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="${ path }/images/trip/busan.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">BUSAN</h5>
-              <p class="card-text">대한민국 부산</p>
-            </div>
-          </div>
-        </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="${ path }/images/trip/jeju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">JEJU</h5>
-              <p class="card-text">대한민국 제주도</p>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-    </div>
-    <div class="row my-5">
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <div class="card" style="width: 16rem;">
-          <div style="overflow: hidden;">
-            <img src="" style="background-color: #f4f3f1;" width="100%" height="254px">
-          </div>
-            <div class="card-body">
-              <h5 class="card-title mb-1">Card title</h5>
-              <p class="card-text">여행지 이름 적기</p>
-            </div>
-          </div>
-        </div>
+    <c:forEach var="location" items="${list}">
+	  <c:if test="${location.locationId eq '1' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/seoul.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">SEOUL</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '2' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/인천.jpeg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">INCHEON</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '3' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/대전.jpeg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">DAEJEON</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '4' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/대구.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">DAEGU</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '5' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/광주.jpeg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">GWANGJU</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '6' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/busan.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">BUSAN</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '7' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/울산.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">ULSAN</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  <c:if test="${location.locationId eq '8' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/세종시.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">SEJONG</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '31' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/경기.jpeg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">GYEONGGI</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '32' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/gangneung.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">GANGWON</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '33' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/충북.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">CHUNGBUK</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '34' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/충남.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">CHUNGNAM</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '35' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/gyeongju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">GYEONGBUK</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '36' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/geojetongyeong.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">GYEONGNAM</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '37' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/namwon.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">JEONBUK</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '38' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/전남.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">JEONNAM</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+	  	  <c:if test="${location.locationId eq '39' }">
+	    <div class="col-lg-3 col-md-6 mb-4">
+	    	<a href="${path}/trip/list?locationId=${location.locationId}">
+	        <div class="card" style="width: 16rem;">
+	          <div style="overflow: hidden;">
+	            <img src="${ path }/images/trip/jeju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	          </div>
+	          <div class="card-body">
+		         <h5 class="card-title mb-1">JEJU</h5>
+		         <p class="card-text">${location.location}</p>
+	          </div>
+	        </div>
+	        </a>
+	    </div>
+	  </c:if>
+    </c:forEach>
     </div>
   </div>
 </div>
@@ -256,3 +448,8 @@
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>
+<script>
+function changeSort(sort){
+	window.location.href = "${path}" + "/trip/main?sort=" + sort;
+}
+</script>

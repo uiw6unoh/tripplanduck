@@ -1,13 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.tripplan.duck.admin.model.mapper.AdminMapper">
-	<sql id="memberListSql">
-		SELECT * FROM MEMBER
+<mapper namespace="com.tripplan.duck.member.model.mapper.MemberMapper">
+	<sql id="selectMemberSql">
+		SELECT M_NO,
+		       M_ID,
+		       M_PW,
+		       M_NAME,
+		       M_NICKNAME,
+		       M_EMAIL,
+		       M_TYPE,
+		       M_WARNING,
+		       M_STATUS,
+		       M_GENDER,
+		       M_AGE
+		FROM MEMBER
 	</sql>
-	
-	<resultMap type="Member" id="memberListResultMap">
-		<id property="memberNo" column="M_NO"/>
+
+	<resultMap type="Member" id="memberResultMap">
+		<id property="memberNo" column="M_NO" />
 		<result property="memberId" column="M_ID"/>
 		<result property="memberPassword" column="M_PW"/>
 		<result property="memberName" column="M_NAME"/>
@@ -19,13 +30,64 @@
 		<result property="memberGender" column="M_GENDER"/>
 		<result property="memberAge" column="M_AGE"/>
 	</resultMap>
-	
-	<select id="selectMemberCount" resultType="_int">
+
+	<select id="selectCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
 	</select>
-	
-	<select id="selectMemberAll" resultMap="memberListResultMap">
-		<include refid="memberListSql" />
-		ORDER BY M_NO DESC
+
+	<select id="selectAll" resultMap="memberResultMap">		
+		<include refid="selectMemberSql"/>
+		WHERE M_STATUS = 'Y'
 	</select>
+
+	<select id="selectMemberById" parameterType="string" resultMap="memberResultMap">
+		<include refid="selectMemberSql"/>
+		WHERE M_ID = #{memberId} AND M_STATUS = 'Y'
+	</select>
+
+	<insert id="insertMember" parameterType="Member"
+			useGeneratedKeys="true" keyColumn="NO" keyProperty="no">
+		INSERT INTO MEMBER (
+			M_NO,
+			M_ID,
+			M_PW,
+			M_NAME,
+			M_NICKNAME,
+			M_EMAIL,
+			M_TYPE,
+			M_WARNING,
+			M_STATUS,
+			M_GENDER,
+			M_AGE
+		) VALUES(
+			SEQ_UNO.NEXTVAL,
+			#{id},
+			#{password},
+			DEFAULT,
+			#{name},
+			#{phone},
+			#{email},
+			#{address},
+			#{hobby},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT
+		)	
+	</insert>
+	
+	<update id="updateMember" parameterType="Member">
+		UPDATE MEMBER 
+		SET 
+			NAME = #{name},
+			PHONE = #{phone},
+			EMAIL = #{email},
+			ADDRESS = #{address},
+			HOBBY = #{hobby},
+			MODIFY_DATE = SYSDATE 
+		WHERE NO = #{no}
+	</update>
+	
+	<delete id="deleteMember" parameterType="_int">
+		DELETE FROM MEMBER WHERE NO = #{no}
+	</delete>
 </mapper>

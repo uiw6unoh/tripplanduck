@@ -81,25 +81,27 @@
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="https://dummyimage.com/400x400/dee2e6/6c757d.jpg" alt="..." />
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="..." />
             </div>
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg> 1224</span></div>
+              </svg> ${dest.destLikeSum}</span></div>
               <div class="title">
                 <div>
                   <a href="#">홈 ></a>
-                  <a href="#">제주도</a>
+                  <a href="#">${dest.destCategory}</a>
                 </div>
-                <h2 class="stu_h2_title">내셔널갤러리</h2>
-                <p>런던 예술의 상징</p>
+                <h2 class="stu_h2_title">${dest.destSubject}</h2>
+                <p>${dest.destSummary}</p>
               </div>
               <div class="description">
-                <p class="lead" style="font-size: 1rem;">런던 트라팔가르 광장에 있는 국립미술관 내셔널 갤러리는 영국 최초의 국립 미술관입니다. 레오나르도 다빈치부터 고흐까지 연대순으로 전시된 작품을 감상하면서 회화 변천사를 확인해 볼 수 있어요.</p>
+                <p class="lead" style="font-size: 1rem;">${dest.destContent}</p>
               </div>
             </div>
         </div>
+        
+        <!--  
         <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-4" data-items-lg="5" data-stage-padding="20">
             <div class="owl-stage-outer">
                 <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1591px;">
@@ -137,53 +139,26 @@
                 </div>
             </div>
         </div>
+        -->
 
         <p class="h3 mb-0 mt-5">경험해볼 만한 것들</p>
         <div class="row mt-2">
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 col-lg-3">
-              <div class="card">
-                <div style="overflow: hidden;">
-                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="https://dummyimage.com/300x200/dee2e6/6c757d.jpg" data-holder-rendered="true">
-                </div>
-                <div class="card-body">
-                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">관광지 제목1</h6>
-                  <h6 class="mt-1 ml-1 text-secondary">관광지 설명~~~~!@#!$!%</h6>
-                </div>
-              </div>
-            </div>
+        	<c:forEach var="dest" items="${destnations}">
+	        	<div class="col-md-6 col-lg-3">
+		        	<a href="${path}/trip/detail?destNo=${dest.destNo}">
+		              <div class="card">
+		                <div style="overflow: hidden;">
+		                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" data-holder-rendered="true">
+		                </div>
+		                <div class="card-body">
+		                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
+		                  <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+		                </div>
+		              </div>
+		              </a>
+	            </div>
+        	</c:forEach>
+            
           </div>
         
           <div class="tabs tabs-alt tabs-tb clearfix ui-tabs ui-corner-all ui-widget ui-widget-content mt-4" id="tab-8">
@@ -194,10 +169,9 @@
 
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
-                <p>구글 맵스, 날씨, 등 넣어야함 ~~</p>
-                
+				<div class="mt-3 ml-2">               
                    <div id="map" style="width:500px;height:400px;"></div>
-				    
+				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
                 <section class="mb-5">
@@ -374,74 +348,30 @@
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
 <script>
+	var mapX="${dest.destMapX}";
+	var mapY="${dest.destMapY}";
+	
+	if(mapX == "" || mapX == null){
+		mapX = 33.42404;
+		mapY = 126.93073;
+	}
+
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-	mapOption = {
-	    center: new kakao.maps.LatLng(33.231669365977254, 126.3147343832866), // 지도의 중심좌표
-	    level: 1 // 지도의 확대 레벨
-	};  
+	mapOption = { 
+	    center: new kakao.maps.LatLng(mapX, mapY), // 지도의 중심좌표
+	    level: 3 // 지도의 확대 레벨
+	};
 	
-	//지도를 생성합니다    
-	var map = new kakao.maps.Map(mapContainer, mapOption); 
+	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
-	//주소-좌표 변환 객체를 생성합니다
-	var geocoder = new kakao.maps.services.Geocoder();
+	//마커가 표시될 위치입니다 
+	var markerPosition  = new kakao.maps.LatLng(mapX, mapY); 
 	
-	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커입니다
-	infowindow = new kakao.maps.InfoWindow({zindex:1}); // 클릭한 위치에 대한 주소를 표시할 인포윈도우입니다
-	
-	//현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시합니다
-	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-	
-	//지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-	searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-	    if (status === kakao.maps.services.Status.OK) {
-	        var detailAddr = !!result[0].road_address ? '<div>도로명주소 : ' + result[0].road_address.address_name + '</div>' : '';
-	        detailAddr += '<div>지번 주소 : ' + result[0].address.address_name + '</div>';
-	        
-	        var content = '<div class="bAddr">' +
-	                        '<span class="title">법정동 주소정보</span>' + 
-	                        detailAddr + 
-	                    '</div>';
-	
-	        // 마커를 클릭한 위치에 표시합니다 
-	        marker.setPosition(mouseEvent.latLng);
-	        marker.setMap(map);
-	
-	        // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-	        infowindow.setContent(content);
-	        infowindow.open(map, marker);
-	    }   
-	});
+	//마커를 생성합니다
+	var marker = new kakao.maps.Marker({
+	position: markerPosition
 	});
 	
-	//중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-	kakao.maps.event.addListener(map, 'idle', function() {
-	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-	});
-	
-	function searchAddrFromCoords(coords, callback) {
-	// 좌표로 행정동 주소 정보를 요청합니다
-	geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-	}
-	
-	function searchDetailAddrFromCoords(coords, callback) {
-	// 좌표로 법정동 상세 주소 정보를 요청합니다
-	geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-	}
-	
-	//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-	function displayCenterInfo(result, status) {
-	if (status === kakao.maps.services.Status.OK) {
-	    var infoDiv = document.getElementById('centerAddr');
-	
-	    for(var i = 0; i < result.length; i++) {
-	        // 행정동의 region_type 값은 'H' 이므로
-	        if (result[i].region_type === 'H') {
-	            infoDiv.innerHTML = result[i].address_name;
-	            break;
-	        }
-	    }
-	}    
-	}
+	//마커가 지도 위에 표시되도록 설정합니다
+	marker.setMap(map);
 </script>

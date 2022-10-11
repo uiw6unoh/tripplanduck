@@ -12,7 +12,7 @@
             <div class="row col-mb-30">
               <div class="col-md-6 text-center text-md-start">
                 Copyrights &copy; 2022 All Rights Reserved by TripPlanDuck Inc.<br />
-                <div class="copyright-links"><a href="#">이용약관</a> / <a href="#">개인정보처리방침</a></div>
+                <div class="copyright-links"><a href="#" id="termconditions" >이용약관</a> / <a href="#" id="privacy" >개인정보처리방침</a></div>
               </div>
               <div class="col-md-6 text-center text-md-end">
                 <div class="d-flex justify-content-center justify-content-md-end">
@@ -64,10 +64,24 @@
   	<script src="${ path }/js/common/jquery-3.6.0.min.js"></script>
     
     <!-- JavaScripts -->
-    <script src="${ path }/js/common/Mainstyle.js"></script>
     <script src="${ path }/js/common/plugins.min.js"></script>
 
     <!-- Footer Scripts -->
     <script src="${ path }/js/common/functions.js"></script>
+    
+<script>
+	$(document).ready(function () {
+		$('#privacy').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/common/privacy';
+		});
+		
+		$('#termconditions').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/common/termconditions';
+		});
+		
+	});
+</script>
   </body>
 </html>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.tripplan.duck.trip.model.mapper.DestinationMapper">
+
+	<resultMap type="Destination" id="DestinationResultMap">
+		<id property="destNo" column="DEST_NO"/>
+		<result property="destCategory" column="DEST_CATEGORY"/>
+		<result property="destSubject" column="DEST_SUBJECT"/>
+		<result property="destSummary" column="DEST_SUMMARY"/>
+		<result property="destContent" column="DEST_CONTENT"/>
+		<result property="destAddress" column="DEST_ADDRESS"/>
+		<result property="destMapX" column="DEST_MAP_X"/>
+		<result property="destMapY" column="DEST_MAP_Y"/>
+		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
+		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
+		<result property="destHit" column="DEST_HIT"/>
+		<result property="destCreateDate" column="DEST_CREATEDATE"/>
+		<result property="destUpdateDate" column="DEST_UPDATEDATE"/>
+		<result property="locationId" column="LOCATION_ID"/>
+		<result property="destImage" column="DEST_IMAGE"/>
+	</resultMap>
+	
+	<resultMap type="Location" id="locationResultMap">
+		<id property="locationId" column="LOCATION_ID" />
+		<result property="location" column="LOCATION" />
+		<result property="lcenterx" column="LCENTERX" />
+		<result property="lcentery" column="LCENTERY" />
+	</resultMap>
+	
+	<insert id="insertData"  parameterType="java.util.Map">
+	INSERT INTO DESTINATION(
+		DEST_NO, 
+		DEST_CATEGORY, 
+		DEST_SUBJECT, 
+		DEST_SUMMARY, 
+		DEST_CONTENT, 
+		DEST_ADDRESS, 
+		DEST_MAP_X, 
+		DEST_MAP_Y, 
+		DEST_LIKE_SUM, 
+		DEST_RATING_AVG, 
+		DEST_HIT, 
+		DEST_CREATEDATE, 
+		DEST_UPDATEDATE, 
+		LOCATION_ID, 
+		DEST_IMAGE)
+	VALUES(
+		DEST_NO.NEXTVAL,
+		#{category},
+		#{title},
+		#{summary},
+		'nothing',
+		#{addr1},
+		#{mapx},
+		#{mapy},
+		0,
+		0,
+		0,
+		SYSDATE,
+		SYSDATE,
+		#{areacode},
+		#{firstimage}
+		)
+	</insert>
+	
+	
+	<select id="getCategoryName" parameterType="int" resultType="string">
+		SELECT LOCATION FROM LOCATION WHERE LOCATION_ID = #{i}
+	</select>
+	
+	<select id="getDestination" parameterType="int" resultMap="DestinationResultMap">
+		SELECT * FROM DESTINATION 
+		WHERE DEST_NO = #{destNo}
+	</select>
+	
+	<select id="getLocation" parameterType="int" resultMap="locationResultMap">
+		SELECT * FROM LOCATION 
+		WHERE LOCATION_ID = #{locationId}
+	</select>
+	
+	<select id="getDestinationsByCategory" parameterType="int" resultMap="DestinationResultMap">
+		SELECT * 
+		FROM (SELECT * FROM DESTINATION WHERE DEST_CATEGORY = (SELECT DEST_CATEGORY FROM DESTINATION WHERE DEST_NO = #{destNo}) ORDER BY DEST_HIT) A
+			<![CDATA[ 
+		WHERE rownum >= 1 
+		AND rownum <= 4
+			]]>
+	</select>
+	
+	<select id="getDestinationsByLocationId" parameterType="int" resultMap="DestinationResultMap">
+		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_LIKE_SUM
+	</select>
+	
+	<select id="getLocations" parameterType="string" resultMap="locationResultMap">
+		SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY 
+		FROM (SELECT LOCATION_ID, SUM(${value}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
+		WHERE A.LOCATION_ID = B.LOCATION_ID 
+		ORDER BY A.SUM DESC
+	</select>
+	
+	<select id="getLocationsByName" parameterType="string" resultMap="locationResultMap">
+		SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY 
+		FROM LOCATION
+		ORDER BY ${value}
+	</select>
+</mapper>

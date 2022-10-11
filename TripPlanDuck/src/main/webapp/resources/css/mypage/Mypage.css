@@ -1,0 +1,226 @@
+/* div {
+    border: solid 1px red;
+}
+
+li {
+    border: solid 1px red;
+} */
+
+/* 상위 컨테이너 */
+.top-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userMypageMenu {
+    display: flex;
+}
+
+.nickName {
+    font-size: 1.4rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+.btn-outline-warning {
+    background-color: #fff8c6;
+    color: black;
+}
+
+.btn-outline-warning:hover {
+    background-color: #fff8c6;
+}
+
+/* 탭메뉴 */
+.nav-link {
+    color: black;
+    font-size: 1.5rem;
+    border: 0;
+    outline: 0;
+}
+
+.nav-link:after:hover {
+    display: block;
+    width: 92px;
+    content: '';
+    /* border-bottom: solid 7px #fff8c6; */
+    background: linear-gradient(to top, yellow 50%, transparent 50%);
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+}
+
+.nav-link:hover:after {
+    transform: scaleX(1.2);
+}
+
+#horizontal-underline {
+    position: absolute;
+    left: 0;
+    height: 4px;
+    width: 0;
+    border-radius: 3px;
+    transition: 0.5s;
+    background-color: #fff8c6;
+    top: 0;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-title {
+    color: #fabf42;
+    font-size: 1.7rem;
+}
+
+/* 여행지 필터 */
+.form-control {
+    width: 150px;
+    float: right;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.form-control:hover,
+.form-control:focus {
+    border: 1px solid #fff8c6;
+    outline: 3px solid #fff8c6;
+}
+
+.form-control option:focus {
+    background-color: #fff8c6;
+}
+
+/* 카드 */
+.card-body {
+    padding: 2.25rem;
+}
+
+.likeCard {
+    width: 800px;
+    height: 200px;
+    /* padding: 20px; */
+    transition: all 200ms ease-in-out;
+}
+
+.imgSize {
+    width: 240px;
+    height: 220px;
+    padding-bottom: 20px;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+}
+
+.likeCard:hover {
+    width: 810px;
+    height: 210px;
+    margin-top: 5px;
+    cursor: pointer;
+    box-shadow: 0px 12px 30px 0px #fff8c6;
+    border: 1px solid #fff8c6;
+}
+
+.likeCard:hover .imgSize {
+    height: 230px;
+    transition: all 200ms ease-in-out;
+    /* transform: scale(1.1); */
+}
+
+/* 작성한 리뷰 카드 */
+.commentCard {
+    width: 800px;
+    height: 200px;
+    margin-bottom: 5px;
+}
+
+.destination {
+    display: flex;
+    align-items: right;
+}
+
+.card-title {
+    color: #fabf42;
+}
+
+.separator {
+    padding-left: 5px;
+    color: #6c757d;
+}
+
+.card-area {
+    font-size: 1.1rem;
+    padding-left: 5px;
+    padding-top: 6px;
+}
+
+.info-container-top {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.title {
+    color: #fabf42;
+}
+
+.text-content {
+    color: black;
+    transform: translate(2%, 2%);
+    padding-left: 5px;
+}
+
+.card-text {
+    font-size: 1.22rem;
+}
+
+.fa-heart {
+    float: right;
+    margin-top: 10px;
+    color: #fabf42;
+}
+
+.down-chevron {
+    cursor: pointer;
+    height: 40px;
+    width: 40px;
+    -webkit-filter: opacity(.3) drop-shadow(1px 1px 1px #fff8c6);
+    filter: opacity(.3) drop-shadow(1px 1px 1px #fff8c6);
+    -webkit-filter: opacity(.4) drop-shadow(4px 4px 4px #fff8c6);
+    filter: opacity(.4) drop-shadow(4px 4px 4px #fff8c6);
+}
+
+/* .down-chevron:hover {
+    -webkit-filter: opacity(.5) drop-shadow(4px 4px 4px #fabf42);
+    filter: opacity(.5) drop-shadow(4px 4px 4px #fabf42);
+} */
+
+.down-chevron:active {
+    position: relative;
+    top:2px;
+    -webkit-filter: opacity(.1) drop-shadow(1px 1px 1px #808080);
+    filter: opacity(.1) drop-shadow(1px 1px 1px #808080);
+}
+
+/* 카드 버튼 */
+.card-btns {
+    float: right;
+    align-items: flex-end;
+    transform: translate(7%, -103%);
+}
+
+/* 비밀번호 모달 */
+.modal-header {
+    background-color: #fff8c6;
+}
+
+.inputPwd {
+    border: 1px solid #fabf42;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}

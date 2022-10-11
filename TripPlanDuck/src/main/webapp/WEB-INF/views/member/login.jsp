@@ -25,17 +25,18 @@
 
 <body class="text-center">
     <main class="form-signin w-300 m-auto">
-      <form action="login" method="GET">
+  
+      <form action="${ path }/member/login" method="POST">
         <h1>LOGIN</h1>
         <a href="${ path }">
         <img class="mb-4" src="${ path }/images/common/logo.png" alt="" width="300"></a>
         <p>덕덕이와 함께 만드는 즐거운 국내여행 플래너</p>
         
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" id="userId" name="userId" placeholder="id">
+          <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id">
         </div>
         <div class="form-floating mb-3">
-          <input type="password" class="form-control" id="userPassword" name="userPassword" placeholder="Password">
+          <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="Password">
         </div>
         <div class="checkbox mb-2">
           <label>
@@ -47,7 +48,7 @@
             <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">아이디찾기</button>
             <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">비밀번호찾기</button>
         </div>
-        <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
+        <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" type="" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
         <button class="w-100 btn-outline-warning btn-lg mb-3" id="signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
       <div class="hr-sect mb-3">OR</div>
       <div class="sns-logo">

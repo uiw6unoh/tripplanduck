@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <!-- mainstyle CSS -->
+  <link rel="stylesheet" href="../Common/Template/css/style.css" type="text/css" />
+  <link rel="stylesheet" href="../Common/Template/css/font-icons.css" type="text/css" />
+
+  <!--owl carousel CSS-->
+  <link rel="stylesheet" type="text/css" href="../../OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
+  <link rel="stylesheet" type="text/css" href="../../OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
+
+  <!-- MyPage CSS -->
+  <link rel="stylesheet" href="../../CSS/Mypage/MypageMain.css">
+
+  <!-- fontawesome CSS -->
+  <script src="https://kit.fontawesome.com/f8167db045.js" crossorigin="anonymous"></script>
+
+  <!-- heart CSS -->
+  <link rel="stylesheet" href="../../CSS/Mypage/heart.css">
+
+  <title>My Page</title>
+</head>
+
+<body>
+  <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
+
+  <body class="stretched">
+    <div id="wrapper">
+      <header id="header" class="full-header">
+        <div id="header-wrap">
+          <div class="container">
+            <div class="header-row">
+              <div id="logo">
+                <a href="index.html" class="standard-logo" data-dark-logo="images/logo-dark.png"><img
+                    src="../../IMG/Common/logo.png" /></a>
+              </div>
+              <div class="header-misc">
+                <div id="top-search" class="header-misc-icon">
+                  <a href="#" id="top-search-trigger"><i class="icon-line-search"></i><i
+                      class="icon-line-cross"></i></a>
+                </div>
+              </div>
+
+              <div id="primary-menu-trigger">
+                <svg class="svg-trigger" viewBox="0 0 100 100">
+                  <path
+                    d="m 30,33 h 40 c 3.722839,0 7.5,3.126468 7.5,8.578427 0,5.451959 -2.727029,8.421573 -7.5,8.421573 h -20">
+                  </path>
+                  <path d="m 30,50 h 40"></path>
+                  <path
+                    d="m 70,67 h -40 c 0,0 -7.5,-0.802118 -7.5,-8.365747 0,-7.563629 7.5,-8.634253 7.5,-8.634253 h 20">
+                  </path>
+                </svg>
+              </div>
+
+              <!-- Primary Navigation
+            ============================================= -->
+              <nav class="primary-menu">
+                <ul class="menu-container">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>Home</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>플래너</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>여행지</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>위드덕</div>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+
+              <nav class="primary-menu">
+                <ul class="menu-container p-0">
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>로그인</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a class="menu-link" href="#">
+                      <div>회원가입</div>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+              <!-- #primary-menu end -->
+
+              <form class="top-search-form" action="search.html" method="get">
+                <input type="text" name="q" class="form-control" value="" placeholder="도시, 키워드로 검색"
+                  autocomplete="off" />
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="header-wrap-clone"></div>
+      </header>
+
+      <!-- Mypage 시작 -->
+      <!-- 전체 컨테이너 -->
+      <div class="container">
+        <!-- 상위 컨테이너 -->
+        <div class="p-5 top-container">
+          <div class="userMypageMenu">
+            <div class="userInfo">
+              <img src="../../IMG/Common/프사.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
+              <div class="pt-1 nickName">킹민주</div>
+            </div>
+            <div class="py-4 px-2 btn-UserMypageMenu">
+              <button class="btn btn-outline-warning btn-sm btn-block">내 위드덕</button>
+              <button class="btn btn-outline-warning btn-sm btn-block" data-toggle="modal"
+                data-target="#changeUserInfo">회원정보수정</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하위 메뉴 -->
+        <div class="nav-container">
+          <div id="horizontal-underline"></div>
+          <ul class="nav justify-content-center">
+            <li class="mr-4 nav-item">
+              <a class="nav-link" href="#likePlan">Like Plan</a>
+            </li>
+            <li class="mr-4 nav-item">
+              <a class="nav-link" href="../Mypage/MypagePlanner.html#myPlanner">내 여행지</a>
+            </li>
+            <li class="mr-4 nav-item">
+              <a class="nav-link" href="../Mypage/MypageComment.html#myComment">나의 리뷰</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- 하위 컨테이너 -->
+        <div class="content-container">
+          <div id="likePlan">
+            <h3 class="section-title">Like Plan</h3>
+            <div class="card mb-3 likeCard" style="max-width: 800px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="../../IMG/Trip/gyeongju.jpg" class="img-fluid rounded-start imgSize" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <i class="fa-sharp fa-solid far fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>경주</h5>
+                    </div>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        신둥이
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">3박 4일</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3 likeCard" style="max-width: 800px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="../../IMG/Trip/jeju.jpg" class="img-fluid rounded-start imgSize" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>제주</h5>
+                    </div>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        김짱구
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">7박 8일</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3 likeCard" style="max-width: 800px;">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img src="../../IMG/Trip/busan.jpg" class="img-fluid rounded-start imgSize" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                  <div class="info-container-top">
+                    <div class="card-title title mt-3">
+                      <h5>여행지</h5>
+                    </div>
+                    <div class="card-title text-content mt-3">
+                      <h5>부산</h5>
+                    </div>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">작성인</p>
+                    <p class="card-text text-content">
+                      <a href="">
+                        김일심
+                      </a>
+                    </p>
+                  </div>
+                  <div class="info-container-top">
+                    <p class="card-text title">여행 일정</p>
+                    <p class="card-text text-content">4박 5일</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="wrap-downChevron">
+          <img class="down-chevron" src="../../IMG/MyPage/down-chevron.png">
+        </div>
+      </div>
+
+      <!-- 비밀번호 확인 모달 -->
+      <div class="modal fade" id="changeUserInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <input type="text" class="inputPwd" placeholder="비밀번호 입력">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-outline-warning"
+                onclick="location.href='UpdateForm.html'">확인</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 푸터 -->
+    <div class="container-fluid p-0">
+      <footer id="footer" class="light">
+        <div id="copyrights">
+          <div class="container">
+            <div class="row col-mb-30">
+              <div class="col-md-6 text-center text-md-start">
+                Copyrights &copy; 2022 All Rights Reserved by TripPlanDuck Inc.<br />
+                <div class="copyright-links"><a href="#">이용약관</a> / <a href="#">개인정보처리방침</a></div>
+              </div>
+              <div class="col-md-6 text-center text-md-end">
+                <div class="d-flex justify-content-center justify-content-md-end">
+                  <a href="#" class="social-icon si-small si-borderless si-facebook">
+                    <i class="icon-facebook"></i>
+                    <i class="icon-facebook"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-twitter">
+                    <i class="icon-twitter"></i>
+                    <i class="icon-twitter"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-gplus">
+                    <i class="icon-gplus"></i>
+                    <i class="icon-gplus"></i>
+                  </a>
+                  <a href="#" class="social-icon si-small si-borderless si-github">
+                    <i class="icon-github"></i>
+                    <i class="icon-github"></i>
+                  </a>
+                </div>
+                <div class="clear"></div>
+                <i class="icon-envelope2"></i> info@TripPlanDuck.com <span class="middot">&middot;</span>
+                <i class="icon-headphones"></i> +82-02-1234-5678
+              </div>
+              <div id="gotoTop" class="icon-angle-up"></div>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"></script>
+
+    <!--jQuery-->
+    <script src="../Common/Template/js/jquery.js"></script>
+
+    <!-- JavaScripts -->
+    <script src="../Common/Template/js/plugins.min.js"></script>
+    <script src="../Common/Template/js/functions.js"></script>
+
+    <!--owl carousel JS -->
+    <script src="../../OwlCarousel2-2.3.4/dist/owl.carousel.min.js"></script>
+    <script src="../../OwlCarousel2-2.3.4/src/js/owl.autoplay.js"></script>
+    <script src="../../OwlCarousel2-2.3.4/src/js/owl.navigation.js"></script>
+    <script src="../../JS/Trip/Mainstyle.js"></script>
+
+    <!-- MyPage JS -->
+    <!-- <script src="../../JS/Mypage/MypageMain.js"></script> -->
+  </body>
+</html>
