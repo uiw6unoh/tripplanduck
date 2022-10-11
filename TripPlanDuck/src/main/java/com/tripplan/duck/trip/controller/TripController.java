@@ -20,15 +20,14 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/trip")
 public class TripController {
-	
-//	@Autowired
-//	private TripService service;
-	
+		
 	@Autowired
 	private DestinationService destinationService;
 	
 	@GetMapping("/main")
-	public ModelAndView TripMain(ModelAndView model, @RequestParam(value="sort", required = false)String sort){
+	public ModelAndView TripMain(ModelAndView model,
+								@RequestParam(value = "sort_name", defaultValue = "추천순") String sort_name,
+								@RequestParam(value="sort", required = false)String sort){
 		
 		String order = "DEST_LIKE_SUM";
 		List<Location> list = new ArrayList<Location>();
@@ -39,21 +38,26 @@ public class TripController {
 		switch(sort){
 			case "1":
 				order = "DEST_RATING_AVG";
+				sort_name = "인기순";
 				list = destinationService.getLocations(order);
 				break;
 			case "2":
 				order = "LOCATION";
+				sort_name = "오름차순";
 				list = destinationService.getLocationsByName(order);
 				break;
 			case "3":
 				order = "LOCATION DESC";
+				sort_name = "내림차순";
 				list = destinationService.getLocationsByName(order);
 				break;
 			default:
+				sort_name = "추천순";
 				list = destinationService.getLocations(order);
 				break;
 		}
 		
+		model.addObject("sort_name", sort_name);
 		model.addObject("list", list);
 		model.setViewName("trip/TripMain");
 		
