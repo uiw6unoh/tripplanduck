@@ -18,4 +18,5 @@ public interface PlannerMapper {
 
 	List<Destination> addDest();
 	
+	public int plannerInsert();
 }

@@ -22,12 +22,16 @@ public class MemberServiceImpl implements MemberService {
 	public Member login(String memberId, String memberPassword) {
 
 		Member member = null;
-		
-//		member = dao.findMemberById(session, memberId);
-		
+				
 		member = mapper.selectMemberById(memberId);
 		
-		return member;
+		if(member != null && member.getMemberPassword().equals(memberPassword)) {
+			return member;
+		} else {
+			return null;
+		}
+		
+	
 	}
 
 }

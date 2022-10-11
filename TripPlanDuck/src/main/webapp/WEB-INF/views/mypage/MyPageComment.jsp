@@ -18,7 +18,7 @@
           <div class="userMypageMenu">
             <div class="userInfo">
               <img src="${ path }/images/common/프사.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
-              <div class="pt-1 nickName">킹민주</div>
+              <div class="pt-1 nickName">닉네임</div>
             </div>
             <div class="py-4 px-2 btn-UserMypageMenu">
               <button class="btn btn-outline-warning btn-sm btn-block">내 위드덕</button>
@@ -33,13 +33,13 @@
           <div id="horizontal-underline"></div>
           <ul class="nav justify-content-center">
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="../Mypage/MypageLikePlan.html">Like Plan</a>
+              <div class="nav-link" href="../Mypage/MypageLikePlan.html">Like Plan</a>
             </li>
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="../Mypage/MypagePlanner.html#myPlanner">내 여행지</a>
+              <div class="nav-link" href="../Mypage/MypagePlanner.html#myPlanner">내 여행지</a>
             </li>
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="#myComment">나의 리뷰</a>
+              <div class="nav-link" href="#myComment">나의 리뷰</a>
             </li>
           </ul>
         </div>

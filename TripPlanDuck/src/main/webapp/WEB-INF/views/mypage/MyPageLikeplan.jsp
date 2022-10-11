@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -12,165 +12,179 @@
   <!-- fontawesome CSS -->
   <script src="https://kit.fontawesome.com/f8167db045.js" crossorigin="anonymous"></script>
 <body>
-	<!-- Mypage Ω√¿€ -->
-    <!-- ¿¸√º ƒ¡≈◊¿Ã≥  -->
+	<!-- Mypage ÏãúÏûë -->
+    <!-- Ï†ÑÏ≤¥ Ïª®ÌÖåÏù¥ÎÑà -->
     <div class="container">
-      <!-- ªÛ¿ß ƒ¡≈◊¿Ã≥  -->
+      <!-- ÏÉÅÏúÑ Ïª®ÌÖåÏù¥ÎÑà -->
         <div class="p-5 top-container">
           <div class="userMypageMenu">
             <div class="userInfo">
-              <img src="${ path }/images/common/«¡ªÁ.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
-              <div class="pt-1 nickName">≈∑πŒ¡÷</div>
+              <img src="${ path }/images/common/ÌîÑÏÇ¨.png" alt="profile" style="width: 100px; height: 100px; border-radius: 50%;">
+              <div class="pt-1 nickName">
+              <%-- ÌÖåÏä§Ìä∏ Îç∞Ïù¥ÌÑ∞ --%>
+              	${member.memberNickname }
+              	
+              </div>
             </div>
             <div class="py-4 px-2 btn-UserMypageMenu">
-              <button class="btn btn-outline-warning btn-sm btn-block">≥ª ¿ßµÂ¥ˆ</button>
+              <button class="btn btn-outline-warning btn-sm btn-block">ÎÇ¥ ÏúÑÎìúÎçï</button>
               <button class="btn btn-outline-warning btn-sm btn-block" data-toggle="modal"
-                data-target="#changeUserInfo">»∏ø¯¡§∫∏ºˆ¡§</button>
+                data-target="#changeUserInfo">ÌöåÏõêÏ†ïÎ≥¥ÏàòÏ†ï</button>
             </div>
           </div>
         </div>
 
-        <!-- «œ¿ß ∏ﬁ¥∫ -->
+        <!-- ÌÉ≠ Î©îÎâ¥ Ïª®ÌÖåÏù¥ÎÑà -->
         <div class="nav-container">
           <div id="horizontal-underline"></div>
           <ul class="nav justify-content-center">
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="#likePlan">Like Plan</a>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=planner&offset=1'">Like Plan</button>
             </li>
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="MyPageLiketrip.jsp#myPlanner">≥ª ø©«‡¡ˆ</a>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=trip&offset=1'">ÎÇ¥ Ïó¨ÌñâÏßÄ</button>
             </li>
             <li class="mr-4 nav-item">
-              <a class="nav-link" href="../Mypage/MypageComment.html#myComment">≥™¿« ∏Æ∫‰</a>
+              <button type="button" class="nav-link" onclick="location.href='/mypage?select=comment&offset=1'">ÎÇòÏùò Î¶¨Î∑∞</button>
             </li>
           </ul>
         </div>
 
-        <!-- «œ¿ß ƒ¡≈◊¿Ã≥  -->
+        <!-- ÌïòÏúÑ Ïª®ÌÖåÏù¥ÎÑà -->
         <div class="content-container">
-          <div id="likePlan">
-            <h3 class="section-title">Like Plan</h3>
-            <div class="card mb-3 likeCard" style="max-width: 800px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img src="${ path }/images/trip/gyeongju.jpg" class="img-fluid rounded-start imgSize" alt="...">
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <i class="fa-sharp fa-solid far fa-heart fa-lg" id="heartIcon"></i>
-                  <div class="info-container-top">
-                    <div class="card-title title mt-3">
-                      <h5>ø©«‡¡ˆ</h5>
+          <!-- Like Plan -->
+          <%-- ÌÖåÏä§Ìä∏ Îç∞Ïù¥ÌÑ∞ --%>
+			${ myPlannerList}
+			${tripList }
+			${commentsList }
+            <div id="likePlan">
+              <h3 class="section-title">Like Plan</h3>
+              <!-- Like Plan Ïπ¥Îìú -->
+              <a>
+                <div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                      <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1000" class="img-fluid rounded-start imgSize" alt="...">
                     </div>
-                    <div class="card-title text-content mt-3">
-                      <h5>∞Ê¡÷</h5>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                        <div class="info-container-top">
+                          <div class="card-title title mt-3">
+                            <h5>Ïó¨ÌñâÏßÄ</h5>
+                          </div>
+                          <div class="card-title text-content mt-3">
+                            <h5>Ï†úÏ£º</h5>
+                          </div>
+                        </div>
+                        <div class="info-container-top">
+                          <p class="card-text title">ÏûëÏÑ±Ïù∏</p>
+                          <p class="card-text text-content">ÎãâÎÑ§ÏûÑ2</p>
+                        </div>
+                        <div class="info-container-top">
+                          <p class="card-text title">Ïó¨Ìñâ ÏÜåÏöî ÏãúÍ∞Ñ</p>
+                          <p class="card-text text-content"></p>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">¿€º∫¿Œ</p>
-                    <p class="card-text text-content">
-                      <a href="">
-                        Ω≈µ’¿Ã
-                      </a>
-                    </p>
-                  </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">ø©«‡ ¿œ¡§</p>
-                    <p class="card-text text-content">3π⁄ 4¿œ</p>
-                  </div>
                 </div>
-              </div>
+              </a>
             </div>
-          </div>
-          <div class="card mb-3 likeCard" style="max-width: 800px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${ path }/images/trip/jeju.jpg" class="img-fluid rounded-start imgSize" alt="...">
+        
+          <!-- ÎÇ¥ Ïó¨ÌñâÏßÄ -->
+        
+          <div id="myPlanner">
+            <h3 class="section-title">ÎÇ¥ Ïó¨ÌñâÏßÄ</h3>
+              <!-- Ïó¨ÌñâÏßÄ ÌïÑÌÑ∞ -->
+            <div>
+              <select class="form-control">
+                <option>Ïó¨ÌñâÏßÄ ÏÑ†ÌÉù</option>
+                <option>Ï†úÏ£º</option>
+              </select>
+            </div>
+            <!-- Ïó¨ÌñâÏßÄ Ïπ¥Îìú -->
+            <a>
+              <div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+                <div class="row g-0">
+                  <div class="col-md-4">
+                    <img src="https://www.myro.co.kr/getSpotImage/jeju?no=1000" class="img-fluid rounded-start imgSize" alt="...">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+                      <div class="info-container-top">
+                        <div class="card-title title mt-3">
+                          <h5>Î™ÖÏÜåÎ™Ö</h5>
+                        </div>
+                        <div class="card-title text-content mt-3">
+                          <h5>ÌòëÏû¨Ìï¥ÏàòÏöïÏû•</h5>
+                        </div>
+                      </div>
+                      <div class="info-container-top">
+                        <p class="card-text title">ÎèÑÏãúÎ™Ö</p>
+                        <p class="card-text text-content">Ï†úÏ£º</p>
+                      </div>
+                      <div class="info-container-top">
+                        <p class="card-text title">Ï£ºÏÜå</p>
+                        <p class="card-text text-content">Ï†úÏ£ºÌäπÎ≥ÑÏûêÏπòÎèÑ Ï†úÏ£ºÏãú ÌïúÎ¶ºÏùç ÌïúÎ¶ºÎ°ú 329-10</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="col-md-8">
+            </a>
+          </div>
+            
+          <!-- comment -->
+          <div id="myComment">
+          <!-- comment Ïπ¥Îìú ÏãúÏûë -->
+            <h3 class="section-title">ÎÇòÏùò Î¶¨Î∑∞</h3>
+            <a>
+            <div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
+              <div>
                 <div class="card-body">
-                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
-                  <div class="info-container-top">
-                    <div class="card-title title mt-3">
-                      <h5>ø©«‡¡ˆ</h5>
-                    </div>
-                    <div class="card-title text-content mt-3">
-                      <h5>¡¶¡÷</h5>
-                    </div>
+                  <div class="destination">
+                    <h4 class="card-title">ÏÑ±ÏÇ∞ ÏùºÏ∂úÎ¥â</h4>
+                    <span class="separator">|</span>
+                    <h5 class="card-area">Ï†úÏ£º</h5>
                   </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">¿€º∫¿Œ</p>
-                    <p class="card-text text-content">
-                      <a href="">
-                        ±Ë¬Ø±∏
-                      </a>
-                    </p>
-                  </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">ø©«‡ ¿œ¡§</p>
-                    <p class="card-text text-content">7π⁄ 8¿œ</p>
+                  <p class="card-text">ÏïÑÎ¶ÑÎã§Ïõ†Ïñ¥Ïöî</p>
+                  <p class="card-text"><small class="text-muted">2022-09-25</small></p>
+                  <div class="card-btns">
+                    <button type="button" class="btn btn-warning" onclick="location.href=''">ÏàòÏ†ï</button>
+                    <button type="button" class="btn btn-secondary">ÏÇ≠Ï†ú</button>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="card mb-3 likeCard" style="max-width: 800px;">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src="${ path }/images/trip/busan.jpg" class="img-fluid rounded-start imgSize" alt="...">
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
-                  <div class="info-container-top">
-                    <div class="card-title title mt-3">
-                      <h5>ø©«‡¡ˆ</h5>
-                    </div>
-                    <div class="card-title text-content mt-3">
-                      <h5>∫ŒªÍ</h5>
-                    </div>
-                  </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">¿€º∫¿Œ</p>
-                    <p class="card-text text-content">
-                      <a href="">
-                        ±Ë¿œΩ…
-                      </a>
-                    </p>
-                  </div>
-                  <div class="info-container-top">
-                    <p class="card-text title">ø©«‡ ¿œ¡§</p>
-                    <p class="card-text text-content">4π⁄ 5¿œ</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+            </a>
+
+        <!-- ÎçîÎ≥¥Í∏∞ -->
         <div class="wrap-downChevron">
-          <abbr title="¥ı∫∏±‚">
-	          <img class="down-chevron" src="${ path }/images/mypage/down-chevron.png">
+          <abbr title="ÎçîÎ≥¥Í∏∞">
+            <img class="down-chevron" src="${ path }/images/mypage/down-chevron.png">
           </abbr>
         </div>
       </div>
 
-      <!-- ∫Òπ–π¯»£ »Æ¿Œ ∏¥ﬁ -->
+      <!-- ÎπÑÎ∞ÄÎ≤àÌò∏ ÌôïÏù∏ Î™®Îã¨ -->
       <div class="modal fade" id="changeUserInfo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">∫Òπ–π¯»£ ¿Á»Æ¿Œ</h5>
+              <h5 class="modal-title" id="exampleModalLabel">ÎπÑÎ∞ÄÎ≤àÌò∏ Ïû¨ÌôïÏù∏</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <input type="text" class="inputPwd" placeholder="∫Òπ–π¯»£ ¿‘∑¬">
+              <input type="text" class="inputPwd" placeholder="ÎπÑÎ∞ÄÎ≤àÌò∏ ÏûÖÎ†•">
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Ï∑®ÏÜå</button>
               <button type="button" class="btn btn-outline-warning"
-                onclick="location.href='UpdateForm.html'">»Æ¿Œ</button>
+                onclick="location.href='UpdateForm.html'">ÌôïÏù∏</button>
             </div>
           </div>
         </div>

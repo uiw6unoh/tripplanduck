@@ -25,7 +25,57 @@
       <div>
         <img class="img-thumbnail" src="${ path }/images/trip/제주.png">
       </div>
-      <p class="font" style="font-family: 'Satisfy'" font-weight;>Jeju Island</p>
+      <c:if test="${location.locationId eq '1' }">
+        <p class="font" style="font-family: 'Satisfy'">Seoul</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '2' }">
+        <p class="font" style="font-family: 'Satisfy'">Incheon</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '3' }">
+        <p class="font" style="font-family: 'Satisfy'" >Daejeon</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '4' }">
+        <p class="font" style="font-family: 'Satisfy'" >Daegu</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '5' }">
+        <p class="font" style="font-family: 'Satisfy'" >Gwangju</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '6' }">
+        <p class="font" style="font-family: 'Satisfy'" >Busan</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '7' }">
+        <p class="font" style="font-family: 'Satisfy'" >Ulsan</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '8' }">
+        <p class="font" style="font-family: 'Satisfy'" >Sejong-si</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '31' }">
+        <p class="font" style="font-family: 'Satisfy'" >Gyeonggi-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '32' }">
+        <p class="font" style="font-family: 'Satisfy'" >Gangwon-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '33' }">
+        <p class="font" style="font-family: 'Satisfy'" >Chungcheongbuk-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '34' }">
+        <p class="font" style="font-family: 'Satisfy'" >Chungcheongnam-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '35' }">
+        <p class="font" style="font-family: 'Satisfy'" >Gyeongsangbuk-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '36' }">
+        <p class="font" style="font-family: 'Satisfy'" >Gyeongsangnam-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '37' }">
+        <p class="font" style="font-family: 'Satisfy'" >Jeollabuk-do</p>
+  	  </c:if>
+      <c:if test="${location.locationId eq '38' }">
+        <p class="font" style="font-family: 'Satisfy'" >Jeollanam-do</p>
+  	  </c:if>
+  	  <c:if test="${location.locationId eq '39' }">
+        <p class="font" style="font-family: 'Satisfy'" >Jeju Island</p>
+  	  </c:if>
     </div>
   
       <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">인기명소</p>

@@ -89,6 +89,6 @@
 <script>
 	$(document).ready(function () {
 		videoNum = Math.floor(18 * Math.random()) + 1;
-		$("#mainVideo").append('<source src="${ path }/images/common/movie/main'.concat(videoNum, '.mp4" type="video/mp4" />'));
+		$("#mainVideo").append('<source src="${ path }/resources/images/common/movie/main'.concat(videoNum, '.mp4" type="video/mp4" />'));
 	});
 </script>
