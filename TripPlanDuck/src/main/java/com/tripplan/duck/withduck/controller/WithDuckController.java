@@ -2,6 +2,8 @@ package com.tripplan.duck.withduck.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -48,6 +50,15 @@ public class WithDuckController {
 		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
 		list = service.getWithDuckList(pageInfo);
 		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = list.get(i).getWithRenameFileName().split(", ");
+			list.get(i).setReList(Arrays.asList(arr));
+			System.out.println(list.get(i) + "\n");
+		}
+		
 		System.out.println(pageInfo +" " + list);
 		
 		model.addObject("sort_name", sort_name);
@@ -82,6 +93,15 @@ public class WithDuckController {
 		
 		pageInfo = new PageInfo(page, 8, service.getWithDuckFilterCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
 		listFilter = service.withDuckFilter(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		
+		for(int i = 0; i < listFilter.size(); i++) {
+			if(listFilter.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = listFilter.get(i).getWithRenameFileName().split(", ");
+			listFilter.get(i).setReList(Arrays.asList(arr));
+			System.out.println(listFilter.get(i) + "\n");
+		}
 		
 		System.out.println(listFilter);
 		
@@ -129,6 +149,15 @@ public class WithDuckController {
 		pageInfo = new PageInfo(page, 8, service.getWithDuckFilterCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
 		listFilter = service.withDuckReadcountSort(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
 		
+		for(int i = 0; i < listFilter.size(); i++) {
+			if(listFilter.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = listFilter.get(i).getWithRenameFileName().split(", ");
+			listFilter.get(i).setReList(Arrays.asList(arr));
+			System.out.println(listFilter.get(i) + "\n");
+		}
+		
 		System.out.println(listFilter);
 		
 		filter_val.add(location_val);
@@ -158,6 +187,15 @@ public class WithDuckController {
 		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
 		list = service.getWithDuckListReadCount(pageInfo);
 		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = list.get(i).getWithRenameFileName().split(", ");
+			list.get(i).setReList(Arrays.asList(arr));
+			System.out.println(list.get(i) + "\n");
+		}
+		
 		System.out.println(pageInfo +" " + list);
 		
 		model.addObject("sort_name", sort_name);
@@ -180,6 +218,14 @@ public class WithDuckController {
 		
 		System.out.println(pageInfo +" " + list);
 		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = list.get(i).getWithRenameFileName().split(", ");
+			list.get(i).setReList(Arrays.asList(arr));
+			System.out.println(list.get(i) + "\n");
+		}
 		
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
@@ -212,6 +258,15 @@ public class WithDuckController {
 		
 		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
 		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		
+		for(int i = 0; i < listFilter.size(); i++) {
+			if(listFilter.get(i).getWithOriginFileName() == null) continue;
+			String[] arr = new String[3];
+			
+			arr = listFilter.get(i).getWithRenameFileName().split(", ");
+			listFilter.get(i).setReList(Arrays.asList(arr));
+			System.out.println(listFilter.get(i) + "\n");
+		}
 		
 		System.out.println(listFilter);
 		
@@ -257,32 +312,44 @@ public class WithDuckController {
 									   @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
 		
-		System.out.println(withDuck + "\n" + file1.getOriginalFilename() + "\n" + file2.getOriginalFilename() + " ");
-		
 		
 		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
-		if((file1 != null && !file1.isEmpty()) || (file2 != null && !file2.isEmpty()) || (file3 != null && !file3.isEmpty()) ) {
 			// 파일을 저장하는 로직 작성
 			String location = null;
-			String renamedFileName1 = null;
-			String renamedFileName2 = null;
-			String renamedFileName3 = null;
+			String renamedFileName = "";
+			List<MultipartFile> list = new ArrayList<MultipartFile>();
 			
+			list.add(file1);
+			list.add(file2);
+			list.add(file3);
+			
+			System.out.println("시작전 list : " + list);
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				if(list.get(i).isEmpty()) {
+					list.remove(list.get(i));
+					i=-1;
+					System.out.println(list + " " + i);
+				}
+			}
+			
+			System.out.println("list : " + list);
+			if(list.size()!=0) {
 			try {
 				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
-				renamedFileName1 = MultipartFileUtil.save(file1, location);
-				renamedFileName2 = MultipartFileUtil.save(file2, location);
-				renamedFileName3 = MultipartFileUtil.save(file3, location);
+				for(int i = 0; i < list.size(); i++) {
+					renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			if(renamedFileName1 != null || renamedFileName1 != null || renamedFileName1 != null) {
-				withDuck.setWithOriginFileName(file1.getOriginalFilename() + ", " + file2.getOriginalFilename() + ", " + file3.getOriginalFilename());
-				withDuck.setWithRenameFileName(renamedFileName1 + ", " + renamedFileName2 + ", " + renamedFileName3);
+				
+				for(int i = 0; i < list.size(); i++) {
+					withDuck.setWithOriginFileName(list.get(i).getOriginalFilename() + ", ");
+					withDuck.setWithRenameFileName(renamedFileName);
+				}
 			}
-			
-		}
 		
 		System.out.println(loginMember.getMemberNickname());
 		
@@ -293,13 +360,13 @@ public class WithDuckController {
 		
 		if(result > 0) {
 			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
-			model.addObject("location", "/main");
+			model.addObject("location", "/withduck/list");
 		} else {
 			model.addObject("msg", "게시글 등록을 실패하였습니다.");
-			model.addObject("location", "/main");
+			model.addObject("location", "/withduck/create");
 		}
 		
-		model.setViewName("/main");
+		model.setViewName("member/msg");
 		
 		return model;
 	}

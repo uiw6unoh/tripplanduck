@@ -1,6 +1,7 @@
 package com.tripplan.duck.withduck.model.vo;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -49,4 +50,8 @@ public class WithDuck {
 	private String createDate;
 	
 	private String updateDate;
+	
+	private List<String> oriList;
+	
+	private List<String> reList;
 }

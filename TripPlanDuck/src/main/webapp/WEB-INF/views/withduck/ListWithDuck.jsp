@@ -179,7 +179,7 @@
                 <div class="col">
                     <div class="p-3 border bg-light">
                         <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/${withDuck.withOriginFileName}" alt="">
+                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
                         </a>
                         <p class="title">안녕하세요</p>
                         <p>안녕하세요</p>
@@ -196,7 +196,12 @@
                 <div class="col">
                     <div class="p-3 border bg-light">
                         <a href="">
-                            <img class="intro-img" src="${path}/resources/images/WithDuck/${withDuck.withOriginFileName}" alt="">
+                        	<c:if test="${empty withDuck.reList[0]}">
+                           		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+                        	</c:if>
+							<c:if test="${not empty withDuck.reList[0]}">
+                            	<img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+							</c:if>
                         </a>
                         <p class="title">안녕하세요</p>
                         <p>안녕하세요</p>
