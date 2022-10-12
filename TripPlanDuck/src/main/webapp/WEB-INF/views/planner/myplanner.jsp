@@ -115,8 +115,8 @@
 					<button type="button" id="lookCourseBtn" class="btn btn-md" >경로 보기</button>
 				</div>
 					<div class="left-box2">
-						 <div  id="divCopy" style="height: 25%; overflow: auto;" >
-								<div class="card mb-3"
+						 <div class="divCopy">
+								<div class="card mb-3 loca1_" 
 									style="width: 300px; border: none;">
 									<div class="row no-gutters">
 										<div class="col-md-4">
@@ -127,7 +127,6 @@
 										</div>
 									</div>
 									<div class="addDesti">
-									
 									</div>
 								</div>
 						</div>
@@ -140,6 +139,7 @@
 				</div>
 				<div class="right-box">
 					<div class="courseZero_margin90"></div>
+
 					<div id="right-box1">
 
 						<!-- 검색창을 삭제할까...흠 
@@ -148,10 +148,11 @@
 							<i class="fas fa-search">검색</i>
 						</button>
 						-->
-						<div style="height: 30%; overflow: auto" >
+						
+						<div style="height: 30%; overflow: auto" class="divOriginal">
 							<c:forEach items="${ destination }" var="destination"
 								varStatus="status">
-								<div id="divOriginal_${ destination.destNo }" class="card mb-3 loca_${ destination.locationId }"
+								<div class="card mb-3 loca_${ destination.locationId }"
 									style="width: 300px;">
 									<div class="row no-gutters">
 										<div class="col-md-4">
@@ -166,7 +167,7 @@
 										</div>
 									</div>
 									<div class="addDesti">
-										<a id="checkButton"class="material-icons" >check</a>
+										<a class="material-icons" id="original_${ destination.destNo }">check</a>
 											<input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
 											<input type="hidden" id="destMapY" name="destMapY" value="${ destination.destMapY }" /> 
 											<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }">
@@ -195,13 +196,13 @@ $(document).ready(function(){
 
 	var data = new Array();
 	
-	$("[class^=addDesti]").on("click", function(event) {
+	
+	$(".addDesti").on("click", function(event) {
 
 		let destMapX = $(this).children('#destMapX').val().trim();
 		let destMapY = $(this).children('#destMapY').val().trim();
 		let destSubject = $(this).children('#destSubject').val();
 		let destNo = $(this).children('#destNo').val().trim();
-		// 마커 찍기
 		addMarker(new kakao.maps.LatLng(destMapX, destMapY));
 		
 		console.log(destMapX);
@@ -211,6 +212,9 @@ $(document).ready(function(){
 		 
 		 data.push(destSubject);
 		 $("#place").val(data);
+		
+
+		 
 
 		 
 /*
@@ -235,15 +239,15 @@ $(document).ready(function(){
 		 }
 		 });
 */	
-	$('#divOriginal_'+destNo).clone().appendTo('#divCopy');
-	$("a").replaceWith("<a >check</a>");
-	
+	$('.divOriginal').clone().appendTo('.divCopy');
 	});
 });
 
 
  
 const lookCourseBtn = document.getElementById('lookCourseBtn');
+
+
 
 lookCourseBtn.addEventListener('click', event =>{
 	
