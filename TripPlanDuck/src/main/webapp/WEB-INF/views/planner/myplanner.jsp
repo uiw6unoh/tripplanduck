@@ -45,6 +45,11 @@
 	padding: 0.75rem 1.25rem;
 	background-color: #fff;
 }
+
+.destImage{
+	max-width:100px;
+    max-height:100px;
+}
 </style>
 <section>
 
@@ -92,7 +97,8 @@
 						 	<option value="39">제주도</option>
 						 </select>
 						  -->
-						</div>
+
+
 						<div class="list-group-item list-group-item-primary"
 							style="background-color: white;">여행 기간</div>
 						<div class="list-group-item list-group-item-secondary"
@@ -104,18 +110,38 @@
 						<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
 						<input type="submit" name="location" class="col-5 btn btn-success" value="완 성">
 						<button type="button" id ="delete" class="col-5 btn btn-danger">초기화</button>
+						
 					</div>
+					<button type="button" id="lookCourseBtn" class="btn btn-md" >경로 보기</button>
 				</div>
-
+					<div class="left-box2">
+						 <div class="divCopy">
+								<div class="card mb-3 loca1_" 
+									style="width: 300px; border: none;">
+									<div class="row no-gutters">
+										<div class="col-md-4">
+										</div>
+										<div class="col-md-8">
+											<div class="card-body ">
+											</div>
+										</div>
+									</div>
+									<div class="addDesti">
+									</div>
+								</div>
+						</div>
+						  </div>
+						</div>
 				<div class="col-8">
-					<div id="map" style="width: 100%; height: 100vh;"></div>
-					<p id="result"></p>
+					<div id="map" style="width: 100%; height: 100vh;">
+					</div>
 				<script type="text/javascript" src="${ path }/resources/js/planner/mapcreate.js"></script>
 				</div>
 				<div class="right-box">
 					<div class="courseZero_margin90"></div>
 
 					<div id="right-box1">
+
 						<!-- 검색창을 삭제할까...흠 
 						<input id="searchBox" type="text" placeholder="검색어를 입력해주세요">
 						<button id="magBtn">
@@ -123,39 +149,31 @@
 						</button>
 						-->
 						
-						<div style="height: 35%; overflow: auto">
+						<div style="height: 30%; overflow: auto" class="divOriginal">
 							<c:forEach items="${ destination }" var="destination"
 								varStatus="status">
 								<div class="card mb-3 loca_${ destination.locationId }"
-									style="max-width: 400px;">
+									style="width: 300px;">
 									<div class="row no-gutters">
 										<div class="col-md-4">
-											<img
-												src="${ destination.destImage }"
-												alt="...">
+											<img class="destImage"
+												src="${ destination.destImage }">
 										</div>
 										<div class="col-md-8">
 											<div class="card-body">
 												<h5 class="card-title" id="subject">>${ destination.destSubject }</h5>
 												<p class="card-text">${ destination.destContent }</p>
-
 											</div>
 										</div>
 									</div>
 									<div class="addDesti">
-										<a class="material-icons">check</a>
-										 <input type="hidden"
-											id="destMapX" name="destMapX"
-											value="${ destination.destMapX }" /> 
-											<input type="hidden"
-											id="destMapY" name="destMapY"
-											value="${ destination.destMapY }" /> 
-											<input type="text"
-											id="destSubject" name="destSubject"
-											value="${ destination.destSubject }" />
-											 <input type="text"
-											id="destNo" name="destination2"
-											value="${ destination.destNo }" />
+										<a class="material-icons" id="original_${ destination.destNo }">check</a>
+											<input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
+											<input type="hidden" id="destMapY" name="destMapY" value="${ destination.destMapY }" /> 
+											<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }">
+											<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" />
+											<input type="hidden" id="destNo" name="destNo" value="${ destination.destNo }" />
+										 	<input type="hidden" id="destContent" name="destContent" value="${ destination.destContent }" />
 									</div>
 								</div>
 							</c:forEach>
@@ -163,7 +181,6 @@
 					</div>
 					
 					<input type="text" name="place" id="place">
-					<input type="hidden" id="card-plus-btn">
 				</div>
 			</div>
 		</div>
@@ -173,18 +190,34 @@
 
 <script>
 
-	$("[class^='addDesti']").on("click", function(event) {
+
+
+$(document).ready(function(){
+
+	var data = new Array();
+	
+	
+	$(".addDesti").on("click", function(event) {
 
 		let destMapX = $(this).children('#destMapX').val().trim();
 		let destMapY = $(this).children('#destMapY').val().trim();
-		let destSubject = $(this).children('#destSubject').val().trim();
+		let destSubject = $(this).children('#destSubject').val();
 		let destNo = $(this).children('#destNo').val().trim();
-		
 		addMarker(new kakao.maps.LatLng(destMapX, destMapY));
-		$("#place").val(markers);
-		console.log(markers);
 		
+		console.log(destMapX);
+		 console.log(destMapY);
+		 console.log(destSubject);
+		 console.log(destNo);
+		 
+		 data.push(destSubject);
+		 $("#place").val(data);
 		
+
+		 
+
+		 
+/*
 		 $.ajax({
 		 type: "GET",
 		 url: "${ path }/planner/addDesti",
@@ -195,21 +228,58 @@
 		 destSubject,
 		 destNo
 		 },
-
 		 success: (obj) => {
-
-
-		 console.log(destMapX);
-		 console.log(destMapY);
-		 console.log(destSubject);
-		 console.log(destNo);
-		
+			 
+		 
 		 }, 
 		 error: (error) => {
+			 
 		 console.log(error);
+		 
 		 }
 		 });
+*/	
+	$('.divOriginal').clone().appendTo('.divCopy');
 	});
+});
+
+
+ 
+const lookCourseBtn = document.getElementById('lookCourseBtn');
+
+
+
+lookCourseBtn.addEventListener('click', event =>{
+	
+for (var i = 0; i < ovarlays.length; i++){
+       ovarlays[i].setMap(null);
+	}  
+	 ovarlays = [];
+   addLine(markers);
+
+
+});
+
+function addLine(markers){
+   var linePath=[];      
+   for (i=0; i < markers.length; ++i){
+      linePath.push(markers[i].getPosition()); 
+   }   
+
+
+   // 지도에 표시할 선을 생성합니다
+   var polyline = new kakao.maps.Polyline({
+       path: linePath, // 선을 구성하는 좌표배열 입니다
+       strokeWeight: 2, // 선의 두께 입니다
+       strokeColor: 'red', // 선의 색깔입니다
+       strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+       strokeStyle: 'solid' // 선의 스타일입니다
+   });
+   lines.push(polyline);
+   // 지도에 선을 표시합니다 
+   polyline.setMap(map); 
+}
+
 
 
 </script>

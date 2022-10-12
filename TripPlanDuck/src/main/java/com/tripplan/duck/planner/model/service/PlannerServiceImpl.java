@@ -1,5 +1,6 @@
 package com.tripplan.duck.planner.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,11 +35,26 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public int plannerInsert(String demo, String locationSelect, String destMapX, String destMapY, String destSubject,
-			String destination2) {
+	public int plannerInsert(String demo, String locationSelect, String destImage, String place) {
+
 		
-		return 0;
+		System.out.println("demo"+demo);
+		System.out.println("locationSelect"+locationSelect);
+		System.out.println("destImage"+destImage);
+		System.out.println("place"+place);
+		
+		HashMap<String,String> hm = new HashMap<String,String>();
+		hm.put("demo", demo);
+		hm.put("locationSelect", locationSelect);
+		hm.put("destImage", "test.jpg");
+		hm.put("place", place);
+		
+		int value = plannerMapper.plannerInsert(hm);
+		
+		return value;
 	}
+
+	
 
 	
 

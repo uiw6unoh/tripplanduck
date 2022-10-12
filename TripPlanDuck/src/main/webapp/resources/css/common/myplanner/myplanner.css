@@ -8,7 +8,10 @@
 	background-color: #fff8c6;
 	border-color: white;
 	color: black;
+	z-index:-1;
+	position:relative;
 }
+
 .list-group-item-primary{
 	background-color: white;
 	
