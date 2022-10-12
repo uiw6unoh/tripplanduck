@@ -1,19 +1,12 @@
 package com.tripplan.duck.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,18 +32,18 @@ public class MemberController {
     }
     
     
-    @GetMapping("/common/privacy")
+    @GetMapping("/member/privacy")
     public String privacy() {
         log.info("개인정보수집 페이지 요청");
 
-        return "common/privacy"; 
+        return "member/privacy"; 
     }
 
-    @GetMapping("/common/termconditions")
+    @GetMapping("/member/termconditions")
     public String termconditions() {
         log.info("이용약관 페이지 요청");
 
-        return "common/termconditions"; 
+        return "member/termconditions"; 
     }
 
     
@@ -170,26 +163,6 @@ public class MemberController {
     	
     	return model;
     }
-    
-	@GetMapping("/jsonTest")
-	@ResponseBody
-	public Object jsonTest() {
-		Map<String, Object> map	= new HashMap<>();
-		
-		map.put("test1", null);
-		map.put("test2", "hi");
-		map.put("test3", 10);
-		map.put("test4", false);
-
-		
-		return map;
-	}
-	
-//	@PostMapping("/member/idCheck")
-//	public String idCheck() {
-//		
-//		return "member/signup";
-//	}
 	
 	
 	
