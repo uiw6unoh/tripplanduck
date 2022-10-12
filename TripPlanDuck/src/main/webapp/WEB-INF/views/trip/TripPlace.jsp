@@ -79,10 +79,10 @@
     </div>
   
       <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">인기명소</p>
-      <div class="owl-carousel owl-theme mb-2">
+      <div class="owl-carousel owl-theme">
       	<c:forEach var="i" begin="0" end="10">
-			<div class="item">
-	          <a href="${path}/trip/detail?destNo=${destinations[i].destNo}"><img src="${destinations[i].destImage eq null ? '/duck/images/trip/busan.jpg' : destinations[i].destImage}" alt="Image 1"></a>
+			<div class="item" style="position:relative;">
+	          <a href="${path}/trip/detail?destNo=${destinations[i].destNo}"><img src="${destinations[i].destImage eq null ? '/duck/images/trip/noImage.jpeg' : destinations[i].destImage}" alt="Image 1"></a>
 	          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 	            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 	          </svg> ${destinations[i].destLikeSum}</span></div>
@@ -95,11 +95,11 @@
       </div>
       <div class="tour-title">
 	      <p class="mt-3 mb-1 font-weight-bold " style="font-size: 1.1rem; color:dimgrey">관광지</p>
-	      <div class="owl-carousel owl-theme mb-2">
+	      <div class="owl-carousel owl-theme">
 	      	<c:forEach var="dest"  items="${destinations}">
 	      		<c:if test="${dest.destSummary eq '관광지'}">
-					<div class="item tour-item">
-			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+					<div class="item tour-item" style="position:relative;">
+			          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 			          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 			            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 			          </svg> ${dest.destLikeSum}</span></div>
@@ -115,11 +115,11 @@
 	
 	  <div class="reports-title">
 	      <p class="mt-3 mb-1 font-weight-bold " style="font-size: 1.1rem; color:dimgrey">레포츠</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '레포츠'}">
-						<div class="item reports-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item reports-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -135,11 +135,11 @@
       
       <div class="culture-title">
 	      <p class="mt-3 mb-1 font-weight-bold " style="font-size: 1.1rem; color:dimgrey">문화시설</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '문화시설'}">
-						<div class="item culture-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item culture-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -155,11 +155,11 @@
       
       <div class="shopping-title">
 	      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">쇼핑</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '쇼핑'}">
-						<div class="item shopping-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item shopping-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -175,11 +175,11 @@
       
       <div class="hotel-title">
 	      <p class="mt-3 mb-1 font-weight-bold " style="font-size: 1.1rem; color:dimgrey">숙박</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '숙박'}">
-						<div class="item hotel-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item hotel-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -195,11 +195,11 @@
       
       <div class="travle-title">
 	      <p class="mt-3 mb-1 font-weight-bold" style="font-size: 1.1rem; color:dimgrey">여행코스</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '여행코스'}">
-						<div class="item travle-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item travle-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -212,14 +212,14 @@
 			  </c:forEach>
 	      </div>
       </div>
-      
+   
       <div class="food-title">
 	      <p class="mt-3 mb-1 font-weight-bold " style="font-size: 1.1rem; color:dimgrey">음식</p>
-	      <div class="owl-carousel owl-theme mb-5">
+	      <div class="owl-carousel owl-theme mb-3">
 		      <c:forEach var="dest"  items="${destinations}">
 		      		<c:if test="${dest.destSummary eq '음식'}">
-						<div class="item food-item">
-				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="Image 1"></a>
+						<div class="item food-item" style="position:relative;">
+				          <a href="${path}/trip/detail?destNo=${dest.destNo}"><img src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="Image 1"></a>
 				          <div class="starTrip"><span><svg xmlns="http://www.w3.org/2000/svg" class="mb-1" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
 				            <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
 				          </svg> ${dest.destLikeSum}</span></div>
@@ -254,13 +254,13 @@ $('.owl-carousel').owlCarousel({
     nav:true,
     responsive:{
         0:{
-            items:1
+            items:0
         },
         600:{
-            items:3
+            items:5
         },
-        1000:{
-            items:5.6
+        1200:{
+            items:6.6
         }
     }
 })

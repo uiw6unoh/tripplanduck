@@ -139,12 +139,22 @@
     <p class="lead text-muted text-center small" style="font-size: 1rem;">
       RECOMMENDED DESTINATIONS
     </p>
-    <div class="dropdown d-flex justify-content-end">
+    <div class="dropdown d-flex justify-content-end" id="dropdown">
+      <c:if test="${ empty sort_name }">
       <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-        선택  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+        추천순 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
           <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
         </svg>
       </button>
+      </c:if>
+      <c:if test="${ not empty sort_name }">
+      <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+        ${sort_name} <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+          <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+        </svg>
+      </button>
+      </c:if>
+
       <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
 		<li>
 		  <a
@@ -304,7 +314,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <img src="${ path }/images/trip/경기.jpeg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	            <img src="${ path }/images/trip/경기.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
 		         <h5 class="card-title mb-1">GYEONGGI</h5>
@@ -319,7 +329,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <img src="${ path }/images/trip/gangneung.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	            <img src="${ path }/images/trip/강원.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
 		         <h5 class="card-title mb-1">GANGWON</h5>
@@ -364,7 +374,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <img src="${ path }/images/trip/gyeongju.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	            <img src="${ path }/images/trip/경북.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
 		         <h5 class="card-title mb-1">GYEONGBUK</h5>
@@ -379,7 +389,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <img src="${ path }/images/trip/geojetongyeong.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	            <img src="${ path }/images/trip/경남.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
 		         <h5 class="card-title mb-1">GYEONGNAM</h5>
@@ -394,7 +404,7 @@
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
 	          <div style="overflow: hidden;">
-	            <img src="${ path }/images/trip/namwon.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
+	            <img src="${ path }/images/trip/전북.jpg" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
 		         <h5 class="card-title mb-1">JEONBUK</h5>
@@ -436,6 +446,15 @@
 	  </c:if>
     </c:forEach>
     </div>
+
+	<div class="list"></div>
+	<p id="sentinel"></p>
+	
+	<div class="loading">
+	  <div class="ldio-76qwp4fy1ic"><div></div>
+	  </div>
+	</div>
+
   </div>
 </div>
 
@@ -452,4 +471,8 @@
 function changeSort(sort){
 	window.location.href = "${path}" + "/trip/main?sort=" + sort;
 }
+
+$(document).ready(function(){
+
+})
 </script>
