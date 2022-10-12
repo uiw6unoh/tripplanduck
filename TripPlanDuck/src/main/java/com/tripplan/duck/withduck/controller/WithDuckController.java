@@ -319,6 +319,8 @@ public class WithDuckController {
 			String renamedFileName = "";
 			List<MultipartFile> list = new ArrayList<MultipartFile>();
 			
+			System.out.println(list);
+			
 			list.add(file1);
 			list.add(file2);
 			list.add(file3);
@@ -391,6 +393,42 @@ public class WithDuckController {
 		
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
+		return model;
+	}
+	
+	/////////////////////////////////////////////////위드덕 수정 //////////////////////////////////////////////////////////////////
+	
+	@GetMapping("/update")
+	public ModelAndView updateWithDuck(ModelAndView model,
+									   @ModelAttribute WithDuck withDuck,
+									   @RequestParam(value = "file1", required = false) String file1,
+									   @RequestParam(value = "file2", required = false) String file2,
+									   @RequestParam(value = "file3", required = false) String file3) {
+		int result = 0;
+		
+		String location = null;
+		String renamedFileName = "";
+		List<String> list = new ArrayList<String>();
+		System.out.println(withDuck);
+		list.add(file1);
+		list.add(file2);
+		list.add(file3);
+		
+		System.out.println("시작전 list : " + list);
+		
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).isEmpty()) {
+				list.remove(list.get(i));
+				i=-1;
+				System.out.println(list + " " + i);
+			}
+		}
+
+		model.addObject("photoList", list);
+		model.addObject("withDuck", withDuck);
+		model.setViewName("withduck/UpdateWithDuck");
+		
 		return model;
 	}
 }

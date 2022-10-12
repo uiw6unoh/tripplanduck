@@ -38,5 +38,8 @@ public interface WithDuckMapper {
 
 	WithDuck detailWithDuck(int withNo);
 
+	int updateWithDuck(int withNo);
+
+
 
 }
