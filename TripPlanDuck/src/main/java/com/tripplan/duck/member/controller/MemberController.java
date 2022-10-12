@@ -1,21 +1,12 @@
 package com.tripplan.duck.member.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,13 +30,6 @@ public class MemberController {
 
         return "member/login"; 
     }
-
-    @GetMapping("/member/signup")
-    public String signuppage() {
-        log.info("회원가입 페이지 요청");
-
-        return "member/signup"; 
-    }
     
     
     @GetMapping("/member/privacy")
@@ -62,8 +46,6 @@ public class MemberController {
         return "member/termconditions"; 
     }
 
-
-    
     
     @Autowired // 빈으로 만들어서 주입
     private MemberService service;
@@ -154,7 +136,35 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+    @GetMapping("/member/signup")
+    public String signuppage() {
+        log.info("회원가입 페이지 요청");
 
+        return "member/signup"; 
+    }
+    
+    @PostMapping("/member/signup")
+    public ModelAndView signup(ModelAndView model, @ModelAttribute Member member) {
+    	log.info(member.toString());
+    	
+    	int result = 0;
+    	
+    	result = service.save(member);
+    	
+    	if(result > 0) {
+    		model.addObject("msg", "회원가입이 정상적으로 완료되었습니다.");
+    		model.addObject("location", "/");
+    	} else {
+    		model.addObject("msg", "회원가입을 실패하였습니다.");
+    		model.addObject("location", "/member/signup");
+    	}
+    	
+    	model.setViewName("member/msg");
+    	
+    	return model;
+    }
+	
+	
 	
 	
 }
