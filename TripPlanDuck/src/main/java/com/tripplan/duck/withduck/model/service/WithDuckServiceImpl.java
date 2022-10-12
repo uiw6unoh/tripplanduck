@@ -1,11 +1,11 @@
 package com.tripplan.duck.withduck.model.service;
 
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.withduck.model.mapper.WithDuckMapper;
@@ -120,6 +120,19 @@ public class WithDuckServiceImpl implements WithDuckService {
 		
 		return mapper.withDuckJoinFilter(rowBounds, location_val, gender_val, age_val, start_val, end_val, personnel_val);
 	}
+
+	//////////////////////////////////////////////////////////////위드덕 생성 ///////////////////////////////////////////////////
+	
+	@Override
+	@Transactional
+	public int createWithDuck(WithDuck withDuck) {
+		int result = 0;
+		
+		result = mapper.createWithDuck(withDuck);
+		
+		return result;
+	}
+
 
 	
 	
