@@ -24,8 +24,8 @@
     <!-- WithDuck CSS-->
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/WithDuckDetail.css">
 </head>
-<body class="stretched">
-                	<h2>${reList}</h2>
+<body class="stretched" >
+<form action="${path}/withduck/update" method="get">
     <section class="zone1">
         <div class="carousel_container">
             <div id="demo" class="carousel slide pointer-event" data-ride="carousel">
@@ -40,17 +40,20 @@
                 <div class="carousel-inner">
 	                <div class="carousel-item active">
 		                <c:if test="${not empty withDuck.reList[0] && withDuck.reList[0] != null}">
-	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="Los Angeles">
+	                    <input name="file1" type="hidden" value="${withDuck.reList[0] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}">
         		        </c:if>
 	                </div>
 	                <div class="carousel-item">
 		                <c:if test="${not empty withDuck.reList[1] && withDuck.reList[1] != null}">
-	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[1]}" alt="Los Angeles">
+	                    <input name="file2" type="hidden" value="${withDuck.reList[1] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[1]}">
 		                </c:if>
 	                </div>
 	                <div class="carousel-item">
 		                <c:if test="${not empty withDuck.reList[2] && withDuck.reList[2] != null}">
-	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[2]}" alt="Los Angeles">
+	                    <input name="file3" type="hidden" value="${withDuck.reList[2] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[2]}">
 		                </c:if>              
 	                </div>
                 </div>
@@ -71,6 +74,7 @@
         <div class="content_container" style="width: 1000px; margin: auto;">
             <!-- 제목 -->
             <div style="margin: 60px; text-align: center;">
+            	<input name="withTitle" type="hidden" value="${withDuck.withTitle }">
                 <h5>${withDuck.withTitle }</h5>
                 <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
                   <label for="switch1" class="label__on-off">
@@ -82,15 +86,20 @@
             <!-- 지역, 모집 인원 ,희망 성별, 요일 -->
             <div class="filter">
                 <div>지역 
+					<input type="hidden" value="${withDuck.withLocation }" name ="withLocation">
                     <span>${withDuck.withLocation }</span>
                 </div>
                 <div>모집 인원
+					<input type="hidden" value="${withDuck.withPersonner }" name ="withPersonnel">
                     <span>${withDuck.withPersonner }명</span>
                 </div>
                 <div>희망 성별
+					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
                     <span>${withDuck.withGender }</span>
                 </div>
                 <div>여행 일정
+					<input type="hidden" value="${withDuck.withStartDate }" name ="withStartDate">
+					<input type="hidden" value="${withDuck.withEndDate }" name ="withEndDate">
                     <span>${withDuck.withStartDate }</span> ~ <span>${withDuck.withEndDate }</span>
                 </div>
             </div>
@@ -100,6 +109,7 @@
                     <img src="${path}/resources/images/Common/프사.png">
                 </div>
                 <div class="profile-name" style="float: left;">
+                	<input type="hidden" value="${withDuck.withWriterNick }" name="withWriterNick">
                     <span style="font-size: 10px;">${withDuck.withWriterNick }</span>
                 </div>
                 <br>
@@ -110,6 +120,7 @@
             </div>
             <!-- 내용 -->
             <div style="margin-top: 20px; border: 3px solid #a7a2a28f; height: 400px; padding: 16px;">
+                <input type="hidden" value="${withDuck.withContent}">
                 <div>
                     ${withDuck.withContent }
                 </div>
@@ -128,18 +139,10 @@
             </div>
         </div>
     </section>
-<!-- <div style="text-align: center; margin: 50px;">
-    <button id="join">
-        동행참여
-    </button>
-    <button id="join">
-        목록으로
-    </button>
-    <button id="join">
-        수정하기
-    </button>
-</div> -->
-
+<input type="hidden" value="${withDuck.withWriterNo }" name="withWriterNo">
+<input type="hidden" value="${withDuck.withAge }" name="withAge">
+<input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
+<input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
     <button class="btn btn-outline-warning" type="button">
         동행참여
@@ -149,10 +152,11 @@
         목록으로
     </button>
 
-    <button class="btn btn-outline-warning" type="button">
+    <button class="btn btn-outline-warning" type="submit">
         수정하기
     </button>
 </div>
+</form>
 
 <!-- Bootstrap JS -->
     <!-- Bootstrap JS -->
