@@ -318,7 +318,7 @@ public class WithDuckController {
 			String location = null;
 			String renamedFileName = "";
 			List<MultipartFile> list = new ArrayList<MultipartFile>();
-			System.out.println("날짜확인 : " + withDuck.getWithStartDate());
+			System.out.println("생성 날짜확인 : " + withDuck.getWithStartDate());
 			System.out.println(list);
 			
 			list.add(file1);
@@ -381,12 +381,25 @@ public class WithDuckController {
 		String[] arr = null;
 		
 		withDuck = service.detailWithDuck(withNo);
+		System.out.println("위드덕 위드 넘버로 조회 : " + withDuck);
+		System.out.println("디테일 날짜확인 : " + withDuck.getWithStartDate());
 		
-		arr = withDuck.getWithRenameFileName().split(", ");
+		if(withDuck.getWithRenameFileName() != null) {
+			arr = withDuck.getWithRenameFileName().split(", ");
+			List<String> list = new ArrayList<String>();
+			list = Arrays.asList(arr);
+
+			for(int i = 0; i < list.size(); i++) {
+					if(list.get(i).isEmpty()) {
+						list.remove(list.get(i));
+						i=-1;
+						System.out.println(list + " " + i);
+					}
+				}
+			
+			withDuck.setReList(list);
+		}
 		
-		withDuck.setReList(Arrays.asList(arr));
-		
-		System.out.println(withDuck.getReList());
 		
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
@@ -416,7 +429,7 @@ public class WithDuckController {
 		
 		System.out.println("시작전 list : " + list);
 		
-		
+		System.out.println("업데이트 날짜확인 : " + withDuck.getWithStartDate());
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).isEmpty()) {
 				list.remove(list.get(i));
