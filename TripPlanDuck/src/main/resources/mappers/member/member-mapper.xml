@@ -6,7 +6,6 @@
 		SELECT M_NO,
 		       M_ID,
 		       M_PW,
-		       M_NAME,
 		       M_NICKNAME,
 		       M_EMAIL,
 		       M_TYPE,
@@ -21,7 +20,6 @@
 		<id property="memberNo" column="M_NO" />
 		<result property="memberId" column="M_ID"/>
 		<result property="memberPassword" column="M_PW"/>
-		<result property="memberName" column="M_NAME"/>
 		<result property="memberNickname" column="M_NICKNAME"/>
 		<result property="memberEmail" column="M_EMAIL"/>
 		<result property="memberType" column="M_TYPE"/>
@@ -46,12 +44,11 @@
 	</select>
 
 	<insert id="insertMember" parameterType="Member"
-			useGeneratedKeys="true" keyColumn="NO" keyProperty="no">
+			useGeneratedKeys="true" keyColumn="M_NO" keyProperty="memberNo"> 
 		INSERT INTO MEMBER (
 			M_NO,
 			M_ID,
 			M_PW,
-			M_NAME,
 			M_NICKNAME,
 			M_EMAIL,
 			M_TYPE,
@@ -60,18 +57,16 @@
 			M_GENDER,
 			M_AGE
 		) VALUES(
-			SEQ_UNO.NEXTVAL,
-			#{id},
-			#{password},
-			DEFAULT,
-			#{name},
-			#{phone},
-			#{email},
-			#{address},
-			#{hobby},
+			SEQ_MEMBER_NO.NEXTVAL,
+			#{memberId},
+			#{memberPassword},
+			#{memberNickname},
+			#{memberEmail},
 			DEFAULT,
 			DEFAULT,
-			DEFAULT
+			DEFAULT,
+			#{memberGender},
+			#{memberAge}
 		)	
 	</insert>
 	
@@ -88,6 +83,6 @@
 	</update>
 	
 	<delete id="deleteMember" parameterType="_int">
-		DELETE FROM MEMBER WHERE NO = #{no}
+		DELETE FROM MEMBER WHERE NO = #{memberNO}
 	</delete>
 </mapper>

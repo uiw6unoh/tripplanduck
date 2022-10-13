@@ -15,7 +15,6 @@ public class Member {
 	
 	private String memberPassword;
 	
-	private String memberName;
 	
 	private String memberNickname;
 	
@@ -27,7 +26,7 @@ public class Member {
 	
 	private char memberStatus;
 	
-	private char memberGender;
+	private String memberGender;
 	
 	private int memberAge;
 	

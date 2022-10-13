@@ -34,5 +34,8 @@ public interface WithDuckService {
 
 	int createWithDuck(WithDuck withDuck);
 
+	WithDuck detailWithDuck(int withNo);
+
+	int updateWithDuck(int withNo);
 
 }
