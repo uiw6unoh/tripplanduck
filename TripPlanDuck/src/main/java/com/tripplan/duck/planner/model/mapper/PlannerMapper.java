@@ -1,5 +1,6 @@
 package com.tripplan.duck.planner.model.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -18,5 +19,5 @@ public interface PlannerMapper {
 
 	List<Destination> addDest();
 	
-	public int plannerInsert();
+	public int plannerInsert(HashMap<String,String> hm );
 }

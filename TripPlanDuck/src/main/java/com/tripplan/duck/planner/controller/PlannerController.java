@@ -70,16 +70,28 @@ public class PlannerController {
 		public String myplannerAction(
 				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") String locationSelect,
-				@RequestParam("place") String place
-				
+				@RequestParam("place") String place,
+				@RequestParam("destImage") String destImage
 				) {
 			
-			System.out.println("넘어오는 demo값은"+demo);	
-			System.out.println("넘어오는 locationSelect값은"+locationSelect);	
-			System.out.println("넘어는 오는  2값"+ place);
-			System.out.println("넘어오는 페이지");
+//			System.out.println("넘어오는 demo값은"+demo);	
+//			System.out.println("넘어오는 locationSelect값은"+locationSelect);	
+//			System.out.println("넘어는 오는 place값"+ place);
+//			System.out.println("넘어오는 페이지");
 			
-			return "planner/myplanner";   //일단 다시 넘기는 페이지로
+			int value = service.plannerInsert(demo, locationSelect, destImage, place);
+			
+			String path="";
+			if (value ==1) {
+				System.out.println("입력이 되었음");
+				path= "planner/myplanner";
+			}else {
+				System.out.println("입력이 안되었음");
+				path="planner/myplanner";
+			}
+			
+			
+			return path;   //일단 다시 넘기는 페이지로
 		}
 		
 		

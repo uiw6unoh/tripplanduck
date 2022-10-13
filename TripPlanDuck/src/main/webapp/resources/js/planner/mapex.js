@@ -43,7 +43,7 @@ var Gangwon = new kakao.maps.LatLng(
 var ChungcheongBuk = new kakao.maps.LatLng(
 		36.63567674729703, 127.49138343414079);
 // 34번
-var GyeongsangNam = new kakao.maps.LatLng(
+var ChungcheongNam = new kakao.maps.LatLng(
 		36.65883394285422, 126.67284926797313);
 // 35번
 var GyeongsangBuk = new kakao.maps.LatLng(

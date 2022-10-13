@@ -2,6 +2,7 @@ package com.tripplan.duck.member.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tripplan.duck.member.model.mapper.MemberMapper;
 import com.tripplan.duck.member.model.vo.Member;
@@ -31,7 +32,21 @@ public class MemberServiceImpl implements MemberService {
 			return null;
 		}
 		
-	
+	}
+		
+
+	@Override
+	public int save(Member member) {
+		int result = 0;
+		
+		if(member.getMemberNo() != 0) {
+			// update
+		} else {
+			// insert
+			result = mapper.insertMember(member);
+		}
+		
+		return result;
 	}
 
 }

@@ -32,4 +32,10 @@ public interface WithDuckService {
 	List<WithDuck> getWithDuckJoinValList(PageInfo pageInfo, String location_val, String gender_val, String age_val,
 			String start_val, String end_val, int personnel_val);
 
+	int createWithDuck(WithDuck withDuck);
+
+	WithDuck detailWithDuck(int withNo);
+
+	int updateWithDuck(int withNo);
+
 }

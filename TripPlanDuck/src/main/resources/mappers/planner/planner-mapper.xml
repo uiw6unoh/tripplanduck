@@ -65,6 +65,7 @@
 		<result property="destCreateDate" column="DEST_CREATEDATE" />
 		<result property="destUpdateDate" column="DEST_UPDATEDATE" />
 		<result property="locationId" column="LOCATION_ID" />
+		<result property="destImage" column="DEST_IMAGE"/>
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
 	
@@ -76,6 +77,12 @@
 		INSERT INTO MY_PLANNER (P_NO, P_STARTDATE,P_ENDDATE, M_NO,LOCATION_ID) VALUES
 			(SEQ_MY_PLANNER_NO, #{PSTARTDATE}, #{PENDDATE}, #{M_NO}, #{LOCATION_ID})
 	</select>
+	
+	<insert id="plannerInsert" parameterType="HashMap">
+		INSERT INTO MYCOURSE (MC_NO,M_NO,SEQS,SUBJECT,IMAGE,DEMODATE) VALUES
+			(SEQ_MY_PLANNER_NO.NEXTVAL,1,SEQ_SEQS.NEXTVAL,#{place}, #{destImage},#{demo})
+	</insert>
+	
 	
 	<select id="selectDest" resultMap="DestFindResultMap">
 	
