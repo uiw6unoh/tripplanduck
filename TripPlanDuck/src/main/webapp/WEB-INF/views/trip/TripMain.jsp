@@ -447,8 +447,6 @@
     </c:forEach>
     </div>
 
-	<div class="list"></div>
-	<p id="sentinel"></p>
 	
 	<div class="loading">
 	  <div class="ldio-76qwp4fy1ic"><div></div>
