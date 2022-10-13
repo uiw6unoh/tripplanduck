@@ -46,37 +46,38 @@
 	background-color: #fff;
 }
 
-.destImage{
-	max-width:100px;
-    max-height:100px;
+.destImage {
+	max-width: 100px;
+	max-height: 100px;
 }
 </style>
 <section>
 
-<% 
+	<% 
 //List<Location> lo = (List<Location>)request.getAttribute("location");
 //int lo_id = lo.get(0).getLocationId();
 //out.println(lo_id);
 %>
 
-<form name="frm" action="${path}/planner/myplannerAction" method="post">
+	<form name="frm" action="${path}/planner/myplannerAction" method="post">
 		<div class="container-fluid">
 			<div class="row">
 				<div class="left-box">
 					<div class="list-group">
 						<div class="list-group-item">
-							<select id="locationSelect" name="locationSelect" onchange="locationValue(this)">
-								<c:forEach items="${ location }" var="location" varStatus="status">
+							<select id="locationSelect" name="locationSelect"
+								onchange="locationValue(this)">
+								<c:forEach items="${ location }" var="location"
+									varStatus="status">
 									<option id="location" value="${ location.locationId }">
-									${ location.location }
-									</option>								
+										${ location.location }</option>
 
 								</c:forEach>
-								
-								
-								
+
+
+
 							</select>
-						 <!-- 
+							<!-- 
 						 <select>
 						 	<option value="1">서울</option>
 						 	<option value="2">인천</option>
@@ -99,91 +100,88 @@
 						  -->
 
 
-						<div class="list-group-item list-group-item-primary"
-							style="background-color: white;">여행 기간</div>
-						<div class="list-group-item list-group-item-secondary"
-							style="background-color: white;">
-							<input type="text" id="demo" name="demo" value="" />
+							<div class="list-group-item list-group-item-primary"
+								style="background-color: white;">여행 기간</div>
+							<div class="list-group-item list-group-item-secondary"
+								style="background-color: white;">
+								<input type="text" id="demo" name="demo" value="" />
+							</div>
 						</div>
+						<div class="col-12 my-3" style="text-align: center;">
+							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
+							<input type="submit" name="location"
+								class="col-5 btn btn-success" value="완 성">
+							<button type="button" id="delete" class="col-5 btn btn-danger">초기화</button>
+
+						</div>
+						<button type="button" id="lookCourseBtn" class="btn btn-md">경로
+							보기</button>
 					</div>
-					<div class="col-12 my-3" style="text-align: center;">
-						<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
-						<input type="submit" name="location" class="col-5 btn btn-success" value="완 성">
-						<button type="button" id ="delete" class="col-5 btn btn-danger">초기화</button>
-						
-					</div>
-					<button type="button" id="lookCourseBtn" class="btn btn-md" >경로 보기</button>
-				</div>
 					<div class="left-box2">
-						 <div  id="divCopy" style="height: 25%; overflow: auto;" >
-								<div class="card mb-3"
-									style="width: 300px; border: none;">
-									<div class="row no-gutters">
-										<div class="col-md-4">
-										</div>
-										<div class="col-md-8">
-											<div class="card-body ">
-											</div>
-										</div>
-									</div>
-									<div class="addDesti">
-									
-									</div>
+						<div id="divCopy" style="height: 25%; overflow: auto;">
+							<div class="row no-gutters">
+								<div id="divCopy_chil" class="col-md-4"></div>
+								<div class="col-md-8">
+									<div class="card-body "></div>
 								</div>
+							</div>
+							<div id="copyButton" onclick="deleteDiv()"></div>
 						</div>
-						  </div>
-						</div>
-				<div class="col-8">
-					<div id="map" style="width: 100%; height: 100vh;">
 					</div>
-				<script type="text/javascript" src="${ path }/resources/js/planner/mapcreate.js"></script>
+				</div>
+				<div class="col-7">
+					<div id="map" style="width: 100%; height: 100vh;"></div>
+					<script type="text/javascript"
+						src="${ path }/resources/js/planner/mapcreate.js"></script>
 				</div>
 				<div class="right-box">
 					<div class="courseZero_margin90"></div>
-					<div id="right-box1">
-
-						<!-- 검색창을 삭제할까...흠 
+					<!-- 검색창을 삭제할까...흠 
 						<input id="searchBox" type="text" placeholder="검색어를 입력해주세요">
 						<button id="magBtn">
 							<i class="fas fa-search">검색</i>
 						</button>
 						-->
-						<div style="height: 30%; overflow: auto" >
-							<c:forEach items="${ destination }" var="destination"
-								varStatus="status">
-								<div id="divOriginal_${ destination.destNo }" class="card mb-3 loca_${ destination.locationId }"
-									style="width: 300px;">
-									<div class="row no-gutters">
-										<div class="col-md-4">
-											<img class="destImage"
-												src="${ destination.destImage }">
-										</div>
-										<div class="col-md-8">
-											<div class="card-body">
-												<h5 class="card-title" id="subject">>${ destination.destSubject }</h5>
-												<p class="card-text">${ destination.destContent }</p>
-											</div>
-										</div>
+					<div style="height: 30%; overflow: auto" class="divOriginal">
+						<c:forEach items="${ destination }" var="destination"
+							varStatus="status">
+							<div id="divOriginal_${ destination.destNo }"
+								class="card mb-3 loca_${ destination.locationId }"
+								style="width: 300px;">
+								<div class="row no-gutters">
+									<div class="col-md-4">
+										<img class="destImage" src="${ destination.destImage }">
 									</div>
-									<div class="addDesti">
-										<a id="checkButton"class="material-icons" >check</a>
-											<input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
-											<input type="hidden" id="destMapY" name="destMapY" value="${ destination.destMapY }" /> 
-											<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }">
-											<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" />
-											<input type="hidden" id="destNo" name="destNo" value="${ destination.destNo }" />
-										 	<input type="hidden" id="destContent" name="destContent" value="${ destination.destContent }" />
+									<div class="col-md-8">
+										<div class="card-body">
+											<h5 class="card-title" id="subject">>${ destination.destSubject }</h5>
+											<p class="card-text">${ destination.destContent }</p>
+										</div>
 									</div>
 								</div>
-							</c:forEach>
-						</div>
+								<div class="addDesti">
+									<a id="checkButton" class="material-icons">check</a> <input
+										type="hidden" id="destMapX" name="destMapX"
+										value="${ destination.destMapX }" /> <input type="hidden"
+										id="destMapY" name="destMapY"
+										value="${ destination.destMapY }" /> <input type="hidden"
+										id="destImage" name="destImage"
+										value="${ destination.destImage }"> <input
+										type="hidden" id="destSubject" name="destSubject"
+										value="${ destination.destSubject }" /> <input type="hidden"
+										id="destNo" name="destNo" value="${ destination.destNo }" />
+									<input type="hidden" id="destContent" name="destContent"
+										value="${ destination.destContent }" />
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-					
+
 					<input type="text" name="place" id="place">
 				</div>
 			</div>
 		</div>
-</form>
+	</form>
 
 </section>
 
@@ -203,46 +201,37 @@ $(document).ready(function(){
 		let destNo = $(this).children('#destNo').val().trim();
 		// 마커 찍기
 		addMarker(new kakao.maps.LatLng(destMapX, destMapY));
-		
-		console.log(destMapX);
-		 console.log(destMapY);
-		 console.log(destSubject);
-		 console.log(destNo);
-		 
+
 		 data.push(destSubject);
 		 $("#place").val(data);
 
-		 
-/*
-		 $.ajax({
-		 type: "GET",
-		 url: "${ path }/planner/addDesti",
-		 dataType: "json",
-		 data: {
-		 destMapX,
-		 destMapY,
-		 destSubject,
-		 destNo
-		 },
-		 success: (obj) => {
-			 
-		 
-		 }, 
-		 error: (error) => {
-			 
-		 console.log(error);
-		 
-		 }
-		 });
-*/	
-	$('#divOriginal_'+destNo).clone().appendTo('#divCopy');
-	$("a").replaceWith("<a >check</a>");
+
+	$('#divOriginal_'+destNo).appendTo('#divCopy_chil');
 	
+	$('#divCopy').find('a').replaceWith('<a id="deleteButton" class="material-icons" onclick="deleteDiv()" >delete</a>');
+
 	});
 });
 
 
+
+function deleteDiv() {
+			
+	$('#divCopy_chil').find('#divOriginal_'+destNo).replaceWith('<div id="divCopy_+destNo"  style="width: 300px;"> </div>');
+
+	//$('#divOriginal_'+destNo).empty();
+	// $().appendTo('#divOriginal');
+};
+
+
  
+ 
+ 
+ 
+ 
+ 
+ 
+ // 지도상의 선 긋기
 const lookCourseBtn = document.getElementById('lookCourseBtn');
 
 lookCourseBtn.addEventListener('click', event =>{
@@ -289,7 +278,8 @@ function addLine(markers){
 
 <script type="text/javascript"
 	src="${ path }/resources/js/planner/mapex.js"></script>
-<script type="text/javascript" src="${ path }/resources/js/planner/addMarker.js"></script>
+<script type="text/javascript"
+	src="${ path }/resources/js/planner/addMarker.js"></script>
 
 <script>	
 	locationValue( $('#locationSelect') );
