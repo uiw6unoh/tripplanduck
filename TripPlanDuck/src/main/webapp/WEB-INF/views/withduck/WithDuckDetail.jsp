@@ -99,6 +99,10 @@
 					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
                     <span>${withDuck.withGender }</span>
                 </div>
+                <div>희망 연령대
+					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
+                    <span>${withDuck.withAge }</span>
+                </div>
                 <div>여행 일정
 					<input type="hidden" value="${withDuck.withStartDate }" name ="withStartDate">
 					<input type="hidden" value="${withDuck.withEndDate }" name ="withEndDate">
@@ -122,7 +126,7 @@
             </div>
             <!-- 내용 -->
             <div style="margin-top: 20px; border: 3px solid #a7a2a28f; height: 400px; padding: 16px;">
-                <input type="hidden" value="${withDuck.withContent}">
+                <input type="hidden" name="withContent" value="${withDuck.withContent}">
                 <div>
                     ${withDuck.withContent }
                 </div>

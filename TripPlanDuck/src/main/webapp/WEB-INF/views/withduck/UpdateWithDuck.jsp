@@ -162,15 +162,17 @@
                     <div class="start_container">
                         <label for="start">출발일:</label>
     
+            			<input type="hidden" value="${withDuck.withEndDate }" id="startVal">
                         <input type="date" id="start" class="start" name="withStartDate"
                             value="${withDuck.withStartDate }"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
+                   	
                     <div class="end_container">
                         <label for="start">도착일:</label>
-            
+            			<input type="hidden" value="${withDuck.withEndDate }" id="endVal">
                         <input type="date" id="end" class="end" name="withEndDate"
-                            value="2018-07-22"
+                            value="${withDuck.withEndDate }"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
                 </div>
@@ -193,7 +195,7 @@
             <input type="text" class="with_title" name="withTitle" value="${withDuck.withTitle }" id="" placeholder="제목을 입력하세요!" required>
         <input type="hidden" value="${withDuck.withContent }" id="hiddenContent">
         <p style="margin-top: 10px;">내용</p>
-        <textarea id="summernote" name="withContent"  required >${withDuck.withContent}</textarea>
+        <textarea id="summernote" name="withContent" required >${withDuck.withContent }</textarea>
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
@@ -240,20 +242,7 @@ $(document).on('click', '.age_btn', function(){
 
 
     $(document).ready(function() {
-    	var date = new Date();
-
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
-        var time = date.get
-
-        if (month < 10) month = "0" + month;
-        if (day < 10) day = "0" + day;
-
-        var today = year + "-" + month + "-" + day;       
-        $("#start").attr("value", today);
-        $("#end").attr("value", today);
-        
+     
     	//여기 아래 부분
         $('#summernote').summernote({
               height: 300,                 // 에디터 높이
@@ -283,12 +272,15 @@ $(document).on('click', '.age_btn', function(){
 	    	};
     	}
     	
+    	
+    	// 인원수 설정 관련
     	var asdf = $('.form-range').val() + '명';
     	$('#value2').text(asdf);
 
     	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
     	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)'); 	
     	
+    	// 모집중, 모집완료 토글 버튼 관련
     	if($('#join').val() == '모집중') {
     		document.getElementById('switch1').checked = true;
     	}
