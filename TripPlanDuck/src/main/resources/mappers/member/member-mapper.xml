@@ -6,7 +6,6 @@
 		SELECT M_NO,
 		       M_ID,
 		       M_PW,
-		       M_NAME,
 		       M_NICKNAME,
 		       M_EMAIL,
 		       M_TYPE,
