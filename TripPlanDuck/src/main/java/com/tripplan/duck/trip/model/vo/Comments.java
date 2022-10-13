@@ -29,4 +29,12 @@ public class Comments {
 	String commentsIpAddress;
 	
 	int destNo;
+	
+	String destSubject;
+	
+	String destCategory;
+	
+	String commentsCreateDateSt;
+	
+	String commentsUpdateDateSt;
 }

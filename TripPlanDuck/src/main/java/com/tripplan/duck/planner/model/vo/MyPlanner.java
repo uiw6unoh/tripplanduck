@@ -41,6 +41,10 @@ public class MyPlanner {
 	
 	private int mNo;
 	
+	private String mNickname;
+	
+	private String destImg;
+	
 	private List<Location> loca;
 	
 	

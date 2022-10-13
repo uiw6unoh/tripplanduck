@@ -90,7 +90,7 @@
 					    ${ loginMember.memberNickname }
 					  </button>
 					  <ul class="dropdown-menu">
-					    <li><a class="dropdown-item" href="#">마이페이지</a></li>
+					    <li><a class="dropdown-item" href="${path}/mypage">마이페이지</a></li>
 					    <li><a class="dropdown-item" id="logout" onclick="location.replace('${ path }/logout')">로그아웃</a></li>
 					  </ul>
 					</div>

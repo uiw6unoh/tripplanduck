@@ -36,8 +36,12 @@
 		<result property="commentsRating" column="COMMENTS_RATING" />
 		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
 		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
+		<result property="commentsCreateDateSt" column="COMMENTS_CREATEDATE_ST" />
+		<result property="commentsUpdateDateSt" column="COMMENTS_UPDATEDATE_ST" />
 		<result property="commentsIpAddress" column="COMMENTS_IP_ADDRESS" />
 		<result property="destNo" column="DEST_NO" />
+		<result property="destSubject" column="DEST_SUBJECT" />
+		<result property="destCategory" column="DEST_CATEGORY" />
 	</resultMap>
 	
 	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
@@ -46,13 +50,13 @@
 		<result property="pStartDate" column="P_STARTDATE" />
 		<result property="pEndDate" column="P_ENDDATE" />
 		<result property="pLt" column="P_LT" />
-		<result property="pMapX" column="P_MAP_X" />
-		<result property="pMapY" column="P_MAP_Y" />
 		<result property="pLike" column="P_LIKE" />
 		<result property="pStatus" column="P_STATUS" />
 		<result property="pType" column="P_TYPE" />
 		<result property="destNo" column="DEST_NO" />
 		<result property="mNo" column="M_NO" />
+		<result property="mNickname" column="M_NICKNAME" />
+		<result property="destImg" column="DEST_IMAGE" />
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
 	
@@ -94,8 +98,6 @@
 				mp.p_startdate,
 				mp.p_enddate,
 				mp.p_lt,
-				mp.p_map_x,
-				mp.p_map_y,
 				mp.p_like,
 				mp.p_status,
 				mp.p_type,
@@ -183,4 +185,99 @@
 		WHERE 
 			rownum &lt;= (#{offset} * 3)
 	</select>
+	
+	
+	<!-- 추가 22.10.12 -->
+
+		<select id="selectMyPlannerByMNoNewPaging" resultMap="MyPlannerResultMap">
+			SELECT
+				mp.p_no,
+				mp.p_place,
+				mp.p_startdate,
+				mp.p_enddate,
+				mp.p_lt,
+				mp.p_like,
+				mp.p_status,
+				mp.p_type,
+				mp.dest_no,
+				mp.m_no,
+				l.location_id,
+				l.location,
+				l.LCENTERX,
+				l.LCENTERY,
+				m.M_NICKNAME,
+				d.DEST_IMAGE
+			FROM 
+				MY_PLANNER mp JOIN LOCATION L
+				ON mp.LOCATION_ID = l.LOCATION_ID
+				JOIN MEMBER m ON mp.m_no = m.M_NO
+				JOIN DESTINATION d ON mp.dest_no = d.DEST_NO
+			WHERE
+				mp.M_NO = #{memberNo}
+			ORDER BY
+				mp.p_no DESC
+			OFFSET #{offset} ROWS FETCH NEXT #{end} ROWS ONLY
+	</select>
+	
+	<select id="selectCommentsByMNoPaging" resultMap="commentsResultMap">
+		SELECT
+				dc.COMMENTS_ID,
+				dc.M_NO,
+				dc.COMMENTS_WRITER_ID,
+				dc.COMMENTS_WRITER_PW,
+				dc.COMMENTS_CONTENT,
+				dc.COMMENTS_RATING,
+				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
+				TO_CHAR(dc.COMMENTS_UPDATEDATE, 'yyyy-mm-dd') as COMMENTS_UPDATEDATE_ST,
+				dc.COMMENTS_IP_ADDRESS,
+				dc.DEST_NO,
+				d.DEST_CATEGORY,
+				d.DEST_SUBJECT
+			FROM
+				DESTINATION_COMMENTS dc JOIN DESTINATION D
+				ON dc.DEST_NO = d.dest_no
+			WHERE
+				m_no = #{memberNo}
+			ORDER BY
+				dc.comments_id desc
+			OFFSET #{offset} ROWS FETCH NEXT #{end} ROWS ONLY
+	</select>
+	
+		
+	<select id="selectTripByMNoNewPaging" resultMap="destinationResultMap">
+			SELECT
+				dl.DEST_NO,
+				dl.M_NO,
+				d.DEST_CATEGORY,
+				d.DEST_SUBJECT,
+				d.DEST_SUMMARY,
+				d.DEST_CONTENT,
+				d.DEST_ADDRESS,
+				d.DEST_MAP_X,
+				d.DEST_MAP_Y,
+				d.DEST_LIKE_SUM,
+				d.DEST_RATING_AVG,
+				d.DEST_HIT,
+				d.DEST_CREATEDATE,
+				d.DEST_UPDATEDATE,
+				d.LOCATION_ID,
+				d.DEST_IMAGE
+			FROM
+				DESTINATION_LIKE dl JOIN DESTINATION D
+				ON dl.DEST_NO = d.dest_no
+			WHERE
+				m_no = #{memberNo}
+				<if test='locationId != null'>
+				AND d.LOCATION_ID = #{locationId}		
+				</if>
+			ORDER BY
+				d.dest_updatedate DESC
+			OFFSET #{offset} ROWS FETCH NEXT ${end} ROWS ONLY	
+	</select>
+	
+	
+	<select id="getOptions" resultType="com.tripplan.duck.planner.model.vo.Location">
+		select location_id as locationId, location from location
+	</select>
+	
 </mapper>
