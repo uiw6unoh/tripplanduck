@@ -57,13 +57,13 @@ public class MyPageController {
 		
 		if(select.equals("planner")) {
 			List<MyPlanner> myPlannerList = myPageService.selectMyPlannerByMNo(param);
-			model.addAttribute("myPlannerList", myPlannerList);
+			model.addAttribute("myPlannerFirst", myPlannerList != null ? myPlannerList.get(0) : null);
 		}else if(select.equals("trip")) {
 			List<Destination> tripList = myPageService.selectTripByMNo(param);
-			model.addAttribute("tripList", tripList);
+			model.addAttribute("tripFirst", tripList != null ? tripList.get(0) : null);
 		}else if(select.equals("comment")) {
 			List<Comments> commentsList = myPageService.selectCommentsByMNo(param);
-			model.addAttribute("commentsList", commentsList);		
+			model.addAttribute("commentFirst", commentsList != null ? commentsList.get(0) : null);		
 		}
 		
 		model.addAttribute("options", myPageService.getOptions());
