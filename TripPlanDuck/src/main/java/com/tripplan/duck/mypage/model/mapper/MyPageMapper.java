@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.planner.model.vo.MyPlanner;
 import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
@@ -17,5 +18,13 @@ public interface MyPageMapper {
 	List<Comments>  selectCommentsByMNo(Map<String, Object> param);
 
 	List<Destination> selectTripByMNo(Map<String, Object> param);
+	
+	List<MyPlanner> selectMyPlannerByMNoNewPaging(Map<String, Object> param);
+
+	List<Destination> selectTripByMNoNewPaging(Map<String, Object> param);
+
+	List<Comments> selectCommentsByMNoPaging(Map<String, Object> param);
+
+	List<Location> getOptions();
 
 }
