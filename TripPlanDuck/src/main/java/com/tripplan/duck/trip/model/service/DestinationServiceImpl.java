@@ -23,6 +23,11 @@ public class DestinationServiceImpl implements DestinationService {
 	}
 
 	@Override
+	public void updateCount(int destNo) {
+		destinationMapper.updateCount(destNo);
+	}
+	
+	@Override
 	public String getCateogryName(int i) {
 		return destinationMapper.getCategoryName(i);
 	}
@@ -56,6 +61,5 @@ public class DestinationServiceImpl implements DestinationService {
 	public List<Location> getLocationsByName(String order) {
 		return destinationMapper.getLocationsByName(order);
 	}
-
 
 }

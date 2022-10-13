@@ -89,7 +89,11 @@
                   <input class="form-check-input" type="radio" name="memberGender" id="genderMale" value="M" style="width:18px; height:18px;">
                   <label class="form-check-label" for="genderMale">남성</label>
                 </td>
+<<<<<<< HEAD
               </tr>   
+=======
+              </tr>	
+>>>>>>> c550380 (221013_회원가입 구현 완료)
               <tr>
                 <td>연령대</td>
               </tr>
@@ -114,6 +118,7 @@
                 </td>
               </tr>
             </table>
+<<<<<<< HEAD
            <div class="checkbox mb-2 mt-4">
              <label>
                <input type="checkbox" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
@@ -125,6 +130,19 @@
            <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
       </form>
       </div>
+=======
+	        <div class="checkbox mb-2 mt-4">
+	          <label>
+	            <input type="checkbox" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
+	            <br>
+	            <input class="auto-login" type="checkbox" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
+	          </label>
+	        </div>
+	        <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+	        <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
+		</form>
+		</div>
+>>>>>>> c550380 (221013_회원가입 구현 완료)
       </main>
 
 
