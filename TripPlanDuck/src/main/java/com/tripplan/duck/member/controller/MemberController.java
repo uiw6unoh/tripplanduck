@@ -193,7 +193,6 @@ public class MemberController {
 	
 	
 	
-	
 }
     
 //    /* 비동기 로그아웃 메서드*/

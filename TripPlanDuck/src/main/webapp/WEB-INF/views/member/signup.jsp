@@ -37,7 +37,7 @@
                 <td>
                   <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id(4글자이상)" required>
                 </td>
-                <td><input type="button" class="form-control" id="checkDuplicate" value="중복확인"></td>
+                <td><input type="button" class="form-control" id="idCheck" value="중복확인"></td>
               </tr> 
               <tr>
                 <td class="title">닉네임</td>
@@ -46,7 +46,7 @@
                 <td>
                   <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
                 </td>
-                <td><input type="button" class="form-control" id="checkDuplicate" value="중복확인"></td>
+                <td><input type="button" class="form-control" id="nicknameCheck" value="중복확인"></td>
               </tr> 
               <tr>
                 <td class="title">비밀번호</td>
@@ -132,7 +132,6 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 <!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
 <script>
@@ -152,11 +151,14 @@
          e.preventDefault();
          location.href = '${path}/common/termconditions';
       });
+      
+
+    		  
    });
    
    // 아이디 중복 확인
    $(document).ready(() => {
-      $("#checkDuplicate").on("click", () => {
+      $("#idCheck").on("click", () => {
          let memberId = $("#memberId").val().trim();         
          
          $.ajax({
@@ -182,6 +184,7 @@
       });
    });
    
+	
    
 
 </script>
