@@ -135,21 +135,23 @@
         <div class="container">
             <div class="sort" style="text-align: right;">
                 <div class="dropdown d-flex justify-content-end" style="width: 100px; position:relative; top: 35px; left: 850px">
-                	<c:if test="${empty sort_name }">
+                 	<c:if test="${empty sort_name }">
 	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	                    최신순  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
-	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+	                    최신순<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                     	<path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 	                    </svg>
 	                    </button>
                 	</c:if>
+
                 	<c:if test="${not empty sort_name }">
 	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-	                    ${sort_name}  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
+	                    ${sort_name}<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-fill" viewBox="0 0 16 16">
 	                        <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
 	                    </svg>
 	                    </button>
                 	</c:if>
-                    
+                   
+
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
                     <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
                     <fmt:formatNumber value="${page}" type="number" var="page"/>
@@ -195,7 +197,7 @@
 					<c:forEach var="withDuck" items="${ list }">
                 <div class="col">
                     <div class="p-3 border bg-light">
-                        <a href="">
+                        <a href="${path }/withduck/detail?withNo=${withDuck.withNo}">
                         	<c:if test="${empty withDuck.reList[0]}">
                            		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
                         	</c:if>
@@ -254,8 +256,6 @@
         </nav>
     </section>
     </form>
-    
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
@@ -294,7 +294,6 @@ $(document).on('click', '.age_btn', function(){
     sessionStorage.setItem("age", $('.age_btn.selected').val());
     $('#btnValueSaveAge').attr('value', sessionStorage.getItem("age"));
 });
-
 
 $(document).ready(function() {
 	var date = new Date();

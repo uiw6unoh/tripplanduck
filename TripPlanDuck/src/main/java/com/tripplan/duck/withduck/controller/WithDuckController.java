@@ -318,6 +318,8 @@ public class WithDuckController {
 			String location = null;
 			String renamedFileName = "";
 			List<MultipartFile> list = new ArrayList<MultipartFile>();
+			System.out.println("날짜확인 : " + withDuck.getWithStartDate());
+			System.out.println(list);
 			
 			list.add(file1);
 			list.add(file2);
@@ -371,5 +373,62 @@ public class WithDuckController {
 		return model;
 	}
 	
+	///////////////////////////////////////////////////위드덕 상세페이지////////////////////////////////////////////////////////////
+	@GetMapping("/detail")
+	public ModelAndView detailWithDuck(ModelAndView model,
+									   @RequestParam(value = "withNo") int withNo) {
+		WithDuck withDuck = null;
+		String[] arr = null;
+		
+		withDuck = service.detailWithDuck(withNo);
+		
+		arr = withDuck.getWithRenameFileName().split(", ");
+		
+		withDuck.setReList(Arrays.asList(arr));
+		
+		System.out.println(withDuck.getReList());
+		
+		System.out.println(withNo);
+		System.out.println("상세페이지 : " + withDuck);
+		
+		model.addObject("withDuck", withDuck);
+		model.setViewName("withduck/WithDuckDetail");
+		return model;
+	}
 	
+	/////////////////////////////////////////////////위드덕 수정 //////////////////////////////////////////////////////////////////
+	
+	@GetMapping("/update")
+	public ModelAndView updateWithDuck(ModelAndView model,
+									   @ModelAttribute WithDuck withDuck,
+									   @RequestParam(value = "file1", required = false) String file1,
+									   @RequestParam(value = "file2", required = false) String file2,
+									   @RequestParam(value = "file3", required = false) String file3) {
+		int result = 0;
+		
+		String location = null;
+		String renamedFileName = "";
+		List<String> list = new ArrayList<String>();
+		System.out.println(withDuck);
+		list.add(file1);
+		list.add(file2);
+		list.add(file3);
+		
+		System.out.println("시작전 list : " + list);
+		
+		
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).isEmpty()) {
+				list.remove(list.get(i));
+				i=-1;
+				System.out.println(list + " " + i);
+			}
+		}
+
+		model.addObject("photoList", list);
+		model.addObject("withDuck", withDuck);
+		model.setViewName("withduck/UpdateWithDuck");
+		
+		return model;
+	}
 }

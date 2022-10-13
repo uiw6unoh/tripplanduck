@@ -24,28 +24,38 @@
     <!-- WithDuck CSS-->
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/WithDuckDetail.css">
 </head>
-<body class="stretched">
+<body class="stretched" >
+<form action="${path}/withduck/update" method="get">
     <section class="zone1">
         <div class="carousel_container">
             <div id="demo" class="carousel slide pointer-event" data-ride="carousel">
                 <!-- Indicators -->
                 <ul class="carousel-indicators">
-                <li data-target="#demo" data-slide-to="0" class=""></li>
-                <li data-target="#demo" data-slide-to="1" class="active"></li>
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1" class=""></li>
                 <li data-target="#demo" data-slide-to="2" class=""></li>
                 </ul>
-            
+
                 <!-- The slideshow -->
                 <div class="carousel-inner">
-                <div class="carousel-item">
-                    <img class="car-img" src="${path}/resources/images/WithDuck/tower1.PNG" alt="Los Angeles">
-                </div>
-                <div class="carousel-item active">
-                    <img class="car-img" src="${path}/resources/images/WithDuck/flower1.PNG" alt="Chicago">
-                </div>
-                <div class="carousel-item">
-                    <img class="car-img" src="${path}/resources/images/WithDuck/flower2.PNG" alt="New York">
-                </div>
+	                <div class="carousel-item active">
+		                <c:if test="${not empty withDuck.reList[0] && withDuck.reList[0] != null}">
+	                    <input name="file1" type="hidden" value="${withDuck.reList[0] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}">
+        		        </c:if>
+	                </div>
+	                <div class="carousel-item">
+		                <c:if test="${not empty withDuck.reList[1] && withDuck.reList[1] != null}">
+	                    <input name="file2" type="hidden" value="${withDuck.reList[1] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[1]}">
+		                </c:if>
+	                </div>
+	                <div class="carousel-item">
+		                <c:if test="${not empty withDuck.reList[2] && withDuck.reList[2] != null}">
+	                    <input name="file3" type="hidden" value="${withDuck.reList[2] }">
+	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[2]}">
+		                </c:if>              
+	                </div>
                 </div>
             
                 <!-- Left and right controls -->
@@ -64,7 +74,8 @@
         <div class="content_container" style="width: 1000px; margin: auto;">
             <!-- 제목 -->
             <div style="margin: 60px; text-align: center;">
-                <h5>8월 28일 ~ 8월 31일 제주도 갑니다!</h5>
+            	<input name="withTitle" type="hidden" value="${withDuck.withTitle }">
+                <h5>${withDuck.withTitle }</h5>
                 <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
                   <label for="switch1" class="label__on-off">
                     <span class="marble"></span>
@@ -75,16 +86,21 @@
             <!-- 지역, 모집 인원 ,희망 성별, 요일 -->
             <div class="filter">
                 <div>지역 
-                    <span>제주</span>
+					<input type="hidden" value="${withDuck.withLocation }" name ="withLocation">
+                    <span>${withDuck.withLocation }</span>
                 </div>
                 <div>모집 인원
-                    <span>5명</span>
+					<input type="hidden" value="${withDuck.withPersonner }" name ="withPersonnel">
+                    <span>${withDuck.withPersonner }명</span>
                 </div>
                 <div>희망 성별
-                    <span>남자</span>
+					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
+                    <span>${withDuck.withGender }</span>
                 </div>
                 <div>여행 일정
-                    <span>2022-08-28</span> ~ <span>2022-08-31</span>
+					<input type="hidden" value="${withDuck.withStartDate }" name ="withStartDate">
+					<input type="hidden" value="${withDuck.withEndDate }" name ="withEndDate">
+                    <span>${withDuck.withStartDate }</span> ~ <span>${withDuck.withEndDate }</span>
                 </div>
             </div>
             <!-- 작성자 프로필, 이름, 나이, 성별 -->
@@ -93,7 +109,8 @@
                     <img src="${path}/resources/images/Common/프사.png">
                 </div>
                 <div class="profile-name" style="float: left;">
-                    <span style="font-size: 10px;">박노경</span>
+                	<input type="hidden" value="${withDuck.withWriterNick }" name="withWriterNick">
+                    <span style="font-size: 10px;">${withDuck.withWriterNick }</span>
                 </div>
                 <br>
                 <div class="profile-age" style="float: left;">
@@ -103,8 +120,9 @@
             </div>
             <!-- 내용 -->
             <div style="margin-top: 20px; border: 3px solid #a7a2a28f; height: 400px; padding: 16px;">
+                <input type="hidden" value="${withDuck.withContent}">
                 <div>
-                    같이 재밌게 놀다 와요
+                    ${withDuck.withContent }
                 </div>
                 <div class="tags">
                   <div class="tag-container">
@@ -121,18 +139,10 @@
             </div>
         </div>
     </section>
-<!-- <div style="text-align: center; margin: 50px;">
-    <button id="join">
-        동행참여
-    </button>
-    <button id="join">
-        목록으로
-    </button>
-    <button id="join">
-        수정하기
-    </button>
-</div> -->
-
+<input type="hidden" value="${withDuck.withWriterNo }" name="withWriterNo">
+<input type="hidden" value="${withDuck.withAge }" name="withAge">
+<input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
+<input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
     <button class="btn btn-outline-warning" type="button">
         동행참여
@@ -142,10 +152,11 @@
         목록으로
     </button>
 
-    <button class="btn btn-outline-warning" type="button">
+    <button class="btn btn-outline-warning" type="submit">
         수정하기
     </button>
 </div>
+</form>
 
 <!-- Bootstrap JS -->
     <!-- Bootstrap JS -->
