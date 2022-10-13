@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="${path }/resources/css/common/font-icons.css" type="text/css" />
 
     <!-- WithDuck CSS-->
-    <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/CreateWithDuck.css">
+    <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/UpdateWithDuck.css">
     
     <!-- Summernote CSS -->
     <link rel="stylesheet" href="${path }/resources/css/withduck/summernote/summernote-lite.css">
@@ -102,6 +102,7 @@
     
     <!-- 필터 등록 -->
     <section class="zone2" >
+    
       <div class="filter">
         <div class="filter_container">
             <div class="filter_location" style="display: flex !important; justify-content: center;
@@ -178,6 +179,15 @@
     </section>
     <!-- 내용, 제목 -->
     <section class="zone3">
+                        <div style="margin: 0px; text-align: center;">
+                      <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
+                        <label for="switch1" class="label__on-off">
+                          <span class="marble"></span>
+                          <input type="hidden" id="join" value="${withDuck.withJoinStatus }">
+                          <span class="on" style="position: relative; right:14px;">모집중</span>
+                          <span class="off" style="position: relative; right: 6px;">모집완료</span>
+                        </label>
+                    </div>
     <div class="content_container">
         <p>제목</p>
             <input type="text" class="with_title" name="withTitle" value="${withDuck.withTitle }" id="" placeholder="제목을 입력하세요!" required>
@@ -190,7 +200,6 @@
         <button class="btn btn-outline-warning" type="submit">수정완료</button>
         <button class="btn btn-outline-warning" type="submit">취소</button>
     </div>
-  </div>
 </form>
 
     <!-- Bootstrap JS -->
@@ -201,6 +210,7 @@
     <script src="${path }/resources/js/common/jquery-3.6.0.min.js"></script>
 
     <!-- JavaScripts -->
+    
     <script src="${path }/resources/js/common/plugins.min.js"></script>
     <script src="${path }/resources/js/common/functions.js"></script>
 </body>
@@ -278,6 +288,22 @@ $(document).on('click', '.age_btn', function(){
 
     	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
     	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)'); 	
+    	
+    	if($('#join').val() == '모집중') {
+    		document.getElementById('switch1').checked = true;
+    	}
+    	if($('#join').val() == '모집완료') {
+    		document.getElementById('switch1').checked = false;
+    	}
+    	
+    	$('#switch1').on('click', function() {
+    	if(document.getElementById('switch1').checked == true) {
+    		document.getElementById('join').value = '모집중';
+    	}
+    	else if (document.getElementById('switch1').checked == false) {
+    		document.getElementById('join').value = '모집완료';
+		}
+    	});
     });
 
         
@@ -331,5 +357,6 @@ $(document).on('click', '.age_btn', function(){
                 $('#empty3').css("visibility", "hidden");
             }
          });
+        
         
 </script>

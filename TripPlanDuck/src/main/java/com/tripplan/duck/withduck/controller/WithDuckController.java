@@ -417,27 +417,26 @@ public class WithDuckController {
 									   @RequestParam(value = "file1", required = false) String file1,
 									   @RequestParam(value = "file2", required = false) String file2,
 									   @RequestParam(value = "file3", required = false) String file3) {
-		int result = 0;
-		
-		String location = null;
-		String renamedFileName = "";
 		List<String> list = new ArrayList<String>();
 		System.out.println(withDuck);
-		list.add(file1);
-		list.add(file2);
-		list.add(file3);
+		String[] arr = new String[3];
+		boolean check = false;
 		
-		System.out.println("시작전 list : " + list);
+		arr[0] = file1;
+		arr[1] = file2;
+		arr[2] = file3;
 		
+		System.out.println("시작전 list : " + Arrays.toString(arr));
 		System.out.println("업데이트 날짜확인 : " + withDuck.getWithStartDate());
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).isEmpty()) {
-				list.remove(list.get(i));
-				i=-1;
-				System.out.println(list + " " + i);
+
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i] == null) {
+				continue;
+			} else if(arr[i] != null) {
+				list.add(arr[i]);
 			}
 		}
-
+		
 		model.addObject("photoList", list);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/UpdateWithDuck");

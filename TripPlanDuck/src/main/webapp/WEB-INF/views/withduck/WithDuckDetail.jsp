@@ -73,15 +73,17 @@
     <section class="zone2">
         <div class="content_container" style="width: 1000px; margin: auto;">
             <!-- 제목 -->
-            <div style="margin: 60px; text-align: center;">
+            <div style="margin: 60px; text-align: center;  display: flex; justify-content: center;">
             	<input name="withTitle" type="hidden" value="${withDuck.withTitle }">
                 <h5>${withDuck.withTitle }</h5>
-                <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
-                  <label for="switch1" class="label__on-off">
-                    <span class="marble"></span>
-                    <span class="on" style="position: relative; right:14px;">모집중</span>
-                    <span class="off" style="position: relative; right: 6px;">모집완료</span>
-                  </label>
+				<c:if test="${withDuck.withJoinStatus == '모집중'}">
+				<input name="withJoinStatus" type="hidden" value="모집중">
+					<div style="background-color: #0bba82; color: white; width: 75px; display: flex; align-items:center; justify-content: center; margin-left: 10px; margin-bottom: 10px;">모집중</div>
+				</c:if>
+				<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+				<input name="withJoinStatus" type="hidden" value="모집완료">
+					<div style="background-color: #ed4956; color: white; width: 75px; display: flex; align-items:center; justify-content: center; margin-left: 10px; margin-bottom: 10px;">모집완료</div>
+				</c:if>
             </div>
             <!-- 지역, 모집 인원 ,희망 성별, 요일 -->
             <div class="filter">
