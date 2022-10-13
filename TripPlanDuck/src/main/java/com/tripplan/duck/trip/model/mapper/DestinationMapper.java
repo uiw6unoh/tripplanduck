@@ -13,6 +13,8 @@ import com.tripplan.duck.trip.model.vo.Destination;
 public interface DestinationMapper {
 
 	void insertData(Map<String, Object> param);
+	
+	void updateCount(int destNo);
 
 	String getCategoryName(int i);
 
