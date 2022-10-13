@@ -260,7 +260,7 @@
 		
 	//	locationId = locationId == undefined? 1 : locationId
 		
-		if(locationId == undefined){
+		if(select !== 'trip' && locationId == undefined){
 			locationId = 1
 			
 			selected += select;
@@ -275,6 +275,10 @@
 			console.log(locSelected)
 					
 		}else {
+			if(locationId == undefined){
+				locationId = locSelected[locSelected.length - 1]
+			}
+			
 			offset = 0
 			locSelected.push(locationId)
 			
@@ -287,8 +291,8 @@
 			}else{
 				offset = 1;
 			}
-			console.log(locSelected)
-			console.log(offset)
+			console.log("locSelected :" , locSelected)
+			console.log("offset :" , offset)
 			
 			
 		}
