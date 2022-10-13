@@ -81,7 +81,7 @@
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" alt="..." />
+            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="..." />
             </div>
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -148,7 +148,7 @@
 		        	<a href="${path}/trip/detail?destNo=${dest.destNo}">
 		              <div class="card">
 		                <div style="overflow: hidden;">
-		                  <img class="card-img-top w-100 h-auto" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="${dest.destImage eq null ? '/duck/images/trip/busan.jpg' : dest.destImage}" data-holder-rendered="true">
+		                  <img class="card-img-top w-100" data-src="holder.js/300x200" alt="300x200" style="width: 300px; height: 200px;" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" data-holder-rendered="true">
 		                </div>
 		                <div class="card-body">
 		                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>

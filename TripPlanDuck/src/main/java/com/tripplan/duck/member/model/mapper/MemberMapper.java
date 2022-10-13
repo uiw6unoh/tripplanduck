@@ -9,4 +9,6 @@ import com.tripplan.duck.member.model.vo.Member;
 public interface MemberMapper {
 
 	Member selectMemberById(@Param("memberId") String memberId);
+
+	int insertMember(Member member);
 }

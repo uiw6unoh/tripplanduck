@@ -28,14 +28,14 @@
       <div>
         <h1>SIGN UP</h1>
         <img class="mb-4" src="${ path }/images/member/profile.png" alt="" width="200px">
-        <form name="memberSignup" action="${ path }/member/signup" method="POST">
+        <form action="${ path }/member/signup" method="POST">
             <table class="signup">
               <tr>
                 <td class="title">아이디</td>
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id" required>
+                  <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id(4글자이상)" required>
                 </td>
                 <td><input type="button" class="form-control" id="checkDuplicate" value="중복확인"></td>
               </tr> 
@@ -53,7 +53,7 @@
               </tr>
               <tr>               
                 <td>
-                  <input type="text" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호" required>
+                  <input type="text" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
                 </td>
               </tr>
               <tr>
@@ -61,7 +61,7 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="confirm_password" name="memberPassword" placeholder="비밀번호확인" required>
+                  <input type="text" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
                 </td>
               </tr>
               <tr>
@@ -77,55 +77,54 @@
                 <td>
                 <input type="text" class="form-control" id="memberEmailNumber" required>
                 </td>
-                <td><input type="button" class="form-control" id="checkDuplicate" value="인증번호확인"></td>
+                <td><input type="button" class="form-control" id="checkDuplicate2" value="인증번호확인"></td>
               </tr>
               <tr>
                 <td>성별</td>
               </tr>
               <tr>
                 <td class="form-control">
-                  <input class="form-check-input" type="radio" name="memberGender1" id="inlineRadio1" value="female" style="width:18px; height:18px; margin-left: 3px;">
-                  <label class="form-check-label" for="inlineRadio1" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                  <input class="form-check-input" type="radio" name="memberGender2" id="inlineRadio1" value="male" style="width:18px; height:18px;">
-                  <label class="form-check-label" for="inlineRadio1">남성</label>
+                  <input class="form-check-input" type="radio" name="memberGender" id="genderFemale" value="F" style="width:18px; height:18px; margin-left: 3px;">
+                  <label class="form-check-label" for="female" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                  <input class="form-check-input" type="radio" name="memberGender" id="genderMale" value="M" style="width:18px; height:18px;">
+                  <label class="form-check-label" for="genderMale">남성</label>
                 </td>
-              </tr>
+              </tr>	
               <tr>
                 <td>연령대</td>
               </tr>
               <tr>
                 <td>
                   <label class="test_obj">
-                    <input type="radio" name="age" value="20">
+                    <input type="radio" name="memberAge" value="20">
                     <span>~20대</span>
                   </label>
                   <label class="test_obj">
-                      <input type="radio" name="age" value="30">
+                      <input type="radio" name="memberAge" value="30">
                       <span>30대</span>
                   </label>
                   <label class="test_obj">
-                    <input type="radio" name="age" value="40">
+                    <input type="radio" name="memberAge" value="40">
                     <span>40대</span>
                    </label>
                    <label class="test_obj">
-                    <input type="radio" name="age" value="50">
+                    <input type="radio" name="memberAge" value="50">
                     <span>50대~</span>
                    </label>
-
                 </td>
               </tr>
             </table>
-        </form>
-        <div class="checkbox mb-2 mt-4">
-          <label>
-            <input type="checkbox" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
-            <br>
-            <input class="auto-login" type="checkbox" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
-          </label>
-        </div>
-        </div>
-        <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
-        <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
+	        <div class="checkbox mb-2 mt-4">
+	          <label>
+	            <input type="checkbox" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
+	            <br>
+	            <input class="auto-login" type="checkbox" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
+	          </label>
+	        </div>
+	        <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+	        <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
+		</form>
+		</div>
       </main>
 
 
