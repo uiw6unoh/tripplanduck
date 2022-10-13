@@ -153,7 +153,7 @@
     
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                        <input type="range" name="withPersonner" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                        <input type="range" name="withPersonner" value="${withDuck.withPersonner }" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
                         <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
                         
                     </div>
@@ -162,7 +162,7 @@
                         <label for="start">출발일:</label>
     
                         <input type="date" id="start" class="start" name="withStartDate"
-                            value="2018-07-22"
+                            value="${withDuck.withStartDate }"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
                     <div class="end_container">
@@ -235,6 +235,7 @@ $(document).on('click', '.age_btn', function(){
         var day = date.getDate();
         var month = date.getMonth() + 1;
         var year = date.getFullYear();
+        var time = date.get
 
         if (month < 10) month = "0" + month;
         if (day < 10) day = "0" + day;
@@ -272,6 +273,11 @@ $(document).on('click', '.age_btn', function(){
 	    	};
     	}
     	
+    	var asdf = $('.form-range').val() + '명';
+    	$('#value2').text(asdf);
+
+    	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
+    	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)'); 	
     });
 
         
