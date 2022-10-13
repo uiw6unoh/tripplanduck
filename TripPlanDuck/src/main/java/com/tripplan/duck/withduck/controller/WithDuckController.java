@@ -318,7 +318,7 @@ public class WithDuckController {
 			String location = null;
 			String renamedFileName = "";
 			List<MultipartFile> list = new ArrayList<MultipartFile>();
-			
+			System.out.println("날짜확인 : " + withDuck.getWithStartDate());
 			System.out.println(list);
 			
 			list.add(file1);
