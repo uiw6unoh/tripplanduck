@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,6 +42,10 @@ public class WithDuck {
 	private String withTitle;
 	
 	private String withContent;
+	
+	private String withWriterGender;
+	
+	private int withWriterAge;
 	
 	private String withkeyword;
 	

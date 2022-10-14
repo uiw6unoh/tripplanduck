@@ -11,14 +11,14 @@
 	       WITH_AGE,
 	       WITH_PERSONNER,
 	       WITH_STATUS,
-	       WITH_STARTDATE,
-	       WITH_ENDDATE,
-	       WITH_STARTDATE,
-	       WITH_ENDDATE,
+	       TO_CHAR(WITH_STARTDATE, 'YYYY-MM-DD') AS "WITH_STARTDATE",
+	       TO_CHAR(WITH_ENDDATE, 'YYYY-MM-DD') AS "WITH_ENDDATE",
 	       WITH_ORIGINFILENAME,
 	       WITH_RENAMEFILENAME,
 	       WITH_TITLE,
 	       WITH_CONTENT,
+	       WITH_WRITER_GENDER,
+	       WITH_WRITER_AGE,
 	       WITH_KEYWORD,
 	       WITH_READCOUNT,
 	       WITH_JOINSTATUS,
@@ -44,6 +44,8 @@
 		<result property="withRenameFileName" column="WITH_RENAMEFILENAME"/>
 		<result property="withTitle" column="WITH_TITLE"/>
 		<result property="withContent" column="WITH_CONTENT"/>
+		<result property="withWriterGender" column="WITH_WRITER_GENDER"/>
+		<result property="withWriterAge" column="WITH_WRITER_AGE"/>
 		<result property="withkeyword" column="WITH_KEYWORD"/>
 		<result property="withReadCount" column="WITH_READCOUNT"/>
 		<result property="withJoinStatus" column="WITH_JOINSTATUS"/>
@@ -116,12 +118,14 @@
 			#{withAge},
 			#{withPersonner},
 			DEFAULT,
-			#{withStartDate},
-			#{withEndDate},
+			TO_DATE(#{withStartDate}, 'YYYY-MM-DD'),
+			TO_DATE(#{withEndDate}, 'YYYY-MM-DD'),
 			#{withOriginFileName},
 			#{withRenameFileName},
 			#{withTitle},
 			#{withContent},
+			#{withWriterGender},
+			#{withWriterAge},
 			DEFAULT,
 			DEFAULT,
 			DEFAULT,
@@ -135,6 +139,5 @@
 		<include refid="withDuckListSql" />
 		AND WITH_NO = #{withNo}
 	</select>
-	
 	
 </mapper>

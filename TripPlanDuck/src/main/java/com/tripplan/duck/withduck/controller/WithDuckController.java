@@ -318,7 +318,7 @@ public class WithDuckController {
 			String location = null;
 			String renamedFileName = "";
 			List<MultipartFile> list = new ArrayList<MultipartFile>();
-			System.out.println("날짜확인 : " + withDuck.getWithStartDate());
+			System.out.println("생성 날짜확인 : " + withDuck.getWithStartDate());
 			System.out.println(list);
 			
 			list.add(file1);
@@ -358,6 +358,8 @@ public class WithDuckController {
 		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
 		withDuck.setWithWriterNo(loginMember.getMemberNo());
 		withDuck.setWithWriterNick(loginMember.getMemberNickname());
+		withDuck.setWithWriterAge(loginMember.getMemberAge());
+		withDuck.setWithWriterGender(loginMember.getMemberGender());
 		result = service.createWithDuck(withDuck);
 		
 		if(result > 0) {
@@ -381,12 +383,25 @@ public class WithDuckController {
 		String[] arr = null;
 		
 		withDuck = service.detailWithDuck(withNo);
+		System.out.println("위드덕 위드 넘버로 조회 : " + withDuck);
+		System.out.println("디테일 날짜확인 : " + withDuck.getWithStartDate());
 		
-		arr = withDuck.getWithRenameFileName().split(", ");
+		if(withDuck.getWithRenameFileName() != null) {
+			arr = withDuck.getWithRenameFileName().split(", ");
+			List<String> list = new ArrayList<String>();
+			list = Arrays.asList(arr);
+
+			for(int i = 0; i < list.size(); i++) {
+					if(list.get(i).isEmpty()) {
+						list.remove(list.get(i));
+						i=-1;
+						System.out.println(list + " " + i);
+					}
+				}
+			
+			withDuck.setReList(list);
+		}
 		
-		withDuck.setReList(Arrays.asList(arr));
-		
-		System.out.println(withDuck.getReList());
 		
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
@@ -404,27 +419,26 @@ public class WithDuckController {
 									   @RequestParam(value = "file1", required = false) String file1,
 									   @RequestParam(value = "file2", required = false) String file2,
 									   @RequestParam(value = "file3", required = false) String file3) {
-		int result = 0;
-		
-		String location = null;
-		String renamedFileName = "";
 		List<String> list = new ArrayList<String>();
 		System.out.println(withDuck);
-		list.add(file1);
-		list.add(file2);
-		list.add(file3);
+		String[] arr = new String[3];
+		boolean check = false;
 		
-		System.out.println("시작전 list : " + list);
+		arr[0] = file1;
+		arr[1] = file2;
+		arr[2] = file3;
 		
-		
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).isEmpty()) {
-				list.remove(list.get(i));
-				i=-1;
-				System.out.println(list + " " + i);
+		System.out.println("시작전 list : " + Arrays.toString(arr));
+		System.out.println("업데이트 날짜확인 : " + withDuck.getWithStartDate());
+
+		for(int i = 0; i < arr.length; i++) {
+			if(arr[i] == null) {
+				continue;
+			} else if(arr[i] != null) {
+				list.add(arr[i]);
 			}
 		}
-
+		
 		model.addObject("photoList", list);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/UpdateWithDuck");
