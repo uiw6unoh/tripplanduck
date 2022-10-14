@@ -43,6 +43,10 @@ public class WithDuck {
 	
 	private String withContent;
 	
+	private String withWriterGender;
+	
+	private int withWriterAge;
+	
 	private String withkeyword;
 	
 	private int withReadCount;

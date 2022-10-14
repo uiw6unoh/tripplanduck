@@ -116,12 +116,25 @@
                 </div>
                 <div class="profile-name" style="float: left;">
                 	<input type="hidden" value="${withDuck.withWriterNick }" name="withWriterNick">
-                    <span style="font-size: 10px;">${withDuck.withWriterNick }</span>
+                    <span style="font-size: 10px; position: relative; left: 9px;">${withDuck.withWriterNick }</span>
                 </div>
                 <br>
-                <div class="profile-age" style="float: left;">
-                    <span style="font-size: 10px;">20대 /</span>
-                    <span style="font-size: 10px;"> 남성</span>
+                <div class="profile-age" style="float: left; right: 18px;">
+                <c:choose>
+                	<c:when test="${withDuck.withWriterAge == 20 }">
+	                    <span style="font-size: 10px;">~${withDuck.withWriterAge }대 /</span>
+                	</c:when>
+                	<c:otherwise>
+	                    <span style="font-size: 10px;">${withDuck.withWriterAge }대 /</span>
+                	</c:otherwise>
+                </c:choose>
+                	
+                    <c:if test="${withDuck.withWriterGender == 'M' }">
+                    <span style="font-size: 10px;"> 남자</span>
+                    </c:if>
+                    <c:if test="${withDuck.withWriterGender == 'Y' }">
+                    <span style="font-size: 10px;"> 여자</span>
+                    </c:if>
                 </div>
             </div>
             <!-- 내용 -->

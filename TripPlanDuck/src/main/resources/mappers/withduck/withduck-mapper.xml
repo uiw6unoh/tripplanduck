@@ -17,6 +17,8 @@
 	       WITH_RENAMEFILENAME,
 	       WITH_TITLE,
 	       WITH_CONTENT,
+	       WITH_WRITER_GENDER,
+	       WITH_WRITER_AGE,
 	       WITH_KEYWORD,
 	       WITH_READCOUNT,
 	       WITH_JOINSTATUS,
@@ -42,6 +44,8 @@
 		<result property="withRenameFileName" column="WITH_RENAMEFILENAME"/>
 		<result property="withTitle" column="WITH_TITLE"/>
 		<result property="withContent" column="WITH_CONTENT"/>
+		<result property="withWriterGender" column="WITH_WRITER_GENDER"/>
+		<result property="withWriterAge" column="WITH_WRITER_AGE"/>
 		<result property="withkeyword" column="WITH_KEYWORD"/>
 		<result property="withReadCount" column="WITH_READCOUNT"/>
 		<result property="withJoinStatus" column="WITH_JOINSTATUS"/>
@@ -120,6 +124,8 @@
 			#{withRenameFileName},
 			#{withTitle},
 			#{withContent},
+			#{withWriterGender},
+			#{withWriterAge},
 			DEFAULT,
 			DEFAULT,
 			DEFAULT,

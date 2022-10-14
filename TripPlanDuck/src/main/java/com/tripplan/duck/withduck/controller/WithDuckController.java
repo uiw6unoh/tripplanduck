@@ -358,6 +358,8 @@ public class WithDuckController {
 		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
 		withDuck.setWithWriterNo(loginMember.getMemberNo());
 		withDuck.setWithWriterNick(loginMember.getMemberNickname());
+		withDuck.setWithWriterAge(loginMember.getMemberAge());
+		withDuck.setWithWriterGender(loginMember.getMemberGender());
 		result = service.createWithDuck(withDuck);
 		
 		if(result > 0) {
