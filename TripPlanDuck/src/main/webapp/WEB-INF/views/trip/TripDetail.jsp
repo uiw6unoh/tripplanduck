@@ -76,8 +76,39 @@
             <g id="Circle">
                 <circle cx="134.7" cy="131.1" r="52"/>
             </g>
-            <path id="Heart_2_" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
+            <c:if test="${ !empty loginMember }">
+				<style type="text/css">
+	                .st1{fill: coral;}
+	                .st2{fill: red;}
+	                .st3{fill:#6BABBD;}
+	                .st4{fill:#38B133;}
+	                .st5{fill:#E03BE7;}
+	                .st6{fill:#E9ACC1;}
+	                .st7{fill:#fabf42;}
+	                .st8{fill:#13414C;}
+	                .st9{font-family:'Montserrat-Regular';}
+	            </style>
+	            
+	            <path id="Heart_2_" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
                 l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
+        	</c:if>
+        	
+        	<c:if test="${ empty loginMember }">
+				<style type="text/css">
+	                .st1{fill: coral;}
+	                .st2{fill: red;}
+	                .st3{fill:#6BABBD;}
+	                .st4{fill:#38B133;}
+	                .st5{fill:#E03BE7;}
+	                .st6{fill:#E9ACC1;}
+	                .st7{fill-opacity: 0;}
+	                .st8{fill:#13414C;}
+	                .st9{font-family:'Montserrat-Regular';}
+	            </style>
+	            
+	            <path id="Heart_2_N" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
+                l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
+        	</c:if>
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
@@ -86,7 +117,7 @@
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg> ${dest.destLikeSum}</span></div>
+              </svg> ${dest.destHit}</span></div>
               <div class="title">
                 <div>
                   <a href="#">홈 ></a>
@@ -100,46 +131,6 @@
               </div>
             </div>
         </div>
-        
-        <!--  
-        <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-4" data-items-lg="5" data-stage-padding="20">
-            <div class="owl-stage-outer">
-                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1591px;">
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 1"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 2"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 3"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 4"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 5"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 6"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 7"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
 
         <p class="h3 mb-0 mt-5">경험해볼 만한 것들</p>
         <div class="row mt-2">
@@ -205,6 +196,9 @@
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">짹짹이 김여울</p>
+	                              <div class="star-rating m-0">
+									<span>별점</span> 	
+	                              </div>
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -335,7 +329,7 @@
           //삭제 요청 처리
           swal.fire(
           '수정완료!',
-          '댓글이 삭제되었습니다',
+          '댓글이 수정되었습니다',
           'success'
     )
         } else {
@@ -374,4 +368,25 @@
 	
 	//마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+</script>
+
+<script>
+$(document).ready(function () {
+	  function addListener() {
+	    var btn = document.querySelector("#Heart_2_");
+	    btn.addEventListener("click", restart, false);
+	  }
+
+	  function restart() {
+	    // var newHeart = document.getElementsByClassName(".st7");
+	    var container = document.querySelector("#Layer_1");
+	    var newContainer = container.cloneNode(true);
+
+	    container.parentNode.replaceChild(newContainer, container);
+	    $(".st7").removeAttr("style");
+
+	    addListener();
+	  }
+	  addListener();
+	});
 </script>

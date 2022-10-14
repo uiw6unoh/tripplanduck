@@ -68,6 +68,7 @@ public class TripController {
 	public ModelAndView TripDetail(ModelAndView model, @RequestParam(value="destNo")int destNo) {
 		
 		Destination dest = destinationService.getDestination(destNo);
+		destinationService.updateCount(destNo);
 		List<Destination> destnations = destinationService.getDestinationsByCategory(destNo);
 		
 		model.addObject("dest", dest);
