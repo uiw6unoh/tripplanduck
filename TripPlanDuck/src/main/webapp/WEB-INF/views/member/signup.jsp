@@ -17,6 +17,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
+  <!-- SweetAlert CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  
   <!-- Custom styles for this template -->
   <link href="${ path }/css/member/signup.css" rel="stylesheet">
 
@@ -28,7 +31,7 @@
       <div>
         <h1>SIGN UP</h1>
         <img class="mb-4" src="${ path }/images/member/profile.png" alt="" width="200px">
-        <form action="${ path }/member/signup" method="POST">
+        <form action="${ path }/member/signup" method="POST" name="signup">
             <table class="signup">
               <tr>
                 <td class="title">아이디</td>
@@ -53,7 +56,7 @@
               </tr>
               <tr>               
                 <td>
-                  <input type="text" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
+                  <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
                 </td>
               </tr>
               <tr>
@@ -61,7 +64,7 @@
               </tr>
               <tr>
                 <td>
-                  <input type="text" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
+                  <input type="password" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
                 </td>
               </tr>
               <tr>
@@ -116,12 +119,12 @@
             </table>
            <div class="checkbox mb-2 mt-4">
              <label>
-               <input type="checkbox" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
+               <input type="checkbox" name="privacy_check" id="privacy_check" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
                <br>
-               <input class="auto-login" type="checkbox" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
+               <input class="auto-login" type="checkbox" name="termconditions_check" id="termconditions_check" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
              </label>
            </div>
-           <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+           <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="button" onclick="signup_check();" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
            <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
       </form>
       </div>
@@ -133,6 +136,9 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <script>
 
@@ -151,9 +157,7 @@
          e.preventDefault();
          location.href = '${path}/common/termconditions';
       });
-      
-
-    		  
+      	  
    });
    
    // 아이디 중복 확인
@@ -172,9 +176,17 @@
                console.log(obj);
                
                if(obj.duplicate === true) {
-                  alert("이미 사용중인 아이디 입니다.");
+                  Swal.fire({
+                	  icon: 'error',
+                	  title: '실패!',
+                	  text: '이미 사용중인 아이디 입니다.',
+                	})
                } else {
-                  alert("사용 가능한 아이디 입니다.");
+                  Swal.fire({
+                	  icon: 'success',
+                	  title: '성공!',
+                	  text: '사용 가능한 아이디 입니다.',
+                	})
                }
             }, 
             error: (error) => {
@@ -184,7 +196,146 @@
       });
    });
    
+   // 닉네임 중복 확인
+   $(document).ready(() => {
+      $("#nicknameCheck").on("click", () => {
+         let memberNickname = $("#memberNickname").val().trim();         
+         
+         $.ajax({
+            type: "POST",
+            url: "${ path }/member/nicknameCheck",
+            dataType: "json",
+            data: {
+               memberNickname 
+            },
+            success: (obj) => {
+               console.log(obj);
+               
+               if(obj.duplicate === true) {
+                  Swal.fire({
+                	  icon: 'error',
+                	  title: '실패!',
+                	  text: '이미 사용중인 닉네임 입니다.',
+                	})
+               } else {
+                  Swal.fire({
+                	  icon: 'success',
+                	  title: '성공!',
+                	  text: '사용 가능한 닉네임 입니다.',
+                	})
+               }
+            }, 
+            error: (error) => {
+               console.log(error);
+            }
+         });
+      });
+   });
 	
+// 유효성 검사
+	function signup_check() {
+		// 변수에 넣기
+		var memberId = document.getElementById("memberId");
+		var memberPassword = document.getElementById("memberPassword");
+		var memberPassword2 = document.getElementById("memberPassword2");
+		var membernickName = document.getElementById("memberNickname");
+		var memberEmail = document.getElementById("memberEmail");
+		var female = document.getElementById("female");
+		var male = document.getElementById("male");
+		var age20 = document.getElementById("age20");
+		var age30 = document.getElementById("age30");
+		var age40 = document.getElementById("age40");
+		var age50 = document.getElementById("age50");
+		var privacy_check = document.getElementById("privacy_check");
+		var termconditions_check = document.getElementById("termconditions_check");
+		
+		if (memberId.value == "") { // if(!memberId.value) 로도 사용 가능 
+			Swal.fire('아이디를 입력하세요.')
+			memberId.focus();
+			return false;	
+		}
+		
+		//아이디 형식
+		var idCheck2 = /^[a-z]+[a-z0-9]{4,12}$/;
+		
+		if (!idCheck2.test(memberId.value)) {
+			Swal.fire('아이디는 4~12자 사이 영문자로 입력해주세요.')
+			memberId.focus();
+			return false;
+		}
+		
+		if(memberPassword == "") {
+			Swal.fire('비밀번호를 입력하세요.')
+			memberPassword.focus();
+			return false;
+		}
+		
+		// 비밀번호 형식
+		var passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/;
+		
+		if (!passwordCheck.test(memberPassword.value)) {
+			Swal.fire('비밀번호는 영문자+숫자+특수문자 조합으로 8자리 이상 입력해주세요.')
+			memberPassword.focus();
+			return false;
+		}
+		
+		if (memberPassword2.value !== memberPassword.value) {
+			Swal.fire('비밀번호가 일치하지 않습니다.')
+			memberPassword2.focus();
+			return false;
+		}
+		
+		if (memberNickname.value == "") {
+			Swal.fire('닉네임을 입력하세요.')
+			memberNickname.focus();
+			return false;
+		}
+		
+		// 이메일 형식
+		var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		
+		if (memberEmail.value == "") {
+			Swal.fire('이메일주소를 입력하세요.')
+			memberEmail.focus();
+			return false;
+		} 
+		
+		if (!emailCheck.test(memberEmail.value)) {
+			Swal.fire('이메일 형식에 맞게 입력해주세요.')
+			memberEmail.focus();
+			return false;
+		}
+		
+		if ($("input[name=memberGender]:radio:checked").length < 1) {
+			Swal.fire('성별을 선택해 주세요.')
+			female.focus();
+			return false;
+		}
+		
+		if ($("input[name=memberAge]:radio:checked").length < 1) {
+			Swal.fire('연령대를 선택해 주세요.')
+			age20.focus();
+			return false;
+		}
+		 
+		if (!privacy_check.checked) {
+			Swal.fire('개인정보수집에 동의해주세요.')
+			privacy_check.focus();
+			return false;
+		} 
+		
+		if (!termconditions_check.checked) {
+			Swal.fire('이용약관에 동의해주세요.')
+			termconditions_check.focus();
+			return false;
+		} 
+		
+		//입력 값 전송
+		document.signup.submit(); 
+		
+}
+		
+   
    
 
 </script>

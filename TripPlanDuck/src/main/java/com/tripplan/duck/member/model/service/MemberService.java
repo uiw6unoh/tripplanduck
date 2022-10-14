@@ -9,7 +9,11 @@ public interface MemberService {
 
 	int save(Member member);
 
-	Boolean isDuplicateID(String memberId);
+	Boolean isCheckID(String memberId);
+
+	Boolean isCheckNickname(String memberNickname);
+
+	Member findMemberByNickname(String memberNickname);
 
 
 

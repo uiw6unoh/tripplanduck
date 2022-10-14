@@ -27,6 +27,12 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mapper.selectMemberById(memberId);
 	}
+	
+	@Override
+	public Member findMemberByNickname(String memberNickname) {
+	
+		return mapper.selectMemberByNickname(memberNickname);
+	}
 
 	@Override
 	public Member login(String memberId, String memberPassword) {
@@ -66,11 +72,16 @@ public class MemberServiceImpl implements MemberService {
 
 
 	@Override
-	public Boolean isDuplicateID(String memberId) {
+	public Boolean isCheckID(String memberId) {
 		
 		return this.findMemberById(memberId) != null;
 	}
 
+	@Override
+	public Boolean isCheckNickname(String memberNickname) {
+		
+		return this.findMemberByNickname(memberNickname) != null;
+	}
 
 
 

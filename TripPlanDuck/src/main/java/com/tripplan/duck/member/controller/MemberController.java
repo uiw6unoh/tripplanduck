@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -181,12 +183,29 @@ public class MemberController {
 		return map;
 	}
 	
-//	@PostMapping("/member/idCheck")
-//	public String idCheck() {
-//		
-//		return "member/signup";
-//	}
+	@PostMapping("/member/idCheck")
+//	@ResponseBody
+	public ResponseEntity<Map<String, Boolean>> idCheck(@RequestParam String memberId) {
+		log.info("{}", memberId);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("duplicate", service.isCheckID(memberId));
+		
+		return new ResponseEntity<Map<String,Boolean>>(map, HttpStatus.OK);
+	}
 	
+	
+	@PostMapping("/member/nicknameCheck")
+	public ResponseEntity<Map<String, Boolean>> nicknameCheck(@RequestParam String memberNickname) {
+		log.info("{}", memberNickname);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("duplicate", service.isCheckNickname(memberNickname));
+		
+		return new ResponseEntity<Map<String,Boolean>>(map, HttpStatus.OK);
+	}
 	
 	
 }

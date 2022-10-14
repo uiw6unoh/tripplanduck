@@ -42,6 +42,11 @@
 		<include refid="selectMemberSql"/>
 		WHERE M_ID = #{memberId} AND M_STATUS = 'Y'
 	</select>
+	
+	<select id="selectMemberByNickname" parameterType="string" resultMap="memberResultMap">
+		<include refid="selectMemberSql"/>
+		WHERE M_NICKNAME = #{memberNickname} AND M_STATUS = 'Y'
+	</select>
 
 	<insert id="insertMember" parameterType="Member"
 			useGeneratedKeys="true" keyColumn="M_NO" keyProperty="memberNo"> 
