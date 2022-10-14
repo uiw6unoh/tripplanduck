@@ -143,11 +143,4 @@ public class WithDuckServiceImpl implements WithDuckService {
 		return mapper.detailWithDuck(withNo);
 	}
 
-	@Override
-	public int updateWithDuck(int withNo) {
-
-		return mapper.updateWithDuck(withNo);
-	}
-
-
 }

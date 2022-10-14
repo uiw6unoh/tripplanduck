@@ -89,6 +89,13 @@
 			]]>
 	</select>
 	
+	<!-- 조회수 증가 -->
+    <update id="updateCount" parameterType="int">
+        UPDATE DESTINATION SET
+        DEST_HIT = NVL(DEST_HIT, 0) + 1
+        WHERE DEST_NO = #{destNo}
+    </update>
+	
 	<select id="getDestinationsByLocationId" parameterType="int" resultMap="DestinationResultMap">
 		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_LIKE_SUM
 	</select>

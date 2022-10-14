@@ -10,6 +10,8 @@ import com.tripplan.duck.trip.model.vo.Destination;
 public interface DestinationService {
 
 	void insertData(Map<String, Object> param);
+	
+	void updateCount(int destNo);
 
 	String getCateogryName(int i);
 
@@ -24,6 +26,5 @@ public interface DestinationService {
 	List<Location> getLocations(String string);
 
 	List<Location> getLocationsByName(String order);
-
 
 }

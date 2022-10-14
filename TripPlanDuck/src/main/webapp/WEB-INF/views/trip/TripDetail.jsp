@@ -196,6 +196,9 @@
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">짹짹이 김여울</p>
+	                              <div class="star-rating m-0">
+									<span>별점</span> 	
+	                              </div>
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -326,7 +329,7 @@
           //삭제 요청 처리
           swal.fire(
           '수정완료!',
-          '댓글이 삭제되었습니다',
+          '댓글이 수정되었습니다',
           'success'
     )
         } else {
