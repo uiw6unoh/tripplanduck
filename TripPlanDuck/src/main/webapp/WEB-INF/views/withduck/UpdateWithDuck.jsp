@@ -32,7 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/create" method="post" enctype="multipart/form-data">
+<form action="${path }/withduck/create" method="post" id="formobj" enctype="multipart/form-data">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -200,7 +200,7 @@
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
         <button class="btn btn-outline-warning" type="submit">수정완료</button>
-        <button class="btn btn-outline-warning" type="submit">취소</button>
+        <button class="btn btn-outline-warning" type="submit" id="cancel">취소</button>
     </div>
 </form>
 
@@ -224,6 +224,17 @@
 </html>
 
 <script>
+$(function() {
+	var cancel = $('#cancel');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "/withduck/list");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
     $(this).addClass('selected');

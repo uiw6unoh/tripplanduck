@@ -144,7 +144,6 @@
                 </div>
             </div>
         </div>
-    </section>
 <input type="hidden" value="${withDuck.withWriterNo }" name="withWriterNo">
 <input type="hidden" value="${withDuck.withAge }" name="withAge">
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
@@ -157,10 +156,16 @@
     <button class="btn btn-outline-warning" type="button">
         목록으로
     </button>
-
-    <button class="btn btn-outline-warning" type="submit">
-        수정하기
-    </button>
+	
+	<c:if test="${loginMember.memberNo == withDuck.withWriterNo }">
+	    <button class="btn btn-outline-warning" type="submit">
+	        수정하기
+	    </button>
+		
+		<button class="btn btn-outline-warning" type="submit">
+	        삭제하기
+	    </button>
+	</c:if>
 </div>
 </form>
 

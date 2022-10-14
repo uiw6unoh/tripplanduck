@@ -32,7 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/create" method="post" enctype="multipart/form-data">
+<form action="${path }/withduck/create" method="post" id="formobj" enctype="multipart/form-data">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -181,15 +181,15 @@
     <section class="zone3">
     <div class="content_container">
         <p>제목</p>
-            <input type="text" class="with_title" name="withTitle" id="" placeholder="제목을 입력하세요!" required>
+            <input type="text" class="with_title" name="withTitle" id="" placeholder="제목을 입력하세요!">
         
         <p style="margin-top: 10px;">내용</p>
-        <textarea id="summernote" name="withContent" required></textarea>
+        <textarea id="summernote" name="withContent"></textarea>
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
         <button class="btn btn-outline-warning" type="submit">등록</button>
-        <button class="btn btn-outline-warning" type="submit">취소</button>
+        <button class="btn btn-outline-warning" type="button" id="cancel">취소</button>
     </div>
   </div>
 </form>
@@ -216,6 +216,17 @@
 </html>
 
 <script>
+$(function() {
+	var cancel = $('#cancel');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "/withduck/list");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
     $(this).addClass('selected');
