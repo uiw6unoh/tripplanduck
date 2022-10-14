@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tripplan.duck.member.model.service.EmailSendService;
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
 
@@ -205,6 +206,20 @@ public class MemberController {
 		map.put("duplicate", service.isCheckNickname(memberNickname));
 		
 		return new ResponseEntity<Map<String,Boolean>>(map, HttpStatus.OK);
+	}
+	
+	
+	@Autowired
+	private EmailSendService emailService;
+	
+	// 이메일 인증
+	@GetMapping("/member/emailCheck")
+	@ResponseBody
+	public String emailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어왔어요!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		
+		return emailService.joinEmail(email);
 	}
 	
 	

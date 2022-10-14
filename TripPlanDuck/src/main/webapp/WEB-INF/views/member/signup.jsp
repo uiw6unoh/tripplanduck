@@ -74,13 +74,13 @@
                 <td>
                   <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="abc@gmail.com" required>
                 </td>
-                <td><input type="button" class="form-control" id="checkDuplicate" value="인증하기"></td>
+                <td><input type="button" class="form-control" id="EmailCheck" value="인증하기"></td>
               </tr>
               <tr>
                 <td>
-                <input type="text" class="form-control" id="memberEmailNumber" required>
+                <input type="text" class="form-control" id="memberEmailNumber"  placeholder="인증번호 6자리 입력" required>
                 </td>
-                <td><input type="button" class="form-control" id="checkDuplicate2" value="인증번호확인"></td>
+                <td><input type="hidden" class="form-control" id="EmailCheck2" value="인증번호확인" disabled="disabled" maxlength="6"></td>
               </tr>
               <tr>
                 <td>성별</td>
@@ -231,8 +231,52 @@
          });
       });
    });
+   
+   
+   
+   // 이메일 인증
+   $('#EmailCheck').click(function() {
+		const eamil = $('#memberEmail').val() // 이메일 주소값 얻어오기
+		console.log('이메일 : ' + eamil); // 이메일 오는지 확인
+		const checkInput = $('#memberEmailNumber') // 인증번호 입력하는곳 
+		
+		$.ajax({
+			type : 'get',
+			url : '<c:url value ="/member/emailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 붙힐수있다.
+			success : function (data) {
+				console.log("data : " +  data);
+				checkInput.attr('disabled',false);
+				code =data;
+				Swal.fire('인증번호가 전송되었습니다.')
+			}			
+		}); // end ajax
+	}); // end send eamil
 	
-// 유효성 검사
+	// 인증번호 비교 
+	// blur -> focus가 벗어나는 경우 발생
+	$('#memberEmailNumber').blur(function () {
+		const inputCode = $(this).val();
+		
+		if(inputCode === code){
+			$('#EmailCheck2').attr('disabled',true);
+			$('#memberEmail').attr('readonly',true);
+			Swal.fire({
+          	  icon: 'success',
+          	  title: '일치!',
+          	  text: '인증번호가 일치합니다!',
+			})
+		}else{
+			Swal.fire({
+	          	  icon: 'error',
+	          	  title: '불일치!',
+	          	  text: '인증번호가 불일치 합니다. 다시 확인해주세요!',
+				})
+		}
+		
+	});
+	
+	
+	// 유효성 검사
 	function signup_check() {
 		// 변수에 넣기
 		var memberId = document.getElementById("memberId");
@@ -256,7 +300,7 @@
 		}
 		
 		//아이디 형식
-		var idCheck2 = /^[a-z]+[a-z0-9]{4,12}$/;
+		var idCheck2 = /^[a-z]+[a-z0-9]{3,13}$/;
 		
 		if (!idCheck2.test(memberId.value)) {
 			Swal.fire('아이디는 4~12자 사이 영문자로 입력해주세요.')
@@ -291,6 +335,7 @@
 			return false;
 		}
 		
+		
 		// 이메일 형식
 		var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 		
@@ -305,6 +350,16 @@
 			memberEmail.focus();
 			return false;
 		}
+		
+		if(memberEmailNumber.value !== code){
+			Swal.fire({
+	          	  icon: 'error',
+	          	  title: '불일치!',
+	          	  text: '인증번호가 불일치 합니다. 다시 확인해주세요!',
+				})
+			memberEmailNumber.focus();
+			return false;
+		} 
 		
 		if ($("input[name=memberGender]:radio:checked").length < 1) {
 			Swal.fire('성별을 선택해 주세요.')
@@ -332,6 +387,7 @@
 		
 		//입력 값 전송
 		document.signup.submit(); 
+
 		
 }
 		
