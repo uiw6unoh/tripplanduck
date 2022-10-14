@@ -8,7 +8,6 @@
 <script src="https://code.jquery.com/jquery-3.6.1.slim.js"
 	integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk="
 	crossorigin="anonymous"></script>
-
 <jsp:include page="../common/header.jsp" />
 
 <link rel="stylesheet"
@@ -53,11 +52,40 @@
 </style>
 <section>
 
-	<% 
-//List<Location> lo = (List<Location>)request.getAttribute("location");
-//int lo_id = lo.get(0).getLocationId();
-//out.println(lo_id);
-%>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+  모달 테스트
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+		<div class="map_wrap">
+			<div id="mapCopy" style="width: 50%; height: 50%;">
+		    <p class="getdata">
+		        <button onclick="getDataFromDrawingMap()">가져오기</button>
+		    </p>
+			</div>
+		</div>
+		</div>
+		
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary">확인</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 
 	<form name="frm" action="${path}/planner/myplannerAction" method="post">
 		<div class="container-fluid">
@@ -111,7 +139,10 @@
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
 							<input type="submit" name="location"
 								class="col-5 btn btn-success" value="완 성">
-							<button type="button" id="delete" class="col-5 btn btn-danger">초기화</button>
+								<a  data-toggle="modal" data-target="#myModal" href="${ path }/planner/test" >Launch modal</a>
+							<!-- 
+								<a id="delete" class="col-5 btn btn-danger" href="${ path }/planner/test">초기화</a>
+							 -->	
 
 						</div>
 						<button type="button" id="lookCourseBtn" class="btn btn-md">경로
@@ -119,13 +150,11 @@
 					</div>
 					<div class="left-box2">
 						<div id="divCopy" style="height: 25%; overflow: auto;">
-							<div class="row no-gutters">
+							<div class="row no-gutters"></div>
 								<div id="divCopy_chil" class="col-md-4"></div>
 								<div class="col-md-8">
 									<div class="card-body "></div>
 								</div>
-							</div>
-							<div id="copyButton" onclick="deleteDiv()"></div>
 						</div>
 					</div>
 				</div>
@@ -147,7 +176,7 @@
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 loca_${ destination.locationId }"
-								style="width: 300px;">
+								style="width: 400px;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
 										<img class="destImage" src="${ destination.destImage }">
@@ -202,33 +231,46 @@ $(document).ready(function(){
 		// 마커 찍기
 		addMarker(new kakao.maps.LatLng(destMapX, destMapY));
 
-		 data.push(destSubject);
-		 $("#place").val(data);
-
+			 data.push(destSubject);
+			 $("#place").val(data);
+			 
+//		 if(data == destSubject){
+//		 }
+//줌 회의가 아직 안열린거같아요
 
 	$('#divOriginal_'+destNo).appendTo('#divCopy_chil');
 	
-	$('#divCopy').find('a').replaceWith('<a id="deleteButton" class="material-icons" onclick="deleteDiv()" >delete</a>');
-
+	$('#divCopy').find('a').replaceWith('<a id="deleteButton" class="material-icons" onclick=deleteDiv('+destNo+',"'+destSubject+'","'+data+'")>delete</a>');
+	//$('#divCopy').find('#divCopy_').replaceAll('#divOriginal_');
+	
+	//$('#divCopy_chil').find('#divOrginal_'+destNo).replaceWith();
+	//$('#addDesti').find('a').replaceWith('a id="x" class="material-icons">delete</a>);
+	
+	//$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
+	
 	});
 });
 
+function deleteDiv(destNo,destSubject,data) {
+	alert(destNo);
+	alert(destSubject);
 
-
-function deleteDiv() {
-			
-	$('#divCopy_chil').find('#divOriginal_'+destNo).replaceWith('<div id="divCopy_+destNo"  style="width: 300px;"> </div>');
+	alert(data);
+	
+	
+	data.splice(0,1);
+	//delete data[0];
+	alert(data);
+	
+	//$('#divCopy_chil').find('#divOriginal_'+destNo).replaceWith('<div id="divCopy_+destNo" style="width: 300px;"> </div>');
 
 	//$('#divOriginal_'+destNo).empty();
-	// $().appendTo('#divOriginal');
+	// 하나만 선택 가능한걸 생각 좀 해보자
+	$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
 };
 
 
- 
- 
- 
- 
- 
+
  
  
  // 지도상의 선 긋기
@@ -254,18 +296,22 @@ function addLine(markers){
 
    // 지도에 표시할 선을 생성합니다
    var polyline = new kakao.maps.Polyline({
+	   
        path: linePath, // 선을 구성하는 좌표배열 입니다
        strokeWeight: 2, // 선의 두께 입니다
        strokeColor: 'red', // 선의 색깔입니다
        strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
        strokeStyle: 'solid' // 선의 스타일입니다
    });
+   
    lines.push(polyline);
    // 지도에 선을 표시합니다 
    polyline.setMap(map); 
 }
 
-
+$('#myModal').modal({
+	  keyboard: false
+});
 
 </script>
 
@@ -280,6 +326,10 @@ function addLine(markers){
 	src="${ path }/resources/js/planner/mapex.js"></script>
 <script type="text/javascript"
 	src="${ path }/resources/js/planner/addMarker.js"></script>
+	<!-- 
+		<script type="text/javascript"
+		src="${ path }/resources/js/planner/modal.js"></script>
+	 -->
 
 <script>	
 	locationValue( $('#locationSelect') );

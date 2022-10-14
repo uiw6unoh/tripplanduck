@@ -79,6 +79,14 @@ public class PlannerController {
 //			System.out.println("넘어는 오는 place값"+ place);
 //			System.out.println("넘어오는 페이지");
 			
+//			String[] arrayPlace = place.split(",");
+//			for(int i = 0; i<arrayPlace.length;i++) {
+//				System.out.println("구분된 제목은?"+arrayPlace[i]);
+//				
+//			}
+			
+			
+			
 			int value = service.plannerInsert(demo, locationSelect, destImage, place);
 			
 			String path="";
