@@ -38,9 +38,8 @@ public class MyPageController {
 	public String Mypage(
 			HttpSession session,
 			@RequestParam(required = false, defaultValue = "1") int offset, 
-			@RequestParam(defaultValue = "planner") String select, 
+			@RequestParam(defaultValue = "") String select, 
 			Model model) throws Exception {
-		
 		
 		//세션에 저장된 멤버 데이터 
 		Member member = (Member)session.getAttribute("loginMember");
@@ -49,23 +48,31 @@ public class MyPageController {
 		//Member member = new Member(2, "yeoul", "1234", "김여울", "여리", "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20); 
 		//model.addAttribute("member", member);
 		
-		System.out.println("logined memger : " + member);
+		// System.out.println("logined memger : " + member);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("memberNo", member.getMemberNo());
 		param.put("offset", offset);
 		
-		if(select.equals("planner")) {
-			List<MyPlanner> myPlannerList = myPageService.selectMyPlannerByMNo(param);
-			model.addAttribute("myPlannerFirst", myPlannerList != null ? myPlannerList.get(0) : null);
-		}else if(select.equals("trip")) {
-			List<Destination> tripList = myPageService.selectTripByMNo(param);
-			model.addAttribute("tripFirst", tripList != null ? tripList.get(0) : null);
-		}else if(select.equals("comment")) {
-			List<Comments> commentsList = myPageService.selectCommentsByMNo(param);
-			model.addAttribute("commentFirst", commentsList != null ? commentsList.get(0) : null);		
+		// select가 빈 문자열이라면 모두 조회, 지정하였을 경우에는 그 값을 조회	
+		// 만약 빈문자열이라면 하단 세개의 분기문이 모두 실행됨
+		if((!select.equals("trip") && !select.equals("comment"))) {
+			
+			MyPlanner myPlanner = myPageService.selectMyPlannerByMNo(param) != null ? myPageService.selectMyPlannerByMNo(param).get(0) : null;
+			model.addAttribute("myPlannerFirst", myPlanner);
 		}
 		
+		if((!select.equals("planner") && !select.equals("comment"))) {
+			Destination trip = myPageService.selectTripByMNo(param) != null ? myPageService.selectTripByMNo(param).get(0) : null;
+			model.addAttribute("tripFirst", trip);
+		}
+
+		if((!select.equals("trip") && !select.equals("planner"))) {
+			Comments comments = myPageService.selectCommentsByMNo(param) != null ? myPageService.selectCommentsByMNo(param).get(0) : null;
+			model.addAttribute("commentFirst", comments);		
+		}
+
+		// 여행카드의 지역 옵션 리스트 
 		model.addAttribute("options", myPageService.getOptions());
 		
 		return "mypage/MypageMain";
@@ -92,18 +99,22 @@ public class MyPageController {
 		int start = 0;
 		int end = 0;
 		
-		if(locationId > 0) {
-			 start = (offset-1)*3;
-			 end = 3; 
-			 
-		} else {
-			start = (offset == 1) ?  1: ((offset-1)*3);
+		// 여행카드의 경우 옵션 값에 따라 데이터를 바꿔줘야하므로 
+		// 더보기 처음 눌렀을 경우 세개, 더보기 n번 누를경우 *n 만큼의 데이터 반환
+		if(select.equals("trip")) {
+			start = 0;
+			end = offset * 3; 
+		}else {
+			// 이미 마이페이지에서 보여준 데이터가 있으므로 
+			// 더보기 처음 클릭시 데이터 두개 반환
+			// 그 이후 클릭시 세개씩 반환됨
+			start = (offset == 1) ?  1 : ((offset-1)*3);
 			end = (offset == 1) ? 2 : 3; 
 		}
 		
 		param.put("offset", start);
 		param.put("end", end);
-		param.put("locationId", locationId);
+		param.put("locationId", locationId); //지역 옵션 아이디 
 		param.put("memberNo", member.getMemberNo());
 		
 		System.out.println("param : "+ param);
