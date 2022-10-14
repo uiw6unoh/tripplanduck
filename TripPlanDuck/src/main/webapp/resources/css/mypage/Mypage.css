@@ -34,11 +34,10 @@ li {
 }
 
 /* 탭메뉴 */
-.nav-link {
+.nav-item {
     color: black;
-    font-size: 1.5rem;
-    border: 0;
-    outline: 0;
+    font-size: 2.5rem;
+   
 }
 
 .nav-link:after:hover {
@@ -105,29 +104,29 @@ li {
     width: 800px;
     height: 200px;
     /* padding: 20px; */
-    transition: all 200ms ease-in-out;
+    /* transition: all 200ms ease-in-out; */
 }
 
 .imgSize {
     width: 240px;
     height: 220px;
     padding-bottom: 20px;
-    transition: all 200ms ease-in-out;
+    /* transition: all 200ms ease-in-out; */
     cursor: pointer;
 }
 
 .likeCard:hover {
-    width: 810px;
-    height: 210px;
-    margin-top: 5px;
+    /* width: 810px; */
+    /* height: 210px; */
+    /* margin-top: 5px; */
     cursor: pointer;
     box-shadow: 0px 12px 30px 0px #fff8c6;
     border: 1px solid #fff8c6;
 }
 
 .likeCard:hover .imgSize {
-    height: 230px;
-    transition: all 200ms ease-in-out;
+    /* height: 230px; */
+    /* transition: all 200ms ease-in-out; */
     /* transform: scale(1.1); */
 }
 

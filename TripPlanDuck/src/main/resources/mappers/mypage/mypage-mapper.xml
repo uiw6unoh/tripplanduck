@@ -140,7 +140,11 @@
 				dc.COMMENTS_UPDATEDATE,
 				dc.COMMENTS_IP_ADDRESS,
 				dc.DEST_NO,
-				d.DEST_CATEGORY
+				d.DEST_CATEGORY,
+				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
+				TO_CHAR(dc.COMMENTS_UPDATEDATE, 'yyyy-mm-dd') as COMMENTS_UPDATEDATE_ST,
+				d.DEST_SUBJECT
+				
 			FROM
 				DESTINATION_COMMENTS dc JOIN DESTINATION D
 				ON dc.DEST_NO = d.dest_no
@@ -272,7 +276,7 @@
 				</if>
 			ORDER BY
 				d.dest_updatedate DESC
-			OFFSET #{offset} ROWS FETCH NEXT ${end} ROWS ONLY	
+			OFFSET #{offset} ROWS FETCH NEXT #{end} ROWS ONLY	
 	</select>
 	
 	
