@@ -51,7 +51,7 @@
 	                <div id="image_preview1" style="cursor: pointer;">
 		                <img class="car-img" name="photo1" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
 	                <label for="file1" class="file">사진추가</label>
-	                <input type="file" id="file1" style="display: none;">
+	                <input type="file" name="file1" id="file1" value="${photoList[0] }" style="display: none;">
 	                </div>
 	            </c:if>
 	            <c:if test="${empty photoList[0] }">
@@ -75,7 +75,7 @@
 	                <div id="image_preview2" style="cursor: pointer;">
 		                <img class="car-img" name="photo2" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
 	                <label for="file2" class="file">사진추가</label>
-	                <input type="file" name="file2" id="file2" style="display: none;">
+	                <input type="file" name="file2" value="${photoList[1] }" id="file2" style="display: none;">
 	                </div>
 	            </c:if>
                 
@@ -100,7 +100,7 @@
 	                <div id="image_preview3" style="cursor: pointer;">
 		                <img class="car-img" name="photo3" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
 	                <label for="file3" class="file">사진추가</label>
-	                <input type="file" name="file3" id="file3" style="display: none;">
+	                <input type="file" name="file3" id="file3" value="${photoList[2] }" style="display: none;">
 	                </div>
 	            </c:if>
 	            
