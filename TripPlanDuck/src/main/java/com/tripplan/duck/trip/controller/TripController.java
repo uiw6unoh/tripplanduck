@@ -1,7 +1,9 @@
 package com.tripplan.duck.trip.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +32,7 @@ public class TripController {
 								@RequestParam(value="sort", required = false)String sort){
 		
 		String order = "DEST_LIKE_SUM";
-		List<Location> list = new ArrayList<Location>();
+		List<Location> list = new ArrayList<Location>();                                       
 		
 		if(sort == null)
 			sort = "4";
@@ -79,7 +81,13 @@ public class TripController {
 	}
 	
 	@GetMapping("/list")
-	public ModelAndView list(ModelAndView model, @RequestParam(value="locationId")int locationId) {
+	public ModelAndView list(ModelAndView model, @RequestParam(value="locationId")int locationId,
+											 @RequestParam(value="keyword", required = false)String keyword) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("locationId", locationId);
+		param.put("keyword", keyword);
+		
 		
 		Location location = destinationService.getLocation(locationId);
 		List<Destination> destinations = destinationService.getDestinationsByLocationId(locationId);
@@ -91,5 +99,11 @@ public class TripController {
 		return model;
 	}
 	
-
+	@GetMapping("/search")
+	public ModelAndView list(ModelAndView model ) {
+		
+		model.setViewName("trip/TripSearch");
+		
+		return model;
+	}
 }
