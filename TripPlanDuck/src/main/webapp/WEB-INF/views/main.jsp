@@ -18,7 +18,7 @@
 			<div class="video-overlay w-100" style="z-index: 2; background-color: rgba(0, 0, 0, 0.45)"></div>
 		</div>
   	</div>
-</section>
+  </section>
 
   <style>
       /* 비디오 */
