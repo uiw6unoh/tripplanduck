@@ -164,5 +164,12 @@
 		WITH_STATUS = 'N'
 		WHERE WITH_NO = #{withNo}
 	</update>
+
+	<update id="withDuckReadCount" parameterType="_int">
+		UPDATE WITHDUK
+		SET
+		WITH_READCOUNT = WITH_READCOUNT + 1
+		WHERE WITH_NO = #{withNo}
+	</update>
 	
 </mapper>

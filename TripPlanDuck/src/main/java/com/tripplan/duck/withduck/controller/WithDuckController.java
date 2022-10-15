@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -379,11 +382,47 @@ public class WithDuckController {
 	///////////////////////////////////////////////////위드덕 상세페이지////////////////////////////////////////////////////////////
 	@GetMapping("/detail")
 	public ModelAndView detailWithDuck(ModelAndView model,
-									   @RequestParam(value = "withNo") int withNo) {
+									   @RequestParam(value = "withNo") int withNo,
+									   HttpServletRequest request,
+									   HttpServletResponse response) {
 		WithDuck withDuck = null;
 		String[] arr = null;
 		
+		Cookie[] cookies = request.getCookies();
+    	String boardHistory = ""; // 조회한 게시글 번호를 저장하는 변수
+    	boolean hasRead = false; // 읽은 글이면 true, 안 읽었으면 false
+    	
+    	if(cookies != null) {
+    		String name = null;
+    		String value = null;
+    		for (Cookie cookie : cookies) {
+				name = cookie.getName();
+				value = cookie.getValue();
+				
+				// boardHistroy인 쿠키 값을 찾기
+				if(name.equals("boardHistory")) {
+					boardHistory = value;
+					
+					if(value.contains("|" + withNo + "|")) {
+						hasRead = true;
+						
+						break;
+					}
+				}
+			}
+    	}
+    	// 2. 읽지 않은 게시글이면 cookie 에 기록
+    	if(!hasRead) {
+        	Cookie cookie = new Cookie("boardHistory", boardHistory + "|" + withNo + "|");
+        	
+        	cookie.setMaxAge(-1); // 브라우저 종료 시 삭제
+        	response.addCookie(cookie);
+    	}
+		
 		withDuck = service.detailWithDuck(withNo);
+		
+		service.withDuckReadCount(withNo, hasRead);
+		
 		System.out.println("위드덕 위드 넘버로 조회 : " + withDuck);
 		System.out.println("디테일 날짜확인 : " + withDuck.getWithStartDate());
 		
@@ -453,7 +492,7 @@ public class WithDuckController {
 										 @RequestParam(value = "file2", required = false) MultipartFile file2,
 										 @RequestParam(value = "file3", required = false) MultipartFile file3,
 										 @SessionAttribute("loginMember") Member loginMember) {
-int result = 0;
+		int result = 0;
 		
 
 		// 1. 파일을 업로드 했는지 확인 후 파일을 저장

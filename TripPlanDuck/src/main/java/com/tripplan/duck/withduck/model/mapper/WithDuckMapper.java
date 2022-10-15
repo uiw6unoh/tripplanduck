@@ -42,6 +42,8 @@ public interface WithDuckMapper {
 
 	int deleteWithDuck(int withNo);
 
+	int withDuckReadCount(int withNo);
+
 
 
 

@@ -214,7 +214,7 @@
                         </a>
                         <p class="title">${withDuck.withTitle }</p>
                         <p>${withDuck.withContent }</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>
@@ -257,9 +257,9 @@
 		                   		</c:if>
 							</c:if>
                         </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="title">${withDuck.withTitle }</p>
+                        <p class="content" id="content" >${withDuck.withContent }</p>
+                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>

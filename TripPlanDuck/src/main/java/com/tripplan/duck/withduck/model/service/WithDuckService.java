@@ -40,5 +40,7 @@ public interface WithDuckService {
 
 	int deleteWithDuck(int withNo);
 
+	int withDuckReadCount(int withNo, boolean hasRead);
+
 
 }
