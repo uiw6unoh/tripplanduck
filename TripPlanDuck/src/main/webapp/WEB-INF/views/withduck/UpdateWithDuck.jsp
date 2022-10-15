@@ -47,9 +47,18 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
 	            <div class="carousel-item active">
-	                <div id="image_preview1">
-		                <img class="car-img" name="photo1" style="">
+	            <c:if test="${not empty photoList[0] }">	            
+	                <div id="image_preview1" style="cursor: pointer;">
+		                <img class="car-img" name="photo1" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file1" class="file">사진추가</label>
+	                <input type="file" id="file1" style="display: none;">
 	                </div>
+	            </c:if>
+	            <c:if test="${empty photoList[0] }">
+	                <div id="image_preview1" style="cursor: pointer;">
+		                <img class="car-img" name="photo1" style="">
+		            </div>
+		            
 	                <div class="empty" id="empty1">
 	                <div>
 	                    <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
@@ -58,33 +67,57 @@
 	                <label for="file1" class="file">사진추가</label>
 	                <input type="file" name="file1" id="file1" style="display: none;">
 	                </div>
+	            </c:if>
 	            </div>
+	            
             <div class="carousel-item">
-               	<div id="image_preview2">
-	                <img class="car-img" name="photo2" style="">
-                </div>
+                <c:if test="${not empty photoList[1] }">	            
+	                <div id="image_preview2" style="cursor: pointer;">
+		                <img class="car-img" name="photo2" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file2" class="file">사진추가</label>
+	                <input type="file" name="file2" id="file2" style="display: none;">
+	                </div>
+	            </c:if>
                 
-                <div class="empty" id="empty2">
-                    <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
-                    </div>
-                    <p>업로드할 사진을 추가해보세요!</p>
-                    <label for="file2" class="file">사진추가</label>
-                    <input type="file" name="file2" id="file2" style="display: none;">
-                </div>
+                <c:if test="${empty photoList[1] }">
+                	<div id="image_preview2" style="cursor: pointer;">
+		                <img class="car-img" name="photo2" style="">
+		            </div>
+                
+	                <div class="empty" id="empty2">
+	                    <div>
+	                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
+	                    </div>
+	                    <p>업로드할 사진을 추가해보세요!</p>
+	                    <label for="file2" class="file">사진추가</label>
+	                    <input type="file" name="file2" id="file2" style="display: none;">
+	                </div>
+                </c:if>
             </div>
+            
             <div class="carousel-item">
-               <div id="image_preview3">
-	                <img class="car-img" name="photo3" style="">
-                </div>
-                <div class="empty" id="empty3">
-                    <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
-                    </div>
-                    <p>업로드할 사진을 추가해보세요!</p>
-                    <label for="file3" class="file">사진추가</label>
-                    <input type="file" name="file3" id="file3" style="display: none;">
-                </div>
+                <c:if test="${not empty photoList[2] }">	            
+	                <div id="image_preview3" style="cursor: pointer;">
+		                <img class="car-img" name="photo3" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file3" class="file">사진추가</label>
+	                <input type="file" name="file3" id="file3" style="display: none;">
+	                </div>
+	            </c:if>
+	            
+                <c:if test="${empty photoList[2] }">
+                	<div id="image_preview3" style="cursor: pointer;">
+		                <img class="car-img" name="photo3" style="">
+		            </div>
+                
+	                <div class="empty" id="empty3">
+	                    <div>
+	                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
+	                    </div>
+	                    <p>업로드할 사진을 추가해보세요!</p>
+	                    <label for="file3" class="file">사진추가</label>
+	                    <input type="file" name="file3" id="file3" style="display: none;">
+	                </div>
+                </c:if>
             </div>
             </div>
         
@@ -223,6 +256,18 @@
 </html>
 
 <script>
+$('#image_preview1').on('click', function() {
+	$('#file1')[0].click();
+});
+
+$('#image_preview2').on('click', function() {
+	$('#file2')[0].click();
+});
+
+$('#image_preview3').on('click', function() {
+	$('#file3')[0].click();
+});
+
 $(function() {
 	var cancel = $('#cancel');
 	

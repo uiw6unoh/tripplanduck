@@ -47,10 +47,11 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
             <div class="carousel-item active">
+            <div style="cursor: pointer;" id="file_container1">
                 <div id="image_preview1">
 	                <img class="car-img" name="photo1" style="">
                 </div>
-                
+            </div>
                 <div class="empty" id="empty1">
                 <div>
                     <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
@@ -61,10 +62,11 @@
                 </div>
             </div>
             <div class="carousel-item">
+            <div style="cursor: pointer;" id="file_container2">
                	<div id="image_preview2">
 	                <img class="car-img" name="photo2" style="">
                 </div>
-                
+            </div>
                 <div class="empty" id="empty2">
                     <div>
                         <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
@@ -75,9 +77,11 @@
                 </div>
             </div>
             <div class="carousel-item">
+            <div style="cursor: pointer;" id="file_container3">
                <div id="image_preview3">
 	                <img class="car-img" name="photo3" style="">
                 </div>
+            </div>
                 <div class="empty" id="empty3">
                     <div>
                         <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
@@ -243,6 +247,16 @@ $(document).on('click', '.age_btn', function(){
     $('#btnValueSaveAge').attr('value', $('.age_btn.selected').val());
 });
 
+$('#file_container1').on('click', function() {
+	$('#file1')[0].click();
+});
+$('#file_container2').on('click', function() {
+	$('#file2')[0].click();
+});
+$('#file_container3').on('click', function() {
+	$('#file3')[0].click();
+});
+	
 
     $(document).ready(function() {
     	var date = new Date();
