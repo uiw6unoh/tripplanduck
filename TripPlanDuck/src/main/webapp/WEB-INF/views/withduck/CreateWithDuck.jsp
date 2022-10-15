@@ -28,6 +28,27 @@
     <link rel="stylesheet" href="${path }/resources/css/withduck/summernote/summernote-lite.css">
 
     <title>동행 생성</title>
+    
+    <style>
+      .tag-item {
+        display: flex;
+        margin-right: 10px;
+        width: 100px;
+        height: 50px;
+        background-color: #a7a2a238;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        margin-top: 20px;
+        margin-right: 5px;
+        border-radius: 0.9em;
+      }
+
+      .div_container {
+        display: flex;
+        margin-bottom: 5px;
+      }
+    </style>
 </head>
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
@@ -189,13 +210,24 @@
         
         <p style="margin-top: 10px;">내용</p>
         <textarea id="summernote" name="withContent"></textarea>
+        
+        <div class="tr_hashTag_area">
+          <div class="form-group">
+            <input type="hidden" value="" name="tag" id="rdTag" />
+          </div>
+
+          <div class="div_container" aria-readonly="true"></div>
+
+          <div class="form-group">
+            <input type="text" id="tag" size="7" placeholder="엔터로 키워드를 등록해주세요." style="width: 300px;"/>
+          </div>
+      	</div>
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
         <button class="btn btn-outline-warning" type="submit">등록</button>
         <button class="btn btn-outline-warning" type="button" id="cancel">취소</button>
     </div>
-  </div>
 </form>
 
     <!-- Bootstrap JS -->
@@ -346,4 +378,66 @@ $('#file_container3').on('click', function() {
             }
          });
         
+        $(document).ready(function () {
+            var tag = {};
+            var counter = 0;
+
+            // 입력한 값을 태그로 생성한다.
+            function addTag (value) {
+                tag[counter] = value;
+                counter++; // del-btn 의 고유 id 가 된다.
+            }
+
+            // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+            function marginTag () {
+                return Object.values(tag).filter(function (word) {
+                    return word !== "";
+                });
+            }
+        
+            // 서버에 제공
+            $("#tag-form").on("submit", function (e) {
+                var value = marginTag(); // return array
+                $("#rdTag").val(value); 
+
+                $(this).submit();
+            });
+
+            $("#tag").on("keypress", function (e) {
+                var self = $(this);
+
+                //엔터나 스페이스바 눌렀을때 실행
+                if (e.key === "Enter" || e.keyCode == 32) {
+
+                    var tagValue = self.val(); // 값 가져오기
+
+                    // 해시태그 값 없으면 실행X
+                    if (tagValue !== "") {
+
+                        // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                        var result = Object.values(tag).filter(function (word) {
+                            return word === tagValue;
+                        })
+                    
+                        // 해시태그가 중복되었는지 확인
+                        if (result.length == 0) { 
+                            $(".div_container").append("<div class='tag-item' >"+tagValue+"<span class='del-btn' idx='"+counter+"'>&ensp;X</span></div>");
+                            addTag(tagValue);
+                            self.val("");
+                        } else {
+                            alert("태그값이 중복됩니다.");
+                        }
+                    }
+                    e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+                }
+            });
+
+            // 삭제 버튼 
+            // 인덱스 검사 후 삭제
+            $(document).on("click", ".del-btn", function (e) {
+                var index = $(this).attr("idx");
+                tag[index] = "";
+                $(this).parent().remove();
+            });
+    });
 </script>
