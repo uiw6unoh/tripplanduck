@@ -54,12 +54,17 @@ public class WithDuckController {
 		list = service.getWithDuckList(pageInfo);
 		
 		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("<p>", ""));
+			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("</p>", ""));
+			System.out.println(list.get(i).getWithContent());
+
 			if(list.get(i).getWithOriginFileName() == null) continue;
 			String[] arr = new String[3];
 			
 			arr = list.get(i).getWithRenameFileName().split(", ");
 			list.get(i).setReList(Arrays.asList(arr));
 			System.out.println(list.get(i) + "\n");
+			
 		}
 		
 		System.out.println(pageInfo +" " + list);
