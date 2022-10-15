@@ -213,7 +213,7 @@
                        </c:if>
                         </a>
                         <p class="title">${withDuck.withTitle }</p>
-                        <p>안녕하세요</p>
+                        <p>${withDuck.withContent }</p>
                         <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>

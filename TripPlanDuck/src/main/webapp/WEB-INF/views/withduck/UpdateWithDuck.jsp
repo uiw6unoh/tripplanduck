@@ -32,7 +32,7 @@
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/create" method="post" id="formobj" enctype="multipart/form-data">
+<form action="${path }/withduck/update" method="post" id="formobj" enctype="multipart/form-data">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -102,7 +102,6 @@
     
     <!-- 필터 등록 -->
     <section class="zone2" >
-    
       <div class="filter">
         <div class="filter_container">
             <div class="filter_location" style="display: flex !important; justify-content: center;
@@ -151,7 +150,7 @@
                     <button class="age_btn" value="40대" type="button" name="age">40대</button>
                     <button class="age_btn" value="50대 이상" type="button" name="age">50대 이상</button>
                 </div>
-    
+    			<input type="hidden" value="${withDuck.withNo }" name="withNo">
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
                         <input type="range" name="withPersonner" value="${withDuck.withPersonner }" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
@@ -185,7 +184,7 @@
                       <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
                         <label for="switch1" class="label__on-off">
                           <span class="marble"></span>
-                          <input type="hidden" id="join" value="${withDuck.withJoinStatus }">
+                          <input type="hidden" id="join" value="${withDuck.withJoinStatus }" name="withJoinStatus">
                           <span class="on" style="position: relative; right:14px;">모집중</span>
                           <span class="off" style="position: relative; right: 6px;">모집완료</span>
                         </label>
