@@ -360,6 +360,7 @@ public class WithDuckController {
 		withDuck.setWithWriterNick(loginMember.getMemberNickname());
 		withDuck.setWithWriterAge(loginMember.getMemberAge());
 		withDuck.setWithWriterGender(loginMember.getMemberGender());
+		
 		result = service.createWithDuck(withDuck);
 		
 		if(result > 0) {
@@ -422,7 +423,6 @@ public class WithDuckController {
 		List<String> list = new ArrayList<String>();
 		System.out.println(withDuck);
 		String[] arr = new String[3];
-		boolean check = false;
 		
 		arr[0] = file1;
 		arr[1] = file2;
@@ -430,7 +430,7 @@ public class WithDuckController {
 		
 		System.out.println("시작전 list : " + Arrays.toString(arr));
 		System.out.println("업데이트 날짜확인 : " + withDuck.getWithStartDate());
-
+		System.out.println(withDuck);
 		for(int i = 0; i < arr.length; i++) {
 			if(arr[i] == null) {
 				continue;
@@ -444,5 +444,90 @@ public class WithDuckController {
 		model.setViewName("withduck/UpdateWithDuck");
 		
 		return model;
+	}
+	
+	@PostMapping("/update")
+	public ModelAndView updateWithDuckGo(ModelAndView model,
+										 @ModelAttribute WithDuck withDuck, 
+										 @RequestParam(value = "file1", required = false) MultipartFile file1,
+										 @RequestParam(value = "file2", required = false) MultipartFile file2,
+										 @RequestParam(value = "file3", required = false) MultipartFile file3,
+										 @SessionAttribute("loginMember") Member loginMember) {
+int result = 0;
+		
+
+		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
+			// 파일을 저장하는 로직 작성
+			String location = null;
+			String renamedFileName = "";
+			List<MultipartFile> list = new ArrayList<MultipartFile>();
+			System.out.println("생성 날짜확인 : " + withDuck.getWithStartDate());
+			System.out.println(list);
+			
+			list.add(file1);
+			list.add(file2);
+			list.add(file3);
+			
+			System.out.println("시작전 list : " + list);
+			
+			
+			for(int i = 0; i < list.size(); i++) {
+				if(list.get(i).isEmpty()) {
+					list.remove(list.get(i));
+					i=-1;
+					System.out.println(list + " " + i);
+				}
+			}
+			
+			System.out.println("list : " + list);
+			if(list.size()!=0) {
+			try {
+				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
+				for(int i = 0; i < list.size(); i++) {
+					renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+				
+				for(int i = 0; i < list.size(); i++) {
+					withDuck.setWithOriginFileName(list.get(i).getOriginalFilename() + ", ");
+					withDuck.setWithRenameFileName(renamedFileName);
+				}
+			}
+		System.out.println("업데이트 withduck : " + withDuck);
+		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
+		result = service.updateGoWithDuck(withDuck);
+		
+		if(result > 0) {
+			model.addObject("msg", "게시글이 정상적으로 수정되었습니다.");
+			model.addObject("location", "/withduck/list");
+		} else {
+			model.addObject("msg", "게시글 수정을 실패하였습니다.");
+			model.addObject("location", "/withduck/create");
+		}
+		
+		model.setViewName("member/msg");
+		
+		return model;
+	}
+	
+	@GetMapping("/delete")
+	public ModelAndView deleteWithDuck(ModelAndView model,
+									   @RequestParam(value = "withNo") int withNo) {
+		int result = 0;
+		
+		result = service.deleteWithDuck(withNo);
+		
+		if(result > 0) {
+			model.addObject("msg", "게시글 삭제에 성공하였습니다.");
+			model.addObject("location", "/withduck/list");
+		} else {
+			model.addObject("msg", "게시글 삭제에 실패였습니다.");
+			model.addObject("location", "/withduck/detail");
+		}
+		model.setViewName("member/msg");
+		return model;
+		
 	}
 }

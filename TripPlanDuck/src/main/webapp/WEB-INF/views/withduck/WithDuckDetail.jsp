@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/WithDuckDetail.css">
 </head>
 <body class="stretched" >
-<form action="${path}/withduck/update" method="get">
+<form action="${path}/withduck/update" id="formobj" method="get">
     <section class="zone1">
         <div class="carousel_container">
             <div id="demo" class="carousel slide pointer-event" data-ride="carousel">
@@ -100,7 +100,7 @@
                     <span>${withDuck.withGender }</span>
                 </div>
                 <div>희망 연령대
-					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
+					<input type="hidden" value="${withDuck.withAge }" name ="withAge">
                     <span>${withDuck.withAge }</span>
                 </div>
                 <div>여행 일정
@@ -132,7 +132,7 @@
                     <c:if test="${withDuck.withWriterGender == 'M' }">
                     <span style="font-size: 10px;"> 남자</span>
                     </c:if>
-                    <c:if test="${withDuck.withWriterGender == 'Y' }">
+                    <c:if test="${withDuck.withWriterGender == 'F' }">
                     <span style="font-size: 10px;"> 여자</span>
                     </c:if>
                 </div>
@@ -158,7 +158,6 @@
             </div>
         </div>
 <input type="hidden" value="${withDuck.withWriterNo }" name="withWriterNo">
-<input type="hidden" value="${withDuck.withAge }" name="withAge">
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
 <input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
@@ -175,7 +174,7 @@
 	        수정하기
 	    </button>
 		
-		<button class="btn btn-outline-warning" type="submit">
+		<button class="btn btn-outline-warning" type="submit" id="deleteWithDuck">
 	        삭제하기
 	    </button>
 	</c:if>
@@ -197,3 +196,15 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
+<script type="text/javascript">
+$(function() {
+	var cancel = $('#deleteWithDuck');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "/withduck/delete");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+</script>

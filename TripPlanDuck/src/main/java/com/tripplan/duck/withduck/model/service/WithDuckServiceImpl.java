@@ -143,4 +143,24 @@ public class WithDuckServiceImpl implements WithDuckService {
 		return mapper.detailWithDuck(withNo);
 	}
 
+	@Override
+	@Transactional
+	public int updateGoWithDuck(WithDuck withDuck) {
+		int result = 0;
+		
+		result = mapper.updateGoWithDuck(withDuck);
+		
+		return result;
+	}
+
+	@Override
+	@Transactional
+	public int deleteWithDuck(int withNo) {
+		int result = 0;
+		
+		result = mapper.deleteWithDuck(withNo);
+		
+		return result;
+	}
+
 }
