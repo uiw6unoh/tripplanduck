@@ -28,11 +28,31 @@
     <link rel="stylesheet" href="${path }/resources/css/withduck/summernote/summernote-lite.css">
 
     <title>동행 생성</title>
+    <style>
+      .tag-item {
+        display: flex;
+        margin-right: 10px;
+        width: 100px;
+        height: 50px;
+        background-color: #a7a2a238;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        margin-top: 20px;
+        margin-right: 5px;
+        border-radius: 0.9em;
+      }
+
+      .div_container {
+        display: flex;
+        margin-bottom: 5px;
+      }
+    </style>
 </head>
 
 <!-- 메인 로고와 상단 우측 메뉴 포함한 header> -->
 <body class="stretched">
-<form action="${path }/withduck/create" method="post" id="formobj" enctype="multipart/form-data">
+<form action="${path }/withduck/update" method="post" id="formobj" enctype="multipart/form-data">
 <!-- 이미지 생성 -->
     <section class="zone1">
     <div class="carousel_container">
@@ -47,9 +67,18 @@
             <!-- The slideshow -->
             <div class="carousel-inner">
 	            <div class="carousel-item active">
-	                <div id="image_preview1">
-		                <img class="car-img" name="photo1" style="">
+	            <c:if test="${not empty photoList[0] }">	            
+	                <div id="image_preview1" style="cursor: pointer;">
+		                <img class="car-img" name="photo1" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file1" class="file">사진추가</label>
+	                <input type="file" name="file1" id="file1" value="${photoList[0] }" style="display: none;">
 	                </div>
+	            </c:if>
+	            <c:if test="${empty photoList[0] }">
+	                <div id="image_preview1" style="cursor: pointer;">
+		                <img class="car-img" name="photo1" style="">
+		            </div>
+		            
 	                <div class="empty" id="empty1">
 	                <div>
 	                    <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" style="width: 20px; height: 20px;" alt="">
@@ -58,33 +87,57 @@
 	                <label for="file1" class="file">사진추가</label>
 	                <input type="file" name="file1" id="file1" style="display: none;">
 	                </div>
+	            </c:if>
 	            </div>
+	            
             <div class="carousel-item">
-               	<div id="image_preview2">
-	                <img class="car-img" name="photo2" style="">
-                </div>
+                <c:if test="${not empty photoList[1] }">	            
+	                <div id="image_preview2" style="cursor: pointer;">
+		                <img class="car-img" name="photo2" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file2" class="file">사진추가</label>
+	                <input type="file" name="file2" value="${photoList[1] }" id="file2" style="display: none;">
+	                </div>
+	            </c:if>
                 
-                <div class="empty" id="empty2">
-                    <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
-                    </div>
-                    <p>업로드할 사진을 추가해보세요!</p>
-                    <label for="file2" class="file">사진추가</label>
-                    <input type="file" name="file2" id="file2" style="display: none;">
-                </div>
+                <c:if test="${empty photoList[1] }">
+                	<div id="image_preview2" style="cursor: pointer;">
+		                <img class="car-img" name="photo2" style="">
+		            </div>
+                
+	                <div class="empty" id="empty2">
+	                    <div>
+	                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo2" style="width: 20px; height: 20px;" alt="">
+	                    </div>
+	                    <p>업로드할 사진을 추가해보세요!</p>
+	                    <label for="file2" class="file">사진추가</label>
+	                    <input type="file" name="file2" id="file2" style="display: none;">
+	                </div>
+                </c:if>
             </div>
+            
             <div class="carousel-item">
-               <div id="image_preview3">
-	                <img class="car-img" name="photo3" style="">
-                </div>
-                <div class="empty" id="empty3">
-                    <div>
-                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
-                    </div>
-                    <p>업로드할 사진을 추가해보세요!</p>
-                    <label for="file3" class="file">사진추가</label>
-                    <input type="file" name="file3" id="file3" style="display: none;">
-                </div>
+                <c:if test="${not empty photoList[2] }">	            
+	                <div id="image_preview3" style="cursor: pointer;">
+		                <img class="car-img" name="photo3" src="${path }/resources/upload/withduck/${photoList[0]}" style="">
+	                <label for="file3" class="file">사진추가</label>
+	                <input type="file" name="file3" id="file3" value="${photoList[2] }" style="display: none;">
+	                </div>
+	            </c:if>
+	            
+                <c:if test="${empty photoList[2] }">
+                	<div id="image_preview3" style="cursor: pointer;">
+		                <img class="car-img" name="photo3" style="">
+		            </div>
+                
+	                <div class="empty" id="empty3">
+	                    <div>
+	                        <img class="empty_img" src="${path}/resources/images/WithDuck/photo.png" name="photo3" style="width: 20px; height: 20px;" alt="">
+	                    </div>
+	                    <p>업로드할 사진을 추가해보세요!</p>
+	                    <label for="file3" class="file">사진추가</label>
+	                    <input type="file" name="file3" id="file3" style="display: none;">
+	                </div>
+                </c:if>
             </div>
             </div>
         
@@ -102,7 +155,6 @@
     
     <!-- 필터 등록 -->
     <section class="zone2" >
-    
       <div class="filter">
         <div class="filter_container">
             <div class="filter_location" style="display: flex !important; justify-content: center;
@@ -151,7 +203,7 @@
                     <button class="age_btn" value="40대" type="button" name="age">40대</button>
                     <button class="age_btn" value="50대 이상" type="button" name="age">50대 이상</button>
                 </div>
-    
+    			<input type="hidden" value="${withDuck.withNo }" name="withNo">
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
                         <input type="range" name="withPersonner" value="${withDuck.withPersonner }" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
@@ -185,7 +237,7 @@
                       <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
                         <label for="switch1" class="label__on-off">
                           <span class="marble"></span>
-                          <input type="hidden" id="join" value="${withDuck.withJoinStatus }">
+                          <input type="hidden" id="join" value="${withDuck.withJoinStatus }" name="withJoinStatus">
                           <span class="on" style="position: relative; right:14px;">모집중</span>
                           <span class="off" style="position: relative; right: 6px;">모집완료</span>
                         </label>
@@ -196,6 +248,17 @@
         <input type="hidden" value="${withDuck.withContent }" id="hiddenContent">
         <p style="margin-top: 10px;">내용</p>
         <textarea id="summernote" name="withContent" required >${withDuck.withContent }</textarea>
+    	 <div class="tr_hashTag_area">
+          <div class="form-group">
+            <input type="hidden" value="" name="tag" id="rdTag" />
+          </div>
+
+          <div class="div_container" aria-readonly="true"></div>
+
+          <div class="form-group">
+            <input type="text" id="tag" size="7" placeholder="엔터로 키워드를 등록해주세요." style="width: 300px;"/>
+          </div>
+      	</div>
     </div>
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
@@ -224,6 +287,18 @@
 </html>
 
 <script>
+$('#image_preview1').on('click', function() {
+	$('#file1')[0].click();
+});
+
+$('#image_preview2').on('click', function() {
+	$('#file2')[0].click();
+});
+
+$('#image_preview3').on('click', function() {
+	$('#file3')[0].click();
+});
+
 $(function() {
 	var cancel = $('#cancel');
 	
@@ -361,5 +436,79 @@ $(document).on('click', '.age_btn', function(){
             }
          });
         
+        $(document).ready(function () {
+            var tag = {};
+            var counter = 0;
+
+            // 입력한 값을 태그로 생성한다.
+            function addTag (value) {
+                tag[counter] = value;
+                counter++; // del-btn 의 고유 id 가 된다.
+            }
+
+            // tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+            function marginTag () {
+                return Object.values(tag).filter(function (word) {
+                    return word !== "";
+                });
+            }
         
+            // 서버에 제공
+            $("#tag-form").on("submit", function (e) {
+                var value = marginTag(); // return array
+                $("#rdTag").val(value); 
+
+                $(this).submit();
+            });
+
+            $("#tag").on("keypress", function (e) {
+                var self = $(this);
+
+                //엔터나 스페이스바 눌렀을때 실행
+                if (e.key === "Enter" || e.keyCode == 32) {
+
+                    var tagValue = self.val(); // 값 가져오기
+
+                    // 해시태그 값 없으면 실행X
+                    if (tagValue !== "") {
+
+                        // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                        var result = Object.values(tag).filter(function (word) {
+                            return word === tagValue;
+                        })
+                    
+                        // 해시태그가 중복되었는지 확인
+                        if (result.length == 0) { 
+                        	if(counter > 2) {
+                        		alert("태그 추가 가능한 갯수를 초과했습니다.");
+                        	} else {
+	                           $(".div_container").append("<div class='tag-item' >"+tagValue+"<span class='del-btn' idx='"+counter+"'>&ensp;X</span><input type='hidden' id='keyword"+counter+"' name='keyword"+counter+"'/></div>");
+							   if($($($('.tag-item')[0])).text() != ''){
+								   $('#keyword0').attr('value', $($($('.tag-item')[0])).text());
+							   }
+							   if($($($('.tag-item')[1])).text() != '') {
+								   $('#keyword1').attr('value', $($($('.tag-item')[1])).text());
+							   }	
+							   if($($($('.tag-item')[2])).text() != '') {
+								   $('#keyword2').attr('value', $($($('.tag-item')[2])).text());
+							   }	
+	                           addTag(tagValue);
+	                            self.val("");
+                        	}
+                        } else {
+                            alert("태그값이 중복됩니다.");
+                        }
+                    }
+                    e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+                }
+            });
+
+            // 삭제 버튼 
+            // 인덱스 검사 후 삭제
+            $(document).on("click", ".del-btn", function (e) {
+                var index = $(this).attr("idx");
+                tag[index] = "";
+                $(this).parent().remove();
+            });
+        });
 </script>

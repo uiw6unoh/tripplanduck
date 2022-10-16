@@ -84,7 +84,7 @@
             <g id="Circle">
                 <circle cx="134.7" cy="131.1" r="52"/>
             </g>
-            <c:if test="${ !empty loginMember }">
+            <%-- <c:if test="${ !empty loginMember }"> --%>
 				<style type="text/css">
 	                .st1{fill: coral;}
 	                .st2{fill: red;}
@@ -99,9 +99,9 @@
 	            
 	            <path id="Heart_2_" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
                 l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
-        	</c:if>
+        	<%-- </c:if> --%>
         	
-        	<c:if test="${ empty loginMember }">
+        	<%-- <c:if test="${ empty loginMember }">
 				<style type="text/css">
 	                .st1{fill: coral;}
 	                .st2{fill: red;}
@@ -116,7 +116,7 @@
 	            
 	            <path id="Heart_2_N" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
                 l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
-        	</c:if>
+        	</c:if> --%>
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
@@ -191,32 +191,47 @@
                               <label for="1-star" class="star">★</label>
                             </div>
                             <button id="enrollAlert" class="btn btn-outline-warning btn-sm float-right" type="button">등록</button>
-                            <p class="pt-2" style="font-size: 0.9em;">별점을 선택해주세요</p>
+                            <p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
                             
                             <textarea class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
                               <p class="mt-1 col p-0" style="font-size: 11px;">2022.09.16 01:30
                               </p>
                             
                           </form>
-                          <!-- Comment with nested comments-->
+                          <!-- 답글이 포함된 댓글 -->
                           <div class="d-flex mb-4">
                               <!-- Parent comment-->
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">짹짹이 김여울</p>
-	                              <div class="star-rating m-0">
-									<span>별점</span> 	
-	                              </div>
+                                <div class="float-left">
+                                  <div class="star-count">
+							        ★
+							        <!-- 여기에 rating 숫자 보여줘야 함 -->
+							        
+							        <div class="star-rate">4.0</div>
+							      </div>
+                                </div>
+							      <!-- 자신이 작성한 댓글이면 수정, 등록 버튼이 보이게 (writerId = loginMember) -->
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
                                   </div>
-                                    <p>아싸 해산!!!</p>
-                                  <!-- Child comment 1-->
+                                  <!-- 자신이 작성한 댓글이 아니면 답글, 신고 버튼이 보이게 -->
+                                    <p> 아싸 해산!!!</p>
+                                    
+                                  <!-- 답글 1 -->
                                   <div class="d-flex mt-2">
                                       <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">선긋기 김민주</p>
+                                        <div class="float-left">
+		                                  <div class="star-count">
+									        ★
+									        <!-- 여기에 rating 숫자 보여줘야 함 -->
+									        <div class="star-rate">3.5</div>
+									      </div>
+		                                </div> 
                                           <div class="float-right">
                                             <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                             <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -224,11 +239,18 @@
                                             <p>저 빼고 재밌는 이야기하지 마세여</p>
                                       </div>
                                   </div>
-                                  <!-- Child comment 2-->
+                                  <!-- 답글 2-->
                                   <div class="d-flex mt-3">
                                       <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                                       <div class="ms-3 w-100">
                                         <p style="font-weight: bold;">코드의마법사 박노경</p>
+                                        <div class="float-left">
+		                                  <div class="star-count">
+									        ★
+									        <!-- 여기에 rating 숫자 보여줘야 함 -->
+									        <div class="star-rate">2.0</div>
+									      </div>
+		                                </div>
                                           <div class="float-right">
                                             <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                             <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -239,11 +261,18 @@
                               </div>
                           </div>
                           
-                          <!-- Single comment-->
+                          <!-- 답글이 없는 댓글 -->
                           <div class="d-flex">
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">무게치는 이건호</p>
+                                <div class="float-left">
+                                  <div class="star-count">
+							        ★
+							        <!-- 여기에 rating 숫자 보여줘야 함 -->
+							        <div class="star-rate">5.0</div>
+							      </div>
+                                </div>
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -273,7 +302,7 @@
 <script src="${ path }/js/trip/Mainstyle.js"></script>
 
 <!-- Heart JS -->
-<script src="${ path }/js/common/heart.js"></script>
+<!--  <script src="${ path }/js/common/heart.js"></script>  -->
 
 <!-- sweetalert2 alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -406,17 +435,65 @@ $(document).ready(function () {
 	  function addListener() {
 	    var btn = document.querySelector("#Heart_2_");
 	    btn.addEventListener("click", restart, false);
+	    
+	  }
+	  
+	  let isLike = "${isLike}";
+	  
+	  if(isLike > 0){
+		  
+		  var container = document.querySelector("#Layer_1");
+		  var newContainer = container.cloneNode(true);
+
+		  container.parentNode.replaceChild(newContainer, container);
+		  $(".st7").removeAttr("style");
+		  
+		  addListener();
 	  }
 
 	  function restart() {
-	    // var newHeart = document.getElementsByClassName(".st7");
-	    var container = document.querySelector("#Layer_1");
-	    var newContainer = container.cloneNode(true);
+		
+		let isLogin = "${loginMember}";
+		
+		if(isLogin != null && isLogin != ""){
+			
+			// var newHeart = document.getElementsByClassName(".st7");
+		    var container = document.querySelector("#Layer_1");
+		    var newContainer = container.cloneNode(true);
 
-	    container.parentNode.replaceChild(newContainer, container);
-	    $(".st7").removeAttr("style");
+		    container.parentNode.replaceChild(newContainer, container);
+		    $(".st7").removeAttr("style");
+		    
+			let destNo = "${dest.destNo}";
+		    $.ajax({
+		    	url : "${path}/trip/api/like",
+		    	type : "POST",
+		    	data : { 'destNo' : destNo },
+		    	success : function(data){
+		    		Swal.fire({
+				        icon: "success",
+				        text: `찜하기 성공!`,
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+				      });
+		    	},
+		    	error : function(error){
+		    		console.log(error)
+		    	}
+		    })
 
-	    addListener();
+		    addListener();
+		} else {
+			  Swal.fire({
+			        icon: "error",
+			        text: `로그인 후 이용해주세요.`,
+			        confirmButtonText: "확인",
+			        closeOnClickOutside : false
+			      }).then(function (isConfirmed) {
+			    	  window.location.href="${path}/member/login";
+			        });
+		}
+	    
 	  }
 	  addListener();
 	});

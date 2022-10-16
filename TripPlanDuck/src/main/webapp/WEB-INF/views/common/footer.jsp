@@ -28,7 +28,7 @@
                     <i class="icon-gplus"></i>
                     <i class="icon-gplus"></i>
                   </a>
-                  <a href="#" class="social-icon si-small si-borderless si-github">
+                  <a href="https://github.com/yeorii/tripplanduck" class="social-icon si-small si-borderless si-github">
                     <i class="icon-github"></i>
                     <i class="icon-github"></i>
                   </a>
