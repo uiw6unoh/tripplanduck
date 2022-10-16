@@ -78,6 +78,7 @@ select option:focus {
     background: #fff8c6;
     cursor: pointer;
 }
+
 /* 카드 */
 .card-body {
     padding: 2.25rem;
@@ -86,31 +87,19 @@ select option:focus {
 .likeCard {
     width: 800px;
     height: 200px;
-    /* padding: 20px; */
-    /* transition: all 200ms ease-in-out; */
 }
 
 .imgSize {
     width: 240px;
     height: 220px;
     padding-bottom: 20px;
-    /* transition: all 200ms ease-in-out; */
     cursor: pointer;
 }
 
 .likeCard:hover {
-    /* width: 810px; */
-    /* height: 210px; */
-    /* margin-top: 5px; */
     cursor: pointer;
     box-shadow: 0px 12px 30px 0px #fff8c6;
     border: 1px solid #fff8c6;
-}
-
-.likeCard:hover .imgSize {
-    /* height: 230px; */
-    /* transition: all 200ms ease-in-out; */
-    /* transform: scale(1.1); */
 }
 
 /* 작성한 리뷰 카드 */
@@ -132,12 +121,12 @@ select option:focus {
 .separator {
     padding-left: 5px;
     color: #6c757d;
+    transform: translate(10%, 8%);
 }
 
 .card-area {
     font-size: 1.1rem;
-    padding-left: 5px;
-    padding-top: 6px;
+    transform: translate(14%, 16%);
 }
 
 .info-container-top {
@@ -162,9 +151,26 @@ select option:focus {
 
 /* 내 여행지 하트 */
 .fa-heart {
-    float: right;
-    margin-top: 10px;
     color: #fabf42;
+    float: right;
+    transform: translate(50%, -56%);
+}
+
+/* 나의 리뷰 별점 */
+.star-rating {
+    display: flex;
+    float: right;
+    transform: translate(34%, -75%);
+}
+
+.star {
+    color: #fabf42;
+    font-size: 1.3rem;
+}
+
+.commentsRating {
+transform: translate(31%, 8%);
+font-size: 1.4rem;
 }
 
 /* 더보기 */

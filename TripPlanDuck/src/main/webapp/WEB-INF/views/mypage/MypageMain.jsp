@@ -144,7 +144,7 @@
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+									<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i>
 									<div class="info-container-top">
 										<div class="card-title title mt-3">
 											<h5>명소명</h5>
@@ -189,6 +189,10 @@
 					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
 						<div>
 							<div class="card-body">
+								<div class="star-rating">
+									<span class="star">★</span>
+									<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
+								</div>
 								<div class="destination">
 									<h4 class="card-title">${comments.getDestSubject()}</h4>
 									<span class="separator">|</span>
@@ -196,7 +200,7 @@
 								</div>
 								<p class="card-text">${comments.getCommentsContent()}</p>
 								<p class="card-text">
-									<small class="text-muted">${comments.getCommentsCreateDateSt()}(수정일 : ${comments.getCommentsUpdateDateSt()})</small>
+									<small class="text-muted">${comments.getCommentsCreateDateSt()} (수정일 : ${comments.getCommentsUpdateDateSt()})</small>
 								</p>
 								<div class="card-btns">
 									<button type="button" class="btn btn-warning"
@@ -233,7 +237,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="text" class="inputPwd" placeholder="비밀번호 입력">
+							<input type="password" class="inputPwd" placeholder="비밀번호 입력">
 
 						</div>
 						<div class="modal-footer">
@@ -256,20 +260,20 @@
 	
 	// 옵션 값을 바꿀때 호출되는 함수
 	function changeOption(e){
-		 sendReq("trip", e);
-	 }
+		sendReq("trip", e);
+	}
 	
 	// 더보기 버튼 클릭시 호출, 더보기 버튼이 여러개이므로 for문 이용하였음
 	document.querySelectorAll('.down-chevron').forEach((cell) => {
 		// 클릭한 버튼이 어느 카드의 버튼인지 판별하기 위해 alt 프로퍼티를 추가하였고,
 		// 해당 프로퍼티 내에는 카드의 이름이 들어감
 		// 프로퍼티에서 꺼내온 카드 이름을 sendReq 함수의 파라미터로 넣어 호출한다 
-	  cell.addEventListener('click', function() {
-	    var select = cell.getAttribute('alt').replace('-down','')
-	    sendReq(select);
-	  });
+		cell.addEventListener('click', function() {
+		var select = cell.getAttribute('alt').replace('-down','')
+		sendReq(select);
+		});
 	});
- 
+
 	
 	// 더보기 버튼을 통한 ajax 통신 함수 
 	function sendReq(select, locationId){
@@ -350,29 +354,33 @@
 									'<div class="col-md-4"> ' +
 										'<img src="'+ data.destImg+'" class="img-fluid rounded-start imgSize" alt="..."> ' +
 									'</div> ' +
-								'<div class="col-md-8"> '+
-									'<div class="card-body"> '+
+								'<div class="col-md-8"> ' +
+									'<div class="card-body"> ' +
 										'<div class="info-container-top"> ' +
 											'<div class="card-title title mt-3"> ' +
 												'<h5>여행지</h5> ' +
 											'</div> ' +
-										'<div class="card-title text-content mt-3"> ' +
-											'<h5>'+ data.pplace+'</h5> ' +
-			                          '</div> ' +
-			                        '</div> ' +
-			                        '<div class="info-container-top"> ' +
-			                          '<p class="card-text title">작성인</p> ' +
-			                          '<p class="card-text text-content">' + data.mnickname +'</p> ' +
-			                        '</div> ' +
-			                        '<div class="info-container-top"> ' +
-			                         '<p class="card-text title">여행 소요 시간</p> ' +
-			                          '<p class="card-text text-content"> '+ data.plt +' </p> ' +
-			                        '</div> ' +
-			                      '</div> ' +
-			                    '</div> ' +
-			                  '</div> ' +
-			                '</div> '+
-			              '</a> '
+											'<div class="card-title text-content mt-3"> ' +
+												'<h5>'+ data.pplace+'</h5> ' +
+											'</div> ' +
+										'</div> ' +
+										'<div class="info-container-top"> ' +
+											'<p class="card-text title">작성인</p> ' +
+											'<p class="card-text text-content">' + data.mnickname +'</p> ' +
+										'</div> ' +
+										'<div class="info-container-top"> ' +
+											'<p class="card-text title">여행 소요 시간</p> ' +
+											'<p class="card-text text-content"> '+ data.plt +' </p> ' +
+										'</div> ' +
+										'<div class="card-btns"> '+
+											'<button type="button" class="btn btn-warning" onclick="">수정</button> '+
+											'<button type="button" class="btn btn-secondary">삭제</button> '+
+										'</div> '+
+									'</div> ' +
+								'</div> ' +
+							'</div> ' +
+						'</div> '+
+						'</a> '
 						
 					} else if (select === 'trip'){
 						appendData += 
@@ -384,7 +392,7 @@
 				                  '</div> '+
 				                  '<div class="col-md-8"> '+
 				                    '<div class="card-body"> '+
-				                      '<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i> '+
+				                      '<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i> '+
 				                      '<div class="info-container-top"> '+
 				                        '<div class="card-title title mt-3"> '+
 				                          '<h5>명소명</h5> '+
@@ -413,6 +421,10 @@
 				           '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
 			                '<div class="card-body"> '+
+								'<div class="star-rating"> ' +
+									'<span class="star">★</span> ' +
+									'<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
+								'</div> ' +
 			                  '<div class="destination"> '+
 			                    '<h4 class="card-title">'+data.destSubject+'</h4> '+
 			                    '<span class="separator">|</span> '+

@@ -48,7 +48,7 @@ public class MyPageController {
 		//Member member = new Member(2, "yeoul", "1234", "김여울", "여리", "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20); 
 		//model.addAttribute("member", member);
 		
-		// System.out.println("logined memger : " + member);
+		System.out.println("logined memger : " + member);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("memberNo", member.getMemberNo());
@@ -141,22 +141,7 @@ public class MyPageController {
 		
 		return result;
 	}
-	
-	
-	// 좋아요 한 여행지
-//	@GetMapping("/liketrip")
-//	public String LikeTrip() throws Exception {
-//		
-//		return "mypage/MyPageLiketrip";
-//	}
-	
-	// 작성한 리뷰
-//	@GetMapping("/comment")
-//	public String Comment() throws Exception {
-//		
-//		return "mypage/MyPageComment";
-//	}
-	
+		
 	// 회원 정보 수정
 	@GetMapping("/updateform")
 	public String UpdateForm() throws Exception {
