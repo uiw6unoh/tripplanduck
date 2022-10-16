@@ -11,17 +11,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.service.DestinationService;
+import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @RestController
+@RequestMapping("/trip/api")
 public class TripRestController {
 	
 	@Autowired
@@ -113,6 +121,24 @@ public class TripRestController {
             }
             
             }
+	}
+	
+	@PostMapping("/like")
+	public int updateLike(HttpSession session, DestinationLike destinationLike) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		if(member == null)
+			return 0;
+		
+		destinationLike.setMemberNo(member.getMemberNo());
+		
+		int like = destinationService.isLike(destinationLike);
+		
+		if(like == 0)
+			destinationService.insertLike(destinationLike);
+		
+		return 1;
 	}
 
 }

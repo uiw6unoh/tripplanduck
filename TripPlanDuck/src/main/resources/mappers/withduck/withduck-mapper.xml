@@ -57,7 +57,7 @@
 	<!-- 내림차순 조회 -->
 	<select id="withDuckSelectAll" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql" />
-		ORDER BY WITH_CREATEDATE
+		ORDER BY WITH_CREATEDATE DESC
 	</select>
 	
 	<select id="withDuckSelectReadCount" resultMap="withDuckResultMap">
@@ -126,7 +126,7 @@
 			#{withContent},
 			#{withWriterGender},
 			#{withWriterAge},
-			DEFAULT,
+			#{withkeyword},
 			DEFAULT,
 			DEFAULT,
 			SYSDATE,
@@ -139,5 +139,38 @@
 		<include refid="withDuckListSql" />
 		AND WITH_NO = #{withNo}
 	</select>
+	
+	<update id="updateGoWithDuck" parameterType="WithDuck">
+		UPDATE WITHDUK
+		SET 
+		WITH_LOCATION = #{withLocation},
+		WITH_GENDER = #{withGender},
+		WITH_AGE = #{withAge},
+		WITH_PERSONNER = #{withPersonner},
+		WITH_ORIGINFILENAME = #{withOriginFileName},
+		WITH_RENAMEFILENAME = #{withRenameFileName},
+		WITH_TITLE = #{withTitle},
+		WITH_CONTENT = #{withContent},
+		WITH_KEYWORD = #{withkeyword},
+		WITH_JOINSTATUS = #{withJoinStatus},
+		WITH_STARTDATE = #{withStartDate},
+		WITH_ENDDATE = #{withEndDate},
+		WITH_UPDATEDATE = SYSDATE
+		WHERE WITH_NO = #{withNo}
+	</update>
+	
+	<update id="deleteWithDuck" parameterType="_int">
+		UPDATE WITHDUK
+		SET
+		WITH_STATUS = 'N'
+		WHERE WITH_NO = #{withNo}
+	</update>
+
+	<update id="withDuckReadCount" parameterType="_int">
+		UPDATE WITHDUK
+		SET
+		WITH_READCOUNT = WITH_READCOUNT + 1
+		WHERE WITH_NO = #{withNo}
+	</update>
 	
 </mapper>

@@ -112,4 +112,20 @@
 		FROM LOCATION
 		ORDER BY ${value}
 	</select>
+	
+	<select id="getDestinationsByKeyWord" parameterType="string" resultMap="DestinationResultMap">
+		SELECT * FROM DESTINATION WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%' ORDER BY DEST_LIKE_SUM
+	</select>
+	
+	<insert id="insertLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+		INSERT INTO DESTINATION_LIKE VALUES(#{destNo}, #{memberNo})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+		DELETE FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+	</delete>
+	
+	<select id="isLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike" resultType="int">
+		SELECT COUNT(*) FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+	</select>
 </mapper>

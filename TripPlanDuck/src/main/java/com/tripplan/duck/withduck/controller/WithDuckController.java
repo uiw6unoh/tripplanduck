@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +54,17 @@ public class WithDuckController {
 		list = service.getWithDuckList(pageInfo);
 		
 		for(int i = 0; i < list.size(); i++) {
+			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("<p>", ""));
+			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("</p>", ""));
+			System.out.println(list.get(i).getWithContent());
+
 			if(list.get(i).getWithOriginFileName() == null) continue;
 			String[] arr = new String[3];
 			
 			arr = list.get(i).getWithRenameFileName().split(", ");
 			list.get(i).setReList(Arrays.asList(arr));
 			System.out.println(list.get(i) + "\n");
+			
 		}
 		
 		System.out.println(pageInfo +" " + list);
@@ -309,9 +317,33 @@ public class WithDuckController {
 									   @RequestParam(value = "file1", required = false) MultipartFile file1,
 									   @RequestParam(value = "file2", required = false) MultipartFile file2,
 									   @RequestParam(value = "file3", required = false) MultipartFile file3,
+									   @RequestParam(value = "keyword0", required =false) String keyword0,
+									   @RequestParam(value = "keyword1", required =false) String keyword1,
+									   @RequestParam(value = "keyword2", required =false) String keyword2,
 									   @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
+		String keyword = "";
 		
+		List<String> keyList = new ArrayList<String>();
+		System.out.println(keyword0);
+		System.out.println("인덱스 : " + keyword0.indexOf("X"));
+		if (keyword0 != null) {
+			keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
+			keyList.add(keyword0);
+			keyword += keyList.get(0) + ", ";
+		}
+		if(keyword1 != null) {
+			keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
+			keyList.add(keyword1);
+			keyword += keyList.get(1) + ", ";
+		}
+		if(keyword2 != null) {
+			keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
+			keyList.add(keyword2);
+			keyword += keyList.get(2) + ", ";
+		}
+		
+		withDuck.setWithkeyword(keyword);
 		
 		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
 			// 파일을 저장하는 로직 작성
@@ -360,6 +392,7 @@ public class WithDuckController {
 		withDuck.setWithWriterNick(loginMember.getMemberNickname());
 		withDuck.setWithWriterAge(loginMember.getMemberAge());
 		withDuck.setWithWriterGender(loginMember.getMemberGender());
+		
 		result = service.createWithDuck(withDuck);
 		
 		if(result > 0) {
@@ -378,11 +411,54 @@ public class WithDuckController {
 	///////////////////////////////////////////////////위드덕 상세페이지////////////////////////////////////////////////////////////
 	@GetMapping("/detail")
 	public ModelAndView detailWithDuck(ModelAndView model,
-									   @RequestParam(value = "withNo") int withNo) {
+									   @RequestParam(value = "withNo") int withNo,
+									   HttpServletRequest request,
+									   HttpServletResponse response) {
 		WithDuck withDuck = null;
 		String[] arr = null;
 		
-		withDuck = service.detailWithDuck(withNo);
+		Cookie[] cookies = request.getCookies();
+    	String boardHistory = ""; // 조회한 게시글 번호를 저장하는 변수
+    	boolean hasRead = false; // 읽은 글이면 true, 안 읽었으면 false
+    	
+    	if(cookies != null) {
+    		String name = null;
+    		String value = null;
+    		for (Cookie cookie : cookies) {
+				name = cookie.getName();
+				value = cookie.getValue();
+				
+				// boardHistroy인 쿠키 값을 찾기
+				if(name.equals("boardHistory")) {
+					boardHistory = value;
+					
+					if(value.contains("|" + withNo + "|")) {
+						hasRead = true;
+						
+						break;
+					}
+				}
+			}
+    	}
+    	// 2. 읽지 않은 게시글이면 cookie 에 기록
+    	if(!hasRead) {
+        	Cookie cookie = new Cookie("boardHistory", boardHistory + "|" + withNo + "|");
+        	
+        	cookie.setMaxAge(-1); // 브라우저 종료 시 삭제
+        	response.addCookie(cookie);
+    	}
+    	withDuck = service.detailWithDuck(withNo);
+		
+		if(withDuck.getWithkeyword() != null) {
+			List<String> keyList = new ArrayList<String>();
+			String[] arr1 = withDuck.getWithkeyword().split(", ");
+			keyList.addAll(Arrays.asList(arr1));
+			System.out.println("keyList : " + keyList );
+			model.addObject("keyList", keyList);
+		}
+		
+		service.withDuckReadCount(withNo, hasRead);
+		
 		System.out.println("위드덕 위드 넘버로 조회 : " + withDuck);
 		System.out.println("디테일 날짜확인 : " + withDuck.getWithStartDate());
 		
@@ -406,6 +482,7 @@ public class WithDuckController {
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
 		
+
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
 		return model;
@@ -422,7 +499,6 @@ public class WithDuckController {
 		List<String> list = new ArrayList<String>();
 		System.out.println(withDuck);
 		String[] arr = new String[3];
-		boolean check = false;
 		
 		arr[0] = file1;
 		arr[1] = file2;
@@ -430,7 +506,7 @@ public class WithDuckController {
 		
 		System.out.println("시작전 list : " + Arrays.toString(arr));
 		System.out.println("업데이트 날짜확인 : " + withDuck.getWithStartDate());
-
+		System.out.println(withDuck);
 		for(int i = 0; i < arr.length; i++) {
 			if(arr[i] == null) {
 				continue;
@@ -444,5 +520,109 @@ public class WithDuckController {
 		model.setViewName("withduck/UpdateWithDuck");
 		
 		return model;
+	}
+	
+	@PostMapping("/update")
+	public ModelAndView updateWithDuckGo(ModelAndView model,
+										 @ModelAttribute WithDuck withDuck, 
+										 @RequestParam(value = "file1", required = false) MultipartFile file1,
+										 @RequestParam(value = "file2", required = false) MultipartFile file2,
+										 @RequestParam(value = "file3", required = false) MultipartFile file3,
+										 @RequestParam(value = "keyword0", required =false) String keyword0,
+										 @RequestParam(value = "keyword1", required =false) String keyword1,
+										 @RequestParam(value = "keyword2", required =false) String keyword2,
+										 @SessionAttribute("loginMember") Member loginMember) {
+		int result = 0;
+		String keyword = "";
+		
+		List<String> keyList = new ArrayList<String>();
+		System.out.println(keyword0);
+		System.out.println("인덱스 : " + keyword0.indexOf("X"));
+		if (keyword0 != null) {
+			keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
+			keyList.add(keyword0);
+			keyword += keyList.get(0) + ", ";
+		}
+		if(keyword1 != null) {
+			keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
+			keyList.add(keyword1);
+			keyword += keyList.get(1) + ", ";
+		}
+		if(keyword2 != null) {
+			keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
+			keyList.add(keyword2);
+			keyword += keyList.get(2) + ", ";
+		}
+		
+		withDuck.setWithkeyword(keyword);
+		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
+			// 파일을 저장하는 로직 작성
+			String location = null;
+			String renamedFileName = "";
+			List<MultipartFile> list = new ArrayList<MultipartFile>();
+			System.out.println("생성 날짜확인 : " + withDuck.getWithStartDate());
+			System.out.println(list);
+			
+			list.add(file1);
+			list.add(file2);
+			list.add(file3);
+			
+			for(int i = 0; i < list.size(); i++) {
+				if(list.get(i).isEmpty()) {
+					list.remove(list.get(i));
+					i=-1;
+					System.out.println(list + " " + i);
+				}
+			}
+			
+			if(list.size()!=0) {
+			try {
+				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
+				for(int i = 0; i < list.size(); i++) {
+					renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+				
+				for(int i = 0; i < list.size(); i++) {
+					withDuck.setWithOriginFileName(list.get(i).getOriginalFilename() + ", ");
+					withDuck.setWithRenameFileName(renamedFileName);
+				}
+			}
+			
+		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
+		result = service.updateGoWithDuck(withDuck);
+		
+		if(result > 0) {
+			model.addObject("msg", "게시글이 정상적으로 수정되었습니다.");
+			model.addObject("location", "/withduck/list");
+		} else {
+			model.addObject("msg", "게시글 수정을 실패하였습니다.");
+			model.addObject("location", "/withduck/create");
+		}
+		
+		model.setViewName("member/msg");
+		
+		return model;
+	}
+	
+	@GetMapping("/delete")
+	public ModelAndView deleteWithDuck(ModelAndView model,
+									   @RequestParam(value = "withNo") int withNo) {
+		int result = 0;
+		
+		result = service.deleteWithDuck(withNo);
+		
+		if(result > 0) {
+			model.addObject("msg", "게시글 삭제에 성공하였습니다.");
+			model.addObject("location", "/withduck/list");
+		} else {
+			model.addObject("msg", "게시글 삭제에 실패였습니다.");
+			model.addObject("location", "/withduck/detail");
+		}
+		model.setViewName("member/msg");
+		return model;
+		
 	}
 }
