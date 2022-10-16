@@ -421,9 +421,22 @@ $('#file_container3').on('click', function() {
                     
                         // 해시태그가 중복되었는지 확인
                         if (result.length == 0) { 
-                            $(".div_container").append("<div class='tag-item' >"+tagValue+"<span class='del-btn' idx='"+counter+"'>&ensp;X</span></div>");
+                        	if(counter > 2) {
+                        		alert("태그 추가 가능한 갯수를 초과했습니다.");
+                        	} else {
+                        		 $(".div_container").append("<div class='tag-item' >"+tagValue+"<span class='del-btn' idx='"+counter+"'>&ensp;X</span><input type='hidden' id='keyword"+counter+"' name='keyword"+counter+"'/></div>");
+  							   if($($($('.tag-item')[0])).text() != ''){
+  								   $('#keyword0').attr('value', $($($('.tag-item')[0])).text());
+  							   }
+  							   if($($($('.tag-item')[1])).text() != '') {
+  								   $('#keyword1').attr('value', $($($('.tag-item')[1])).text());
+  							   }	
+  							   if($($($('.tag-item')[2])).text() != '') {
+  								   $('#keyword2').attr('value', $($($('.tag-item')[2])).text());
+  							   }	
                             addTag(tagValue);
                             self.val("");
+                        	}
                         } else {
                             alert("태그값이 중복됩니다.");
                         }

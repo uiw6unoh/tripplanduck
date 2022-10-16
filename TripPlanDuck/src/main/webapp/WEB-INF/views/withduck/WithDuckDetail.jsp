@@ -112,7 +112,7 @@
             <!-- 작성자 프로필, 이름, 나이, 성별 -->
             <div class="profile-container">
                 <div class="profile-img">
-                    <img src="${path}/resources/images/Common/프사.png">
+                    <img src="${path}/resources/images/common/프사.png">
                 </div>
                 <div class="profile-name" style="float: left;">
                 	<input type="hidden" value="${withDuck.withWriterNick }" name="withWriterNick">
@@ -144,16 +144,13 @@
                     ${withDuck.withContent }
                 </div>
                 <div class="tags">
+                <c:forEach var="keyList" items="${keyList }">
                   <div class="tag-container">
                     <a href="">
-                        #제주
+                        ${keyList}
                     </a>
                   </div>
-                  <div class="tag-container">
-                      <a href="">
-                          #여행
-                      </a>
-                  </div>
+                </c:forEach>
                 </div>
             </div>
         </div>
@@ -196,7 +193,7 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
-<script type="text/javascript">
+<script>
 $(function() {
 	var cancel = $('#deleteWithDuck');
 	
