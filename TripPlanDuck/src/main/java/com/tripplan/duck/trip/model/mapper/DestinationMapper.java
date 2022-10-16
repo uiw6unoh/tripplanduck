@@ -39,4 +39,6 @@ public interface DestinationMapper {
 
 	void deleteLike(DestinationLike destinationLike);
 
+	int isLike(DestinationLike destinationLike);
+
 }

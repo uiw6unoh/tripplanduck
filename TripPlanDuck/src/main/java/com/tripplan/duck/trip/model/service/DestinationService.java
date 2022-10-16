@@ -34,4 +34,6 @@ public interface DestinationService {
 
 	void deleteLike(DestinationLike destinationLike);
 
+	int isLike(DestinationLike destinationLike);
+
 }

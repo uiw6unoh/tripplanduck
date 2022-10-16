@@ -302,7 +302,7 @@
 <script src="${ path }/js/trip/Mainstyle.js"></script>
 
 <!-- Heart JS -->
-<script src="${ path }/js/common/heart.js"></script>
+<!--  <script src="${ path }/js/common/heart.js"></script>  -->
 
 <!-- sweetalert2 alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -435,17 +435,65 @@ $(document).ready(function () {
 	  function addListener() {
 	    var btn = document.querySelector("#Heart_2_");
 	    btn.addEventListener("click", restart, false);
+	    
+	  }
+	  
+	  let isLike = "${isLike}";
+	  
+	  if(isLike > 0){
+		  
+		  var container = document.querySelector("#Layer_1");
+		  var newContainer = container.cloneNode(true);
+
+		  container.parentNode.replaceChild(newContainer, container);
+		  $(".st7").removeAttr("style");
+		  
+		  addListener();
 	  }
 
 	  function restart() {
-	    // var newHeart = document.getElementsByClassName(".st7");
-	    var container = document.querySelector("#Layer_1");
-	    var newContainer = container.cloneNode(true);
+		
+		let isLogin = "${loginMember}";
+		
+		if(isLogin != null && isLogin != ""){
+			
+			// var newHeart = document.getElementsByClassName(".st7");
+		    var container = document.querySelector("#Layer_1");
+		    var newContainer = container.cloneNode(true);
 
-	    container.parentNode.replaceChild(newContainer, container);
-	    $(".st7").removeAttr("style");
+		    container.parentNode.replaceChild(newContainer, container);
+		    $(".st7").removeAttr("style");
+		    
+			let destNo = "${dest.destNo}";
+		    $.ajax({
+		    	url : "${path}/trip/api/like",
+		    	type : "POST",
+		    	data : { 'destNo' : destNo },
+		    	success : function(data){
+		    		Swal.fire({
+				        icon: "success",
+				        text: `찜하기 성공!`,
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+				      });
+		    	},
+		    	error : function(error){
+		    		console.log(error)
+		    	}
+		    })
 
-	    addListener();
+		    addListener();
+		} else {
+			  Swal.fire({
+			        icon: "error",
+			        text: `로그인 후 이용해주세요.`,
+			        confirmButtonText: "확인",
+			        closeOnClickOutside : false
+			      }).then(function (isConfirmed) {
+			    	  window.location.href="${path}/member/login";
+			        });
+		}
+	    
 	  }
 	  addListener();
 	});

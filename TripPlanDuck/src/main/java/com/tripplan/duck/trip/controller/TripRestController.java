@@ -19,6 +19,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -28,6 +29,7 @@ import com.tripplan.duck.trip.model.service.DestinationService;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @RestController
+@RequestMapping("/trip/api")
 public class TripRestController {
 	
 	@Autowired
@@ -122,23 +124,21 @@ public class TripRestController {
 	}
 	
 	@PostMapping("/like")
-	@Transactional(rollbackFor = Exception.class)
-	public int updateLike(HttpSession session, @RequestBody DestinationLike destinationLike) throws Exception {
+	public int updateLike(HttpSession session, DestinationLike destinationLike) throws Exception {
 		
 		Member member = (Member)session.getAttribute("loginMember");
 		
-		int like = destinationLike.getLike();
+		if(member == null)
+			return 0;
 		
-		if(like > 0) {
+		destinationLike.setMemberNo(member.getMemberNo());
+		
+		int like = destinationService.isLike(destinationLike);
+		
+		if(like == 0)
 			destinationService.insertLike(destinationLike);
-			like = 0;
-		} else {
-			destinationService.deleteLike(destinationLike);
-			like = 1;
-		}
 		
-		return 0;
-		
+		return 1;
 	}
 
 }
