@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.mapper.DestinationMapper;
 import com.tripplan.duck.trip.model.vo.Destination;
+import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @Service
 public class DestinationServiceImpl implements DestinationService {
@@ -60,6 +61,21 @@ public class DestinationServiceImpl implements DestinationService {
 	@Override
 	public List<Location> getLocationsByName(String order) {
 		return destinationMapper.getLocationsByName(order);
+	}
+
+	@Override
+	public List<Destination> getDestinationsByKeyWord(String keyword) {
+		return destinationMapper.getDestinationsByKeyWord(keyword);
+	}
+
+	@Override
+	public void insertLike(DestinationLike destinationLike) {
+		destinationMapper.insertLike(destinationLike);
+	}
+
+	@Override
+	public void deleteLike(DestinationLike destinationLike) {
+		destinationMapper.deleteLike(destinationLike);
 	}
 
 }

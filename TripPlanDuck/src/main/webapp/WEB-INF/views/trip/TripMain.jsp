@@ -75,7 +75,7 @@
       <div class="owl-stage-outer">
         <div class="owl-stage">
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/jeju.jpg"></a>
+            <a href="${ path }/trip/list?locationId=39" class=""><img src="${ path }/images/trip/jeju.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
               <h4 style="font-family: Montserrat">JEJU</h4>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/busan.jpg"></a>
+            <a href="${ path }/trip/list?locationId=6" class=""><img src="${ path }/images/trip/busan.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
               <h4 style="font-family: Montserrat">BUSAN</h4>
@@ -91,7 +91,7 @@
             </div>
           </div>
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/gyeongju.jpg"></a>
+            <a href="${ path }/trip/list?locationId=35" class=""><img src="${ path }/images/trip/gyeongju.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
               <h4 style="font-family: Montserrat">GYEONGJU</h4>
@@ -99,7 +99,7 @@
             </div>
           </div>
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/gangneung.jpg"></a>
+            <a href="${ path }/trip/list?locationId=32" class=""><img src="${ path }/images/trip/gangneung.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
               <h4 style="font-family: Montserrat">GANGNEUNG</h4>
@@ -107,7 +107,7 @@
             </div>
           </div>
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/namwon.jpg"></a>
+            <a href="${ path }/trip/list?locationId=37" class=""><img src="${ path }/images/trip/namwon.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
               <h4 style="font-family: Montserrat">NAMWON</h4>
@@ -115,11 +115,11 @@
             </div>
           </div>
           <div class="owl-item">
-            <a href="#" class=""><img src="${ path }/images/trip/geojetongyeong.jpg"></a>
+            <a href="${ path }/trip/list?locationId=1" class=""><img src="${ path }/images/trip/seoul.jpg"></a>
             <div class="main-photo-linear"></div>
             <div class="owl-text-overlay m-auto"> 
-              <h4 style="font-family: Montserrat" font-weight=700;>GEOJETONGYEONG</h4>
-              <h6>대한민국 거제통영</h6>
+              <h4 style="font-family: Montserrat" font-weight=700;>SEOUL</h4>
+              <h6>대한민국 서울</h6>
             </div>
           </div>
         </div>
@@ -129,7 +129,11 @@
     <p class="h2 mt-5 font-weight-bold text-center">어디로 여행을 떠나시나요?</p>
     <p class="font-weight-light text-muted text-center mb-1">여행지를 검색해주세요.</p>
     <div class="mx-auto input-group justify-content-center w-50">
-          <input name="keyword" type="text" class="form-control" aria-label="search">
+          <input  type="text"
+                  name="keyword"
+                  class="form-control"
+                  placeholder="도시, 키워드로 검색"
+                  autocomplete="off">
         <button class="btn btn-outline-warning" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-search" viewBox="0 0 16 18">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg></button>

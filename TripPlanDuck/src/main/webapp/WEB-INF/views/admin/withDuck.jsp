@@ -42,9 +42,10 @@
             </div>
             <div class="col-md-6">
                 <form action="...">
-                    <button style="margin-top: 25px; margin-left: 130px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);">최신순</button>
-                    <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">신고받은게시글</button>
-                    <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">오래된순</button>
+                    <button type="button" style="margin-top: 25px; margin-left: 130px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/withDuckLatest'">최신순</button>
+                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">신고받은게시글</button>
+                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">오래된순</button>
                 </form>
             </div>
         </div>
@@ -52,114 +53,37 @@
             <table class="table table-sm">
                 <thead>
                     <tr style="height: 10px; color:gray">
-                        <th style="width: 20%;">게시글 번호</th>
-                        <th style="width: 30%;">제목</th>
-                        <th style="width: 15%;">아이디</th>
-                        <th style="width: 15%;">신고</th>
-                        <th style="width: 15%;">게시글 삭제</th>
+                        <th style="width: 20%; text-align: center;">게시글 번호</th>
+                        <th style="width: 20%; text-align: center;">제목</th>
+                        <th style="width: 15%; text-align: center;">아이디</th>
+                        <th style="width: 20%; text-align: center;">신고</th>
+                        <th style="width: 10%; text-align: center;">게시글 삭제</th>
                     </tr>
                 </thead>
 
                 <tbody>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td style="color: blue;">신고된게시글</td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            게시글 삭제
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td style="color: blue;">신고된게시글</td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            게시글 삭제
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td style="color: blue;">신고된게시글</td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            게시글 삭제
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td style="color: blue;">신고된게시글</td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            게시글 삭제
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td></td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td></td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td></td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td></td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>00</td>
-                    <td>abcd</td>
-                    <td>홍길동</td>
-                    <td></td>
-                    <td>
-                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-                            
-                        </button>
-                    </td>
-                </tr>
+                <c:if test="${ empty list }">
+                	<tr>
+                		<td colspan="6">
+                			조회된 위드덕이 없습니다.
+                		</td>
+                	</tr>
+                </c:if>
+                <c:if test="${ not empty list }">
+                	<c:forEach var="withDuck" items="${list}">
+                		<tr>
+		                    <td style="text-align: center;">${withDuck.withNo}</td>
+		                    <td style="text-align: center;">${withDuck.withTitle}</td>
+		                    <td style="text-align: center;">${withDuck.withWriterNick}</td>
+		                    <td style="text-align: center;">신고된게시글</td>
+		                    <td>
+	                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                            게시글삭제
+	                        </button>
+		                    </td>
+		                </tr>
+                	</c:forEach>
+                </c:if>
                 </tbody>
             </table>
         </div>
@@ -168,13 +92,38 @@
             <div class="col-4"></div>
             <div class="col-4">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">&lt;&lt;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&gt;&gt;</a></li>
+                    <!-- 맨 처음으로 -->
+					<button onclick="location.href='${ path }/admin/withDuck?page=1'" 
+					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+					&lt;&lt;</button>
+		
+					<!-- 이전 페이지로 -->
+					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.prevPage }'"
+					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+					 &lt;</button>
+		
+					<!--  10개 페이지 목록 -->
+					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+						<c:if test="${ status.current == pageInfo.currentPage }">
+							<button disabled style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+							${ status.current }</button>
+						</c:if>
+						<c:if test="${ status.current != pageInfo.currentPage }">
+							<button onclick="location.href='${ path }/admin/withDuck?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+							${ status.current }</button>
+						</c:if>
+					</c:forEach>
+		
+		
+					<!-- 다음 페이지로 -->
+					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.nextPage }'"
+					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+					 &gt;</button>
+		
+					<!-- 맨 끝으로 -->
+					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.maxPage }'"
+					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+					 &gt;&gt;</button>
                 </ul>
             </div>
         </div>

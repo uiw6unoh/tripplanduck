@@ -24,6 +24,7 @@
   <!-- Mainstyle CSS -->
   <link rel="stylesheet" href="${ path }/css/common/style.css" type="text/css" />
   <link rel="stylesheet" href="${ path }/css/common/font-icons.css" type="text/css" />
+  <script src="${ path }/js/search.js"></script>
   
   <title>TripPlanDuck</title>
 </head>
@@ -102,10 +103,11 @@
               </nav>
               <!-- #primary-menu end -->
 
-              <form class="top-search-form" action="search.html" method="get">
+              <form class="top-search-form" action="search" method="get">
                 <input
                   type="text"
-                  name="q"
+                  id="searchBtn"
+                  name="keyword"
                   class="form-control"
                   value=""
                   placeholder="도시, 키워드로 검색"
@@ -129,7 +131,7 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
   	
 <style>
-/* font-family ������Ʈ - pretendard */
+/* font-family - pretendard */
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
 * {
