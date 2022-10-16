@@ -81,13 +81,7 @@ public class TripController {
 	}
 	
 	@GetMapping("/list")
-	public ModelAndView list(ModelAndView model, @RequestParam(value="locationId")int locationId,
-											 @RequestParam(value="keyword", required = false)String keyword) {
-		
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("locationId", locationId);
-		param.put("keyword", keyword);
-		
+	public ModelAndView list(ModelAndView model, @RequestParam(value="locationId")int locationId) {
 		
 		Location location = destinationService.getLocation(locationId);
 		List<Destination> destinations = destinationService.getDestinationsByLocationId(locationId);
@@ -100,8 +94,13 @@ public class TripController {
 	}
 	
 	@GetMapping("/search")
-	public ModelAndView list(ModelAndView model ) {
+	public ModelAndView list(ModelAndView model, @RequestParam("keyword")String keyword) {
 		
+		
+		List<Destination> destinations = destinationService.getDestinationsByKeyWord(keyword);
+		
+		model.addObject("destinations", destinations);
+		model.addObject("keyword", keyword);
 		model.setViewName("trip/TripSearch");
 		
 		return model;

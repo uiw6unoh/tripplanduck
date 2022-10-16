@@ -11,4 +11,6 @@ public class DestinationLike {
 	int destNo;
 	
 	int memberNo;
+	
+	int like;
 }
