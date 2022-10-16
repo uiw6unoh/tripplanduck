@@ -7,11 +7,21 @@
 <!DOCTYPE html>
 <html lang="ko">
 
+<style>
+/* font-family - pretendard */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+* {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+        "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+</style>
+
 <head>
 <!-- Required meta tags -->
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
     
   <!-- Bootstrap CSS -->
   <link
@@ -24,7 +34,7 @@
   <!-- Mainstyle CSS -->
   <link rel="stylesheet" href="${ path }/css/common/style.css" type="text/css" />
   <link rel="stylesheet" href="${ path }/css/common/font-icons.css" type="text/css" />
-  <script src="${ path }/js/search.js"></script>
+  <script src="${ path }/js/trip/search.js"></script>
   
   <title>TripPlanDuck</title>
 </head>
@@ -103,7 +113,7 @@
               </nav>
               <!-- #primary-menu end -->
 
-              <form class="top-search-form" action="search" method="get">
+              <form class="top-search-form" name="headerForm" action="search" method="get" onsubmit="return validate();">
                 <input
                   type="text"
                   id="searchBtn"
@@ -128,18 +138,15 @@
 
 	<!-- Bootstrap JS -->
 	<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-  	
-<style>
-/* font-family - pretendard */
-@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-
-* {
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
-        "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
-}
-
-</style>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>  
   
+  <script>
+  function validate() {
+	    var searchBtn = document.getElementById('searchBtn').value;
+	    var isFormValid = (searchBtn != '');
+
+	    return isFormValid;
+	}  
+  </script>
   </body>
 </html>

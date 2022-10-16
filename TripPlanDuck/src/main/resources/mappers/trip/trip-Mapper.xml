@@ -124,4 +124,8 @@
 	<delete id="deleteLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
 		DELETE FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
 	</delete>
+	
+	<select id="isLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike" resultType="int">
+		SELECT COUNT(*) FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+	</select>
 </mapper>

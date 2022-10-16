@@ -130,11 +130,12 @@
     <p class="font-weight-light text-muted text-center mb-1">여행지를 검색해주세요.</p>
     <div class="mx-auto input-group justify-content-center w-50">
           <input  type="text"
+          		  id="keyword"
                   name="keyword"
+                  value=""
                   class="form-control"
-                  placeholder="도시, 키워드로 검색"
                   autocomplete="off">
-        <button class="btn btn-outline-warning" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-search" viewBox="0 0 16 18">
+        <button class="btn btn-outline-warning" type="button" id="searchButton"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="black" class="bi bi-search" viewBox="0 0 16 18">
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg></button>
     </div>
@@ -469,12 +470,23 @@
 
 <!-- Trip JS -->
 <script src="${ path }/js/trip/Mainstyle.js"></script>
+
+<!-- sweetalert2 alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 function changeSort(sort){
 	window.location.href = "${path}" + "/trip/main?sort=" + sort;
 }
 
-$(document).ready(function(){
+$('[id="searchButton"]').on("click", function () {
+	var keyword = document.getElementById("keyword");
+	
+	if(!keyword.value) {
+		Swal.fire('검색어를 입력하세요.');
+	} else {
+		window.location.href="${path}/trip/search?keyword=" + keyword.value;
+	};
+});
 
-})
 </script>
