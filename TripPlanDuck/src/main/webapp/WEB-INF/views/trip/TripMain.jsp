@@ -483,10 +483,47 @@ $('[id="searchButton"]').on("click", function () {
 	var keyword = document.getElementById("keyword");
 	
 	if(!keyword.value) {
-		Swal.fire('검색어를 입력하세요.');
+		Swal.fire({
+	        icon: "error",
+	        title: `실패!`,
+	        text: `검색어를 입력해주세요.`,
+	        confirmButtonText: "확인",
+	        closeOnClickOutside : false
+	      });
 	} else {
 		window.location.href="${path}/trip/search?keyword=" + keyword.value;
 	};
 });
 
+
+var limit = 4;
+var datalength = 1;
+
+$(window).scroll(function() {
+	alert("hi")
+	if ($(window).scrollTop() == $(document).height() - $(window).height() || $(window).scrollTop() >= $(document).height() - $(window).height() - 5) {
+		if (datalength > 0) {
+			$.ajax({
+				url : "${path}/trip/api/main"
+				type : "GET",
+				success: function(obj) {
+					datalength = obj.data.length;
+
+					if(obj.data.length > 0) {
+						obj.data.forEach(function(v,i) {
+							//here
+						});
+						page++;
+
+					} else {
+						alert("no data");
+					}
+				},
+				error: function(error) {
+					alert("error");
+				}
+			});
+		}
+	}
+});
 </script>

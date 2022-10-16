@@ -472,6 +472,7 @@ $(document).ready(function () {
 		    	success : function(data){
 		    		Swal.fire({
 				        icon: "success",
+				        title: `성공`,
 				        text: `찜하기 성공!`,
 				        confirmButtonText: "확인",
 				        closeOnClickOutside : false
@@ -486,6 +487,7 @@ $(document).ready(function () {
 		} else {
 			  Swal.fire({
 			        icon: "error",
+			        title: `실패!`,
 			        text: `로그인 후 이용해주세요.`,
 			        confirmButtonText: "확인",
 			        closeOnClickOutside : false

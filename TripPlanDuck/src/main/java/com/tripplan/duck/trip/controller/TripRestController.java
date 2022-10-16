@@ -20,11 +20,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
@@ -139,6 +142,50 @@ public class TripRestController {
 			destinationService.insertLike(destinationLike);
 		
 		return 1;
+	}
+	
+	@GetMapping("/main")
+	public Map<String, Object> TripMain(@RequestParam(value = "sort_name", defaultValue = "추천순") String sort_name,
+								@RequestParam(value="sort", required = false)String sort,
+								@RequestParam(value="page", defaultValue = "8")int limit){
+		
+		String order = "DEST_LIKE_SUM";
+		List<Location> list = new ArrayList<Location>();    
+		Map<String, Object> result = new HashMap<String, Object>();
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("order", order);
+		params.put("limit", limit);
+		
+		if(sort == null)
+			sort = "4";
+		
+		switch(sort){
+			case "1":
+				order = "DEST_RATING_AVG";
+				sort_name = "인기순";
+				list = destinationService.getLocations(params);
+				break;
+			case "2":
+				order = "LOCATION";
+				sort_name = "오름차순";
+				list = destinationService.getLocationsByName(params);
+				break;
+			case "3":
+				order = "LOCATION DESC";
+				sort_name = "내림차순";
+				list = destinationService.getLocationsByName(params);
+				break;
+			default:
+				sort_name = "추천순";
+				list = destinationService.getLocations(params);
+				break;
+		}
+		
+//		model.addObject("sort_name", sort_name);
+		result.put("list", list);
+		
+		return result;
 	}
 
 }
