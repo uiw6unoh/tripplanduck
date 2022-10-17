@@ -26,6 +26,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;
@@ -145,13 +146,17 @@ public class TripRestController {
 	}
 	
 	@GetMapping("/main")
-	public Map<String, Object> TripMain(@RequestParam(value = "sort_name", defaultValue = "추천순") String sort_name,
-								@RequestParam(value="sort", required = false)String sort,
+	public Map<String, Object> TripMain(@RequestParam(value="sort", required = false)String sort,
 								@RequestParam(value="page", defaultValue = "8")int limit){
 		
 		String order = "DEST_LIKE_SUM";
 		List<Location> list = new ArrayList<Location>();    
 		Map<String, Object> result = new HashMap<String, Object>();
+		
+//		PageInfo pageInfo = null;
+		
+//		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
+
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("order", order);
@@ -162,27 +167,24 @@ public class TripRestController {
 		
 		switch(sort){
 			case "1":
-				order = "DEST_RATING_AVG";
-				sort_name = "인기순";
+				params.put("order", "DEST_RATING_AVG");
 				list = destinationService.getLocations(params);
 				break;
 			case "2":
-				order = "LOCATION";
-				sort_name = "오름차순";
+				params.put("order", "LOCATION");
 				list = destinationService.getLocationsByName(params);
 				break;
 			case "3":
-				order = "LOCATION DESC";
-				sort_name = "내림차순";
+				params.put("order", "LOCATION DESC");
 				list = destinationService.getLocationsByName(params);
 				break;
 			default:
-				sort_name = "추천순";
 				list = destinationService.getLocations(params);
 				break;
 		}
 		
-//		model.addObject("sort_name", sort_name);
+		System.out.println("list : " + list);
+		
 		result.put("list", list);
 		
 		return result;

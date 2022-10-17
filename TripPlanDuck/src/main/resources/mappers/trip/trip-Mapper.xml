@@ -27,6 +27,8 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+		<result property="locationTitle" column="LOCATION_TITLE" />
 	</resultMap>
 	
 	<insert id="insertData"  parameterType="java.util.Map">
@@ -101,7 +103,7 @@
 	</select>
 	
 	<select id="getLocations" parameterType="map" resultMap="locationResultMap">
-		SELECT * FROM (SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY 
+		SELECT * FROM (SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY, B.LOCATION_IMAGE, B.LOCATION_TITLE
 		FROM (SELECT LOCATION_ID, SUM(${order}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
 		WHERE A.LOCATION_ID = B.LOCATION_ID 
 		ORDER BY A.SUM DESC) 
@@ -111,7 +113,7 @@
 	</select>
 	
 	<select id="getLocationsByName" parameterType="map" resultMap="locationResultMap">
-		SELECT * FROM (SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY 
+		SELECT * FROM (SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY, LOCATION_IMAGE, LOCATION_TITLE
 		FROM LOCATION
 		ORDER BY ${order})
 		<![CDATA[ 

@@ -48,17 +48,17 @@ public class TripController {
 		
 		switch(sort){
 			case "1":
-				order = "DEST_RATING_AVG";
+				params.put("order", "DEST_RATING_AVG");
 				sort_name = "인기순";
 				list = destinationService.getLocations(params);
 				break;
 			case "2":
-				order = "LOCATION";
+				params.put("order", "LOCATION");
 				sort_name = "오름차순";
 				list = destinationService.getLocationsByName(params);
 				break;
 			case "3":
-				order = "LOCATION DESC";
+				params.put("order", "LOCATION DESC");
 				sort_name = "내림차순";
 				list = destinationService.getLocationsByName(params);
 				break;
