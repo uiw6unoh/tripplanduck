@@ -197,7 +197,7 @@
 	    <div class="col-lg-3 col-md-6 mb-4">
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
-	          <div style="overflow: hidden;">
+	          <div class="card-img" style="overflow: hidden;">
 	            <img src="${ path }/images/trip/${location.locationImage}" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
@@ -209,7 +209,54 @@
 	    </div>
     </c:forEach>
     </div>
-
+    
+    <div class="row mt-1 skeletonCard" style="display:none;">
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<div class="w-100" style="display:flex; justify-content: center;">
 		<div class="loading">
 		  <div class="ldio-76qwp4fy1ic" ><div></div>
@@ -264,6 +311,7 @@ var isEnd = true;
 $(window).scroll(function() {
 	if ($(window).scrollTop() == $(document).height() - $(window).height() || $(window).scrollTop() >= $(document).height() - $(window).height() - 5) {
 		if (datalength > 0 && isEnd == true) {
+			showSkeleton();
 			showLoading();
 			isEnd = false;
 			let sort = getParameter("sort")
@@ -285,8 +333,8 @@ $(window).scroll(function() {
 							    		"<img src=\'${ path }/images/trip/" + obj.list[i].locationImage + "\' style='background-color: #f4f3f1;' width='100%' height='254px'>" +
 							    		"</div>" +
 							    		"<div class='card-body'>" +
-							    		"<h5 class='card-title mb-1'>" + obj.list[i].locationTitle + "</h5>" + 
-							    		"<p class='card-text'>" + obj.list[i].location + "</p>" + 
+							    		"<h5 class='card-title mb-1 '>" + obj.list[i].locationTitle + "</h5>" + 
+							    		"<p class='card-text '>" + obj.list[i].location + "</p>" + 
 							    		"</div>" + 
 							    		"</div>" + 
 							    		"</a>" +
@@ -303,6 +351,7 @@ $(window).scroll(function() {
 						      });
 						}
 						
+						hideSkeleton();
 						hideLoading();
 						isEnd = true;
 						limit += 4;
@@ -311,6 +360,7 @@ $(window).scroll(function() {
 				},
 				error: function(error) {
 					alert("error");
+					hideSkeleton();
 					hideLoading();
 				}
 			});

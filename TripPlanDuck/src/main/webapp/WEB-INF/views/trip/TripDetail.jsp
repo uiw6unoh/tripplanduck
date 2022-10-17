@@ -214,6 +214,7 @@
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
+                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
                                   </div>
                                     <p>계란후라이 먹었어요</p>
                               </div>
