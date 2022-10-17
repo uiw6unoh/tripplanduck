@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.tripplan.duck.admin.model.mapper.AdminMapper;
 import com.tripplan.duck.common.util.PageInfo;
@@ -78,6 +79,34 @@ public class AdminServiceImpl implements AdminService {
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		return mapper.withDuckSelectAll(rowBounds);
+	}
+
+	@Override
+	public List<Comments> getWithDuckLatestList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.withDuckSelectLatest(rowBounds);
+	}
+
+	@Override
+	public List<Comments> getWithDuckOldList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.withDuckSelectOld(rowBounds);
+	}
+
+	@Override
+	@Transactional
+	public int Memberdelete(int no) {
+		int result = 0;
+		
+		result = mapper.updateMemberStatus(no, "N");
+				
+		return result;
 	}
 
 

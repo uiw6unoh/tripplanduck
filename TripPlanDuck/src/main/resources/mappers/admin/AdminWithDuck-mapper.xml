@@ -64,6 +64,11 @@
 	
 	<select id="withDuckSelectLatest" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql"/>
+		ORDER BY WITH_NO DESC
+	</select>
+	
+	<select id="withDuckSelectOld" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql"/>
 		ORDER BY WITH_NO ASC
 	</select>
 

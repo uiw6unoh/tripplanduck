@@ -26,6 +26,14 @@ public interface AdminMapper {
 
 	List<Comments> withDuckSelectAll(RowBounds rowBounds);
 
+	List<Comments> withDuckSelectLatest(RowBounds rowBounds);
+
+	List<Comments> withDuckSelectOld(RowBounds rowBounds);
+
+	int updateMemberStatus(int no, String string);
+
+	
+
 	
 
 	

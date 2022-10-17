@@ -24,6 +24,12 @@ public interface AdminService {
 
 	List<Comments> getWithDuckList(PageInfo pageInfo);
 
+	List<Comments> getWithDuckLatestList(PageInfo pageInfo);
+
+	List<Comments> getWithDuckOldList(PageInfo pageInfo);
+
+	int Memberdelete(int no);
+
 
 
 

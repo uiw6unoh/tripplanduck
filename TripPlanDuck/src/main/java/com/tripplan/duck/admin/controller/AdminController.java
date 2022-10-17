@@ -45,6 +45,44 @@ public class AdminController {
     	return model;
     }
     
+    @GetMapping("/admin/withDuckLatest")
+    public ModelAndView withDuckLatest(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	List<Comments> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	pageInfo = new PageInfo(page, 10, service.getWithDuckCount(), 10);
+    	list = service.getWithDuckLatestList(pageInfo);
+    	
+    	System.out.println(pageInfo);
+    	System.out.println(list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("/admin/withDuckLatest");
+    	return model;
+    }
+    
+    @GetMapping("/admin/withDuckOld")
+    public ModelAndView withDuckOld(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	List<Comments> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	pageInfo = new PageInfo(page, 10, service.getWithDuckCount(), 10);
+    	list = service.getWithDuckOldList(pageInfo);
+    	
+    	System.out.println(pageInfo);
+    	System.out.println(list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("/admin/withDuckOld");
+    	return model;
+    }
+    
     
     @GetMapping("/admin/review")
     public ModelAndView review(ModelAndView model,
@@ -140,6 +178,25 @@ public class AdminController {
     	model.setViewName("admin/member");
     	return model;
     	
+    }
+    
+    @GetMapping("/admin/MemberDelete")
+    public ModelAndView MemberDelete(ModelAndView model, @RequestParam int no) {
+    	int result = 0;
+    	
+    	result = service.Memberdelete(no);
+    	
+		if(result > 0) {
+			model.addObject("msg", "게시글이 정상적으로 삭제되었습니다.");
+			model.addObject("location", "/admin/member");
+		} else {
+			model.addObject("msg", "게시글 삭제를 실패하였습니다.");
+			model.addObject("location", "/admin/member");
+		}
+		
+		model.setViewName("common/msg");
+    	
+    	return model;
     }
     
 }
