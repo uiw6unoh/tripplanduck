@@ -48,16 +48,15 @@ public class MyPageController {
 		//Member member = new Member(2, "yeoul", "1234", "김여울", "여리", "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20); 
 		//model.addAttribute("member", member);
 		
-		// System.out.println("logined memger : " + member);
+		System.out.println("logined memger : " + member);
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("memberNo", member.getMemberNo());
 		param.put("offset", offset);
 		
-		// select가 빈 문자열이라면 모두 조회, 지정하였을 경우에는 그 값을 조회	
+        // select가 빈 문자열이라면 모두 조회, 지정하였을 경우에는 그 값을 조회    
 		// 만약 빈문자열이라면 하단 세개의 분기문이 모두 실행됨
 		if((!select.equals("trip") && !select.equals("comment"))) {
-			
 			MyPlanner myPlanner = myPageService.selectMyPlannerByMNo(param) != null ? myPageService.selectMyPlannerByMNo(param).get(0) : null;
 			model.addAttribute("myPlannerFirst", myPlanner);
 		}
@@ -142,22 +141,7 @@ public class MyPageController {
 		
 		return result;
 	}
-	
-	
-	// 좋아요 한 여행지
-//	@GetMapping("/liketrip")
-//	public String LikeTrip() throws Exception {
-//		
-//		return "mypage/MyPageLiketrip";
-//	}
-	
-	// 작성한 리뷰
-//	@GetMapping("/comment")
-//	public String Comment() throws Exception {
-//		
-//		return "mypage/MyPageComment";
-//	}
-	
+		
 	// 회원 정보 수정
 	@GetMapping("/updateform")
 	public String UpdateForm() throws Exception {

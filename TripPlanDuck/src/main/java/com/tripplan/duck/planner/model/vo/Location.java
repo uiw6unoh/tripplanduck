@@ -18,4 +18,8 @@ public class Location {
 	
 	private double lcentery;
 	
+	private String locationImage;
+	
+	private String locationTitle;
+	
 }
