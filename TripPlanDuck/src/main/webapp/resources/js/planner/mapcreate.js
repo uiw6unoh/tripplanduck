@@ -27,6 +27,8 @@
 	// 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
 	var zoomControl = new kakao.maps.ZoomControl();
 	map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+	
+/*
 	kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
 		// 클릭한 위치에 마커를 표시합니다 
 		addMarker: addMarker
@@ -52,6 +54,7 @@
 			markers[i].setMap(map);
 		}
 	}
+*/
 	function asd(aaa) {
 		map.setCenter(aaa);
 

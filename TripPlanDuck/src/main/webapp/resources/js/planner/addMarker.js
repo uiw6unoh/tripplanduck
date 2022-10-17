@@ -18,7 +18,35 @@
 			    addMarker: addMarker
 			});
 
-
+				var data = new Array();
+				
+				$(document).ready(function(){
+					
+					$("[class^=addDesti]").on("click", function(event) {
+				
+						let destMapX = $(this).children('#destMapX').val().trim();
+						let destMapY = $(this).children('#destMapY').val().trim();
+						let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
+						let destNo = $(this).children('#destNo').val().trim();
+						
+						// 마커 찍기
+						addMarker(new kakao.maps.LatLng(destMapX, destMapY));
+				
+							 data.push(destSubject);
+							 $("#place").val(data);
+				
+					$('#divOriginal_'+destNo).appendTo('#divCopy_chil');
+					
+					$('#divCopy').find('.addDesti').replaceWith('<div onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
+					//$('#divCopy').find('#divCopy_').replaceAll('#divOriginal_');
+					
+					//$('#divCopy_chil').find('#divOrginal_'+destNo).replaceWith();
+					//$('#addDesti').find('a').replaceWith('a id="x" class="material-icons">delete</a>);
+					
+					//$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
+					
+					});
+				});
 			// 마커를 생성하고 지도위에 표시하는 함수입니다
 			function addMarker(position) {
 			    
@@ -41,3 +69,20 @@
 			        markers[i].setMap(map);
 			    }            
 			}
+			function deleteDiv(destNo,destSubject,destMapX,destMapY) {
+				
+				
+				$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
+				
+				for(var i = 0; i < data.length; i++){
+					if(data[i] == destSubject){
+						data.splice(i,1);
+						 $("#place").val(data);
+					}
+				}
+				
+			
+				//deleteMarkers(new kakao.maps.LatLng(destMapX, destMapY));
+				
+			};
+			
