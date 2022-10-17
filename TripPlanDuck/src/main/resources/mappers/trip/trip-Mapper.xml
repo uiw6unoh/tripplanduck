@@ -27,6 +27,8 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+		<result property="locationTitle" column="LOCATION_TITLE" />
 	</resultMap>
 	
 	<insert id="insertData"  parameterType="java.util.Map">
@@ -100,17 +102,23 @@
 		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_LIKE_SUM
 	</select>
 	
-	<select id="getLocations" parameterType="string" resultMap="locationResultMap">
-		SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY 
-		FROM (SELECT LOCATION_ID, SUM(${value}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
+	<select id="getLocations" parameterType="map" resultMap="locationResultMap">
+		SELECT * FROM (SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY, B.LOCATION_IMAGE, B.LOCATION_TITLE
+		FROM (SELECT LOCATION_ID, SUM(${order}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
 		WHERE A.LOCATION_ID = B.LOCATION_ID 
-		ORDER BY A.SUM DESC
+		ORDER BY A.SUM DESC) 
+		<![CDATA[ 
+		WHERE rownum <= ${limit} 
+		]]>
 	</select>
 	
-	<select id="getLocationsByName" parameterType="string" resultMap="locationResultMap">
-		SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY 
+	<select id="getLocationsByName" parameterType="map" resultMap="locationResultMap">
+		SELECT * FROM (SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY, LOCATION_IMAGE, LOCATION_TITLE
 		FROM LOCATION
-		ORDER BY ${value}
+		ORDER BY ${order})
+		<![CDATA[ 
+		WHERE rownum <= ${limit} 
+		]]>
 	</select>
 	
 	<select id="getDestinationsByKeyWord" parameterType="string" resultMap="DestinationResultMap">

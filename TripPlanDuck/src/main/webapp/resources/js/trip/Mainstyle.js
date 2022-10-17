@@ -118,3 +118,12 @@ function getJson() {
 	});
 }
 */
+
+
+function showLoading(){
+	$(".ldio-76qwp4fy1ic").css("display", "block");
+}
+
+function hideLoading(){
+	$(".ldio-76qwp4fy1ic").css("display", "block");
+}
