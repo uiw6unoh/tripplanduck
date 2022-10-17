@@ -41,4 +41,6 @@ public interface DestinationMapper {
 
 	int isLike(DestinationLike destinationLike);
 
+	void updateDestLike(DestinationLike destinationLike);
+
 }

@@ -83,4 +83,9 @@ public class DestinationServiceImpl implements DestinationService {
 		return destinationMapper.isLike(destinationLike);
 	}
 
+	@Override
+	public void updateDestLike(DestinationLike destinationLike) {
+		destinationMapper.updateDestLike(destinationLike);
+	}
+
 }

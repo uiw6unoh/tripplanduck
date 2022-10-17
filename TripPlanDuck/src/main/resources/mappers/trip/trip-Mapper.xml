@@ -13,13 +13,13 @@
 		<result property="destAddress" column="DEST_ADDRESS"/>
 		<result property="destMapX" column="DEST_MAP_X"/>
 		<result property="destMapY" column="DEST_MAP_Y"/>
-		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
-		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
 		<result property="destHit" column="DEST_HIT"/>
 		<result property="destCreateDate" column="DEST_CREATEDATE"/>
 		<result property="destUpdateDate" column="DEST_UPDATEDATE"/>
 		<result property="locationId" column="LOCATION_ID"/>
 		<result property="destImage" column="DEST_IMAGE"/>
+		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
+		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
 	</resultMap>
 	
 	<resultMap type="Location" id="locationResultMap">
@@ -41,13 +41,13 @@
 		DEST_ADDRESS, 
 		DEST_MAP_X, 
 		DEST_MAP_Y, 
-		DEST_LIKE_SUM, 
-		DEST_RATING_AVG, 
 		DEST_HIT, 
 		DEST_CREATEDATE, 
 		DEST_UPDATEDATE, 
 		LOCATION_ID, 
-		DEST_IMAGE)
+		DEST_IMAGE,
+		DEST_LIKE_SUM, 
+		DEST_RATING_AVG)
 	VALUES(
 		DEST_NO.NEXTVAL,
 		#{category},
@@ -134,4 +134,10 @@
 	<select id="isLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike" resultType="int">
 		SELECT COUNT(*) FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
 	</select>
+	
+	<update id="updateDestLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+        UPDATE DESTINATION SET
+        DEST_LIKE_SUM = DEST_LIKE_SUM + 1
+        WHERE DEST_NO = #{destNo}
+    </update>
 </mapper>

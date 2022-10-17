@@ -30,10 +30,6 @@ public class Destination {
 	
 	private double destMapY;		// 여행지Y좌표
 	
-	private int destLikeSum;		// 좋아요합
-	
-	private int destRatingAvg; 		// 별점평균
-	
 	private int destHit;			// 조회수
 	
 	private Date destCreateDate;	// 등록일
@@ -43,6 +39,10 @@ public class Destination {
 	private int locationId;			// 지역번호
 	
 	private String destImage;		// 여행지사진
+	
+	private int destLikeSum;		// 좋아요합
+
+	private int destRatingAvg;		// 별점평균
 	
 	private List<Location> loca;
 }

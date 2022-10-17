@@ -139,8 +139,10 @@ public class TripRestController {
 		
 		int like = destinationService.isLike(destinationLike);
 		
-		if(like == 0)
+		if(like == 0) {
 			destinationService.insertLike(destinationLike);
+			destinationService.updateDestLike(destinationLike);
+		}
 		
 		return 1;
 	}
