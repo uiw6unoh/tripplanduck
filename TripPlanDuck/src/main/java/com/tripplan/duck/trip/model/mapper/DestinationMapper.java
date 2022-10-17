@@ -29,9 +29,9 @@ public interface DestinationMapper {
 
 	Location getLocation(int locationId);
 
-	List<Location> getLocations(String string);
+	List<Location> getLocations(Map<String, Object> params);
 
-	List<Location> getLocationsByName(String order);
+	List<Location> getLocationsByName(Map<String, Object> params);
 
 	List<Destination> getDestinationsByKeyWord(String keyword);
 

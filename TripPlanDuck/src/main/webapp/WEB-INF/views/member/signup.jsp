@@ -39,6 +39,7 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id(4글자이상)" required>
+                  <label for="" id="id_chk"></label>
                 </td>
                 <td><input type="button" class="form-control" id="idCheck" value="중복확인"></td>
               </tr> 
@@ -48,6 +49,7 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
+                  <label for="" id="nickname_chk"></label>
                 </td>
                 <td><input type="button" class="form-control" id="nicknameCheck" value="중복확인"></td>
               </tr> 
@@ -57,6 +59,7 @@
               <tr>               
                 <td>
                   <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
+                  <label for="" id="password_chk" style="font-size: 11px; color: #616161;"></label>
                 </td>
               </tr>
               <tr>
@@ -65,6 +68,7 @@
               <tr>
                 <td>
                   <input type="password" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
+                  <label for="" id="password_chk2" ></label>
                 </td>
               </tr>
               <tr>
@@ -73,14 +77,16 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="abc@gmail.com" required>
+                  <label for="" id="email_chk2"></label>
                 </td>
-                <td><input type="button" class="form-control" id="EmailCheck" value="인증하기"></td>
+                <td><input type="button" class="form-control" id="emailCheck" value="인증하기"></td>
               </tr>
               <tr>
                 <td>
-                <input type="text" class="form-control" id="memberEmailNumber"  placeholder="인증번호 6자리 입력" required>
+                <input type="text" class="form-control" id="memberEmailNumber" placeholder="인증번호 6자리 입력" required>
+                <label for="" id="email_chk"></label>
                 </td>
-                <td><input type="hidden" class="form-control" id="EmailCheck2" value="인증번호확인" disabled="disabled" maxlength="6"></td>
+                <td><input type="hidden" class="form-control" id="emailCheck2" value="인증번호확인" disabled="disabled" maxlength="6"></td>
               </tr>
               <tr>
                 <td>성별</td>
@@ -91,6 +97,7 @@
                   <label class="form-check-label" for="female" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                   <input class="form-check-input" type="radio" name="memberGender" id="genderMale" value="M" style="width:18px; height:18px;">
                   <label class="form-check-label" for="genderMale">남성</label>
+                  <label for="" id="gender_chk" class="check"></label>
                 </td>
               </tr>   
               <tr>
@@ -114,6 +121,7 @@
                     <input type="radio" name="memberAge" value="50">
                     <span>50대~</span>
                    </label>
+                   <label for="" id="age_chk" class="check"></label>
                 </td>
               </tr>
             </table>
@@ -160,10 +168,26 @@
       	  
    });
    
+   
+   
    // 아이디 중복 확인
    $(document).ready(() => {
       $("#idCheck").on("click", () => {
          let memberId = $("#memberId").val().trim();         
+
+        	 if (memberId == "") { // if(!memberId.value) 로도 사용 가능 
+	 			Swal.fire('아이디를 입력하세요.')
+	 			memberId.focus();
+	 			return false;	
+	 		}	
+         
+	        var idCheck2 = /^[a-z]+[a-z0-9]{3,13}$/;
+	  		
+	  		if (!idCheck2.test(memberId)) {
+	  			Swal.fire('아이디는 4~12자 사이 영문자로 입력해주세요.')
+	  			memberId.focus();
+	  			return;
+	  		}
          
          $.ajax({
             type: "POST",
@@ -196,10 +220,17 @@
       });
    });
    
+ 
    // 닉네임 중복 확인
    $(document).ready(() => {
       $("#nicknameCheck").on("click", () => {
          let memberNickname = $("#memberNickname").val().trim();         
+         
+ 		if (memberNickname == "") {
+			Swal.fire('닉네임을 입력하세요.')
+			memberNickname.focus();
+			return false;
+		}
          
          $.ajax({
             type: "POST",
@@ -231,7 +262,6 @@
          });
       });
    });
-   
    
    
    // 이메일 인증
@@ -275,6 +305,36 @@
 		
 	});
 	
+	$(document).ready(function () {
+	// 비밀번호 유효성 검사
+	$("memberPassword").change(function() {
+		var memberPassword = $("#memberPassword");
+		var passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/;
+		
+		if(passwordCheck.test(p1.val())==false){
+			$("#password_chk").html("8자 이상, 최소 하나의 문자 및 하나의 숫자를 입력해주세요.");
+			$("#password_chk").attr('style', 'visibility:visible;');
+		} else if(passwordCheck.test(p1.val())==true) {
+			$("#password_chk").html("");
+			$("#password_chk").attr('style', 'visibility:hidden;');
+		}
+	});
+	
+	// 비밀번호 재확인 유효성검사
+	$("#memberPassword2").change(function(){
+		var memberPassword = $("#memberPassword");
+		var memberPassword2 = $("#memberPassword2");
+		
+		if(memberPassword.val() != memberPassword2.val()){
+			$("#password_chk2").html("비밀번호가 일치하지 않습니다.");
+			$("#password_chk2").attr('style', 'visibility:visible;');
+		} else{
+			$("#password_chk2").html("");
+			$("#password_chk2").attr('style', 'visibility:hidden;');
+		}
+	});
+	
+	});
 	
 	// 유효성 검사
 	function signup_check() {
@@ -305,8 +365,9 @@
 		if (!idCheck2.test(memberId.value)) {
 			Swal.fire('아이디는 4~12자 사이 영문자로 입력해주세요.')
 			memberId.focus();
-			return false;
+			return false;	
 		}
+		
 		
 		if(memberPassword == "") {
 			Swal.fire('비밀번호를 입력하세요.')
@@ -344,6 +405,7 @@
 			memberEmail.focus();
 			return false;
 		} 
+		
 		
 		if (!emailCheck.test(memberEmail.value)) {
 			Swal.fire('이메일 형식에 맞게 입력해주세요.')
@@ -391,8 +453,6 @@
 		
 }
 		
-   
-   
 
 </script>
 </body>
