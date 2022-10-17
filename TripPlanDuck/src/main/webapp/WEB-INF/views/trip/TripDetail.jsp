@@ -198,71 +198,30 @@
                               </p>
                             
                           </form>
-                          <!-- 답글이 포함된 댓글 -->
-                          <div class="d-flex mb-4">
-                              <!-- Parent comment-->
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
+                          <!-- 댓글 1 -->
+                          <div class="d-flex mb-3">
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
-                                <p style="font-weight: bold;">짹짹이 김여울</p>
+                                <p style="font-weight: bold;">무게치는 이건호</p>
                                 <div class="float-left">
                                   <div class="star-count">
 							        ★
 							        <!-- 여기에 rating 숫자 보여줘야 함 -->
-							        
-							        <div class="star-rate">4.0</div>
+							        <div class="star-rate">5.0</div>
 							      </div>
                                 </div>
-							      <!-- 자신이 작성한 댓글이면 수정, 등록 버튼이 보이게 (writerId = loginMember) -->
+                                <!-- loginmember == writerId 면 수정 or 삭제, 일치하지 않으면 신고버튼만 -->
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
+                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
                                   </div>
-                                  <!-- 자신이 작성한 댓글이 아니면 답글, 신고 버튼이 보이게 -->
-                                    <p> 아싸 해산!!!</p>
-                                    
-                                  <!-- 답글 1 -->
-                                  <div class="d-flex mt-2">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                      <div class="ms-3 w-100">
-                                        <p style="font-weight: bold;">선긋기 김민주</p>
-                                        <div class="float-left">
-		                                  <div class="star-count">
-									        ★
-									        <!-- 여기에 rating 숫자 보여줘야 함 -->
-									        <div class="star-rate">3.5</div>
-									      </div>
-		                                </div> 
-                                          <div class="float-right">
-                                            <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                            <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                          </div>
-                                            <p>저 빼고 재밌는 이야기하지 마세여</p>
-                                      </div>
-                                  </div>
-                                  <!-- 답글 2-->
-                                  <div class="d-flex mt-3">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                      <div class="ms-3 w-100">
-                                        <p style="font-weight: bold;">코드의마법사 박노경</p>
-                                        <div class="float-left">
-		                                  <div class="star-count">
-									        ★
-									        <!-- 여기에 rating 숫자 보여줘야 함 -->
-									        <div class="star-rate">2.0</div>
-									      </div>
-		                                </div>
-                                          <div class="float-right">
-                                            <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                            <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                          </div>
-                                            <p>사는게 쉽지가 않네요...</p>
-                                      </div>
-                                  </div>
+                                    <p>계란후라이 먹었어요</p>
                               </div>
                           </div>
                           
-                          <!-- 답글이 없는 댓글 -->
-                          <div class="d-flex">
+                          <!-- 댓글 2 -->
+                          <div class="d-flex mb-4">
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">무게치는 이건호</p>
@@ -472,6 +431,7 @@ $(document).ready(function () {
 		    	success : function(data){
 		    		Swal.fire({
 				        icon: "success",
+				        title: `성공`,
 				        text: `찜하기 성공!`,
 				        confirmButtonText: "확인",
 				        closeOnClickOutside : false
@@ -486,6 +446,7 @@ $(document).ready(function () {
 		} else {
 			  Swal.fire({
 			        icon: "error",
+			        title: `실패!`,
 			        text: `로그인 후 이용해주세요.`,
 			        confirmButtonText: "확인",
 			        closeOnClickOutside : false

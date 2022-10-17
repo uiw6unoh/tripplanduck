@@ -27,7 +27,6 @@
 					<img src="${ path }/images/common/프사.png" alt="profile"
 						style="width: 100px; height: 100px; border-radius: 50%;">
 					<div class="pt-1 nickName">
-						<%-- 테스트 데이터 --%>
 						${member.memberNickname }
 					</div>
 				</div>
@@ -45,8 +44,9 @@
 			<ul class="nav justify-content-center">
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
-						onclick="location.href='${path}/mypage?select=planner'">Like
-						Plan</button>
+						onclick="location.href='${path}/mypage?select=planner'">
+						내 플래너
+					</button>
 				</li>
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
@@ -64,24 +64,22 @@
 		<!-- 하위 컨테이너 -->
 		<div class="content-container">
 			<!-- Like Plan -->
-			<%-- 테스트 데이터 --%>
 			<c:if test="${myPlannerFirst ne null}">
 			<c:set var="plan" value="${myPlannerFirst}" />
 			
 			<div id="likePlan">
-				<h3 class="section-title">Like Plan</h3>
+				<h3 class="section-title">내 플래너</h3>
 				<div id="text"></div>
-				<!-- Like Plan 카드 -->
+				<!-- 내 플래너 카드 -->
 				<a>
 					<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
 						<div class="row g-0">
 							<div class="col-md-4">
 								<img src="${plan.getDestImg()}"
-									class="img-fluid rounded-start imgSize" alt="...">
+								class="img-fluid rounded-start imgSize" alt="...">
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
 									<div class="info-container-top">
 										<div class="card-title title mt-3">
 											<h5>여행지</h5>
@@ -92,12 +90,17 @@
 									</div>
 								
 									<div class="info-container-top">
-										<p class="card-text title">작성인</p>
+										<p class="card-text title">여행 시작 날짜</p>
 										<p class="card-text text-content">${plan.getMNickname()}</p>
 									</div>
 									<div class="info-container-top">
 										<p class="card-text title">여행 소요 시간</p>
 										<p class="card-text text-content">${plan.getPLt()}</p>
+									</div>
+									<div class="card-btns">
+										<button type="button" class="btn btn-warning"
+											onclick="location.href=''">수정</button>
+										<button type="button" class="btn btn-secondary">삭제</button>
 									</div>
 								</div>
 							</div>
@@ -123,12 +126,12 @@
 				<h3 class="section-title">내 여행지</h3>
 				<!-- 여행지 필터 -->
 				<div>
-				<select name="selectBox" id="selectBox" onchange="changeOption(this.value)" style="width:80px;" class="form-control">      
-				<c:forEach var="options" items="${options}" varStatus="i">
-					 <option value="${options.locationId}">${options.location}</option>
-				</c:forEach>
-				 <option value="0" selected>여행지 선택</option>
-					</select>
+				<select name="selectBox" id="selectBox" onchange="changeOption(this.value)" style="width:150px;" class="form-control">      
+					 <option value="0" selected>여행지 선택</option>
+						<c:forEach var="options" items="${options}" varStatus="i">
+					 		<option value="${options.locationId}">${options.location}</option>
+						</c:forEach>
+				</select>
 				</div>
 				<!-- 여행지 카드 -->
 				<div id = "shiftTrip"> 
@@ -141,7 +144,7 @@
 							</div>
 							<div class="col-md-8">
 								<div class="card-body">
-									<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i>
+									<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i>
 									<div class="info-container-top">
 										<div class="card-title title mt-3">
 											<h5>명소명</h5>
@@ -186,6 +189,10 @@
 					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
 						<div>
 							<div class="card-body">
+								<div class="star-rating">
+									<span class="star">★</span>
+									<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
+								</div>
 								<div class="destination">
 									<h4 class="card-title">${comments.getDestSubject()}</h4>
 									<span class="separator">|</span>
@@ -193,11 +200,11 @@
 								</div>
 								<p class="card-text">${comments.getCommentsContent()}</p>
 								<p class="card-text">
-									<small class="text-muted">${comments.getCommentsCreateDateSt()}(수정일 : ${comments.getCommentsUpdateDateSt()})</small>
+									<small class="text-muted">${comments.getCommentsCreateDateSt()} (수정일 : ${comments.getCommentsUpdateDateSt()})</small>
 								</p>
 								<div class="card-btns">
 									<button type="button" class="btn btn-warning"
-										onclick="location.href=''">수정</button>
+										onclick="location.href='${path}/TripDetail'">수정</button>
 									<button type="button" class="btn btn-secondary">삭제</button>
 								</div>
 							</div>
@@ -230,7 +237,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="text" class="inputPwd" placeholder="비밀번호 입력">
+							<input type="password" class="inputPwd" placeholder="비밀번호 입력">
 
 						</div>
 						<div class="modal-footer">
@@ -253,20 +260,20 @@
 	
 	// 옵션 값을 바꿀때 호출되는 함수
 	function changeOption(e){
-		 sendReq("trip", e);
-	 }
+		sendReq("trip", e);
+	}
 	
 	// 더보기 버튼 클릭시 호출, 더보기 버튼이 여러개이므로 for문 이용하였음
 	document.querySelectorAll('.down-chevron').forEach((cell) => {
 		// 클릭한 버튼이 어느 카드의 버튼인지 판별하기 위해 alt 프로퍼티를 추가하였고,
 		// 해당 프로퍼티 내에는 카드의 이름이 들어감
 		// 프로퍼티에서 꺼내온 카드 이름을 sendReq 함수의 파라미터로 넣어 호출한다 
-	  cell.addEventListener('click', function() {
-	    var select = cell.getAttribute('alt').replace('-down','')
-	    sendReq(select);
-	  });
+		cell.addEventListener('click', function() {
+		var select = cell.getAttribute('alt').replace('-down','')
+		sendReq(select);
+		});
 	});
- 
+
 	
 	// 더보기 버튼을 통한 ajax 통신 함수 
 	function sendReq(select, locationId){
@@ -281,7 +288,6 @@
 			locationId = 1
 			
 			// 어떤 카드에서 더보기를 클릭했는지 기억하기 위하여 카드 이름을 리스트에 저장 
-			
 			selected += select;
 			
 			// 해당 리스트에 방금 선택한 카드 이름이 몇번 저장되어있는지 count
@@ -318,9 +324,9 @@
 			// 동일 옵션값 더보기시 offset 증가 아닐 경우 offset 1로 초기화
 			if(locSelected.includes(locationId)){
 				for(let i=0; i < locSelected.length; i++) {
-					  if(locSelected[i] === locationId)  {
-					    offset++;
-					  }
+					if(locSelected[i] === locationId)  {
+						offset++;
+					}
 				}
 			// 	
 			}else{
@@ -342,36 +348,39 @@
 					
 					if(select === 'planner'){
 						appendData += 	
-							'<a> ' + 
-			                '<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
-			                  '<div class="row g-0"> ' + 
-			                   '<div class="col-md-4"> ' +
-			                      '<img src="'+ data.destImg+'" class="img-fluid rounded-start imgSize" alt="..."> ' +
-			                    '</div> ' +
-			                    '<div class="col-md-8"> '+
-			                      '<div class="card-body"> '+
-			                       '<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i> ' +
-			                        '<div class="info-container-top"> ' +
-			                         '<div class="card-title title mt-3"> ' +
-			                            '<h5>여행지</h5> ' +
-			                          '</div> ' +
-			                          '<div class="card-title text-content mt-3"> ' +
-			                            '<h5>'+ data.pplace+'</h5> ' +
-			                          '</div> ' +
-			                        '</div> ' +
-			                        '<div class="info-container-top"> ' +
-			                          '<p class="card-text title">작성인</p> ' +
-			                          '<p class="card-text text-content">' + data.mnickname +'</p> ' +
-			                        '</div> ' +
-			                        '<div class="info-container-top"> ' +
-			                         '<p class="card-text title">여행 소요 시간</p> ' +
-			                          '<p class="card-text text-content"> '+ data.plt +' </p> ' +
-			                        '</div> ' +
-			                      '</div> ' +
-			                    '</div> ' +
-			                  '</div> ' +
-			                '</div> '+
-			              '</a> '
+						'<a> ' + 
+							'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
+								'<div class="row g-0"> ' + 
+									'<div class="col-md-4"> ' +
+										'<img src="'+ data.destImg+'" class="img-fluid rounded-start imgSize" alt="..."> ' +
+									'</div> ' +
+								'<div class="col-md-8"> ' +
+									'<div class="card-body"> ' +
+										'<div class="info-container-top"> ' +
+											'<div class="card-title title mt-3"> ' +
+												'<h5>여행지</h5> ' +
+											'</div> ' +
+											'<div class="card-title text-content mt-3"> ' +
+												'<h5>'+ data.pplace+'</h5> ' +
+											'</div> ' +
+										'</div> ' +
+										'<div class="info-container-top"> ' +
+											'<p class="card-text title">작성인</p> ' +
+											'<p class="card-text text-content">' + data.mnickname +'</p> ' +
+										'</div> ' +
+										'<div class="info-container-top"> ' +
+											'<p class="card-text title">여행 소요 시간</p> ' +
+											'<p class="card-text text-content"> '+ data.plt +' </p> ' +
+										'</div> ' +
+										'<div class="card-btns"> '+
+											'<button type="button" class="btn btn-warning" onclick="">수정</button> '+
+											'<button type="button" class="btn btn-secondary">삭제</button> '+
+										'</div> '+
+									'</div> ' +
+								'</div> ' +
+							'</div> ' +
+						'</div> '+
+						'</a> '
 						
 					} else if (select === 'trip'){
 						appendData += 
@@ -383,7 +392,7 @@
 				                  '</div> '+
 				                  '<div class="col-md-8"> '+
 				                    '<div class="card-body"> '+
-				                      '<i class="fa-sharp fa-solid fa-heart fa-lg" id="heartIcon"></i> '+
+				                      '<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i> '+
 				                      '<div class="info-container-top"> '+
 				                        '<div class="card-title title mt-3"> '+
 				                          '<h5>명소명</h5> '+
@@ -412,6 +421,10 @@
 				           '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
 			                '<div class="card-body"> '+
+								'<div class="star-rating"> ' +
+									'<span class="star">★</span> ' +
+									'<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
+								'</div> ' +
 			                  '<div class="destination"> '+
 			                    '<h4 class="card-title">'+data.destSubject+'</h4> '+
 			                    '<span class="separator">|</span> '+
@@ -436,14 +449,17 @@
 				// 여행 데이터가 없을 경우
 				// 다른 카드와는 달리 카드 내에 '데이터 없음' 보여줌 
 				if(select == 'trip' && result.data.length == 0){
-					appendData =   
+					appendData = 
+					'<a href="${path}/trip/main"> ' +
 						'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
-		                  '<div class="row g-0"> ' + 
-		                   '<div class="col-md-4"> ' +
-	                   			'<h5>텅텅터ㅌㅇ텅ㅇ텅 ~!!!</h5>' +
-	                   		'</div> '+
-	                  	   '</div> '+
-	                	'</div> '
+								'<div class="col-md-4"> ' +
+									'<div class=nodata> ' +
+										'<img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png"> ' +
+										'<h5>덕덕이와 함께 떠나봐요🛫</h5>' +
+									'</div> '+
+								'</div> ' +
+						'</div> ' +
+					'</a>'
 				}
 				
 				

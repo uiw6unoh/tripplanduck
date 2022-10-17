@@ -33,33 +33,38 @@ public class TripController {
 	@GetMapping("/main")
 	public ModelAndView TripMain(ModelAndView model,
 								@RequestParam(value = "sort_name", defaultValue = "추천순") String sort_name,
-								@RequestParam(value="sort", required = false)String sort){
+								@RequestParam(value="sort", required = false)String sort,
+								@RequestParam(value="page", defaultValue = "0")int limit){
 		
-		String order = "DEST_LIKE_SUM";
-		List<Location> list = new ArrayList<Location>();                                       
+		String order = "DEST_RATING_AVG";
+		List<Location> list = new ArrayList<Location>();    
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("order", order);
+		params.put("limit", limit);
 		
 		if(sort == null)
 			sort = "4";
 		
 		switch(sort){
 			case "1":
-				order = "DEST_RATING_AVG";
+				params.put("order", "DEST_LIKE_SUM");
 				sort_name = "인기순";
-				list = destinationService.getLocations(order);
+				list = destinationService.getLocations(params);
 				break;
 			case "2":
-				order = "LOCATION";
+				params.put("order", "LOCATION");
 				sort_name = "오름차순";
-				list = destinationService.getLocationsByName(order);
+				list = destinationService.getLocationsByName(params);
 				break;
 			case "3":
-				order = "LOCATION DESC";
+				params.put("order", "LOCATION DESC");
 				sort_name = "내림차순";
-				list = destinationService.getLocationsByName(order);
+				list = destinationService.getLocationsByName(params);
 				break;
 			default:
 				sort_name = "추천순";
-				list = destinationService.getLocations(order);
+				list = destinationService.getLocations(params);
 				break;
 		}
 		

@@ -222,9 +222,10 @@ public class MemberController {
 		return emailService.joinEmail(email);
 	}
 	
+
+	
 	
 }
-    
 //    /* 비동기 로그아웃 메서드*/
 //    @RequestMapping(value="logout.do", method=RequestMethod.POST)
 //    @ResponseBody

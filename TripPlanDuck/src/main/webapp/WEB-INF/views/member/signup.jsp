@@ -39,7 +39,6 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id(4글자이상)" required>
-                  <label for="" id="id_chk"></label>
                 </td>
                 <td><input type="button" class="form-control" id="idCheck" value="중복확인"></td>
               </tr> 
@@ -49,7 +48,6 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
-                  <label for="" id="nickname_chk"></label>
                 </td>
                 <td><input type="button" class="form-control" id="nicknameCheck" value="중복확인"></td>
               </tr> 
@@ -59,7 +57,6 @@
               <tr>               
                 <td>
                   <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
-                  <label for="" id="password_chk" style="font-size: 11px; color: #616161;"></label>
                 </td>
               </tr>
               <tr>
@@ -68,7 +65,6 @@
               <tr>
                 <td>
                   <input type="password" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
-                  <label for="" id="password_chk2" ></label>
                 </td>
               </tr>
               <tr>
@@ -77,14 +73,12 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberEmail" name="memberEmail" placeholder="abc@gmail.com" required>
-                  <label for="" id="email_chk2"></label>
                 </td>
                 <td><input type="button" class="form-control" id="emailCheck" value="인증하기"></td>
               </tr>
               <tr>
                 <td>
                 <input type="text" class="form-control" id="memberEmailNumber" placeholder="인증번호 6자리 입력" required>
-                <label for="" id="email_chk"></label>
                 </td>
                 <td><input type="hidden" class="form-control" id="emailCheck2" value="인증번호확인" disabled="disabled" maxlength="6"></td>
               </tr>
@@ -265,7 +259,7 @@
    
    
    // 이메일 인증
-   $('#EmailCheck').click(function() {
+   $('#emailCheck').click(function() {
 		const eamil = $('#memberEmail').val() // 이메일 주소값 얻어오기
 		console.log('이메일 : ' + eamil); // 이메일 오는지 확인
 		const checkInput = $('#memberEmailNumber') // 인증번호 입력하는곳 
@@ -288,7 +282,7 @@
 		const inputCode = $(this).val();
 		
 		if(inputCode === code){
-			$('#EmailCheck2').attr('disabled',true);
+			$('#emailCheck2').attr('disabled',true);
 			$('#memberEmail').attr('readonly',true);
 			Swal.fire({
           	  icon: 'success',
@@ -305,36 +299,7 @@
 		
 	});
 	
-	$(document).ready(function () {
-	// 비밀번호 유효성 검사
-	$("memberPassword").change(function() {
-		var memberPassword = $("#memberPassword");
-		var passwordCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/;
-		
-		if(passwordCheck.test(p1.val())==false){
-			$("#password_chk").html("8자 이상, 최소 하나의 문자 및 하나의 숫자를 입력해주세요.");
-			$("#password_chk").attr('style', 'visibility:visible;');
-		} else if(passwordCheck.test(p1.val())==true) {
-			$("#password_chk").html("");
-			$("#password_chk").attr('style', 'visibility:hidden;');
-		}
-	});
 	
-	// 비밀번호 재확인 유효성검사
-	$("#memberPassword2").change(function(){
-		var memberPassword = $("#memberPassword");
-		var memberPassword2 = $("#memberPassword2");
-		
-		if(memberPassword.val() != memberPassword2.val()){
-			$("#password_chk2").html("비밀번호가 일치하지 않습니다.");
-			$("#password_chk2").attr('style', 'visibility:visible;');
-		} else{
-			$("#password_chk2").html("");
-			$("#password_chk2").attr('style', 'visibility:hidden;');
-		}
-	});
-	
-	});
 	
 	// 유효성 검사
 	function signup_check() {
