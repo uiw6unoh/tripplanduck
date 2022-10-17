@@ -210,11 +210,13 @@
     </c:forEach>
     </div>
 
-	
-	<div class="loading">
-	  <div class="ldio-76qwp4fy1ic"><div></div>
-	  </div>
+	<div class="w-100" style="display:flex; justify-content: center;">
+		<div class="loading">
+		  <div class="ldio-76qwp4fy1ic" ><div></div>
+		  </div>
+		</div>
 	</div>
+	
 
   </div>
 </div>
@@ -233,6 +235,8 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+
+
 function changeSort(sort){
 	window.location.href = "${path}" + "/trip/main?sort=" + sort;
 }
@@ -253,49 +257,61 @@ $('[id="searchButton"]').on("click", function () {
 	};
 });
 
-
 var limit = 4;
 var datalength = 1;
+var isEnd = true;
 
 $(window).scroll(function() {
 	if ($(window).scrollTop() == $(document).height() - $(window).height() || $(window).scrollTop() >= $(document).height() - $(window).height() - 5) {
-		if (datalength > 0) {
+		if (datalength > 0 && isEnd == true) {
+			showLoading();
+			isEnd = false;
 			let sort = getParameter("sort")
 			$.ajax({
-				url : "${path}/trip/api/main?sort=" + sort,
+				url : "${path}/trip/api/main?sort=" + sort + "&limit=" + limit,
 				type : "GET",
 				success: function(obj) {
 					datalength = obj.list.length;
 					
-					console.log("datalength ", datalength)
-					console.log("obj ", obj)
+					setTimeout(function() {
+						if(obj.list.length > 0) {
+							obj.list.forEach(function(v,i) {
+								
+							    $("#mainDiv").append(
+							    		"<div class='col-lg-3 col-md-6 mb-4'>" +
+							    		"<a href=\'${path}/trip/list?locationId=" + obj.list[i].loctaionId + "\'>" +
+							    		"<div class='card' style='width: 16rem;'>" +
+							    		"<div style='overflow: hidden;'>" +
+							    		"<img src=\'${ path }/images/trip/" + obj.list[i].locationImage + "\' style='background-color: #f4f3f1;' width='100%' height='254px'>" +
+							    		"</div>" +
+							    		"<div class='card-body'>" +
+							    		"<h5 class='card-title mb-1'>" + obj.list[i].locationTitle + "</h5>" + 
+							    		"<p class='card-text'>" + obj.list[i].location + "</p>" + 
+							    		"</div>" + 
+							    		"</div>" + 
+							    		"</a>" +
+							    		"</div>")
+							});
 
-					if(obj.list.length > 0) {
-						obj.list.forEach(function(v,i) {
 							
-						    $("#mainDiv").append(
-						    		"<div class='col-lg-3 col-md-6 mb-4'>" +
-						    		"<a href='${path}/trip/list?locationId=${obj.list[i].loctaionId}'>" +
-						    		"<div class='card' style='width: 16rem;'>" +
-						    		"<div style='overflow: hidden;'>" +
-						    		"<img src='${ path }/images/trip/seoul.jpg' style='background-color: #f4f3f1;' width='100%' height='254px'>" +
-						    		"</div>" +
-						    		"<div class='card-body'>" +
-						    		"<h5 class='card-title mb-1'>SEOUL</h5>" + 
-						    		"<p class='card-text'>${obj.list[i].location}</p>" + 
-						    		"</div>" + 
-						    		"</div>" + 
-						    		"</a>" +
-						    		"</div>")
-						});
-						// limit++;
-
-					} else {
-						alert("no data");
-					}
+						} else {
+							Swal.fire({
+						        icon: "warning",
+						        text: `더 이상 스크롤을 할 수 없습니다.`,
+						        confirmButtonText: "확인",
+						        closeOnClickOutside : false
+						      });
+						}
+						
+						hideLoading();
+						isEnd = true;
+						limit += 4;
+					}, 2000);
+					
 				},
 				error: function(error) {
 					alert("error");
+					hideLoading();
 				}
 			});
 		}
