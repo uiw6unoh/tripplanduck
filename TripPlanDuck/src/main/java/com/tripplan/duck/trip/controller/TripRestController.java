@@ -147,17 +147,12 @@ public class TripRestController {
 	
 	@GetMapping("/main")
 	public Map<String, Object> TripMain(@RequestParam(value="sort", required = false)String sort,
-								@RequestParam(value="page", defaultValue = "8")int limit){
+								@RequestParam(value="limit", defaultValue = "4")int limit){
 		
-		String order = "DEST_LIKE_SUM";
+		String order = "DEST_RATING_AVG"; 
 		List<Location> list = new ArrayList<Location>();    
 		Map<String, Object> result = new HashMap<String, Object>();
-		
-//		PageInfo pageInfo = null;
-		
-//		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
-
-		
+			
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("order", order);
 		params.put("limit", limit);
@@ -167,7 +162,7 @@ public class TripRestController {
 		
 		switch(sort){
 			case "1":
-				params.put("order", "DEST_RATING_AVG");
+				params.put("order", "DEST_LIKE_SUM");
 				list = destinationService.getLocations(params);
 				break;
 			case "2":

@@ -390,7 +390,7 @@ html {
 .loading {
 	  width: 200px;
 	  height: 200px;
-	  display: inline-block;
+	  display: none;
 	  overflow: hidden;
 	  background: #ffffff;
 }
