@@ -8,7 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DestinationLike {
-	int destNo;
+	private int destNo;
 	
-	int memberNo;
+	private int memberNo;
+	
+	private int like;
 }

@@ -11,17 +11,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tripplan.duck.common.util.PageInfo;
+import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;
+import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @RestController
+@RequestMapping("/trip/api")
 public class TripRestController {
 	
 	@Autowired
@@ -113,6 +125,66 @@ public class TripRestController {
             }
             
             }
+	}
+	
+	@PostMapping("/like")
+	public int updateLike(HttpSession session, DestinationLike destinationLike) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		if(member == null)
+			return 0;
+		
+		destinationLike.setMemberNo(member.getMemberNo());
+		
+		int like = destinationService.isLike(destinationLike);
+		
+		if(like == 0) {
+			destinationService.insertLike(destinationLike);
+			destinationService.updateDestLike(destinationLike);
+		}
+		
+		return 1;
+	}
+	
+	@GetMapping("/main")
+	public Map<String, Object> TripMain(@RequestParam(value="sort", required = false)String sort,
+								@RequestParam(value="limit", defaultValue = "4")int limit){
+		
+		String order = "DEST_RATING_AVG"; 
+		List<Location> list = new ArrayList<Location>();    
+		Map<String, Object> result = new HashMap<String, Object>();
+			
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("order", order);
+		params.put("limit", limit);
+		
+		if(sort == null)
+			sort = "4";
+		
+		switch(sort){
+			case "1":
+				params.put("order", "DEST_LIKE_SUM");
+				list = destinationService.getLocations(params);
+				break;
+			case "2":
+				params.put("order", "LOCATION");
+				list = destinationService.getLocationsByName(params);
+				break;
+			case "3":
+				params.put("order", "LOCATION DESC");
+				list = destinationService.getLocationsByName(params);
+				break;
+			default:
+				list = destinationService.getLocations(params);
+				break;
+		}
+		
+		System.out.println("list : " + list);
+		
+		result.put("list", list);
+		
+		return result;
 	}
 
 }

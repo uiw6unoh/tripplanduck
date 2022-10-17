@@ -10,23 +10,27 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Comments {
-	int commentsId;
+	private int commentsId;
 	
-	int memberNo;
+	private int memberNo;
 	
-	String commentsWriterId;
+	private String commentsWriterId;
 	
-	String commentsWriterPw;
+	private String commentsContent;
 	
-	String commentsContent;
+	private int commentsRating;
 	
-	int commentsRating;
+	private Date commentsCreateDate;
 	
-	Date commentsCreateDate;
+	private Date commentsUpdateDate;
 	
-	Date commentsUpdateDate;
+	private int destNo;
 	
-	String commentsIpAddress;
+	private String destSubject;
 	
-	int destNo;
+	private String destCategory;
+	
+	private String commentsCreateDateSt;
+	
+	private String commentsUpdateDateSt;
 }

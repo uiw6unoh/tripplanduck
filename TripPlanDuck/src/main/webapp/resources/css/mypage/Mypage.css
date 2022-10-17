@@ -37,33 +37,8 @@ li {
 .nav-link {
     color: black;
     font-size: 1.5rem;
+    background-color: transparent;
     border: 0;
-    outline: 0;
-}
-
-.nav-link:after:hover {
-    display: block;
-    width: 92px;
-    content: '';
-    /* border-bottom: solid 7px #fff8c6; */
-    background: linear-gradient(to top, yellow 50%, transparent 50%);
-    transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
-}
-
-.nav-link:hover:after {
-    transform: scaleX(1.2);
-}
-
-#horizontal-underline {
-    position: absolute;
-    left: 0;
-    height: 4px;
-    width: 0;
-    border-radius: 3px;
-    transition: 0.5s;
-    background-color: #fff8c6;
-    top: 0;
 }
 
 .content-container {
@@ -80,20 +55,28 @@ li {
 
 /* 여행지 필터 */
 .form-control {
-    width: 150px;
     float: right;
     margin-bottom: 15px;
     cursor: pointer;
 }
 
 .form-control:hover,
-.form-control:focus {
+.form-control:focus,
+.form-control::after {
     border: 1px solid #fff8c6;
     outline: 3px solid #fff8c6;
+    box-shadow: 0 0 0 0.2rem #fff8c6;
 }
 
-.form-control option:focus {
-    background-color: #fff8c6;
+select option {
+    border-radius: 4px;
+}
+
+select option:checked,
+select option:hover
+select option:focus {
+    background: #fff8c6;
+    cursor: pointer;
 }
 
 /* 카드 */
@@ -104,31 +87,19 @@ li {
 .likeCard {
     width: 800px;
     height: 200px;
-    /* padding: 20px; */
-    transition: all 200ms ease-in-out;
 }
 
 .imgSize {
     width: 240px;
     height: 220px;
     padding-bottom: 20px;
-    transition: all 200ms ease-in-out;
     cursor: pointer;
 }
 
 .likeCard:hover {
-    width: 810px;
-    height: 210px;
-    margin-top: 5px;
     cursor: pointer;
     box-shadow: 0px 12px 30px 0px #fff8c6;
     border: 1px solid #fff8c6;
-}
-
-.likeCard:hover .imgSize {
-    height: 230px;
-    transition: all 200ms ease-in-out;
-    /* transform: scale(1.1); */
 }
 
 /* 작성한 리뷰 카드 */
@@ -150,12 +121,12 @@ li {
 .separator {
     padding-left: 5px;
     color: #6c757d;
+    transform: translate(10%, 8%);
 }
 
 .card-area {
     font-size: 1.1rem;
-    padding-left: 5px;
-    padding-top: 6px;
+    transform: translate(14%, 16%);
 }
 
 .info-container-top {
@@ -178,10 +149,33 @@ li {
     font-size: 1.22rem;
 }
 
+/* 내 여행지 하트 */
 .fa-heart {
-    float: right;
-    margin-top: 10px;
     color: #fabf42;
+    float: right;
+    transform: translate(50%, -56%);
+}
+
+/* 나의 리뷰 별점 */
+.star-rating {
+    display: flex;
+    float: right;
+    transform: translate(34%, -75%);
+}
+
+.star {
+    color: #fabf42;
+    font-size: 1.3rem;
+}
+
+.commentsRating {
+transform: translate(31%, 8%);
+font-size: 1.4rem;
+}
+
+/* 더보기 */
+.wrap-downChevron {
+    text-align: center;
 }
 
 .down-chevron {
@@ -193,11 +187,6 @@ li {
     -webkit-filter: opacity(.4) drop-shadow(4px 4px 4px #fff8c6);
     filter: opacity(.4) drop-shadow(4px 4px 4px #fff8c6);
 }
-
-/* .down-chevron:hover {
-    -webkit-filter: opacity(.5) drop-shadow(4px 4px 4px #fabf42);
-    filter: opacity(.5) drop-shadow(4px 4px 4px #fabf42);
-} */
 
 .down-chevron:active {
     position: relative;
@@ -211,6 +200,17 @@ li {
     float: right;
     align-items: flex-end;
     transform: translate(7%, -103%);
+}
+
+/* no data */
+.nodataImg {
+    width: 130px;
+    height: 162px;
+    transform: translate(20%, 6%);
+}
+
+.nodata {
+    transform: translate(122%, -1%);
 }
 
 /* 비밀번호 모달 */

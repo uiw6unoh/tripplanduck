@@ -180,12 +180,41 @@
 				<c:forEach var="withDuck" items="${ listFilter }">
                 <div class="col">
                     <div class="p-3 border bg-light">
-                        <a href="">
-                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+                       <a href="${path }/withduck/detail?withNo=${withDuck.withNo}">
+	                   	
+	                   	<c:if test="${not empty withDuck.reList[0]}">
+		                   	<c:if test="${withDuck.withJoinStatus == '모집중'}">
+			                   <div id="total_container" style="position: relative;">
+		                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+		                        	<div id="joincontainer" style="color: white; position: absolute; border-radius: 5px; 
+				                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
+		                        	${withDuck.withJoinStatus }
+		                        	</div>
+			                   </div>
+			                </c:if>
+		                   	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+		                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+			                </c:if>
+	                    </c:if>
+	                    
+                       <c:if test="${ empty withDuck.reList[0] }">
+                       	<c:if test="${withDuck.withJoinStatus == '모집중'}">
+                       		<div id="total_container" style="position: relative;">
+	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+	                        	<div id="joincontainer" style="color: white; position: absolute; border-radius: 5px; 
+				                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
+	                        	${withDuck.withJoinStatus }
+	                        	</div>
+		                   </div>
+		                </c:if>
+                       	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+		                </c:if>
+                       </c:if>
                         </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="title">${withDuck.withTitle }</p>
+                        <p>${withDuck.withContent }</p>
+                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>
@@ -199,15 +228,38 @@
                     <div class="p-3 border bg-light">
                         <a href="${path }/withduck/detail?withNo=${withDuck.withNo}">
                         	<c:if test="${empty withDuck.reList[0]}">
-                           		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+                        		<c:if test="${withDuck.withJoinStatus == '모집중'}">
+	                        		<div id="total_container" style="position: relative;">
+		                           		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+		                           		<div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
+				                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
+				                        	${withDuck.withJoinStatus }
+				                        </div>
+		                   			</div>
+                        		</c:if>
+                        	 	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+                        	 		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+                        	 	</c:if>
                         	</c:if>
+                        	
 							<c:if test="${not empty withDuck.reList[0]}">
-                            	<img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+								<c:if test="${withDuck.withJoinStatus == '모집중'}">
+	                            	<div id="total_container" style="position: relative;">
+			                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+			                        	<div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
+			                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        	${withDuck.withJoinStatus }
+			                        	</div>
+		                   			</div>
+		                   		</c:if>
+								<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+			                        <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+		                   		</c:if>
 							</c:if>
                         </a>
-                        <p class="title">안녕하세요</p>
-                        <p>안녕하세요</p>
-                        <p class="nickName"><img src="${path}/resources/images/Common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="title" style="font-weight:bold">${withDuck.withTitle }</p>
+                        <p class="content" id="content" style="font-size:14px">${withDuck.withContent }</p>
+                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
                         <p class="readCount">123</p>
                     </div>
@@ -348,6 +400,8 @@ $(document).ready(function() {
 	if((sessionStorage.getItem('end') != undefined)) {
 	$('#end').attr('value', sessionStorage.getItem("end"));
 	}
+	
+
 });
 
 function startValidity(e){

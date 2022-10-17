@@ -17,6 +17,14 @@
 <link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.carousel.min.css">
 <link rel="stylesheet" type="text/css" href="${ path }/owlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css">
 
+<style>
+	.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+	.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #fff8c6;background: #fff8c6 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+</style>
+
 <!-- 내용 시작 -->
 <section>
     <div class="container px-4 px-lg-4 my-3 position-relative">
@@ -76,8 +84,39 @@
             <g id="Circle">
                 <circle cx="134.7" cy="131.1" r="52"/>
             </g>
-            <path id="Heart_2_" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
+            <%-- <c:if test="${ !empty loginMember }"> --%>
+				<style type="text/css">
+	                .st1{fill: coral;}
+	                .st2{fill: red;}
+	                .st3{fill:#6BABBD;}
+	                .st4{fill:#38B133;}
+	                .st5{fill:#E03BE7;}
+	                .st6{fill:#E9ACC1;}
+	                .st7{fill:#fabf42;}
+	                .st8{fill:#13414C;}
+	                .st9{font-family:'Montserrat-Regular';}
+	            </style>
+	            
+	            <path id="Heart_2_" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
                 l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
+        	<%-- </c:if> --%>
+        	
+        	<%-- <c:if test="${ empty loginMember }">
+				<style type="text/css">
+	                .st1{fill: coral;}
+	                .st2{fill: red;}
+	                .st3{fill:#6BABBD;}
+	                .st4{fill:#38B133;}
+	                .st5{fill:#E03BE7;}
+	                .st6{fill:#E9ACC1;}
+	                .st7{fill-opacity: 0;}
+	                .st8{fill:#13414C;}
+	                .st9{font-family:'Montserrat-Regular';}
+	            </style>
+	            
+	            <path id="Heart_2_N" class="st7" style="fill-opacity: 0;" d="M131.9,110.7c-6.8-6.3-17.4-6-23.7,0.8c-6.3,6.8-6,17.4,0.8,23.7l14.4,13.5l11.5,10.7l11.5-10.7
+                l14.4-13.5c6.8-6.3,7.1-16.9,0.8-23.7c-6.3-6.8-16.9-7.1-23.7-0.8l-2.9,2.7"/>
+        	</c:if> --%>
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
@@ -86,11 +125,11 @@
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
-              </svg> ${dest.destLikeSum}</span></div>
+              </svg> ${dest.destHit}</span></div>
               <div class="title">
                 <div>
-                  <a href="#">홈 ></a>
-                  <a href="#">${dest.destCategory}</a>
+                  <a href="${path}/trip/main">홈 ></a>
+                  <a href="${path}/trip/list?locationId=${location.locationId}">${dest.destCategory}</a>
                 </div>
                 <h2 class="stu_h2_title">${dest.destSubject}</h2>
                 <p>${dest.destSummary}</p>
@@ -100,46 +139,6 @@
               </div>
             </div>
         </div>
-        
-        <!--  
-        <div id="oc-images" class="owl-carousel image-carousel carousel-widget owl-loaded owl-drag with-carousel-dots mt-4" data-items-lg="5" data-stage-padding="20">
-            <div class="owl-stage-outer">
-                <div class="owl-stage" style="transform: translate3d(0px, 0px, 0px); transition: all 0s ease 0s; width: 1591px;">
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 1"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 2"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;">
-                        <div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 3"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 4"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item active" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 5"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 6"></a>
-                        </div>
-                    </div>
-                    <div class="owl-item" style="width: 207.2px; margin-right: 20px;"><div class="oc-item">
-                            <a href="#"><img src="https://dummyimage.com/400x300/dee2e6/6c757d.jpg" alt="Image 7"></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
 
         <p class="h3 mb-0 mt-5">경험해볼 만한 것들</p>
         <div class="row mt-2">
@@ -192,56 +191,47 @@
                               <label for="1-star" class="star">★</label>
                             </div>
                             <button id="enrollAlert" class="btn btn-outline-warning btn-sm float-right" type="button">등록</button>
-                            <p class="pt-2" style="font-size: 0.9em;">별점을 선택해주세요</p>
+                            <p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
                             
                             <textarea class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
                               <p class="mt-1 col p-0" style="font-size: 11px;">2022.09.16 01:30
                               </p>
                             
                           </form>
-                          <!-- Comment with nested comments-->
-                          <div class="d-flex mb-4">
-                              <!-- Parent comment-->
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;" ></div>
-                              <div class="ms-3 w-100">
-                                <p style="font-weight: bold;">짹짹이 김여울</p>
-                                  <div class="float-right">
-                                    <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                    <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                  </div>
-                                    <p>아싸 해산!!!</p>
-                                  <!-- Child comment 1-->
-                                  <div class="d-flex mt-2">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                      <div class="ms-3 w-100">
-                                        <p style="font-weight: bold;">선긋기 김민주</p>
-                                          <div class="float-right">
-                                            <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                            <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                          </div>
-                                            <p>저 빼고 재밌는 이야기하지 마세여</p>
-                                      </div>
-                                  </div>
-                                  <!-- Child comment 2-->
-                                  <div class="d-flex mt-3">
-                                      <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                                      <div class="ms-3 w-100">
-                                        <p style="font-weight: bold;">코드의마법사 박노경</p>
-                                          <div class="float-right">
-                                            <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                            <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                          </div>
-                                            <p>사는게 쉽지가 않네요...</p>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          
-                          <!-- Single comment-->
-                          <div class="d-flex">
+                          <!-- 댓글 1 -->
+                          <div class="d-flex mb-3">
                               <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
                               <div class="ms-3 w-100">
                                 <p style="font-weight: bold;">무게치는 이건호</p>
+                                <div class="float-left">
+                                  <div class="star-count">
+							        ★
+							        <!-- 여기에 rating 숫자 보여줘야 함 -->
+							        <div class="star-rate">5.0</div>
+							      </div>
+                                </div>
+                                <!-- loginmember == writerId 면 수정 or 삭제, 일치하지 않으면 신고버튼만 -->
+                                  <div class="float-right">
+                                    <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
+                                    <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
+                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
+                                  </div>
+                                    <p>계란후라이 먹었어요</p>
+                              </div>
+                          </div>
+                          
+                          <!-- 댓글 2 -->
+                          <div class="d-flex mb-4">
+                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+                              <div class="ms-3 w-100">
+                                <p style="font-weight: bold;">무게치는 이건호</p>
+                                <div class="float-left">
+                                  <div class="star-count">
+							        ★
+							        <!-- 여기에 rating 숫자 보여줘야 함 -->
+							        <div class="star-rate">5.0</div>
+							      </div>
+                                </div>
                                   <div class="float-right">
                                     <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
                                     <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
@@ -271,7 +261,7 @@
 <script src="${ path }/js/trip/Mainstyle.js"></script>
 
 <!-- Heart JS -->
-<script src="${ path }/js/common/heart.js"></script>
+<!--  <script src="${ path }/js/common/heart.js"></script>  -->
 
 <!-- sweetalert2 alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -335,7 +325,7 @@
           //삭제 요청 처리
           swal.fire(
           '수정완료!',
-          '댓글이 삭제되었습니다',
+          '댓글이 수정되었습니다',
           'success'
     )
         } else {
@@ -364,14 +354,108 @@
 	
 	var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 	
+	var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbj1sID%2FbtrOmc6KtD6%2FKF00nKO1xpe9nbUlbySxn1%2Fimg.png', // 마커이미지의 주소입니다
+    imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
+    imageOption = {offset: new kakao.maps.Point(15, 32)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+	
 	//마커가 표시될 위치입니다 
-	var markerPosition  = new kakao.maps.LatLng(mapX, mapY); 
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    markerPosition = new kakao.maps.LatLng(mapX, mapY); // 마커가 표시될 위치입니다
 	
 	//마커를 생성합니다
 	var marker = new kakao.maps.Marker({
-	position: markerPosition
+		position: markerPosition,
+		image: markerImage // 마커이미지 설정
 	});
 	
 	//마커가 지도 위에 표시되도록 설정합니다
 	marker.setMap(map);
+	
+	var content = '<div class="customoverlay">' +
+	   '  <a href="#" target="_blank">' +
+	    '    <span class="title">${dest.destSubject}</span>' +
+	    '  </a>' +
+	    '</div>';
+    
+ 	// 커스텀 오버레이가 표시될 위치입니다 
+    var position = new kakao.maps.LatLng(mapX, mapY);  
+    
+	 // 커스텀 오버레이를 생성합니다
+	    var customOverlay = new kakao.maps.CustomOverlay({
+	        map: map,
+	        position: position,
+	        content: content,
+	        yAnchor: 0.2
+	    });
+</script>
+
+<script>
+$(document).ready(function () {
+	  function addListener() {
+	    var btn = document.querySelector("#Heart_2_");
+	    btn.addEventListener("click", restart, false);
+	    
+	  }
+	  
+	  let isLike = "${isLike}";
+	  
+	  if(isLike > 0){
+		  
+		  var container = document.querySelector("#Layer_1");
+		  var newContainer = container.cloneNode(true);
+
+		  container.parentNode.replaceChild(newContainer, container);
+		  $(".st7").removeAttr("style");
+		  
+		  addListener();
+	  }
+
+	  function restart() {
+		
+		let isLogin = "${loginMember}";
+		
+		if(isLogin != null && isLogin != ""){
+			
+			// var newHeart = document.getElementsByClassName(".st7");
+		    var container = document.querySelector("#Layer_1");
+		    var newContainer = container.cloneNode(true);
+
+		    container.parentNode.replaceChild(newContainer, container);
+		    $(".st7").removeAttr("style");
+		    
+			let destNo = "${dest.destNo}";
+		    $.ajax({
+		    	url : "${path}/trip/api/like",
+		    	type : "POST",
+		    	data : { 'destNo' : destNo },
+		    	success : function(data){
+		    		Swal.fire({
+				        icon: "success",
+				        title: `성공`,
+				        text: `찜하기 성공!`,
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+				      });
+		    	},
+		    	error : function(error){
+		    		console.log(error)
+		    	}
+		    })
+
+		    addListener();
+		} else {
+			  Swal.fire({
+			        icon: "error",
+			        title: `실패!`,
+			        text: `로그인 후 이용해주세요.`,
+			        confirmButtonText: "확인",
+			        closeOnClickOutside : false
+			      }).then(function (isConfirmed) {
+			    	  window.location.href="${path}/member/login";
+			        });
+		}
+	    
+	  }
+	  addListener();
+	});
 </script>

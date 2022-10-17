@@ -1,0 +1,56 @@
+/* font-family 눈누폰트 - pretendard */
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+* {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI",
+    "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+}
+
+@media (max-width: 600px) {
+  .container {
+      width: 90vw;
+      padding: 24px;
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 300px;
+  padding: 15px;
+}
+
+.title {
+  margin-left: 33px;
+}
+
+.findIdEmail,
+.find-btn-box,
+.btns-box
+ {
+  width: 250px;
+}
+
+.small-text {
+  font-size: 11px;
+  text-align: left;
+  color: #616161;
+  letter-spacing: 1px;
+  padding-left: 8px;
+  padding-right: 18px;
+}
+
+.text-box {
+  margin-bottom: 30px;
+}

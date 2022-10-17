@@ -118,3 +118,21 @@ function getJson() {
 	});
 }
 */
+
+
+function showLoading() {
+	$(".loading").css("display", "block");
+}
+
+function hideLoading() {
+	$(".loading").css("display", "none");
+}
+
+function showSkeleton() {
+	$(".skeletonCard").css("display", "");
+}
+
+function hideSkeleton() {
+	$(".skeletonCard").css("display", "none");
+
+};

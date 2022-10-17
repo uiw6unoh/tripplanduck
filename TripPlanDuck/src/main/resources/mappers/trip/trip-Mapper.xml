@@ -13,13 +13,13 @@
 		<result property="destAddress" column="DEST_ADDRESS"/>
 		<result property="destMapX" column="DEST_MAP_X"/>
 		<result property="destMapY" column="DEST_MAP_Y"/>
-		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
-		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
 		<result property="destHit" column="DEST_HIT"/>
 		<result property="destCreateDate" column="DEST_CREATEDATE"/>
 		<result property="destUpdateDate" column="DEST_UPDATEDATE"/>
 		<result property="locationId" column="LOCATION_ID"/>
 		<result property="destImage" column="DEST_IMAGE"/>
+		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
+		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
 	</resultMap>
 	
 	<resultMap type="Location" id="locationResultMap">
@@ -27,6 +27,8 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+		<result property="locationTitle" column="LOCATION_TITLE" />
 	</resultMap>
 	
 	<insert id="insertData"  parameterType="java.util.Map">
@@ -39,13 +41,13 @@
 		DEST_ADDRESS, 
 		DEST_MAP_X, 
 		DEST_MAP_Y, 
-		DEST_LIKE_SUM, 
-		DEST_RATING_AVG, 
 		DEST_HIT, 
 		DEST_CREATEDATE, 
 		DEST_UPDATEDATE, 
 		LOCATION_ID, 
-		DEST_IMAGE)
+		DEST_IMAGE,
+		DEST_LIKE_SUM, 
+		DEST_RATING_AVG)
 	VALUES(
 		DEST_NO.NEXTVAL,
 		#{category},
@@ -89,20 +91,53 @@
 			]]>
 	</select>
 	
+	<!-- 조회수 증가 -->
+    <update id="updateCount" parameterType="int">
+        UPDATE DESTINATION SET
+        DEST_HIT = NVL(DEST_HIT, 0) + 1
+        WHERE DEST_NO = #{destNo}
+    </update>
+	
 	<select id="getDestinationsByLocationId" parameterType="int" resultMap="DestinationResultMap">
 		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_LIKE_SUM
 	</select>
 	
-	<select id="getLocations" parameterType="string" resultMap="locationResultMap">
-		SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY 
-		FROM (SELECT LOCATION_ID, SUM(${value}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
-		WHERE A.LOCATION_ID = B.LOCATION_ID 
-		ORDER BY A.SUM DESC
+	<select id="getLocations" parameterType="map" resultMap="locationResultMap">
+		SELECT C.* FROM (SELECT rownum as rnum, B.* FROM (SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY, B.LOCATION_IMAGE, B.LOCATION_TITLE
+		FROM (SELECT LOCATION_ID, SUM(${order}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
+		WHERE A.LOCATION_ID = B.LOCATION_ID ORDER BY A.SUM DESC) B 
+		<![CDATA[
+		WHERE rownum <= ${limit+4}) C WHERE C.rnum > ${limit}
+		]]>
 	</select>
 	
-	<select id="getLocationsByName" parameterType="string" resultMap="locationResultMap">
-		SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY 
-		FROM LOCATION
-		ORDER BY ${value}
+	<select id="getLocationsByName" parameterType="map" resultMap="locationResultMap">
+		SELECT B.* FROM (SELECT rownum as rnum, A.* FROM (SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY, LOCATION_IMAGE, LOCATION_TITLE
+		FROM LOCATION ORDER BY ${order}) A 
+		<![CDATA[ 
+		WHERE ROWNUM <= ${limit+4}) B WHERE B.rnum > ${limit}
+		]]>
 	</select>
+	
+	<select id="getDestinationsByKeyWord" parameterType="string" resultMap="DestinationResultMap">
+		SELECT * FROM DESTINATION WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%' ORDER BY DEST_LIKE_SUM
+	</select>
+	
+	<insert id="insertLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+		INSERT INTO DESTINATION_LIKE VALUES(#{destNo}, #{memberNo})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+		DELETE FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+	</delete>
+	
+	<select id="isLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike" resultType="int">
+		SELECT COUNT(*) FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+	</select>
+	
+	<update id="updateDestLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
+        UPDATE DESTINATION SET
+        DEST_LIKE_SUM = DEST_LIKE_SUM + 1
+        WHERE DEST_NO = #{destNo}
+    </update>
 </mapper>

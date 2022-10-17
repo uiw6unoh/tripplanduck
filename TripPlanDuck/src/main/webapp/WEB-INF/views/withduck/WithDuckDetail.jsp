@@ -25,7 +25,7 @@
     <link rel="stylesheet" type="text/css" href="${path }/resources/css/withduck/WithDuckDetail.css">
 </head>
 <body class="stretched" >
-<form action="${path}/withduck/update" method="get">
+<form action="${path}/withduck/update" id="formobj" method="get">
     <section class="zone1">
         <div class="carousel_container">
             <div id="demo" class="carousel slide pointer-event" data-ride="carousel">
@@ -73,15 +73,17 @@
     <section class="zone2">
         <div class="content_container" style="width: 1000px; margin: auto;">
             <!-- 제목 -->
-            <div style="margin: 60px; text-align: center;">
+            <div style="margin: 60px; text-align: center;  display: flex; justify-content: center;">
             	<input name="withTitle" type="hidden" value="${withDuck.withTitle }">
                 <h5>${withDuck.withTitle }</h5>
-                <input type="checkbox" id="switch1" name="switch1" class="input__on-off">
-                  <label for="switch1" class="label__on-off">
-                    <span class="marble"></span>
-                    <span class="on" style="position: relative; right:14px;">모집중</span>
-                    <span class="off" style="position: relative; right: 6px;">모집완료</span>
-                  </label>
+				<c:if test="${withDuck.withJoinStatus == '모집중'}">
+				<input name="withJoinStatus" type="hidden" value="모집중">
+					<div style="background-color: #0bba82; color: white; width: 75px; display: flex; align-items:center; justify-content: center; margin-left: 10px; margin-bottom: 10px;">모집중</div>
+				</c:if>
+				<c:if test="${withDuck.withJoinStatus == '모집완료'}">
+				<input name="withJoinStatus" type="hidden" value="모집완료">
+					<div style="background-color: #ed4956; color: white; width: 75px; display: flex; align-items:center; justify-content: center; margin-left: 10px; margin-bottom: 10px;">모집완료</div>
+				</c:if>
             </div>
             <!-- 지역, 모집 인원 ,희망 성별, 요일 -->
             <div class="filter">
@@ -97,6 +99,10 @@
 					<input type="hidden" value="${withDuck.withGender }" name ="withGender">
                     <span>${withDuck.withGender }</span>
                 </div>
+                <div>희망 연령대
+					<input type="hidden" value="${withDuck.withAge }" name ="withAge">
+                    <span>${withDuck.withAge }</span>
+                </div>
                 <div>여행 일정
 					<input type="hidden" value="${withDuck.withStartDate }" name ="withStartDate">
 					<input type="hidden" value="${withDuck.withEndDate }" name ="withEndDate">
@@ -106,41 +112,49 @@
             <!-- 작성자 프로필, 이름, 나이, 성별 -->
             <div class="profile-container">
                 <div class="profile-img">
-                    <img src="${path}/resources/images/Common/프사.png">
+                    <img src="${path}/resources/images/common/프사.png">
                 </div>
                 <div class="profile-name" style="float: left;">
                 	<input type="hidden" value="${withDuck.withWriterNick }" name="withWriterNick">
-                    <span style="font-size: 10px;">${withDuck.withWriterNick }</span>
+                    <span style="font-size: 10px; position: relative; left: 9px;">${withDuck.withWriterNick }</span>
                 </div>
                 <br>
-                <div class="profile-age" style="float: left;">
-                    <span style="font-size: 10px;">20대 /</span>
-                    <span style="font-size: 10px;"> 남성</span>
+                <div class="profile-age" style="float: left; right: 18px;">
+                <c:choose>
+                	<c:when test="${withDuck.withWriterAge == 20 }">
+	                    <span style="font-size: 10px;">~${withDuck.withWriterAge }대 /</span>
+                	</c:when>
+                	<c:otherwise>
+	                    <span style="font-size: 10px;">${withDuck.withWriterAge }대 /</span>
+                	</c:otherwise>
+                </c:choose>
+                	
+                    <c:if test="${withDuck.withWriterGender == 'M' }">
+                    <span style="font-size: 10px;"> 남자</span>
+                    </c:if>
+                    <c:if test="${withDuck.withWriterGender == 'F' }">
+                    <span style="font-size: 10px;"> 여자</span>
+                    </c:if>
                 </div>
             </div>
             <!-- 내용 -->
             <div style="margin-top: 20px; border: 3px solid #a7a2a28f; height: 400px; padding: 16px;">
-                <input type="hidden" value="${withDuck.withContent}">
+                <input type="hidden" name="withContent" value="${withDuck.withContent}">
                 <div>
                     ${withDuck.withContent }
                 </div>
                 <div class="tags">
+                <c:forEach var="keyList" items="${keyList }">
                   <div class="tag-container">
                     <a href="">
-                        #제주
+                        ${keyList}
                     </a>
                   </div>
-                  <div class="tag-container">
-                      <a href="">
-                          #여행
-                      </a>
-                  </div>
+                </c:forEach>
                 </div>
             </div>
         </div>
-    </section>
 <input type="hidden" value="${withDuck.withWriterNo }" name="withWriterNo">
-<input type="hidden" value="${withDuck.withAge }" name="withAge">
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
 <input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
@@ -151,10 +165,16 @@
     <button class="btn btn-outline-warning" type="button">
         목록으로
     </button>
-
-    <button class="btn btn-outline-warning" type="submit">
-        수정하기
-    </button>
+	
+	<c:if test="${loginMember.memberNo == withDuck.withWriterNo }">
+	    <button class="btn btn-outline-warning" type="submit">
+	        수정하기
+	    </button>
+		
+		<button class="btn btn-outline-warning" type="submit" id="deleteWithDuck">
+	        삭제하기
+	    </button>
+	</c:if>
 </div>
 </form>
 
@@ -173,3 +193,15 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
+<script>
+$(function() {
+	var cancel = $('#deleteWithDuck');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "/withduck/delete");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+</script>

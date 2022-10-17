@@ -1,16 +1,22 @@
 package com.tripplan.duck.member.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.tripplan.duck.member.model.service.EmailSendService;
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
 
@@ -32,18 +38,18 @@ public class MemberController {
     }
     
     
-    @GetMapping("/member/privacy")
+    @GetMapping("/common/privacy")
     public String privacy() {
         log.info("개인정보수집 페이지 요청");
 
-        return "member/privacy"; 
+        return "common/privacy"; 
     }
 
-    @GetMapping("/member/termconditions")
+    @GetMapping("/common/termconditions")
     public String termconditions() {
         log.info("이용약관 페이지 요청");
 
-        return "member/termconditions"; 
+        return "common/termconditions"; 
     }
 
     
@@ -163,12 +169,63 @@ public class MemberController {
     	
     	return model;
     }
+    
+	@GetMapping("/jsonTest")
+	@ResponseBody
+	public Object jsonTest() {
+		Map<String, Object> map	= new HashMap<>();
+		
+		map.put("test1", null);
+		map.put("test2", "hi");
+		map.put("test3", 10);
+		map.put("test4", false);
+
+		
+		return map;
+	}
+	
+	@PostMapping("/member/idCheck")
+//	@ResponseBody
+	public ResponseEntity<Map<String, Boolean>> idCheck(@RequestParam String memberId) {
+		log.info("{}", memberId);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("duplicate", service.isCheckID(memberId));
+		
+		return new ResponseEntity<Map<String,Boolean>>(map, HttpStatus.OK);
+	}
 	
 	
+	@PostMapping("/member/nicknameCheck")
+	public ResponseEntity<Map<String, Boolean>> nicknameCheck(@RequestParam String memberNickname) {
+		log.info("{}", memberNickname);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		map.put("duplicate", service.isCheckNickname(memberNickname));
+		
+		return new ResponseEntity<Map<String,Boolean>>(map, HttpStatus.OK);
+	}
+	
+	
+	@Autowired
+	private EmailSendService emailService;
+	
+	// 이메일 인증
+	@GetMapping("/member/emailCheck")
+	@ResponseBody
+	public String emailCheck(String email) {
+		System.out.println("이메일 인증 요청이 들어왔어요!");
+		System.out.println("이메일 인증 이메일 : " + email);
+		
+		return emailService.joinEmail(email);
+	}
+	
+
 	
 	
 }
-    
 //    /* 비동기 로그아웃 메서드*/
 //    @RequestMapping(value="logout.do", method=RequestMethod.POST)
 //    @ResponseBody
@@ -184,4 +241,3 @@ public class MemberController {
 
     
 	
-

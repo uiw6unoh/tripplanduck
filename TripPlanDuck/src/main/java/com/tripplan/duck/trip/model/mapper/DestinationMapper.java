@@ -8,11 +8,14 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.vo.Destination;
+import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @Mapper
 public interface DestinationMapper {
 
 	void insertData(Map<String, Object> param);
+	
+	void updateCount(int destNo);
 
 	String getCategoryName(int i);
 
@@ -26,8 +29,18 @@ public interface DestinationMapper {
 
 	Location getLocation(int locationId);
 
-	List<Location> getLocations(String string);
+	List<Location> getLocations(Map<String, Object> params);
 
-	List<Location> getLocationsByName(String order);
+	List<Location> getLocationsByName(Map<String, Object> params);
+
+	List<Destination> getDestinationsByKeyWord(String keyword);
+
+	void insertLike(DestinationLike destinationLike);
+
+	void deleteLike(DestinationLike destinationLike);
+
+	int isLike(DestinationLike destinationLike);
+
+	void updateDestLike(DestinationLike destinationLike);
 
 }
