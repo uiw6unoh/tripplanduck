@@ -57,5 +57,11 @@ public class MyPageServiceImpl implements MyPageService{
 		return mapper.getOptions();
 	}
 
+	@Override
+	public void unLikeTrip(Map<String, Object> param) {
+		mapper.deleteLikeTrip(param);
+		
+	}
+
 
 }

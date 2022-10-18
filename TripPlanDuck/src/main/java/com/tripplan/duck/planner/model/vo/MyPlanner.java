@@ -47,6 +47,8 @@ public class MyPlanner {
 	
 	private List<Location> loca;
 	
+	private Location loc;
+	
 	
 	// 생각 좀 해보자
 //	public long Dateminus () {
