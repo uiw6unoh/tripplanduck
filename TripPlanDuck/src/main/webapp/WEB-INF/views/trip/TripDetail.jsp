@@ -372,7 +372,7 @@
 	marker.setMap(map);
 	
 	var content = '<div class="customoverlay">' +
-	   '  <a href="#" target="_blank">' +
+	   '  <a target="_blank">' +
 	    '    <span class="title">${dest.destSubject}</span>' +
 	    '  </a>' +
 	    '</div>';
