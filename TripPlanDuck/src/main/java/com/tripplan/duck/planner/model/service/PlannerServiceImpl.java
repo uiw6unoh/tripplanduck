@@ -6,8 +6,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.mapper.PlannerMapper;
 import com.tripplan.duck.planner.model.vo.Location;
+import com.tripplan.duck.planner.model.vo.MyPlanner;
 import com.tripplan.duck.trip.model.vo.Destination;
 
 
@@ -31,27 +33,30 @@ public class PlannerServiceImpl implements PlannerService {
 
 	@Override
 	public List<Destination> addDestination() {
+		
 		return plannerMapper.addDest();
 	}
 
 	@Override
-	public int plannerInsert(String demo, String locationSelect, String destImage, String place) {
-
+	public int detailInsert(String imagea, String place) {
 		
-		System.out.println("demo"+demo);
-		System.out.println("locationSelect"+locationSelect);
-		System.out.println("destImage"+destImage);
+		System.out.println("destImage"+imagea);
 		System.out.println("place"+place);
-		
+		 
 		HashMap<String,String> hm = new HashMap<String,String>();
-		hm.put("demo", demo);
-		hm.put("locationSelect", locationSelect);
-		hm.put("destImage", "test.jpg");
+		hm.put("destImage", imagea);
 		hm.put("place", place);
 		
-		int value = plannerMapper.plannerInsert(hm);
+		int value = plannerMapper.detailInsert(hm);
 		
 		return value;
+	}
+
+	@Override
+	
+	 public void insertPlanner(MyPlanner myPlanner) {
+		
+		plannerMapper.insertPlanner(myPlanner);
 	}
 
 	
