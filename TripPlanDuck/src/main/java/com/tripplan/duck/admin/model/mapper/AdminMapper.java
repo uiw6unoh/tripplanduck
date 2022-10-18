@@ -30,7 +30,7 @@ public interface AdminMapper {
 
 	List<Comments> withDuckSelectOld(RowBounds rowBounds);
 
-	int updateMemberStatus(int no, String string);
+	
 
 	
 
