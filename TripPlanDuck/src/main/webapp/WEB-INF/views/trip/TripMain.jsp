@@ -327,7 +327,7 @@ $(window).scroll(function() {
 								
 							    $("#mainDiv").append(
 							    		"<div class='col-lg-3 col-md-6 mb-4'>" +
-							    		"<a href=\'${ path }/trip/list?locationId=" + obj.list[i].loctaionId + "\'>" +
+							    		"<a href=\'${ path }/trip/list?locationId=" + obj.list[i].locationId + "\'>" +
 							    		"<div class='card' style='width: 16rem;'>" +
 							    		"<div style='overflow: hidden;'>" +
 							    		"<img src=\'${ path }/images/trip/" + obj.list[i].locationImage + "\' style='background-color: #f4f3f1;' width='100%' height='254px'>" +
