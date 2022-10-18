@@ -102,36 +102,10 @@
 
 								</c:forEach>
 
-
-
 							</select>
-							<!-- 
-						 <select>
-						 	<option value="1">서울</option>
-						 	<option value="2">인천</option>
-						 	<option value="3">대전</option>
-						 	<option value="4">대구</option>
-						 	<option value="5">광주</option>
-						 	<option value="6">부산</option>
-						 	<option value="7">울산</option>
-						 	<option value="8">세종특별자치시</option>
-						 	<option value="31">경기도</option>
-						 	<option value="32">강원도</option>
-						 	<option value="33">충청북도</option>
-						 	<option value="34">충청남도</option>
-						 	<option value="35">경상북도</option>
-						 	<option value="36">경상남도</option>
-						 	<option value="37">전라북도</option>
-						 	<option value="38">전라남도</option>
-						 	<option value="39">제주도</option>
-						 </select>
-						  -->
-
-
-							<div class="list-group-item list-group-item-primary"
-								style="background-color: white;">여행 기간</div>
-							<div class="list-group-item list-group-item-secondary"
-								style="background-color: white;">
+							<!-- 기간 선택시 날짜 출력 -->
+							<div class="list-group-item list-group-item-primary" style="background-color: white;" id="datepicker" value=""></div>
+							<div class="list-group-item list-group-item-secondary" style="background-color: white;">
 								<input type="text" id="demo" name="demo" value="" />
 							</div>
 						</div>
@@ -145,11 +119,10 @@
 							 -->	
 
 						</div>
-						<button type="button" id="lookCourseBtn" class="btn btn-md">경로
-							보기</button>
+						<button type="button" id="lookCourseBtn" class="btn btn-md">경로 보기</button>
 					</div>
 					<div class="left-box2">
-						<div id="divCopy" style="height: 25%; overflow: auto;">
+						<div id="divCopy"  style="height: 60vh; overflow:auto;">
 							<div class="row no-gutters"></div>
 								<div id="divCopy_chil" class="col-md-4"></div>
 								<div class="col-md-8">
@@ -158,25 +131,28 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-7">
-					<div id="map" style="width: 100%; height: 100vh;"></div>
+				<div class="col-8">
+					<div id="map" style="width: 100%; height: 80vh;"></div>
 					<script type="text/javascript"
 						src="${ path }/resources/js/planner/mapcreate.js"></script>
 				</div>
+				
 				<div class="right-box">
 					<div class="courseZero_margin90"></div>
+					
 					<!-- 검색창을 삭제할까...흠 
 						<input id="searchBox" type="text" placeholder="검색어를 입력해주세요">
 						<button id="magBtn">
 							<i class="fas fa-search">검색</i>
 						</button>
 						-->
-					<div style="height: 30%; overflow: auto" class="divOriginal">
+						
+					<div class="divOriginal"  style="height: 80vh; overflow:auto;">
 						<c:forEach items="${ destination }" var="destination"
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 loca_${ destination.locationId }"
-								style="width: 400px;">
+								style="width: 300px;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
 										<img class="destImage" src="${ destination.destImage }">
@@ -207,7 +183,7 @@
 						</c:forEach>
 					</div>
 
-					<input type="text" name="place" id="place">
+					<input type="hidden" name="place" id="place">
 				</div>
 			</div>
 		</div>
@@ -278,37 +254,7 @@ function addMarker(position) {
     markers.push(marker);
 }
 
-
-
-
-function deleteDiv(destNo,destSubject,destMapX,destMapY) {
-	let destMapXD = parseFloat(destMapX);
-	let destMapYD = parseFloat(destMapY);
-	
-	
-	$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
-	
-	for(var i = 0; i < data.length; i++){
-		
-		if(data[i] == destSubject){
-		markers[i].setMap(null);
-		data.splice(i,1);
-    	markers.splice(i,1);
-    	positions.splice(i, 1);
-    	ovarlays.splice(i, 1);
-		$("#place").val(data);
-		
-		}
-	}
-	
-};
-
-
-
-//배열에 추가된 마커들을 지도에 표시하거나 삭제하는 함수입니다
-
-
- // 지도상의 선 긋기
+//지도상의 선 긋기
 const lookCourseBtn = document.getElementById('lookCourseBtn');
       lookCourseBtn.addEventListener('click', event =>{
 	 	
@@ -344,6 +290,26 @@ function addLine(markers){
 
 
 
+function deleteDiv(destNo,destSubject,destMapX,destMapY) {
+	
+	
+	$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
+	
+	for(var i = 0; i < data.length; i++){
+		
+		if(data[i] == destSubject){
+		markers[i].setMap(null);
+		data.splice(i,1);
+    	markers.splice(i,1);
+    	positions.splice(i, 1);
+    	ovarlays.splice(i, 1);
+		$("#place").val(data);
+		
+		}
+	}
+	
+};
+
 //$('#myModal').modal({
 //	  keyboard: false
 //});
@@ -368,4 +334,15 @@ function addLine(markers){
 
 <script>	
 	locationValue( $('#locationSelect') );
+</script>
+
+<script type="text/javascript">
+$( function() {
+    $( "#datepicker" ).datepicker({ 
+        onSelect: function() { 
+            var date = $.datepicker.formatDate("yymmdd",$("#datepicker").datepicker("getDate")); 
+            alert(date);
+        }
+    });                    
+});
 </script>
