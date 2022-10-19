@@ -11,6 +11,7 @@ import com.tripplan.duck.admin.model.mapper.AdminMapper;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 @Service
 public class AdminServiceImpl implements AdminService {
@@ -99,8 +100,39 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.withDuckSelectOld(rowBounds);
 	}
 
+	@Override
+	public Member findMemberByNo(int memberNo) {
 
+		return mapper.memberFindNo(memberNo);
+	}
 
+	@Override
+	@Transactional
+	public int memberStatusChange(int memberNo) {
+		
+		int result = 0;
+		
+		result = mapper.updateMemberStatus(memberNo);
+		
+		return result;
+	}
+
+	@Override
+	public WithDuck findWithDuckByNo(int withDuckNo) {
+
+		return mapper.withDuckFindNo(withDuckNo);
+	}
+
+	@Override
+	@Transactional
+	public int withDuckDelte(int withDuckNo) {
+		
+		int result = 0;
+		
+		result = mapper.deletewithDuck(withDuckNo);
+		
+		return result;
+	}
 
 
 

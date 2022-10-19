@@ -78,7 +78,8 @@
 		                    <td style="text-align: center;">${withDuck.withWriterNick}</td>
 		                    <td style="text-align: center;">신고된게시글</td>
 		                    <td>
-	                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                        <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;"
+	                         onclick="location.href='${ path }/admin/withDuckInfo?withDuckNo=${withDuck.withNo}'">
 	                            게시글삭제
 	                        </button>
 		                    </td>
