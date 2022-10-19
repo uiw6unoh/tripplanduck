@@ -1,44 +1,44 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<c:set var="path" value="${ pageContext.request.contextPath }"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 	<jsp:include page="../common/header.jsp"/>
 	
 	<!-- UpdateForm CSS -->
 	<link rel="stylesheet" type="text/css" href="${ path }/css/mypage/UpdateForm.css">
 <body>
-	<!-- È¸¿ø Á¤º¸ ¼öÁ¤ -->
-	<!-- ÀüÃ¼ ÄÁÅ×ÀÌ³Ê -->
+	<!-- íšŒì› ì •ë³´ ìˆ˜ì • -->
+	<!-- ì „ì²´ ì»¨í…Œì´ë„ˆ -->
 	<div class="container">
 	<main class="form-signup m-auto">
 		<div>
 		<div class="updateFormInfo pt-3">
-			<h1>È¸¿ø Á¤º¸</h1>
-			<img class="mb-4" src="${ path }/images/common/ÇÁ»ç.png" alt="">
+			<h1>íšŒì› ì •ë³´</h1>
+			<img class="mb-4" src="${ path }/images/common/í”„ì‚¬.png" alt="">
 		</div>
 		<form>
 			<table class="signup">
 				<tr>
-					<td class="title">¾ÆÀÌµğ</td>
+					<td class="title">ì•„ì´ë””</td>
 				</tr>
 				<tr>
 					<td>
-						<a class="form-control" type="text" placeholder="¾ÆÀÌµğ" disabled="disabled">${ member.memberId }</a>
+						<a class="form-control" type="text" placeholder="ì•„ì´ë””" disabled="disabled">${ member.memberId }</a>
 					</td>
               	</tr> 
               	<tr>
-                	<td class="title">´Ğ³×ÀÓ</td>
+                	<td class="title">ë‹‰ë„¤ì„</td>
               	</tr>
               	<tr>
                 	<td>
-                  		<a type="text" class="form-control" id="nickname" placeholder="´Ğ³×ÀÓ" disabled="disabled">${ member.memberNickname }</a>
+                  		<a type="text" class="form-control" id="nickname" placeholder="ë‹‰ë„¤ì„" disabled="disabled">${ member.memberNickname }</a>
                 	</td>
               	</tr> 
               	<tr>
-                	<td class="title">ÀÌ¸ŞÀÏ</td>
+                	<td class="title">ì´ë©”ì¼</td>
               	</tr>
               	<tr>
                 	<td>
@@ -47,8 +47,8 @@
               	</tr>
             </table>
             <div class="updateBtn pt-2">
-            	<button type="button" class="btn  btn-outline-warning btn-warning" id="btnDelete" onclick="location.href=''">ºñÈ¸¿ø ÀüÈ¯</button>
-            	<button type="button" class="btn btn-secondary" onclick="location.href='${ path }/admin/member'">µ¹¾Æ°¡±â</button>
+            	<button type="button" class="btn  btn-outline-warning btn-warning" id="btnDelete" onclick="location.href=''">ë¹„íšŒì› ì „í™˜</button>
+            	<button type="button" class="btn btn-secondary" onclick="location.href='${ path }/admin/member'">ëŒì•„ê°€ê¸°</button>
             </div>
         </form>
         </div>
@@ -58,7 +58,7 @@
       <script>
 		$(document).ready(() => {
 			$("#btnDelete").on("click", () => {
-				if(confirm("ºñÈ¸¿øÀ¸·Î ÀüÈ¯ ÇÏ½Ã°Ú½À´Ï±î?")) {
+				if(confirm("ë¹„íšŒì›ìœ¼ë¡œ ì „í™˜ í•˜ì‹œê² ìŠµë‹ˆê¹Œ?")) {
 					location.replace("${ path }/admin/memberChange?memberNo=${ member.memberNo }");
 				}
 			});
