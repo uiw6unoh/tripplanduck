@@ -23,19 +23,29 @@
 		SELECT * FROM LOCATION
 		WHERE LOCATION_ID=#{locationId}
 	</sql>
+	<resultMap type="com.tripplan.duck.planner.model.vo.DetailPlanner" id="detailPlannerResultMap">
+		<id property="pNo" column="P_NO" />
+		<result property="sqes" column="SEQS"/>
+		<result property="place" column="PLACE"/>
+		<result property="image" column="IMAGE"/>
+	</resultMap>
+	
+	<resultMap type="com.tripplan.duck.planner.model.vo.Location" id="memberResultMap">
+		<id property="memberNo" column="M_NO" />
+		<result property="memberId" column="M_ID"/>
+		<result property="memberPassword" column="M_PW"/>
+		<result property="memberNickname" column="M_NICKNAME"/>
+		<result property="memberEmail" column="M_EMAIL"/>
+		<result property="memberType" column="M_TYPE"/>
+		<result property="memberWarning" column="M_WARNING"/>
+		<result property="memberStatus" column="M_STATUS"/>
+		<result property="memberGender" column="M_GENDER"/>
+		<result property="memberAge" column="M_AGE"/>
+	</resultMap>
+	
 	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
 		<id property="pNo" column="P_NO" />
-		<result property="pPlace" column="P_PLACE" />
-		<result property="pStartDate" column="P_STARTDATE" />
-		<result property="pEndDate" column="P_ENDDATE" />
-		<result property="pLt" column="P_LT" />
-		<result property="pMapX" column="P_MAP_X" />
-		<result property="pMapY" column="P_MAP_Y" />
-		<result property="pMap" column="P_MAP" />
-		<result property="pLike" column="P_LIKE" />
-		<result property="pStatus" column="P_STATUS" />
-		<result property="pType" column="P_TYPE" />
-		<result property="pDestNo" column="DEST_NO" />
+		<result property="destNo" column="DEST_NO" />
 		<result property="mNo" column="M_NO" />
 		<result property="locationId" column="LOCATION_ID" />
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
@@ -46,6 +56,8 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+		<result property="locationTitle" column="LOCATION_TITLE" />
 		
 	</resultMap>
 	
@@ -73,14 +85,20 @@
 		<include refid="findLocation"/>
 	</select>
 	
-	<select id="insertPlanner" resultMap="MyPlannerResultMap">
-		INSERT INTO MY_PLANNER (P_NO, P_STARTDATE,P_ENDDATE, M_NO,LOCATION_ID) VALUES
-			(SEQ_MY_PLANNER_NO, #{PSTARTDATE}, #{PENDDATE}, #{M_NO}, #{LOCATION_ID})
-	</select>
+	<!-- My planner insert -->
 	
-	<insert id="plannerInsert" parameterType="HashMap">
-		INSERT INTO MYCOURSE (MC_NO,M_NO,SEQS,SUBJECT,IMAGE,DEMODATE) VALUES
-			(SEQ_MY_PLANNER_NO.NEXTVAL,1,SEQ_SEQS.NEXTVAL,#{place}, #{destImage},#{demo})
+	
+	<insert id="insertPlanner" parameterType="MyPlanner" keyColumn="P_NO" keyProperty="pNo">
+		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{destNo},#{mNo},#{locationId})
+	</insert>
+	
+	<insert id="detailInsert" parameterType="HashMap">
+		<selectKey keyProperty="pNo" resultType="integer" order="BEFORE">
+	        SELECT (MAX(P_NO)) FROM MY_PLANNER
+	    </selectKey>
+	    
+		INSERT INTO DETAIL_PLANNER (P_NO,SEQS,PLACE,IMAGE) VALUES
+			(#{pNo},SEQ_SEQS.NEXTVAL,#{place},#{destImage})
 	</insert>
 	
 	
@@ -92,6 +110,7 @@
 	</select>
 	
 	<select id="addDest" resultMap="DestFindResultMap">
+	
 		SELECT L.LOCATION_ID ,D.DEST_NO, D.DEST_SUBJECT , D.DEST_MAP_X, D.DEST_MAP_Y  FROM LOCATION L
 		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
 		WHERE D.DEST_SUBJECT = #{destSubject}

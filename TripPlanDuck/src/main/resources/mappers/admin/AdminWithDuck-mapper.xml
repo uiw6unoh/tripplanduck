@@ -52,6 +52,10 @@
 		<result property="updateDate" column="WITH_UPDATEDATE"/>
 	</resultMap>
 	
+	<select id="withDuckFindNo" parameterType="int" resultMap="withDuckResultMap">
+		SELECT * FROM WITHDUK 
+		WHERE WITH_NO = #{withDuckNo}
+	</select>
 	
 	<select id="withDuckSelectAll" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql" />
@@ -64,8 +68,17 @@
 	
 	<select id="withDuckSelectLatest" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql"/>
+		ORDER BY WITH_NO DESC
+	</select>
+	
+	<select id="withDuckSelectOld" resultMap="withDuckResultMap">
+		<include refid="withDuckListSql"/>
 		ORDER BY WITH_NO ASC
 	</select>
+	
+	<delete id="deletewithDuck" parameterType="_int">
+		DELETE FROM WITHDUK WHERE WITH_NO = #{withNo}
+	</delete>
 
 	
 </mapper>

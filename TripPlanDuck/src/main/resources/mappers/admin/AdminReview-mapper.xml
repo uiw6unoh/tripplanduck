@@ -50,6 +50,8 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+        <result property="locationTitle" column="LOCATION_TITLE" />
 		
 	</resultMap>
 	

@@ -101,7 +101,17 @@
 					    ${ loginMember.memberNickname }
 					  </button>
 					  <ul class="dropdown-menu">
+					  	<c:choose>
+					  	<c:when test="${ loginMember.memberId == 'admin' }">
+					  		<li><a class="dropdown-item" href="${path}/admin/visitor">관리자페이지</a></li>
+					  	</c:when>
+					  	
+					  	<c:otherwise>
 					    <li><a class="dropdown-item" href="${path}/mypage?select=planner">마이페이지</a></li>
+					  	</c:otherwise>
+					  	
+					  	</c:choose>
+					  	
 					    <li><a class="dropdown-item" id="logout" onclick="location.replace('${ path }/logout')">로그아웃</a></li>
 					  </ul>
 					</div>

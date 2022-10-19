@@ -32,7 +32,7 @@
           <div class="carousel-item active">
             <img src="${ path }/images/trip/건대.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left mt-0">
-              <h4 class="">2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -40,7 +40,7 @@
           <div class="carousel-item ">
             <img src="${ path }/images/trip/야경.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left">
-              <h4 class="">2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -48,7 +48,7 @@
           <div class="carousel-item">
             <img src="${ path }/images/trip//제주도.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left">
-              <h4>2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -197,7 +197,7 @@
 	    <div class="col-lg-3 col-md-6 mb-4">
 	    	<a href="${path}/trip/list?locationId=${location.locationId}">
 	        <div class="card" style="width: 16rem;">
-	          <div style="overflow: hidden;">
+	          <div class="card-img" style="overflow: hidden;">
 	            <img src="${ path }/images/trip/${location.locationImage}" style="background-color: #f4f3f1;" width="100%" height="254px">
 	          </div>
 	          <div class="card-body">
@@ -209,7 +209,54 @@
 	    </div>
     </c:forEach>
     </div>
-
+    
+    <div class="row mt-1 skeletonCard" style="display:none;">
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	  <div class='col-lg-3 col-md-6 mb-4'>
+		<div class="card" style="width: 16rem;">
+		  <div class="card-img skeleton" style="overflow: hidden;">
+			<img width="100%" height="254px">
+		  </div>
+		  <div class="card-body">
+		    <h5 class="skeleton-title skeleton mb-1"></h5>
+		    <p class="skeleton-text skeleton"></p>
+		  </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<div class="w-100" style="display:flex; justify-content: center;">
 		<div class="loading">
 		  <div class="ldio-76qwp4fy1ic" ><div></div>
@@ -264,6 +311,7 @@ var isEnd = true;
 $(window).scroll(function() {
 	if ($(window).scrollTop() == $(document).height() - $(window).height() || $(window).scrollTop() >= $(document).height() - $(window).height() - 5) {
 		if (datalength > 0 && isEnd == true) {
+			showSkeleton();
 			showLoading();
 			isEnd = false;
 			let sort = getParameter("sort")
@@ -279,14 +327,14 @@ $(window).scroll(function() {
 								
 							    $("#mainDiv").append(
 							    		"<div class='col-lg-3 col-md-6 mb-4'>" +
-							    		"<a href=\'${ path }/trip/list?locationId=" + obj.list[i].loctaionId + "\'>" +
+							    		"<a href=\'${ path }/trip/list?locationId=" + obj.list[i].locationId + "\'>" +
 							    		"<div class='card' style='width: 16rem;'>" +
 							    		"<div style='overflow: hidden;'>" +
 							    		"<img src=\'${ path }/images/trip/" + obj.list[i].locationImage + "\' style='background-color: #f4f3f1;' width='100%' height='254px'>" +
 							    		"</div>" +
 							    		"<div class='card-body'>" +
-							    		"<h5 class='card-title mb-1'>" + obj.list[i].locationTitle + "</h5>" + 
-							    		"<p class='card-text'>" + obj.list[i].location + "</p>" + 
+							    		"<h5 class='card-title mb-1 '>" + obj.list[i].locationTitle + "</h5>" + 
+							    		"<p class='card-text '>" + obj.list[i].location + "</p>" + 
 							    		"</div>" + 
 							    		"</div>" + 
 							    		"</a>" +
@@ -303,6 +351,7 @@ $(window).scroll(function() {
 						      });
 						}
 						
+						hideSkeleton();
 						hideLoading();
 						isEnd = true;
 						limit += 4;
@@ -310,7 +359,12 @@ $(window).scroll(function() {
 					
 				},
 				error: function(error) {
-					alert("error");
+					Swal.fire({
+				        icon: "error",
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+				      });
+					hideSkeleton();
 					hideLoading();
 				}
 			});

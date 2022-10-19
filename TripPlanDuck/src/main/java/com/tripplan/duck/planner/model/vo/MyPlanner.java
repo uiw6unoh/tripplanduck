@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.ListModel;
 
+import com.tripplan.duck.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,34 +20,44 @@ import lombok.NoArgsConstructor;
 public class MyPlanner {
 	private int pNo;
 	
-	private String pPlace;
-	
-	private String pStartDate;
-	
-	private String pEndDate;
-	
-	// 굳이 있어야 하나 의문??
-	private Date pLt;
-	
-	private String pMapX;
-	
-	private String pMapY;
-	
-	private int pLike;
-	
-	private String pStatus;
-	
-	private String pType;
-	
 	private int destNo;
 	
 	private int mNo;
 	
-	private String mNickname;
-	
-	private String destImg;
+	private int locationId;
 	
 	private List<Location> loca;
+	
+	private Location loc; 
+	
+	private String route;
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 생각 좀 해보자

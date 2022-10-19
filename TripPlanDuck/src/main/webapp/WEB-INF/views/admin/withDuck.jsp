@@ -45,7 +45,8 @@
                     <button type="button" style="margin-top: 25px; margin-left: 130px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
                      onclick="location.href='${ path }/admin/withDuckLatest'">최신순</button>
                     <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">신고받은게시글</button>
-                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">오래된순</button>
+                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/withDuckOld'">오래된순</button>
                 </form>
             </div>
         </div>
@@ -77,7 +78,8 @@
 		                    <td style="text-align: center;">${withDuck.withWriterNick}</td>
 		                    <td style="text-align: center;">신고된게시글</td>
 		                    <td>
-	                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                        <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;"
+	                         onclick="location.href='${ path }/admin/withDuckInfo?withDuckNo=${withDuck.withNo}'">
 	                            게시글삭제
 	                        </button>
 		                    </td>

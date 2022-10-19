@@ -28,6 +28,11 @@
 		<result property="memberGender" column="M_GENDER"/>
 		<result property="memberAge" column="M_AGE"/>
 	</resultMap>
+	
+	<select id="memberFindNo" parameterType="int" resultMap="memberResultMap">
+		SELECT * FROM MEMBER 
+		WHERE M_NO = #{memberNo}
+	</select>
 
 	<select id="selectCount" resultType="_int">
 		SELECT COUNT(*) FROM MEMBER
@@ -35,12 +40,17 @@
 
 	<select id="selectAll" resultMap="memberResultMap">		
 		<include refid="selectMemberSql"/>
-		WHERE M_STATUS = 'Y'
+		ORDER BY M_NO DESC
 	</select>
 
 	<select id="selectMemberById" parameterType="string" resultMap="memberResultMap">
 		<include refid="selectMemberSql"/>
 		WHERE M_ID = #{memberId} AND M_STATUS = 'Y'
+	</select>
+	
+	<select id="selectMemberByNickname" parameterType="string" resultMap="memberResultMap">
+		<include refid="selectMemberSql"/>
+		WHERE M_NICKNAME = #{memberNickname} AND M_STATUS = 'Y'
 	</select>
 
 	<insert id="insertMember" parameterType="Member"
@@ -80,6 +90,11 @@
 			HOBBY = #{hobby},
 			MODIFY_DATE = SYSDATE 
 		WHERE NO = #{no}
+	</update>
+	
+	<update id="updateMemberStatus" parameterType="Member">
+		UPDATE MEMBER SET M_STATUS = 'N'
+		WHERE M_NO = #{memberNo}
 	</update>
 	
 	<delete id="deleteMember" parameterType="_int">

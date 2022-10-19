@@ -120,10 +120,21 @@ function getJson() {
 */
 
 
-function showLoading(){
+
+
+function showLoading() {
 	$(".loading").css("display", "block");
 }
 
-function hideLoading(){
+function hideLoading() {
 	$(".loading").css("display", "none");
 }
+
+function showSkeleton() {
+	$(".skeletonCard").css("display", "");
+}
+
+function hideSkeleton() {
+	$(".skeletonCard").css("display", "none");
+
+};

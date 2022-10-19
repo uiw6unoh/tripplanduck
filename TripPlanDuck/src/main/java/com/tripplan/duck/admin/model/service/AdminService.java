@@ -5,6 +5,7 @@ import java.util.List;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 public interface AdminService {
 
@@ -24,8 +25,17 @@ public interface AdminService {
 
 	List<Comments> getWithDuckList(PageInfo pageInfo);
 
+	List<Comments> getWithDuckLatestList(PageInfo pageInfo);
 
+	List<Comments> getWithDuckOldList(PageInfo pageInfo);
 
+	Member findMemberByNo(int memberNo);
+
+	int memberStatusChange(int memberNo);
+
+	WithDuck findWithDuckByNo(int withDuckNo);
+
+	int withDuckDelte(int withDuckNo);
 
 
 }

@@ -25,20 +25,20 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
+		<result property="locationImage" column="LOCATION_IMAGE" />
+      	<result property="locationTitle" column="LOCATION_TITLE" />
 	</resultMap>
 
 	<resultMap type="Comments" id="commentsResultMap">
 		<id property="commentsId" column="COMMENTS_ID" />
 		<result property="memberNo" column="M_NO" />
 		<result property="commentsWriterId" column="COMMENTS_WRITER_ID" />
-		<result property="commentsWriterPw" column="COMMENTS_WRITER_PW" />
 		<result property="commentsContent" column="COMMENTS_CONTENT" />
 		<result property="commentsRating" column="COMMENTS_RATING" />
 		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
 		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
 		<result property="commentsCreateDateSt" column="COMMENTS_CREATEDATE_ST" />
 		<result property="commentsUpdateDateSt" column="COMMENTS_UPDATEDATE_ST" />
-		<result property="commentsIpAddress" column="COMMENTS_IP_ADDRESS" />
 		<result property="destNo" column="DEST_NO" />
 		<result property="destSubject" column="DEST_SUBJECT" />
 		<result property="destCategory" column="DEST_CATEGORY" />
@@ -46,17 +46,11 @@
 	
 	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
 		<id property="pNo" column="P_NO" />
-		<result property="pPlace" column="P_PLACE" />
-		<result property="pStartDate" column="P_STARTDATE" />
-		<result property="pEndDate" column="P_ENDDATE" />
-		<result property="pLt" column="P_LT" />
-		<result property="pLike" column="P_LIKE" />
-		<result property="pStatus" column="P_STATUS" />
-		<result property="pType" column="P_TYPE" />
 		<result property="destNo" column="DEST_NO" />
 		<result property="mNo" column="M_NO" />
-		<result property="mNickname" column="M_NICKNAME" />
-		<result property="destImg" column="DEST_IMAGE" />
+		<result property="route" column="ROUTE" /> 
+		<association property="loc" javaType="Location" columnPrefix="L_" resultMap="locationResultMap">
+		</association>
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
 	
@@ -65,7 +59,7 @@
 		<result property="location" column="LOCATION" />
 		<result property="lcenterx" column="LCENTERX" />
 		<result property="lcentery" column="LCENTERY" />
-		
+		<result property="image" column="LOCATION_IMAGE" />	
 	</resultMap>
 	
 	<resultMap type="com.tripplan.duck.trip.model.vo.Destination" id="DestFindResultMap">
@@ -87,6 +81,13 @@
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
 	
+	<resultMap type="com.tripplan.duck.planner.model.vo.DetailPlanner" id="detailPlannerResultMap">
+		<id property="pNo" column="P_NO" />
+		<result property="sqes" column="SEQS"/>
+		<result property="place" column="PLACE"/>
+		<result property="image" column="IMAGE"/>
+	</resultMap>
+		
 	<select id="selectMyPlannerByMNo" resultMap="MyPlannerResultMap">
 		SELECT
 			ROWNUM,
@@ -94,21 +95,21 @@
 		FROM
 			(SELECT
 				mp.p_no,
-				mp.p_place,
-				mp.p_startdate,
-				mp.p_enddate,
-				mp.p_lt,
-				mp.p_like,
-				mp.p_status,
-				mp.p_type,
 				mp.dest_no,
 				mp.m_no,
-				l.location_id,
-				l.location,
-				l.LCENTERX,
-				l.LCENTERY,
-				m.M_NICKNAME,
-				d.DEST_IMAGE
+				l.location_id as L_LOCATION_ID,
+				l.location as L_LOCATION,
+				l.location_image as L_LOCATION_IMAGE,
+				l.LCENTERX as L_LCENTERX,
+				l.LCENTERY as L_LCENTERY,
+				m.M_NICKNAME as M_NICKNAME,
+               	d.DEST_IMAGE,
+               	(SELECT LISTAGG(place, ' > ') WITHIN GROUP(ORDER BY seqs) AS place
+				  FROM detail_planner
+				WHERE p_no = MP.P_NO
+				 GROUP BY p_no
+				 ) route
+   
 			FROM 
 				MY_PLANNER mp JOIN LOCATION L
 				ON mp.LOCATION_ID = l.LOCATION_ID
@@ -133,12 +134,10 @@
 				dc.COMMENTS_ID,
 				dc.M_NO,
 				dc.COMMENTS_WRITER_ID,
-				dc.COMMENTS_WRITER_PW,
 				dc.COMMENTS_CONTENT,
 				dc.COMMENTS_RATING,
 				dc.COMMENTS_CREATEDATE,
 				dc.COMMENTS_UPDATEDATE,
-				dc.COMMENTS_IP_ADDRESS,
 				dc.DEST_NO,
 				d.DEST_CATEGORY,
 				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
@@ -178,14 +177,14 @@
 				d.DEST_CREATEDATE,
 				d.DEST_UPDATEDATE,
 				d.LOCATION_ID,
-				d.DEST_IMAGE
+				NVL(d.DEST_IMAGE, '/duck/images/trip/noImage.jpeg' ) DEST_IMAGE
 			FROM
 				DESTINATION_LIKE dl JOIN DESTINATION D
 				ON dl.DEST_NO = d.dest_no
 			WHERE
 				m_no = #{memberNo}
 			ORDER BY
-				d.dest_updatedate DESC) a
+				d.dest_no DESC) a
 		WHERE 
 			rownum &lt;= (#{offset} * 3)
 	</select>
@@ -196,21 +195,20 @@
 		<select id="selectMyPlannerByMNoNewPaging" resultMap="MyPlannerResultMap">
 			SELECT
 				mp.p_no,
-				mp.p_place,
-				mp.p_startdate,
-				mp.p_enddate,
-				mp.p_lt,
-				mp.p_like,
-				mp.p_status,
-				mp.p_type,
 				mp.dest_no,
 				mp.m_no,
-				l.location_id,
-				l.location,
-				l.LCENTERX,
-				l.LCENTERY,
-				m.M_NICKNAME,
-				d.DEST_IMAGE
+				l.location_id as L_LOCATION_ID,
+				l.location as L_LOCATION,
+				l.location_image as L_LOCATION_IMAGE,
+				l.LCENTERX as L_LCENTERX,
+				l.LCENTERY as L_LCENTERY,
+				m.M_NICKNAME as M_NICKNAME,
+				d.DEST_IMAGE,
+				(SELECT LISTAGG(place, ' > ') WITHIN GROUP(ORDER BY seqs) AS place
+				  FROM detail_planner
+				WHERE p_no = MP.P_NO
+				 GROUP BY p_no
+				 ) route
 			FROM 
 				MY_PLANNER mp JOIN LOCATION L
 				ON mp.LOCATION_ID = l.LOCATION_ID
@@ -228,12 +226,10 @@
 				dc.COMMENTS_ID,
 				dc.M_NO,
 				dc.COMMENTS_WRITER_ID,
-				dc.COMMENTS_WRITER_PW,
 				dc.COMMENTS_CONTENT,
 				dc.COMMENTS_RATING,
 				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
 				TO_CHAR(dc.COMMENTS_UPDATEDATE, 'yyyy-mm-dd') as COMMENTS_UPDATEDATE_ST,
-				dc.COMMENTS_IP_ADDRESS,
 				dc.DEST_NO,
 				d.DEST_CATEGORY,
 				d.DEST_SUBJECT
@@ -265,17 +261,17 @@
 				d.DEST_CREATEDATE,
 				d.DEST_UPDATEDATE,
 				d.LOCATION_ID,
-				d.DEST_IMAGE
+					NVL(d.DEST_IMAGE, '/duck/images/trip/noImage.jpeg' ) DEST_IMAGE
 			FROM
 				DESTINATION_LIKE dl JOIN DESTINATION D
 				ON dl.DEST_NO = d.dest_no
 			WHERE
 				m_no = #{memberNo}
-				<if test='locationId != null'>
+				<if test='locationId != null and 999 > locationId'>
 				AND d.LOCATION_ID = #{locationId}		
 				</if>
 			ORDER BY
-				d.dest_updatedate DESC
+				d.dest_No DESC
 			OFFSET #{offset} ROWS FETCH NEXT #{end} ROWS ONLY	
 	</select>
 	
@@ -284,4 +280,15 @@
 		select location_id as locationId, location from location
 	</select>
 	
+	<delete id="deleteLikeTrip">
+		delete DESTINATION_LIKE where dest_no = #{no} and m_no = #{mno}
+	</delete>
+	
+	<delete id="deleteReview">
+		delete DESTINATION_COMMENTS where comments_id = #{no} and m_no = #{mno}
+	</delete>
+
+	<delete id="deletePlan">
+		delete MY_PLANNER where p_no = #{no} and m_no = #{mno}
+	</delete>
 </mapper>
