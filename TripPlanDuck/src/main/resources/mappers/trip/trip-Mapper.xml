@@ -173,8 +173,8 @@
 		#{commentsWriterId},
 		#{commentsContent},
 		#{commentsRating},
-		TO_DATE(#{commentsCreateDate}, 'YYYY-MM-DD HH24:MI'),
-		TO_DATE(#{commentsUpdateDate}, 'YYYY-MM-DD HH24:MI'),
+		TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
+		TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
 		#{destNo}
 		)
 	</insert>
@@ -187,8 +187,7 @@
         UPDATE DESTINATION_COMMENTS SET
         COMMENTS_CONTENT = #{commentsContent},
         COMMENTS_RATING = #{commentsRating},
-        COMMENTS_CREATEDATE = #{commentsCreateDate},
-        COMMENTS_UPDATEDATE = SYSDATE
+        COMMENTS_UPDATEDATE = TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI')
         WHERE DEST_NO = #{destNo}
         AND	  COMMENTS_ID = #{commentsId}
     </update>

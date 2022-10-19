@@ -199,7 +199,7 @@ public class TripRestController {
 			throw new Exception("로그인된 사용자가 없습니다.");
 		
 		comments.setMemberNo(member.getMemberNo());
-		comments.setCommentsWriterId(member.getMemberId());
+		comments.setCommentsWriterId(member.getMemberNickname());
 		
 		destinationService.insertComment(comments);
 		
@@ -207,7 +207,9 @@ public class TripRestController {
 	}
 	
 	@PutMapping("/comment")
-	public Comments updateComment(HttpSession session, Comments comments) throws Exception {
+	public Comments updateComment(HttpSession session, @RequestBody Comments comments) throws Exception {
+		
+		System.out.println("update comments : " + comments.toString());
 		
 		Member member = (Member)session.getAttribute("loginMember");
 		
@@ -215,7 +217,7 @@ public class TripRestController {
 			throw new Exception("로그인된 사용자가 없습니다.");
 		
 		comments.setMemberNo(member.getMemberNo());
-		comments.setCommentsWriterId(member.getMemberId());
+		comments.setCommentsWriterId(member.getMemberNickname());
 		
 		destinationService.updateComment(comments);
 		

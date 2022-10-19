@@ -2,6 +2,8 @@ package com.tripplan.duck.trip.model.vo;
 
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,9 +24,9 @@ public class Comments {
 	
 	private int commentsRating;
 	
-	private Date commentsCreateDate;
+	private String commentsCreateDate;
 	
-	private Date commentsUpdateDate;
+	private String commentsUpdateDate;
 	
 	private int destNo;
 	

@@ -170,13 +170,13 @@
 
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
-				<div class="mt-3 ml-2">               
-                   <div id="map" style="width:500px;height:400px;"></div>
+				<div class="card-tab">               
+                   <div class="card-tab m-2 " id="map" style="width:500px;height:400px;"></div>
 				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
                 <section class="mb-5">
-                  <div class="card-tab bg-light">
+                  <div class="bg-light">
                       <div class="card-tab pt-2 px-3 pb-3">
                           <!-- Comment form-->
                           <form class="mb-2 " id="commentForm">
@@ -204,7 +204,7 @@
 	                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
 	                              <div class="ms-3 w-100">
 	                                <p style="font-weight: bold; width:100%">${comment.commentsWriterId}</p>
-	                                <span class="" style="font-size:0.5rem">${comment.commentsCreateDate}</span>                    
+	                                <span class="" style="font-size:0.5rem">${comment.commentsUpdateDate}</span>                    
 	                              <div class="float-left">
 	                                  <div class="star-count">
 								        ★
@@ -216,15 +216,18 @@
 	                                  
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
-											<button class="btn btn-outline-warning py-0" data-toggle="modal" data-target="#staticBackdrop">수정</button>
+											<button class="btn btn-outline-warning py-0" data-toggle="modal" id="updateBtn" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
 		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
+		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
+		                                  	
 										</c:when>
 										<c:otherwise>	
-		                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
+		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" id="reportBtn" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
 									  </c:choose>
 	                                  </div>
-	                                    <p>${comment.commentsContent}</p>
+	                                    <p>${ comment.commentsContent }</p>
 	                              </div>
 	                          </div>
                           </c:forEach>
@@ -235,7 +238,7 @@
               </div>
               
             <!-- 수정 클릭 시 모달 -->
-			<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal fade" id="updateBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
 			    <div class="modal-content">
 			      <div class="modal-header">
@@ -243,33 +246,81 @@
 			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
+			        <input type="hidden" id="commentsId"/>
 			      </div>
 			      <div class="modal-body">
-					 <form class="mb-2 " id="commentForm">
+					 <form class="mb-2 " id="commentForm2">
                         <div class="star-rating space-x-4 mx-auto float-left ">
-                           <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
-                              <label for="5-stars" class="star">★</label>
-                              <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
-                              <label for="4-stars" class="star">★</label>
-                              <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
-                              <label for="3-stars" class="star">★</label>
-                              <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
-                              <label for="2-stars" class="star">★</label>
-                              <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
-                              <label for="1-star" class="star">★</label>
+                           <input type="radio" id="5-stars2" name="rating2" value="5" v-model="ratings"/>
+                              <label for="5-stars2" class="star">★</label>
+                              <input type="radio" id="4-stars2" name="rating2" value="4" v-model="ratings"/>
+                              <label for="4-stars2" class="star">★</label>
+                              <input type="radio" id="3-stars2" name="rating2" value="3" v-model="ratings"/>
+                              <label for="3-stars2" class="star">★</label>
+                              <input type="radio" id="2-stars2" name="rating2" value="2" v-model="ratings"/>
+                              <label for="2-stars2" class="star">★</label>
+                              <input type="radio" id="1-star2" name="rating2" value="1" v-model="ratings" />
+                              <label for="1-star2" class="star">★</label>
                          </div>
                          <p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
-                           <textarea id="commentsContent" class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
+                           <textarea id="commentsContent2" class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
                          <p class="mt-1 col p-0" style="font-size: 11px;"><c:out value="${now}" /></p>
                      </form>
 				  </div>
 			      <div class="modal-footer">
-			        <button type="button" id="updateAlert" onclick="updateComment(${comment.commentsId})"  class="btn btn-outline-warning py-0">확인</button>
+			        <button type="button" id="updateAlert" onclick="updateComment()"  class="btn btn-outline-warning py-0">확인</button>
 			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>
+              
+             <c:if test="${ !empty loginMember }">
+             <!-- 신고 클릭 시 모달 -->
+			<div class="modal fade" id="reportBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">신고하기</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					<p style="font-size:0.9rem"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+					  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+					</svg> 클릭하여 신고 이유를 선택해 주세요.</p>
+					<div class="mt-3">
+						<label class="box-radio-input"><input type="radio" name="report" value="1"><span>회원비난/비하</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="2"><span>욕설/비속어</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="3"><span>예의에 어긋난 게시물/리플</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="4"><span>허위사실 유포</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="5"><span>회원기만</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="6"><span>무단광고/홍보</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="7"><span>사적목적 이용</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="8"><span>외설적 표현물</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="9"><span>불법행위 관련/소개</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="10"><span>타인권리 침해</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="11"><span>종교 비난</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="12"><span>선교/포교</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="13"><span>특정집단 차별</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="14"><span>불쾌감 조성</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="15"><span>게시판 용도위반 or 부적절</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="16"><span>이용방해 행위</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="17"><span>질문/요청글</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="18"><span>기타 사유</span></label>
+						<input type="hidden" id="reportType" name="reportType"></input>
+					</div>
+				  </div>
+			      <div class="modal-footer">
+			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0">신고</button>
+			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>  
+			</c:if>
               
             </div>
           </div>
@@ -294,6 +345,21 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+// 수정 시 모달에 데이터 넘겨주기
+$('[id="updateBtn"]').on("click", function () {
+ 	let commentsId = $("#updateBtn").attr('name')
+	$("#commentsId").val(commentsId)
+	
+	let rating = $("#rating" + commentsId).val()
+	$("input[name='rating2'][value=" + rating + "]").prop("checked", true);
+ 	
+	let content = $("#content" + commentsId).val()
+	$("#commentsContent2").val(content)
+	
+});
+
+
+// 삭제 버튼
 function deleteComment(commentsId){
     Swal.fire({
       icon: "warning",
@@ -333,9 +399,11 @@ function deleteComment(commentsId){
     });
   };
   
-  function updateComment(commentsId) {
-  	let rating = $('input[name=rating]:checked').val();
-  	let comment = $("#commentsContent").val();
+  // 수정 버튼
+  function updateComment() {
+  	let rating = $('input[name=rating2]:checked').val();
+  	let comment = $("#commentsContent2").val();
+    let commentsId = $("#commentsId").val();
   	
 	   	if(rating == null || rating == "" || comment == "" || comment == null){
 	       	Swal.fire({
@@ -369,10 +437,12 @@ function deleteComment(commentsId){
   		'destNo' : "${dest.destNo}"
  		  };
         
+        console.log("data : ", data)
         $.ajax({
 			url : "${path}/trip/api/comment",
 			type : "PUT",
-			data : data,
+			data		:  JSON.stringify(data), 
+	        contentType : "application/json",
 			dataType : "json",
 			success: function(data) {
 				swal.fire(
@@ -381,7 +451,7 @@ function deleteComment(commentsId){
 		          'success'
 	    		)
 	    		
-	    		location.reload()
+	    		 location.reload()
 			},
 			error: function(error) {
 				
@@ -394,11 +464,9 @@ function deleteComment(commentsId){
       }
     });
   };
-  // alertsweet 버튼
+  // 등록 버튼
   $(document).ready(function () {
-	
-
-    $('[id="enrollAlert"]').on("click", function () {
+	    $('[id="enrollAlert"]').on("click", function () {
     	
     	let member = "${member}";
     	
@@ -410,7 +478,9 @@ function deleteComment(commentsId){
 		        text: '로그인 후 이용해주세요.',
 		        confirmButtonText: "확인",
 		        closeOnClickOutside : false
-	        })
+	        }).then(function (isConfirmed) {
+		    	  window.location.href="${path}/member/login";
+	        });
 	        
 	        return;
 	    }
@@ -458,13 +528,88 @@ function deleteComment(commentsId){
 			}
 		})
 		
-        // document.getElementById('updateAlert').submit();
         
       });
     });
-
-    
   });
+ 
+  // 신고 버튼
+  $(document).ready(function () {
+	    $('[id="reportBtn"]').on("click", function () {
+	    
+	    	let member = "${member}";
+	     	let commentsId = $("#reportBtn").attr('name')
+	    	$("#commentsId").val(commentsId)	
+	    	
+	    	console.log("commentsId : ", commentsId)
+	    	console.log("member :", member)
+	    	
+	    	if(member == "" || member == null){
+	    		Swal.fire({
+			        icon: "error",
+			        title: `실패!`,
+			        text: '로그인 후 이용해주세요.',
+			        confirmButtonText: "확인",
+			        closeOnClickOutside : false
+		        }).then(function (isConfirmed) {
+			    	  window.location.href="${path}/member/login";
+		        });
+		        
+		        return;
+		    }
+	    	
+	    	$('[id="reportAlert"]').on("click", function () {
+		    	let report = $('input[name=report]:checked').text();
+		    	let reportType = $('#reportType').attr('value', report);
+	
+			   	if(report == null || report == ""){
+			       	Swal.fire({
+				        icon: "error",
+				        title: `실패!`,
+				        text: '신고 이유를 체크해주세요.',
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+			        })
+			        
+			       	return;
+			    }
+	    	
+		      var form = $(this).parents('form');
+		      Swal.fire({
+		        icon: "success",
+		        title: "신고완료!",
+		        text: `신고가 접수되었습니다.`,
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	
+		      }).then(function (isConfirmed) {
+		    	  
+		        // 신고 요청 처리
+		        let data = {
+		        	'commentsId' : commentsId,
+		        	'reportType' : reportType
+		   		};
+		        
+		        console.log("data :", data)
+		        
+		        $.ajax({
+					url : "${path}/report/review",
+					type : "POST",
+					data : data,
+					dataType : "json",
+					success: function(data) {
+						location.reload()
+					},
+					error: function(error) {
+						
+					}
+				})			
+		        
+		      });
+		    });
+	    });
+
+	  });
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
