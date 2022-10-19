@@ -31,6 +31,21 @@
 		<result property="locationTitle" column="LOCATION_TITLE" />
 	</resultMap>
 	
+	<resultMap type="Comments" id="commentsResultMap">
+		<id property="commentsId" column="COMMENTS_ID" />
+		<result property="memberNo" column="M_NO" />
+		<result property="commentsWriterId" column="COMMENTS_WRITER_ID" />
+		<result property="commentsContent" column="COMMENTS_CONTENT" />
+		<result property="commentsRating" column="COMMENTS_RATING" />
+		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
+		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
+		<result property="commentsCreateDateSt" column="COMMENTS_CREATEDATE_ST" />
+		<result property="commentsUpdateDateSt" column="COMMENTS_UPDATEDATE_ST" />
+		<result property="destNo" column="DEST_NO" />
+		<result property="destSubject" column="DEST_SUBJECT" />
+		<result property="destCategory" column="DEST_CATEGORY" />
+	</resultMap>
+	
 	<insert id="insertData"  parameterType="java.util.Map">
 	INSERT INTO DESTINATION(
 		DEST_NO, 
@@ -140,4 +155,45 @@
         DEST_LIKE_SUM = DEST_LIKE_SUM + 1
         WHERE DEST_NO = #{destNo}
     </update>
+    
+    <insert id="insertComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
+    INSERT INTO DESTINATION_COMMENTS(
+		COMMENTS_ID, 
+		M_NO, 
+		COMMENTS_WRITER_ID, 
+		COMMENTS_CONTENT, 
+		COMMENTS_RATING,
+		COMMENTS_CREATEDATE,
+		COMMENTS_UPDATEDATE,
+		DEST_NO
+		)
+	VALUES(
+		COMMENTS_ID.NEXTVAL,
+		#{memberNo},
+		#{commentsWriterId},
+		#{commentsContent},
+		#{commentsRating},
+		TO_DATE(#{commentsCreateDate}, 'YYYY-MM-DD HH24:MI'),
+		TO_DATE(#{commentsUpdateDate}, 'YYYY-MM-DD HH24:MI'),
+		#{destNo}
+		)
+	</insert>
+	
+	<select id="getDestinationComments" parameterType="int" resultMap="commentsResultMap">
+		SELECT * FROM DESTINATION_COMMENTS WHERE DEST_NO = #{destNo}
+	</select>
+	
+	<update id="updateComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
+        UPDATE DESTINATION_COMMENTS SET
+        COMMENTS_CONTENT = #{commentsContent},
+        COMMENTS_RATING = #{commentsRating},
+        COMMENTS_CREATEDATE = #{commentsCreateDate},
+        COMMENTS_UPDATEDATE = SYSDATE
+        WHERE DEST_NO = #{destNo}
+        AND	  COMMENTS_ID = #{commentsId}
+    </update>
+    
+    <delete id="deleteComment" parameterType="int">
+		DELETE FROM DESTINATION_COMMENTS WHERE COMMENTS_ID = #{commentsId}
+	</delete>
 </mapper>

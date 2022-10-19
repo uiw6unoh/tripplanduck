@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.mapper.DestinationMapper;
+import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
@@ -86,6 +87,26 @@ public class DestinationServiceImpl implements DestinationService {
 	@Override
 	public void updateDestLike(DestinationLike destinationLike) {
 		destinationMapper.updateDestLike(destinationLike);
+	}
+
+	@Override
+	public void insertComment(Comments comments) {
+		destinationMapper.insertComment(comments);
+	}
+
+	@Override
+	public List<Comments> getDestinationComments(int destNo) {
+		return destinationMapper.getDestinationComments(destNo);
+	}
+
+	@Override
+	public void updateComment(Comments comments) {
+		destinationMapper.updateComment(comments);
+	}
+
+	@Override
+	public void deleteComment(int commentsId) {
+		destinationMapper.deleteComment(commentsId);
 	}
 
 }

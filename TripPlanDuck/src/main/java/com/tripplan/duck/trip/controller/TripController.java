@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;
+import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
@@ -82,6 +83,9 @@ public class TripController {
 		Destination dest = destinationService.getDestination(destNo);
 		destinationService.updateCount(destNo);
 		List<Destination> destnations = destinationService.getDestinationsByCategory(destNo);
+		List<Comments> comments = destinationService.getDestinationComments(destNo);
+		
+		System.out.println("comments : " + comments);
 		int isLike = 0;
 		
 		Member member = (Member)session.getAttribute("loginMember");
@@ -93,9 +97,12 @@ public class TripController {
 			destinationLike.setDestNo(destNo);
 			destinationLike.setMemberNo(member.getMemberNo());
 			isLike = destinationService.isLike(destinationLike);
+			model.addObject("member", member);
+
 		}
 		
 		model.addObject("isLike", isLike);
+		model.addObject("comments", comments);
 		model.addObject("dest", dest);
 		model.addObject("destnations", destnations);
 		model.setViewName("trip/TripDetail");
