@@ -180,23 +180,6 @@ public class AdminController {
     	
     }
     
-    @GetMapping("/admin/MemberDelete")
-    public ModelAndView MemberDelete(ModelAndView model, @RequestParam int no) {
-    	int result = 0;
-    	
-    	result = service.Memberdelete(no);
-    	
-		if(result > 0) {
-			model.addObject("msg", "게시글이 정상적으로 삭제되었습니다.");
-			model.addObject("location", "/admin/member");
-		} else {
-			model.addObject("msg", "게시글 삭제를 실패하였습니다.");
-			model.addObject("location", "/admin/member");
-		}
-		
-		model.setViewName("common/msg");
-    	
-    	return model;
-    }
+
     
 }

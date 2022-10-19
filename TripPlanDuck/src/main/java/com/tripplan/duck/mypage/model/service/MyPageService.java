@@ -24,4 +24,6 @@ public interface MyPageService {
 
 	List<Location> getOptions();
 
+	void unLikeTrip(Map<String, Object> param);
+
 }

@@ -42,38 +42,6 @@
 		<include refid="selectMemberSql"/>
 		WHERE M_ID = #{memberId} AND M_STATUS = 'Y'
 	</select>
-
-	<insert id="insertMember" parameterType="Member"
-			useGeneratedKeys="true" keyColumn="M_NO" keyProperty="memberNo"> 
-		INSERT INTO MEMBER (
-			M_NO,
-			M_ID,
-			M_PW,
-			M_NICKNAME,
-			M_EMAIL,
-			M_TYPE,
-			M_WARNING,
-			M_STATUS,
-			M_GENDER,
-			M_AGE
-		) VALUES(
-			SEQ_MEMBER_NO.NEXTVAL,
-			#{memberId},
-			#{memberPassword},
-			#{memberNickname},
-			#{memberEmail},
-			DEFAULT,
-			DEFAULT,
-			DEFAULT,
-			#{memberGender},
-			#{memberAge}
-		)	
-	</insert>
-	
-	<update id="updateMemberStatus" parameterType="Member">
-		UPDATE MEMBER SET M_STATUS = 'N'
-		WHERE M_NO = #{no}
-	</update>
 	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 

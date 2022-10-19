@@ -27,4 +27,6 @@ public interface MyPageMapper {
 
 	List<Location> getOptions();
 
+	void deleteLikeTrip(Map<String, Object> param);
+
 }

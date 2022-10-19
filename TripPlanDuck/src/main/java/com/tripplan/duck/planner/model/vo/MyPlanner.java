@@ -26,6 +26,8 @@ public class MyPlanner {
 	
 	private List<Location> loca;
 	
+	private Location loc;
+	
 	
 	
 	

@@ -99,15 +99,7 @@ public class AdminServiceImpl implements AdminService {
 		return mapper.withDuckSelectOld(rowBounds);
 	}
 
-	@Override
-	@Transactional
-	public int Memberdelete(int no) {
-		int result = 0;
-		
-		result = mapper.updateMemberStatus(no, "N");
-				
-		return result;
-	}
+
 
 
 
