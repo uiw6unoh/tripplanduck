@@ -75,6 +75,16 @@
 		)	
 	</insert>
 	
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="String" resultType="String">
+		SELECT M_ID FROM MEMBER WHERE M_EMAIL = #{memberEmail}
+	</select>
+	
+	<!-- 임시비밀번호 -->
+	<update id="updateMemberPassword" parameterType="Member">
+		UPDATE MEMBER SET M_PW = #{memberPassword} WHERE M_ID = #{memberId}
+	</update>
+	
 	<update id="updateMember" parameterType="Member">
 		UPDATE MEMBER 
 		SET 
@@ -90,4 +100,5 @@
 	<delete id="deleteMember" parameterType="_int">
 		DELETE FROM MEMBER WHERE NO = #{memberNO}
 	</delete>
+	
 </mapper>

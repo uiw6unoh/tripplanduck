@@ -1,6 +1,11 @@
 package com.tripplan.duck.member.model.service;
 
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberMapper mapper;
 	
+	
 	@Override
 	public Member findMemberById(String memberId) {
 		
@@ -34,6 +40,7 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.selectMemberByNickname(memberNickname);
 	}
 
+	// 로그인
 	@Override
 	public Member login(String memberId, String memberPassword) {
 
@@ -53,7 +60,7 @@ public class MemberServiceImpl implements MemberService {
 		
 	}
 		
-
+	// 저장
 	@Override
 	public int save(Member member) {
 		int result = 0;
@@ -70,19 +77,41 @@ public class MemberServiceImpl implements MemberService {
 		return result;
 	}
 
-
+	//아이디 중복 체크
 	@Override
 	public Boolean isCheckID(String memberId) {
 		
 		return this.findMemberById(memberId) != null;
 	}
 
+	//닉네임 중복 체크
 	@Override
 	public Boolean isCheckNickname(String memberNickname) {
 		
 		return this.findMemberByNickname(memberNickname) != null;
 	}
 
+	//아이디 찾기
+	@Override
+	public String findMemberId(HttpServletResponse response, String memberEmail) throws Exception {
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		String MemberId = mapper.findMemberId(memberEmail);
+		
+		if (MemberId == null) {
+			out.println("<script>");
+			out.println("alert('가입된 아이디가 없습니다.');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.close();
+			return null;
+		} else {
+			
+			return MemberId;
+		}
+	}
 
+	
 
 }
