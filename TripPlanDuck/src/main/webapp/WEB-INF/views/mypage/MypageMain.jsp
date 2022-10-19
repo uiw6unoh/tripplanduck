@@ -26,9 +26,7 @@
 				<div class="userInfo">
 					<img src="${ path }/images/common/프사.png" alt="profile"
 						style="width: 100px; height: 100px; border-radius: 50%;">
-					<div class="pt-1 nickName">
-						${member.memberNickname }
-					</div>
+					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
 					<button class="btn btn-outline-warning btn-sm btn-block">내
@@ -45,8 +43,7 @@
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
 						onclick="location.href='${path}/mypage?select=planner'">
-						내 플래너
-					</button>
+						내 플래너</button>
 				</li>
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
@@ -63,165 +60,193 @@
 
 		<!-- 하위 컨테이너 -->
 		<div class="content-container">
-			<!-- Like Plan -->
+			<!-- 내 플래너 -->
 			<c:if test="${myPlannerFirst ne null}">
-			<c:set var="plan" value="${myPlannerFirst}" />
-			
-			<div id="likePlan">
-				<h3 class="section-title">내 플래너</h3>
-				<div id="text"></div>
-				<!-- 내 플래너 카드 -->
-				<a>
-					<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="${plan.getDestImg()}"
-								class="img-fluid rounded-start imgSize" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<div class="info-container-top">
-										<div class="card-title title mt-3">
-											<h5>여행지</h5>
+				<c:set var="plan" value="${myPlannerFirst}" />
+
+				<div id="likePlan">
+					<h3 class="section-title">Like Plan</h3>
+					<div id="text"></div>
+					<!-- 내 플래너 카드 -->
+					<a>
+						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+							<div class="row g-0">
+								<div class="col-md-4">
+									<%--  <img src="${ path }/images/trip/${plan.getLoc().getLocationImage()}" --%>
+									<img
+										src="${ path }/images/trip/${plan.getLoc().getLocationImage()}"
+										class="img-fluid rounded-start imgSize" alt="...">
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<div class="info-container-top">
+											<div class="card-title title mt-3">
+												<h5>여행지</h5>
+											</div>
+											<div class="card-title text-content mt-3">
+												<h5>${plan.getLoc().getLocation()}</h5>
+
+											</div>
 										</div>
-										<div class="card-title text-content mt-3">
-											<h5>${plan.getPPlace()}</h5>
+
+										<%-- 	<div class="info-container-top">
+										<p class="card-text title">작성인</p>
+										<p class="card-text text-content">${plan.member.getMNo()}</p>
+									</div> --%>
+									
+										<div class="info-container-top">
+											<p class="card-text title">코스</p>
+											<p class="card-text text-content">${plan.getRoute()}</p>
 										</div>
-									</div>
-								
-									<div class="info-container-top">
-										<p class="card-text title">여행 시작 날짜</p>
-										<p class="card-text text-content">${plan.getMNickname()}</p>
-									</div>
-									<div class="info-container-top">
-										<p class="card-text title">여행 소요 시간</p>
-										<p class="card-text text-content">${plan.getPLt()}</p>
-									</div>
-									<div class="card-btns">
-										<button type="button" class="btn btn-warning"
+										<div class="card-btns">
+											<button type="button" class="btn btn-warning"
 											onclick="location.href=''">수정</button>
-										<button type="button" class="btn btn-secondary">삭제</button>
+											<button type="button" class="btn btn-secondary"
+											onclick="delPlan(${plan.getPNo()})">삭제</button>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</a>
-				
-				<!--   ajax로 불러온 데이터가 추가되는 곳 -->
-				<div id="appendPlan"></div>
+					</a>
 
-				<div class="wrap-downChevron">
-					<abbr title="더보기"> <img class="down-chevron"
-						alt="planner-down" src="${ path }/images/mypage/down-chevron.png">
-					</abbr>
+					<!--   ajax로 불러온 데이터가 추가되는 곳 -->
+					<div id="appendPlan"></div>
+
+					<div class="wrap-downChevron">
+						<abbr title="더보기"> <img class="down-chevron"
+							alt="planner-down" src="${ path }/images/mypage/down-chevron.png">
+						</abbr>
+					</div>
 				</div>
-			</div>
-		
+
+			</c:if>
+			<c:if test="${planIsEmpty}">
+				<div class="empty">
+					<span> 여행계획 데이터가 없습니다. </span>
+				</div>
 			</c:if>
 			<!-- 내 여행지 -->
 			<c:if test="${tripFirst ne null}">
-			<c:set var="trip" value="${tripFirst}" />
-			<div id="myPlanner">
-				<h3 class="section-title">내 여행지</h3>
-				<!-- 여행지 필터 -->
-				<div>
-				<select name="selectBox" id="selectBox" onchange="changeOption(this.value)" style="width:150px;" class="form-control">      
-					 <option value="0" selected>여행지 선택</option>
-						<c:forEach var="options" items="${options}" varStatus="i">
-					 		<option value="${options.locationId}">${options.location}</option>
-						</c:forEach>
-				</select>
-				</div>
-				<!-- 여행지 카드 -->
-				<div id = "shiftTrip"> 
-				<a>
-					<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
-						<div class="row g-0">
-							<div class="col-md-4">
-								<img src="${trip.getDestImage()}"
-									class="img-fluid rounded-start imgSize" alt="...">
-							</div>
-							<div class="col-md-8">
-								<div class="card-body">
-									<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i>
-									<div class="info-container-top">
-										<div class="card-title title mt-3">
-											<h5>명소명</h5>
-										</div>
-										<div class="card-title text-content mt-3">
-											<h5>${trip.getDestSubject()}</h5>
-										</div>
+				<c:set var="trip" value="${tripFirst}" />
+				<div id="myPlanner">
+					<h3 class="section-title">내 여행지</h3>
+					<!-- 여행지 필터 -->
+					<div>
+						<select name="selectBox" id="selectBox"
+							onchange="changeOption(this.value)" style="width: 80px;"
+							class="form-control">      
+							<c:forEach var="options" items="${options}" varStatus="i">
+					 <option value="${options.locationId}">${options.location}</option>
+							</c:forEach>  
+							<option value="999" selected>전체</option>  
+							<option value="0">여행지 선택</option>
+						</select>
+					</div>
+					<!-- 여행지 카드 -->
+					<div id="shiftTrip">
+						<a>
+							<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+								<div class="row g-0">
+									<div class="col-md-4">
+										<img src="${trip.getDestImage()}"
+											class="img-fluid rounded-start imgSize" alt="...">
 									</div>
-									<div class="info-container-top">
-										<p class="card-text title">도시명</p>
-										<p class="card-text text-content">${trip.getDestCategory()}</p>
-									</div>
-									<div class="info-container-top">
-										<p class="card-text title">주소</p>
-										<p class="card-text text-content">${trip.getDestAddress()}</p>
+									<div class="col-md-8">
+										<div class="card-body">
+											<input type="hidden" class="tripCardUId"
+												value="${trip.getDestNo()}"> <i
+												class="fa-sharp fa-solid  fa-heart fa-lg heartIcon"
+												onclick="unLike(${trip.getDestNo()})"></i>
+
+											<div class="info-container-top">
+												<div class="card-title title mt-3">
+													<h5>명소명</h5>
+												</div>
+												<div class="card-title text-content mt-3">
+													<h5>${trip.getDestSubject()}</h5>
+												</div>
+											</div>
+											<div class="info-container-top">
+												<p class="card-text title">도시명</p>
+												<p class="card-text text-content">${trip.getDestCategory()}</p>
+											</div>
+											<div class="info-container-top">
+												<p class="card-text title">주소</p>
+												<p class="card-text text-content">${trip.getDestAddress()}</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</a>
 					</div>
-				</a>
-				</div>
 
-				<!--  ajax로 불러온 데이터가 추가되는 곳 -->
-				<div id="appendTrip"></div>
+					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
+					<div id="appendTrip"></div>
 
-				<div class="wrap-downChevron">
-					<abbr title="더보기"> <img class="down-chevron" alt="trip-down"
-						src="${ path }/images/mypage/down-chevron.png">
-					</abbr>
+					<div class="wrap-downChevron">
+						<abbr title="더보기"> <img class="down-chevron"
+							alt="trip-down" src="${ path }/images/mypage/down-chevron.png">
+						</abbr>
+					</div>
 				</div>
-			</div>
 			</c:if>
-
+			<c:if test="${tripIsEmpty}">
+				<div class="empty">
+					<span> 여행 데이터가 없습니다. </span>
+				</div>
+			</c:if>
 			<!-- comment -->
 			<c:if test="${commentFirst ne null}">
-			<c:set var="comments" value="${commentFirst}" />
-			<div id="myComment">
-				<!-- comment 카드 시작 -->
-				<h3 class="section-title">나의 리뷰</h3>
-				<a>
-					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
-						<div>
-							<div class="card-body">
-								<div class="star-rating">
-									<span class="star">★</span>
-									<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
-								</div>
-								<div class="destination">
-									<h4 class="card-title">${comments.getDestSubject()}</h4>
-									<span class="separator">|</span>
-									<h5 class="card-area">${comments.getDestCategory()}</h5>
-								</div>
-								<p class="card-text">${comments.getCommentsContent()}</p>
-								<p class="card-text">
-									<small class="text-muted">${comments.getCommentsCreateDateSt()} (수정일 : ${comments.getCommentsUpdateDateSt()})</small>
-								</p>
-								<div class="card-btns">
-									<button type="button" class="btn btn-warning"
-										onclick="location.href='${path}/TripDetail'">수정</button>
-									<button type="button" class="btn btn-secondary">삭제</button>
+				<c:set var="comments" value="${commentFirst}" />
+				<div id="myComment">
+					<!-- comment 카드 시작 -->
+					<h3 class="section-title">나의 리뷰</h3>
+					<a>
+						<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
+							<div>
+								<div class="card-body">
+									<div class="star-rating">
+										<span class="star">★</span>
+										<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
+									</div>
+									<div class="destination">
+										<h4 class="card-title">${comments.getDestSubject()}</h4>
+										<span class="separator">|</span>
+										<h5 class="card-area">${comments.getDestCategory()}</h5>
+									</div>
+									<p class="card-text">${comments.getCommentsContent()}</p>
+									<p class="card-text">
+										<small class="text-muted">${comments.getCommentsCreateDateSt()}(수정일
+											: ${comments.getCommentsUpdateDateSt()})</small>
+									</p>
+									<div class="card-btns">
+										<button type="button" class="btn btn-warning"
+											onclick="location.href=''">수정</button>
+										<button type="button" class="btn btn-secondary"
+											onclick="delReview(true, ${comments.getCommentsId()})">삭제</button>
+									</div>
 								</div>
 							</div>
 						</div>
+					</a>
+
+					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
+					<div id="appendComment"></div>
+
+					<!-- 더보기 -->
+					<div class="wrap-downChevron">
+						<abbr title="더보기"> <img class="down-chevron"
+							alt="comment-down" src="${ path }/images/mypage/down-chevron.png">
+						</abbr>
 					</div>
-				</a>
-
-				<!--  ajax로 불러온 데이터가 추가되는 곳 -->
-				<div id="appendComment"></div>
-
-				<!-- 더보기 -->
-				<div class="wrap-downChevron">
-					<abbr title="더보기"> <img class="down-chevron"
-						alt="comment-down" src="${ path }/images/mypage/down-chevron.png">
-					</abbr>
 				</div>
-			</div>
+			</c:if>
+			<c:if test="${commentIsEmpty}">
+				<div class="empty">
+					<span> 리뷰 데이터가 없습니다. </span>
+				</div>
 			</c:if>
 
 			<!-- 비밀번호 확인 모달 -->
@@ -237,7 +262,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="password" class="inputPwd" placeholder="비밀번호 입력">
+							<input type="text" class="inputPwd" placeholder="비밀번호 입력">
 
 						</div>
 						<div class="modal-footer">
@@ -250,42 +275,43 @@
 				</div>
 			</div>
 		</div>
+		</div>
 
 		<jsp:include page="../common/footer.jsp" />
-		
-<script type="text/javascript">
+
+		<script type="text/javascript">
 	var selected = "";  
 	var locSelected = [];
 	var sameCnt = 0;
 	
 	// 옵션 값을 바꿀때 호출되는 함수
 	function changeOption(e){
-		sendReq("trip", e);
-	}
+		console.log("changeOption", e)
+		 sendReq("trip", e);
+	 }
 	
 	// 더보기 버튼 클릭시 호출, 더보기 버튼이 여러개이므로 for문 이용하였음
 	document.querySelectorAll('.down-chevron').forEach((cell) => {
 		// 클릭한 버튼이 어느 카드의 버튼인지 판별하기 위해 alt 프로퍼티를 추가하였고,
 		// 해당 프로퍼티 내에는 카드의 이름이 들어감
 		// 프로퍼티에서 꺼내온 카드 이름을 sendReq 함수의 파라미터로 넣어 호출한다 
-		cell.addEventListener('click', function() {
-		var select = cell.getAttribute('alt').replace('-down','')
-		sendReq(select);
-		});
+	  cell.addEventListener('click', function() {
+	    var select = cell.getAttribute('alt').replace('-down','')
+	    sendReq(select);
+	  });
 	});
-
+ 
 	
 	// 더보기 버튼을 통한 ajax 통신 함수 
 	function sendReq(select, locationId){
-		
-		
+		var path ='${ pageContext.request.contextPath }'
 		// 플랜 혹은 리뷰 카드일 경우
 		if(select !== 'trip' && locationId == undefined){
 			// 더보기를 통해 새로 불러오는 데이터가  
 			var offset = 1
 			
-			// 기본값
-			locationId = 1
+			// 기본값 전체보기
+			locationId = 999
 			
 			// 어떤 카드에서 더보기를 클릭했는지 기억하기 위하여 카드 이름을 리스트에 저장 
 			selected += select;
@@ -305,9 +331,9 @@
 			// 여행 카드는 옵션이 있기 때문에 offset 따로 분류되므로 초기화
 			var offset = 0 
 			
-			// 만약 로케이션 옵션값을 한번도 만지지 않았을 경우 로케이션은 디폴트 값인 서울로 설정
+			// 만약 로케이션 옵션값을 한번도 만지지 않았을 경우 로케이션은 디폴트 값인 전체로 설정
 			if(locationId == undefined && locSelected.length == 0){
-				locationId = 1
+				locationId = 999  //기본값 전체보기
 				
 			} else if (locationId == undefined && locSelected.length > 0){
 				// 로케이션 옵션값을 지정한 이후 더보기 버튼을 눌렀을 경우, 
@@ -324,9 +350,9 @@
 			// 동일 옵션값 더보기시 offset 증가 아닐 경우 offset 1로 초기화
 			if(locSelected.includes(locationId)){
 				for(let i=0; i < locSelected.length; i++) {
-					if(locSelected[i] === locationId)  {
-						offset++;
-					}
+					  if(locSelected[i] === locationId)  {
+					    offset++;
+					  }
 				}
 			// 	
 			}else{
@@ -341,46 +367,46 @@
 			success : function(result){
 				// html상에 추가해줄 데이터 
 				var appendData = '';
-				
 				// 결과값이 리스트이므로 for문으로 접근
 				for(var i = 0; i < result.data.length; i++){
 					var data = result.data[i]
-					
 					if(select === 'planner'){
 						appendData += 	
-						'<a> ' + 
-							'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
-								'<div class="row g-0"> ' + 
-									'<div class="col-md-4"> ' +
-										'<img src="'+ data.destImg+'" class="img-fluid rounded-start imgSize" alt="..."> ' +
-									'</div> ' +
-								'<div class="col-md-8"> ' +
-									'<div class="card-body"> ' +
-										'<div class="info-container-top"> ' +
-											'<div class="card-title title mt-3"> ' +
-												'<h5>여행지</h5> ' +
-											'</div> ' +
-											'<div class="card-title text-content mt-3"> ' +
-												'<h5>'+ data.pplace+'</h5> ' +
-											'</div> ' +
-										'</div> ' +
-										'<div class="info-container-top"> ' +
-											'<p class="card-text title">작성인</p> ' +
-											'<p class="card-text text-content">' + data.mnickname +'</p> ' +
-										'</div> ' +
-										'<div class="info-container-top"> ' +
-											'<p class="card-text title">여행 소요 시간</p> ' +
-											'<p class="card-text text-content"> '+ data.plt +' </p> ' +
-										'</div> ' +
-										'<div class="card-btns"> '+
-											'<button type="button" class="btn btn-warning" onclick="">수정</button> '+
-											'<button type="button" class="btn btn-secondary">삭제</button> '+
-										'</div> '+
-									'</div> ' +
-								'</div> ' +
-							'</div> ' +
-						'</div> '+
-						'</a> '
+							'<a> ' + 
+			                '<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
+			                  '<div class="row g-0"> ' + 
+			                   '<div class="col-md-4"> ' +
+			                      '<img src="' +path +'/images/trip/'+ data.loc.locationImage+'" class="img-fluid rounded-start imgSize" alt="..."> ' +
+			                    '</div> ' +
+			                    '<div class="col-md-8"> '+
+			                      '<div class="card-body"> '+
+			                        '<div class="info-container-top"> ' +
+			                         '<div class="card-title title mt-3"> ' +
+			                            '<h5>여행지</h5> ' +
+			                          '</div> ' +
+			                          '<div class="card-title text-content mt-3"> ' +
+			                            '<h5>'+ data.loc.location+'</h5> ' +
+			                          '</div> ' +
+			                        '</div> ' +
+			                       /*  '<div class="info-container-top"> ' +
+			                          '<p class="card-text title">작성인</p> ' +
+			                          '<p class="card-text text-content">' + data.member +'</p> ' +
+			                        '</div> ' + */
+			                        '<div class="info-container-top"> ' +
+			                         '<p class="card-text title">코스</p> ' +
+			                          '<p class="card-text text-content"> '+ data.route +' </p> ' +
+			                        '</div> ' +
+			                        '<div class="card-btns"> '+
+											'<button type="button" class="btn btn-warning" '+
+											'onclick="">수정</button> '+
+											'<button type="button" class="btn btn-secondary" '+
+											'onclick="delPlan('+ data.pno +')">삭제</button> '+
+										'</div>' +
+			                      '</div> ' +
+			                    '</div> ' +
+			                  '</div> ' +
+			                '</div> '+
+			              '</a> '
 						
 					} else if (select === 'trip'){
 						appendData += 
@@ -392,7 +418,7 @@
 				                  '</div> '+
 				                  '<div class="col-md-8"> '+
 				                    '<div class="card-body"> '+
-				                      '<i class="fa-sharp fa-solid fa-heart fa-2x" id="heartIcon"></i> '+
+				                      '<i class="fa-sharp fa-solid  fa-heart fa-lg heartIcon" onclick="unLike('+data.destNo+')" ></i> '+
 				                      '<div class="info-container-top"> '+
 				                        '<div class="card-title title mt-3"> '+
 				                          '<h5>명소명</h5> '+
@@ -421,10 +447,10 @@
 				           '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
 			                '<div class="card-body"> '+
-								'<div class="star-rating"> ' +
-									'<span class="star">★</span> ' +
-									'<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
-								'</div> ' +
+			                  '<div class="star-rating"> ' +
+							    '<span class="star">★</span> ' +
+							    '<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
+						      '</div> ' +
 			                  '<div class="destination"> '+
 			                    '<h4 class="card-title">'+data.destSubject+'</h4> '+
 			                    '<span class="separator">|</span> '+
@@ -435,7 +461,7 @@
 			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDateSt+ '(수정일 : '+data.commentsUpdateDateSt +'  ) </small></p> '+
 			                  '<div class="card-btns"> '+
 			                    '<button type="button" class="btn btn-warning" onclick="">수정</button> '+
-			                    '<button type="button" class="btn btn-secondary">삭제</button> '+
+			                    '<button type="button" class="btn btn-secondary" onclick="delReview(false, '+data.commentsId+')">삭제</button> '+
 			                  '</div> '+
 			                '</div> '+
 			              '</div> '+
@@ -449,17 +475,17 @@
 				// 여행 데이터가 없을 경우
 				// 다른 카드와는 달리 카드 내에 '데이터 없음' 보여줌 
 				if(select == 'trip' && result.data.length == 0){
-					appendData = 
-					'<a href="${path}/trip/main"> ' +
+					appendData =   
 						'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
-								'<div class="col-md-4"> ' +
-									'<div class=nodata> ' +
-										'<img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png"> ' +
-										'<h5>덕덕이와 함께 떠나봐요🛫</h5>' +
-									'</div> '+
-								'</div> ' +
-						'</div> ' +
-					'</a>'
+		                  '<div class="row g-0"> ' + 
+		                   '<div class="col-md-4"> ' +
+		                     '<div class=nodata> ' +
+							   '<img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png"> ' +
+							   '<h5>덕덕이와 함께 떠나봐요🛫</h5>' +
+						     '</div> '+
+	                   	    '</div> '+
+	                  	  '</div> '+
+	                	'</div> '
 				}
 				
 				
@@ -479,5 +505,70 @@
 		}); 
 	} 
 		
+	/* 좋아요 해제 기능 */
+	function unLike(e){
+		$.ajax({
+			url : "mypage/trip/unlike?no="+e,
+			type : "get",
+			//dataType : "json",
+			success : function(result){
+				alert('좋아요가 해제되었습니다.')
+				sendReq("trip");
+			}
+		})	
+	}
+	
+	/* 리뷰 삭제 기능 */
+	function delReview(isFirst, e){
+		var confirm = window.confirm('해당 리뷰를 삭제하시겠습니까?');
+		if(confirm){
+		
+			 $.ajax({
+					url : "mypage/review/delete?no="+e,
+					type : "get",
+					success : function(result){
+						alert('리뷰가 삭제되었습니다.')
+						location.reload()
+						
+						
+						/* 
+						// 컨트롤러에게 응답 받은 데이터를 가지고 화면에 그려주는 방식이 다르므로 달리 처리함 
+					 	if(isFirst){
+					 		// model에 담긴 데이터를 삭제했을 경우(= 나의 리뷰에서 최초로 뜨는 데이터를 삭제했을 경우 )
+					 		location.reload()
+					 		 
+						} else {
+							// ajax를 통해 불러온 데이터에서 삭제했을 경우 (= 더보기를 통해 가져온 데이터를 삭제했을 경우)
+							$("#appendComment").html("");
+							sendReq('comment')
+						} */
+						
+					}, error : function(result){
+						alert('데이터 삭제에 실패하였습니다. 잠시후 다시 시도해주세요')
+					}
+				})	 
+		}
+	}
+	
+		/* 플랜 삭제 기능 */
+		function delPlan(e){
+	
+		 	var confirm = window.confirm('해당 플랜을 삭제하시겠습니까?');
+			
+			if(confirm){
+				 $.ajax({
+						url : "mypage/plan/delete?no="+e,
+						type : "get",
+						success : function(result){
+							alert('플랜이 삭제되었습니다.')
+								location.reload()
+							
+						}, error : function(result){
+							alert('데이터 삭제에 실패하였습니다. 잠시후 다시 시도해주세요')
+						}
+					})	 
+			}	 
+	 
+	}
 	
 	</script>

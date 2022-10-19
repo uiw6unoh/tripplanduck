@@ -4,6 +4,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:mm" var="now" />
 
 <jsp:include page="../common/header.jsp"/>
 
@@ -177,7 +179,7 @@
                   <div class="card-tab bg-light">
                       <div class="card-tab pt-2 px-3 pb-3">
                           <!-- Comment form-->
-                          <form class="mb-2 ">
+                          <form class="mb-2 " id="commentForm">
                             <div class="star-rating space-x-4 mx-auto float-left ">
                               <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
                               <label for="5-stars" class="star">★</label>
@@ -192,58 +194,83 @@
                             </div>
                             <button id="enrollAlert" class="btn btn-outline-warning btn-sm float-right" type="button">등록</button>
                             <p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
-                            
-                            <textarea class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
-                              <p class="mt-1 col p-0" style="font-size: 11px;">2022.09.16 01:30
-                              </p>
-                            
+
+                            <textarea id="commentsContent" class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
+                              <p class="mt-1 col p-0" style="font-size: 11px;"><c:out value="${now}" /></p>
                           </form>
-                          <!-- 댓글 1 -->
-                          <div class="d-flex mb-3">
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                              <div class="ms-3 w-100">
-                                <p style="font-weight: bold;">무게치는 이건호</p>
-                                <div class="float-left">
-                                  <div class="star-count">
-							        ★
-							        <!-- 여기에 rating 숫자 보여줘야 함 -->
-							        <div class="star-rate">5.0</div>
-							      </div>
-                                </div>
-                                <!-- loginmember == writerId 면 수정 or 삭제, 일치하지 않으면 신고버튼만 -->
-                                  <div class="float-right">
-                                    <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                    <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
-                                  </div>
-                                    <p>계란후라이 먹었어요</p>
-                              </div>
-                          </div>
                           
-                          <!-- 댓글 2 -->
-                          <div class="d-flex mb-4">
-                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
-                              <div class="ms-3 w-100">
-                                <p style="font-weight: bold;">무게치는 이건호</p>
-                                <div class="float-left">
-                                  <div class="star-count">
-							        ★
-							        <!-- 여기에 rating 숫자 보여줘야 함 -->
-							        <div class="star-rate">5.0</div>
-							      </div>
-                                </div>
-                                  <div class="float-right">
-                                    <button id="updateAlert" class="btn btn-outline-warning py-0">수정</button>
-                                    <button id="deleteAlert" class="btn btn-outline-warning py-0">삭제</button>
-                                  </div>
-                                    <p>계란후라이 먹었어요</p>
-                              </div>
-                          </div>
+                          <c:forEach var="comment" items="${comments}">
+	                          <div class="d-flex mb-3">
+	                              <div class="flex-shrink-0"><img class="rounded-circle" src="${ path }/images/common/프사.png" alt="..." style="height: 50px; width: 50px; object-fit:contain ;"></div>
+	                              <div class="ms-3 w-100">
+	                                <p style="font-weight: bold; width:100%">${comment.commentsWriterId}</p>
+	                                <span class="" style="font-size:0.5rem">${comment.commentsCreateDate}</span>                    
+	                              <div class="float-left">
+	                                  <div class="star-count">
+								        ★
+								        <!-- 여기에 rating 숫자 보여줘야 함 -->
+								        <div class="star-rate">${comment.commentsRating}.0</div>
+								      </div>
+	                                </div>
+	                                  <div class="float-right">
+	                                  
+	                                  <c:choose>
+										<c:when test="${ comment.memberNo eq member.memberNo  }">
+											<button class="btn btn-outline-warning py-0" data-toggle="modal" data-target="#staticBackdrop">수정</button>
+		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+										</c:when>
+										<c:otherwise>	
+		                                    <button id="reportAlert" class="btn btn-outline-warning py-0">신고</button>
+										</c:otherwise>
+									  </c:choose>
+	                                  </div>
+	                                    <p>${comment.commentsContent}</p>
+	                              </div>
+	                          </div>
+                          </c:forEach>
                       </div>
                   </div>
                 </section>
                 </div>
               </div>
+              
+            <!-- 수정 클릭 시 모달 -->
+			<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">리뷰 수정</h5>
+			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					 <form class="mb-2 " id="commentForm">
+                        <div class="star-rating space-x-4 mx-auto float-left ">
+                           <input type="radio" id="5-stars" name="rating" value="5" v-model="ratings"/>
+                              <label for="5-stars" class="star">★</label>
+                              <input type="radio" id="4-stars" name="rating" value="4" v-model="ratings"/>
+                              <label for="4-stars" class="star">★</label>
+                              <input type="radio" id="3-stars" name="rating" value="3" v-model="ratings"/>
+                              <label for="3-stars" class="star">★</label>
+                              <input type="radio" id="2-stars" name="rating" value="2" v-model="ratings"/>
+                              <label for="2-stars" class="star">★</label>
+                              <input type="radio" id="1-star" name="rating" value="1" v-model="ratings" />
+                              <label for="1-star" class="star">★</label>
+                         </div>
+                         <p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
+                           <textarea id="commentsContent" class="form-control shadow-none" rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
+                         <p class="mt-1 col p-0" style="font-size: 11px;"><c:out value="${now}" /></p>
+                     </form>
+				  </div>
+			      <div class="modal-footer">
+			        <button type="button" id="updateAlert" onclick="updateComment(${comment.commentsId})"  class="btn btn-outline-warning py-0">확인</button>
+			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>
+              
             </div>
           </div>
         </div>
@@ -267,34 +294,141 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
+function deleteComment(commentsId){
+    Swal.fire({
+      icon: "warning",
+      title: "댓글삭제",
+      text: `댓글을 삭제 하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonText: "삭제",
+      cancelButtonText: "취소",
+      closeOnClickOutside : false
+
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        //삭제 요청 처리
+        
+        $.ajax({
+			url : "${path}/trip/api/comment?commentsId=" + commentsId,
+			type : "DELETE",
+			success: function(data) {
+				if(data == 1){
+					swal.fire(
+			          '삭제완료!',
+			          '댓글이 삭제되었습니다',
+			          'success'
+			   		 )
+				}
+				
+				location.reload()
+			},
+			error: function(error) {
+				
+			}
+		})
+        
+      } else {
+        //취소
+      }
+    });
+  };
+  
+  function updateComment(commentsId) {
+  	let rating = $('input[name=rating]:checked').val();
+  	let comment = $("#commentsContent").val();
+  	
+	   	if(rating == null || rating == "" || comment == "" || comment == null){
+	       	Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '별점 혹은 내용을 입력해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        })
+	       	return;
+	    }
+	   	
+    Swal.fire({
+      icon: "warning",
+      title: "댓글수정",
+      text: `댓글을 수정 하시겠습니까?`,
+      showCancelButton: true,
+      confirmButtonText: "수정",
+      cancelButtonText: "취소",
+      closeOnClickOutside : false
+
+    }).then(function (result) {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        //수정 요청 처리
+        
+        let data = {
+  		'commentsRating' : rating, 
+   		'commentsContent' : comment,
+   		'commentsId' : commentsId,
+  		'destNo' : "${dest.destNo}"
+ 		  };
+        
+        $.ajax({
+			url : "${path}/trip/api/comment",
+			type : "PUT",
+			data : data,
+			dataType : "json",
+			success: function(data) {
+				swal.fire(
+		          '수정완료!',
+		          '댓글이 수정되었습니다',
+		          'success'
+	    		)
+	    		
+	    		location.reload()
+			},
+			error: function(error) {
+				
+			}
+		})
+		
+        
+      } else {
+        //취소
+      }
+    });
+  };
   // alertsweet 버튼
   $(document).ready(function () {
-    $('[id="deleteAlert"]').on("click", function () {
-      Swal.fire({
-        icon: "warning",
-        title: "댓글삭제",
-        text: `댓글을 삭제 하시겠습니까?`,
-        showCancelButton: true,
-        confirmButtonText: "삭제",
-        cancelButtonText: "취소",
-        closeOnClickOutside : false
-
-      }).then(function (result) {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          //삭제 요청 처리
-          swal.fire(
-          '삭제완료!',
-          '댓글이 삭제되었습니다',
-          'success'
-    )
-        } else {
-          //취소
-        }
-      });
-    });
+	
 
     $('[id="enrollAlert"]').on("click", function () {
+    	
+    	let member = "${member}";
+    	
+    	console.log("member :", member)
+    	if(member == "" || member == null){
+    		Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '로그인 후 이용해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        })
+	        
+	        return;
+	    }
+    	
+    	let rating = $('input[name=rating]:checked').val();
+    	let comment = $("#commentsContent").val();
+    	
+	   	if(rating == null || rating == "" || comment == "" || comment == null){
+	       	Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '별점 혹은 내용을 입력해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        })
+	       	return;
+	    }
+    	
       var form = $(this).parents('form');
       Swal.fire({
         icon: "success",
@@ -305,34 +439,31 @@
 
       }).then(function (isConfirmed) {
         //등록 요청 처리
-        document.getElementById('updateAlert').submit();
+        let data = {
+    		'commentsRating' : rating, 
+     		'commentsContent' : comment,
+    		'destNo' : "${dest.destNo}"
+   		};
+        
+        $.ajax({
+			url : "${path}/trip/api/comment",
+			type : "POST",
+			data : data,
+			dataType : "json",
+			success: function(data) {
+				location.reload()
+			},
+			error: function(error) {
+				
+			}
+		})
+		
+        // document.getElementById('updateAlert').submit();
+        
       });
     });
 
-    $('[id="updateAlert"]').on("click", function () {
-      Swal.fire({
-        icon: "warning",
-        title: "댓글수정",
-        text: `댓글을 수정 하시겠습니까?`,
-        showCancelButton: true,
-        confirmButtonText: "수정",
-        cancelButtonText: "취소",
-        closeOnClickOutside : false
-
-      }).then(function (result) {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isConfirmed) {
-          //삭제 요청 처리
-          swal.fire(
-          '수정완료!',
-          '댓글이 수정되었습니다',
-          'success'
-    )
-        } else {
-          //취소
-        }
-      });
-    });
+    
   });
 </script>
 

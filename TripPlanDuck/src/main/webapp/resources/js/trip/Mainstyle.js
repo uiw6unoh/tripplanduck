@@ -120,6 +120,8 @@ function getJson() {
 */
 
 
+
+
 function showLoading() {
 	$(".loading").css("display", "block");
 }
