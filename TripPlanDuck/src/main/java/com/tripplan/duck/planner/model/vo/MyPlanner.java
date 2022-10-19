@@ -7,6 +7,8 @@ import java.util.List;
 
 import javax.swing.ListModel;
 
+import com.tripplan.duck.member.model.vo.Member;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,11 +28,9 @@ public class MyPlanner {
 	
 	private List<Location> loca;
 	
-	private Location loc;
+	private Location loc; 
 	
-	
-	
-	
+	private String route;
 	
 	
 	

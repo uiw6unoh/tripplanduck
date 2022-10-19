@@ -63,5 +63,15 @@ public class MyPageServiceImpl implements MyPageService{
 		
 	}
 
+	@Override
+	public void deleteReview(Map<String, Object> param) {
+		mapper.deleteReview(param);
+	}
+
+	@Override
+	public void deletePlan(Map<String, Object> map) {
+		mapper.deletePlan(map);
+	}
+
 
 }

@@ -29,4 +29,8 @@ public interface MyPageMapper {
 
 	void deleteLikeTrip(Map<String, Object> param);
 
+	void deleteReview(Map<String, Object> param);
+
+	void deletePlan(Map<String, Object> map);
+
 }
