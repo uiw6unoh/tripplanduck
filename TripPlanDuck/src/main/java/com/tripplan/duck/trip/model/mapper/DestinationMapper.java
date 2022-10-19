@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.tripplan.duck.planner.model.vo.Location;
+import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
@@ -42,5 +43,13 @@ public interface DestinationMapper {
 	int isLike(DestinationLike destinationLike);
 
 	void updateDestLike(DestinationLike destinationLike);
+
+	void insertComment(Comments comments);
+
+	List<Comments> getDestinationComments(int destNo);
+
+	void updateComment(Comments comments);
+
+	void deleteComment(int commentsId);
 
 }

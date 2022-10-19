@@ -32,7 +32,7 @@
           <div class="carousel-item active">
             <img src="${ path }/images/trip/건대.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left mt-0">
-              <h4 class="">2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -40,7 +40,7 @@
           <div class="carousel-item ">
             <img src="${ path }/images/trip/야경.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left">
-              <h4 class="">2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -48,7 +48,7 @@
           <div class="carousel-item">
             <img src="${ path }/images/trip//제주도.jpg" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left">
-              <h4>2022 봄 여행지 제안</h4>
+              <h4>2022 겨울 여행지 제안</h4>
               <h1>추천할 장소 적기</h1>
               <h5><a style="color:white;" href="">자세히</a></h5>
             </div>
@@ -359,7 +359,11 @@ $(window).scroll(function() {
 					
 				},
 				error: function(error) {
-					alert("error");
+					Swal.fire({
+				        icon: "error",
+				        confirmButtonText: "확인",
+				        closeOnClickOutside : false
+				      });
 					hideSkeleton();
 					hideLoading();
 				}

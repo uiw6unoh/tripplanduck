@@ -16,8 +16,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +32,7 @@ import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;
+import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.DestinationLike;
 
 @RestController
@@ -186,5 +189,49 @@ public class TripRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/comment")
+	public Comments insertComment(HttpSession session, Comments comments) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		if(member == null)
+			throw new Exception("로그인된 사용자가 없습니다.");
+		
+		comments.setMemberNo(member.getMemberNo());
+		comments.setCommentsWriterId(member.getMemberId());
+		
+		destinationService.insertComment(comments);
+		
+		return comments;
+	}
+	
+	@PutMapping("/comment")
+	public Comments updateComment(HttpSession session, Comments comments) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		if(member == null)
+			throw new Exception("로그인된 사용자가 없습니다.");
+		
+		comments.setMemberNo(member.getMemberNo());
+		comments.setCommentsWriterId(member.getMemberId());
+		
+		destinationService.updateComment(comments);
+		
+		return comments;
+	}
 
+	@DeleteMapping("/comment")
+	public int deleteComment(HttpSession session, @RequestParam("commentsId")int commentsId) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		if(member == null)
+			throw new Exception("로그인된 사용자가 없습니다.");
+		
+		destinationService.deleteComment(commentsId);
+		
+		return 1;
+	}
 }

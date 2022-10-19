@@ -14,6 +14,8 @@ public class Comments {
 	
 	private int memberNo;
 	
+	private String memberImage;
+	
 	private String commentsWriterId;
 	
 	private String commentsContent;
