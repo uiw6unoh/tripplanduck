@@ -422,9 +422,12 @@ public class WithDuckController {
 	public ModelAndView detailWithDuck(ModelAndView model,
 									   @RequestParam(value = "withNo") int withNo,
 									   HttpServletRequest request,
-									   HttpServletResponse response) {
+									   HttpServletResponse response,
+									   HttpSession session) {
 		WithDuck withDuck = null;
 		String[] arr = null;
+		
+		Member member = (Member)session.getAttribute("loginMember");
 		
 		Cookie[] cookies = request.getCookies();
     	String boardHistory = ""; // 조회한 게시글 번호를 저장하는 변수
@@ -491,7 +494,8 @@ public class WithDuckController {
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
 		System.out.println(request.getAttribute("withDuck"));
-
+		
+		model.addObject("member", member);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
 		return model;

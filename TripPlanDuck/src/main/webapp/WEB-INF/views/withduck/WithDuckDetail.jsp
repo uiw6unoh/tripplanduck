@@ -165,17 +165,64 @@
     <button class="btn btn-outline-warning" type="button">
         목록으로
     </button>
-	
+
+    <button class="btn btn-outline-warning" type="button" data-toggle="modal" id="reportBtn" data-target="#reportBackdrop"  id="reportBtn" name="${withDuck.withNo }">
+        신고하기
+    </button>
+		
 	<c:if test="${loginMember.memberNo == withDuck.withWriterNo }">
 	    <button class="btn btn-outline-warning" type="submit">
 	        수정하기
 	    </button>
-		
 		<button class="btn btn-outline-warning" type="submit" id="deleteWithDuck">
 	        삭제하기
 	    </button>
 	</c:if>
 </div>
+<input type="hidden" id="withNo" value='${withDuck.withNo}'>
+			<div class="modal fade" id="reportBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			  <div class="modal-dialog modal-dialog-centered">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="staticBackdropLabel">신고하기</h5>
+			        <button id="closeBtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <div class="modal-body">
+					<p style="font-size:0.9rem"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+					  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+					</svg> 클릭하여 신고 이유를 선택해 주세요.</p>
+					<div class="mt-3">
+						<label class="box-radio-input"><input type="radio" name="report" value="회원비난/비하"><span>회원비난/비하</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="욕설/비속어"><span>욕설/비속어</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="예의에 어긋난 게시물/리플"><span>예의에 어긋난 게시물/리플</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="허위사실 유포"><span>허위사실 유포</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="회원기만"><span>회원기만</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="무단광고/홍보"><span>무단광고/홍보</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="사적목적 이용"><span>사적목적 이용</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="외설적 표현물"><span>외설적 표현물</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="불법행위 관련/소개"><span>불법행위 관련/소개</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="타인권리 침해"><span>타인권리 침해</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="종교 비난"><span>종교 비난</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="선교/포교"><span>선교/포교</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="특정집단 차별"><span>특정집단 차별</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="불쾌감 조성"><span>불쾌감 조성</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="게시판 용도위반 or 부적절"><span>게시판 용도위반 or 부적절</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="이용방해 행위"><span>이용방해 행위</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="질문/요청글"><span>질문/요청글</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="기타 사유"><span>기타 사유</span></label>
+					</div>
+				  </div>
+			      <div class="modal-footer">
+			        <button type="button" id="reportAlert" onclick="reportWithduck()" class="btn btn-outline-warning py-0">신고</button>
+			        <button type="button" id="reportCancel" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			      </div>
+			    </div>
+			  </div>
+			</div>  
+
 </form>
 
 <!-- Bootstrap JS -->
@@ -193,6 +240,9 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
+
+<!-- sweetalert2 alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(function() {
 	var cancel = $('#deleteWithDuck');
@@ -214,6 +264,87 @@ $(function() {
 		formElement.attr("method", "get");
 		formElement.submit();
 	})
+});
+
+$('[id="reportBtn"]').on("click", function () {
+	let withNo = $("#reportBtn").attr('name')
+    $("#withNo").val(withNo)
+    console.log("withNo: ", withNo);
+    let member = "${member}";
+    console.log("member :", member)
+    	
+   	if(member == "" || member == null){
+    	Swal.fire({
+	        icon: "error",
+	        title: `실패!`,
+	        text: '로그인 후 이용해주세요.',
+	        confirmButtonText: "확인",
+	        closeOnClickOutside : false
+	    }).then(function (isConfirmed) {
+		  	  window.location.href="${path}/member/login";
+	    });
+	        
+	return;
+}
+});
+	
+function reportWithduck() {
+let reportType = $('input[name=report]:checked').val();
+let withNo= $("#withNo").val();
+			
+console.log("withNo: ", withNo)
+	    	
+if(reportType == null || reportType == "") {
+		Swal.fire({
+		    icon: "error",
+			title: `실패!`,
+			text: '신고 이유를 체크해주세요.',
+			confirmButtonText: "확인",
+			closeOnClickOutside : false
+		})
+		        
+			return;
+	}
+    	
+var form = $(this).parents('form');
+Swal.fire({
+	icon: "success",
+	title: "신고완료!",
+	text: `신고가 접수되었습니다.`,
+	confirmButtonText: "확인",
+	closeOnClickOutside : false
+
+}).then(function (isConfirmed) {
+// 신고 요청 처리
+let data = {
+	'memberNo' : ${ member.memberNo },
+	'reportType' : reportType,
+	'reportNoType' : withNo
+};
+	        
+console.log("data :", data)
+	        
+$.ajax({
+	url : "${path}/report/withDuck",
+	type : "POST",
+	data		:  JSON.stringify(data), 
+	contentType : "application/json",
+	dataType : "json",
+	success: function(data) {
+	window.location.href="${path }/withduck/detail?withNo=${withDuck.withNo}";
+},
+	error: function(error) {
+}
+	})			
+});
+};
+    	
+$('[id="reportCancel"]').on("click", function () {
+	window.location.href="${path }/withduck/detail?withNo=${withDuck.withNo}";
+});
+    	
+$('[id="closeBtn"]').on("click", function () {
+window.location.href="${path }/withduck/detail?withNo=${withDuck.withNo}";
 });
 
 </script>
