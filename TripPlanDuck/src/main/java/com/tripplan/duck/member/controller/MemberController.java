@@ -223,7 +223,7 @@ public class MemberController {
 		if (result > 0) {
 		emailService.findMemberPasswordEmail(response, email, member);
 			model.addObject("msg", "임시비밀번호가 전송되었습니다.");
-			model.addObject("location", "/member/findMemberPassword");
+			model.addObject("location", "/member/login");
 		}
 		else {
 			model.addObject("msg", "임시비밀번호 발급에 실패하였습니다.");

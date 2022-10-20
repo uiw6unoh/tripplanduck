@@ -158,7 +158,7 @@
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
 <input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
-    <button class="btn btn-outline-warning" type="button">
+    <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
         동행참여
     </button>
 
@@ -199,9 +199,21 @@ $(function() {
 	
 	cancel.click(function() {
 		const formElement = $('#formobj');
-		formElement.attr("action", "/withduck/delete");
+		formElement.attr("action", "${path}/withduck/delete");
 		formElement.attr("method", "get");
 		formElement.submit();
 	})
 });
+
+$(function() {
+	var cancel = $('#chatWithDuck');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "${path}/chatgo");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+
 </script>
