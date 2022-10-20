@@ -180,7 +180,9 @@
 	</insert>
 	
 	<select id="getDestinationComments" parameterType="int" resultMap="commentsResultMap">
-		SELECT * FROM DESTINATION_COMMENTS WHERE DEST_NO = #{destNo}
+		SELECT * FROM DESTINATION_COMMENTS
+		WHERE DEST_NO = #{destNo}
+		ORDER BY COMMENTS_ID
 	</select>
 	
 	<update id="updateComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
