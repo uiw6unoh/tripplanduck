@@ -14,13 +14,17 @@ import com.tripplan.duck.trip.model.vo.Destination;
 @Mapper
 public interface PlannerMapper {
 	
+
+	List<Destination> selectDest(int locationSelect);
+
 	List<Location> locationInsert();
-
-	List<Destination> selectDest();
-
-	List<Destination> addDest();
 	
-	public int detailInsert(HashMap<String,String> hm);
+	List<Destination> addDest();
 
+	public int detailInsert(HashMap<String,String> hm);
+	
 	public void insertPlanner(MyPlanner myPlanner);
+
+	Location location(int locationSelect);
+
 }
