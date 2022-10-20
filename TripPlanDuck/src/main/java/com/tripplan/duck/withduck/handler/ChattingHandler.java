@@ -39,9 +39,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		log.info("#ChattingHandler, handleMessage");
 		System.out.println("받은 session 정보 : " + session.getAttributes());
-		Map<String, Object> map = session.getAttributes();
-		String userId = (String)map.get("memberId");
-		System.out.println("map : " + map.get("memberId"));
+		System.out.println("입장 샷 : " + message);
 		for(WebSocketSession s : sessionList) {
 			if(session.getId() == s.getId()) {
 				continue;

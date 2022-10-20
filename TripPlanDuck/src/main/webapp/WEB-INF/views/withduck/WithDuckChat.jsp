@@ -190,9 +190,9 @@ $("#button-send").on("click", function(e) {
 		str += '<span>' + '${loginMember.memberNickname}' + '</span>';
 		str += '<div class="textbox">' + msg + '</div>'
 		str += '</div>';
-		
+		nickname = '${loginMember.memberNickname}';
 	  $(".wrap").append(str);
-	  socket.send(msg);
+	  socket.send(msg + ':' + nickname);
 });
 connect();
 });
@@ -222,12 +222,8 @@ function connect() {
 		var length = "memberNickname=".length;
 		
 		var arr = data.split(":");
-		startIndex = arr[2].indexOf('memberNickname')+length;
-		endIndex = arr[2].indexOf(', memberEmail');
-		nickLength = arr[2].substr(startIndex)
-		nickNameLength = endIndex-startIndex;
-		
-		nickName = arr[2].substr(startIndex,nickNameLength);
+
+		nickName = arr[2];
 		console.log(data);
 		console.log('nickName : ' + nickName);
 		for(var i=0; i<arr.length; i++){
@@ -250,9 +246,7 @@ function connect() {
 			str += '</div>';
 			} else {
 			    console.log('Info: connection opened.');
-			    var str = '<div class="chat_entry" id="msgArea">';
-				str += nickName + "님이 입장하셨습니다.";
-				str += '</div>';
+			    var str = arr[1];
 			}
 			$(".wrap").append(str);
 

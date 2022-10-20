@@ -495,7 +495,7 @@ public class WithDuckController {
 		System.out.println("상세페이지 : " + withDuck);
 		System.out.println(request.getAttribute("withDuck"));
 		
-		model.addObject("member", member);
+		session.setAttribute("member", member);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
 		return model;

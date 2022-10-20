@@ -26,11 +26,11 @@ public class ChatController {
 	
 	@GetMapping("/chatgo")
 	public ModelAndView chatGo(ModelAndView model, HttpSession session, @ModelAttribute WithDuck withDuck) {
-		Member loginMember = (Member)session.getAttribute("loginMember");
+		Member loginMember = (Member)session.getAttribute("member");
 		System.out.println("withduck : " + withDuck);
 		System.out.println("loginMember : " + loginMember);
 		int result = 0;
-		
+		System.out.println("session member : " + session.getAttribute("member"));
 		if(loginMember == null) {
 			model.addObject("msg", "로그인 후 이용이 가능합니다.");
 			model.addObject("location", "/member/login");
