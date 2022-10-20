@@ -4,6 +4,15 @@
 	var lines = [];
 	var names = [];
 	
+	var drawingMapContainer = document.getElementById('map'),
+    drawingMap = { 
+        center: new kakao.maps.LatLng(37.54358784304751, 126.98080883930932), // 지도의 중심좌표
+        level: 9 // 지도의 확대 레벨
+    };
+    
+    var drawingMap = new kakao.maps.Map(drawingMapContainer, drawingMap);
+    
+     
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 
 	mapOption = {
