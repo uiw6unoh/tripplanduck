@@ -30,177 +30,209 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @RequestMapping("/mypage")
 public class MyPageController {
-	
+
 	@Autowired
 	private MyPageService myPageService;
-	
+
 	// 마이페이지 메인
 	@GetMapping("")
-	public String Mypage(
-			HttpSession session,
-			@RequestParam(required = false, defaultValue = "1") int offset, 
-			@RequestParam(defaultValue = "") String select, 
-			Model model) throws Exception {
-		
-		//세션에 저장된 멤버 데이터 
-		Member member = (Member)session.getAttribute("loginMember");
+	public String Mypage(HttpSession session, @RequestParam(required = false, defaultValue = "1") int offset,
+			@RequestParam(defaultValue = "") String select, Model model) throws Exception {
+
+		// 세션에 저장된 멤버 데이터
+		Member member = (Member) session.getAttribute("loginMember");
 		model.addAttribute("member", member);
 		// 로그인 데이터로 갈아끼우기
-		//Member member = new Member(2, "yeoul", "1234", "김여울", "여리", "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20); 
-		//model.addAttribute("member", member);
-		
+		// Member member = new Member(2, "yeoul", "1234", "김여울", "여리",
+		// "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20);
+		// model.addAttribute("member", member);
+
 		// System.out.println("logined memger : " + member);
-		
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("memberNo", member.getMemberNo());
 		param.put("offset", offset);
-		
+
 		// select가 빈 문자열이라면 모두 조회, 지정하였을 경우에는 그 값을 조회
 		// 만약 빈문자열이라면 하단 세개의 분기문이 모두 실행됨
 		boolean isEmpty = true;
-		if((!select.equals("trip") && !select.equals("comment"))) {
-			// 아무 값도 나오지 않을 경우 .get(index) 메서드를 이용하면 NullPointerExcpetion 발생되므로 
+		if ((!select.equals("trip") && !select.equals("comment"))) {
+			// 아무 값도 나오지 않을 경우 .get(index) 메서드를 이용하면 NullPointerExcpetion 발생되므로
 			// 데이터가 있을 경우에만 .get(index) 메서드 이용하도록 함
-			isEmpty = myPageService.selectMyPlannerByMNo(param).size() == 0 ;
+			isEmpty = myPageService.selectMyPlannerByMNo(param).size() == 0;
 			MyPlanner myPlanner = !isEmpty ? myPageService.selectMyPlannerByMNo(param).get(0) : null;
 			model.addAttribute("myPlannerFirst", myPlanner);
 			// 비어있는지 여부를 체크할 값, jsp에서 select한 페이지의 데이터가 없을때 isEmpty == true
 			model.addAttribute("planIsEmpty", isEmpty);
 		}
-		
-		if((!select.equals("planner") && !select.equals("comment"))) {
+
+		if ((!select.equals("planner") && !select.equals("comment"))) {
 			isEmpty = myPageService.selectTripByMNo(param).size() == 0;
-			Destination trip =  !isEmpty  ? myPageService.selectTripByMNo(param).get(0) : null;
+			Destination trip = !isEmpty ? myPageService.selectTripByMNo(param).get(0) : null;
 			model.addAttribute("tripFirst", trip);
 			model.addAttribute("tripIsEmpty", isEmpty);
 		}
 
-		if((!select.equals("trip") && !select.equals("planner"))) {
+		if ((!select.equals("trip") && !select.equals("planner"))) {
 			isEmpty = myPageService.selectCommentsByMNo(param).size() == 0;
 			Comments comments = !isEmpty ? myPageService.selectCommentsByMNo(param).get(0) : null;
-			model.addAttribute("commentFirst", comments);	
+			model.addAttribute("commentFirst", comments);
 			model.addAttribute("commentIsEmpty", isEmpty);
 		}
 
-		// 여행카드의 지역 옵션 리스트 
+		// 여행카드의 지역 옵션 리스트
 		model.addAttribute("options", myPageService.getOptions());
-		
+
 		return "mypage/MypageMain";
 	}
-	
-	
+
 	// 더보기 ajax
 	@GetMapping("/ajax")
 	@ResponseBody
-	public Map<String,Object> mypageByAjax(
-			HttpSession session,
-			@RequestParam(required = false, defaultValue = "1") int offset, 
-			@RequestParam(defaultValue = "planner") String select, 
-			@RequestParam(required = false, defaultValue = "999") int locationId , 
-			Model model) throws Exception {
-		
-		//세션에 저장된 멤버 데이터 
-		Member member = (Member)session.getAttribute("loginMember");
+	public Map<String, Object> mypageByAjax(HttpSession session,
+			@RequestParam(required = false, defaultValue = "1") int offset,
+			@RequestParam(defaultValue = "planner") String select,
+			@RequestParam(required = false, defaultValue = "999") int locationId, Model model) throws Exception {
+
+		// 세션에 저장된 멤버 데이터
+		Member member = (Member) session.getAttribute("loginMember");
 		model.addAttribute("member", member);
-		
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		Map<String, Object> result = new HashMap<String, Object>();
-			
+
 		int start = 0;
 		int end = 0;
-		
-		// 여행카드의 경우 옵션 값에 따라 데이터를 바꿔줘야하므로 
+
+		// 여행카드의 경우 옵션 값에 따라 데이터를 바꿔줘야하므로
 		// 더보기 처음 눌렀을 경우 세개, 더보기 n번 누를경우 *n 만큼의 데이터 반환
-		if(select.equals("trip")) {
+		if (select.equals("trip")) {
 			start = 0;
-			end = offset * 3; 
-		}else {
-			// 이미 마이페이지에서 보여준 데이터가 있으므로 
+			end = offset * 3;
+		} else {
+			// 이미 마이페이지에서 보여준 데이터가 있으므로
 			// 더보기 처음 클릭시 데이터 두개 반환
 			// 그 이후 클릭시 세개씩 반환됨
-			start = (offset == 1) ?  1 : ((offset-1)*3);
-			end = (offset == 1) ? 2 : 3; 
+			start = (offset == 1) ? 1 : ((offset - 1) * 3);
+			end = (offset == 1) ? 2 : 3;
 		}
-		
+
 		param.put("offset", start);
 		param.put("end", end);
-		param.put("locationId", locationId); //지역 옵션 아이디 
+		param.put("locationId", locationId); // 지역 옵션 아이디
 		param.put("memberNo", member.getMemberNo());
-		
-		System.out.println("param : "+ param);
-		
+
+		System.out.println("param : " + param);
+
 		result.put("result", false);
-		
-		if(select.equals("planner")) {
+
+		if (select.equals("planner")) {
 			List<MyPlanner> myPlannerList = myPageService.selectMyPlannerByMNoNewPaging(param);
 			model.addAttribute("myPlannerList", myPlannerList);
-			System.out.println("MyPlanner "+ myPlannerList.get(0));
 			result.put("data", myPlannerList);
 			result.put("result", true);
-		}else if(select.equals("trip")) {
+		} else if (select.equals("trip")) {
 			List<Destination> tripList = myPageService.selectTripByMNoNewPaging(param);
 			model.addAttribute("tripList", tripList);
-			System.out.println("tripList "+ tripList.get(0));
 			result.put("data", tripList);
 			result.put("result", true);
-		}else if(select.equals("comment")) {
+		} else if (select.equals("comment")) {
 			List<Comments> commentsList = myPageService.selectCommentsByMNoPaging(param);
 			model.addAttribute("commentsList", commentsList);
 			result.put("data", commentsList);
 			result.put("result", true);
 		}
-		
+
 		System.out.println("result :" + result);
-		
+
 		return result;
 	}
-	
-	// 좋아요 해제 
+
+	// 좋아요 해제
 	@GetMapping("/trip/unlike")
 	@ResponseBody
 	public String unLikeTrip(HttpSession session, @RequestParam int no) {
-	
+
 		try {
-			
-			Member member = (Member)session.getAttribute("loginMember");
+
+			Member member = (Member) session.getAttribute("loginMember");
 			Map<String, Object> map = new HashMap<>();
 			map.put("mno", member.getMemberNo());
 			map.put("no", no);
 			myPageService.unLikeTrip(map);
-		}catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return "failed";
 		}
-		
+
 		return "success";
 	}
-	
-	
+
+	// 리뷰 삭제
+	@GetMapping("/review/delete")
+	@ResponseBody
+	public String deleteReview(HttpSession session, @RequestParam int no) {
+
+		try {
+
+			Member member = (Member) session.getAttribute("loginMember");
+			Map<String, Object> map = new HashMap<>();
+			map.put("mno", member.getMemberNo());
+			map.put("no", no);
+			myPageService.deleteReview(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "failed";
+		}
+
+		return "success";
+	}
+
+	// 내 플랜 삭제
+	@GetMapping("/plan/delete")
+	@ResponseBody
+	public String deletePlan(HttpSession session, @RequestParam int no) {
+
+		try {
+
+			Member member = (Member) session.getAttribute("loginMember");
+			Map<String, Object> map = new HashMap<>();
+			map.put("mno", member.getMemberNo());
+			map.put("no", no);
+			myPageService.deletePlan(map);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "failed";
+		}
+
+		return "success";
+	}
+
 	// 좋아요 한 여행지
 //	@GetMapping("/liketrip")
 //	public String LikeTrip() throws Exception {
 //		
 //		return "mypage/MyPageLiketrip";
 //	}
-	
+
 	// 작성한 리뷰
 //	@GetMapping("/comment")
 //	public String Comment() throws Exception {
 //		
 //		return "mypage/MyPageComment";
 //	}
-	
+
 	// 회원 정보 수정
 	@GetMapping("/updateform")
 	public String UpdateForm() throws Exception {
-		
+
 		return "mypage/UpdateForm";
 	}
-	
+
 	// 회원 탈퇴
 	@GetMapping("/dropout")
 	public String DropOut() throws Exception {
-		
+
 		return "mypage/DropOut";
 	}
 }

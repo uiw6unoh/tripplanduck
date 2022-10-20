@@ -1,6 +1,9 @@
 package com.tripplan.duck.member.model.service;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.tripplan.duck.member.model.vo.Member;
+
 
 public interface MemberService {
 	Member findMemberById(String memberId);
@@ -15,6 +18,6 @@ public interface MemberService {
 
 	Member findMemberByNickname(String memberNickname);
 
-
+	String findMemberId(HttpServletResponse response, String memberEmail) throws Exception;
 
 }

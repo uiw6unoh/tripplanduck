@@ -12,6 +12,7 @@ import com.tripplan.duck.admin.model.service.AdminService;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -180,6 +181,71 @@ public class AdminController {
     	
     }
     
+    @GetMapping("/admin/memberInfo")
+    public ModelAndView memberInfo(ModelAndView model, @RequestParam(value="memberNo") int memberNo) {
+    	
+    	Member member = null;
+    	
+    	member = service.findMemberByNo(memberNo);
+    	
+    	model.addObject("member", member);
+    	model.setViewName("/admin/memberInfo");
+    	
+    	return model;
 
+    }
+    
+    @GetMapping("/admin/memberChange")
+    public ModelAndView memberChange(ModelAndView model, @RequestParam(value="memberNo") int memberNo) {
+    	
+    	int result = 0;
+    	
+    	result = service.memberStatusChange(memberNo);
+    	
+    	if(result > 0) {
+    		model.addObject("msg", "비회원 전환이 정상적으로 되었습니다.");
+    		model.addObject("location", "/admin/member");
+    	}else {
+    		model.addObject("msg", "비회원 전환에 실패하였습니다.");
+    		model.addObject("location", "/admin/memberInfo?memberNo");
+    	}
+    	
+    	model.setViewName("member/msg");
+    	
+    	return model;
+    }
+    
+    @GetMapping("/admin/withDuckInfo")
+    public ModelAndView withDuckInfo(ModelAndView model, @RequestParam(value="withDuckNo") int withDuckNo) {
+    	
+    	WithDuck withDuck = null;
+    	
+    	withDuck = service.findWithDuckByNo(withDuckNo);
+    	
+    	model.addObject("withDuck", withDuck);
+    	model.setViewName("/admin/withDuckInfo");
+    	
+    	return model;
+    }
+    
+    @GetMapping("/admin/withDuckDelte")
+    public ModelAndView withDuckDelte(ModelAndView model, @RequestParam(value="withDuckNo") int withDuckNo) {
+    	
+    	int result = 0;
+    	
+    	result = service.withDuckDelte(withDuckNo);
+    	
+    	if(result > 0) {
+    		model.addObject("msg", "위드덕이 정상적으로 삭제 되었습니다.");
+    		model.addObject("location", "/admin/withDuck");
+    	}else {
+    		model.addObject("msg", "위드덕 삭제에 실패하였습니다.");
+    		model.addObject("location", "/admin/withDuckInfo?withDuckNo");
+    	}
+    	
+    	model.setViewName("member/msg");
+    	
+    	return model;
+    }
     
 }

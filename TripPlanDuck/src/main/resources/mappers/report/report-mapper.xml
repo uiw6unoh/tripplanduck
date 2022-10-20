@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tripplan.duck.trip.model.mapper.ReportMapper">
+
+	<resultMap type="Report" id="ReportResultMap">
+		<id property="reportId" column="REPORT_ID" />
+		<result property="reportCategory" column="REPORT_CATEGORY" />
+		<result property="reportMemberNo" column="REPORT_M_NO" />
+		<result property="reportCreateDate" column="REOIRT_CREATEDATE" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="reportType" column="REPORT_TYPE" />
+		<result property="reportNoType" column="REPORT_NO_TYPE" />
+		<result property="memberNo" column="M_NO" />
+	</resultMap>
+	
+	<select id="selectCommentReport"  parameterType="int" resultMap="ReportResultMap">
+		SELECT * FROM REPORT WHERE COMMENTS_ID = #{commentsId}
+	</select >
+	
+	<insert id="insertCommentReport" parameterType="Report"
+			useGeneratedKeys="true" keyColumn="REPORT_ID" keyProperty="reportId"> 
+		INSERT INTO REPORT (
+			REPORT_ID,
+			REPORT_CATEGORY,
+			REPORT_M_NO,
+			REOIRT_CREATEDATE,
+			REPORT_COUNT,
+			REPORT_TYPE,
+			REPORT_NO_TYPE,
+			M_NO
+		) VALUES(
+			SEQ_REPORT_ID.NEXTVAL,
+			'REVIEW',
+			#{reportMemberNo},
+			TO_DATE(#{reportCreateDate}, 'YYYY-MM-DD HH24:MI'),
+			'1',
+			#{reportType},
+			'COMMENTS_ID',
+			#{memberNo}
+		)	
+	</insert>
+	
+	<update id="updateReportCount" parameterType="int">
+        UPDATE REPORT SET
+        REPORT_COUNT = NVL(REPORT_COUNT, 0) + 1
+        WHERE REPORT_ID = #{REPORT_ID}
+    </update>
+</mapper>

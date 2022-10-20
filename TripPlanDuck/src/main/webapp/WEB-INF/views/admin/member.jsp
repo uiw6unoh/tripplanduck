@@ -73,8 +73,8 @@
 		                    <td style="text-align: center;">${list.memberType}</td>
 		                    <td style="text-align: center;">${list.memberStatus}</td>
 		                    <td>
-	                        <button type="button" id="btnDelete" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-	                            계정탈퇴
+	                        <button type="button" onclick="location.href='${ path }/admin/memberInfo?memberNo=${ list.memberNo }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                            회원정보
 	                        </button>
 		                    </td>
 		                </tr>
@@ -133,15 +133,6 @@
     
 <!-- Bootstrap JS -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
-<script>
-	$(document).ready(() => {
-		$("#btnDelete").on("click", () => {
-			if(confirm("정말로 회원을 탈퇴 시키겠습니까?")) {
-				location.replace("${ path }/admin/member");
-			}
-		});
-	});
-</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>

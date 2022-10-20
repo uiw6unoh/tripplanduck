@@ -45,8 +45,8 @@
           </label>
         </div>
         <div class="lost-id-password mb-3">
-            <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">아이디찾기</button>
-            <button type="button" class="btn-outline-warning btn-sm" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">비밀번호찾기</button>
+            <button type="button" class="btn-outline-warning btn-sm" id="findId" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">아이디찾기</button>
+            <button type="button" class="btn-outline-warning btn-sm" id="findPassword" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">비밀번호찾기</button>
         </div>
         <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" name="login" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
         <button class="w-100 btn-outline-warning btn-lg mb-3" id="signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
@@ -78,7 +78,19 @@
 			e.preventDefault();
 			location.href = '${path}/member/signup';
 		});
+		
+		$('#findId').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/FindId';
+		});
+		
+		$('#findPassword').click(function (e) {
+			e.preventDefault();
+			location.href = '${path}/member/FindPassword';
+		});
 	});
+	
+
 	
 	// 아이디 저장
 	$(function() {

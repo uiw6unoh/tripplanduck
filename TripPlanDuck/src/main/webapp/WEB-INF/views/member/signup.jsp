@@ -260,13 +260,13 @@
    
    // 이메일 인증
    $('#emailCheck').click(function() {
-		const eamil = $('#memberEmail').val() // 이메일 주소값 얻어오기
-		console.log('이메일 : ' + eamil); // 이메일 오는지 확인
+		const email = $('#memberEmail').val() // 이메일 주소값 얻어오기
+		console.log('이메일 : ' + email); // 이메일 오는지 확인
 		const checkInput = $('#memberEmailNumber') // 인증번호 입력하는곳 
 		
 		$.ajax({
 			type : 'get',
-			url : '<c:url value ="/member/emailCheck?email="/>'+eamil, // GET방식이라 Url 뒤에 email을 붙힐수있다.
+			url : '<c:url value ="/member/emailCheck?email="/>'+email, // GET방식이라 Url 뒤에 email을 붙힐수있다.
 			success : function (data) {
 				console.log("data : " +  data);
 				checkInput.attr('disabled',false);
