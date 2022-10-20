@@ -4,8 +4,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tripplan.duck.member.model.mapper.MemberMapper;
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.mypage.model.mapper.MyPageMapper;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.planner.model.vo.MyPlanner;
@@ -17,6 +20,12 @@ public class MyPageServiceImpl implements MyPageService{
 
 	@Autowired
 	private MyPageMapper mapper;
+	
+	@Autowired
+	private MemberMapper memberMapper;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Override
 	public List<MyPlanner> selectMyPlannerByMNo(Map<String, Object> param) {
@@ -73,5 +82,19 @@ public class MyPageServiceImpl implements MyPageService{
 		mapper.deletePlan(map);
 	}
 
+	// parameter Member
+	//	id			: 세션에 저장되어있던 loginMember의 id값
+	// 	password	: 사용자가 입력한 비밀번호 재확인 값 
+	@Override
+	public boolean confirmPassword(Member pwInputMember) {
+		
+		Member member = memberMapper.selectMemberById(pwInputMember.getMemberId());
+		
+		// 매번 랜덤한 솔트값을 가지고 암호화를 하기 때문에 매번 다른 값으로 암호화 된다.
+		System.out.println("encode() : " + passwordEncoder.encode(pwInputMember.getMemberPassword())); 
+		
+		// matches() 메소드를 사용하여 내부적으로 복호화해서 나온 결과값에 솔트값을 뗀 나머지 값과 원문을 비교
+		return member != null && passwordEncoder.matches(pwInputMember.getMemberPassword(), member.getMemberPassword());
+	}
 
 }

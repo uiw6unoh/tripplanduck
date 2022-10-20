@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
@@ -36,16 +37,14 @@ public class MyPageController {
 
 	// 마이페이지 메인
 	@GetMapping("")
-	public String Mypage(HttpSession session, @RequestParam(required = false, defaultValue = "1") int offset,
+	public String Mypage(
+			HttpSession session, 
+			@RequestParam(required = false, defaultValue = "1") int offset,
 			@RequestParam(defaultValue = "") String select, Model model) throws Exception {
 
 		// 세션에 저장된 멤버 데이터
 		Member member = (Member) session.getAttribute("loginMember");
 		model.addAttribute("member", member);
-		// 로그인 데이터로 갈아끼우기
-		// Member member = new Member(2, "yeoul", "1234", "김여울", "여리",
-		// "yeoul940813@gmail.com", 'M', '0', 'Y', 'F', 20);
-		// model.addAttribute("member", member);
 
 		// System.out.println("logined memger : " + member);
 
@@ -207,20 +206,24 @@ public class MyPageController {
 
 		return "success";
 	}
-
-	// 좋아요 한 여행지
-//	@GetMapping("/liketrip")
-//	public String LikeTrip() throws Exception {
-//		
-//		return "mypage/MyPageLiketrip";
-//	}
-
-	// 작성한 리뷰
-//	@GetMapping("/comment")
-//	public String Comment() throws Exception {
-//		
-//		return "mypage/MyPageComment";
-//	}
+	
+	// 마이페이지 - 회원정보수정 전 비밀번호 확인
+	@PostMapping("/confirm/password")
+	@ResponseBody
+    public String confirmPassword(HttpSession session, 
+    		@RequestParam("password") String inputPassword) {
+    	
+		Member member = (Member) session.getAttribute("loginMember");
+		member.setMemberPassword(inputPassword); 
+		//검증을 위해 인자를 하나만 받기 위해 멤버 객체로 합쳐보냄
+    	boolean isCorrect = myPageService.confirmPassword(member);
+    	
+    	if(isCorrect) {
+    		return "success";
+    	} else {
+    		return "failed";
+    	}
+	}    	
 
 	// 회원 정보 수정
 	@GetMapping("/updateform")

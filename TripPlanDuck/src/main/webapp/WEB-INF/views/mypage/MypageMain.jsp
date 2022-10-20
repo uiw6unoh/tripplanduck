@@ -87,13 +87,7 @@
 												<h5>${plan.getLoc().getLocation()}</h5>
 
 											</div>
-										</div>
-
-										<%-- 	<div class="info-container-top">
-										<p class="card-text title">작성인</p>
-										<p class="card-text text-content">${plan.member.getMNo()}</p>
-									</div> --%>
-									
+										</div>									
 										<div class="info-container-top">
 											<p class="card-text title">코스</p>
 											<p class="card-text text-content">${plan.getRoute()}</p>
@@ -140,7 +134,7 @@
 					 <option value="${options.locationId}">${options.location}</option>
 							</c:forEach>  
 							<option value="999" selected>전체</option>  
-							<option value="0">여행지 선택</option>
+							<!-- <option value="0">여행지 선택</option> -->
 						</select>
 					</div>
 					<!-- 여행지 카드 -->
@@ -218,8 +212,8 @@
 									</div>
 									<p class="card-text">${comments.getCommentsContent()}</p>
 									<p class="card-text">
-										<small class="text-muted">${comments.getCommentsCreateDateSt()}(수정일
-											: ${comments.getCommentsUpdateDateSt()})</small>
+										<small class="text-muted">${comments.getCommentsCreateDate()}(수정일
+											: ${comments.getCommentsUpdateDate()})</small>
 									</p>
 									<div class="card-btns">
 										<button type="button" class="btn btn-warning"
@@ -262,19 +256,21 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="text" class="inputPwd" placeholder="비밀번호 입력">
+							<input type="password" class="inputPwd" placeholder="비밀번호 입력">
 
 						</div>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary"
-								data-dismiss="modal">취소</button>
-							<button type="button" class="btn btn-outline-warning"
-								onclick="location.href='UpdateForm.html'">확인</button>
+							<div id="modal-msg-wrap"></div>
+							<div id="modal-btn-wrap">
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">취소</button>
+								<button type="button" class="btn btn-outline-warning"
+									onclick="confirmPW()">확인</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 
 		<jsp:include page="../common/footer.jsp" />
@@ -388,10 +384,6 @@
 			                            '<h5>'+ data.loc.location+'</h5> ' +
 			                          '</div> ' +
 			                        '</div> ' +
-			                       /*  '<div class="info-container-top"> ' +
-			                          '<p class="card-text title">작성인</p> ' +
-			                          '<p class="card-text text-content">' + data.member +'</p> ' +
-			                        '</div> ' + */
 			                        '<div class="info-container-top"> ' +
 			                         '<p class="card-text title">코스</p> ' +
 			                          '<p class="card-text text-content"> '+ data.route +' </p> ' +
@@ -458,7 +450,7 @@
 			                  '</div> '+
 			                  '<p class="card-text">'+data.commentsContent+'</p> '+
 			                  
-			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDateSt+ '(수정일 : '+data.commentsUpdateDateSt +'  ) </small></p> '+
+			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDate+ '(수정일 : '+data.commentsUpdateDate +'  ) </small></p> '+
 			                  '<div class="card-btns"> '+
 			                    '<button type="button" class="btn btn-warning" onclick="">수정</button> '+
 			                    '<button type="button" class="btn btn-secondary" onclick="delReview(false, '+data.commentsId+')">삭제</button> '+
@@ -473,7 +465,7 @@
 				// 여행의 경우에만 옵션 값이 있으며
 				// 지역 옵션 값에 따라 카드 내 데이터가 바뀌는 형식이므로 
 				// 여행 데이터가 없을 경우
-				// 다른 카드와는 달리 카드 내에 '데이터 없음' 보여줌 
+				// 다른 카드와는 달리 카드 내에 데이터가 없음을 보여줌 
 				if(select == 'trip' && result.data.length == 0){
 					appendData =   
 						'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
@@ -530,7 +522,9 @@
 						alert('리뷰가 삭제되었습니다.')
 						location.reload()
 						
-						
+						// ajax를 통해 가져온 데이터 삭제 시 다시 sendReq(ajax)를 통해 데이터를 리로드 시켜주려했으나 
+						// 더보기를 누른 횟수만큼 offset을 설정해주는 기능때문에 
+						// 가져오고자하는 데이터의 offset보다 높은 숫자로 요청 감
 						/* 
 						// 컨트롤러에게 응답 받은 데이터를 가지고 화면에 그려주는 방식이 다르므로 달리 처리함 
 					 	if(isFirst){
@@ -569,6 +563,36 @@
 					})	 
 			}	 
 	 
+			
 	}
 	
+	/* 비밀번호 확인 모달 */
+	function confirmPW(){
+		var pw = $('.inputPwd').val();
+		var data ={
+				password : pw
+			}
+		
+		$.ajax({
+				url : "mypage/confirm/password",
+				dataType : "text",
+				data : data,
+				type : "post",
+				success : function(result){
+					console.log(result)
+					if(result === 'failed'){
+						var appendmsg = '<span class="error-msg">비밀번호가 일치하지 않습니다</span>';
+						$('#modal-msg-wrap').html("")
+						$('#modal-msg-wrap').append(appendmsg)
+					}else {
+						location.href = '${path}/mypage/updateform';
+					}
+					
+					
+				}, error : function(result){
+					alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
+				}
+			})	
+	}	
+		
 	</script>

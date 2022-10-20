@@ -224,3 +224,14 @@ font-size: 1.4rem;
     height: 40px;
     border-radius: 5px;
 }
+
+.modal-footer {
+	display: flex;
+	justify-content: space-between;
+}
+
+/* 비밀번호 모달의 오류 메세지  */
+.error-msg {
+	color : red
+}
+

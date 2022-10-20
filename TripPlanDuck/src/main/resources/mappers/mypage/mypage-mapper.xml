@@ -37,8 +37,6 @@
 		<result property="commentsRating" column="COMMENTS_RATING" />
 		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
 		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
-		<result property="commentsCreateDateSt" column="COMMENTS_CREATEDATE_ST" />
-		<result property="commentsUpdateDateSt" column="COMMENTS_UPDATEDATE_ST" />
 		<result property="destNo" column="DEST_NO" />
 		<result property="destSubject" column="DEST_SUBJECT" />
 		<result property="destCategory" column="DEST_CATEGORY" />
@@ -140,8 +138,6 @@
 				dc.COMMENTS_UPDATEDATE,
 				dc.DEST_NO,
 				d.DEST_CATEGORY,
-				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
-				TO_CHAR(dc.COMMENTS_UPDATEDATE, 'yyyy-mm-dd') as COMMENTS_UPDATEDATE_ST,
 				d.DEST_SUBJECT
 				
 			FROM
@@ -228,8 +224,6 @@
 				dc.COMMENTS_WRITER_ID,
 				dc.COMMENTS_CONTENT,
 				dc.COMMENTS_RATING,
-				TO_CHAR(dc.COMMENTS_CREATEDATE, 'yyyy-mm-dd') as COMMENTS_CREATEDATE_ST,
-				TO_CHAR(dc.COMMENTS_UPDATEDATE, 'yyyy-mm-dd') as COMMENTS_UPDATEDATE_ST,
 				dc.DEST_NO,
 				d.DEST_CATEGORY,
 				d.DEST_SUBJECT
@@ -291,4 +285,5 @@
 	<delete id="deletePlan">
 		delete MY_PLANNER where p_no = #{no} and m_no = #{mno}
 	</delete>
+	
 </mapper>
