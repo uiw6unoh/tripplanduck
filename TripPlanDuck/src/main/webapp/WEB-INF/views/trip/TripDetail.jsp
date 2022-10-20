@@ -215,14 +215,14 @@
 	                                  
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
-											<button class="btn btn-outline-warning py-0" data-toggle="modal" id="updateBtn" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
+											<button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="updateSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
 		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
 		                                  	
 										</c:when>
 										<c:otherwise>	
-		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" id="reportBtn" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
+		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
 									  </c:choose>
 	                                  </div>
@@ -344,8 +344,7 @@
 
 <script>
 // 수정 시 모달에 데이터 넘겨주기
-$('[id="updateBtn"]').on("click", function () {
- 	let commentsId = $("#updateBtn").attr('name')
+function updateSet(commentsId){
 	$("#commentsId").val(commentsId)
 	
 	let rating = $("#rating" + commentsId).val()
@@ -355,8 +354,7 @@ $('[id="updateBtn"]').on("click", function () {
 	$("#commentsContent2").val(content)
 	
 	console.log("commentsId : ", commentsId)
-});
-
+}
 
 // 삭제 버튼
 function deleteComment(commentsId){
@@ -533,8 +531,7 @@ function deleteComment(commentsId){
   });
  
   // 신고 버튼
-$('[id="reportBtn"]').on("click", function () {
-	    let commentsId = $("#reportBtn").attr('name')
+function reportSet(commentsId){
 	   	$("#commentsId").val(commentsId)
 	    	
 	    let member = "${member}";
@@ -555,8 +552,7 @@ $('[id="reportBtn"]').on("click", function () {
 		        
 		return;
 	}
-});
-  	
+  }  	
 function reportComment() {
 	let reportType = $('input[name=report]:checked').val();
 	let commentsId = $("#commentsId").val();
@@ -600,7 +596,7 @@ function reportComment() {
 		contentType : "application/json",
 		dataType : "json",
 		success: function(data) {
-		window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
+			location.reload()
 	},
 		error: function(error) {
 	}
@@ -608,13 +604,6 @@ function reportComment() {
 	});
 };
 	    	
-$('[id="reportCancel"]').on("click", function () {
-		window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
-});
-	    	
-$('[id="closeBtn"]').on("click", function () {
-	window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
-});
 
 
 	  
