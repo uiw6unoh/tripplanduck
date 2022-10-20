@@ -38,8 +38,9 @@ public class ReportController {
 		if(member == null)
 			return 0;
 		
-		int isReport = reportService.isReported(report.getReportCategory(), report.getReportNoType());
+		String reportType = report.getReportType();
 		Comments comments = reportService.getComments(report.getReportNoType());
+		int isReport = reportService.isReported(report.getReportCategory(), report.getReportNoType());
 		
 		report.setReportMemberNo(comments.getMemberNo());
 		report.setMemberNo(member.getMemberNo());
@@ -49,6 +50,8 @@ public class ReportController {
 		
 		if (isReport > 0) {
 			report = reportService.getReportComments(report.getReportNoType());
+			report.setReportType(reportType);
+			
 			reportService.updateReportCount(report);
 		} else {
 			reportService.insertCommentReport(report);
@@ -73,6 +76,7 @@ public class ReportController {
 		if(member == null)
 			return 0;
 		
+		String reportType = report.getReportType();
 		int isReport = reportService.selectWithDuckReport(report.getReportCategory(), reportNoType);
 		withDuck = reportService.getWithDuck(reportNoType);
 		
@@ -84,7 +88,9 @@ public class ReportController {
 		System.out.println("report :" + report);
 		
 		if (isReport > 0) {
-			report = reportService.getReportComments(report.getReportNoType());
+			report = reportService.getReportWithDuck(report.getReportNoType());
+			report.setReportType(reportType);
+			System.out.println("report : " + report);
 			reportService.updateReportCount(report);
 		} else {
 			reportService.insertWithDuckReport(report);

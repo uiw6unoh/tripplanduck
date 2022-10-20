@@ -24,6 +24,8 @@ public interface ReportMapper {
 
 	WithDuck getWithDuck(int reportNoType);
 
-	Object getWithDuck(Report report);
+	void insertWithDuckReport(Report report);
+
+	Report getReportWithDuck(String reportNoType);
 
 }

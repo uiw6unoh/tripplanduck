@@ -87,14 +87,16 @@
 		WHERE COMMENTS_ID = #{reportNoType}
 	</select>
 	
-    <select id="getReportComments" parameterType="String" resultMap="ReportResultMap">
-		SELECT * FROM REPORT
-		WHERE REPORT_NO_TYPE = #{reportNoType}
-	</select>
+	<select id="getReportComments" parameterType="String" resultMap="ReportResultMap">
+        SELECT * FROM REPORT
+        WHERE (REPORT_NO_TYPE = #{reportNoType}) AND (REPORT_CATEGORY = 'REVIEW')
+    </select>
 	
 	<update id="updateReportCount" parameterType="com.tripplan.duck.report.model.vo.Report">
         UPDATE REPORT SET
-        REPORT_COUNT = NVL(REPORT_COUNT, 0) + 1
+        REPORT_CREATEDATE = TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
+        REPORT_COUNT = NVL(REPORT_COUNT, 0) + 1,
+		REPORT_TYPE = #{reportType}        
         WHERE REPORT_ID = #{reportId}
     </update>
     
@@ -104,7 +106,7 @@
 		SELECT COUNT(*)
   		FROM REPORT R
         JOIN WITHDUK W ON R.REPORT_NO_TYPE = W.WITH_NO
-        WHERE (REPORT_CATEGORY = 'WITHDUK') AND (REPORT_NO_TYPE = #{reportNoType})
+        WHERE (REPORT_CATEGORY = 'WITHDUCK') AND (REPORT_NO_TYPE = #{reportNoType})
 	</select >
 	
 	<insert id="insertWithDuckReport" parameterType="com.tripplan.duck.report.model.vo.Report"> 
@@ -133,4 +135,9 @@
 		SELECT * FROM WITHDUK
 		WHERE WITH_NO = #{reportNoType}
 	</select>
+	
+	<select id="getReportWithDuck" parameterType="String" resultMap="ReportResultMap">
+        SELECT * FROM REPORT
+        WHERE (REPORT_NO_TYPE = #{reportNoType}) AND (REPORT_CATEGORY = 'WITHDUCK')
+    </select>
 </mapper>

@@ -22,6 +22,8 @@ public interface ReportService {
 
 	void insertWithDuckReport(Report report);
 
+	Report getReportWithDuck(String reportNoType);
+
 
 
 }

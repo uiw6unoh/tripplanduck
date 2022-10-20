@@ -55,8 +55,15 @@ public class ReportServiceImpl implements ReportService {
 	}
 
 	@Override
+	@Transactional
 	public void insertWithDuckReport(Report report) {
-		reportMapper.getWithDuck(report);
+		reportMapper.insertWithDuckReport(report);
+	}
+
+	@Override
+	public Report getReportWithDuck(String reportNoType) {
+		
+		return reportMapper.getReportWithDuck(reportNoType);
 	}
 
 
