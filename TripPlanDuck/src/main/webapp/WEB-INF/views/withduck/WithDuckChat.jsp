@@ -199,7 +199,7 @@ connect();
 
 var socket = null;
 function connect() {
-	var ws = new WebSocket("ws://localhost:9999/chatting");
+	var ws = new WebSocket("ws://localhost:9999/${path}/chatting");
 	socket = ws;
 
 	ws.onopen = function (event) {

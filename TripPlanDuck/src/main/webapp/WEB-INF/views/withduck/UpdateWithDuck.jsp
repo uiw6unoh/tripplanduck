@@ -304,7 +304,7 @@ $(function() {
 	
 	cancel.click(function() {
 		const formElement = $('#formobj');
-		formElement.attr("action", "/withduck/list");
+		formElement.attr("action", "${path}/withduck/list");
 		formElement.attr("method", "get");
 		formElement.submit();
 	})

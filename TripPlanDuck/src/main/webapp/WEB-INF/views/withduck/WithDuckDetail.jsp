@@ -199,7 +199,7 @@ $(function() {
 	
 	cancel.click(function() {
 		const formElement = $('#formobj');
-		formElement.attr("action", "/withduck/delete");
+		formElement.attr("action", "${path}/withduck/delete");
 		formElement.attr("method", "get");
 		formElement.submit();
 	})
@@ -210,7 +210,7 @@ $(function() {
 	
 	cancel.click(function() {
 		const formElement = $('#formobj');
-		formElement.attr("action", "/chatgo");
+		formElement.attr("action", "${path}/chatgo");
 		formElement.attr("method", "get");
 		formElement.submit();
 	})
