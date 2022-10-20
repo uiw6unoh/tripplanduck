@@ -126,7 +126,7 @@
 			#{reportType},
 			#{reportNoType},
 			#{memberNo}
-		)	
+		)
 	</insert>
 	
 	<select id="getWithDuck" parameterType="int" resultMap="withDuckResultMap">
