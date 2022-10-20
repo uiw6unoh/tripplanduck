@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tripplan.duck.report.model.mapper.ReportMapper;
 import com.tripplan.duck.report.model.vo.Report;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 @Service
 public class ReportServiceImpl implements ReportService {
@@ -41,6 +42,21 @@ public class ReportServiceImpl implements ReportService {
 	@Override
 	public Report getReportComments(String reportNoType) {
 		return reportMapper.getReportComments(reportNoType);
+	}
+
+	@Override
+	public int selectWithDuckReport(String reportCategory, int reportNoType) {
+		return reportMapper.selectWithDuckReport(reportCategory, reportNoType);
+	}
+
+	@Override
+	public WithDuck getWithDuck(int reportNoType) {
+		return reportMapper.getWithDuck(reportNoType);
+	}
+
+	@Override
+	public void insertWithDuckReport(Report report) {
+		reportMapper.getWithDuck(report);
 	}
 
 

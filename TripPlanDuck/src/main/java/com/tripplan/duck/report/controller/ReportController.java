@@ -17,6 +17,7 @@ import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.report.model.service.ReportService;
 import com.tripplan.duck.report.model.vo.Report;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,6 +52,42 @@ public class ReportController {
 			reportService.updateReportCount(report);
 		} else {
 			reportService.insertCommentReport(report);
+			
+		}
+		
+		return 1;
+	}
+	
+	@PostMapping("/withDuck")
+	public int reportWithDuck(HttpSession session,
+								@RequestBody Report report) throws Exception {
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		WithDuck withDuck = null;
+		
+		System.out.println(report);
+		
+		int reportNoType = Integer.parseInt(report.getReportNoType());
+		
+		System.out.println(withDuck);
+		if(member == null)
+			return 0;
+		
+		int isReport = reportService.selectWithDuckReport(report.getReportCategory(), reportNoType);
+		withDuck = reportService.getWithDuck(reportNoType);
+		
+		report.setReportMemberNo(withDuck.getWithWriterNo());
+		report.setMemberNo(member.getMemberNo());
+		
+		System.out.println("isReport : " + isReport);
+		System.out.println("withDuck: "+withDuck);
+		System.out.println("report :" + report);
+		
+		if (isReport > 0) {
+			report = reportService.getReportComments(report.getReportNoType());
+			reportService.updateReportCount(report);
+		} else {
+			reportService.insertWithDuckReport(report);
 			
 		}
 		

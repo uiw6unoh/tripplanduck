@@ -29,6 +29,30 @@
 		<result property="destCategory" column="DEST_CATEGORY" />
 	</resultMap>
 	
+	<resultMap type="WithDuck" id="withDuckResultMap">
+		<id property="withNo" column="WITH_NO"/>
+		<result property="withWriterNo" column="WITH_WRITER_NO"/>
+		<result property="withWriterNick" column="WITH_WRITER_NICK"/>
+		<result property="withLocation" column="WITH_LOCATION"/>
+		<result property="withGender" column="WITH_GENDER"/>
+		<result property="withAge" column="WITH_AGE"/>
+		<result property="withPersonner" column="WITH_PERSONNER"/>
+		<result property="withStatus" column="WITH_STATUS"/>
+		<result property="withStartDate" column="WITH_STARTDATE"/>
+		<result property="withEndDate" column="WITH_ENDDATE"/>
+		<result property="withOriginFileName" column="WITH_ORIGINFILENAME"/>
+		<result property="withRenameFileName" column="WITH_RENAMEFILENAME"/>
+		<result property="withTitle" column="WITH_TITLE"/>
+		<result property="withContent" column="WITH_CONTENT"/>
+		<result property="withWriterGender" column="WITH_WRITER_GENDER"/>
+		<result property="withWriterAge" column="WITH_WRITER_AGE"/>
+		<result property="withkeyword" column="WITH_KEYWORD"/>
+		<result property="withReadCount" column="WITH_READCOUNT"/>
+		<result property="withJoinStatus" column="WITH_JOINSTATUS"/>
+		<result property="createDate" column="WITH_CREATEDATE"/>
+		<result property="updateDate" column="WITH_UPDATEDATE"/>
+	</resultMap>
+	
 	<select id="selectCommentReport" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
   		FROM REPORT R
@@ -74,4 +98,39 @@
         WHERE REPORT_ID = #{reportId}
     </update>
     
+    <!-- 위드덕 -->
+    
+    <select id="selectWithDuckReport" parameterType="map" resultType="_int">
+		SELECT COUNT(*)
+  		FROM REPORT R
+        JOIN WITHDUK W ON R.REPORT_NO_TYPE = W.WITH_NO
+        WHERE (REPORT_CATEGORY = 'WITHDUK') AND (REPORT_NO_TYPE = #{reportNoType})
+	</select >
+	
+	<insert id="insertWithDuckReport" parameterType="com.tripplan.duck.report.model.vo.Report"> 
+		INSERT INTO REPORT (
+			REPORT_ID,
+			REPORT_CATEGORY,
+			REPORT_M_NO,
+			REPORT_CREATEDATE,
+			REPORT_COUNT,
+			REPORT_TYPE,
+			REPORT_NO_TYPE,
+			M_NO
+		) VALUES(
+			SEQ_REPORT_ID.NEXTVAL,
+			'WITHDUCK',
+			#{reportMemberNo},
+			TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
+			1,
+			#{reportType},
+			#{reportNoType},
+			#{memberNo}
+		)	
+	</insert>
+	
+	<select id="getWithDuck" parameterType="int" resultMap="withDuckResultMap">
+		SELECT * FROM WITHDUK
+		WHERE WITH_NO = #{reportNoType}
+	</select>
 </mapper>

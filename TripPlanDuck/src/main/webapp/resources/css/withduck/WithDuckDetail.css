@@ -1,3 +1,27 @@
+   
+    /************************************************************* 모달 *****************************************************************/
+    .box-radio-input input[type="radio"]{
+  display:none;
+}
+
+.box-radio-input input[type="radio"] + span{
+  display: inline-block;
+  background: none;
+  border: 1px solid #b2b2b2;
+  padding: 0px 10px;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  font-weight: 500;
+  font-size: 0.93rem;
+  cursor: pointer;
+}
+
+.box-radio-input input[type="radio"]:checked + span{
+  border:1px solid #f4f3f1;
+  background:darkgrey;
+  color: #fff;
+}
     /************************************************************* zone 1 *****************************************************************/
     .carousel_container {
         text-align: center;
