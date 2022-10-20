@@ -48,51 +48,48 @@
 .destImage {
 	max-width: 100px;
 	max-height: 100px;
-}
+}	
+   .customoverlay {
+   	background-color: #fff8c6;
+   }
+   .customoverlay .title {background:#fff8c6;font-size:14px;font-weight:bold;}
+   
+#numbers{
+	font-weight:bold;
+	font-size:17px;
+}   
 </style>
 <section>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+<button class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop" id="modalTest">
   모달 테스트
 </button>
-
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <h5 class="modal-title" id="staticBackdropLabel">선택한 여행지</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-		<div class="map_wrap">
-			<div id="mapCopy" style="width: 50%; height: 50%;">
-		    <p class="getdata">
-		        <button onclick="getDataFromDrawingMap()">가져오기</button>
-		    </p>
-			</div>
-		</div>
-		</div>
-		
-      <div class="modal-footer">
+				<div id="ModalCopy"  >
+					<div id="placeCopy" class="col-md-4"></div>
+				</div>
+				<div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
         <button type="button" class="btn btn-primary">확인</button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-
 	<form name="frm" action="${path}/planner/myplannerAction" method="post">
-		<div class="container-fluid">
+		<div class="container-fluid"  >
 			<div class="row">
-				<div class="left-box">
-					<div class="list-group">
-						<div class="list-group-item">
+				<div class="left-box" style="border: none;">
+					<div class="list-group" style="border: none;" >
+						<div class="list-group-item" style="border: none;">
 							<select id="locationSelect" name="locationSelect"
 								onchange="locationValue(this)">
 								<c:forEach items="${ location }" var="location"
@@ -104,32 +101,26 @@
 
 							</select>
 							<!-- 기간 선택시 날짜 출력 -->
-							<div class="list-group-item list-group-item-primary" style="background-color: white;" id="datepicker" value=""></div>
-							<div class="list-group-item list-group-item-secondary" style="background-color: white;">
+							<div class="list-group-item list-group-item-primary" style="background-color: white; border: none;" id="datepicker" value=""></div>
+							<div class="list-group-item list-group-item-secondary" style="background-color: white; border: none;">
 								<input type="text" id="demo" name="demo" value="" />
 							</div>
 						</div>
 						<div class="col-12 my-3" style="text-align: center;">
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
-							<input type="submit" name="location"
-								class="col-5 btn btn-success" value="완 성">
-								<a  data-toggle="modal" data-target="#myModal" href="${ path }/planner/test" >Launch modal</a>
+							<input type="submit" name="location" class="col-5 btn btn-success" value="완 성">
+							<input type="reset" class="col-5 btn btn-danger" id="clearAll"  value="초기화">
 							<!-- 
-								<a id="delete" class="col-5 btn btn-danger" href="${ path }/planner/test">초기화</a>
+								<a  data-toggle="modal" data-target="#myModal" href="${ path }/planner/test" >Launch modal</a>
 							 -->	
 
 						</div>
-						<button type="button" id="lookCourseBtn" class="btn btn-md">경로 보기</button>
+						<button type="button" id="lookCourseBtn" class="btn btn-primary">경로 보기</button>
 					</div>
 					<div class="left-box2">
 						<div id="divCopy"  style="height: 60vh; overflow:auto;">
 							<div class="row no-gutters"></div>
 								<div id="divCopy_chil" class="col-md-4"></div>
-								<div class="col-md-8">
-									<div class="card-body ">
-									
-									</div>
-								</div>
 						</div>
 					</div>
 				</div>
@@ -154,10 +145,10 @@
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 loca_${ destination.locationId }"
-								style="width: 300px;">
+								style="width: 22vh;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
-										<img class="destImage" src="${ destination.destImage }">
+										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/noImage.jpeg' : destination.destImage}">
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
@@ -180,6 +171,7 @@
 										
 									<input type="hidden" id="destContent" name="destContent"
 										value="${ destination.destContent }" />
+										
 								</div>
 							</div>
 						</c:forEach>
@@ -187,16 +179,17 @@
 
 					<input type="hidden" name="place" id="place">
 					<input type="hidden" name="imagea" id="imagea">
-					<input type="text" name="destNos" id="destNos">
+					<input type="hidden" name="destNos" id="destNos">
 				</div>
 			</div>
 		</div>
 	</form>
-
+	
 </section>
 
 <script>
 
+var count = 0;	
 var markers = [];
 //clusterer.addMarker( markers );
 var ovarlays = [];
@@ -209,10 +202,15 @@ var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=ht
  imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
  imageOption = {offset: new kakao.maps.Point(15, 32)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+ 
 	$(document).ready(function(){
-		
 		$("[class^=addDesti]").on("click", function(event) {
-	
+			
+			count = countF(1);
+			
+			
+		//	alert(count);
+			
 			let destMapX = $(this).children('#destMapX').val().trim();
 			let destMapY = $(this).children('#destMapY').val().trim();
 			let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
@@ -220,32 +218,57 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 			let destImage = $(this).children('#destImage').val().trim();
 			// 마커 찍기
 			
-			addMarker(new kakao.maps.LatLng(destMapX, destMapY));
+			names = destSubject.split(',');	
+		
+			addMarker(new kakao.maps.LatLng(destMapX, destMapY), destNo,count);
 	
 				 data.push(destSubject);
 				 imagehttp.push(destImage);
+				 
 				 $("#place").val(data);
 				 $("#destNos").val(destNo);
 				 $("#imagea").val(imagehttp);
-		// 하나씩 밀려서 나옴 화면에 찍히고 input에 저장되는 형식이라 그런거같은데.. 흠	
-		//		names = destSubject.split(',');	
-
+				 
+				 
 		$('#divOriginal_'+destNo).appendTo('#divCopy_chil');
 		
-		$('#divCopy').find('.addDesti').replaceWith('<div onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
+		//$('#divCopy').find('.addDesti').replaceWith('<div onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
+		$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+destNo+'" onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
+
+		
+		
+		
+		
+		$('#modalTest').on("click", function() {
+			// 모달창 복사
+			$('#divOriginal_'+destNo).clone().appendTo('#placeCopy');
+			
+			//style=" width:20vh; overflow:auto; display: inline-block; float: left;" 
+			//$('#ModalCopy').find('#placeCopy').replaceWith('<div onclick=ModalDeleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
+
+		});
 		
 		});
+
 	});
 	
-	 // undifind
-	 //names = destSubject.split(',');	
-	 //for(var i = 0; i < checker.length; i++){	
-	 //	var deSubje = destSubject[i];
-	 //};	
 
+function countF(a){
+	
+	if (a ==1){
+		count++;
+	}else{
+		count = 0;
+	}
+	return count;
+	
+}	
+	
 // 마커를 생성하고 지도위에 표시하는 함수입니다
-function addMarker(position) {
-    
+function addMarker(position, destNo, count) {
+	
+  //  alert(destNo);
+	
     // 마커를 생성합니다
     var marker = new kakao.maps.Marker({
         position: position,
@@ -253,11 +276,12 @@ function addMarker(position) {
 
     });
 
-    var content = '<div class="customoverlay">' +
-    '    <span class="title">'+names+'</span>' +
+    var content = 
+    '<div class="customoverlay" id="selectArea'+destNo+'">' +
+    '<a>' +
+    '     <span id="numbers">'+count+'<span> <span class="title">'+names+'</span> ' +
+    '</a>'+ 
     '</div>';
-    
-  //커스텀 오버레이를 생성합니다
 
     // 마커가 지도 위에 표시되도록 설정합니다
     marker.setMap(map);
@@ -266,7 +290,7 @@ function addMarker(position) {
         map: map,
         position: position,
         content: content,
-        yAnchor: 2
+        yAnchor: 2.2
        });      
 
     // 생성된 마커를 배열에 추가합니다
@@ -310,11 +334,42 @@ function addLine(markers){
 }
 
 
-
+//일반 딜리트
 function deleteDiv(destNo,destSubject,destMapX,destMapY) {
 	
 	
+	//names = destSubject.split(',');
+	$("#selectArea"+destNo).text("");
+	
 	$('#divCopy_chil').children('#divOriginal_'+destNo).remove();
+	
+	$('#placeCopy').children('#divOriginal_'+destNo).remove();
+	
+	for(var i = 0; i < data.length; i++){
+		
+		if(data[i] == destSubject){
+			markers[i].setMap(null);
+			data.splice(i,1);
+			imagehttp.splice(i,1);
+	    	markers.splice(i,1);
+	    	positions.splice(i, 1);
+	    	ovarlays.splice(i, 1);
+			$("#place").val(data);
+			$("#imagea").val(imagehttp);
+		}
+	}
+	if (data == null||data == ""){
+		countF(2);
+	}
+};
+
+
+// 모달창 딜리트
+function ModalDeleteDiv(destNo,destSubject,destMapX,destMapY) {
+	
+	
+	
+	
 	
 	for(var i = 0; i < data.length; i++){
 		
@@ -327,15 +382,15 @@ function deleteDiv(destNo,destSubject,destMapX,destMapY) {
     	ovarlays.splice(i, 1);
 		$("#place").val(data);
 		$("#imagea").val(imagehttp);
-		
 		}
 	}
-	
 };
 
 //$('#myModal').modal({
 //	  keyboard: false
 //});
+
+
 
 </script>
 
@@ -368,4 +423,5 @@ $( function() {
         }
     });                    
 });
+
 </script>
