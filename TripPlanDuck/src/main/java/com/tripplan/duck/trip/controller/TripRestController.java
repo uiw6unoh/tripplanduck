@@ -2,7 +2,6 @@ package com.tripplan.duck.trip.controller;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -24,11 +23,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.trip.model.service.DestinationService;

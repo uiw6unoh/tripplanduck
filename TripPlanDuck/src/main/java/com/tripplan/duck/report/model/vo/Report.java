@@ -1,9 +1,5 @@
 package com.tripplan.duck.report.model.vo;
 
-import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,7 +20,7 @@ public class Report {
 	
 	private String reportType;
 	
-	private int reportNoType;
+	private String reportNoType;
 	
 	private int memberNo;
 }
