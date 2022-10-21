@@ -58,16 +58,21 @@
 	font-weight:bold;
 	font-size:17px;
 }
-.modal-dialog{
-	max-width: 3000px;
-}
+
 #ModalCopy{
-	overflow:auto;
+   overflow-x: auto;
+   white-space:nowrap;
+}
+#placeCopy{
+    width: 8000px;
 }
 #ModalCopy > #placeCopy> .modalCss{
 	float: left;
+	margin-right: 70;
 	
 }   
+
+
 </style>
 <section>
 
@@ -76,7 +81,7 @@
 </button>
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-xl">
     <div class="modal-content" style="position: relative;">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">선택한 여행지</h5>
@@ -149,7 +154,7 @@
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 modalCss" 
-								style="width: 22vh;">
+								style="width: 27vh;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
 										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">

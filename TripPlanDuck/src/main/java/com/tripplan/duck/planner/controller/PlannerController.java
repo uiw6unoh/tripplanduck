@@ -68,6 +68,7 @@ public class PlannerController {
 		
 		@RequestMapping("/myplannerAction")
 		public String myplannerAction(
+				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") int locationSelect,
 				@RequestParam("place") String place,
 				@RequestParam("imagea") String imagea,
@@ -79,12 +80,13 @@ public class PlannerController {
 			myPlanner.setMNo(loginMember.getMemberNo());
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDestNo(Integer.parseInt(destNos));
+			myPlanner.setDemo(demo);
+			service.insertPlanner(myPlanner);
 			
 			String[] arrayPlace = place.split(",");
 			String[] arrayImage = imagea.split(",");
 			
 			// 마이플래너에 넣기
-			service.insertPlanner(myPlanner);
 			
 			for (int i = 0; i < arrayPlace.length; i++) {
 				String imagea1 = arrayImage[i];

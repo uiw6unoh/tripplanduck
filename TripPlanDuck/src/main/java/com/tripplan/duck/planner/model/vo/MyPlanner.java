@@ -28,6 +28,8 @@ public class MyPlanner {
 	
 	private List<Location> loca;
 	
+	private String demo;
+	
 	private Location loc; 
 	
 	private String route;
