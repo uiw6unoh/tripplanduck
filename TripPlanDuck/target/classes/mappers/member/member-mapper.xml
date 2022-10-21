@@ -132,7 +132,7 @@
 	</insert>
 	
 	<!-- 카카오 회원 로그인 -->
-	<select id="kakaoSelect" parameterType="String" resultType="Member">
+	<select id="kakaoSelect" parameterType="String" resultMap="memberResultMap">
 		SELECT M_NO,
 		       M_ID,
 		       M_PW,

@@ -267,8 +267,8 @@ public class MemberController {
         Member member = new Member();
         
         // 일치하는 snsId 없을 시 회원가입
-        System.out.println("snsId : " + snsId);
-        if (snsId == null) {
+        System.out.println("snsId : " + service.kakaoLogin(snsId));
+        if (service.kakaoLogin(snsId) == null) {
             log.warn("카카오로 회원가입");
             member.setMemberId(email);
             member.setMemberEmail(email);
@@ -279,6 +279,8 @@ public class MemberController {
             member.setMemberGender(gender);
             member.setMemberAge(age);
             service.kakaoJoin(member);
+
+            session.setAttribute("loginMember", member);
         } else {
         	// 일치하는 snsId가 있으면 멤버객체에 담음.
             log.warn("카카오로 로그인");

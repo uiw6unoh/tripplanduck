@@ -26,7 +26,7 @@ public interface MemberMapper {
 //    Member read(String memberId);
 
     //snsId로 회원정보얻기
-    Member kakaoSelect(@Param("memberSnsId") String memberSnsId);
+    Member kakaoSelect(String memberSnsId);
 
     //snsId로 회원 아이디찾기
     String findUserIdBy2(String memberSnsId);

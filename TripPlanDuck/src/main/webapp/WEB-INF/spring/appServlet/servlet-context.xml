@@ -44,6 +44,6 @@
 		
 	</websocket:handlers>
 	
-	<beans:bean id="chattingHandler" class="com.tripplan.duck.withduck.handler.ChattingHandler"/>
+	<beans:bean id="chattingHandler" class="com.tripplan.duck.withduck.handler.ChattingHandler"/> 
 	
 </beans:beans>
