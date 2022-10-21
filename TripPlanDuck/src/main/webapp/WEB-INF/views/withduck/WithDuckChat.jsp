@@ -193,13 +193,32 @@ $("#button-send").on("click", function(e) {
 		nickname = '${loginMember.memberNickname}';
 	  $(".wrap").append(str);
 	  socket.send(msg + ':' + nickname);
+	  $("#msg").val('');
 });
+	$('#msg').on('keydown', function(e) {
+		e.preventDefault();
+		if(e.keyCode === 13) {
+			 let msg = $('#msg').val();
+			  var str = '<div class="chat ch2">';
+				str += '<div class="icon"><i class="fa-solid fa-user">';
+				str += '<img src="${path}/resources/images/common/프사.png" alt="">';
+				str += "</i></div>";
+				str += '<span>' + '${loginMember.memberNickname}' + '</span>';
+				str += '<div class="textbox">' + msg + '</div>'
+				str += '</div>';
+				nickname = '${loginMember.memberNickname}';
+			  $(".wrap").append(str);
+			  socket.send(msg + ':' + nickname);
+			  $("#msg").val('');
+		} 
+	});
+
 connect();
 });
 
 var socket = null;
 function connect() {
-	var ws = new WebSocket("ws://localhost:9999/${path}/chatting");
+	var ws = new WebSocket("ws://211.209.232.21:80/${path}/chatting");
 	socket = ws;
 
 	ws.onopen = function (event) {
@@ -264,7 +283,7 @@ function connect() {
 		setTimeout( function(){ connect(); }, 1000); // retry connection!!
 	};
 	
-
+	$()
 	ws.onerror = function (err) { console.log('Error:', err); };
 }
 </script>
