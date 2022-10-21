@@ -109,4 +109,9 @@ public class DestinationServiceImpl implements DestinationService {
 		destinationMapper.deleteComment(commentsId);
 	}
 
+	@Override
+	public void updateDestRating(Comments comments) {
+		destinationMapper.updateDestRating(comments);
+	}
+
 }
