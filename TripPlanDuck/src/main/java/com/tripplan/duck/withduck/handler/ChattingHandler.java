@@ -2,6 +2,7 @@ package com.tripplan.duck.withduck.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import javax.websocket.Session;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -40,6 +42,11 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		log.info("#ChattingHandler, handleMessage");
 		System.out.println("받은 session 정보 : " + session.getAttributes());
 		System.out.println("입장 샷 : " + message);
+		String[] arr = message.getPayload().split(":");
+		String msg = arr[0];
+		String nickName = arr[1];
+		
+		System.out.println(Arrays.toString(arr));
 		for(WebSocketSession s : sessionList) {
 			if(session.getId() == s.getId()) {
 				continue;
@@ -51,7 +58,6 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		System.out.println("sessionList : " + sessionList);
 		
 	}
-    
     
 	
     @Override

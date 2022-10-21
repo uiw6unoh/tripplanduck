@@ -192,14 +192,25 @@ $("#button-send").on("click", function(e) {
 		str += '</div>';
 		nickname = '${loginMember.memberNickname}';
 	  $(".wrap").append(str);
-	  socket.send(msg + ':' + nickname);
+	  
+	  // onmessage에 전달되어 받은사람에게 보내지는 것
+	  var str = '<div class="chat ch1">';
+		str += '<div class="icon"><i class="fa-solid fa-user">';
+		str += '<img src="${path}/resources/images/common/프사.png" alt="">';
+		str += "</i></div>";
+		str += '<span>' + '${loginMember.memberNickname}' + '</span>';
+		str += '<div class="textbox">' + msg + '</div>'
+		str += '</div>';
+		nickname = '${loginMember.memberNickname}';
+	  socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 	  $("#msg").val('');
 });
 	$('#msg').on('keydown', function(e) {
 		
 		if(e.keyCode === 13) {
 			 let msg = $('#msg').val();
-			  var str = '<div class="chat ch2">';
+			 // 보내는사람에게 보여지는 채팅 
+			 var str = '<div class="chat ch2">';
 				str += '<div class="icon"><i class="fa-solid fa-user">';
 				str += '<img src="${path}/resources/images/common/프사.png" alt="">';
 				str += "</i></div>";
@@ -208,7 +219,17 @@ $("#button-send").on("click", function(e) {
 				str += '</div>';
 				nickname = '${loginMember.memberNickname}';
 			  $(".wrap").append(str);
-			  socket.send(msg + ':' + nickname);
+			  
+			  // onmessage에 전달되어 받은사람에게 보내지는 것
+			  var str = '<div class="chat ch1">';
+				str += '<div class="icon"><i class="fa-solid fa-user">';
+				str += '<img src="${path}/resources/images/common/프사.png" alt="">';
+				str += "</i></div>";
+				str += '<span>' + '${loginMember.memberNickname}' + '</span>';
+				str += '<div class="textbox">' + msg + '</div>'
+				str += '</div>';
+				nickname = '${loginMember.memberNickname}';
+			  socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 			  $("#msg").val('');
 			  e.preventDefault();
 		} 
@@ -230,7 +251,7 @@ function connect() {
 		str += '</div>';
 		
 		console.log(event);
-		socket.send(str)
+		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 		$(".wrap").append(str);
 	};
 
@@ -256,19 +277,15 @@ function connect() {
 		sessionId = arr[0];
 		message = arr[1];
 			console.log(sessionId + " " + cur_session);
+			// 입장메시지가 아닌 받은 메시지
 			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
-			var str = '<div class="chat ch1">';
-			str += '<div class="icon"><i class="fa-solid fa-user">';
-			str += '<img src="${path}/resources/images/common/프사.png" alt="">';
-			str += "</i></div>";
-			str += '<span>' + nickName + '</span>';
-			str += '<div class="textbox">' + message + '</div>'
-			str += '</div>';
+				$(".wrap").append(arr[1]);
+			// 입장메시지
 			} else {
 			    console.log('Info: connection opened.');
 			    var str = arr[1];
-			}
 			$(".wrap").append(str);
+			}
 
 		
 		console.log("ReceiveMessage:", event.data+'\n');
