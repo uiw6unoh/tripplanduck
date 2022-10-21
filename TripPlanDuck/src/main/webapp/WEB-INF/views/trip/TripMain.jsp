@@ -139,8 +139,21 @@
         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
       </svg></button>
     </div>
+	  <div class="justify-content-center mt-2">
+         <div style="border: 4px solid rgba(255, 255, 255, 0.14); border-radius: 50px; margin: auto; background: rgba(55, 78, 132, 0.37); padding-inline: 2%; width: 37%; height:35px;">
+            <div style="width: 15%;float:left; transform: translateY(-23%);">
+            <div id=iconImg ></div>   
+         </div>
+         <div style="width: 85%;float: left; margin-top: 0.1rem;">
+         <div class="ctype" style="float: left; width: 20%; font-weight: bold; font-size: 1em; text-align: center;color: white;"></div>
+         <div class="clowtemp" style="float: inherit; font-weight: bold;color: #2E9AFE;text-align: center;"></div>
+         <div style="color: white; margin-right:3px; margin-left:3px;width: 2%;float: inherit;"> / </div>
+         <div class="chightemp" style="float: inherit; width: 18%; font-weight: bold;color: #FA5858;text-align: center;"></div>
+         <div class="cityName" style="float: left; width: 37%; color: white;  font-weight: bold; font-size: 1em; text-align:center;"></div></div>
+       </div>
+     </div>
 
-    <p class="h3 mt-5 mb-0 text-center">추천 여행지</p>
+    <p class="h3 mt-5 mb-0 text-center" style="clear:both">추천 여행지</p>
     <p class="lead text-muted text-center small" style="font-size: 1rem;">
       RECOMMENDED DESTINATIONS
     </p>
@@ -264,7 +277,7 @@
 		</div>
 	</div>
 	
-
+	
   </div>
 </div>
 
@@ -379,3 +392,67 @@ function getParameter(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 </script>
+
+ <script>
+ $(function() {   
+      if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+        	function(position) {              
+	             var lat = position.coords.latitude; // 위도
+	             var lon = position.coords.longitude; // 경도
+             
+	          console.log(`You live in ${lat} and ${lon}`)   
+	          
+             getWeather(lat,lon); 
+            });
+      } else {           
+          alert("현재 위치를 가져올 수 없습니다.");
+      }
+ 
+      function getWeather(lat,lon) {
+         var url = 'https://api.openweathermap.org/data/2.5/find?lat='+lat+'&lon='+lon+'&cnt=1&APPID=bc5f36b83cd547a922b26dbd5cfc523a&units=metric';
+          fetch(url)
+          .then(function(response){ 
+            return response.json();
+          }).then(function(data){
+            var $minTemp = data.list[0].main.temp_min;
+            var $maxTemp = data.list[0].main.temp_max;
+            var $humidity = data.list[0].main.humidity;
+            var $type = data.list[0].weather[0].description;
+            var $sky = data.list[0].weather[0].main;
+            var $icon = data.list[0].weather[0].icon;
+            var $probability = data.list[0].clouds.all;
+            var $cityName = data.list[0].name;
+            $('.clowtemp').append($minTemp + "°C");
+            $('.chightemp').append($maxTemp + "°C");
+            $('.chumidity').append($humidity + "%");
+            $('.csky').append($sky);            
+            $('.cprobability').append($probability + "%");   
+            $('.cityName').append($cityName);
+            
+            var iconImg = document.getElementById('iconImg');
+            iconImg.innerHTML= "<img src='http://openweathermap.org/img/wn/"+$icon+".png' style='float: inline-end; margin-top:0.5%;'>";
+            if($type == "Clouds" || $type == "overcast clouds" || $type == "broken clouds")
+               $type = "흐림";
+            else if($type == "few clouds")
+               $type = "약간 흐림";
+            else if($type == "scattered clouds")
+               $type = "개임";
+            else if($type == "haze" || $type == "mist")
+               $type = "안개";
+            else if($type == "Rain" || $type == "shower rain" || $type == "light rain")
+               $type = "비";
+            else if($type == "thunderstorm")
+               $type = "번개";
+            else if($type == "snow")
+               $type = "눈";
+            else if($type == "clear sky")
+               $type = "맑음";
+            else if($type == "sand")
+                $type = "황사";
+            $('.ctype').append($type);
+          })
+      }  
+ });     
+ 
+   </script>

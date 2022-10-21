@@ -141,44 +141,22 @@
                 <a href="">
                     <img class="exit" src="${path}/resources/images/WithDuck/left-arrow.png">
                 </a>
-                <p class="withChat_title">8월 28일 ~ 8월 31일 제주도 갑니다</p>
+                <p class="withChat_title">${withDuck.withTitle }</p>
             </div>
             <!-- 내용 부분 -->
-            <div class="chatContent">
-                <div class="chat_entry">
-                    <span>박노경님이 입장하셨습니다.</span>
-                </div>
-                <div class="wrap">
-                    <div></div>
-                    <div class="chat ch1">
-                        <div class="icon"><i class="fa-solid fa-user">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
-                        </i></div>
-                        <div class="textbox">안녕하세요. 반갑습니다.</div>
-                    </div>
-                    <div class="chat ch2">
-                        <div class="icon"><i class="fa-solid fa-user">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
-                        </i>
-                        </div>
-                        <div class="textbox">안녕하세요. 박노경입니다.</div>
-                    </div>
-                    <div class="chat ch1">
-                        <div class="icon"><i class="fa-solid fa-user">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
-                        </i>
-                        </div>
-                        <div class="textbox">요즘 어떻게 지내세요?</div>
-                    </div>
-                </div>
+
+            <div class="chatContent" id="msgArea">
+                <div class="wrap" style="padding: 10px 0">
+	            </div>
             </div>
+
             <!-- 채팅 입력 부분-->
             <div class="inputChat">
                 <div class="message-box">
-                    <textarea type="text" class="message-input" placeholder="메시지를 입력하세요."></textarea>
-                    <a href="">
-                        <img src="${path}/resources/images/WithDuck/send.png" alt="">
-                    </a>
+                    <textarea type="text" id="msg" class="message-input" placeholder="메시지를 입력하세요."></textarea>
+                    <button id="button-send" >
+                        <img src="${path}/resources/images/WithDuck/send.png" style="width: 50px; position:relative; right:20px; top:15px;">
+                    </button>
                 </div>
             </div>
         </div>
@@ -189,10 +167,111 @@
 
     <!--jQuery-->
     <script src="${path }/resources/js/common/jquery-3.6.0.min.js"></script>
-
+	
     <!-- JavaScripts -->
     <script src="${path }/resources/js/common/plugins.min.js"></script>
     <script src="${path }/resources/js/common/functions.js"></script>
 </body>
 <jsp:include page="../common/footer.jsp"/>
+<script type="text/javascript">
+	
+//전송 버튼 누르는 이벤트
+$(document).ready(function() {
+	
+$("#button-send").on("click", function(e) {
+	e.preventDefault();
+	if (socket.readyState !== 1) return;
+      
+	  let msg = $('#msg').val();
+	  var str = '<div class="chat ch2">';
+		str += '<div class="icon"><i class="fa-solid fa-user">';
+		str += '<img src="${path}/resources/images/common/프사.png" alt="">';
+		str += "</i></div>";
+		str += '<span>' + '${loginMember.memberNickname}' + '</span>';
+		str += '<div class="textbox">' + msg + '</div>'
+		str += '</div>';
+		
+	  $(".wrap").append(str);
+	  socket.send(msg);
+});
+connect();
+});
+
+var socket = null;
+function connect() {
+	var ws = new WebSocket("ws://localhost:9999/${path}/chatting");
+	socket = ws;
+
+	ws.onopen = function (event) {
+	    console.log('Info: connection opened.');
+	    var str = '<div class="chat_entry" id="msgArea">';
+		var user = '${loginMember.memberNickname}';
+		str += user + "님이 입장하셨습니다.";
+		str += '</div>';
+		
+		console.log(event);
+		socket.send(str)
+		$(".wrap").append(str);
+	};
+
+	ws.onmessage = function (event) {
+		var data = event.data;
+		var sessionId = null; //데이터를 보낸 사람
+		var message = null;
+		var nickName = null; //파싱한 닉네임 값 저장
+		var length = "memberNickname=".length;
+		
+		var arr = data.split(":");
+		startIndex = arr[2].indexOf('memberNickname')+length;
+		endIndex = arr[2].indexOf(', memberEmail');
+		nickLength = arr[2].substr(startIndex)
+		nickNameLength = endIndex-startIndex;
+		
+		nickName = arr[2].substr(startIndex,nickNameLength);
+		console.log(data);
+		console.log('nickName : ' + nickName);
+		for(var i=0; i<arr.length; i++){
+			console.log('arr[' + i + ']: ' + arr[i]);
+		}
+		
+		var cur_session = '${loginMember.memberId}'; //현재 세션에 로그인 한 사람
+		console.log("cur_session : " + cur_session);
+		
+		sessionId = arr[0];
+		message = arr[1];
+			console.log(sessionId + " " + cur_session);
+			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
+			var str = '<div class="chat ch1">';
+			str += '<div class="icon"><i class="fa-solid fa-user">';
+			str += '<img src="${path}/resources/images/common/프사.png" alt="">';
+			str += "</i></div>";
+			str += '<span>' + nickName + '</span>';
+			str += '<div class="textbox">' + message + '</div>'
+			str += '</div>';
+			} else {
+			    console.log('Info: connection opened.');
+			    var str = '<div class="chat_entry" id="msgArea">';
+				str += nickName + "님이 입장하셨습니다.";
+				str += '</div>';
+			}
+			$(".wrap").append(str);
+
+		
+		console.log("ReceiveMessage:", event.data+'\n');
+	};
+	
+	ws.onclose = function (event) {
+		console.log('Info: connection closed.'); 
+		var user = '${loginMember.memberNickname}';
+		var str = user + " 님이 퇴장하셨습니다.";
+		
+		$("#msgArea").append(str);
+		
+		setTimeout( function(){ connect(); }, 1000); // retry connection!!
+	};
+	
+
+	ws.onerror = function (err) { console.log('Error:', err); };
+}
+</script>
 </html>

@@ -114,7 +114,7 @@
     </update>
 	
 	<select id="getDestinationsByLocationId" parameterType="int" resultMap="DestinationResultMap">
-		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_LIKE_SUM
+		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_HIT DESC
 	</select>
 	
 	<select id="getLocations" parameterType="map" resultMap="locationResultMap">
@@ -135,7 +135,7 @@
 	</select>
 	
 	<select id="getDestinationsByKeyWord" parameterType="string" resultMap="DestinationResultMap">
-		SELECT * FROM DESTINATION WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%' ORDER BY DEST_LIKE_SUM
+		SELECT * FROM DESTINATION WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%' ORDER BY DEST_HIT DESC
 	</select>
 	
 	<insert id="insertLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
@@ -180,7 +180,9 @@
 	</insert>
 	
 	<select id="getDestinationComments" parameterType="int" resultMap="commentsResultMap">
-		SELECT * FROM DESTINATION_COMMENTS WHERE DEST_NO = #{destNo}
+		SELECT * FROM DESTINATION_COMMENTS
+		WHERE DEST_NO = #{destNo}
+		ORDER BY COMMENTS_ID
 	</select>
 	
 	<update id="updateComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
@@ -195,4 +197,11 @@
     <delete id="deleteComment" parameterType="int">
 		DELETE FROM DESTINATION_COMMENTS WHERE COMMENTS_ID = #{commentsId}
 	</delete>
+	
+	<update id="updateDestRating" parameterType="com.tripplan.duck.trip.model.vo.Comments">
+       	update DESTINATION 
+       	set DEST_RATING_AVG = (select avg(COMMENTS_RATING) 
+       	from DESTINATION_COMMENTS where DEST_NO = #{destNo}) 
+       	WHERE DEST_NO = #{destNo}
+    </update>
 </mapper>

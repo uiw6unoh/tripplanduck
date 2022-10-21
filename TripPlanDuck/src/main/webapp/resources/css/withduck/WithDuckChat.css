@@ -23,6 +23,17 @@
     float: right;
 }
 
+.chatContent{
+    overflow: scroll;
+    /* IE scroll 숨김 */
+    -ms-overflow-style: none;
+}
+ 
+.chatContent::-webkit-scrollbar { 
+    display: none;
+    width: 0 !important;
+}
+
 /* 왼쪽 zone */
 
 .chatListContainer {
@@ -186,6 +197,9 @@
 .message-box {
     width: 900px;
     margin-left: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .message-box img {
@@ -213,7 +227,7 @@
 
 .message-input {
     margin: auto;
-    width: 92%;
+    width: 90%;
     border-radius: 9px;
     resize: none;
     position: relative;
@@ -222,7 +236,7 @@
 }
 
 .wrap {
-    padding: 40px 0;
+    padding: 10px 0;
 }
 
 .wrap .chat {
@@ -275,6 +289,12 @@
     left: -15px;
     content: "◀";
     color: white;
+}
+
+#button-send {
+	width: 5%;
+	border: 0;
+	background: white;
 }
 
 .wrap .ch2 {

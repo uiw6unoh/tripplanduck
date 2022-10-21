@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.tripplan.duck.withduck.model.mapper.ChatMapper">
+	<resultMap type="WithDuckChat" id="withDuckChatResultMap">
+		<id property="chatNo" column="CHAT_NO"/>
+		<result property="withNo" column="WITH_NO"/>
+		<result property="withCategory" column="WITH_CATEGORY"/>
+		<result property="chatContent" column="CHAT_CONTENT"/>
+		<result property="chatTime" column="CHAT_TIME"/>
+		<result property="chatMemNick" column="CHAT_MEMNICK"/>
+		<result property="withMemNo" column="WITH_MEM_NO"/>
+		<result property="chatTitle" column="CHAT_TITLE"/>
+		
+	</resultMap>
+	
+	<insert id="createChat" parameterType="map" >
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '작성자', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+	</insert>
+	
+	<insert id="joinChat" parameterType="map" >
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+	</insert>
+</mapper>
