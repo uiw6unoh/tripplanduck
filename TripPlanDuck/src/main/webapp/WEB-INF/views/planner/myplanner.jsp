@@ -146,15 +146,10 @@
 					<div class="courseZero_margin90"></div>
 					<!-- 검색창 -->
 						<input id="searchBox" type="text" placeholder="검색어를 입력해주세요">
-						
-							<button id="shrud" type="submit">검색</button>
-						
 					<div class="divOriginal"  style="height: 80vh; overflow:auto;">
 						<c:forEach items="${ destination }" var="destination"
 							varStatus="status">
-							<div id="divOriginal_${ destination.destNo }"
-								class="card mb-3 modalCss" 
-								style="width: 27vh;">
+							<div id="divOriginal_${ destination.destNo }"class="card mb-3 modalCss" style="width: 27vh;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
 										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
@@ -180,7 +175,6 @@
 							</div>
 						</c:forEach>
 					</div>
-
 					<input type="hidden" name="place" id="place">
 					<input type="hidden" name="imagea" id="imagea">
 					<input type="hidden" name="destNos" id="destNos">
@@ -203,7 +197,47 @@ let locationI = "${location.locationId}";
 function divDelteBtn(){
 	$('#placeCopy').children('[id^=divOriginal_]').remove();
 };
-// submit 검색창 변형
+
+//원래의 인풋 박스 값을 받는다.
+var oldVal = $("#searchBox");
+
+/* 검색 내용 변경 감지 */
+$("#searchBox").on("propertychange change keyup paste input", function () {
+  // 변화에 바로바로 반응하면 부하가 걸릴 수 있어서 1초 딜레이를 준다.
+  setTimeout(function () {
+    // 변경된 현재 박스 값을 받아온다.
+    var currentVal = $("#searchBox").val();
+    if (currentVal == oldVal) {
+      return;
+    }
+    // forEach의 첫번째 인자값 = 배열 내 현재 값
+    // 두번째 값 = index
+    // 세번째 값 = 현재 배열
+    var listArray = $(".modalCss").toArray();
+    
+    
+    listArray.forEach(function (c, i) {
+      var currentList = c;
+      // 현재 배열값에서 내용 추출
+      var currentListText = c.innerText;
+      // 검색 내용을 포함하지 않을 경우
+      if (currentListText.includes(currentVal) == false) {
+        currentList.style.display = "none";
+      }
+      // 검색 내용을 포함할 경우
+      if (currentListText.includes(currentVal)) {
+        currentList.style.display = "block";
+      }
+      // 검색 내용이 없을 경우
+      if (currentVal.trim() == "") {
+        currentList.style.display = "block";
+      }
+    });
+  }, 1000);
+});
+
+/*
+ * submit 검색창 변형
 $(function() {
 	var search = $('#shrud');
 	search.click(function() {
@@ -214,6 +248,7 @@ $(function() {
 		formElement.submit();
 	})
 });
+ */ 
 
 
 function locationValue(){
@@ -221,6 +256,7 @@ function locationValue(){
 	location.href = "${path}/planner/myplanner?locationSelect="+locationValue;
 			
 }
+
 //지도api변수들 선언
 var count = 0;	
 var markers = [];
@@ -236,8 +272,6 @@ var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=ht
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
  
 	$(document).ready(function(){
-
-		
 		$("[class^=addDesti]").on("click", function(event) {
 			
 			count = countF(1);

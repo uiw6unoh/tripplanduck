@@ -113,11 +113,15 @@
 		WHERE L.LOCATION_ID = #{locationSelect}
 	</select>
 	
-	<select id="addDest" resultMap="DestFindResultMap">
+	<select id="searchDest" resultMap="DestFindResultMap">
 	
-		SELECT L.LOCATION_ID ,D.DEST_NO, D.DEST_SUBJECT , D.DEST_MAP_X, D.DEST_MAP_Y  FROM LOCATION L
-		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
-		WHERE D.DEST_SUBJECT = #{destSubject}
+		SELECT * FROM DESTINATION D
+				JOIN LOCATION L ON(L.LOCATION_ID = D.LOCATION_ID)
+				
+				<trim prefix="WHERE" prefixOverrides="AND|OR">
+					D.DEST_SUBJECT LIKE '%' || #{destSubject} || '%'
+				</trim>
+				
 	</select>
 	
 </mapper>
