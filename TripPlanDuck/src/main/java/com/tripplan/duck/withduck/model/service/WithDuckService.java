@@ -42,5 +42,7 @@ public interface WithDuckService {
 
 	int withDuckReadCount(int withNo, boolean hasRead);
 
+	int countChatMem(int withNo, int memberNo);
+
 
 }

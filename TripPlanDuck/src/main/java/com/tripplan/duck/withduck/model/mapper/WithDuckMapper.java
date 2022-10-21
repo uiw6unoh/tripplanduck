@@ -44,6 +44,8 @@ public interface WithDuckMapper {
 
 	int withDuckReadCount(int withNo);
 
+	int countChatMem(@Param("withNo") int withNo, @Param("memberNo") int memberNo);
+
 
 
 

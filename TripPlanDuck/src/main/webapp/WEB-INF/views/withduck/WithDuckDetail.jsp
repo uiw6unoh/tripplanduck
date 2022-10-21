@@ -158,9 +158,11 @@
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
 <input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
+<c:if test="${joinBool == true}">
     <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
         동행참여
     </button>
+</c:if>
 
     <button class="btn btn-outline-warning" type="button">
         목록으로

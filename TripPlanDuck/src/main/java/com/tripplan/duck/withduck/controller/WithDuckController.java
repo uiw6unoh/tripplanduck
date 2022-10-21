@@ -489,13 +489,21 @@ public class WithDuckController {
 			
 			withDuck.setReList(list);
 		}
-		
-		
+		int result = 0;
+		boolean joinBool = false;
+		if(member != null) {
+			result = service.countChatMem(withNo, member.getMemberNo());
+			if(result == 0) {
+				joinBool = true;
+			}
+		}
+		System.out.println("countChatMem : " + result );
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
 		System.out.println(request.getAttribute("withDuck"));
 		
 		session.setAttribute("member", member);
+		model.addObject("joinBool", joinBool);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
 		return model;

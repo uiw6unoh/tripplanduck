@@ -173,4 +173,10 @@ public class WithDuckServiceImpl implements WithDuckService {
 		}
 	}
 
+	@Override
+	public int countChatMem(int withNo, int memberNo) {
+		// TODO Auto-generated method stub
+		return mapper.countChatMem(withNo, memberNo);
+	}
+
 }
