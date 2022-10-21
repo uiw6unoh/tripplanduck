@@ -58,8 +58,15 @@
 	font-weight:bold;
 	font-size:17px;
 }
-#ModaCopy > div{
-float: left;
+.modal-dialog{
+	max-width: 3000px;
+}
+#ModalCopy{
+	overflow:auto;
+}
+#ModalCopy > #placeCopy> .modalCss{
+	float: left;
+	
 }   
 </style>
 <section>
@@ -70,20 +77,18 @@ float: left;
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content"style="float: left;">
+    <div class="modal-content" style="position: relative;">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">선택한 여행지</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
-				<div id="ModalCopy" style="overflow:hidden;" >
-					<div id="placeCopy" >
+      	<div class="modalUp">
+				<div id="ModalCopy">
+					<div id="placeCopy">
 					</div>
 				</div>
+      	</div>
 				<div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary">확인</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="divDelteBtn()">확인</button>
       </div>
     </div>
   </div>
@@ -96,7 +101,6 @@ float: left;
 						<div class="list-group-item" style="border: none; font-size: 40;"  >
 							${location.location}
 						</div >
-						
 						<div class="list-group-item" style="border: none;">
 							<select id="locationSelect" name="locationSelect" onchange="locationValue()">
 								<c:forEach items="${ loca }" var="loca" varStatus="status" >
@@ -144,14 +148,14 @@ float: left;
 						<c:forEach items="${ destination }" var="destination"
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
-								class="card mb-3 loca_${ destination.locationId }"
+								class="card mb-3 modalCss" 
 								style="width: 22vh;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
 										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
 									</div>
 									<div class="col-md-8">
-										<div style="position: absolute; left: 160px">찜:${destination.destLikeSum}</div>
+										<div style="position: absolute; top: 0; right: 0; ">찜:${destination.destLikeSum}</div>
 										<div class="card-body">
 											<h5 class="card-title" id="subject">${ destination.destSubject }</h5>
 											<p class="card-text">${ destination.destContent }</p>
@@ -190,7 +194,11 @@ let locationX = "${location.lcenterx}";
 let locationY = "${location.lcentery}";
 let locationI = "${location.locationId}";
 
-
+//모달창에서 클론한 div 삭제
+function divDelteBtn(){
+	$('#placeCopy').children('[id^=divOriginal_]').remove();
+};
+// submit 검색창 변형
 $(function() {
 	var search = $('#shrud');
 	search.click(function() {
@@ -208,10 +216,9 @@ function locationValue(){
 	location.href = "${path}/planner/myplanner?locationSelect="+locationValue;
 			
 }
-
+//지도api변수들 선언
 var count = 0;	
 var markers = [];
-//clusterer.addMarker( markers );
 var ovarlays = [];
 var lines = [];
 var names = [];
@@ -251,27 +258,19 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 				 
 		$('#divOriginal_'+destNo).appendTo('#divCopy_chil');
 		
-		//$('#divCopy').find('.addDesti').replaceWith('<div onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
 		$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+destNo+'" onclick=deleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
-
-		
-		
-		
 		
 		$('#modalTest').on("click", function() {
 			// 모달창 복사
 			$('#divOriginal_'+destNo).clone().appendTo('#placeCopy');
 			
-			//style=" width:20vh; overflow:auto; display: inline-block; float: left;" 
-			//$('#ModalCopy').find('#placeCopy').replaceWith('<div onclick=ModalDeleteDiv('+destNo+',"'+destSubject+'","'+destMapX+'","'+destMapY+'")> <a class="material-icons")>delete</a></div>');
-
 		});
 		
 	});
 
 });
 	
-
+// 이름 옆에 숫자 증가
 function countF(a){
 	
 	if (a ==1){
@@ -317,7 +316,8 @@ function addMarker(position, destNo, count) {
 }
 
 
-
+/*
+ * 
 //지도상의 선 긋기
 const lookCourseBtn = document.getElementById('lookCourseBtn');
       lookCourseBtn.addEventListener('click', event =>{
@@ -336,7 +336,6 @@ function addLine(markers){
       linePath.push(markers[i].getPosition()); 
    }   
 
-
    // 지도에 표시할 선을 생성합니다
    var polyline = new kakao.maps.Polyline({
 	   
@@ -351,6 +350,7 @@ function addLine(markers){
    // 지도에 선을 표시합니다 
    polyline.setMap(map); 
 }
+ */
 
 //일반 딜리트
 function deleteDiv(destNo,destSubject,destMapX,destMapY) {
