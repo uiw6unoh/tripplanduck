@@ -172,6 +172,28 @@
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
 				<div class="card-tab">               
                    <div class="card-tab m-2 " id="map" style="width:500px;height:400px;"></div>
+                   <div class="tomorrow"
+			           data-location-id=""
+			           data-language="KO"
+			           data-unit-system="METRIC"
+			           data-skin="light"
+			           data-widget-type="upcoming"
+			           style="padding-bottom:22px;position:relative;"
+			        >
+			          <a
+			            href="https://www.tomorrow.io/weather/"
+			            rel="nofollow noopener noreferrer"
+			            target="_blank"
+			            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
+			          >
+			            <img
+			              alt="Powered by Tomorrow.io"
+			              src="https://weather-website-client.tomorrow.io/img/powered-by-tomorrow.svg"
+			              width="140"
+			              height="15"
+			            />
+			          </a>
+			        </div>
 				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
@@ -215,14 +237,14 @@
 	                                  
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
-											<button class="btn btn-outline-warning py-0" data-toggle="modal" id="updateBtn" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
+											<button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="updateSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
 		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
 		                                  	
 										</c:when>
 										<c:otherwise>	
-		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" id="reportBtn" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
+		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
 									  </c:choose>
 	                                  </div>
@@ -235,7 +257,7 @@
                 </section>
                 </div>
               </div>
-              
+                           
             <!-- 수정 클릭 시 모달 -->
 			<div class="modal fade" id="updateBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
@@ -344,8 +366,7 @@
 
 <script>
 // 수정 시 모달에 데이터 넘겨주기
-$('[id="updateBtn"]').on("click", function () {
- 	let commentsId = $("#updateBtn").attr('name')
+function updateSet(commentsId){
 	$("#commentsId").val(commentsId)
 	
 	let rating = $("#rating" + commentsId).val()
@@ -355,8 +376,7 @@ $('[id="updateBtn"]').on("click", function () {
 	$("#commentsContent2").val(content)
 	
 	console.log("commentsId : ", commentsId)
-});
-
+}
 
 // 삭제 버튼
 function deleteComment(commentsId){
@@ -373,8 +393,10 @@ function deleteComment(commentsId){
       if (result.isConfirmed) {
         //삭제 요청 처리
         
+        let destNo = "${dest.destNo}"
+        
         $.ajax({
-			url : "${path}/trip/api/comment?commentsId=" + commentsId,
+			url : "${path}/trip/api/comment?commentsId=" + commentsId + "&destNo=" + destNo,
 			type : "DELETE",
 			success: function(data) {
 				if(data == 1){
@@ -425,7 +447,6 @@ function deleteComment(commentsId){
       closeOnClickOutside : false
 
     }).then(function (result) {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         //수정 요청 처리
         
@@ -533,8 +554,7 @@ function deleteComment(commentsId){
   });
  
   // 신고 버튼
-$('[id="reportBtn"]').on("click", function () {
-	    let commentsId = $("#reportBtn").attr('name')
+function reportSet(commentsId){
 	   	$("#commentsId").val(commentsId)
 	    	
 	    let member = "${member}";
@@ -555,8 +575,7 @@ $('[id="reportBtn"]').on("click", function () {
 		        
 		return;
 	}
-});
-  	
+  }  	
 function reportComment() {
 	let reportType = $('input[name=report]:checked').val();
 	let commentsId = $("#commentsId").val();
@@ -600,7 +619,7 @@ function reportComment() {
 		contentType : "application/json",
 		dataType : "json",
 		success: function(data) {
-		window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
+			location.reload()
 	},
 		error: function(error) {
 	}
@@ -608,13 +627,6 @@ function reportComment() {
 	});
 };
 	    	
-$('[id="reportCancel"]').on("click", function () {
-		window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
-});
-	    	
-$('[id="closeBtn"]').on("click", function () {
-	window.location.href="${path}/trip/detail?destNo=${dest.destNo}";
-});
 
 
 	  
@@ -622,6 +634,7 @@ $('[id="closeBtn"]').on("click", function () {
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
 <script>
+// 카카오 지도 api JS
 	var mapX="${dest.destMapX}";
 	var mapY="${dest.destMapY}";
 	
@@ -674,6 +687,7 @@ $('[id="closeBtn"]').on("click", function () {
 </script>
 
 <script>
+// 하트 클릭 이벤트
 $(document).ready(function () {
 	  function addListener() {
 	    var btn = document.querySelector("#Heart_2_");
@@ -742,4 +756,21 @@ $(document).ready(function () {
 	  }
 	  addListener();
 	});
+</script>
+
+<script>
+        (function(d, s, id) {
+            if (d.getElementById(id)) {
+                if (window.__TOMORROW__) {
+                    window.__TOMORROW__.renderWidget();
+                }
+                return;
+            }
+            const fjs = d.getElementsByTagName(s)[0];
+            const js = d.createElement(s);
+            js.id = id;
+            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
+
+            fjs.parentNode.insertBefore(js, fjs);
+        })(document, 'script', 'tomorrow-sdk');
 </script>

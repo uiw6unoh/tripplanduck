@@ -52,4 +52,6 @@ public interface DestinationMapper {
 
 	void deleteComment(int commentsId);
 
+	void updateDestRating(Comments comments);
+
 }

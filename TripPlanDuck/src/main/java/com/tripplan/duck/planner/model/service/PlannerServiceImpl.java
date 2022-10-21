@@ -25,10 +25,10 @@ public class PlannerServiceImpl implements PlannerService {
 	}
 
 	@Override
-	public List<Destination> getDestination() {
+	public List<Destination> getDestination(int locationSelect) {
 		
 		
-		return plannerMapper.selectDest();
+		return plannerMapper.selectDest(locationSelect);
 	}
 
 	@Override
@@ -40,9 +40,6 @@ public class PlannerServiceImpl implements PlannerService {
 	@Override
 	public int detailInsert(String imagea, String place) {
 		
-		System.out.println("destImage"+imagea);
-		System.out.println("place"+place);
-		 
 		HashMap<String,String> hm = new HashMap<String,String>();
 		hm.put("destImage", imagea);
 		hm.put("place", place);
@@ -57,6 +54,11 @@ public class PlannerServiceImpl implements PlannerService {
 	 public void insertPlanner(MyPlanner myPlanner) {
 		
 		plannerMapper.insertPlanner(myPlanner);
+	}
+
+	@Override
+	public Location getLocation(int locationSelect) {
+		return plannerMapper.location(locationSelect);
 	}
 
 	
