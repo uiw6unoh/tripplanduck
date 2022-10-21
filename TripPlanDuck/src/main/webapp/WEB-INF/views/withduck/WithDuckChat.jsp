@@ -196,7 +196,7 @@ $("#button-send").on("click", function(e) {
 	  $("#msg").val('');
 });
 	$('#msg').on('keydown', function(e) {
-		e.preventDefault();
+		
 		if(e.keyCode === 13) {
 			 let msg = $('#msg').val();
 			  var str = '<div class="chat ch2">';
@@ -210,6 +210,7 @@ $("#button-send").on("click", function(e) {
 			  $(".wrap").append(str);
 			  socket.send(msg + ':' + nickname);
 			  $("#msg").val('');
+			  e.preventDefault();
 		} 
 	});
 
