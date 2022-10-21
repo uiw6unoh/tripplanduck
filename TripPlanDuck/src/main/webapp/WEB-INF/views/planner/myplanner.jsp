@@ -53,10 +53,13 @@
    	background-color: #fff8c6;
    }
    .customoverlay .title {background:#fff8c6;font-size:14px;font-weight:bold;}
-   
+  
 #numbers{
 	font-weight:bold;
 	font-size:17px;
+}
+#ModaCopy > div{
+float: left;
 }   
 </style>
 <section>
@@ -67,15 +70,16 @@
 <!-- Modal -->
 <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
-    <div class="modal-content">
+    <div class="modal-content"style="float: left;">
       <div class="modal-header">
         <h5 class="modal-title" id="staticBackdropLabel">선택한 여행지</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-				<div id="ModalCopy"  >
-					<div id="placeCopy" class="col-md-4"></div>
+				<div id="ModalCopy" style="overflow:hidden;" >
+					<div id="placeCopy" >
+					</div>
 				</div>
 				<div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
@@ -84,24 +88,28 @@
     </div>
   </div>
 </div>
-	<form name="frm" action="${path}/planner/myplannerAction" method="post">
+	<form id="formId" name="frm" action="${path}/planner/myplannerAction" method="post">
 		<div class="container-fluid"  >
 			<div class="row">
 				<div class="left-box" style="border: none;">
 					<div class="list-group" style="border: none;" >
+						<div class="list-group-item" style="border: none; font-size: 40;"  >
+							${location.location}
+						</div >
+						
 						<div class="list-group-item" style="border: none;">
-							<select id="locationSelect" name="locationSelect"
-								onchange="locationValue(this)">
-								<c:forEach items="${ location }" var="location"
-									varStatus="status">
-									<option id="location" value="${ location.locationId }">
-										${ location.location }</option>
-
+							<select id="locationSelect" name="locationSelect" onchange="locationValue()">
+								<c:forEach items="${ loca }" var="loca" varStatus="status" >
+								<c:if test="${loca.location == location.location}"> 
+									<option id="location" value="${ loca.locationId }" selected="selected"> ${loca.location}</option>
+								</c:if>
+								<c:if test="${loca.location != location.location}">
+									<option id="location" value="${ loca.locationId }"> ${loca.location}</option>
+								</c:if>
 								</c:forEach>
-
 							</select>
 							<!-- 기간 선택시 날짜 출력 -->
-							<div class="list-group-item list-group-item-primary" style="background-color: white; border: none;" id="datepicker" value=""></div>
+							<div class="list-group-item list-group-item-primary" style="background-color: white; border: none;" id="datepicker"></div>
 							<div class="list-group-item list-group-item-secondary" style="background-color: white; border: none;">
 								<input type="text" id="demo" name="demo" value="" />
 							</div>
@@ -109,36 +117,28 @@
 						<div class="col-12 my-3" style="text-align: center;">
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
 							<input type="submit" name="location" class="col-5 btn btn-success" value="완 성">
-							<input type="reset" class="col-5 btn btn-danger" id="clearAll"  value="초기화">
-							<!-- 
-								<a  data-toggle="modal" data-target="#myModal" href="${ path }/planner/test" >Launch modal</a>
-							 -->	
-
+							
+							<input type="reset" class="col-5 btn btn-success" id="clear" onclick="history.go(0)" value="초기화">
 						</div>
 						<button type="button" id="lookCourseBtn" class="btn btn-primary">경로 보기</button>
 					</div>
 					<div class="left-box2">
 						<div id="divCopy"  style="height: 60vh; overflow:auto;">
 							<div class="row no-gutters"></div>
-								<div id="divCopy_chil" class="col-md-4"></div>
+							<div id="divCopy_chil" class="col-md-4"></div>
 						</div>
 					</div>
 				</div>
 				<div class="col-8">
 					<div id="map" style="width: 100%; height: 80vh;"></div>
-					<script type="text/javascript"
-						src="${ path }/resources/js/planner/mapcreate.js"></script>
 				</div>
 				
 				<div class="right-box">
 					<div class="courseZero_margin90"></div>
-					
-					<!-- 검색창을 삭제할까...흠 
+					<!-- 검색창 -->
 						<input id="searchBox" type="text" placeholder="검색어를 입력해주세요">
-						<button id="magBtn">
-							<i class="fas fa-search">검색</i>
-						</button>
-						-->
+						
+							<button id="shrud" type="submit">검색</button>
 						
 					<div class="divOriginal"  style="height: 80vh; overflow:auto;">
 						<c:forEach items="${ destination }" var="destination"
@@ -148,30 +148,25 @@
 								style="width: 22vh;">
 								<div class="row no-gutters">
 									<div class="col-md-4">
-										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/noImage.jpeg' : destination.destImage}">
+										<img class="destImage" src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
 									</div>
 									<div class="col-md-8">
+										<div style="position: absolute; left: 160px">찜:${destination.destLikeSum}</div>
 										<div class="card-body">
-											<h5 class="card-title" id="subject">>${ destination.destSubject }</h5>
+											<h5 class="card-title" id="subject">${ destination.destSubject }</h5>
 											<p class="card-text">${ destination.destContent }</p>
 										</div>
 									</div>
 								</div>
 								<div class="addDesti">
 									<a id="checkButton" class="material-icons">check</a> 
-									<input
-										type="hidden" id="destMapX" name="destMapX"
-										value="${ destination.destMapX }" /> <input type="hidden"
-										id="destMapY" name="destMapY"
-										value="${ destination.destMapY }" /> <input type="hidden"
-										id="destImage" name="destImage"
-										value="${ destination.destImage }"> 
-										<input type="hidden" id="destSubject" name="destSubject"value="${ destination.destSubject }" /> 
-										<input type="hidden"id="destNo" name="destNo" value="${ destination.destNo }" />
-										
+									<input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
+									<input type="hidden" id="destMapY" name="destMapY" value="${ destination.destMapY }" /> 
+									<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }"> 
+									<input type="hidden" id="destSubject" name="destSubject"value="${ destination.destSubject }" /> 
+									<input type="hidden"id="destNo" name="destNo" value="${ destination.destNo }" />
 									<input type="hidden" id="destContent" name="destContent"
 										value="${ destination.destContent }" />
-										
 								</div>
 							</div>
 						</c:forEach>
@@ -183,11 +178,36 @@
 				</div>
 			</div>
 		</div>
+		
+		
 	</form>
-	
 </section>
 
+
 <script>
+
+let locationX = "${location.lcenterx}";
+let locationY = "${location.lcentery}";
+let locationI = "${location.locationId}";
+
+
+$(function() {
+	var search = $('#shrud');
+	search.click(function() {
+
+		const formElement = $('#formId');
+		formElement.attr("action", "${path}/planner/searchDesti");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+
+
+function locationValue(){
+	var locationValue = $('#locationSelect').val();
+	location.href = "${path}/planner/myplanner?locationSelect="+locationValue;
+			
+}
 
 var count = 0;	
 var markers = [];
@@ -204,12 +224,11 @@ var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=ht
 var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
  
 	$(document).ready(function(){
+
+		
 		$("[class^=addDesti]").on("click", function(event) {
 			
 			count = countF(1);
-			
-			
-		//	alert(count);
 			
 			let destMapX = $(this).children('#destMapX').val().trim();
 			let destMapY = $(this).children('#destMapY').val().trim();
@@ -248,9 +267,9 @@ var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
 
 		});
 		
-		});
-
 	});
+
+});
 	
 
 function countF(a){
@@ -274,7 +293,7 @@ function addMarker(position, destNo, count) {
         position: position,
         image: markerImage
 
-    });
+});
 
     var content = 
     '<div class="customoverlay" id="selectArea'+destNo+'">' +
@@ -333,10 +352,8 @@ function addLine(markers){
    polyline.setMap(map); 
 }
 
-
 //일반 딜리트
 function deleteDiv(destNo,destSubject,destMapX,destMapY) {
-	
 	
 	//names = destSubject.split(',');
 	$("#selectArea"+destNo).text("");
@@ -358,70 +375,20 @@ function deleteDiv(destNo,destSubject,destMapX,destMapY) {
 			$("#imagea").val(imagehttp);
 		}
 	}
+	
 	if (data == null||data == ""){
 		countF(2);
 	}
 };
 
-
-// 모달창 딜리트
-function ModalDeleteDiv(destNo,destSubject,destMapX,destMapY) {
-	
-	
-	
-	
-	
-	for(var i = 0; i < data.length; i++){
-		
-		if(data[i] == destSubject){
-		markers[i].setMap(null);
-		data.splice(i,1);
-		imagehttp.splice(i,1);
-    	markers.splice(i,1);
-    	positions.splice(i, 1);
-    	ovarlays.splice(i, 1);
-		$("#place").val(data);
-		$("#imagea").val(imagehttp);
-		}
-	}
-};
-
-//$('#myModal').modal({
-//	  keyboard: false
-//});
-
-
-
 </script>
 
+
+<script type="text/javascript" src="${ path }/resources/js/planner/mapcreate.js"></script>
 <jsp:include page="../common/footer.jsp" />
 
 
-<script type="text/javascript"
-	src="${ path }/resources/js/daterangepicker.js"></script>
+<script type="text/javascript" src="${ path }/resources/js/daterangepicker.js"></script>
 <script type="text/javascript" src="${ path }/resources/js/date/date.js"></script>
 
-<script type="text/javascript"
-	src="${ path }/resources/js/planner/mapex.js"></script>
-	<!-- 
-		<script type="text/javascript"
-			src="${ path }/resources/js/planner/addMarker.js"></script>
-		<script type="text/javascript"
-			src="${ path }/resources/js/planner/modal.js"></script>
-	 -->
-
-<script>	
-	locationValue( $('#locationSelect') );
-</script>
-
-<script type="text/javascript">
-$( function() {
-    $( "#datepicker" ).datepicker({ 
-        onSelect: function() { 
-            var date = $.datepicker.formatDate("yymmdd",$("#datepicker").datepicker("getDate")); 
-            alert(date);
-        }
-    });                    
-});
-
-</script>
+<script type="text/javascript"src="${ path }/resources/js/planner/mapex.js" ></script>

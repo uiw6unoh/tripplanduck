@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,32 +41,30 @@ public class PlannerController {
 		@Autowired
 		PlannerMapper plannerMapper; 
 		
-		@Autowired
+		@Autowired   
 		private PlannerService service;
 		
+		
 		@GetMapping("/myplanner")
-		public String locatinList(Model model , HttpSession session) {
+		public String locatinList(Model model , HttpSession session,
+				@RequestParam(name = "locationSelect" , defaultValue = "1") int locationSelect ) {
 			
 			Member member = (Member)session.getAttribute("loginMember");
+			
+			List<Location> loca = service.getLocationList();
+			
+			Location location = service.getLocation(locationSelect);
+			
+			List<Destination> destination= service.getDestination(locationSelect);			
+			
 			model.addAttribute("member", member);
-			
-			System.out.println("logined memger : " + member);
-			
-			
-			
-			List<Location> location;
-			List<Destination> destination;			
-			
-			location = service.getLocationList();
-			
-			destination = service.getDestination();
-			
 			model.addAttribute("destination", destination);
 			model.addAttribute("location",location);
+			model.addAttribute("loca",loca);
+			
 			
 			return "planner/myplanner";    //입력페이지
 		}
-		
 		
 		@RequestMapping("/myplannerAction")
 		public String myplannerAction(
@@ -77,7 +76,6 @@ public class PlannerController {
 			
 			MyPlanner myPlanner = new MyPlanner();
 			
-			
 			myPlanner.setMNo(loginMember.getMemberNo());
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDestNo(Integer.parseInt(destNos));
@@ -85,8 +83,7 @@ public class PlannerController {
 			String[] arrayPlace = place.split(",");
 			String[] arrayImage = imagea.split(",");
 			
-			// 마이코스에 넣을 매퍼 만들기
-			
+			// 마이플래너에 넣기
 			service.insertPlanner(myPlanner);
 			
 			for (int i = 0; i < arrayPlace.length; i++) {
@@ -100,21 +97,19 @@ public class PlannerController {
 		
 		
 		
-		@GetMapping("/addDesti")
-		public @ResponseBody List<Destination> addDesti(ModelAndView model) {
-			List<Destination> destination;
-			destination = service.addDestination();
-			model.addObject("destination", destination);
+		@GetMapping("/searchDesti")
+		public ModelAndView addDesti(ModelAndView model) {
+			
+			//Destination destination = service.addDestination();
+			
+			//model.addObject("destination", destination);
 			model.setViewName("planner/myplanner");
-			return destination;
+			
+			
+			return model;
 		}
 			
 		
-//		@PostMapping("/myplanner")
-//			public ModelAndView routePlanner(ModelAndView model) {
-//				return model;
-//			}
-//		
 		
 		
 		

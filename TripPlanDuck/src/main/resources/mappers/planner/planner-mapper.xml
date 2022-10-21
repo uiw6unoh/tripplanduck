@@ -81,12 +81,11 @@
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
 	
-	<select id="locationInsert" resultMap="locationInsertMap">
+	<select id="locationInsert" parameterType="int" resultMap="locationInsertMap">
 		<include refid="findLocation"/>
 	</select>
 	
 	<!-- My planner insert -->
-	
 	
 	<insert id="insertPlanner" parameterType="MyPlanner" keyColumn="P_NO" keyProperty="pNo">
 		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{destNo},#{mNo},#{locationId})
@@ -101,12 +100,16 @@
 			(#{pNo},SEQ_SEQS.NEXTVAL,#{place},#{destImage})
 	</insert>
 	
+	<select id="location" parameterType="int" resultMap="locationInsertMap">
+		SELECT * FROM LOCATION
+		WHERE LOCATION_ID = #{locationSelect}
+	</select>
+	
 	
 	<select id="selectDest" resultMap="DestFindResultMap">
-	
 		SELECT * FROM LOCATION L
 		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
-		
+		WHERE L.LOCATION_ID = #{locationSelect}
 	</select>
 	
 	<select id="addDest" resultMap="DestFindResultMap">

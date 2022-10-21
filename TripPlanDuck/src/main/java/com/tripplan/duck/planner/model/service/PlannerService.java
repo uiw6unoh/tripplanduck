@@ -9,9 +9,10 @@ import com.tripplan.duck.trip.model.vo.Destination;
 
 public interface PlannerService {
 
+	
 	List<Location> getLocationList();
 
-	List<Destination> getDestination();
+	List<Destination> getDestination(int locationSelect);
 
 	List<Destination> addDestination();
 	
@@ -20,4 +21,6 @@ public interface PlannerService {
 			String imagea);
 
 	void insertPlanner(MyPlanner myPlanner);
+
+	Location getLocation(int locationSelect);
 }
