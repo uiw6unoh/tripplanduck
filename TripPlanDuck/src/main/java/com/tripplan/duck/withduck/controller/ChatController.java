@@ -44,5 +44,17 @@ public class ChatController {
 		
 		return model;
 	}
+	/*
+	@GetMapping("/putLog")
+	public static void chatLog(String chatContent, String chatMemNickName, String memNo, String withNo) {
+		int chatMemNo = Integer.parseInt(memNo);
+		int chatWithNo = Integer.parseInt(withNo);
+		System.out.println("msg : " + chatContent + " nickName : " + chatMemNickName + " memNo : " + chatMemNo + " withNo : " + chatWithNo);
+		int result = 0;
+		WithDuckChatService service = null;
+		result = service.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
+		return;	
+	}
+	*/
 
 }

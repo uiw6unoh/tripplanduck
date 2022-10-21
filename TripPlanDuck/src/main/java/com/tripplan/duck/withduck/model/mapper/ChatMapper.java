@@ -12,5 +12,7 @@ public interface ChatMapper {
 
 	int joinChat(@Param("withNo") int withNo, @Param("chatMemNick") String chatMemNick, @Param("withMemNo") int withMemNo, @Param("chatTitle") String chatTitle);
 
+	int putLog(@Param("chatContent") String chatContent,@Param("chatMemNickName") String chatMemNickName, @Param("chatMemNo") int chatMemNo, @Param("chatWithNo") int chatWithNo);
+
 
 }

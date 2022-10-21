@@ -26,4 +26,11 @@ public class WithDuckChatServiceImpl implements WithDuckChatService {
 		return mapper.joinChat(withNo, chatMemNick, withMemNo, chatTitle);
 	}
 
+	@Override
+	public int putLog(String chatContent, String chatMemNickName, int chatMemNo, int chatWithNo) {
+		System.out.println(chatContent + "asdfasdfasdfasdf" );
+		return mapper.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
+	}
+
+
 }

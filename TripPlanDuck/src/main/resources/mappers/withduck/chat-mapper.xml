@@ -11,7 +11,14 @@
 		<result property="chatMemNick" column="CHAT_MEMNICK"/>
 		<result property="withMemNo" column="WITH_MEM_NO"/>
 		<result property="chatTitle" column="CHAT_TITLE"/>
-		
+	</resultMap>
+	<resultMap type="WithDuckChatLog" id="withDuckChatLogResultMap">
+		<id property="chatContentNo" column="CHAT_CONTENTNO"/>
+		<result property="chatMemNo" column="CHAT_MEMNO"/>
+		<result property="chatMemNickName" column="CHAT_MEMNICKMANE"/>
+		<result property="chatContent" column="CHAT_CONTENT"/>
+		<result property="chatTime" column="CHAT_TIME"/>
+		<result property="chatWithNo" column="CHAT_WITHNO"/>
 	</resultMap>
 	
 	<insert id="createChat" parameterType="map" >
@@ -20,5 +27,9 @@
 	
 	<insert id="joinChat" parameterType="map" >
 		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+	</insert>
+
+	<insert id="putLog" parameterType="map" >
+		INSERT INTO WITHDUK_CHATLOG VALUES(SEQ_WITHDUK_CHATLOG_NO.NEXTVAL, #{chatMemNo}, #{chatMemNickName}, #{chatContent}, TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatWithNo})
 	</insert>
 </mapper>

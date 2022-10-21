@@ -264,7 +264,7 @@ function connect() {
 		
 		var arr = data.split(":");
 
-		nickName = arr[2];
+		nickName = arr[1];
 		console.log(data);
 		console.log('nickName : ' + nickName);
 		for(var i=0; i<arr.length; i++){
@@ -274,16 +274,15 @@ function connect() {
 		var cur_session = '${loginMember.memberId}'; //현재 세션에 로그인 한 사람
 		console.log("cur_session : " + cur_session);
 		
-		sessionId = arr[0];
-		message = arr[1];
+		message = arr[0];
 			console.log(sessionId + " " + cur_session);
 			// 입장메시지가 아닌 받은 메시지
 			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
-				$(".wrap").append(arr[1]);
+				$(".wrap").append(arr[0]);
 			// 입장메시지
 			} else {
 			    console.log('Info: connection opened.');
-			    var str = arr[1];
+			    var str = arr[0];
 			$(".wrap").append(str);
 			}
 

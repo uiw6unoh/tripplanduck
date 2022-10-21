@@ -6,4 +6,6 @@ public interface WithDuckChatService {
 
 	int joinChat(int withNo, String withTitle, String withWriterNick, int withWriterNo);
 
+	int putLog(String chatContent, String chatMemNickName, int chatMemNo, int chatWithNo);
+
 }
