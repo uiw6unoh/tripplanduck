@@ -88,7 +88,8 @@ public class MyPageController {
 	// 더보기 ajax
 	@GetMapping("/ajax")
 	@ResponseBody
-	public Map<String, Object> mypageByAjax(HttpSession session,
+	public Map<String, Object> mypageByAjax(
+			HttpSession session,
 			@RequestParam(required = false, defaultValue = "1") int offset,
 			@RequestParam(defaultValue = "planner") String select,
 			@RequestParam(required = false, defaultValue = "999") int locationId, Model model) throws Exception {
@@ -150,7 +151,9 @@ public class MyPageController {
 	// 좋아요 해제
 	@GetMapping("/trip/unlike")
 	@ResponseBody
-	public String unLikeTrip(HttpSession session, @RequestParam int no) {
+	public String unLikeTrip(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -170,7 +173,9 @@ public class MyPageController {
 	// 리뷰 삭제
 	@GetMapping("/review/delete")
 	@ResponseBody
-	public String deleteReview(HttpSession session, @RequestParam int no) {
+	public String deleteReview(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -190,7 +195,9 @@ public class MyPageController {
 	// 내 플랜 삭제
 	@GetMapping("/plan/delete")
 	@ResponseBody
-	public String deletePlan(HttpSession session, @RequestParam int no) {
+	public String deletePlan(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -210,7 +217,8 @@ public class MyPageController {
 	// 마이페이지 - 회원정보수정 전 비밀번호 확인
 	@PostMapping("/confirm/password")
 	@ResponseBody
-    public String confirmPassword(HttpSession session, 
+    public String confirmPassword(
+    		HttpSession session, 
     		@RequestParam("password") String inputPassword) {
     	
 		Member member = (Member) session.getAttribute("loginMember");

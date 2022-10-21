@@ -29,8 +29,9 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button class="btn btn-outline-warning btn-sm btn-block">내
-						위드덕</button>
+					<button type="button" class="btn btn-outline-warning btn-sm btn-block"
+						onclick="location.href='${path}/chatgo'">
+					내 위드덕</button>
 					<button class="btn btn-outline-warning btn-sm btn-block"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
@@ -65,7 +66,7 @@
 				<c:set var="plan" value="${myPlannerFirst}" />
 
 				<div id="likePlan">
-					<h3 class="section-title">Like Plan</h3>
+					<h3 class="section-title">내 플래너</h3>
 					<div id="text"></div>
 					<!-- 내 플래너 카드 -->
 					<a>
@@ -92,7 +93,7 @@
 											<p class="card-text title">코스</p>
 											<p class="card-text text-content">${plan.getRoute()}</p>
 										</div>
-										<div class="card-btns">
+										<div class="plannerCard-btns">
 											<button type="button" class="btn btn-warning"
 											onclick="location.href=''">수정</button>
 											<button type="button" class="btn btn-secondary"
@@ -134,17 +135,18 @@
 					 <option value="${options.locationId}">${options.location}</option>
 							</c:forEach>  
 							<option value="999" selected>전체</option>  
-							<!-- <option value="0">여행지 선택</option> -->
+							<option value="0">여행지 선택</option>
 						</select>
 					</div>
 					<!-- 여행지 카드 -->
 					<div id="shiftTrip">
-						<a>
 							<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
 								<div class="row g-0">
 									<div class="col-md-4">
+										<a href="${path}/trip/detail?destNo=${trip.getDestNo()}">
 										<img src="${trip.getDestImage()}"
 											class="img-fluid rounded-start imgSize" alt="...">
+										</a>
 									</div>
 									<div class="col-md-8">
 										<div class="card-body">
@@ -173,7 +175,6 @@
 									</div>
 								</div>
 							</div>
-						</a>
 					</div>
 
 					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
@@ -197,7 +198,6 @@
 				<div id="myComment">
 					<!-- comment 카드 시작 -->
 					<h3 class="section-title">나의 리뷰</h3>
-					<a>
 						<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
 							<div>
 								<div class="card-body">
@@ -224,7 +224,6 @@
 								</div>
 							</div>
 						</div>
-					</a>
 
 					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
 					<div id="appendComment"></div>
@@ -256,8 +255,7 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="password" class="inputPwd" placeholder="비밀번호 입력">
-
+							<input type="password" id="inputPwd" class="inputPwd" placeholder="비밀번호 입력">
 						</div>
 						<div class="modal-footer">
 							<div id="modal-msg-wrap"></div>
@@ -271,11 +269,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>	
+	</div>
 
-		<jsp:include page="../common/footer.jsp" />
+	<jsp:include page="../common/footer.jsp" />
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 	var selected = "";  
 	var locSelected = [];
 	var sameCnt = 0;
@@ -303,7 +302,7 @@
 		var path ='${ pageContext.request.contextPath }'
 		// 플랜 혹은 리뷰 카드일 경우
 		if(select !== 'trip' && locationId == undefined){
-			// 더보기를 통해 새로 불러오는 데이터가  
+			// 더보기를 통해 새로 불러오는 데이터  
 			var offset = 1
 			
 			// 기본값 전체보기
@@ -312,7 +311,7 @@
 			// 어떤 카드에서 더보기를 클릭했는지 기억하기 위하여 카드 이름을 리스트에 저장 
 			selected += select;
 			
-			// 해당 리스트에 방금 선택한 카드 이름이 몇번 저장되어있는지 count
+			// 해당 리스트에 방금 선택한 카드 이름이 몇 번 저장되어있는지 count
 			var matchReg = new RegExp(select,"g");
 			var test = selected.match(matchReg)
 			
@@ -361,6 +360,7 @@
 			type : "get",
 			dataType : "json",
 			success : function(result){
+				console.log(result.data)
 				// html상에 추가해줄 데이터 
 				var appendData = '';
 				// 결과값이 리스트이므로 for문으로 접근
@@ -377,7 +377,7 @@
 			                    '<div class="col-md-8"> '+
 			                      '<div class="card-body"> '+
 			                        '<div class="info-container-top"> ' +
-			                         '<div class="card-title title mt-3"> ' +
+			                          '<div class="card-title title mt-3"> ' +
 			                            '<h5>여행지</h5> ' +
 			                          '</div> ' +
 			                          '<div class="card-title text-content mt-3"> ' +
@@ -385,15 +385,15 @@
 			                          '</div> ' +
 			                        '</div> ' +
 			                        '<div class="info-container-top"> ' +
-			                         '<p class="card-text title">코스</p> ' +
+			                          '<p class="card-text title">코스</p> ' +
 			                          '<p class="card-text text-content"> '+ data.route +' </p> ' +
 			                        '</div> ' +
-			                        '<div class="card-btns"> '+
-											'<button type="button" class="btn btn-warning" '+
-											'onclick="">수정</button> '+
-											'<button type="button" class="btn btn-secondary" '+
-											'onclick="delPlan('+ data.pno +')">삭제</button> '+
-										'</div>' +
+			                        '<div class="plannerCard-btns"> '+
+									  '<button type="button" class="btn btn-warning" '+
+									  'onclick="">수정</button> '+
+									  '<button type="button" class="btn btn-secondary" '+
+									  'onclick="delPlan('+ data.pno +')">삭제</button> '+
+									'</div>' +
 			                      '</div> ' +
 			                    '</div> ' +
 			                  '</div> ' +
@@ -402,11 +402,12 @@
 						
 					} else if (select === 'trip'){
 						appendData += 
-							'<a> '+
 				              '<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> '+
 				                '<div class="row g-0"> '+
 				                  '<div class="col-md-4"> '+
+				                  '<a href="'+ path+ '/trip/detail?destNo='+ data.destNo + '"> '+
 				                    '<img src="'+data.destImage +'" class="img-fluid rounded-start imgSize" alt="..."> '+
+				                    '</a> '+
 				                  '</div> '+
 				                  '<div class="col-md-8"> '+
 				                    '<div class="card-body"> '+
@@ -430,13 +431,11 @@
 				                    '</div> '+
 				                  '</div> '+
 				                '</div> '+
-				              '</div> '+
-				            '</a> '
+				              '</div> '
 					} else {
 						
 						appendData += 
-						'<a> '+
-				           '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
+				         '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
 			                '<div class="card-body"> '+
 			                  '<div class="star-rating"> ' +
@@ -449,7 +448,6 @@
 			                    '<h5 class="card-area">'+data.destCategory+'</h5> '+
 			                  '</div> '+
 			                  '<p class="card-text">'+data.commentsContent+'</p> '+
-			                  
 			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDate+ '(수정일 : '+data.commentsUpdateDate +'  ) </small></p> '+
 			                  '<div class="card-btns"> '+
 			                    '<button type="button" class="btn btn-warning" onclick="">수정</button> '+
@@ -457,18 +455,18 @@
 			                  '</div> '+
 			                '</div> '+
 			              '</div> '+
-			            '</div> '+
-			            '</a> '
+			             '</div> '
 					}
 				} // 반복문 끝
 				
 				// 여행의 경우에만 옵션 값이 있으며
 				// 지역 옵션 값에 따라 카드 내 데이터가 바뀌는 형식이므로 
 				// 여행 데이터가 없을 경우
-				// 다른 카드와는 달리 카드 내에 데이터가 없음을 보여줌 
+				// 다른 카드와는 달리 카드 내에 '데이터 없음' 보여줌 
 				if(select == 'trip' && result.data.length == 0){
 					appendData =   
 						'<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;"> ' +
+						'<a href="'+ path+ '/trip/main"> '+
 		                  '<div class="row g-0"> ' + 
 		                   '<div class="col-md-4"> ' +
 		                     '<div class=nodata> ' +
@@ -477,6 +475,7 @@
 						     '</div> '+
 	                   	    '</div> '+
 	                  	  '</div> '+
+	                  	  '</a> '+
 	                	'</div> '
 				}
 				
@@ -522,10 +521,9 @@
 						alert('리뷰가 삭제되었습니다.')
 						location.reload()
 						
-						// ajax를 통해 가져온 데이터 삭제 시 다시 sendReq(ajax)를 통해 데이터를 리로드 시켜주려했으나 
+						// ajax를 통해 가져온 데이터 삭제시, 다시 sendReq(ajax)를 통해 데이터를 리로드 시켜주려했으나 
 						// 더보기를 누른 횟수만큼 offset을 설정해주는 기능때문에 
 						// 가져오고자하는 데이터의 offset보다 높은 숫자로 요청 감
-						/* 
 						// 컨트롤러에게 응답 받은 데이터를 가지고 화면에 그려주는 방식이 다르므로 달리 처리함 
 					 	if(isFirst){
 					 		// model에 담긴 데이터를 삭제했을 경우(= 나의 리뷰에서 최초로 뜨는 데이터를 삭제했을 경우 )
@@ -535,7 +533,7 @@
 							// ajax를 통해 불러온 데이터에서 삭제했을 경우 (= 더보기를 통해 가져온 데이터를 삭제했을 경우)
 							$("#appendComment").html("");
 							sendReq('comment')
-						} */
+						} 
 						
 					}, error : function(result){
 						alert('데이터 삭제에 실패하였습니다. 잠시후 다시 시도해주세요')
@@ -587,7 +585,6 @@
 					}else {
 						location.href = '${path}/mypage/updateform';
 					}
-					
 					
 				}, error : function(result){
 					alert('오류가 발생했습니다. 잠시 후 다시 시도해주세요.')
