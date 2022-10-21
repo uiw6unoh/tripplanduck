@@ -12,7 +12,8 @@
 		       M_WARNING,
 		       M_STATUS,
 		       M_GENDER,
-		       M_AGE
+		       M_AGE,
+		       M_SNSID
 		FROM MEMBER
 	</sql>
 
@@ -101,4 +102,53 @@
 		DELETE FROM MEMBER WHERE NO = #{memberNO}
 	</delete>
 	
+	<!-- 카카오 회원가입 -->
+	<insert id="kakaoInsert">
+	    INSERT INTO MEMBER (
+			M_NO,
+			M_ID,
+			M_PW,
+			M_NICKNAME,
+			M_EMAIL,
+			M_TYPE,
+			M_WARNING,
+			M_STATUS,
+			M_GENDER,
+			M_AGE,
+		    M_SNSID
+	    ) VALUES(
+			SEQ_MEMBER_NO.NEXTVAL,
+			#{memberId},
+			#{memberPassword},
+			#{memberNickname},
+			#{memberEmail},
+			DEFAULT,
+			DEFAULT,
+			DEFAULT,
+			#{memberGender},
+			#{memberAge},
+		    #{memberSnsId}
+	    )
+	</insert>
+	
+	<!-- 카카오 회원 로그인 -->
+	<select id="kakaoSelect" parameterType="String" resultType="Member">
+		SELECT M_NO,
+		       M_ID,
+		       M_PW,
+		       M_NICKNAME,
+		       M_EMAIL,
+		       M_TYPE,
+		       M_WARNING,
+		       M_STATUS,
+		       M_GENDER,
+		       M_AGE,
+		       M_SNSID
+		FROM MEMBER
+		WHERE M_SNSID = #{memberSnsId}
+	</select>
+	
+	<select id="findUserIdBy2" parameterType="String" resultType="String">
+		SELECT M_ID FROM MEMBER WHERE M_SNSID = #{memberSnsId}
+	</select>
 </mapper>

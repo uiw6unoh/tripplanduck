@@ -2,6 +2,7 @@ package com.tripplan.duck.member.model.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import com.tripplan.duck.member.model.vo.Member;
 
@@ -18,4 +19,17 @@ public interface MemberMapper {
 
 	int updateMemberPassword(Member member);
 
+
+	 // 카카오 회원가입 관련
+    void kakaoInsert(Member member);
+    
+//    Member read(String memberId);
+
+    //snsId로 회원정보얻기
+    Member kakaoSelect(@Param("memberSnsId") String memberSnsId);
+
+    //snsId로 회원 아이디찾기
+    String findUserIdBy2(String memberSnsId);
+
+    
 }
