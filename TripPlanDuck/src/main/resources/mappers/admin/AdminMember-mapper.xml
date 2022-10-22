@@ -11,8 +11,8 @@
 		       M_TYPE,
 		       M_WARNING,
 		       M_STATUS,
-		       M_GENDER,
-		       M_AGE
+		       M_GENDER
+		       
 		FROM MEMBER
 	</sql>
 

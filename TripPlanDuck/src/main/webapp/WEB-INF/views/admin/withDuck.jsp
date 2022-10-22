@@ -20,8 +20,6 @@
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
             <p></p>
-            <a id="myListMain" href="${ path }/admin/chat"> 채팅 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/withDuck"> 위드덕 관리 </a>
         </div>
     </div>
@@ -76,7 +74,7 @@
 		                    <td style="text-align: center;">${withDuck.withNo}</td>
 		                    <td style="text-align: center;">${withDuck.withTitle}</td>
 		                    <td style="text-align: center;">${withDuck.withWriterNick}</td>
-		                    <td style="text-align: center;">신고된게시글</td>
+		                    <td style="text-align: center;">${withDuck.REPORT_TYPE}</td>
 		                    <td>
 	                        <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;"
 	                         onclick="location.href='${ path }/admin/withDuckInfo?withDuckNo=${withDuck.withNo}'">
