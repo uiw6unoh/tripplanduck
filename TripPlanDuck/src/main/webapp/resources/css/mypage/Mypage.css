@@ -81,7 +81,7 @@ select option:focus {
 
 /* 카드 */
 .card-body {
-    padding: 2.25rem;
+    transform: translate(-3%, 1%);
 }
 
 .likeCard {
@@ -98,11 +98,14 @@ select option:focus {
 
 .likeCard:hover {
     cursor: pointer;
-    box-shadow: 0px 12px 30px 0px #fff8c6;
+    box-shadow: 0 2px 12px 0 #fff8c6, 0 1px 4px 0 #fff8c6;
     border: 1px solid #fff8c6;
 }
 
 /* 작성한 리뷰 카드 */
+.commentCard-body {
+    transform: translate(5%, 31%);
+}
 .commentCard {
     width: 800px;
     height: 200px;
@@ -153,14 +156,14 @@ select option:focus {
 .fa-heart {
     color: #fabf42;
     float: right;
-    transform: translate(94%, -56%);
+    transform: translate(62%, -25%);
 }
 
 /* 나의 리뷰 별점 */
 .star-rating {
     display: flex;
     float: right;
-    transform: translate(34%, -75%);
+    transform: translate(-190%, -70%);
 }
 
 .star {
@@ -198,13 +201,12 @@ font-size: 1.4rem;
 /* 카드 버튼 */
 .plannerCard-btns {
 	float: right;
-    align-items: flex-end;
-    transform: translate(14%, 9%);
+    transform: translate(-31%, -460%);
 }
 .card-btns {
     float: right;
     align-items: flex-end;
-    transform: translate(7%, -103%);
+    transform: translate(-53%, -71%);
 }
 
 /* no data */
@@ -249,3 +251,93 @@ font-size: 1.4rem;
 	color : red
 }
 
+/* 애니메이션 */
+.send {
+	font-size: 30px;
+	border: none;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -0.5em;
+	margin-top: -0.5em;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+	color: white;
+}
+.send:focus {
+		outline: none;
+		animation: fly 1000ms ease;
+}
+
+
+@keyframes fly {
+	10% {
+		transform: translate(-10px, 10px);
+	}
+	40% {
+		transform: translate(-15px, 15px);
+		opacity: 1;
+	}
+	100% {
+		transform: translate(100vw, -100vh);
+		opacity: 0;
+	}
+}
+
+/* 리뷰 수정 */
+.star-rating-modal {
+	display: flex;
+ 	flex-direction: row-reverse;
+	font-size: 1.25rem;
+	line-height: 2rem;
+	justify-content: space-around;
+	padding: 0 0.1em;
+	text-align: center;
+	width: 5em;
+}
+
+.star-rating input {
+  display: none;
+}
+
+.star-rating label {
+  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+  -webkit-text-stroke-width: 1.2px;
+  -webkit-text-stroke-color: #2b2a29;
+  cursor: pointer;
+  margin-bottom: 0%;
+}
+
+.star-rating :checked ~ label {
+  -webkit-text-fill-color: gold;
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  -webkit-text-fill-color: #fff58c;
+}
+
+  .star-count {
+	position: relative;
+    background-color: white;
+    width: 47px;
+    height: 23px;
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    -webkit-text-stroke-width: 1.2px;
+    -webkit-text-stroke-color: #2b2a29;
+    cursor: pointer;
+    -webkit-text-fill-color: gold;
+    padding-left: 0.2rem;
+    margin-right: 3px;
+  }
+
+  .star-rate {
+    position: absolute;
+    top: 0px;
+    right: 5.5px;
+    font-size: 0.9rem;
+    -webkit-text-stroke-width: 0px;
+    -webkit-text-fill-color: black;
+  }

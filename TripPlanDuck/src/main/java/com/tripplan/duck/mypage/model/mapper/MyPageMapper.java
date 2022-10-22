@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.planner.model.vo.MyPlanner;
 import com.tripplan.duck.trip.model.vo.Comments;
@@ -32,5 +33,7 @@ public interface MyPageMapper {
 	void deleteReview(Map<String, Object> param);
 
 	void deletePlan(Map<String, Object> map);
+
+	int updateMyProfile(Member member);
 
 }
