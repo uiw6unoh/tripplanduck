@@ -116,7 +116,12 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-
+   	<script type="text/javascript">
+   	$(document).ready(function(){
+   		
+   	$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+   	});
+   	</script>
     <!--jQuery-->
     <script src="${path }/resources/js/common/jquery-3.6.0.min.js"></script>
 	
@@ -126,8 +131,9 @@
 </body>
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript">
-	
 //전송 버튼 누르는 이벤트
+
+
 $(document).ready(function() {
 	
 $("#button-send").on("click", function(e) {
@@ -156,6 +162,8 @@ $("#button-send").on("click", function(e) {
 		nickname = '${loginMember.memberNickname}';
 	  socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 	  $("#msg").val('');
+	  
+	  $('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
 });
 	$('#msg').on('keydown', function(e) {
 		
@@ -184,6 +192,8 @@ $("#button-send").on("click", function(e) {
 			  socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 			  $("#msg").val('');
 			  e.preventDefault();
+			  
+			  $('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
 		} 
 	});
 
@@ -259,7 +269,6 @@ function connect() {
 		setTimeout( function(){ connect(); }, 1000); // retry connection!!
 	};
 	
-	$()
 	ws.onerror = function (err) { console.log('Error:', err); };
 }
 </script>
