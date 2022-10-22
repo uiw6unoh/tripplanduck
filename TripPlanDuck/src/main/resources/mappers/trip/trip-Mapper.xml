@@ -47,59 +47,67 @@
 	</resultMap>
 	
 	<insert id="insertData"  parameterType="java.util.Map">
-	INSERT INTO DESTINATION(
-		DEST_NO, 
-		DEST_CATEGORY, 
-		DEST_SUBJECT, 
-		DEST_SUMMARY, 
-		DEST_CONTENT, 
-		DEST_ADDRESS, 
-		DEST_MAP_X, 
-		DEST_MAP_Y, 
-		DEST_HIT, 
-		DEST_CREATEDATE, 
-		DEST_UPDATEDATE, 
-		LOCATION_ID, 
-		DEST_IMAGE,
-		DEST_LIKE_SUM, 
-		DEST_RATING_AVG)
-	VALUES(
-		DEST_NO.NEXTVAL,
-		#{category},
-		#{title},
-		#{summary},
-		'nothing',
-		#{addr1},
-		#{mapx},
-		#{mapy},
-		0,
-		0,
-		0,
-		SYSDATE,
-		SYSDATE,
-		#{areacode},
-		#{firstimage}
-		)
+		INSERT INTO DESTINATION(
+			DEST_NO, 
+			DEST_CATEGORY, 
+			DEST_SUBJECT, 
+			DEST_SUMMARY, 
+			DEST_CONTENT, 
+			DEST_ADDRESS, 
+			DEST_MAP_X, 
+			DEST_MAP_Y, 
+			DEST_HIT, 
+			DEST_CREATEDATE, 
+			DEST_UPDATEDATE, 
+			LOCATION_ID, 
+			DEST_IMAGE,
+			DEST_LIKE_SUM, 
+			DEST_RATING_AVG)
+		VALUES(
+			DEST_NO.NEXTVAL,
+			#{category},
+			#{title},
+			#{summary},
+			'nothing',
+			#{addr1},
+			#{mapx},
+			#{mapy},
+			0,
+			0,
+			0,
+			SYSDATE,
+			SYSDATE,
+			#{areacode},
+			#{firstimage}
+			)
 	</insert>
 	
 	
 	<select id="getCategoryName" parameterType="int" resultType="string">
-		SELECT LOCATION FROM LOCATION WHERE LOCATION_ID = #{i}
+		SELECT LOCATION
+		FROM LOCATION
+		WHERE LOCATION_ID = #{i}
 	</select>
 	
 	<select id="getDestination" parameterType="int" resultMap="DestinationResultMap">
-		SELECT * FROM DESTINATION 
+		SELECT *
+		FROM DESTINATION 
 		WHERE DEST_NO = #{destNo}
 	</select>
 	
 	<select id="getLocation" parameterType="int" resultMap="locationResultMap">
-		SELECT * FROM LOCATION 
+		SELECT *
+		FROM LOCATION 
 		WHERE LOCATION_ID = #{locationId}
 	</select>
 	
 	<select id="getDestinationsByCategory" parameterType="int" resultMap="DestinationResultMap">
 		SELECT * 
-		FROM (SELECT * FROM DESTINATION WHERE DEST_CATEGORY = (SELECT DEST_CATEGORY FROM DESTINATION WHERE DEST_NO = #{destNo}) ORDER BY DEST_HIT) A
+		FROM (SELECT *
+			  FROM DESTINATION
+			  WHERE DEST_CATEGORY = (SELECT DEST_CATEGORY
+			  						 FROM DESTINATION
+			  						 WHERE DEST_NO = #{destNo}) ORDER BY DEST_HIT) A
 			<![CDATA[ 
 		WHERE rownum >= 1 
 		AND rownum <= 4
@@ -114,12 +122,24 @@
     </update>
 	
 	<select id="getDestinationsByLocationId" parameterType="int" resultMap="DestinationResultMap">
-		SELECT * FROM DESTINATION WHERE LOCATION_ID = #{locationId} ORDER BY DEST_HIT DESC
+		SELECT *
+		FROM DESTINATION
+		WHERE LOCATION_ID = #{locationId}
+		ORDER BY DEST_HIT DESC
 	</select>
 	
 	<select id="getLocations" parameterType="map" resultMap="locationResultMap">
-		SELECT C.* FROM (SELECT rownum as rnum, B.* FROM (SELECT A.LOCATION_ID, B.LOCATION, B.LCENTERX, B.LCENTERY, B.LOCATION_IMAGE, B.LOCATION_TITLE
-		FROM (SELECT LOCATION_ID, SUM(${order}) SUM FROM DESTINATION GROUP BY LOCATION_ID) A, LOCATION B 
+		SELECT C.*
+		FROM (SELECT rownum as rnum, B.*
+			  FROM (SELECT A.LOCATION_ID,
+			  			   B.LOCATION,
+			  			   B.LCENTERX,
+			  			   B.LCENTERY,
+			  			   B.LOCATION_IMAGE,
+			  			   B.LOCATION_TITLE
+				    FROM (SELECT LOCATION_ID, SUM(${order}) SUM
+				    	  FROM DESTINATION
+				    	  GROUP BY LOCATION_ID) A, LOCATION B 
 		WHERE A.LOCATION_ID = B.LOCATION_ID ORDER BY A.SUM DESC) B 
 		<![CDATA[
 		WHERE rownum <= ${limit+4}) C WHERE C.rnum > ${limit}
@@ -127,15 +147,25 @@
 	</select>
 	
 	<select id="getLocationsByName" parameterType="map" resultMap="locationResultMap">
-		SELECT B.* FROM (SELECT rownum as rnum, A.* FROM (SELECT LOCATION_ID, LOCATION, LCENTERX, LCENTERY, LOCATION_IMAGE, LOCATION_TITLE
-		FROM LOCATION ORDER BY ${order}) A 
+		SELECT B.*
+		FROM (SELECT rownum as rnum, A.*
+			  FROM (SELECT LOCATION_ID,
+			  			   LOCATION,
+			  			   LCENTERX,
+			  			   LCENTERY,
+			  			   LOCATION_IMAGE,
+			  			   LOCATION_TITLE
+					FROM LOCATION ORDER BY ${order}) A 
 		<![CDATA[ 
 		WHERE ROWNUM <= ${limit+4}) B WHERE B.rnum > ${limit}
 		]]>
 	</select>
 	
 	<select id="getDestinationsByKeyWord" parameterType="string" resultMap="DestinationResultMap">
-		SELECT * FROM DESTINATION WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%' ORDER BY DEST_HIT DESC
+		SELECT *
+		FROM DESTINATION
+		WHERE DEST_SUBJECT LIKE '%' ||  #{keyword} || '%'
+		ORDER BY DEST_HIT DESC
 	</select>
 	
 	<insert id="insertLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
@@ -143,40 +173,43 @@
 	</insert>
 	
 	<delete id="deleteLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
-		DELETE FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+		DELETE FROM DESTINATION_LIKE
+		WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
 	</delete>
 	
 	<select id="isLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike" resultType="int">
-		SELECT COUNT(*) FROM DESTINATION_LIKE WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
+		SELECT COUNT(*)
+		FROM DESTINATION_LIKE
+		WHERE DEST_NO = #{destNo} AND M_NO = #{memberNo}
 	</select>
 	
 	<update id="updateDestLike" parameterType="com.tripplan.duck.trip.model.vo.DestinationLike">
         UPDATE DESTINATION SET
-        DEST_LIKE_SUM = DEST_LIKE_SUM + 1
+        	   DEST_LIKE_SUM = DEST_LIKE_SUM + 1
         WHERE DEST_NO = #{destNo}
     </update>
     
     <insert id="insertComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
-    INSERT INTO DESTINATION_COMMENTS(
-		COMMENTS_ID, 
-		M_NO, 
-		COMMENTS_WRITER_ID, 
-		COMMENTS_CONTENT, 
-		COMMENTS_RATING,
-		COMMENTS_CREATEDATE,
-		COMMENTS_UPDATEDATE,
-		DEST_NO
-		)
-	VALUES(
-		COMMENTS_ID.NEXTVAL,
-		#{memberNo},
-		#{commentsWriterId},
-		#{commentsContent},
-		#{commentsRating},
-		TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
-		TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
-		#{destNo}
-		)
+	    INSERT INTO DESTINATION_COMMENTS(
+			COMMENTS_ID, 
+			M_NO, 
+			COMMENTS_WRITER_ID, 
+			COMMENTS_CONTENT, 
+			COMMENTS_RATING,
+			COMMENTS_CREATEDATE,
+			COMMENTS_UPDATEDATE,
+			DEST_NO
+			)
+		VALUES(
+			COMMENTS_ID.NEXTVAL,
+			#{memberNo},
+			#{commentsWriterId},
+			#{commentsContent},
+			#{commentsRating},
+			TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
+			TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI'),
+			#{destNo}
+			)
 	</insert>
 	
 	<select id="getDestinationComments" parameterType="int" resultMap="commentsResultMap">
@@ -187,21 +220,23 @@
 	
 	<update id="updateComment" parameterType="com.tripplan.duck.trip.model.vo.Comments">
         UPDATE DESTINATION_COMMENTS SET
-        COMMENTS_CONTENT = #{commentsContent},
-        COMMENTS_RATING = #{commentsRating},
-        COMMENTS_UPDATEDATE = TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI')
+	           COMMENTS_CONTENT = #{commentsContent},
+	           COMMENTS_RATING = #{commentsRating},
+	           COMMENTS_UPDATEDATE = TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI')
         WHERE DEST_NO = #{destNo}
         AND	  COMMENTS_ID = #{commentsId}
     </update>
     
     <delete id="deleteComment" parameterType="int">
-		DELETE FROM DESTINATION_COMMENTS WHERE COMMENTS_ID = #{commentsId}
+		DELETE FROM DESTINATION_COMMENTS
+		WHERE COMMENTS_ID = #{commentsId}
 	</delete>
 	
 	<update id="updateDestRating" parameterType="com.tripplan.duck.trip.model.vo.Comments">
-       	update DESTINATION 
-       	set DEST_RATING_AVG = (select avg(COMMENTS_RATING) 
-       	from DESTINATION_COMMENTS where DEST_NO = #{destNo}) 
+       	UPDATE DESTINATION 
+       	SET DEST_RATING_AVG = (SELECT AVG(COMMENTS_RATING) 
+       						  FROM DESTINATION_COMMENTS
+       						  WHERE DEST_NO = #{destNo}) 
        	WHERE DEST_NO = #{destNo}
     </update>
 </mapper>

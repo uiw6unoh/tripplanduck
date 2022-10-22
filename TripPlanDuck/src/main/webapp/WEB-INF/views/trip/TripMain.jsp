@@ -140,7 +140,7 @@
       </svg></button>
     </div>
 	  <div class="justify-content-center mt-2">
-         <div style="border: 4px solid rgba(255, 255, 255, 0.14); border-radius: 50px; margin: auto; background: rgba(55, 78, 132, 0.37); padding-inline: 2%; width: 37%; height:35px;">
+         <div style="border: 4px solid rgba(255, 255, 255, 0.14); border-radius: 50px; margin: auto; background: rgb(86 89 98 / 37%); padding-inline: 2%; width: 37%; height:35px;">
             <div style="width: 15%;float:left; transform: translateY(-23%);">
             <div id=iconImg ></div>   
          </div>
