@@ -38,4 +38,11 @@ public interface AdminService {
 	int withDuckDelte(int withDuckNo);
 
 
+
+	
+
+	
+
+
+
 }
