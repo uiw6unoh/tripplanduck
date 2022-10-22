@@ -51,26 +51,23 @@ public class ChatController {
 			model.setViewName("member/msg");
 		} else {
 			result1 = serviceWith.countChatMem(withDuck.getWithNo(), loginMember.getMemberNo());
-			if(result1 > 0) {
-				model.addObject("msg", "이미 참여중입니다.");
-				model.addObject("location", "/withduck/detail?withNo=" + withDuck.getWithNo());
-				model.setViewName("member/msg");
-			} else {
-				
-				result = service.joinChat(withDuck.getWithNo(), withDuck.getWithTitle(), loginMember.getMemberNickname(), loginMember.getMemberNo());
-				List<WithDuckChat> loginChatList = service.selectloginChatList(loginMember.getMemberNo());
-				System.out.println("loginChatList : " + loginChatList);
-				List<WithDuckChat> joinChatList = service.selectjoinChatList(withDuck.getWithNo());
-				System.out.println("joinChatList : " + joinChatList);
-				List<WithDuckChatLog> chatLogList = service.selectChatLogList(withDuck.getWithNo());
-				System.out.println("chatLogList : " + chatLogList);
-				model.addObject("loginChatList", loginChatList);
-				model.addObject("joinChatList", joinChatList);
-				model.addObject("chatLogList", chatLogList);
-				model.addObject("loginMember", loginMember);
-				model.addObject("withDuck", withDuck);
-				model.setViewName("withduck/WithDuckChat");
-			}
+			if(result1 == 0) {
+				service.joinChat(withDuck.getWithNo(), withDuck.getWithTitle(), loginMember.getMemberNickname(), loginMember.getMemberNo());
+			} 
+			
+			List<WithDuckChat> loginChatList = service.selectloginChatList(loginMember.getMemberNo());
+			System.out.println("loginChatList : " + loginChatList);
+			List<WithDuckChat> joinChatList = service.selectjoinChatList(withDuck.getWithNo());
+			System.out.println("joinChatList : " + joinChatList);
+			List<WithDuckChatLog> chatLogList = service.selectChatLogList(withDuck.getWithNo());
+			System.out.println("chatLogList : " + chatLogList);
+			
+			model.addObject("loginChatList", loginChatList);
+			model.addObject("joinChatList", joinChatList);
+			model.addObject("chatLogList", chatLogList);
+			model.addObject("loginMember", loginMember);
+			model.addObject("withDuck", withDuck);
+			model.setViewName("withduck/WithDuckChat");
 		}
 		
 		return model;

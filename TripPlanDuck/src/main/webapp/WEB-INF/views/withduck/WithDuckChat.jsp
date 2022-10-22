@@ -90,7 +90,14 @@
             <div class="chatContent" id="msgArea">
                 <div class="wrap" style="padding: 10px 0">
                 	<c:forEach items="${chatLogList}" var="chatLogList">
-                		${chatLogList.chatContent }
+                		<c:if test="${loginMember.memberNickname ==  chatLogList.chatMemNickName}">
+                			<c:set var='str' value="${chatLogList.chatContent }"></c:set>
+                			<c:set var='str1' value="${fn:replace(str, 'ch1', 'ch2') }"></c:set>
+                			${str1 }
+                		</c:if>
+                		<c:if test="${loginMember.memberNickname !=  chatLogList.chatMemNickName}">
+                			${chatLogList.chatContent }
+                		</c:if>
                 	</c:forEach>
 	            </div>
             </div>
@@ -187,8 +194,23 @@ var socket = null;
 function connect() {
 	var ws = new WebSocket("ws://211.209.232.21:80/${path}/chatting");
 	socket = ws;
-
+	var memberNo = '${loginMember.memberNo}';
+	var length = '${fn:length(joinChatList)}';
+	var joinChatList = "";
+	
 	ws.onopen = function (event) {
+	var count = 0;
+	console.log(length);
+	
+	<c:forEach items="${joinChatList}" var="item">
+			joinChatList = '${item.withMemNo}'
+			if(joinChatList == memberNo) {
+				count++;
+				console.log('count : ' + count);
+			}
+	</c:forEach>
+	
+	if(count===1){
 	    console.log('Info: connection opened.');
 	    var str = '<div class="chat_entry" id="msgArea">';
 		var user = '${loginMember.memberNickname}';
@@ -198,8 +220,8 @@ function connect() {
 		console.log(event);
 		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 		$(".wrap").append(str);
-	};
-
+	}
+};
 	ws.onmessage = function (event) {
 		var data = event.data;
 		var sessionId = null; //데이터를 보낸 사람

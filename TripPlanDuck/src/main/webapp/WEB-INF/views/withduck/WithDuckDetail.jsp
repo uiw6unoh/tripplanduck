@@ -163,6 +163,11 @@
         동행참여
     </button>
 </c:if>
+<c:if test="${joinBool == false}">
+    <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
+        채팅진입
+    </button>
+</c:if>
 
     <button class="btn btn-outline-warning" type="button">
         목록으로
