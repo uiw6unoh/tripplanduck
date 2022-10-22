@@ -36,67 +36,23 @@
                             채팅 목록
                         </span>
                 </div>
-                
-                <div class="withTitle">
-                    <div class="chatList">
-                        <div class="imgdiv"><img src="${path}/resources/images/Common/프사.png" alt=""></div>
-                            <div class="imgdiv-right">
-                                <div class="textdiv1">
-                                    <a href="">8월 28일 ~ 8월 31일 제주도 갑니다123123</a>
-                                </div>
-                                <div class="textdiv2">34
-                                    <a href="">
-                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="chatList">
-                        <div class="imgdiv"><img src="${path}/resources/images/Common/프사.png" alt=""></div>
-                            <div class="imgdiv-right">
-                                <div class="textdiv1">8월 28일 ~ 8월 31일 제주도 갑니다123123</div>
-                                <div class="textdiv2">34
-                                    <a href="">
-                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="chatList">
-                        <div class="imgdiv"><img src="${path}/resources/images/Common/프사.png" alt=""></div>
-                            <div class="imgdiv-right">
-                                <div class="textdiv1">8월 28일 ~ 8월 31일 제주도 갑니다123123</div>
-                                <div class="textdiv2">34
-                                    <a href="">
-                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="chatList">
-                        <div class="imgdiv"><img src="${path}/resources/images/Common/프사.png" alt=""></div>
-                            <div class="imgdiv-right">
-                                <div class="textdiv1">8월 28일 ~ 8월 31일 제주도 갑니다123123</div>
-                                <div class="textdiv2">34
-                                    <a href="">
-                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                    <div class="chatList">
-                        <div class="imgdiv"><img src="${path}/resources/images/Common/프사.png" alt=""></div>
-                            <div class="imgdiv-right">
-                                <div class="textdiv1">8월 28일 ~ 8월 31일 제주도 갑니다123123</div>
-                                <div class="textdiv2">34
-                                    <a href="">
-                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-                                    </a>
-                                </div>
-                            </div>
-                    </div>
-                </div>
-                
+	                <div class="withTitle">
+                <c:forEach items="${loginChatList}" var="loginChatList">
+	                    <div class="chatList">
+	                        <div class="imgdiv"><img src="${path}/resources/images/common/프사.png" alt=""></div>
+	                            <div class="imgdiv-right">
+	                                <div class="textdiv1">
+	                                    <a href="">${loginChatList.chatTitle}</a>
+	                                </div>
+	                                <div class="textdiv2">34
+	                                    <a href="">
+	                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
+	                                    </a>
+	                                </div>
+	                            </div>
+	                    </div>
+                </c:forEach>
+	                </div>
             </div>
             <!--참여 인원-->
             <div class="chatPerContainer">
@@ -106,30 +62,16 @@
                     </span>
                 </div>
                 <div class="chatPerList">
+                <c:forEach items="${joinChatList}" var="joinChatList">
                     <div class="profile_name">
                         <div class="chat_profile">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
+                            <img src="${path}/resources/images/common/프사.png" alt="">
                         </div>
                         <div class="chat_name">
-                            <span>박노경</span>
+                            <span>${joinChatList.chatMemNick }</span>
                         </div>
                     </div>
-                    <div class="profile_name">
-                        <div class="chat_profile">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
-                        </div>
-                        <div class="chat_name">
-                            <span>박노순</span>
-                        </div>
-                    </div>
-                    <div class="profile_name">
-                        <div class="chat_profile">
-                            <img src="${path}/resources/images/Common/프사.png" alt="">
-                        </div>
-                        <div class="chat_name">
-                            <span>박노</span>
-                        </div>
-                    </div>
+                </c:forEach>
                 </div>
             </div>
         </div>
@@ -147,6 +89,9 @@
 
             <div class="chatContent" id="msgArea">
                 <div class="wrap" style="padding: 10px 0">
+                	<c:forEach items="${chatLogList}" var="chatLogList">
+                		${chatLogList.chatContent }
+                	</c:forEach>
 	            </div>
             </div>
 
