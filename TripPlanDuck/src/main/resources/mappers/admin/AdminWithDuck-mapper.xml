@@ -68,28 +68,29 @@
 		<result property="updateDate" column="WITH_UPDATEDATE"/>
 	</resultMap>
 	
-		<resultMap type="WithDuckReport" id="withDuckReportResultMap">
+		<resultMap type="Report" id="withDuckReportResultMap">
 		<id property="withNo" column="WITH_NO"/>
-		<result property="withWriterNo" column="WITH_WRITER_NO"/>
 		<result property="withWriterNick" column="WITH_WRITER_NICK"/>
-		<result property="withLocation" column="WITH_LOCATION"/>
-		<result property="withGender" column="WITH_GENDER"/>
-		<result property="withAge" column="WITH_AGE"/>
-		<result property="withPersonner" column="WITH_PERSONNER"/>
-		<result property="withStatus" column="WITH_STATUS"/>
-		<result property="withStartDate" column="WITH_STARTDATE"/>
-		<result property="withEndDate" column="WITH_ENDDATE"/>
-		<result property="withOriginFileName" column="WITH_ORIGINFILENAME"/>
-		<result property="withRenameFileName" column="WITH_RENAMEFILENAME"/>
 		<result property="withTitle" column="WITH_TITLE"/>
-		<result property="withContent" column="WITH_CONTENT"/>
-		<result property="withWriterGender" column="WITH_WRITER_GENDER"/>
-		<result property="withWriterAge" column="WITH_WRITER_AGE"/>
-		<result property="withkeyword" column="WITH_KEYWORD"/>
-		<result property="withReadCount" column="WITH_READCOUNT"/>
-		<result property="withJoinStatus" column="WITH_JOINSTATUS"/>
-		<result property="createDate" column="WITH_CREATEDATE"/>
-		<result property="updateDate" column="WITH_UPDATEDATE"/>
+		<result property="reportId" column="REPORT_ID" />
+		<result property="reportCategory" column="REPORT_CATEGORY" />
+		<result property="reportMemberNo" column="REPORT_M_NO" />
+		<result property="reportCreateDate" column="REPORT_CREATEDATE" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="reportType" column="REPORT_TYPE" />
+		<result property="reportNoType" column="REPORT_NO_TYPE" />
+		<result property="memberNo" column="M_NO" />
+	</resultMap>
+	
+	<resultMap type="Report" id="ReportResultMap">
+		<id property="reportId" column="REPORT_ID" />
+		<result property="reportCategory" column="REPORT_CATEGORY" />
+		<result property="reportMemberNo" column="REPORT_M_NO" />
+		<result property="reportCreateDate" column="REPORT_CREATEDATE" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="reportType" column="REPORT_TYPE" />
+		<result property="reportNoType" column="REPORT_NO_TYPE" />
+		<result property="memberNo" column="M_NO" />
 	</resultMap>
 	
 	<select id="withDuckFindNo" parameterType="int" resultMap="withDuckResultMap">
