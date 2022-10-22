@@ -1,9 +1,11 @@
 package com.tripplan.duck.member.controller;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,9 +25,11 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.member.model.service.EmailSendService;
+import com.tripplan.duck.member.model.service.KakaoService;
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -74,6 +78,9 @@ public class MemberController {
     
     @Autowired // 빈으로 만들어서 주입
     private MemberService service;
+
+    @Autowired
+    private KakaoService kakaoService;
     
  
     /*
@@ -93,6 +100,7 @@ public class MemberController {
     	log.info("{}, {}", memberId, memberPassword);
     	
     	Member loginMember = service.login(memberId, memberPassword);
+    	
     	
     	if(loginMember != null) {
     		model.addObject("loginMember", loginMember);
@@ -204,12 +212,12 @@ public class MemberController {
 	
 	
 	// 아이디 찾기
-		@RequestMapping(value = "/member/findMemberId", method = RequestMethod.POST)
-		public String find_id(HttpServletResponse response, @RequestParam("memberEmail") String memberEmail, Model model) throws Exception{
-			model.addAttribute("memberId", service.findMemberId(response, memberEmail));
-			
-			return "/member/FindIdResult";
-		}
+	@RequestMapping(value = "/member/findMemberId", method = RequestMethod.POST)
+	public String find_id(HttpServletResponse response, @RequestParam("memberEmail") String memberEmail, Model model) throws Exception{
+		model.addAttribute("memberId", service.findMemberId(response, memberEmail));
+		
+		return "/member/FindIdResult";
+	}
 
 	// 비밀번호 찾기
 	@RequestMapping(value = "/member/findMemberPassword", method = RequestMethod.POST)
@@ -235,8 +243,63 @@ public class MemberController {
 		return model;
 	}
 	
-	
+	// 카카오 로그인
+    @RequestMapping(value = "/member/kakaoLogin", method = RequestMethod.GET)
+    public String redirectkakao(@RequestParam String code, HttpSession session) throws IOException {
+        System.out.println("code:: " + code);
+
+        // 접속토큰 get
+        String kakaoToken = kakaoService.getReturnAccessToken(code);
+
+        // 접속자 정보 get
+        Map<String, Object> result = kakaoService.getUserInfo(kakaoToken);
+        log.info("result:: " + result);
+        String snsId = (String) result.get("id");
+        String nickName = (String) result.get("nickname");
+        String email = (String) result.get("email");
+        String pw = snsId;
+        String gender = (String)result.get("gender");
+        String age = (String)result.get("age_range");
+        
+        
+
+        // 분기
+        Member member = new Member();
+        
+        // 일치하는 snsId 없을 시 회원가입
+        System.out.println("snsId : " + service.kakaoLogin(snsId));
+        if (service.kakaoLogin(snsId) == null) {
+            log.warn("카카오로 회원가입");
+            member.setMemberId(email);
+            member.setMemberEmail(email);
+            member.setMemberPassword(pw);
+            member.setMemberNickname(nickName);
+            member.setMemberSnsId(snsId);
+            member.setMemberEmail(email);
+            member.setMemberGender(gender);
+            member.setMemberAge(age);
+            service.kakaoJoin(member);
+
+            session.setAttribute("loginMember", member);
+        } else {
+        	// 일치하는 snsId가 있으면 멤버객체에 담음.
+            log.warn("카카오로 로그인");
+            String MemberId = service.findUserIdBy2(snsId);
+            Member vo = service.findMemberById(MemberId);
+            log.warn("member:: " + vo);
+            session.setAttribute("loginMember", vo);
+          
+            System.out.println(vo);
+        }
+        
+        /* 로그아웃 처리 시, 사용할 토큰 값 */
+        session.setAttribute("kakaoToken", kakaoToken);
+
+         return "redirect:/";
+    }
+
 }
+
 
 
 

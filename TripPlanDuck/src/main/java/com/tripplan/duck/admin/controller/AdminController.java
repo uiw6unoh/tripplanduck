@@ -2,8 +2,11 @@ package com.tripplan.duck.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -161,25 +164,6 @@ public class AdminController {
     	return model;
     }
     
-    @GetMapping("/admin/chat")
-    public ModelAndView chat(ModelAndView model,
-    		@RequestParam(value="page", defaultValue = "1") int page) {
-    	
-    	List<Member> list = null;
-    	PageInfo pageInfo = null;
-    	
-    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
-    	list = service.getMemberList(pageInfo);
-    	
-    	System.out.println(pageInfo);
-    	System.out.println(list);
-    	
-    	model.addObject("list", list);
-    	model.addObject("pageInfo", pageInfo);
-    	model.setViewName("admin/member");
-    	return model;
-    	
-    }
     
     @GetMapping("/admin/memberInfo")
     public ModelAndView memberInfo(ModelAndView model, @RequestParam(value="memberNo") int memberNo) {
@@ -247,5 +231,6 @@ public class AdminController {
     	
     	return model;
     }
+    
     
 }

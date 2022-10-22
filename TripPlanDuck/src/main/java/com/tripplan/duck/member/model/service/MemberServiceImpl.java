@@ -12,7 +12,10 @@ import org.springframework.stereotype.Service;
 import com.tripplan.duck.member.model.mapper.MemberMapper;
 import com.tripplan.duck.member.model.vo.Member;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class MemberServiceImpl implements MemberService {
 	
 //	@Autowired
@@ -111,7 +114,26 @@ public class MemberServiceImpl implements MemberService {
 			return MemberId;
 		}
 	}
-
 	
+	//카카오로그인
+    @Override
+    public void kakaoJoin(Member member) {
+        mapper.kakaoInsert(member);
+        String memberId = member.getMemberId();
+        log.info("userid:: " + memberId);
+    }
+
+    @Override
+    public Member kakaoLogin(String memberSnsId) {
+        log.info("snsId:: " + memberSnsId);
+        return mapper.kakaoSelect(memberSnsId);
+    }
+
+    @Override
+    public String findUserIdBy2(String memberSnsId) {
+        log.info("snsId:: " + memberSnsId);
+        return mapper.findUserIdBy2(memberSnsId);
+    }
+
 
 }
