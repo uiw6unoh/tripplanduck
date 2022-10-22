@@ -163,7 +163,7 @@
         동행참여
     </button>
 </c:if>
-<c:if test="${joinBool == false}">
+<c:if test="${joinBool == false && loginMember != null}">
     <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
         채팅진입
     </button>

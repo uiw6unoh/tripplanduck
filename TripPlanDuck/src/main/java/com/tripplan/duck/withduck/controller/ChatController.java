@@ -62,6 +62,7 @@ public class ChatController {
 			List<WithDuckChatLog> chatLogList = service.selectChatLogList(withDuck.getWithNo());
 			System.out.println("chatLogList : " + chatLogList);
 			
+			model.addObject("result", result1);
 			model.addObject("loginChatList", loginChatList);
 			model.addObject("joinChatList", joinChatList);
 			model.addObject("chatLogList", chatLogList);

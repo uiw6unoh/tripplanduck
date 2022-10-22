@@ -33,7 +33,9 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		log.info("#ChattingHandler, afterConnectionEstablished");
+		String cur_withDuck = String.valueOf(session.getUri()).replace("ws://211.209.232.21//duck/chatting?withNo=", "");
 		sessionList.add(session);
+		System.out.println(session);
 		log.info(session.getId() + "님이 입장하셨습니다.");
 		
 	}
@@ -55,7 +57,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		int chatMemNo = Integer.parseInt(memNo);
 		int chatWithNo = Integer.parseInt(withNo);
 		
-		
+
 		service.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
 		
 		System.out.println(Arrays.toString(arr));
@@ -63,8 +65,9 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			if(session.getId() == s.getId()) {
 				continue;
 			}
-			s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo ));
-			System.out.println("sessiong.getId(): " + session);
+				s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo ));
+				System.out.println(" s : " + s);
+			
 		}
 		
 		System.out.println("sessionList : " + sessionList);

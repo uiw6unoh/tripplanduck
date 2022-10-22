@@ -192,7 +192,7 @@ connect();
 
 var socket = null;
 function connect() {
-	var ws = new WebSocket("ws://211.209.232.21:80/${path}/chatting");
+	var ws = new WebSocket("ws://211.209.232.21:80/${path}/chatting?withNo=" + "${withDuck.withNo}");
 	socket = ws;
 	var memberNo = '${loginMember.memberNo}';
 	var length = '${fn:length(joinChatList)}';
@@ -202,15 +202,7 @@ function connect() {
 	var count = 0;
 	console.log(length);
 	
-	<c:forEach items="${joinChatList}" var="item">
-			joinChatList = '${item.withMemNo}'
-			if(joinChatList == memberNo) {
-				count++;
-				console.log('count : ' + count);
-			}
-	</c:forEach>
-	
-	if(count===1){
+	<c:if test="${result == 0}">
 	    console.log('Info: connection opened.');
 	    var str = '<div class="chat_entry" id="msgArea">';
 		var user = '${loginMember.memberNickname}';
@@ -220,7 +212,7 @@ function connect() {
 		console.log(event);
 		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 		$(".wrap").append(str);
-	}
+	</c:if>
 };
 	ws.onmessage = function (event) {
 		var data = event.data;
