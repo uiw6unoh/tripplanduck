@@ -3,6 +3,7 @@ package com.tripplan.duck.mypage.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.planner.model.vo.Location;
 import com.tripplan.duck.planner.model.vo.MyPlanner;
 import com.tripplan.duck.trip.model.vo.Comments;
@@ -29,4 +30,6 @@ public interface MyPageService {
 	void deleteReview(Map<String, Object> param);
 
 	void deletePlan(Map<String, Object> map);
+
+	boolean confirmPassword(Member member);
 }

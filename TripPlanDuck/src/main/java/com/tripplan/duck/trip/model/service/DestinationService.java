@@ -47,4 +47,6 @@ public interface DestinationService {
 
 	void deleteComment(int commentsId);
 
+	void updateDestRating(Comments comments);
+
 }

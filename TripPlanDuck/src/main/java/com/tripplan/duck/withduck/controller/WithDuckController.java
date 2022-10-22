@@ -26,8 +26,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tripplan.duck.common.util.MultipartFileUtil;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.withduck.model.service.WithDuckChatService;
 import com.tripplan.duck.withduck.model.service.WithDuckService;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
+import com.tripplan.duck.withduck.model.vo.WithDuckChat;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +40,9 @@ public class WithDuckController {
 	
 	@Autowired
 	private WithDuckService service;
+	
+	@Autowired
+	private WithDuckChatService chatService;
 	
 	@Autowired
 	private ResourceLoader resourceLoader;
@@ -393,9 +398,13 @@ public class WithDuckController {
 		withDuck.setWithWriterAge(loginMember.getMemberAge());
 		withDuck.setWithWriterGender(loginMember.getMemberGender());
 		
-		result = service.createWithDuck(withDuck);
+		int result2 = 0;
 		
-		if(result > 0) {
+		result = service.createWithDuck(withDuck);
+		System.out.println("withNo : " + withDuck);
+		result2 = chatService.createChat(withDuck.getWithNo(), withDuck.getWithTitle(), withDuck.getWithWriterNick(), withDuck.getWithWriterNo());
+		
+		if(result > 0 && result2 > 0) {
 			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
 			model.addObject("location", "/withduck/list");
 		} else {
@@ -413,9 +422,12 @@ public class WithDuckController {
 	public ModelAndView detailWithDuck(ModelAndView model,
 									   @RequestParam(value = "withNo") int withNo,
 									   HttpServletRequest request,
-									   HttpServletResponse response) {
+									   HttpServletResponse response,
+									   HttpSession session) {
 		WithDuck withDuck = null;
 		String[] arr = null;
+		
+		Member member = (Member)session.getAttribute("loginMember");
 		
 		Cookie[] cookies = request.getCookies();
     	String boardHistory = ""; // 조회한 게시글 번호를 저장하는 변수
@@ -481,8 +493,9 @@ public class WithDuckController {
 		
 		System.out.println(withNo);
 		System.out.println("상세페이지 : " + withDuck);
+		System.out.println(request.getAttribute("withDuck"));
 		
-
+		model.addObject("member", member);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
 		return model;

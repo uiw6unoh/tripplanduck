@@ -27,6 +27,8 @@ public class Member {
 	
 	private String memberGender;
 	
-	private int memberAge;
+	private String memberAge;
+	
+	private String memberSnsId;
 	
 }

@@ -25,6 +25,14 @@
 	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #fff8c6;background: #fff8c6 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
 	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	
+	.lb-widget-01 {
+	  position: fixed;
+	  top: 220px; /* 브라우저 윗쪽 끝에서부터의 거리 */
+	  right: 50%; /* 왼쪽에 배치하려면 right를 left로 변경 */
+	  margin-right: -850px; /* 왼쪽에 배치하려면 margin-right를 margin-left로 변경  */
+	  z-index: 99;
+	}
 </style>
 
 <!-- 내용 시작 -->
@@ -171,7 +179,7 @@
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
 				<div class="card-tab">               
-                   <div class="card-tab m-2 " id="map" style="width:500px;height:400px;"></div>
+                   <div class="card-tab m-2 " id="map" style="width:1075px;height:400px;"></div>
 				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
@@ -208,7 +216,6 @@
 	                              <div class="float-left">
 	                                  <div class="star-count">
 								        ★
-								        <!-- 여기에 rating 숫자 보여줘야 함 -->
 								        <div class="star-rate">${comment.commentsRating}.0</div>
 								      </div>
 	                                </div>
@@ -216,14 +223,18 @@
 	                                  
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
-											<button class="btn btn-outline-warning py-0" data-toggle="modal" id="updateBtn" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
+											<button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="updateSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
 		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
-		                                  	
 										</c:when>
+										
+										<c:when test="${ loginMember.memberId == 'admin' }">
+											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+										</c:when>
+										
 										<c:otherwise>	
-		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" id="reportBtn" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
+		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
 									  </c:choose>
 	                                  </div>
@@ -236,7 +247,7 @@
                 </section>
                 </div>
               </div>
-              
+                           
             <!-- 수정 클릭 시 모달 -->
 			<div class="modal fade" id="updateBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			  <div class="modal-dialog modal-dialog-centered">
@@ -282,7 +293,7 @@
 			    <div class="modal-content">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="staticBackdropLabel">신고하기</h5>
-			        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        <button id="closeBtn" type="button" class="close" data-dismiss="modal" aria-label="Close">
 			          <span aria-hidden="true">&times;</span>
 			        </button>
 			      </div>
@@ -292,40 +303,41 @@
 					  <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
 					</svg> 클릭하여 신고 이유를 선택해 주세요.</p>
 					<div class="mt-3">
-						<label class="box-radio-input"><input type="radio" name="report" value="1"><span>회원비난/비하</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="2"><span>욕설/비속어</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="3"><span>예의에 어긋난 게시물/리플</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="4"><span>허위사실 유포</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="5"><span>회원기만</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="6"><span>무단광고/홍보</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="7"><span>사적목적 이용</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="8"><span>외설적 표현물</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="9"><span>불법행위 관련/소개</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="10"><span>타인권리 침해</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="11"><span>종교 비난</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="12"><span>선교/포교</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="13"><span>특정집단 차별</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="14"><span>불쾌감 조성</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="15"><span>게시판 용도위반 or 부적절</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="16"><span>이용방해 행위</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="17"><span>질문/요청글</span></label>
-						<label class="box-radio-input"><input type="radio" name="report" value="18"><span>기타 사유</span></label>
-						<input type="hidden" id="reportType" name="reportType"></input>
+						<label class="box-radio-input"><input type="radio" name="report" value="회원비난/비하"><span>회원비난/비하</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="욕설/비속어"><span>욕설/비속어</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="예의에 어긋난 게시물/리플"><span>예의에 어긋난 게시물/리플</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="허위사실 유포"><span>허위사실 유포</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="회원기만"><span>회원기만</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="무단광고/홍보"><span>무단광고/홍보</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="사적목적 이용"><span>사적목적 이용</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="외설적 표현물"><span>외설적 표현물</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="불법행위 관련/소개"><span>불법행위 관련/소개</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="타인권리 침해"><span>타인권리 침해</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="종교 비난"><span>종교 비난</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="선교/포교"><span>선교/포교</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="특정집단 차별"><span>특정집단 차별</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="불쾌감 조성"><span>불쾌감 조성</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="게시판 용도위반 or 부적절"><span>게시판 용도위반 or 부적절</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="이용방해 행위"><span>이용방해 행위</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="질문/요청글"><span>질문/요청글</span></label>
+						<label class="box-radio-input"><input type="radio" name="report" value="기타 사유"><span>기타 사유</span></label>
 					</div>
 				  </div>
 			      <div class="modal-footer">
 			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0">신고</button>
-			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			        <button type="button" id="reportCancel" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
 			  </div>
 			</div>  
-			</c:if>
-              
+			</c:if>      
             </div>
           </div>
-        </div>
-      </div>
+             <div class="lb-widget-01" style="width:200px; float:right;">
+				<div id="lbl-1" class="lb-left-weather" style="height:200px;">
+					<iframe src="https://forecast.io/embed/#lat=${dest.destMapX}&lon=${dest.destMapY}&name=${dest.destSubject}&color=&font=&units=si"></iframe>
+				</div>
+			 </div>
 </section>
 
 <jsp:include page="../common/footer.jsp"/>
@@ -346,8 +358,7 @@
 
 <script>
 // 수정 시 모달에 데이터 넘겨주기
-$('[id="updateBtn"]').on("click", function () {
- 	let commentsId = $("#updateBtn").attr('name')
+function updateSet(commentsId){
 	$("#commentsId").val(commentsId)
 	
 	let rating = $("#rating" + commentsId).val()
@@ -356,8 +367,8 @@ $('[id="updateBtn"]').on("click", function () {
 	let content = $("#content" + commentsId).val()
 	$("#commentsContent2").val(content)
 	
-});
-
+	console.log("commentsId : ", commentsId)
+}
 
 // 삭제 버튼
 function deleteComment(commentsId){
@@ -374,8 +385,10 @@ function deleteComment(commentsId){
       if (result.isConfirmed) {
         //삭제 요청 처리
         
+        let destNo = "${dest.destNo}"
+        
         $.ajax({
-			url : "${path}/trip/api/comment?commentsId=" + commentsId,
+			url : "${path}/trip/api/comment?commentsId=" + commentsId + "&destNo=" + destNo,
 			type : "DELETE",
 			success: function(data) {
 				if(data == 1){
@@ -426,7 +439,6 @@ function deleteComment(commentsId){
       closeOnClickOutside : false
 
     }).then(function (result) {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         //수정 요청 처리
         
@@ -534,86 +546,83 @@ function deleteComment(commentsId){
   });
  
   // 신고 버튼
-  $(document).ready(function () {
-	    $('[id="reportBtn"]').on("click", function () {
-	    
-	    	let member = "${member}";
-	     	let commentsId = $("#reportBtn").attr('name')
-	    	$("#commentsId").val(commentsId)	
+function reportSet(commentsId){
+	   	$("#commentsId").val(commentsId)
 	    	
-	    	console.log("commentsId : ", commentsId)
-	    	console.log("member :", member)
+	    let member = "${member}";
+	     	
+	   	console.log("commentsId : ", commentsId)
+	    console.log("member :", member)
 	    	
-	    	if(member == "" || member == null){
-	    		Swal.fire({
-			        icon: "error",
-			        title: `실패!`,
-			        text: '로그인 후 이용해주세요.',
-			        confirmButtonText: "확인",
-			        closeOnClickOutside : false
-		        }).then(function (isConfirmed) {
-			    	  window.location.href="${path}/member/login";
-		        });
-		        
-		        return;
-		    }
-	    	
-	    	$('[id="reportAlert"]').on("click", function () {
-		    	let report = $('input[name=report]:checked').text();
-		    	let reportType = $('#reportType').attr('value', report);
-	
-			   	if(report == null || report == ""){
-			       	Swal.fire({
-				        icon: "error",
-				        title: `실패!`,
-				        text: '신고 이유를 체크해주세요.',
-				        confirmButtonText: "확인",
-				        closeOnClickOutside : false
-			        })
-			        
-			       	return;
-			    }
-	    	
-		      var form = $(this).parents('form');
-		      Swal.fire({
-		        icon: "success",
-		        title: "신고완료!",
-		        text: `신고가 접수되었습니다.`,
+	   	if(member == "" || member == null){
+	    	Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '로그인 후 이용해주세요.',
 		        confirmButtonText: "확인",
 		        closeOnClickOutside : false
-	
-		      }).then(function (isConfirmed) {
-		    	  
-		        // 신고 요청 처리
-		        let data = {
-		        	'commentsId' : commentsId,
-		        	'reportType' : reportType
-		   		};
-		        
-		        console.log("data :", data)
-		        
-		        $.ajax({
-					url : "${path}/report/review",
-					type : "POST",
-					data : data,
-					dataType : "json",
-					success: function(data) {
-						location.reload()
-					},
-					error: function(error) {
-						
-					}
-				})			
-		        
-		      });
+		    }).then(function (isConfirmed) {
+			  	  window.location.href="${path}/member/login";
 		    });
-	    });
-
-	  });
+		        
+		return;
+	}
+  }  	
+function reportComment() {
+	let reportType = $('input[name=report]:checked').val();
+	let commentsId = $("#commentsId").val();
+				
+	console.log("commentsId : ", commentsId)
+		    	
+	if(reportType == null || reportType == "") {
+			Swal.fire({
+			    icon: "error",
+				title: `실패!`,
+				text: '신고 이유를 체크해주세요.',
+				confirmButtonText: "확인",
+				closeOnClickOutside : false
+			})
+			        
+				return;
+		}
+	    	
+	var form = $(this).parents('form');
+	Swal.fire({
+		icon: "success",
+		title: "신고완료!",
+		text: `신고가 접수되었습니다.`,
+		confirmButtonText: "확인",
+		closeOnClickOutside : false
+	
+	}).then(function (isConfirmed) {
+	// 신고 요청 처리
+	let data = {
+		'memberNo' : ${ loginMember.memberNo },
+		'reportType' : reportType,
+		'reportNoType' : commentsId
+	};
+		        
+	console.log("data :", data)
+		        
+	$.ajax({
+		url : "${path}/report/review",
+		type : "POST",
+		data		:  JSON.stringify(data), 
+		contentType : "application/json",
+		dataType : "json",
+		success: function(data) {
+			location.reload()
+	},
+		error: function(error) {
+	}
+		})			
+	});
+};
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
 <script>
+// 카카오 지도 api JS
 	var mapX="${dest.destMapX}";
 	var mapY="${dest.destMapY}";
 	
@@ -666,6 +675,7 @@ function deleteComment(commentsId){
 </script>
 
 <script>
+// 하트 클릭 이벤트
 $(document).ready(function () {
 	  function addListener() {
 	    var btn = document.querySelector("#Heart_2_");
