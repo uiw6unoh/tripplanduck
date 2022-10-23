@@ -85,7 +85,8 @@
 
 .profile_name {
     height: 9%;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .chat_profile {
