@@ -32,4 +32,6 @@ public interface MyPageService {
 	void deletePlan(Map<String, Object> map);
 
 	boolean confirmPassword(Member member);
+
+	int updateMyProfile(Member member);
 }

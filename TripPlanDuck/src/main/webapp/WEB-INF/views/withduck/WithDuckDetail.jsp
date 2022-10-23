@@ -158,9 +158,16 @@
 <input type="hidden" value="${withDuck.withPersonner }" name="withPersonner">
 <input type="hidden" name="withNo" value="${withDuck.withNo }">
 <div class="filter-btn" style="text-align: center; margin: 50px;">
+<c:if test="${joinBool == true}">
     <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
         동행참여
     </button>
+</c:if>
+<c:if test="${joinBool == false && loginMember != null}">
+    <button class="btn btn-outline-warning" type="button" id="chatWithDuck">
+        채팅진입
+    </button>
+</c:if>
 
     <button class="btn btn-outline-warning" type="button">
         목록으로
@@ -243,6 +250,7 @@
 
 <!-- sweetalert2 alert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
 $(function() {
 	var cancel = $('#deleteWithDuck');

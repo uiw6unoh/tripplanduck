@@ -3,19 +3,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:mm" var="now" />
 <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="../common/header.jsp" />
-<!-- MyPage CSS -->
-<link rel="stylesheet" type="text/css"
-	href="${ path }/css/mypage/Mypage.css">
 
+<!-- MyPage CSS -->
+<link rel="stylesheet" type="text/css" href="${ path }/css/mypage/Mypage.css">
 <!-- fontawesome CSS -->
-<script src="https://kit.fontawesome.com/f8167db045.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f8167db045.js" crossorigin="anonymous"></script>
 <!-- jquery -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<!-- sweetalert2 alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <body>
 	<!-- Mypage 시작 -->
 	<!-- 전체 컨테이너 -->
@@ -29,9 +31,9 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button type="button" class="btn btn-outline-warning btn-sm btn-block"
-						onclick="location.href='${path}/chatgo'">
-					내 위드덕</button>
+					<button type="button"
+						class="btn btn-outline-warning btn-sm btn-block"
+						onclick="location.href='${path}/chatgo'">내 위드덕</button>
 					<button class="btn btn-outline-warning btn-sm btn-block"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
@@ -86,19 +88,20 @@
 											</div>
 											<div class="card-title text-content mt-3">
 												<h5>${plan.getLoc().getLocation()}</h5>
-
 											</div>
-										</div>									
+										</div>
+										<div class="info-container-top">
+											<p class="card-text title">여행 일자</p>
+											<p class="card-text text-content">${plan.getDemo()}</p>
+										</div>
 										<div class="info-container-top">
 											<p class="card-text title">코스</p>
 											<p class="card-text text-content">${plan.getRoute()}</p>
 										</div>
-										<div class="plannerCard-btns">
-											<button type="button" class="btn btn-warning"
-											onclick="location.href=''">수정</button>
-											<button type="button" class="btn btn-secondary"
+									</div>
+									<div class="plannerCard-btns">
+										<button type="button" class="btn btn-secondary"
 											onclick="delPlan(${plan.getPNo()})">삭제</button>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -130,51 +133,51 @@
 					<div>
 						<select name="selectBox" id="selectBox"
 							onchange="changeOption(this.value)" style="width: 80px;"
-							class="form-control">      
+							class="form-control">
 							<c:forEach var="options" items="${options}" varStatus="i">
-					 <option value="${options.locationId}">${options.location}</option>
-							</c:forEach>  
-							<option value="999" selected>전체</option>  
+					 			<option value="${options.locationId}">${options.location}</option>
+							</c:forEach>
+							<option value="999" selected>전체</option>
 							<option value="0">여행지 선택</option>
 						</select>
 					</div>
 					<!-- 여행지 카드 -->
 					<div id="shiftTrip">
-							<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
-								<div class="row g-0">
-									<div class="col-md-4">
-										<a href="${path}/trip/detail?destNo=${trip.getDestNo()}">
-										<img src="${trip.getDestImage()}"
-											class="img-fluid rounded-start imgSize" alt="...">
-										</a>
-									</div>
-									<div class="col-md-8">
-										<div class="card-body">
-											<input type="hidden" class="tripCardUId"
-												value="${trip.getDestNo()}"> <i
-												class="fa-sharp fa-solid  fa-heart fa-lg heartIcon"
-												onclick="unLike(${trip.getDestNo()})"></i>
+						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+							<div class="row g-0">
+								<div class="col-md-4">
+									<a href="${path}/trip/detail?destNo=${trip.getDestNo()}"> <img
+										src="${trip.getDestImage()}"
+										class="img-fluid rounded-start imgSize" alt="...">
+									</a>
+								</div>
+								<div class="col-md-8">
+									<div class="card-body">
+										<input type="hidden" class="tripCardUId"
+											value="${trip.getDestNo()}"> <i
+											class="fa-sharp fa-solid  fa-heart fa-2x heartIcon"
+											onclick="unLike(${trip.getDestNo()})"></i>
 
-											<div class="info-container-top">
-												<div class="card-title title mt-3">
-													<h5>명소명</h5>
-												</div>
-												<div class="card-title text-content mt-3">
-													<h5>${trip.getDestSubject()}</h5>
-												</div>
+										<div class="info-container-top">
+											<div class="card-title title mt-3">
+												<h5>명소명</h5>
 											</div>
-											<div class="info-container-top">
-												<p class="card-text title">도시명</p>
-												<p class="card-text text-content">${trip.getDestCategory()}</p>
+											<div class="card-title text-content mt-3">
+												<h5>${trip.getDestSubject()}</h5>
 											</div>
-											<div class="info-container-top">
-												<p class="card-text title">주소</p>
-												<p class="card-text text-content">${trip.getDestAddress()}</p>
-											</div>
+										</div>
+										<div class="info-container-top">
+											<p class="card-text title">도시명</p>
+											<p class="card-text text-content">${trip.getDestCategory()}</p>
+										</div>
+										<div class="info-container-top">
+											<p class="card-text title">주소</p>
+											<p class="card-text text-content">${trip.getDestAddress()}</p>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
 
 					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
@@ -198,32 +201,45 @@
 				<div id="myComment">
 					<!-- comment 카드 시작 -->
 					<h3 class="section-title">나의 리뷰</h3>
-						<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
-							<div>
-								<div class="card-body">
-									<div class="star-rating">
-										<span class="star">★</span>
-										<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
-									</div>
-									<div class="destination">
-										<h4 class="card-title">${comments.getDestSubject()}</h4>
-										<span class="separator">|</span>
-										<h5 class="card-area">${comments.getDestCategory()}</h5>
-									</div>
-									<p class="card-text">${comments.getCommentsContent()}</p>
-									<p class="card-text">
-										<small class="text-muted">${comments.getCommentsCreateDate()}(수정일
-											: ${comments.getCommentsUpdateDate()})</small>
-									</p>
-									<div class="card-btns">
-										<button type="button" class="btn btn-warning"
-											onclick="location.href=''">수정</button>
-										<button type="button" class="btn btn-secondary"
-											onclick="delReview(true, ${comments.getCommentsId()})">삭제</button>
-									</div>
+					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
+						<div>
+							<div class="commentCard-body">
+								<div class="star-rating">
+									<span class="star">★</span>
+									<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
+								</div>
+								<div class="destination">
+									<h4 class="card-title">${comments.getDestSubject()}</h4>
+									<span class="separator">|</span>
+									<h5 class="card-area">${comments.getDestCategory()}</h5>
+								</div>
+								<p class="card-text">${comments.getCommentsContent()}</p>
+								<p class="card-text">
+									<small class="text-muted">${comments.getCommentsCreateDate()}(수정일
+										: ${comments.getCommentsUpdateDate()})</small>
+								</p>
+								<input type="hidden"
+									id="hideCmtContent${comments.getCommentsId()}"
+									value="${comments.getCommentsContent()}"/> 
+								<input
+									type="hidden" id="hideCmtRating${comments.getCommentsId()}"
+									value="${comments.getCommentsRating()}"/>
+								<input type="hidden"
+									id="hideCmtDest${comments.getCommentsId()}"
+									value="${comments.getDestNo()}"/> 	
+								<div class="card-btns">
+									<button class="btn btn-outline-warning"
+										data-toggle="modal"
+										onclick="updateSet(${comments.getCommentsId()})"
+										name="${comments.getCommentsId()}"
+										data-target="#updateBackdrop">수정</button>
+
+									<button type="button" class="btn btn-secondary"
+										onclick="delReview(true, ${comments.getCommentsId()})">삭제</button>
 								</div>
 							</div>
 						</div>
+					</div>
 
 					<!--  ajax로 불러온 데이터가 추가되는 곳 -->
 					<div id="appendComment"></div>
@@ -255,7 +271,8 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="password" id="inputPwd" class="inputPwd" placeholder="비밀번호 입력">
+							<input type="password" id="inputPwd" class="inputPwd"
+								placeholder="비밀번호 입력">
 						</div>
 						<div class="modal-footer">
 							<div id="modal-msg-wrap"></div>
@@ -269,7 +286,54 @@
 					</div>
 				</div>
 			</div>
-		</div>	
+
+			<!-- 리뷰 수정 모달 -->
+			<div class="modal fade" id="updateBackdrop" data-backdrop="static"
+				data-keyboard="false" tabindex="-1"
+				aria-labelledby="staticBackdropLabel" aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="staticBackdropLabel">리뷰 수정</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<input type="hidden" id="commentsId" />
+						</div>
+						<div class="modal-body">
+							<form class="mb-2 " id="commentForm2">
+								<div class="star-rating-modal space-x-4 mx-auto">
+									<input type="radio" id="5-stars2" name="rating2" value="5"
+										v-model="ratings" /> <label for="5-stars2" class="star">★</label>
+									<input type="radio" id="4-stars2" name="rating2" value="4"
+										v-model="ratings" /> <label for="4-stars2" class="star">★</label>
+									<input type="radio" id="3-stars2" name="rating2" value="3"
+										v-model="ratings" /> <label for="3-stars2" class="star">★</label>
+									<input type="radio" id="2-stars2" name="rating2" value="2"
+										v-model="ratings" /> <label for="2-stars2" class="star">★</label>
+									<input type="radio" id="1-star2" name="rating2" value="1"
+										v-model="ratings" /> <label for="1-star2" class="star">★</label>
+								</div>
+								<p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
+								<textarea id="commentsContent2" class="form-control shadow-none"
+									rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
+								<p class="mt-1 col p-0" style="font-size: 11px;">
+									<c:out value="${now}" />
+								</p>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" id="updateAlert" onclick="updateComment()"
+								class="btn btn-outline-warning py-0">확인</button>
+							<button type="button" class="btn btn-outline-warning py-0"
+								data-dismiss="modal">취소</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
 	</div>
 
 	<jsp:include page="../common/footer.jsp" />
@@ -385,16 +449,18 @@
 			                          '</div> ' +
 			                        '</div> ' +
 			                        '<div class="info-container-top"> ' +
+									  '<p class="card-text title">여행 일자</p> ' +
+									  '<p class="card-text text-content"> ' + data.demo +' </p> ' +
+								    '</div> ' +									
+			                        '<div class="info-container-top"> ' +
 			                          '<p class="card-text title">코스</p> ' +
 			                          '<p class="card-text text-content"> '+ data.route +' </p> ' +
 			                        '</div> ' +
+									'</div> ' +
 			                        '<div class="plannerCard-btns"> '+
-									  '<button type="button" class="btn btn-warning" '+
-									  'onclick="">수정</button> '+
 									  '<button type="button" class="btn btn-secondary" '+
 									  'onclick="delPlan('+ data.pno +')">삭제</button> '+
 									'</div>' +
-			                      '</div> ' +
 			                    '</div> ' +
 			                  '</div> ' +
 			                '</div> '+
@@ -411,7 +477,7 @@
 				                  '</div> '+
 				                  '<div class="col-md-8"> '+
 				                    '<div class="card-body"> '+
-				                      '<i class="fa-sharp fa-solid  fa-heart fa-lg heartIcon" onclick="unLike('+data.destNo+')" ></i> '+
+				                      '<i class="fa-sharp fa-solid  fa-heart fa-2x heartIcon" onclick="unLike('+data.destNo+')" ></i> '+
 				                      '<div class="info-container-top"> '+
 				                        '<div class="card-title title mt-3"> '+
 				                          '<h5>명소명</h5> '+
@@ -432,12 +498,12 @@
 				                  '</div> '+
 				                '</div> '+
 				              '</div> '
+				              
 					} else {
-						
 						appendData += 
 				         '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
-			                '<div class="card-body"> '+
+			                '<div class="commentCard-body"> '+
 			                  '<div class="star-rating"> ' +
 							    '<span class="star">★</span> ' +
 							    '<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
@@ -449,9 +515,15 @@
 			                  '</div> '+
 			                  '<p class="card-text">'+data.commentsContent+'</p> '+
 			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDate+ '(수정일 : '+data.commentsUpdateDate +'  ) </small></p> '+
+			                  '<input type="hidden" id="hideCmtContent'+ data.commentsId +'" value="'+ data.commentsContent +'"/> ' +  
+			                  '<input type="hidden" id="hideCmtRating'+ data.commentsId +'" value="'+ data.commentsRating +'"/> ' +
+			                  '<input type="hidden" id="hideCmtDest'+ data.commentsId +'" value="'+ data.destNo +'"/> ' +
 			                  '<div class="card-btns"> '+
-			                    '<button type="button" class="btn btn-warning" onclick="">수정</button> '+
+			                  '<button class="btn btn-outline-warning" data-toggle="modal" '+
+									'onclick="updateSet('+ data.commentsId +')" '+
+									'name="'+data.commentsId+'" data-target="#updateBackdrop">수정</button> '+
 			                    '<button type="button" class="btn btn-secondary" onclick="delReview(false, '+data.commentsId+')">삭제</button> '+
+			                    
 			                  '</div> '+
 			                '</div> '+
 			              '</div> '+
@@ -592,4 +664,98 @@
 			})	
 	}	
 		
+	
+	
+	/* 리뷰 수정 */
+	
+	/* 	리뷰 수정 시 임의의 엘리먼트에 수정할 리뷰 값 할당 */
+	function updateSet(commentsId){
+		$("#commentsId").val(commentsId)
+		
+		let rating = $("#hideCmtRating" + commentsId).val()
+		$("input[name='rating2'][value=" + rating + "]").prop("checked", true);
+	 	
+		let content = $("#hideCmtContent" + commentsId).val()
+		$("#commentsContent2").val(content)
+		
+	}
+
+	
+	  function updateComment() {
+		// 앞서 할당했던 엘리먼트에서 값 꺼내기
+	  	let rating = $('input[name=rating2]:checked').val();
+	  	let comment = $("#commentsContent2").val();
+	    let commentsId = $("#commentsId").val();
+	    let destNo = $("#hideCmtDest" + commentsId).val()
+	  	
+	    console.log("rating : ", rating);
+	    console.log("comment : ", comment);
+	    console.log("commentsId : ", commentsId);
+	    console.log("destNo : ", destNo);
+	    
+		if(rating == null || rating == "" || comment == "" || comment == null){
+		   Swal.fire({
+			  icon: "error",
+			  title: `실패!`,
+			  text: '별점 혹은 내용을 입력해주세요.',
+			  confirmButtonText: "확인",
+			  //closeOnClickOutside : false
+		 })
+		     return;
+		}
+		   	
+	    Swal.fire({
+	      icon: "warning",
+	      title: "댓글수정",
+	      text: `댓글을 수정 하시겠습니까?`,
+	      showCancelButton: true,
+	      confirmButtonText: "수정",
+	      cancelButtonText: "취소",
+		 //closeOnClickOutside : false
+
+	    }).then(function (result) {
+	    	console.log(result)
+	      if (result.isConfirmed) {
+	        //수정 요청 처리
+	        
+	        let data = {
+	  		'commentsRating' : rating, 
+	   		'commentsContent' : comment,
+	   		'commentsId' : commentsId,
+	  		'destNo' : destNo
+	 		  };
+	        
+	        console.log("data : ", data)
+	        $.ajax({
+				url : "${path}/trip/api/comment",
+				type : "PUT",
+				data		:  JSON.stringify(data), 
+		        contentType : "application/json",
+				dataType : "json",
+				success: function(data) {
+					 Swal.fire({
+					      icon: "success",
+					      title: "수정 완료",
+					      text: `댓글 수정이 완료되었습니다`,
+					      showCancelButton: false,
+					      confirmButtonText: "확인",
+
+					}).then(function (result) {
+					    if(result.isConfirmed){
+					    location.reload()	
+					   } 
+					});
+				},
+				error: function(error) {
+					
+				}
+			})
+			
+	        
+	      } else {
+	        //취소
+	      }
+	    });
+	  };
+	
 	</script>

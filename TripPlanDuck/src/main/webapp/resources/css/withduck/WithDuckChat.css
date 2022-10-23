@@ -23,16 +23,7 @@
     float: right;
 }
 
-.chatContent{
-    overflow: scroll;
-    /* IE scroll 숨김 */
-    -ms-overflow-style: none;
-}
  
-.chatContent::-webkit-scrollbar { 
-    display: none;
-    width: 0 !important;
-}
 
 /* 왼쪽 zone */
 
@@ -94,7 +85,8 @@
 
 .profile_name {
     height: 9%;
-    display: block;
+    display: flex;
+    align-items: center;
 }
 
 .chat_profile {
@@ -184,7 +176,8 @@
 .chatContent {
     background-color: gainsboro;
     width: 100%;
-    height: 80%
+    height: 80%;
+    overflow: scroll;
 }
 
 .inputChat {

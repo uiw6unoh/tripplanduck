@@ -2,8 +2,11 @@ package com.tripplan.duck.admin.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,16 +14,23 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tripplan.duck.admin.model.service.AdminService;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.trip.model.service.DestinationService;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.trip.model.vo.Destination;
+import com.tripplan.duck.trip.model.vo.DestinationLike;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 import lombok.extern.slf4j.Slf4j;
+
 
 @Slf4j
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService service;
+	
+	@Autowired
+	private DestinationService destinationService;
 	
     @GetMapping("/admin/visitor")
     public void visitor() {
@@ -104,6 +114,44 @@ public class AdminController {
     	return model;
     }
     
+	@GetMapping("/detail")
+	public ModelAndView TripDetail(ModelAndView model, @RequestParam(value="reviewNo")int reviewNo,
+			HttpSession session) {
+		Comments comment = service.Category(reviewNo);
+		System.out.println(comment.getDestNo());
+		
+		int destNo = comment.getDestNo();
+		
+		Destination dest = destinationService.getDestination(destNo);
+		destinationService.updateCount(destNo);
+		List<Destination> destnations = destinationService.getDestinationsByCategory(destNo);
+		List<Comments> comments = destinationService.getDestinationComments(destNo);
+		
+		System.out.println("comments : " + comments);
+		int isLike = 0;
+		
+		Member member = (Member)session.getAttribute("loginMember");
+		
+		System.out.println(member);
+		
+		if(member != null) {
+			DestinationLike destinationLike = new DestinationLike();
+			destinationLike.setDestNo(destNo);
+			destinationLike.setMemberNo(member.getMemberNo());
+			isLike = destinationService.isLike(destinationLike);
+			model.addObject("member", member);
+
+		}
+		
+		model.addObject("isLike", isLike);
+		model.addObject("comments", comments);
+		model.addObject("dest", dest);
+		model.addObject("destnations", destnations);
+		model.setViewName("trip/TripDetail");
+		
+		return model;
+	}
+    
     @GetMapping("/admin/reviewLatest")
     public ModelAndView reviewLatest(ModelAndView model,
     		@RequestParam(value="page", defaultValue = "1") int page) {
@@ -161,25 +209,6 @@ public class AdminController {
     	return model;
     }
     
-    @GetMapping("/admin/chat")
-    public ModelAndView chat(ModelAndView model,
-    		@RequestParam(value="page", defaultValue = "1") int page) {
-    	
-    	List<Member> list = null;
-    	PageInfo pageInfo = null;
-    	
-    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
-    	list = service.getMemberList(pageInfo);
-    	
-    	System.out.println(pageInfo);
-    	System.out.println(list);
-    	
-    	model.addObject("list", list);
-    	model.addObject("pageInfo", pageInfo);
-    	model.setViewName("admin/member");
-    	return model;
-    	
-    }
     
     @GetMapping("/admin/memberInfo")
     public ModelAndView memberInfo(ModelAndView model, @RequestParam(value="memberNo") int memberNo) {
@@ -247,5 +276,9 @@ public class AdminController {
     	
     	return model;
     }
+    
+    
+
+    
     
 }

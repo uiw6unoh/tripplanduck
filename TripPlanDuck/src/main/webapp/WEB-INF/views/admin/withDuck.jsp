@@ -20,8 +20,6 @@
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
             <p></p>
-            <a id="myListMain" href="${ path }/admin/chat"> 채팅 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/withDuck"> 위드덕 관리 </a>
         </div>
     </div>
@@ -42,9 +40,8 @@
             </div>
             <div class="col-md-6">
                 <form action="...">
-                    <button type="button" style="margin-top: 25px; margin-left: 130px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
+                    <button type="button" style="margin-top: 25px; margin-left: 300px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
                      onclick="location.href='${ path }/admin/withDuckLatest'">최신순</button>
-                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">신고받은게시글</button>
                     <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
                      onclick="location.href='${ path }/admin/withDuckOld'">오래된순</button>
                 </form>
@@ -54,10 +51,10 @@
             <table class="table table-sm">
                 <thead>
                     <tr style="height: 10px; color:gray">
-                        <th style="width: 20%; text-align: center;">게시글 번호</th>
-                        <th style="width: 20%; text-align: center;">제목</th>
-                        <th style="width: 15%; text-align: center;">아이디</th>
-                        <th style="width: 20%; text-align: center;">신고</th>
+                        <th style="width: 20%; text-align: center;">번호</th>
+                        <th style="width: 20%; text-align: center;">신고 내용</th>
+                        <th style="width: 15%; text-align: center;">신고받은 회원번호</th>
+                        <th style="width: 20%; text-align: center;">신고 접수</th>
                         <th style="width: 10%; text-align: center;">게시글 삭제</th>
                     </tr>
                 </thead>
@@ -73,13 +70,13 @@
                 <c:if test="${ not empty list }">
                 	<c:forEach var="withDuck" items="${list}">
                 		<tr>
-		                    <td style="text-align: center;">${withDuck.withNo}</td>
-		                    <td style="text-align: center;">${withDuck.withTitle}</td>
-		                    <td style="text-align: center;">${withDuck.withWriterNick}</td>
-		                    <td style="text-align: center;">신고된게시글</td>
+		                    <td style="text-align: center;">${withDuck.reportNoType}</td>
+		                    <td style="text-align: center;">${withDuck.reportType}</td>
+		                    <td style="text-align: center;">${withDuck.reportMemberNo}</td>
+		                    <td style="text-align: center;">${withDuck.reportCategory}</td>
 		                    <td>
 	                        <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;"
-	                         onclick="location.href='${ path }/admin/withDuckInfo?withDuckNo=${withDuck.withNo}'">
+	                         onclick="location.href='${ path }/admin/withDuckInfo?withDuckNo=${withDuck.reportNoType}'">
 	                            게시글삭제
 	                        </button>
 		                    </td>

@@ -97,4 +97,11 @@ public class MyPageServiceImpl implements MyPageService{
 		return member != null && passwordEncoder.matches(pwInputMember.getMemberPassword(), member.getMemberPassword());
 	}
 
+	@Override
+	public int updateMyProfile(Member member) {
+		// 패스워드 암호화
+		member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()) );
+		return mapper.updateMyProfile(member);
+	}
+
 }
