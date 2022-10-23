@@ -37,21 +37,21 @@
 		SELECT * 
 		FROM WITHDUK_CHAT
 		WHERE WITH_MEM_NO = #{memberNo}
-		ORDER BY CHAT_TIME DESC
+		ORDER BY CHAT_TIME
 	</select>
 	
 	<select id="selectjoinChatList" parameterType="_int" resultMap="withDuckChatResultMap">
 		SELECT *
 		FROM WITHDUK_CHAT
 		WHERE WITH_NO = #{withNo}
-		ORDER BY CHAT_TIME DESC
+		ORDER BY CHAT_TIME
 	</select>
 	
 	<select id="selectChatLogList" parameterType="_int" resultMap="withDuckChatLogResultMap">
 		SELECT *
 		FROM WITHDUK_CHATLOG
 		WHERE CHAT_WITHNO = #{withNo}
-		ORDER BY CHAT_TIME DESC
+		ORDER BY CHAT_CONTENTNO
 	</select>
 	
 	<delete id="deleteChatMember" parameterType="_int">
