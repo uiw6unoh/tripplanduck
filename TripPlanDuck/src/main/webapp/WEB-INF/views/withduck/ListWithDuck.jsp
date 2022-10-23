@@ -32,7 +32,7 @@
 </div>
 </section>
 
-<form action="${path}/withduck/filter" method="get">
+<form action="${path}/withduck/joinValFilter" id="formobj" method="get">
 <section class="zone2">
 <div class="filter">
     <div class="filter_container">
@@ -85,12 +85,7 @@
 
                 <label for="customRange2" class="form-label"></label>
                 <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
-                    <input type="range" name="personnel_val" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="
-                    		sessionStorage.setItem('personnel', $('.form-range').val())
-							$('.form-range').attr('value', sessionStorage.getItem('personnel') );
-							$('#value2').text(sessionStorage.getItem('personnel')+'명');	
-							document.getElementById('value2').innerHTML=this.value+'명';
-							">
+                    <input type="range" name="personnel_val" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명'">
                     <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;"> 명</span>
                     
                 </div>
@@ -114,7 +109,7 @@
 </div>
 
         <div class="btn filter-btn">
-            <button class="btn btn-outline-warning" type="submit">
+            <button class="btn btn-outline-warning" id="filterSearch" type="submit">
             필터 검색
             </button>
     
@@ -165,14 +160,7 @@
                     </c:if>
                     </ul>
                 </div>
-                <!-- <input type="radio" name="radio" id="" value="최신순" checked>최신순
-                <input type="radio" name="radio" id="" value="조회순">조회순 -->
-                <c:if test="${empty filter_val }">
-                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter'">모집중인 글만 보기</button>
-            	</c:if>
-                <c:if test="${not empty filter_val }">
-                	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}';">모집중인 글만 보기</button>
-            	</c:if>
+                	<button class="btn btn-outline-warning" id="joinButton" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;">모집중인 글만 보기</button>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             
@@ -230,51 +218,38 @@
 			</div>
         </div>
         <nav aria-label="..." style="margin-top: 50px;">
-            <ul class="pagination justify-content-center">
-            <li class="page-item disabled">
-                
-                <!-- 
-                 <span class="page-link">이전</span>
-                 -->
-                   <c:if test="${ not empty filter_val && empty joinStatus }">
-					<a class="page-link" href="${ path }/withduck/filter?page=${ pageInfo.prevPage }" aria-label="Previous">
-	                            <span aria-hidden="true">이전</span>
-	                </a>
-		            </li>
-		            <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-		                    <li class="page-item"><a class="page-link" href="${ path }/withduck/filter?page=${ status.current }">${ status.current }</a></li>
-		            </c:forEach>
-		            <li class="page-item">
-		                <a class="page-link" href="${path}/withduck/filter?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
-		            </li>
-		            </c:if>
-                   <c:if test="${ not empty joinStatus }">
-					<a class="page-link" href="${ path }/withduck/filter?page=${ pageInfo.prevPage }" aria-label="Previous">
-	                            <span aria-hidden="true">이전</span>
-	                </a>
-		            </li>
-		            <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-		                    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinFiter?page=${ status.current }">${ status.current }</a></li>
-		            </c:forEach>
-		            <li class="page-item">
-		                <a class="page-link" href="${path}/withduck/filter?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
-		            </li>
-		            </c:if>
-		            
-                   <c:if test="${ empty filter_val && empty joinStatus }">
-					<a class="page-link" href="${ path }/withduck/list?page=${ pageInfo.prevPage }" aria-label="Previous">
-	                            <span aria-hidden="true">이전</span>
-	                </a>
-		            </li>
-		            <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-		                    <li class="page-item"><a class="page-link" href="${ path }/withduck/list?page=${ status.current }">${ status.current }</a></li>
-		            </c:forEach>
-		            <li class="page-item">
-		                <a class="page-link" href="${path}/withduck/list?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
-		            </li>
-		            </c:if>
-            </ul>
+            <c:if test="${joinStatus != '모집중' }">
+	            <ul class="pagination justify-content-center">
+	            <li class="page-item disabled">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=" aria-label="Previous">
+		                            <span aria-hidden="true">이전</span>
+		                </a>
+			    </li>
+			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=">${ status.current }</a></li>
+			    </c:forEach>
+			    <li class="page-item">
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=" aria-label="Next">다음</a>
+			    </li>
+	            </ul>
+            </c:if>
+            <c:if test="${joinStatus == '모집중' }">
+	            <ul class="pagination justify-content-center">
+	            <li class="page-item disabled">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}" aria-label="Previous">
+		                            <span aria-hidden="true">이전</span>
+		                </a>
+			    </li>
+			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}">${ status.current }</a></li>
+			    </c:forEach>
+			    <li class="page-item">
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}" aria-label="Next">다음</a>
+			    </li>
+	            </ul>
+            </c:if>
         </nav>
+        <input type="hidden" id="joinStatus" name="joinStatus" >
     </section>
     </form>
     <!-- Bootstrap JS -->
@@ -293,6 +268,28 @@
 </html>
 
 <script>
+$(function() {
+	var joinButton = $('#joinButton');
+	
+	joinButton.click(function() {
+		const formElement = $('#formobj');
+		$('#joinStatus').val('모집중');
+		formElement.attr("action", "${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=" + "모집중");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+$(function() {
+	var filterSearch = $('#filterSearch');
+	
+	filterSearch.click(function() {
+		const formElement = $('#formobj');
+		$('#joinStatus').val('');
+		formElement.attr("action", "${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
 $(document).on('click', '.location_btn', function(){
     $('.location_btn').removeClass('selected');
     sessionStorage.removeItem("location");
@@ -317,6 +314,12 @@ $(document).on('click', '.age_btn', function(){
 });
 
 $(document).ready(function() {
+	$('.form-range').attr('value', 0);
+
+	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
+	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+	
+	
 	var date = new Date();
 
     var day = date.getDate();
@@ -355,15 +358,11 @@ $(document).ready(function() {
 		}
 	}
 	
-	//$('.form-range').attr('value', sessionStorage.getItem('personnel'));
-	if(sessionStorage.getItem('personnel')!=null){
-		$('#value2').text(sessionStorage.getItem('personnel')+"명");		
-	} 
-	$('.form-range').val(0);
+	document.querySelector('.form-range').addEventListener('input',function(event){
+	    var gradient_value = 100 / event.target.attributes.max.value;
+	  event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
+	});
 
-	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
-	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
-	
 	if((sessionStorage.getItem('start') != undefined)){
 		$('#start').attr('value', sessionStorage.getItem("start"));
 	}
@@ -371,6 +370,7 @@ $(document).ready(function() {
 	$('#end').attr('value', sessionStorage.getItem("end"));
 	}
 	
+	$('.form-range').val(0);
 });
 
 function startValidity(e){

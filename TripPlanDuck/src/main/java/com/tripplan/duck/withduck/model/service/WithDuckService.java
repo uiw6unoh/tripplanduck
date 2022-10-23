@@ -27,10 +27,10 @@ public interface WithDuckService {
 	List<WithDuck> getWithDuckJoinList(PageInfo pageInfo);
 
 	int getWithDuckJoinValCount(String location_val, String gender_val, String age_val, String start_val,
-			String end_val, int personnel_val);
+			String end_val, int personnel_val, String joinStatus);
 
 	List<WithDuck> getWithDuckJoinValList(PageInfo pageInfo, String location_val, String gender_val, String age_val,
-			String start_val, String end_val, int personnel_val);
+			String start_val, String end_val, int personnel_val, String joinStatus);
 
 	int createWithDuck(WithDuck withDuck);
 

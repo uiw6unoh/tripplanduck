@@ -104,21 +104,21 @@ public class WithDuckServiceImpl implements WithDuckService {
 
 	@Override
 	public int getWithDuckJoinValCount(String location_val, String gender_val, String age_val, String start_val,
-			String end_val, int personnel_val) {
+			String end_val, int personnel_val, String joinStatus) {
 
-		return mapper.selectWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		return mapper.selectWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus);
 	}
 
 	@Override
 	public List<WithDuck> getWithDuckJoinValList(PageInfo pageInfo, String location_val, String gender_val,
-			String age_val, String start_val, String end_val, int personnel_val) {
+			String age_val, String start_val, String end_val, int personnel_val, String joinStatus) {
 		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
 		int limit = pageInfo.getListLimit();
 		RowBounds rowBounds = new RowBounds(offset, limit);
 		
 		System.out.println("aaaaaaaaaa : " + location_val);
 		
-		return mapper.withDuckJoinFilter(rowBounds, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		return mapper.withDuckJoinFilter(rowBounds, location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus);
 	}
 
 	//////////////////////////////////////////////////////////////위드덕 생성 ///////////////////////////////////////////////////

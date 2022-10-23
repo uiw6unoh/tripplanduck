@@ -49,6 +49,7 @@ public class WithDuckController {
 	/////////////////////////////////////////////////위드덕 리스트////////////////////////////////////////////////////////////////////////
 	@GetMapping("/list")
 	public ModelAndView withDuckList(ModelAndView model,
+							  HttpSession session,
 							  @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 							  @RequestParam(value = "page", defaultValue = "1") int page) {
 		
@@ -74,65 +75,12 @@ public class WithDuckController {
 		
 		System.out.println(pageInfo +" " + list);
 		
+		//session.removeAttribute("joinStatus");
 		model.addObject("sort_name", sort_name);
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");
 		
-		return model;
-	}
-	
-	@GetMapping("/filter") 
-	public ModelAndView withDuckFilter(ModelAndView model,
-									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
-									   @RequestParam(value = "location_val") String location_val , 
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "personnel_val") int personnel_val,
-									   @RequestParam(value = "page", defaultValue = "1") int page){
-		List<WithDuck> listFilter = null;
-		List<Object> filter_val = new ArrayList<Object>();
-		
-		System.out.println(location_val);
-		System.out.println(gender_val);
-		System.out.println(age_val);
-		System.out.println(start_val);
-		System.out.println(end_val);
-		System.out.println(personnel_val);
-		
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckFilterCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
-		listFilter = service.withDuckFilter(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
-		
-		for(int i = 0; i < listFilter.size(); i++) {
-			if(listFilter.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = listFilter.get(i).getWithRenameFileName().split(", ");
-			listFilter.get(i).setReList(Arrays.asList(arr));
-			System.out.println(listFilter.get(i) + "\n");
-		}
-		
-		System.out.println(listFilter);
-		
-		filter_val.add(location_val);
-		filter_val.add(gender_val);
-		filter_val.add(age_val);
-		filter_val.add(start_val);
-		filter_val.add(end_val);
-		filter_val.add(personnel_val);
-		filter_val.add(page);
-		
-		System.out.println("asdfasdfsadf : " + filter_val);
-		
-		model.addObject("sort_name", sort_name);
-		model.addObject("filter_val", filter_val);
-		model.addObject("list", listFilter);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
 		return model;
 	}
 	
@@ -219,50 +167,20 @@ public class WithDuckController {
 		return model;
 	}
 	
-	@GetMapping("/joinFilter")
-	public ModelAndView withDuckJoinList(ModelAndView model, 
-							  @RequestParam(value = "page", defaultValue = "1") int page) {
-		
-		List<WithDuck> list = null;
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinCount(), 8);
-		list = service.getWithDuckJoinList(pageInfo);
-		
-		System.out.println(pageInfo +" " + list);
-		
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = list.get(i).getWithRenameFileName().split(", ");
-			list.get(i).setReList(Arrays.asList(arr));
-			System.out.println(list.get(i) + "\n");
-		}
-		
-		for (WithDuck withDuck : list) {
-			System.out.println(withDuck.getWithJoinStatus());
-		}
-		model.addObject("joinStatus", "모집중");
-		model.addObject("list", list);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
-		
-		return model;
-	}
-	
 	@GetMapping("/joinValFilter")
 	public ModelAndView withDuckJoinValList(ModelAndView model,
-									   @RequestParam(value = "location_val") String location_val, 
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "personnel_val") int personnel_val,
+									   @RequestParam(value = "location_val", required=false) String location_val, 
+									   @RequestParam(value = "gender_val", required=false) String gender_val,
+									   @RequestParam(value = "age_val", required=false) String age_val,
+									   @RequestParam(value = "start_val", required=false) String start_val,
+									   @RequestParam(value = "end_val", required=false) String end_val,
+									   @RequestParam(value = "personnel_val", defaultValue = "0") int personnel_val,
+									   @RequestParam(value = "joinStatus", required=false) String joinStatus,
 									   @RequestParam(value = "page", defaultValue = "1") int page ) {
 		
 		List<WithDuck> listFilter = null;
 		List<Object> filter_val = new ArrayList<Object>();
+		PageInfo pageInfo = null;
 		
 		System.out.println(location_val);
 		System.out.println(gender_val);
@@ -270,12 +188,13 @@ public class WithDuckController {
 		System.out.println(start_val);
 		System.out.println(end_val);
 		System.out.println(personnel_val);
+		System.out.println(joinStatus);
 		
-		PageInfo pageInfo = null;
 		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
-		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus), 8);		
+		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus);
 		
+		System.out.println("listFilter : " + listFilter);
 		for(int i = 0; i < listFilter.size(); i++) {
 			if(listFilter.get(i).getWithOriginFileName() == null) continue;
 			String[] arr = new String[3];
@@ -295,6 +214,7 @@ public class WithDuckController {
 		filter_val.add(personnel_val);
 		filter_val.add(page);
 		
+		model.addObject("joinStatus", joinStatus);
 		model.addObject("filter_val", filter_val);
 		model.addObject("list", listFilter);
 		model.addObject("pageInfo", pageInfo);

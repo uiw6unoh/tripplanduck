@@ -94,11 +94,6 @@
 		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
 	</select>
 	
-	<select id="withDuckReadcountSort" resultMap="withDuckResultMap" parameterType="map">
-		<include refid="withDuckListSql" />
-		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
-		ORDER BY WITH_READCOUNT DESC
-	</select>
 	
 	<select id="selectWithDuckJoinCount" resultType="_int">
 		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_JOINSTATUS = '모집중'
@@ -109,15 +104,62 @@
 		AND WITH_JOINSTATUS = '모집중'
 	</select>
 	
+	<select id="withDuckReadcountSort" resultMap="withDuckResultMap" parameterType="map">
+		<include refid="withDuckListSql" />
+		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
+		ORDER BY WITH_READCOUNT DESC
+	</select>
 
 	<select id="selectWithDuckJoinValCount" resultType="_int" parameterType="map">
-		SELECT COUNT(*) FROM WITHDUK WHERE WITH_STATUS='Y' AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val}
-		AND WITH_JOINSTATUS = '모집중'
+		SELECT COUNT(*) FROM WITHDUK 
+		WHERE WITH_STATUS='Y' 
+		<if test="location_val != null and location_val != ''">
+			AND WITH_LOCATION LIKE '%' || #{location_val} || '%' 
+		</if>
+		<if test="gender_val != null and gender_val != ''">
+			AND WITH_GENDER LIKE '%' || #{gender_val} || '%' 
+		</if>
+		<if test="age_val != null and age_val != ''">
+			AND WITH_AGE LIKE '%' || #{age_val} || '%' 
+		</if>
+		<if test="start_val != null and start_val != ''">
+			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') 
+		</if>
+		<if test="end_val != null and end_val != ''">
+			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) 
+		</if>
+		<if test="personnel_val != 0">
+			AND WITH_PERSONNER = #{personnel_val}
+		</if>
+		<if test="joinStatus.equals('모집중')">
+			AND WITH_JOINSTATUS = '모집중'
+		</if>
+		ORDER BY WITH_CREATEDATE
 	</select>
 	
-	<select id="withDuckJoinFilter" resultMap="withDuckResultMap" parameterType="map">
+	<select id="withDuckJoinFilter" parameterType="map" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql" />
-		AND WITH_LOCATION LIKE '%' || #{location_val} || '%' AND WITH_GENDER LIKE '%' || #{gender_val} || '%' AND WITH_AGE LIKE '%' || #{age_val} || '%' AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) AND WITH_PERSONNER = #{personnel_val} AND WITH_JOINSTATUS = '모집중'
+		<if test="location_val != null and location_val != ''">
+			AND WITH_LOCATION LIKE '%' || #{location_val} || '%' 
+		</if>
+		<if test="gender_val != null and gender_val != ''">
+			AND WITH_GENDER LIKE '%' || #{gender_val} || '%' 
+		</if>
+		<if test="age_val != null and age_val != ''">
+			AND WITH_AGE LIKE '%' || #{age_val} || '%' 
+		</if>
+		<if test="start_val != null and start_val != ''">
+			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') 
+		</if>
+		<if test="end_val != null and end_val != ''">
+			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) 
+		</if>
+		<if test="personnel_val != 0">
+			AND WITH_PERSONNER = #{personnel_val}
+		</if>
+		<if test="joinStatus.equals('모집중')">
+			AND WITH_JOINSTATUS = '모집중'
+		</if>
 		ORDER BY WITH_CREATEDATE
 	</select>
 	
