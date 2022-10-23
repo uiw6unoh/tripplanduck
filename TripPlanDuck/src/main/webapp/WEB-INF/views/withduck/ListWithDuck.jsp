@@ -85,13 +85,13 @@
 
                 <label for="customRange2" class="form-label"></label>
                 <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
-                    <input type="range" name="personnel_val" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="
+                    <input type="range" name="personnel_val" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="
                     		sessionStorage.setItem('personnel', $('.form-range').val())
 							$('.form-range').attr('value', sessionStorage.getItem('personnel') );
 							$('#value2').text(sessionStorage.getItem('personnel')+'명');	
 							document.getElementById('value2').innerHTML=this.value+'명';
 							">
-                    <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
+                    <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;"> 명</span>
                     
                 </div>
                 <div class="date_container">
@@ -167,21 +167,20 @@
                 </div>
                 <!-- <input type="radio" name="radio" id="" value="최신순" checked>최신순
                 <input type="radio" name="radio" id="" value="조회순">조회순 -->
-                <c:if test="${empty listFilter && empty filter_val }">
+                <c:if test="${empty filter_val }">
                 	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinFilter'">모집중인 글만 보기</button>
             	</c:if>
-                <c:if test="${not empty listFilter }">
+                <c:if test="${not empty filter_val }">
                 	<button class="btn btn-outline-warning" style="width: 150px; background-color: #a7a2a23b; border: 0; font-weight: bold; border-radius: 30px;" onclick="javascript: form.action='${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}';">모집중인 글만 보기</button>
             	</c:if>
             </div>
             <div class="row row-cols-2 row-cols-lg-4 g-2 g-lg-3">
             
-            <c:if test="${ not empty listFilter }">
-				<c:forEach var="withDuck" items="${ listFilter }">
+            
+				<c:forEach var="withDuck" items="${ list }">
                 <div class="col">
                     <div class="p-3 border bg-light">
                        <a href="${path }/withduck/detail?withNo=${withDuck.withNo}">
-	                   	
 	                   	<c:if test="${not empty withDuck.reList[0]}">
 		                   	<c:if test="${withDuck.withJoinStatus == '모집중'}">
 			                   <div id="total_container" style="position: relative;">
@@ -194,6 +193,10 @@
 			                </c:if>
 		                   	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
 		                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
+		                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
+			                        									top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        	${withDuck.withJoinStatus }
+			                        </div>
 			                </c:if>
 	                    </c:if>
 	                    
@@ -209,6 +212,10 @@
 		                </c:if>
                        	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
 	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+	                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
+			                        									top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        	${withDuck.withJoinStatus }
+			                    </div>
 		                </c:if>
                        </c:if>
                         </a>
@@ -220,57 +227,7 @@
                     </div>
                 </div>
 				</c:forEach>
-				</c:if>
-				 
-				<c:if test="${ empty listFilter && not empty list }">
-					<c:forEach var="withDuck" items="${ list }">
-                <div class="col">
-                    <div class="p-3 border bg-light">
-                        <a href="${path }/withduck/detail?withNo=${withDuck.withNo}">
-                        	<c:if test="${empty withDuck.reList[0]}">
-                        		<c:if test="${withDuck.withJoinStatus == '모집중'}">
-	                        		<div id="total_container" style="position: relative;">
-		                           		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
-		                           		<div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-				                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
-				                        	${withDuck.withJoinStatus }
-				                        </div>
-		                   			</div>
-                        		</c:if>
-                        	 	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
-                        	 		<img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
-                        	 	</c:if>
-                        	</c:if>
-                        	
-							<c:if test="${not empty withDuck.reList[0]}">
-								<c:if test="${withDuck.withJoinStatus == '모집중'}">
-	                            	<div id="total_container" style="position: relative;">
-			                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
-			                        	<div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-			                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
-			                        	${withDuck.withJoinStatus }
-			                        	</div>
-		                   			</div>
-		                   		</c:if>
-								<c:if test="${withDuck.withJoinStatus == '모집완료'}">
-			                        <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
-		                   		</c:if>
-							</c:if>
-                        </a>
-                        <p class="title" style="font-weight:bold">${withDuck.withTitle }</p>
-                        <p class="content" id="content" style="font-size:14px">${withDuck.withContent }</p>
-                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
-                        <p class="good">${withDuck.withReadCount }</p>
-                        <p class="readCount">123</p>
-                    </div>
-                </div>
-				</c:forEach>
-				</c:if>
-				
-			
-				 
-				
-            </div>
+			</div>
         </div>
         <nav aria-label="..." style="margin-top: 50px;">
             <ul class="pagination justify-content-center">
@@ -279,7 +236,7 @@
                 <!-- 
                  <span class="page-link">이전</span>
                  -->
-                   <c:if test="${ not empty listFilter }">
+                   <c:if test="${ not empty filter_val && empty joinStatus }">
 					<a class="page-link" href="${ path }/withduck/filter?page=${ pageInfo.prevPage }" aria-label="Previous">
 	                            <span aria-hidden="true">이전</span>
 	                </a>
@@ -291,8 +248,20 @@
 		                <a class="page-link" href="${path}/withduck/filter?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
 		            </li>
 		            </c:if>
+                   <c:if test="${ not empty joinStatus }">
+					<a class="page-link" href="${ path }/withduck/filter?page=${ pageInfo.prevPage }" aria-label="Previous">
+	                            <span aria-hidden="true">이전</span>
+	                </a>
+		            </li>
+		            <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+		                    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinFiter?page=${ status.current }">${ status.current }</a></li>
+		            </c:forEach>
+		            <li class="page-item">
+		                <a class="page-link" href="${path}/withduck/filter?page=${pageInfo1.nextPage}" aria-label="Next">다음</a>
+		            </li>
+		            </c:if>
 		            
-                   <c:if test="${ empty listFilter && not empty list }">
+                   <c:if test="${ empty filter_val && empty joinStatus }">
 					<a class="page-link" href="${ path }/withduck/list?page=${ pageInfo.prevPage }" aria-label="Previous">
 	                            <span aria-hidden="true">이전</span>
 	                </a>
@@ -358,8 +327,8 @@ $(document).ready(function() {
     if (day < 10) day = "0" + day;
 
     var today = year + "-" + month + "-" + day;       
-    $("#start").attr("value", today);
-    $("#end").attr("value", today);
+    $("#start").attr("value", "");
+    $("#end").attr("value", "");
 	   
 	if(sessionStorage.getItem("location") !== undefined) {
 		for(var i = 0; i < $('button[class="location_btn"]').length; i ++){			
@@ -386,10 +355,11 @@ $(document).ready(function() {
 		}
 	}
 	
-	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
+	//$('.form-range').attr('value', sessionStorage.getItem('personnel'));
 	if(sessionStorage.getItem('personnel')!=null){
 		$('#value2').text(sessionStorage.getItem('personnel')+"명");		
-	}
+	} 
+	$('.form-range').val(0);
 
 	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
 	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
@@ -401,7 +371,6 @@ $(document).ready(function() {
 	$('#end').attr('value', sessionStorage.getItem("end"));
 	}
 	
-
 });
 
 function startValidity(e){
