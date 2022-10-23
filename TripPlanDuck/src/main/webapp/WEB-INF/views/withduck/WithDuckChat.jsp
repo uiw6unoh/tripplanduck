@@ -266,7 +266,7 @@ function connect() {
 		var user = '${loginMember.memberNickname}';
 		var str = user + " 님이 퇴장하셨습니다.";
 		
-		$("#msgArea").append(str);
+		$(".wrap").append(str);
 		
 		setTimeout( function(){ connect(); }, 1000); // retry connection!!
 	};

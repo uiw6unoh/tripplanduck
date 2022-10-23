@@ -84,9 +84,8 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		
 		log.info("#ChattingHandler, afterConnectionClosed");
 		sessionList.remove(session);
-		/*
+		System.out.println(session.getId() +" 퇴장햇네요");
+		log.info(session.getId() + "님이 퇴장하셨습니다.");
 		
-		log.info(session.getPrincipal().getName() + "님이 퇴장하셨습니다.");
-		*/
 	}
 }
