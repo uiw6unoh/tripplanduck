@@ -27,24 +27,8 @@
 	FROM WITHDUK
 	</sql>
 	
-	<sql id="wiDuckSql">
-	SELECT REPORT.M_NO,
-	       REPORT.REPORT_CATEGORY,
-	       REPORT.REPORT_COUNT,
-	       REPORT.REPORT_CREATEDATE,
-	       REPORT.REPORT_ID,
-	       REPORT.REPORT_M_NO,
-	       REPORT.REPORT_NO_TYPE,
-	       REPORT.REPORT_TYPE,
-	       WITHDUK.WITH_NO,
-	       WITHDUK.WITH_TITLE,
-	       WITHDUK.WITH_WRITER_NICK
-	FROM REPORT
-	JOIN WITHDUK ON REPORT.REPORT_M_NO = WITHDUK.WITH_WRITER_NO
-	</sql>
 	
-	
-	<resultMap type="WithDuck" id="withDuckResultMap">
+	<resultMap type="WithDuck" id="WithDuck">
 		<id property="withNo" column="WITH_NO"/>
 		<result property="withWriterNo" column="WITH_WRITER_NO"/>
 		<result property="withWriterNick" column="WITH_WRITER_NICK"/>
@@ -68,19 +52,6 @@
 		<result property="updateDate" column="WITH_UPDATEDATE"/>
 	</resultMap>
 	
-		<resultMap type="Report" id="withDuckReportResultMap">
-		<id property="withNo" column="WITH_NO"/>
-		<result property="withWriterNick" column="WITH_WRITER_NICK"/>
-		<result property="withTitle" column="WITH_TITLE"/>
-		<result property="reportId" column="REPORT_ID" />
-		<result property="reportCategory" column="REPORT_CATEGORY" />
-		<result property="reportMemberNo" column="REPORT_M_NO" />
-		<result property="reportCreateDate" column="REPORT_CREATEDATE" />
-		<result property="reportCount" column="REPORT_COUNT" />
-		<result property="reportType" column="REPORT_TYPE" />
-		<result property="reportNoType" column="REPORT_NO_TYPE" />
-		<result property="memberNo" column="M_NO" />
-	</resultMap>
 	
 	<resultMap type="Report" id="ReportResultMap">
 		<id property="reportId" column="REPORT_ID" />
@@ -93,28 +64,30 @@
 		<result property="memberNo" column="M_NO" />
 	</resultMap>
 	
-	<select id="withDuckFindNo" parameterType="int" resultMap="withDuckResultMap">
+	<select id="withDuckFindNo" parameterType="int" resultMap="WithDuck">
 		SELECT * FROM WITHDUK 
 		WHERE WITH_NO = #{withDuckNo}
 	</select>
 	
-	<select id="withDuckSelectAll" resultMap="withDuckResultMap">
-		<include refid="wiDuckSql" />
-		
+	<select id="withDuckSelectAll" resultMap="ReportResultMap">
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'WITHDUCK'
 	</select>
 	
 	<select id="selectWithDuckCount" resultType="_int">
 		SELECT COUNT(*) FROM WITHDUK
 	</select>
 	
-	<select id="withDuckSelectLatest" resultMap="withDuckResultMap">
-		<include refid="withDuckListSql"/>
-		ORDER BY WITH_NO DESC
+	<select id="withDuckSelectLatest" resultMap="ReportResultMap">
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'WITHDUCK'
+        ORDER BY REPORT_CREATEDATE DESC
 	</select>
 	
-	<select id="withDuckSelectOld" resultMap="withDuckResultMap">
-		<include refid="withDuckListSql"/>
-		ORDER BY WITH_NO ASC
+	<select id="withDuckSelectOld" resultMap="ReportResultMap">
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'WITHDUCK'
+        ORDER BY REPORT_CREATEDATE ASC
 	</select>
 	
 	<delete id="deletewithDuck" parameterType="_int">
