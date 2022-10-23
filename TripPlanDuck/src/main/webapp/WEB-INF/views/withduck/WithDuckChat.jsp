@@ -26,6 +26,8 @@
 </head>
 
 <body class="stretched">
+<form action="${path}/withduck/detail">
+
     <div class="allDiv">
         <!--채팅 목록, 참여인원-->
         <div class="leftDiv">
@@ -79,6 +81,8 @@
         <div class="rightDiv">
             <!-- 제목 부분 -->
             <div class="chatTitle">
+            <input type="hidden" value="${withDuck.withNo }" name="withNo">
+            <button id = "exitBtn" type="submit">나가기</button>
                 <!-- 나가기 버튼 -->
                 <a href="">
                     <img class="exit" src="${path}/resources/images/WithDuck/left-arrow.png">
@@ -106,13 +110,14 @@
             <div class="inputChat">
                 <div class="message-box">
                     <textarea type="text" id="msg" class="message-input" placeholder="메시지를 입력하세요."></textarea>
-                    <button id="button-send" >
+                    <button type="button" id="button-send" >
                         <img src="${path}/resources/images/WithDuck/send.png" style="width: 50px; position:relative; right:20px; top:15px;">
                     </button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
@@ -132,7 +137,6 @@
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript">
 //전송 버튼 누르는 이벤트
-
 
 $(document).ready(function() {
 	
@@ -207,7 +211,7 @@ function connect() {
 	var memberNo = '${loginMember.memberNo}';
 	var length = '${fn:length(joinChatList)}';
 	var joinChatList = "";
-	
+	ws.onclose = onClose;
 	ws.onopen = function (event) {
 	var count = 0;
 	console.log(length);
@@ -260,18 +264,26 @@ function connect() {
 		
 		console.log("ReceiveMessage:", event.data+'\n');
 	};
-	
-	ws.onclose = function (event) {
-		console.log('Info: connection closed.'); 
+	$('#exitBtn').click(function() { disconnect(); });
+	function disconnect() {
+	    var str = '<div class="chat_entry" id="msgArea">';
 		var user = '${loginMember.memberNickname}';
-		var str = user + " 님이 퇴장하셨습니다.";
+		str += user + "님이 퇴장하셨습니다.";
+		str += '</div>';
 		
-		$(".wrap").append(str);
+		$("#msgArea").append(str);
+		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
 		
+		ws.close();
+	}
+	function onClose (event) {
+		console.log('Info: connection closed.'); 
+
 		setTimeout( function(){ connect(); }, 1000); // retry connection!!
 	};
 	
 	ws.onerror = function (err) { console.log('Error:', err); };
 }
+
 </script>
 </html>

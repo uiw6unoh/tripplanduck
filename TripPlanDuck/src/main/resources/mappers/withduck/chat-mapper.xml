@@ -53,4 +53,9 @@
 		WHERE CHAT_WITHNO = #{withNo}
 		ORDER BY CHAT_TIME ASC
 	</select>
+	
+	<delete id="deleteChatMember" parameterType="_int">
+		DELETE FROM WITHDUK_CHAT
+		WHERE WITH_MEM_NO = #{withMemNo} AND WITH_NO = #{withNo}
+	</delete>
 </mapper>

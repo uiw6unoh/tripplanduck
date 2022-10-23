@@ -24,5 +24,7 @@ public interface ChatMapper {
 
 	List<WithDuckChatLog> selectChatLogList(int withNo);
 
+	int deleteChatMember(@Param("withMemNo") int withMemNo, @Param("withNo") int withNo);
+
 
 }

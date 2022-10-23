@@ -57,8 +57,12 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		int chatMemNo = Integer.parseInt(memNo);
 		int chatWithNo = Integer.parseInt(withNo);
 		String cur_withDuck = String.valueOf(session.getUri()).replace("ws://211.209.232.21//duck/chatting?withNo=", "");		
-
+		
 		service.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
+		
+		if(chatContent.contains("퇴장하셨습니다.")) {
+			result = service.deleteChatMember(chatMemNo, chatWithNo);
+		}
 		
 		System.out.println(Arrays.toString(arr));
 		for(WebSocketSession s : sessionList) {
