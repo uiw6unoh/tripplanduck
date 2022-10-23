@@ -44,10 +44,10 @@
 	                        <div class="imgdiv"><img src="${path}/resources/images/common/프사.png" alt=""></div>
 	                            <div class="imgdiv-right">
 	                                <div class="textdiv1">
-	                                    <a href="">${loginChatList.chatTitle}</a>
+	                                    <a href="${path}/chatFindGo?withNo=${loginChatList.withNo}">${loginChatList.chatTitle}</a>
 	                                </div>
 	                                <div class="textdiv2">34
-	                                    <a href="">
+	                                    <a href="" class="chatOut">
 	                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
 	                                    </a>
 	                                </div>
@@ -82,12 +82,10 @@
             <!-- 제목 부분 -->
             <div class="chatTitle">
             <input type="hidden" value="${withDuck.withNo }" name="withNo">
-            <button id = "exitBtn" type="submit">나가기</button>
-                <!-- 나가기 버튼 -->
-                <a href="">
-                    <img class="exit" src="${path}/resources/images/WithDuck/left-arrow.png">
-                </a>
-                <p class="withChat_title">${withDuck.withTitle }</p>
+            <button id = "exitBtn" type="submit">
+			 <img class="exit" src="${path}/resources/images/WithDuck/logout.png">
+			</button>
+                <p class="withChat_title" style="margin:0; margin-left: 10px; font-weight: bold;">${withDuck.withTitle }</p>
             </div>
             <!-- 내용 부분 -->
 
@@ -265,6 +263,14 @@ function connect() {
 		console.log("ReceiveMessage:", event.data+'\n');
 	};
 	$('#exitBtn').click(function() { disconnect(); });
+	$(document).on('click', '.chatOut', function(){
+	    $('.location_btn').removeClass('selected');
+	    sessionStorage.removeItem("location");
+	    $(this).addClass('selected');
+	    sessionStorage.setItem("location", $('.location_btn.selected').val());
+	    $('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
+	    
+	});
 	function disconnect() {
 	    var str = '<div class="chat_entry" id="msgArea">';
 		var user = '${loginMember.memberNickname}';
