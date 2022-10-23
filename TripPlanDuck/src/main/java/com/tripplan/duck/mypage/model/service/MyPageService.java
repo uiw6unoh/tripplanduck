@@ -34,4 +34,6 @@ public interface MyPageService {
 	boolean confirmPassword(Member member);
 
 	int updateMyProfile(Member member);
+
+	int memberDropOut(int memberNo);
 }
