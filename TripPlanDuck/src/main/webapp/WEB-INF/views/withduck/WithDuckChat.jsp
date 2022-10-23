@@ -142,8 +142,8 @@ $(document).ready(function() {
 $("#button-send").on("click", function(e) {
 	e.preventDefault();
 	if (socket.readyState !== 1) return;
-      
 	  let msg = $('#msg').val();
+      if(msg != ""){
 	  var str = '<div class="chat ch2">';
 		str += '<div class="icon"><i class="fa-solid fa-user">';
 		str += '<img src="${path}/resources/images/common/프사.png" alt="">';
@@ -167,10 +167,13 @@ $("#button-send").on("click", function(e) {
 	  $("#msg").val('');
 	  
 	  $('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+      } else {
+    	  return;
+      }
 });
 	$('#msg').on('keydown', function(e) {
-		
-		if(e.keyCode === 13) {
+		e.preventDefault();
+		if(e.keyCode === 13 && $('#msg').val() != '') {
 			 let msg = $('#msg').val();
 			 // 보내는사람에게 보여지는 채팅 
 			 var str = '<div class="chat ch2">';
