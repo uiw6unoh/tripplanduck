@@ -26,7 +26,7 @@
 </head>
 
 <body class="stretched">
-<form action="${path}/withduck/detail">
+<form action="${path}/withduck/detail" id="formobj">
 
     <div class="allDiv">
         <!--채팅 목록, 참여인원-->
@@ -269,7 +269,16 @@ function connect() {
 		$('.chatOut').removeClass('selected');
 		$(this).addClass('selected');
 		$('#withNoValue').attr('value', $('.chatOut.selected').val());
-		var withNoValue = $('#withNoValue').val();
+		withNoValue = $('#withNoValue').val();
+		
+		if(withNoValue != ${withDuck.withNo}){
+			var chatOut = $('.chatOut');
+				const formElement = $('#formobj');
+				formElement.attr("action", "${path}/chatFindGo?withNo=" + withNoValue);
+				formElement.attr("method", "get");
+				formElement.submit();
+
+		}
 		console.log("withNoValue : " + withNoValue);
 		disconnect(); 
 	});
