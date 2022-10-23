@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.transform.impl.AddDelegateTransformer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,86 +37,94 @@ public class PlannerController {
 		
 		
 		@GetMapping("/myplanner")
-		public String locatinList(Model model , HttpSession session,
+		public ModelAndView locatinList(ModelAndView model , HttpSession session,
 				@RequestParam(name = "locationSelect" , defaultValue = "1") int locationSelect ) {
+			Member loginMember = (Member)session.getAttribute("loginMember");
+			if(loginMember == null ) {
+				model.addObject("msg", "로그인 후 이용이 가능합니다.");
+				model.addObject("location", "/member/login");
+				model.setViewName("member/msg");
+			}else {
+				
+				List<Location> loca = service.getLocationList();
+				
+				Location location = service.getLocation(locationSelect);
+				
+				List<Destination> destination= service.getDestination(locationSelect);			
+				
+				model.addObject("loginMember", loginMember);
+				model.addObject("destination", destination);
+				model.addObject("location",location);
+				model.addObject("loca",loca);
+				model.setViewName("planner/myplanner");
+			}
+			return model;
 			
-			Member member = (Member)session.getAttribute("loginMember");
-			
-			List<Location> loca = service.getLocationList();
-			
-			Location location = service.getLocation(locationSelect);
-			
-			List<Destination> destination= service.getDestination(locationSelect);			
-			
-			model.addAttribute("member", member);
-			model.addAttribute("destination", destination);
-			model.addAttribute("location",location);
-			model.addAttribute("loca",loca);
-			
-			
-			return "planner/myplanner";    //입력페이지
 		}
 		
 		@RequestMapping("/myplannerAction")
-		public String myplannerAction(
+		public ModelAndView myplannerAction(
+				ModelAndView model,
 				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") int locationSelect,
 				@RequestParam("place") String place,
 				@RequestParam("imagea") String imagea,
 				@RequestParam("destNos") String destNos,
 				@SessionAttribute("loginMember") Member loginMember) {
-			
 			MyPlanner myPlanner = new MyPlanner();
-			
 			myPlanner.setMNo(loginMember.getMemberNo());
+			
+			
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDestNo(Integer.parseInt(destNos));
 			myPlanner.setDemo(demo);
+			
 			service.insertPlanner(myPlanner);
+			
+			
+			
 			
 			String[] arrayPlace = place.split(",");
 			String[] arrayImage = imagea.split(",");
-			
 			// 마이플래너에 넣기
-			
-			for (int i = 0; i < arrayPlace.length; i++) {
-				String imagea1 = arrayImage[i];
-				String place1 = arrayPlace[i];
-				// 디테일에 넣기
-				service.detailInsert(imagea1, place1);
+			// || arrayPlace.length == 0 배열에 0?? "" 아예 빈 배열 처리 방법 문의
+			if(arrayPlace.length <= 1 ) {
+				model.addObject("msg", "여행지를 두곳 이상 선택해주세요");
+				model.addObject("location", "/planner/myplanner");
+				
+			}else {
+				
+				// 마이플래너에 넣기
+				for (int i = 0; i < arrayPlace.length; i++) {
+					String place1 = arrayPlace[i];
+					String imagea1 = arrayImage[i];
+					// 디테일에 넣기
+					service.detailInsert(imagea1, place1);
+					
+				}
+				model.addObject("msg", "여행지 등록이 완료되었습니다.");
+				model.addObject("location", "/mypage?select=planner");
+				
+				
 			}
-			return "/planner/myplanner";  
-		}
+				model.setViewName("member/msg");
+				
+				return model;
+
+}
 		
-		
-		
-		@GetMapping("/searchDesti")
-		public ModelAndView addDesti(ModelAndView model, @RequestParam("destSubject") String destSubject) {
+//		@GetMapping("/searchDesti")
+//		public ModelAndView addDesti(ModelAndView model, @RequestParam("destSubject") String destSubject) {
+//			
+//			List<Destination> destination = service.addDestination();
+//			
+//			//model.addObject("destination", destination);
+//			model.setViewName("planner/myplanner");
+//			
+//			
+//			return model;
+//		}
 			
-			List<Destination> destination = service.addDestination();
-			
-			//model.addObject("destination", destination);
-			model.setViewName("planner/myplanner");
-			
-			
-			return model;
-		}
-			
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
