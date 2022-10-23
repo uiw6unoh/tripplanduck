@@ -39,6 +39,15 @@ public interface AdminMapper {
 
 	int deletewithDuck(int withDuckNo);
 
+	void deleteComment(int commentsId);
+
+	
+
+	
+
+	
+
+
 	
 
 	

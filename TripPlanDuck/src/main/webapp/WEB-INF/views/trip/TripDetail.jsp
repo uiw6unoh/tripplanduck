@@ -25,6 +25,14 @@
 	.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #fff8c6;background: #fff8c6 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 	.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
 	.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+	
+	.lb-widget-01 {
+	  position: fixed;
+	  top: 220px; /* 브라우저 윗쪽 끝에서부터의 거리 */
+	  right: 50%; /* 왼쪽에 배치하려면 right를 left로 변경 */
+	  margin-right: -850px; /* 왼쪽에 배치하려면 margin-right를 margin-left로 변경  */
+	  z-index: 99;
+	}
 </style>
 
 <!-- 내용 시작 -->
@@ -171,29 +179,7 @@
             <div class="tab-container">
               <div id="tab-1" class="tab-content clearfix ui-tabs-active " aria-hidden="">
 				<div class="card-tab">               
-                   <div class="card-tab m-2 " id="map" style="width:500px;height:400px;"></div>
-                   <div class="tomorrow"
-			           data-location-id=""
-			           data-language="KO"
-			           data-unit-system="METRIC"
-			           data-skin="light"
-			           data-widget-type="upcoming"
-			           style="padding-bottom:22px;position:relative;"
-			        >
-			          <a
-			            href="https://www.tomorrow.io/weather/"
-			            rel="nofollow noopener noreferrer"
-			            target="_blank"
-			            style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;"
-			          >
-			            <img
-			              alt="Powered by Tomorrow.io"
-			              src="https://weather-website-client.tomorrow.io/img/powered-by-tomorrow.svg"
-			              width="140"
-			              height="15"
-			            />
-			          </a>
-			        </div>
+                   <div class="card-tab m-2 " id="map" style="width:1075px;height:400px;"></div>
 				</div> 
               </div>
               <div id="tab-2" class="tab-content clearfix" aria-hidden="" style="display: none;">
@@ -241,8 +227,12 @@
 		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
-		                                  	
 										</c:when>
+										
+										<c:when test="${ loginMember.memberId == 'admin' }">
+											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+										</c:when>
+										
 										<c:otherwise>	
 		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
@@ -340,12 +330,14 @@
 			    </div>
 			  </div>
 			</div>  
-			</c:if>
-              
+			</c:if>      
             </div>
           </div>
-        </div>
-      </div>
+             <div class="lb-widget-01" style="width:200px; float:right;">
+				<div id="lbl-1" class="lb-left-weather" style="height:200px;">
+					<iframe src="https://forecast.io/embed/#lat=${dest.destMapX}&lon=${dest.destMapY}&name=${dest.destSubject}&color=&font=&units=si"></iframe>
+				</div>
+			 </div>
 </section>
 
 <jsp:include page="../common/footer.jsp"/>
@@ -626,10 +618,6 @@ function reportComment() {
 		})			
 	});
 };
-	    	
-
-
-	  
 </script>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9ffc9caebebf866316d34a68b425adfd"></script>
@@ -756,21 +744,4 @@ $(document).ready(function () {
 	  }
 	  addListener();
 	});
-</script>
-
-<script>
-        (function(d, s, id) {
-            if (d.getElementById(id)) {
-                if (window.__TOMORROW__) {
-                    window.__TOMORROW__.renderWidget();
-                }
-                return;
-            }
-            const fjs = d.getElementsByTagName(s)[0];
-            const js = d.createElement(s);
-            js.id = id;
-            js.src = "https://www.tomorrow.io/v1/widget/sdk/sdk.bundle.min.js";
-
-            fjs.parentNode.insertBefore(js, fjs);
-        })(document, 'script', 'tomorrow-sdk');
 </script>

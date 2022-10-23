@@ -1,25 +1,15 @@
 package com.tripplan.duck.planner.controller;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,6 +58,7 @@ public class PlannerController {
 		
 		@RequestMapping("/myplannerAction")
 		public String myplannerAction(
+				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") int locationSelect,
 				@RequestParam("place") String place,
 				@RequestParam("imagea") String imagea,
@@ -79,12 +70,13 @@ public class PlannerController {
 			myPlanner.setMNo(loginMember.getMemberNo());
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDestNo(Integer.parseInt(destNos));
+			myPlanner.setDemo(demo);
+			service.insertPlanner(myPlanner);
 			
 			String[] arrayPlace = place.split(",");
 			String[] arrayImage = imagea.split(",");
 			
 			// 마이플래너에 넣기
-			service.insertPlanner(myPlanner);
 			
 			for (int i = 0; i < arrayPlace.length; i++) {
 				String imagea1 = arrayImage[i];
@@ -98,9 +90,9 @@ public class PlannerController {
 		
 		
 		@GetMapping("/searchDesti")
-		public ModelAndView addDesti(ModelAndView model) {
+		public ModelAndView addDesti(ModelAndView model, @RequestParam("destSubject") String destSubject) {
 			
-			//Destination destination = service.addDestination();
+			List<Destination> destination = service.addDestination();
 			
 			//model.addObject("destination", destination);
 			model.setViewName("planner/myplanner");

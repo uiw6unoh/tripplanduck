@@ -20,8 +20,6 @@
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
             <p></p>
-            <a id="myListMain" href="${ path }/admin/chat"> 채팅 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/withDuck"> 위드덕 관리 </a>
         </div>
     </div>
@@ -54,7 +52,7 @@
                 <thead>
                     <tr style="height: 10px; color:gray">
                         <th style="width: 20%; text-align: center;">리뷰 번호</th>
-                        <th style="width: 20%; text-align: center;">여행지 번호</th>
+                        <th style="width: 20%; text-align: center;">리뷰 내용</th>
                         <th style="width: 15%; text-align: center;">아이디</th>
                         <th style="width: 20%; text-align: center;">신고</th>
                         <th style="width: 10%; text-align: center;">리뷰 삭제</th>
@@ -73,12 +71,12 @@
                 	<c:forEach var="review" items="${list}">
                 		<tr>
 		                    <td style="text-align: center;">${review.commentsId}</td>
-		                    <td style="text-align: center;">${review.destNo}</td>
+		                    <td style="text-align: center;">${review.commentsContent}</td>
 		                    
 		                    <td style="text-align: center;">${review.commentsWriterId}</td>
 		                    <td style="text-align: center;">신고된리뷰</td>
 		                    <td>
-	                        <button style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                        <button type="button" onclick="location.href='${path}/trip/detail?destNo=${review.destNo}'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
 	                            리뷰삭제
 	                        </button>
 		                    </td>

@@ -47,6 +47,7 @@
 		<id property="pNo" column="P_NO" />
 		<result property="destNo" column="DEST_NO" />
 		<result property="mNo" column="M_NO" />
+		<result property="demo" column="TOURDATE" />
 		<result property="locationId" column="LOCATION_ID" />
 		<collection property="loca" javaType="arrayList" columnPrefix="R_" resultMap="locationInsertMap"></collection>
 	</resultMap>
@@ -88,7 +89,7 @@
 	<!-- My planner insert -->
 	
 	<insert id="insertPlanner" parameterType="MyPlanner" keyColumn="P_NO" keyProperty="pNo">
-		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{destNo},#{mNo},#{locationId})
+		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID,TOURDATE) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{destNo},#{mNo},#{locationId},#{demo})
 	</insert>
 	
 	<insert id="detailInsert" parameterType="HashMap">
@@ -112,11 +113,15 @@
 		WHERE L.LOCATION_ID = #{locationSelect}
 	</select>
 	
-	<select id="addDest" resultMap="DestFindResultMap">
+	<select id="searchDest" resultMap="DestFindResultMap">
 	
-		SELECT L.LOCATION_ID ,D.DEST_NO, D.DEST_SUBJECT , D.DEST_MAP_X, D.DEST_MAP_Y  FROM LOCATION L
-		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
-		WHERE D.DEST_SUBJECT = #{destSubject}
+		SELECT * FROM DESTINATION D
+				JOIN LOCATION L ON(L.LOCATION_ID = D.LOCATION_ID)
+				
+				<trim prefix="WHERE" prefixOverrides="AND|OR">
+					D.DEST_SUBJECT LIKE '%' || #{destSubject} || '%'
+				</trim>
+				
 	</select>
 	
 </mapper>
