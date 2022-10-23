@@ -346,8 +346,8 @@
 			var email = $("#memberEmail");
 		
 			if (/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/.test(email.val()) == false) {
-				$("#email_chk").html("유효한 이메일을 입력해주세요.");
-				$("#email_chk").attr('style', 'visibility:visible; font-size:10px; color="red";');
+				$("#email_chk").html("<b>유효한 이메일을 입력해주세요.</b>");
+				$("#email_chk").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
 			}else{
 				$("#email_chk").html("");
 				$("#email_chk").attr('style', 'visibility:hidden;');
@@ -358,8 +358,8 @@
 				var p1 = $("#memberPassword");
 				
 				if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==false){
-					$("#pwd_chk1").html("10자~16자, 최소 하나의 문자 및 하나의 숫자를 입력해주세요.<br>");
-					$("#pwd_chk1").attr('style', 'visibility:visible; font-size:10px; color="red";');
+					$("#pwd_chk1").html("<b>영문자+숫자+특수문자 조합으로 8자리 이상 입력해주세요.</b>");
+					$("#pwd_chk1").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
 				}else if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==true){
 					$("#pwd_chk1").html("");
 					$("#pwd_chk1").attr('style', 'visibility:hidden;');
@@ -371,8 +371,8 @@
 				var p2 = $("#memberPassword2");
 				
 				if(p1.val() != p2.val()){
-					$("#pwd_chk2").html("비밀번호가 일치하지 않습니다.");
-					$("#pwd_chk2").attr('style', 'font-size:10px; color="red"; visibility:visible;');
+					$("#pwd_chk2").html("<b>비밀번호가 일치하지 않습니다.</b>");
+					$("#pwd_chk2").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
 				}else{
 					$("#pwd_chk2").html("");
 					$("#pwd_chk2").attr('style', 'visibility:hidden;');
