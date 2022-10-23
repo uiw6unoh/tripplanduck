@@ -39,7 +39,8 @@
                         </span>
                 </div>
 	                <div class="withTitle">
-                <c:forEach items="${loginChatList}" var="loginChatList">
+	                <input type="hidden" id="withNoValue" value="${withDuck.withNo }">
+                <c:forEach items="${loginChatList}" var="loginChatList" varStatus="status">
 	                    <div class="chatList">
 	                        <div class="imgdiv"><img src="${path}/resources/images/common/프사.png" alt=""></div>
 	                            <div class="imgdiv-right">
@@ -47,9 +48,9 @@
 	                                    <a href="${path}/chatFindGo?withNo=${loginChatList.withNo}">${loginChatList.chatTitle}</a>
 	                                </div>
 	                                <div class="textdiv2">34
-	                                    <a href="" class="chatOut">
+	                                    <button class="chatOut" style="border: 0; background: white; padding:0px" value="${loginChatList.withNo }">
 	                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-	                                    </a>
+	                                    </button>
 	                                </div>
 	                            </div>
 	                    </div>
@@ -135,7 +136,7 @@
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript">
 //전송 버튼 누르는 이벤트
-
+var withNoValue = $('#withNoValue').val();
 $(document).ready(function() {
 	
 $("#button-send").on("click", function(e) {
@@ -263,22 +264,25 @@ function connect() {
 		console.log("ReceiveMessage:", event.data+'\n');
 	};
 	$('#exitBtn').click(function() { disconnect(); });
-	$(document).on('click', '.chatOut', function(){
-	    $('.location_btn').removeClass('selected');
-	    sessionStorage.removeItem("location");
-	    $(this).addClass('selected');
-	    sessionStorage.setItem("location", $('.location_btn.selected').val());
-	    $('#btnValueSaveLocation').attr('value', sessionStorage.getItem("location"));
-	    
+	
+	$('.chatOut').on('click', function() {
+		$('.chatOut').removeClass('selected');
+		$(this).addClass('selected');
+		$('#withNoValue').attr('value', $('.chatOut.selected').val());
+		var withNoValue = $('#withNoValue').val();
+		console.log("withNoValue : " + withNoValue);
+		disconnect(); 
 	});
+	
 	function disconnect() {
 	    var str = '<div class="chat_entry" id="msgArea">';
+	    console.log(withNoValue)
 		var user = '${loginMember.memberNickname}';
 		str += user + "님이 퇴장하셨습니다.";
 		str += '</div>';
-		
+		console.log(withNoValue)
 		$("#msgArea").append(str);
-		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + '${withDuck.withNo}');
+		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + withNoValue);
 		
 		ws.close();
 	}

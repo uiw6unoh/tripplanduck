@@ -22,15 +22,15 @@
 	</resultMap>
 	
 	<insert id="createChat" parameterType="map" >
-		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '작성자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '작성자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI:SS'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
 	</insert>
 	
 	<insert id="joinChat" parameterType="map" >
-		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI:SS'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
 	</insert>
 
 	<insert id="putLog" parameterType="map" >
-		INSERT INTO WITHDUK_CHATLOG VALUES(SEQ_WITHDUK_CHATLOG_NO.NEXTVAL, #{chatMemNo}, #{chatMemNickName}, #{chatContent}, TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatWithNo})
+		INSERT INTO WITHDUK_CHATLOG VALUES(SEQ_WITHDUK_CHATLOG_NO.NEXTVAL, #{chatMemNo}, #{chatMemNickName}, #{chatContent}, TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI:SS'), #{chatWithNo})
 	</insert>
 	
 	<select id="selectloginChatList" parameterType="_int" resultMap="withDuckChatResultMap">
