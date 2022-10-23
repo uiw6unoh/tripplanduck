@@ -33,6 +33,14 @@
 	  margin-right: -850px; /* 왼쪽에 배치하려면 margin-right를 margin-left로 변경  */
 	  z-index: 99;
 	}
+		
+	.lb-left-weather iframe {
+	  display: block;
+      border: 0;
+      width: 100%;
+      height: 140px;
+	}
+	
 </style>
 
 <!-- 내용 시작 -->
@@ -130,7 +138,7 @@
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="..." />
+            <div class="col-md-6"><img referrerpolicy="no-referrer" class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="..." />
             </div>
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -224,13 +232,13 @@
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
 											<button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="updateSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
-		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0" type="button">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
 										</c:when>
 										
 										<c:when test="${ loginMember.memberId == 'admin' }">
-											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0">삭제</button>
+											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0" >삭제</button>
 										</c:when>
 										
 										<c:otherwise>	
@@ -279,7 +287,7 @@
                      </form>
 				  </div>
 			      <div class="modal-footer">
-			        <button type="button" id="updateAlert" onclick="updateComment()"  class="btn btn-outline-warning py-0">확인</button>
+			        <button type="button" id="updateAlert" onclick="updateComment()" class="btn btn-outline-warning py-0">확인</button>
 			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
@@ -324,7 +332,7 @@
 					</div>
 				  </div>
 			      <div class="modal-footer">
-			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0">신고</button>
+			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0" >신고</button>
 			        <button type="button" id="reportCancel" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
@@ -334,8 +342,8 @@
             </div>
           </div>
              <div class="lb-widget-01" style="width:200px; float:right;">
-				<div id="lbl-1" class="lb-left-weather" style="height:200px;">
-					<iframe src="https://forecast.io/embed/#lat=${dest.destMapX}&lon=${dest.destMapY}&name=${dest.destSubject}&color=&font=&units=si"></iframe>
+				<div id="lbl-1" class="lb-left-weather" style="height:100px;">
+					<iframe id="iframe" src="https://forecast.io/embed/#lat=${dest.destMapX}&lon=${dest.destMapY}&name=${dest.destSubject}&color=&font=&units=si"></iframe>
 				</div>
 			 </div>
 </section>
@@ -357,7 +365,78 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-// 수정 시 모달에 데이터 넘겨주기
+// 등록 버튼
+$(document).ready(function () {
+	$('[id="enrollAlert"]').on("click", function () {
+  	
+  	let member = "${member}";
+  	
+  	console.log("member :", member)
+  	
+  	if(member == "" || member == null){
+  		Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '로그인 후 이용해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        }).then(function (isConfirmed) {
+		    	  window.location.href="${path}/member/login";
+	        });
+	        
+	        return;
+	    }
+  	
+  	let rating = $('input[name=rating]:checked').val();
+  	let comment = $("#commentsContent").val();
+  	
+	   	if(rating == null || rating == "" || comment == "" || comment == null){
+	       	Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '별점 혹은 내용을 입력해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        })
+	       	return;
+	    }
+  	
+    var form = $(this).parents('form');
+    Swal.fire({
+      icon: "success",
+      title: "등록성공!",
+      text: `댓글이 등록되었습니다.`,
+      confirmButtonText: "확인",
+      closeOnClickOutside : false
+
+    }).then(function (isConfirmed) {
+      //등록 요청 처리
+      let data = {
+  		'commentsRating' : rating, 
+   		'commentsContent' : comment,
+  		'destNo' : "${dest.destNo}"
+ 		};
+      
+      $.ajax({
+			url : "${path}/trip/api/comment",
+			type : "POST",
+			data : data,
+			dataType : "json",
+			success: function(data) {
+				location.reload()
+			},
+			error: function(error) {
+				
+			}
+		})
+		
+      
+    });
+  });
+});
+
+
+//수정 시 모달에 데이터 넘겨주기
 function updateSet(commentsId){
 	$("#commentsId").val(commentsId)
 	
@@ -369,6 +448,75 @@ function updateSet(commentsId){
 	
 	console.log("commentsId : ", commentsId)
 }
+
+// 수정 버튼
+function updateComment() {
+	let rating = $('input[name=rating2]:checked').val();
+	let comment = $("#commentsContent2").val();
+    let commentsId = $("#commentsId").val();
+	
+	   	if(rating == null || rating == "" || comment == "" || comment == null){
+	       	Swal.fire({
+		        icon: "error",
+		        title: `실패!`,
+		        text: '별점 혹은 내용을 입력해주세요.',
+		        confirmButtonText: "확인",
+		        closeOnClickOutside : false
+	        })
+	       	return;
+	    }
+	   	
+  Swal.fire({
+    icon: "warning",
+    title: "댓글수정",
+    text: `댓글을 수정 하시겠습니까?`,
+    showCancelButton: true,
+    confirmButtonText: "수정",
+    cancelButtonText: "취소",
+    closeOnClickOutside : false
+
+  }).then(function (result) {
+    if (result.isConfirmed) {
+      //수정 요청 처리
+      
+      let data = {
+		'commentsRating' : rating, 
+ 		'commentsContent' : comment,
+ 		'commentsId' : commentsId,
+		'destNo' : "${dest.destNo}"
+		  };
+      
+      console.log("data : ", data)
+      $.ajax({
+			url : "${path}/trip/api/comment",
+			type : "PUT",
+			data		:  JSON.stringify(data), 
+	        contentType : "application/json",
+			dataType : "json",
+			success: function(data) {
+				Swal.fire({
+				      icon: "success",
+				      title: "수정완료!",
+				      text: `댓글이 수정되었습니다.`,
+				      confirmButtonText: "확인",
+				      closeOnClickOutside : false
+
+				    }).then(function(){
+	    		
+	    		 location.reload()
+				    })
+			},
+			error: function(error) {
+				
+			}
+		})
+		
+      
+    } else {
+      //취소
+    }
+  });
+};
 
 // 삭제 버튼
 function deleteComment(commentsId){
@@ -392,160 +540,32 @@ function deleteComment(commentsId){
 			type : "DELETE",
 			success: function(data) {
 				if(data == 1){
-					swal.fire(
-			          '삭제완료!',
-			          '댓글이 삭제되었습니다',
-			          'success'
-			   		 )
+					Swal.fire({
+					      icon: "success",
+					      title: "삭제완료!",
+					      text: `댓글이 삭제되었습니다.`,
+					      confirmButtonText: "확인",
+					      closeOnClickOutside : false
+
+					}).then(function(){
+				
+				location.reload()
+					})
 				}
-				
-				location.reload()
 			},
 			error: function(error) {
 				
 			}
-		})
-        
+		})   
       } else {
         //취소
       }
-    });
-  };
+   });
+};
+
+
   
-  // 수정 버튼
-  function updateComment() {
-  	let rating = $('input[name=rating2]:checked').val();
-  	let comment = $("#commentsContent2").val();
-    let commentsId = $("#commentsId").val();
-  	
-	   	if(rating == null || rating == "" || comment == "" || comment == null){
-	       	Swal.fire({
-		        icon: "error",
-		        title: `실패!`,
-		        text: '별점 혹은 내용을 입력해주세요.',
-		        confirmButtonText: "확인",
-		        closeOnClickOutside : false
-	        })
-	       	return;
-	    }
-	   	
-    Swal.fire({
-      icon: "warning",
-      title: "댓글수정",
-      text: `댓글을 수정 하시겠습니까?`,
-      showCancelButton: true,
-      confirmButtonText: "수정",
-      cancelButtonText: "취소",
-      closeOnClickOutside : false
-
-    }).then(function (result) {
-      if (result.isConfirmed) {
-        //수정 요청 처리
-        
-        let data = {
-  		'commentsRating' : rating, 
-   		'commentsContent' : comment,
-   		'commentsId' : commentsId,
-  		'destNo' : "${dest.destNo}"
- 		  };
-        
-        console.log("data : ", data)
-        $.ajax({
-			url : "${path}/trip/api/comment",
-			type : "PUT",
-			data		:  JSON.stringify(data), 
-	        contentType : "application/json",
-			dataType : "json",
-			success: function(data) {
-				swal.fire(
-		          '수정완료!',
-		          '댓글이 수정되었습니다',
-		          'success'
-	    		)
-	    		
-	    		 location.reload()
-			},
-			error: function(error) {
-				
-			}
-		})
-		
-        
-      } else {
-        //취소
-      }
-    });
-  };
-  // 등록 버튼
-  $(document).ready(function () {
-	    $('[id="enrollAlert"]').on("click", function () {
-    	
-    	let member = "${member}";
-    	
-    	console.log("member :", member)
-    	if(member == "" || member == null){
-    		Swal.fire({
-		        icon: "error",
-		        title: `실패!`,
-		        text: '로그인 후 이용해주세요.',
-		        confirmButtonText: "확인",
-		        closeOnClickOutside : false
-	        }).then(function (isConfirmed) {
-		    	  window.location.href="${path}/member/login";
-	        });
-	        
-	        return;
-	    }
-    	
-    	let rating = $('input[name=rating]:checked').val();
-    	let comment = $("#commentsContent").val();
-    	
-	   	if(rating == null || rating == "" || comment == "" || comment == null){
-	       	Swal.fire({
-		        icon: "error",
-		        title: `실패!`,
-		        text: '별점 혹은 내용을 입력해주세요.',
-		        confirmButtonText: "확인",
-		        closeOnClickOutside : false
-	        })
-	       	return;
-	    }
-    	
-      var form = $(this).parents('form');
-      Swal.fire({
-        icon: "success",
-        title: "등록성공!",
-        text: `댓글이 등록되었습니다.`,
-        confirmButtonText: "확인",
-        closeOnClickOutside : false
-
-      }).then(function (isConfirmed) {
-        //등록 요청 처리
-        let data = {
-    		'commentsRating' : rating, 
-     		'commentsContent' : comment,
-    		'destNo' : "${dest.destNo}"
-   		};
-        
-        $.ajax({
-			url : "${path}/trip/api/comment",
-			type : "POST",
-			data : data,
-			dataType : "json",
-			success: function(data) {
-				location.reload()
-			},
-			error: function(error) {
-				
-			}
-		})
-		
-        
-      });
-    });
-  });
- 
-  // 신고 버튼
+//신고 시 모달에 데이터 넘겨주기
 function reportSet(commentsId){
 	   	$("#commentsId").val(commentsId)
 	    	
@@ -568,6 +588,8 @@ function reportSet(commentsId){
 		return;
 	}
   }  	
+  
+// 신고 버튼
 function reportComment() {
 	let reportType = $('input[name=report]:checked').val();
 	let commentsId = $("#commentsId").val();
@@ -597,7 +619,6 @@ function reportComment() {
 	}).then(function (isConfirmed) {
 	// 신고 요청 처리
 	let data = {
-		'memberNo' : ${ loginMember.memberNo },
 		'reportType' : reportType,
 		'reportNoType' : commentsId
 	};

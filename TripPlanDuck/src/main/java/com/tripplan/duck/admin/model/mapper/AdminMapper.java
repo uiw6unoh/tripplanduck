@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 @Mapper
@@ -40,6 +41,12 @@ public interface AdminMapper {
 	int deletewithDuck(int withDuckNo);
 
 	void deleteComment(int commentsId);
+
+	Comments Category(int reviewNo);
+
+	
+
+	
 
 	
 

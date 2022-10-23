@@ -43,26 +43,49 @@
 		<result property="commentsRating" column="COMMENTS_RATING" />
 		<result property="commentsCreateDate" column="COMMENTS_CREATEDATE" />
 		<result property="commentsUpdateDate" column="COMMENTS_UPDATEDATE" />
-		<result property="commentsCreateDateSt" column="COMMENTS_CREATEDATE_ST" />
-		<result property="commentsUpdateDateSt" column="COMMENTS_UPDATEDATE_ST" />
 		<result property="destNo" column="DEST_NO" />
-		<result property="destSubject" column="DEST_SUBJECT" />
-		<result property="destCategory" column="DEST_CATEGORY" />
 	</resultMap>
 	
-	<select id="selectReviewAll" resultMap="commentsResultMap">		
-		<include refid="selectReviewSql"/>
-		
+	<resultMap type="Report" id="Report">
+		<id property="reportId" column="REPORT_ID" />
+		<result property="reportCategory" column="REPORT_CATEGORY" />
+		<result property="reportMemberNo" column="REPORT_M_NO" />
+		<result property="reportCreateDate" column="REPORT_CREATEDATE" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="reportType" column="REPORT_TYPE" />
+		<result property="reportNoType" column="REPORT_NO_TYPE" />
+		<result property="memberNo" column="M_NO" />
+	</resultMap>
+	
+	<select id="selectReviewAll" resultMap="Report">		
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'REVIEW'
+	</select>
+
+	<select id="Category" parameterType="_int" resultMap="commentsResultMap">
+		SELECT D.COMMENTS_ID,
+			   D.M_NO,
+			   D.COMMENTS_WRITER_ID,
+			   D.COMMENTS_CONTENT,
+			   D.COMMENTS_RATING,
+			   D.COMMENTS_CREATEDATE,
+			   D.COMMENTS_UPDATEDATE,
+			   D.DEST_NO
+	    FROM REPORT R
+	    JOIN DESTINATION_COMMENTS D ON(R.REPORT_NO_TYPE = D.COMMENTS_ID)
+	    WHERE R.REPORT_NO_TYPE = #{reviewNo}
 	</select>
 	
-	<select id="selectReviewOld" resultMap="commentsResultMap">
-		<include refid="selectReviewSql"/>
-		ORDER BY COMMENTS_ID DESC
+	<select id="selectReviewOld" resultMap="Report">
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'REVIEW'
+        ORDER BY REPORT_CREATEDATE ASC
 	</select>
 	
-	<select id="selectReviewLatest" resultMap="commentsResultMap">
-		<include refid="selectReviewSql"/>
-		ORDER BY COMMENTS_ID ASC
+	<select id="selectReviewLatest" resultMap="Report">
+		SELECT * FROM REPORT
+		WHERE REPORT_CATEGORY = 'REVIEW'
+        ORDER BY REPORT_CREATEDATE DESC
 	</select>
 	
 	<select id="reviewCount" resultType="_int">

@@ -5,6 +5,7 @@ import java.util.List;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 public interface AdminService {
@@ -36,6 +37,8 @@ public interface AdminService {
 	WithDuck findWithDuckByNo(int withDuckNo);
 
 	int withDuckDelte(int withDuckNo);
+
+	Comments Category(int reviewNo);
 
 
 

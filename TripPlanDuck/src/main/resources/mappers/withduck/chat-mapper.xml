@@ -11,14 +11,46 @@
 		<result property="chatMemNick" column="CHAT_MEMNICK"/>
 		<result property="withMemNo" column="WITH_MEM_NO"/>
 		<result property="chatTitle" column="CHAT_TITLE"/>
-		
+	</resultMap>
+	<resultMap type="WithDuckChatLog" id="withDuckChatLogResultMap">
+		<id property="chatContentNo" column="CHAT_CONTENTNO"/>
+		<result property="chatMemNo" column="CHAT_MEMNO"/>
+		<result property="chatMemNickName" column="CHAT_MEMNICKMANE"/>
+		<result property="chatContent" column="CHAT_CONTENT"/>
+		<result property="chatTime" column="CHAT_TIME"/>
+		<result property="chatWithNo" column="CHAT_WITHNO"/>
 	</resultMap>
 	
 	<insert id="createChat" parameterType="map" >
-		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '작성자', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '작성자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
 	</insert>
 	
 	<insert id="joinChat" parameterType="map" >
-		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE, 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
+		INSERT INTO WITHDUK_CHAT VALUES(SEQ_WITHDUCK_CHAT_NO.NEXTVAL, #{withNo}, '참여자', TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatMemNick}, #{withMemNo}, #{chatTitle})
 	</insert>
+
+	<insert id="putLog" parameterType="map" >
+		INSERT INTO WITHDUK_CHATLOG VALUES(SEQ_WITHDUK_CHATLOG_NO.NEXTVAL, #{chatMemNo}, #{chatMemNickName}, #{chatContent}, TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY-MM-DD HH24:MI'), #{chatWithNo})
+	</insert>
+	
+	<select id="selectloginChatList" parameterType="_int" resultMap="withDuckChatResultMap">
+		SELECT * 
+		FROM WITHDUK_CHAT
+		WHERE WITH_MEM_NO = #{memberNo}
+		ORDER BY CHAT_TIME DESC
+	</select>
+	
+	<select id="selectjoinChatList" parameterType="_int" resultMap="withDuckChatResultMap">
+		SELECT *
+		FROM WITHDUK_CHAT
+		WHERE WITH_NO = #{withNo}
+		ORDER BY CHAT_TIME DESC
+	</select>
+	
+	<select id="selectChatLogList" parameterType="_int" resultMap="withDuckChatLogResultMap">
+		SELECT *
+		FROM WITHDUK_CHATLOG
+		WHERE CHAT_WITHNO = #{withNo}
+		ORDER BY CHAT_TIME ASC
+	</select>
 </mapper>
