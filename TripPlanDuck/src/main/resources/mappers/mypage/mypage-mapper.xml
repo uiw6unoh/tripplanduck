@@ -302,4 +302,11 @@
 				m_id = #{memberId}
 	</update>
 	
+	<update id="memberDropOut">
+		update member
+			set m_status = 'N'
+			where
+				m_no = #{memberNo}
+	</update>
+	
 </mapper>

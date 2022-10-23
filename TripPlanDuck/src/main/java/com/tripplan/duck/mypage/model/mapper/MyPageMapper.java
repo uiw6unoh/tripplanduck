@@ -36,4 +36,6 @@ public interface MyPageMapper {
 
 	int updateMyProfile(Member member);
 
+	int memberDropOut(int memberNo);
+
 }
