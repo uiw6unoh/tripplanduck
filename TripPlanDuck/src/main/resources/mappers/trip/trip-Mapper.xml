@@ -233,10 +233,10 @@
 	</delete>
 	
 	<update id="updateDestRating" parameterType="com.tripplan.duck.trip.model.vo.Comments">
-       	UPDATE DESTINATION 
-       	SET DEST_RATING_AVG = (SELECT AVG(COMMENTS_RATING) 
-       						  FROM DESTINATION_COMMENTS
-       						  WHERE DEST_NO = #{destNo}) 
-       	WHERE DEST_NO = #{destNo}
+		UPDATE DESTINATION
+		SET DEST_RATING_AVG = NVL((SELECT AVG(COMMENTS_RATING) 
+		                       FROM DESTINATION_COMMENTS
+		                       WHERE DEST_NO = #{destNo}), 0)
+		WHERE ( DEST_NO = #{destNo})
     </update>
 </mapper>

@@ -52,6 +52,20 @@
 		<result property="createDate" column="WITH_CREATEDATE"/>
 		<result property="updateDate" column="WITH_UPDATEDATE"/>
 	</resultMap>
+	<!-- 
+	<resultMap type="Member" id="memberResultMap">
+		<id property="memberNo" column="M_NO" />
+		<result property="memberId" column="M_ID"/>
+		<result property="memberPassword" column="M_PW"/>
+		<result property="memberNickname" column="M_NICKNAME"/>
+		<result property="memberEmail" column="M_EMAIL"/>
+		<result property="memberType" column="M_TYPE"/>
+		<result property="memberWarning" column="M_WARNING"/>
+		<result property="memberStatus" column="M_STATUS"/>
+		<result property="memberGender" column="M_GENDER"/>
+		<result property="memberAge" column="M_AGE"/>
+	</resultMap>
+	 -->
 	
 	
 	<!-- 내림차순 조회 -->
@@ -173,4 +187,11 @@
 		WHERE WITH_NO = #{withNo}
 	</update>
 	
+	<select id="countChatMem" resultType="_int">
+		SELECT COUNT(*) FROM(
+			SELECT *
+			FROM WITHDUK_CHAT 
+			WHERE WITH_NO = ${withNo})
+		WHERE WITH_MEM_NO = ${memberNo}
+	</select>
 </mapper>
