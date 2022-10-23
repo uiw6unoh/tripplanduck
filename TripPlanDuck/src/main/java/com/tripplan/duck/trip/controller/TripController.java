@@ -104,10 +104,10 @@ public class TripController {
 			destinationLike.setDestNo(destNo);
 			destinationLike.setMemberNo(member.getMemberNo());
 			isLike = destinationService.isLike(destinationLike);
+			
 			model.addObject("member", member);
 
 		}
-		
 		model.addObject("isLike", isLike);
 		model.addObject("comments", comments);
 		model.addObject("dest", dest);
