@@ -183,23 +183,19 @@
 								<div class="addDesti">
 									<a id="checkButton" class="material-icons">check</a> <input
 										type="hidden" id="destMapX" name="destMapX"
-										value="${ destination.destMapX }" /> <input type="hidden"
-										id="destMapY" name="destMapY"
-										value="${ destination.destMapY }" /> <input type="hidden"
-										id="destImage" name="destImage"
-										value="${ destination.destImage }"> <input
-										type="hidden" id="destSubject" name="destSubject"
-										value="${ destination.destSubject }" /> <input type="hidden"
-										id="destNo" name="destNo" value="${ destination.destNo }" />
-									<input type="hidden" id="destContent" name="destContent"
-										value="${ destination.destContent }" />
+										value="${ destination.destMapX }" /> 
+										<input type="hidden" id="destMapY" name="destMapY"value="${ destination.destMapY }" /> 
+										<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }"> 
+										<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" /> 
+										<input type="hidden" id="destNo" name="destNo" value="${ destination.destNo }" />
+									    <input type="hidden" id="destContent" name="destContent" value="${ destination.destContent }" />
 								</div>
 							</div>
 						</c:forEach>
 					</div>
 					<input type="hidden" name="place" id="place"> 
 					<input type="hidden" name="imagea" id="imagea"> 
-					<input type="text" name="destNos" id="destNos"> 
+					<input type="hidden" id="destNos"> 
 				</div>
 			</div>
 		</div>
@@ -313,10 +309,10 @@
 	var markers = [];
 	var ovarlays = [];
 	var lines = [];
-	var names = [];
-	var positions = [];
-	var data = new Array();
-	var imagehttp = new Array();
+	var names = []; // 여행지 이름
+	var positions = [];  
+	var data = new Array(); // 여행지 이름 담는 배열 
+	var imagehttp = new Array(); // 이미지 주소
 	var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbj1sID%2FbtrOmc6KtD6%2FKF00nKO1xpe9nbUlbySxn1%2Fimg.png', // 마커이미지의 주소입니다    
 	imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
 	imageOption = {
@@ -330,67 +326,42 @@
 		
 		$("[class^=addDesti]").on("click",function(event) {
 
-											count = countF(1);
+					count = countF(1);
+					
+					
+					let destMapX = $(this).children('#destMapX').val().trim();
+					let destMapY = $(this).children('#destMapY').val().trim();
+					let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
+					let destNo = $(this).children('#destNo').val().trim();
+					let destImage = $(this).children('#destImage').val().trim();
+					// 마커 찍기
 
-											let destMapX = $(this).children(
-													'#destMapX').val().trim();
-											let destMapY = $(this).children(
-													'#destMapY').val().trim();
-											let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
-											let destNo = $(this).children(
-													'#destNo').val().trim();
-											let destImage = $(this).children(
-													'#destImage').val().trim();
-											// 마커 찍기
+					names = destSubject.split(',');
 
-											names = destSubject.split(',');
+					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 
-											addMarker(new kakao.maps.LatLng(
-													destMapX, destMapY),
-													destNo, count);
+					data.push(destSubject);
+					imagehttp.push(destImage);
+					
+					// 타이틀
+					$("#place").val(data);
+					// 줏
+					$("#imagea").val(imagehttp);
+					
+					
+			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
-											data.push(destSubject);
-											imagehttp.push(destImage);
+			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a class="material-icons")>delete</a></div>');
 
-											$("#place").val(data);
-											$("#destNos").val(destNo);
-											$("#imagea").val(imagehttp);
-
-											$('#divOriginal_' + destNo)
-													.appendTo('#divCopy_chil');
-
-											$('#divCopy')
-													.find('.addDesti')
-													.replaceWith(
-															'<div class="deleteCopyBtn'
-																	+ destNo
-																	+ '" onclick=deleteDiv('
-																	+ destNo
-																	+ ',"'
-																	+ destSubject
-																	+ '","'
-																	+ destMapX
-																	+ '","'
-																	+ destMapY
-																	+ '")> <a class="material-icons")>delete</a></div>');
-
-											$('#modalTest')
-													.on(
-															"click",
-															function() {
+			$('#modalTest').on("click",function() {
 																// 모달창 복사
-																$(
-																		'#divOriginal_'
-																				+ destNo)
-																		.clone()
-																		.appendTo(
-																				'#placeCopy');
+			$(	'#divOriginal_'+ destNo).clone().appendTo('#placeCopy');
 
-															});
+				});
 
-										});
+		});
 
-					});
+});
 
 	// 이름 옆에 숫자 증가
 	function countF(a) {

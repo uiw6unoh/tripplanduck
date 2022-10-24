@@ -44,7 +44,6 @@
 	
 	<resultMap type="com.tripplan.duck.planner.model.vo.MyPlanner" id="MyPlannerResultMap">
 		<id property="pNo" column="P_NO" />
-		<result property="destNo" column="DEST_NO" />
 		<result property="mNo" column="M_NO" />
 		<result property="demo" column="TOURDATE" />
 		<result property="route" column="ROUTE" /> 
@@ -94,7 +93,6 @@
 		FROM
 			(SELECT
 				mp.p_no,
-				mp.dest_no,
 				mp.m_no,
 				mp.tourdate,
 				l.location_id as L_LOCATION_ID,
@@ -103,7 +101,6 @@
 				l.LCENTERX as L_LCENTERX,
 				l.LCENTERY as L_LCENTERY,
 				m.M_NICKNAME as M_NICKNAME,
-               	d.DEST_IMAGE,
                	(SELECT LISTAGG(place, ' > ') WITHIN GROUP(ORDER BY seqs) AS place
 				  FROM detail_planner
 				WHERE p_no = MP.P_NO
@@ -114,7 +111,6 @@
 				MY_PLANNER mp JOIN LOCATION L
 				ON mp.LOCATION_ID = l.LOCATION_ID
 				JOIN MEMBER m ON mp.m_no = m.M_NO
-				JOIN DESTINATION d ON mp.dest_no = d.DEST_NO
 			WHERE
 				mp.M_NO = #{memberNo}
 			ORDER BY
@@ -193,7 +189,6 @@
 		<select id="selectMyPlannerByMNoNewPaging" resultMap="MyPlannerResultMap">
 			SELECT
 				mp.p_no,
-				mp.dest_no,
 				mp.m_no,
 				mp.tourdate,
 				l.location_id as L_LOCATION_ID,
@@ -212,7 +207,6 @@
 				MY_PLANNER mp JOIN LOCATION L
 				ON mp.LOCATION_ID = l.LOCATION_ID
 				JOIN MEMBER m ON mp.m_no = m.M_NO
-				JOIN DESTINATION d ON mp.dest_no = d.DEST_NO
 			WHERE
 				mp.M_NO = #{memberNo}
 			ORDER BY
