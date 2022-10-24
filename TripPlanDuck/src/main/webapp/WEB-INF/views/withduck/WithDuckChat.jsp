@@ -253,15 +253,19 @@ function connect() {
 			console.log(sessionId + " " + cur_session);
 			// 입장메시지가 아닌 받은 메시지
 			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
+				if(message.indexOf('님이 퇴장하셨습니다.') != -1){
+					location.reload(true);
+				}
 				$(".wrap").append(arr[0]);
 				$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
 			// 입장메시지
 			} else {
-			    console.log('Info: connection opened.');
+			    location.reload(true);
+				console.log('Info: connection opened.');
 			    var str = arr[0];
 			$(".wrap").append(str);
 			$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
-			}
+			} 
 
 		
 		console.log("ReceiveMessage:", event.data+'\n');

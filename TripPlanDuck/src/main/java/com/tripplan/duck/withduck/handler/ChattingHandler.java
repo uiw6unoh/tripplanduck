@@ -56,6 +56,7 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		int result = 0;
 		int chatMemNo = Integer.parseInt(memNo);
 		int chatWithNo = Integer.parseInt(withNo);
+		String reload = "location.reload(true)";
 		String cur_withDuck = String.valueOf(session.getUri()).replace("ws://211.209.232.21//duck/chatting?withNo=", "");		
 	
 		service.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
@@ -74,13 +75,13 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 				if (!cur_withDuck.equals(every)) {
 					continue;
 				}
-					s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo ));
+					s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo + ":" + reload ));
 					System.out.println(" s : " + s);
 			} else {
 				if (!withNo.equals(every)) {
 					continue;
 				}
-				s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo ));
+				s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo + ":" + reload ));
 				System.out.println(" s : " + s);
 				
 			}
