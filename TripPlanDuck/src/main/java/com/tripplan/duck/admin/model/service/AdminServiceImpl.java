@@ -11,6 +11,7 @@ import com.tripplan.duck.admin.model.mapper.AdminMapper;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
 import com.tripplan.duck.trip.model.vo.Comments;
+import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
 
 @Service
@@ -133,6 +134,18 @@ public class AdminServiceImpl implements AdminService {
 		
 		return result;
 	}
+
+	@Override
+	public Comments Category(int reviewNo) {
+		
+		return mapper.Category(reviewNo);
+	}
+
+
+
+
+
+
 
 
 

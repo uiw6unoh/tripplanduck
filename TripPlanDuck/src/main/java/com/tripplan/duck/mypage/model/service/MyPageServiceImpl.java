@@ -29,56 +29,63 @@ public class MyPageServiceImpl implements MyPageService{
 	
 	@Override
 	public List<MyPlanner> selectMyPlannerByMNo(Map<String, Object> param) {
+		
 		return mapper.selectMyPlannerByMNo(param);
 	}
 
 	@Override
 	public List<Comments>  selectCommentsByMNo(Map<String, Object> param) {
+		
 		return mapper.selectCommentsByMNo(param);
 	}
 
 	@Override
 	public List<Destination> selectTripByMNo(Map<String, Object> param) {
+		
 		return mapper.selectTripByMNo(param);
 	}
 	
 	@Override
 	public List<MyPlanner> selectMyPlannerByMNoNewPaging(Map<String, Object> param) {
 //		int offset = Integer.parseInt(param.get("offset").toString());
+		
 		return mapper.selectMyPlannerByMNoNewPaging(param);
 	}
 
 	@Override
 	public List<Destination> selectTripByMNoNewPaging(Map<String, Object> param) {
-		// TODO Auto-generated method stub
+
 		return mapper.selectTripByMNoNewPaging(param);
 	}
 
 	@Override
 	public List<Comments> selectCommentsByMNoPaging(Map<String, Object> param) {
-		// TODO Auto-generated method stub
+		
 		return mapper.selectCommentsByMNoPaging(param);
 	}
 
 	@Override
 	public List<Location> getOptions() {
-		// TODO Auto-generated method stub
+		
 		return mapper.getOptions();
 	}
 
 	@Override
 	public void unLikeTrip(Map<String, Object> param) {
+		
 		mapper.deleteLikeTrip(param);
 		
 	}
 
 	@Override
 	public void deleteReview(Map<String, Object> param) {
+		
 		mapper.deleteReview(param);
 	}
 
 	@Override
 	public void deletePlan(Map<String, Object> map) {
+		
 		mapper.deletePlan(map);
 	}
 
@@ -96,5 +103,20 @@ public class MyPageServiceImpl implements MyPageService{
 		// matches() 메소드를 사용하여 내부적으로 복호화해서 나온 결과값에 솔트값을 뗀 나머지 값과 원문을 비교
 		return member != null && passwordEncoder.matches(pwInputMember.getMemberPassword(), member.getMemberPassword());
 	}
+
+	@Override
+	public int updateMyProfile(Member member) {
+		// 패스워드 암호화
+		member.setMemberPassword(passwordEncoder.encode(member.getMemberPassword()) );
+		return mapper.updateMyProfile(member);
+	}
+
+	@Override
+	public int memberDropOut(int memberNo) {
+		
+		return mapper.memberDropOut(memberNo);
+	}
+	
+	
 
 }

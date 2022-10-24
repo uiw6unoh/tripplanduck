@@ -1,5 +1,7 @@
 package com.tripplan.duck.member.model.service;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.tripplan.duck.member.model.vo.Member;
@@ -20,4 +22,12 @@ public interface MemberService {
 
 	String findMemberId(HttpServletResponse response, String memberEmail) throws Exception;
 
+	void kakaoJoin(Member member);
+	
+	Member kakaoLogin(String memberSnsId);
+	
+	String findUserIdBy2(String memberSnsId);
+	
+//	Member findByUserId(String memberSnsId);
+	
 }

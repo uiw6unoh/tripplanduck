@@ -25,9 +25,9 @@ body {
     margin-left: 160px;
 }
 
-:root {
+/* :root {
     accent-color: gold;
-}
+} */
 
 table {
     border-collapse: separate;
@@ -119,6 +119,18 @@ table {
     background-color: #fff8c6;
 }
 
+/* 성별 체크 */
+.form-check-input {
+    width: 18px;
+    height: 18px;
+    margin-left: 3px;
+}
+
+.radioF {
+    margin-left: 3px;
+}
+
+/* 회원탈퇴 버튼 */
 .memberOutBtn {
     text-align: center;
     transform: translate(0, 20%);
@@ -134,4 +146,10 @@ table {
 
 .memberOutBtn button:hover {
     color: #fabf42;
+}
+
+/* 인풋 */
+.form-contro:focus {
+    border-color: #fff8c6;
+    box-shadow: 0 0 0 0.2rem #fff8c6;
 }

@@ -50,13 +50,12 @@
         </div>
         <button class="w-100 btn-outline-warning btn-lg mt-2 mb-3" id="login" name="login" type="submit" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">로그인</button>
         <button class="w-100 btn-outline-warning btn-lg mb-3" id="signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
+      </form> 
       <div class="hr-sect mb-3">OR</div>
-      <div class="sns-logo">
-        <img src="${ path }/images/member/google_logo.png" style="width: 50px;">
-        <img src="${ path }/images/member/kakao_login.png" style="width: 50px; margin-left: 30px;">
-        <img src="${ path }/images/member/naver.png" style="width: 50px; margin-left: 30px;">
+      <div class="sns-logo">       
+       <!-- 카카오 -->
+      	<img src="${ path }/images/member/kakao_login.png" onclick="loginWithKakao()">
       </div>
-      </form>
       </main>
       
  
@@ -70,6 +69,9 @@
 
 <!--SweetAlert2-->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- kakao JS -->
+<script src = "https://developers.kakao.com/sdk/js/kakao.js"></script>
 
 <script>
 
@@ -105,6 +107,7 @@
 	
 	 function fnInit(){
 	     var cookieid = getCookie("saveId");
+	     
 	     console.log(cookieid);
 	     if(cookieid !=""){
 	         $("input:checkbox[id='saveId']").prop("checked", true);
@@ -156,15 +159,26 @@
 	         expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
 	         setCookie("saveId", $("#memberId").val(), expdate);
 	         }else{
-	        expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
-	         setCookie("saveId", $("#memberId").val(), expdate);
-	          
+	            
 	     }
 	 }
-			
-
-		
+	 
+	 // 카카오 로그인
+	 // 3a6f0d7758bc8181d09a8444b40cf873 자바스크립트 키
+	 // ad8b938ac510d9524c1e65f7aa96de64 REST API 키
+	 
+	    $(document).ready(function(){
+	        Kakao.init('3a6f0d7758bc8181d09a8444b40cf873');
+	        Kakao.isInitialized();
+	    });
 	
+	    function loginWithKakao() {
+	        Kakao.Auth.authorize({ 
+	        redirectUri: 'http://localhost:9999/duck/member/kakaoLogin' 
+	        }); // 등록한 리다이렉트uri 입력
+	    }
+	 
+
 </script>
 
 </body>
