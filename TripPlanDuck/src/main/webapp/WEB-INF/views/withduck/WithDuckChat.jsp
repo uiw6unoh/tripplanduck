@@ -82,11 +82,14 @@
         <div class="rightDiv">
             <!-- 제목 부분 -->
             <div class="chatTitle">
+            <button style="width: 50px; height: 50px; border: 0px; background: white;" id="backBtn" onclick="javascript: history.back();">
+            	<img alt="" style="width: 100%" src="${path}/resources/images/WithDuck/left-arrow.png">
+            </button>
             <input type="hidden" value="${withDuck.withNo }" name="withNo">
-            <button id = "exitBtn" type="submit">
+            <button id = "exitBtn" style="position: relative; left:760px;" type="submit">
 			 <img class="exit" src="${path}/resources/images/WithDuck/logout.png">
 			</button>
-                <p class="withChat_title" style="margin:0; margin-left: 10px; font-weight: bold;">${withDuck.withTitle }</p>
+                <p class="withChat_title" style="margin:0; margin-left: 10px; font-weight: bold; position:relative; right:50px;">${withDuck.withTitle }</p>
             </div>
             <!-- 내용 부분 -->
 
@@ -138,7 +141,6 @@
 //전송 버튼 누르는 이벤트
 var withNoValue = $('#withNoValue').val();
 $(document).ready(function() {
-	
 $("#button-send").on("click", function(e) {
 	e.preventDefault();
 	if (socket.readyState !== 1) return;
