@@ -151,4 +151,7 @@
 	<select id="findUserIdBy2" parameterType="String" resultType="String">
 		SELECT M_ID FROM MEMBER WHERE M_SNSID = #{memberSnsId}
 	</select>
+	
+	
+	
 </mapper>

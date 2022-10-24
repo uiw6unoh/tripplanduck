@@ -1,5 +1,7 @@
 package com.tripplan.duck.member.model.service;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletResponse;
 
 import com.tripplan.duck.member.model.vo.Member;
@@ -27,5 +29,5 @@ public interface MemberService {
 	String findUserIdBy2(String memberSnsId);
 	
 //	Member findByUserId(String memberSnsId);
- 
+	
 }

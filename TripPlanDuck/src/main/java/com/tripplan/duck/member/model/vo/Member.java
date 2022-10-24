@@ -1,5 +1,7 @@
 package com.tripplan.duck.member.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,5 +32,11 @@ public class Member {
 	private String memberAge;
 	
 	private String memberSnsId;
+	
+	private String sessionId;
+	
+	private Date sessionLimit;
+
+	public boolean isUseCookie;
 	
 }

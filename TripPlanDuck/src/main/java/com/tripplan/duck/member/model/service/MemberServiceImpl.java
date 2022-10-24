@@ -1,11 +1,11 @@
 package com.tripplan.duck.member.model.service;
 
 import java.io.PrintWriter;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
