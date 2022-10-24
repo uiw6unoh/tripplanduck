@@ -34,6 +34,17 @@ li {
 }
 
 /* 탭메뉴 */
+#horizontal-underline {
+    position: absolute;
+    left:0;
+    height: 4px;
+    width: 100%;
+    border-radius: 3px;
+    transition: 0.8s;
+    background-color: pink;
+    top:0;
+}
+
 .nav-link {
     color: black;
     font-size: 1.5rem;
@@ -221,9 +232,9 @@ font-size: 1.4rem;
 }
 
 /* 비밀번호 모달 */
-.modal-header {
+/* .modal-header {
     background-color: #fff8c6;
-}
+} */
 
 .inputPwd {
     border: 1px solid #fabf42;

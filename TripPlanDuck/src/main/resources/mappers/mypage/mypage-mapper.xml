@@ -197,7 +197,6 @@
 				l.LCENTERX as L_LCENTERX,
 				l.LCENTERY as L_LCENTERY,
 				m.M_NICKNAME as M_NICKNAME,
-				d.DEST_IMAGE,
 				(SELECT LISTAGG(place, ' > ') WITHIN GROUP(ORDER BY seqs) AS place
 				  FROM detail_planner
 				WHERE p_no = MP.P_NO
