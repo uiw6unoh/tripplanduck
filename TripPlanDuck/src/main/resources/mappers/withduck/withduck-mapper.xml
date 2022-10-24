@@ -94,25 +94,28 @@
 		SELECT COUNT(*) FROM WITHDUK 
 		WHERE WITH_STATUS='Y' 
 		<if test="location_val != null and location_val != ''">
-			AND WITH_LOCATION LIKE '%' || #{location_val} || '%' 
+			AND WITH_LOCATION LIKE '%' || #{location_val} || '%'
 		</if>
 		<if test="gender_val != null and gender_val != ''">
-			AND WITH_GENDER LIKE '%' || #{gender_val} || '%' 
+			AND WITH_GENDER LIKE '%' || #{gender_val} || '%'
 		</if>
 		<if test="age_val != null and age_val != ''">
-			AND WITH_AGE LIKE '%' || #{age_val} || '%' 
+			AND WITH_AGE LIKE '%' || #{age_val} || '%'
 		</if>
 		<if test="start_val != null and start_val != ''">
-			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') 
+			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD')
 		</if>
 		<if test="end_val != null and end_val != ''">
-			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) 
+			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD'))
 		</if>
 		<if test="personnel_val != 0">
 			AND WITH_PERSONNER = #{personnel_val}
 		</if>
 		<if test="joinStatus.equals('모집중')">
 			AND WITH_JOINSTATUS = '모집중'
+		</if>
+		<if test="keywordSearch!=null and !keywordSearch.equals('')">
+			AND WITH_KEYWORD LIKE '%' || #{keywordSearch} || '%'
 		</if>
 		<if test="sort_name.equals('최신순')">
 			ORDER BY WITH_CREATEDATE DESC
@@ -125,19 +128,19 @@
 	<select id="withDuckJoinFilter" parameterType="map" resultMap="withDuckResultMap">
 		<include refid="withDuckListSql" />
 		<if test="location_val != null and location_val != ''">
-			AND WITH_LOCATION LIKE '%' || #{location_val} || '%' 
+			AND WITH_LOCATION LIKE '%' || #{location_val} || '%'
 		</if>
 		<if test="gender_val != null and gender_val != ''">
-			AND WITH_GENDER LIKE '%' || #{gender_val} || '%' 
+			AND WITH_GENDER LIKE '%' || #{gender_val} || '%'
 		</if>
 		<if test="age_val != null and age_val != ''">
-			AND WITH_AGE LIKE '%' || #{age_val} || '%' 
+			AND WITH_AGE LIKE '%' || #{age_val} || '%'
 		</if>
 		<if test="start_val != null and start_val != ''">
-			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD') 
+			AND (WITH_STARTDATE = TO_DATE(#{start_val}, 'YYYY-MM-DD')
 		</if>
 		<if test="end_val != null and end_val != ''">
-			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD')) 
+			AND WITH_ENDDATE= TO_DATE(#{end_val}, 'YYYY-MM-DD'))
 		</if>
 		<if test="personnel_val != 0">
 			AND WITH_PERSONNER = #{personnel_val}
@@ -145,7 +148,10 @@
 		<if test="joinStatus.equals('모집중')">
 			AND WITH_JOINSTATUS = '모집중'
 		</if>
-			<if test="sort_name.equals('최신순')">
+		<if test="keywordSearch!=null and !keywordSearch.equals('')">
+			AND WITH_KEYWORD LIKE '%' || #{keywordSearch} || '%'
+		</if>
+		<if test="sort_name.equals('최신순')">
 			ORDER BY WITH_CREATEDATE DESC
 		</if>
 		<if test="sort_name.equals('조회순')">

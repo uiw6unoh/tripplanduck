@@ -129,6 +129,9 @@
     <section class="zone3">
         <div class="container">
             <div class="sort" style="text-align: right;">
+            
+            <input name="keywordSearch" id="keyword" style="display: inline-block; position: relative; right: 65%; top: 60px;" placeholder="키워드를 입력하세요.">
+            <button id="keywordSearch" class="btn btn-outline-warning" style="display: inline-block; position: relative; right: 65%; top: 60px;">검색</button>
                 <div class="dropdown d-flex justify-content-end" style="width: 100px; position:relative; top: 35px; left: 850px">
                  	<c:if test="${empty sort_name }">
 	                    <button class="btn btn-outline-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
@@ -151,12 +154,24 @@
                     <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
                     <fmt:formatNumber value="${page}" type="number" var="page"/>
                     <c:if test="${joinStatus == '모집중'}">
-                    	<li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중">조회순</a></li>
+                    	<c:if test="${empty keywordSearch}">
+	                    	<li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중&keywordSearch=">최신순</a></li>
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중&keywordSearch=">조회순</a></li>
+                    	</c:if>
+                    	<c:if test="${not empty keywordSearch}">
+	                    	<li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중&keywordSearch=${keywordSearch}">최신순</a></li>
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중&keywordSearch=${keywordSearch}">조회순</a></li>
+                    	</c:if>
                     </c:if>
                     <c:if test="${joinStatus != '모집중'}">
-	                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=">조회순</a></li>
+	                   	<c:if test="${not empty keywordSearch}">
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=&keywordSearch=${keywordSearch}">최신순</a></li>
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=&keywordSearch=${keywordSearch}">조회순</a></li>
+                    	</c:if>
+	                   	<c:if test="${empty keywordSearch}">
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=&keywordSearch=">최신순</a></li>
+		                    <li><a class="dropdown-item" href="${path}/withduck/joinValFilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=&keywordSearch=">조회순</a></li>
+                    	</c:if>
                     </c:if>
                     </ul>
                 </div>
@@ -219,34 +234,71 @@
         </div>
         <nav aria-label="..." style="margin-top: 50px;">
             <c:if test="${joinStatus != '모집중' }">
+              <c:if test="${empty keywordSearch }">
 	            <ul class="pagination justify-content-center">
 	            <li class="page-item disabled">
-						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}" aria-label="Previous">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=" aria-label="Previous">
 		                            <span aria-hidden="true">이전</span>
 		                </a>
 			    </li>
 			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}">${ status.current }</a></li>
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=">${ status.current }</a></li>
 			    </c:forEach>
 			    <li class="page-item">
-			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}" aria-label="Next">다음</a>
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=" aria-label="Next">다음</a>
 			    </li>
 	            </ul>
+              </c:if>
+              
+              <c:if test="${not empty keywordSearch }">
+	            <ul class="pagination justify-content-center">
+	            <li class="page-item disabled">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=${keywordSearch}" aria-label="Previous">
+		                            <span aria-hidden="true">이전</span>
+		                </a>
+			    </li>
+			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=${keywordSearch}">${ status.current }</a></li>
+			    </c:forEach>
+			    <li class="page-item">
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=&sort_name=${sort_name}&keywordSearch=${keywordSearch}" aria-label="Next">다음</a>
+			    </li>
+	            </ul>
+              </c:if>
             </c:if>
+            
             <c:if test="${joinStatus == '모집중' }">
+	          <c:if test="${empty keywordSearch }">
 	            <ul class="pagination justify-content-center">
 	            <li class="page-item disabled">
-						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}" aria-label="Previous">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=" aria-label="Previous">
 		                            <span aria-hidden="true">이전</span>
 		                </a>
 			    </li>
 			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
-			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}">${ status.current }</a></li>
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=">${ status.current }</a></li>
 			    </c:forEach>
 			    <li class="page-item">
-			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}" aria-label="Next">다음</a>
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=" aria-label="Next">다음</a>
 			    </li>
 	            </ul>
+              </c:if>
+              
+	          <c:if test="${not empty keywordSearch }">
+	            <ul class="pagination justify-content-center">
+	            <li class="page-item disabled">
+						<a class="page-link" href="${ path }/withduck/joinValFilter?page=${ pageInfo.prevPage }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=${keywordSearch}" aria-label="Previous">
+		                            <span aria-hidden="true">이전</span>
+		                </a>
+			    </li>
+			    <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
+			    <li class="page-item"><a class="page-link" href="${ path }/withduck/joinValFilter?page=${ status.current }&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=${keywordSearch}">${ status.current }</a></li>
+			    </c:forEach>
+			    <li class="page-item">
+			       <a class="page-link" href="${path}/withduck/joinValFilter?page=${pageInfo.nextPage}&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=${joinStatus}&sort_name=${sort_name}&keywordSearch=${keywordSearch}" aria-label="Next">다음</a>
+			    </li>
+	            </ul>
+              </c:if>
             </c:if>
         </nav>
         <input type="hidden" id="joinStatus" name="joinStatus" >
@@ -262,7 +314,6 @@
     <!-- JavaScripts -->
     <script src="${path }/resources/js/common/plugins.min.js"></script>
     <script src="${path }/resources/js/common/functions.js"></script>
-
 </body>
 <jsp:include page="../common/footer.jsp"/>
 </html>
@@ -274,7 +325,20 @@ $(function() {
 	joinButton.click(function() {
 		const formElement = $('#formobj');
 		$('#joinStatus').val('모집중');
-		formElement.attr("action", "${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=" + "모집중");
+		$('#keyword').val('${keywordSearch}');
+		var keywordSearch = $('#keyword').val()
+		formElement.attr("action", "${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=모집중&keywordSearch=" + keywordSearch);
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+$(function() {
+	var keywordSearch = $('#keywordSearch');
+
+	keywordSearch.click(function() {
+		var keywordSearch = $('#keyword').val();
+		const formElement = $('#formobj');
+		formElement.attr("action", "${path}/withduck/joinValFilter?location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&joinStatus=모집중&keywordSearch=" +  keywordSearch);
 		formElement.attr("method", "get");
 		formElement.submit();
 	})
@@ -315,7 +379,7 @@ $(document).on('click', '.age_btn', function(){
 
 $(document).ready(function() {
 	$('.form-range').attr('value', 0);
-
+	$('#keywordSearch').attr("value", '${keywordSearch}');
 	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
 	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
 	
