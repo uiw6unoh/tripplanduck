@@ -188,7 +188,6 @@
 					</div>
 					<input type="hidden" name="place" id="place"> 
 					<input type="hidden" name="imagea" id="imagea"> 
-					<input type="hidden" id="destNos"> 
 				</div>
 			</div>
 		</div>
@@ -300,20 +299,24 @@
 	//지도api변수들 선언
 	var count = 0;
 	var markers = [];
-	var ovarlays = [];
 	var lines = [];
 	var names = []; // 여행지 이름
 	var positions = [];  
-	var data = new Array(); // 여행지 이름 담는 배열 
+	var polyline = new Array();
+	var path = new Array();
+	var data = new Array(); // 여행지 이름 담는 배열
 	var imagehttp = new Array(); // 이미지 주소
 	var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbj1sID%2FbtrOmc6KtD6%2FKF00nKO1xpe9nbUlbySxn1%2Fimg.png', // 마커이미지의 주소입니다    
 	imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
 	imageOption = {
 		offset : new kakao.maps.Point(15, 32)
 	}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
-			imageOption);
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageOption);
+	// 라인
+	
 
+	
+	
 	$(document).ready(function() {
 		var $set_val = $('#forecast_embed').contents().find('#styleID').attr('href');
 		
@@ -328,19 +331,29 @@
 					let destNo = $(this).children('#destNo').val().trim();
 					let destImage = $(this).children('#destImage').val().trim();
 					// 마커 찍기
-
+					
 					names = destSubject.split(',');
-
+					
+					path.push(new kakao.maps.LatLng(destMapX, destMapY))
+					
+					polyline.push(new kakao.maps.Polyline({
+							map:map,
+							path:path,
+							endArrow: true, // 선의 끝을 화살표로 표시되도록 설정한다
+							strokeWeight: 4, // 선의 두께
+							strokeColor: '#82ebff', // 선 색
+							strokeOpacity: 0.9, // 선 투명도
+							strokeStyle: 'solid' // 선 스타일
+						}));
 					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 
 					data.push(destSubject);
-					imagehttp.push(destImage);
 					
+					imagehttp.push(destImage);
 					// 타이틀
 					$("#place").val(data);
 					// 주소
 					$("#imagea").val(imagehttp);
-					
 					
 			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
@@ -367,47 +380,7 @@
 		return count;
 
 	}
-/*
- * 
- const lookCourseBtn = document.getElementById('lookCourseBtn');
-	 lookCourseBtn.addEventListener('click', event =>{
-	
-	 for (var i = 0; i < ovarlays.length; i++){
-	 ovarlays[i].setMap(null);
-	 }  
-	 ovarlays = [];
-	 addLine(markers);
 
-	 });
-	
-function addLine(markers){
-		 
-	 var linePath=[];     
-	 
-	 for (i=0; i < markers.length; ++i){
-		 
-	 linePath.push(markers[i].getPosition()); 
-	 
-	 }   
-
-	 // 지도에 표시할 선을 생성합니다
-	 var polyline = new kakao.maps.Polyline({
-	
-	 path: linePath, // 선을 구성하는 좌표배열 입니다
-	 strokeWeight: 2, // 선의 두께 입니다
-	 strokeColor: 'red', // 선의 색깔입니다
-	 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	 strokeStyle: 'solid' // 선의 스타일입니다
-	 });
-	
-	 lines.push(polyline);
-	 
-	 // 지도에 선을 표시합니다 
-	 polyline.setMap(map); 
-	 
-	 }
-
- */
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, destNo, count) {
@@ -436,37 +409,45 @@ function addMarker(position, destNo, count) {
 
 		// 생성된 마커를 배열에 추가합니다
 		markers.push(marker);
+		
 	}
-
 
 	//일반 딜리트
 	function deleteDiv(destNo, destSubject, destMapX, destMapY) {
-
+		
 		//names = destSubject.split(',');
 		$("#selectArea" + destNo).text("");
 
 		$('#divCopy_chil').children('#divOriginal_' + destNo).remove();
 
 		$('#placeCopy').children('#divOriginal_' + destNo).remove();
-
 		for (var i = 0; i < data.length; i++) {
-			
 			if (data[i] == destSubject) {
+				polyline[i].setMap(null);
 				markers[i].setMap(null);
 				data.splice(i, 1);
+				polyline.splice(i,1);
 				imagehttp.splice(i, 1);
 				markers.splice(i, 1);
 				positions.splice(i, 1);
-				ovarlays.splice(i, 1);
+				path.splice(i,1);
+				
 				$("#place").val(data);
 				$("#imagea").val(imagehttp);
+				
 			}
+			
 		}
-	
+		
+		for (var i = 0; i < polyline.length; i++) {
+			polyline[i].setMap(null);
+			
+		}
+
 		if (data == null || data == "") {
 			countF(2);
 		}
-
+		
 	};
 </script>
 
