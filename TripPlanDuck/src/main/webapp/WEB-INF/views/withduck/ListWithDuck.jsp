@@ -182,7 +182,7 @@
 		                   	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
 		                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
 		                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-			                        									top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        								margin: 5px; top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
 			                        	${withDuck.withJoinStatus }
 			                        </div>
 			                </c:if>
@@ -193,7 +193,7 @@
                        		<div id="total_container" style="position: relative;">
 	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
 	                        	<div id="joincontainer" style="color: white; position: absolute; border-radius: 5px; 
-				                        									top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
+				                        								margin: 5px;	top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
 	                        	${withDuck.withJoinStatus }
 	                        	</div>
 		                   </div>
@@ -201,7 +201,7 @@
                        	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
 	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
 	                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-			                        									top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        								top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
 			                        	${withDuck.withJoinStatus }
 			                    </div>
 		                </c:if>

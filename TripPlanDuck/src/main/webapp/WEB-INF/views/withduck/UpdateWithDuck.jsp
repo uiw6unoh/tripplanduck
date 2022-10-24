@@ -263,7 +263,7 @@
     </section>
     <div style="text-align: center; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; position: relative; bottom: 50px;">
         <button class="btn btn-outline-warning" type="submit">수정완료</button>
-        <button class="btn btn-outline-warning" type="submit" id="cancel">취소</button>
+        <button class="btn btn-secondary" type="submit" id="cancel" style="width:140px;">취소</button>
     </div>
 </form>
 
