@@ -141,6 +141,7 @@
 //전송 버튼 누르는 이벤트
 var withNoValue = $('#withNoValue').val();
 $(document).ready(function() {
+	$("textarea:not([disabled])").first().focus();
 $("#button-send").on("click", function(e) {
 	e.preventDefault();
 	if (socket.readyState !== 1) return;
@@ -254,21 +255,25 @@ function connect() {
 		message = arr[0];
 			console.log(sessionId + " " + cur_session);
 			// 입장메시지가 아닌 받은 메시지
-			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
+			if(message.indexOf('님이 입장하셨습니다.') == -1 && message.indexOf('님이 퇴장하셨습니다.') == -1){ 
 
 					$(".wrap").append(arr[0]);
 					$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
 			// 입장메시지
-			} else{
+			} else if(message.indexOf('님이 퇴장하셨습니다.') != -1){
+				$(".wrap").append(arr[0]);
+				$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+				history.go(0)
+			}
+			else {
 				console.log('Info: connection opened.');
 			    var str = arr[0];
 			$(".wrap").append(str);
 			$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+				history.go(0)
+				
 			}
-			if(message.indexOf('님이 입장하셨습니다.') != -1 || message.indexOf('님이 퇴장하셨습니다.') != -1) {
-				location.reload(true);
-			}
-
+			
 		
 		console.log("ReceiveMessage:", event.data+'\n');
 	};
