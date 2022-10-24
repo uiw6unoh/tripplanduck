@@ -43,17 +43,29 @@
 	                    <input name="file1" type="hidden" value="${withDuck.reList[0] }">
 	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}">
         		        </c:if>
+		                <c:if test="${empty withDuck.reList[0] || withDuck.reList[0] == null}">
+	                    <input name="file1" type="hidden" value="${withDuck.reList[0] }">
+	                    <img class="car-img" src="${path}/resources/images/trip/noImage.jpeg">
+        		        </c:if>
 	                </div>
 	                <div class="carousel-item">
 		                <c:if test="${not empty withDuck.reList[1] && withDuck.reList[1] != null}">
 	                    <input name="file2" type="hidden" value="${withDuck.reList[1] }">
 	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[1]}">
 		                </c:if>
+		                <c:if test="${empty withDuck.reList[1] || withDuck.reList[1] == null}">
+	                    <input name="file2" type="hidden" value="${withDuck.reList[1] }">
+	                    <img class="car-img" src="${path}/resources/images/trip/noImage.jpeg">
+		                </c:if>
 	                </div>
 	                <div class="carousel-item">
 		                <c:if test="${not empty withDuck.reList[2] && withDuck.reList[2] != null}">
 	                    <input name="file3" type="hidden" value="${withDuck.reList[2] }">
 	                    <img class="car-img" src="${path}/resources/upload/withduck/${withDuck.reList[2]}">
+		                </c:if>              
+		                <c:if test="${empty withDuck.reList[2] || withDuck.reList[2] == null}">
+	                    <input name="file3" type="hidden" value="${withDuck.reList[2] }">
+	                    <img class="car-img" src="${path}/resources/images/trip/noImage.jpeg">
 		                </c:if>              
 	                </div>
                 </div>

@@ -47,7 +47,7 @@
 	                                <div class="textdiv1">
 	                                    <a href="${path}/chatFindGo?withNo=${loginChatList.withNo}">${loginChatList.chatTitle}</a>
 	                                </div>
-	                                <div class="textdiv2">34
+	                                <div class="textdiv2">
 	                                    <button class="chatOut" style="border: 0; background: white; padding:0px" value="${loginChatList.withNo }">
 	                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
 	                                    </button>

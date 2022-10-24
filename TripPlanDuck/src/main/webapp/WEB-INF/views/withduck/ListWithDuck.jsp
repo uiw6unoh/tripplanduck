@@ -197,7 +197,7 @@
 		                   	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
 		                            <img class="intro-img" src="${path}/resources/upload/withduck/${withDuck.reList[0]}" alt="">
 		                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-			                        								margin: 5px; top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        								margin: 5px; top: 25px;	left: 40px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
 			                        	${withDuck.withJoinStatus }
 			                        </div>
 			                </c:if>
@@ -206,7 +206,7 @@
                        <c:if test="${ empty withDuck.reList[0] }">
                        	<c:if test="${withDuck.withJoinStatus == '모집중'}">
                        		<div id="total_container" style="position: relative;">
-	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+	                            <img class="intro-img" src="${path}/resources/images/trip/noImage.jpeg" alt="">
 	                        	<div id="joincontainer" style="color: white; position: absolute; border-radius: 5px; 
 				                        								margin: 5px;	top: 5px;	left: 5px; background-color: green; width: 80px; display: flex; align-items: center; justify-content: center; ">
 	                        	${withDuck.withJoinStatus }
@@ -214,19 +214,19 @@
 		                   </div>
 		                </c:if>
                        	<c:if test="${withDuck.withJoinStatus == '모집완료'}">
-	                            <img class="intro-img" src="${path}/resources/images/WithDuck/go.png" alt="">
+	                            <img class="intro-img" src="${path}/resources/images/trip/noImage.jpeg" alt="">
 	                            <div id="joincontainer" style="	color: white; position: absolute; border-radius: 5px; 
-			                        								top: 5px;	left: 5px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
+			                        								top: 25px;	left: 40px; background-color: red; width: 80px; display: flex; align-items: center; justify-content: center; ">
 			                        	${withDuck.withJoinStatus }
 			                    </div>
 		                </c:if>
                        </c:if>
                         </a>
-                        <p class="title">${withDuck.withTitle }</p>
-                        <p>${withDuck.withContent }</p>
-                        <p class="nickName"><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
+                        <p class="title" style="font-size: 22px; font-weight: bold;">${withDuck.withTitle }</p>
+                        <p class="content">${withDuck.withContent }</p>
+                        <p class="nickName" ><img src="${path}/resources/images/common/프사.png">${withDuck.withWriterNick }</p> 
                         <p class="good">${withDuck.withReadCount }</p>
-                        <p class="readCount">123</p>
+                        <p class="readCount" ><img style="width:20px" src="${path }/resources/images/WithDuck/view.png"> </p>
                     </div>
                 </div>
 				</c:forEach>

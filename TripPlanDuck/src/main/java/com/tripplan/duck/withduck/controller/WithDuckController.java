@@ -55,10 +55,8 @@ public class WithDuckController {
 		
 		List<WithDuck> list = null;
 		PageInfo pageInfo = null;
-		
 		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
 		list = service.getWithDuckList(pageInfo);
-		
 		for(int i = 0; i < list.size(); i++) {
 			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("<p>", ""));
 			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("</p>", ""));
@@ -354,6 +352,8 @@ public class WithDuckController {
 		boolean joinBool = false;
 		if(member != null) {
 			result = service.countChatMem(withNo, member.getMemberNo());
+			List<WithDuckChat> totalperson = chatService.selectjoinChatList(withNo);
+			System.out.println("totalperson : " + totalperson);
 			if(result == 0) {
 				joinBool = true;
 			}
@@ -364,6 +364,7 @@ public class WithDuckController {
 		System.out.println(request.getAttribute("withDuck"));
 		
 		session.setAttribute("member", member);
+		model.addObject("joinStatus", withDuck.getWithJoinStatus());
 		model.addObject("joinBool", joinBool);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
