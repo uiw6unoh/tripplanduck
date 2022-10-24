@@ -73,12 +73,6 @@ public class PlannerController {
 				@SessionAttribute("loginMember") Member loginMember) {
 			MyPlanner myPlanner = new MyPlanner();
 			
-//			String[] arraydestNos = destNos.split(",");
-//			for (int  i = 0;  i < arraydestNos.length; i++) {
-//				String dest1 = arraydestNos[i];
-//				myPlanner.setDestNo(Integer.parseInt(dest1));
-//			}
-			
 			myPlanner.setMNo(loginMember.getMemberNo());
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDemo(demo);
@@ -110,22 +104,7 @@ public class PlannerController {
 				model.setViewName("member/msg");
 				
 				return model;
-
-}
-		
-//		@GetMapping("/searchDesti")
-//		public ModelAndView addDesti(ModelAndView model, @RequestParam("destSubject") String destSubject) {
-//			
-//			List<Destination> destination = service.addDestination();
-//			
-//			//model.addObject("destination", destination);
-//			model.setViewName("planner/myplanner");
-//			
-//			
-//			return model;
-//		}
-			
-		
-		
+	
+		}
 		
  }

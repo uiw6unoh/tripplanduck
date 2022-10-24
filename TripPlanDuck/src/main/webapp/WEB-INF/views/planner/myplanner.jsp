@@ -25,14 +25,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${ path }/resources/css/daterangepicker.css">
 <!--BootStrap JS-->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
 
 <!--  데이트 피커 스크립트 -->
 <script type="text/javascript"
@@ -139,12 +133,11 @@
 						</div>
 						<div class="col-12 my-3" style="text-align: center;">
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
-								<input type="submit" name="location" class="col-5 btn btn-success" value="완 성"> 
+								<input type="submit" name="location" class="col-5 btn btn-outline-warning btn-sm" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" value="완 성"> 
 							
-							<input type="reset" class="col-5 btn btn-success" id="clear" onclick="history.go(0)" value="초기화">
+							<input type="reset" class="col-5 btn btn-outline-warning btn-sm" id="clear" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" onclick="history.go(0)" value="초기화">
 						</div>
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#staticBackdrop" id="modalTest">경로 보기</button>
+						<button type="button" class="btn btn-outline-warning btn-sm" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" data-toggle="modal" data-target="#staticBackdrop" id="modalTest">경로 보기</button>
 
 					</div>
 					<div class="left-box2">
@@ -345,7 +338,7 @@
 					
 					// 타이틀
 					$("#place").val(data);
-					// 줏
+					// 주소
 					$("#imagea").val(imagehttp);
 					
 					
@@ -374,11 +367,50 @@
 		return count;
 
 	}
+/*
+ * 
+ const lookCourseBtn = document.getElementById('lookCourseBtn');
+	 lookCourseBtn.addEventListener('click', event =>{
+	
+	 for (var i = 0; i < ovarlays.length; i++){
+	 ovarlays[i].setMap(null);
+	 }  
+	 ovarlays = [];
+	 addLine(markers);
 
-	// 마커를 생성하고 지도위에 표시하는 함수입니다
-	function addMarker(position, destNo, count) {
+	 });
+	
+function addLine(markers){
+		 
+	 var linePath=[];     
+	 
+	 for (i=0; i < markers.length; ++i){
+		 
+	 linePath.push(markers[i].getPosition()); 
+	 
+	 }   
 
-		//  alert(destNo);
+	 // 지도에 표시할 선을 생성합니다
+	 var polyline = new kakao.maps.Polyline({
+	
+	 path: linePath, // 선을 구성하는 좌표배열 입니다
+	 strokeWeight: 2, // 선의 두께 입니다
+	 strokeColor: 'red', // 선의 색깔입니다
+	 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+	 strokeStyle: 'solid' // 선의 스타일입니다
+	 });
+	
+	 lines.push(polyline);
+	 
+	 // 지도에 선을 표시합니다 
+	 polyline.setMap(map); 
+	 
+	 }
+
+ */
+
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position, destNo, count) {
 
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
@@ -406,41 +438,6 @@
 		markers.push(marker);
 	}
 
-	/*
-	 * 
-	 //지도상의 선 긋기
-	 const lookCourseBtn = document.getElementById('lookCourseBtn');
-	 lookCourseBtn.addEventListener('click', event =>{
-	
-	 for (var i = 0; i < ovarlays.length; i++){
-	 ovarlays[i].setMap(null);
-	 }  
-	 ovarlays = [];
-	 addLine(markers);
-
-	 });
-	
-	 function addLine(markers){
-	 var linePath=[];      
-	 for (i=0; i < markers.length; ++i){
-	 linePath.push(markers[i].getPosition()); 
-	 }   
-
-	 // 지도에 표시할 선을 생성합니다
-	 var polyline = new kakao.maps.Polyline({
-	
-	 path: linePath, // 선을 구성하는 좌표배열 입니다
-	 strokeWeight: 2, // 선의 두께 입니다
-	 strokeColor: 'red', // 선의 색깔입니다
-	 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	 strokeStyle: 'solid' // 선의 스타일입니다
-	 });
-	
-	 lines.push(polyline);
-	 // 지도에 선을 표시합니다 
-	 polyline.setMap(map); 
-	 }
-	 */
 
 	//일반 딜리트
 	function deleteDiv(destNo, destSubject, destMapX, destMapY) {
@@ -453,7 +450,7 @@
 		$('#placeCopy').children('#divOriginal_' + destNo).remove();
 
 		for (var i = 0; i < data.length; i++) {
-
+			
 			if (data[i] == destSubject) {
 				markers[i].setMap(null);
 				data.splice(i, 1);
@@ -465,10 +462,11 @@
 				$("#imagea").val(imagehttp);
 			}
 		}
-
+	
 		if (data == null || data == "") {
 			countF(2);
 		}
+
 	};
 </script>
 
