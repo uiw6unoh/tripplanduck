@@ -31,9 +31,6 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button type="button"
-						class="btn btn-outline-warning btn-sm btn-block"
-						onclick="location.href='${path}/chatgo'">내 위드덕</button>
 					<button class="btn btn-outline-warning btn-sm btn-block"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
@@ -41,6 +38,7 @@
 		</div>
 		<!-- 탭 메뉴 컨테이너 -->
 		<div class="nav-container">
+		<nav>
 			<div id="horizontal-underline"></div>
 			<ul class="nav justify-content-center">
 				<li class="mr-4 nav-item">
@@ -59,7 +57,8 @@
 						리뷰</button>
 				</li>
 			</ul>
-		</div>
+			</div>
+		</nav>
 
 		<!-- 하위 컨테이너 -->
 		<div class="content-container">
@@ -680,7 +679,7 @@
 	}
 
 	
-	  function updateComment() {
+	function updateComment() {
 		// 앞서 할당했던 엘리먼트에서 값 꺼내기
 	  	let rating = $('input[name=rating2]:checked').val();
 	  	let comment = $("#commentsContent2").val();
@@ -756,5 +755,24 @@
 	      }
 	    });
 	  };
-	
+
+	// 탭 메뉴
+	let horizontalBar = document.getElementById("horizontal-underline");
+	let horizontalMenus = document.querySelectorAll("nav ul li button");
+
+	console.log(horizontalBar);
+	console.log(horizontalMenus);
+
+	function horizontalIndicator(e) {
+		horizontalBar.style.left = e.offsetLeft + "px";
+		horizontalBar.style.width = e.offsetWidth + "px";
+		horizontalBar.style.top = e.offsetTop + e.offsetHeight + "px";
+	}
+
+	horizontalMenus.forEach((menu) =>
+		menu.addEventListener("click", (e) =>
+		horizontalIndicator(e.currentTarget)
+		)
+	);
+
 	</script>
