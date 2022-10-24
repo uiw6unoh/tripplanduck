@@ -147,7 +147,7 @@
               <div class="title">
                 <div>
                   <a href="${path}/trip/main">홈 ></a>
-                  <a href="${path}/trip/list?locationId=${location.locationId}">${dest.destCategory}</a>
+                  <a href="${path}/trip/list?locationId=${dest.locationId}">${dest.destCategory}</a>
                 </div>
                 <h2 class="stu_h2_title">${dest.destSubject}</h2>
                 <p>${dest.destSummary}</p>
