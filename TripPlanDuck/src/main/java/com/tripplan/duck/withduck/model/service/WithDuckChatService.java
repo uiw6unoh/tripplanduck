@@ -19,4 +19,6 @@ public interface WithDuckChatService {
 
 	List<WithDuckChatLog> selectChatLogList(int withNo);
 
+	int deleteChatMember(int chatMemNo, int chatWithNo);
+
 }

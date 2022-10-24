@@ -1,5 +1,7 @@
 package com.tripplan.duck.member.model.mapper;
 
+import java.sql.Date;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -30,6 +32,13 @@ public interface MemberMapper {
 
     //snsId로 회원 아이디찾기
     String findUserIdBy2(String memberSnsId);
+    
+    // 자동로그인
+    void keepLogin(String MemberId, String sessionId, Date sessionLimit) throws Exception;
+    
+    // 세션키 검증
+    Member checkUserWithSessionKey(String value) throws Exception;
+    
 
     
 }

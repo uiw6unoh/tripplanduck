@@ -107,6 +107,7 @@
 	
 	 function fnInit(){
 	     var cookieid = getCookie("saveId");
+	     
 	     console.log(cookieid);
 	     if(cookieid !=""){
 	         $("input:checkbox[id='saveId']").prop("checked", true);
@@ -158,9 +159,7 @@
 	         expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
 	         setCookie("saveId", $("#memberId").val(), expdate);
 	         }else{
-	        expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
-	         setCookie("saveId", $("#memberId").val(), expdate);
-	          
+	            
 	     }
 	 }
 	 

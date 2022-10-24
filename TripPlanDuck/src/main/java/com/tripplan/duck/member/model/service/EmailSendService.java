@@ -26,10 +26,8 @@ public class EmailSendService {
 	
 	@Autowired
 	private MemberMapper mapper;
-	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-	
+		
+	// 인증번호 난수 설정
 	public void makeRandomNumber() {
 		// 난수의 범위 111111 ~ 999999 (6자리 난수)
 		Random r = new Random();
@@ -38,8 +36,37 @@ public class EmailSendService {
 		authNumber = checkNum;
 	}
 	
+
+	// 비밀번호 찾기
+	public int findMemberPassword(HttpServletResponse response, Member member) throws Exception {
+		response.setContentType("text/html;charset=utf-8");
+		int result = 0;
+		Member signupId = mapper.selectMemberById(member.getMemberId());
+		
+		// 아이디가 없으면
+		if(signupId == null) {
+
+		}
+		// 가입에 사용한 이메일이 아니면
+		else if(!member.getMemberEmail().equals(signupId.getMemberEmail())) {
+
+		}else {
+			// 임시 비밀번호 생성
+			String pw = "";
+			for (int i = 0; i < 12; i++) {
+				pw += (char) ((Math.random() * 26) + 97);
+				
+			// 비밀번호 변경
+			member.setMemberPassword(pw);
+			result = mapper.updateMemberPassword(member);
+			}	
+		}
+		
+		return result;
+	}
+	
 	//이메일 보낼 양식!
-	//회원가입 이메일 인증
+	//회원가입 이메일 인증 양식
 	public String joinEmail(String email) {
 		makeRandomNumber();
 		String setFrom = ".com"; // email-config에 설정한 자신의 이메일 주소를 입력 
@@ -55,51 +82,7 @@ public class EmailSendService {
 		return Integer.toString(authNumber);
 	}
 	
-	
-//	//비밀번호 찾기 이메일 인증
-//	public void findMemberPasswordEmail(HttpServletResponse response, String email, Member member) {
-//		String setFrom = ".com"; 
-//		String toMail = email;
-//		String title = "트립플랜덕 임시 비밀번호 입니다."; 
-//		String content = 
-//				"트립플랜덕과 함께해주셔서 감사합니다." + 
-//                "<br><br>" + 
-//			    member.getMemberId() + "님의 임시 비밀번호는 " + authNumber + "입니다." + 
-//			    "<br>" + 
-//			    "***임시번호를 사용하여 로그인 하신 후 비밀번호를 변경 후 사용해주세요."; //이메일 내용 삽입
-//		mailSend(setFrom, toMail, title, content);
-//	}
-
-	// 비밀번호 찾기
-	public int findMemberPassword(ModelAndView model, HttpServletResponse response, Member member) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		int result = 0;
-		
-		// 아이디가 없으면
-		if(mapper.selectMemberById(member.getMemberId()) == null) {
-			
-		}
-		// 가입에 사용한 이메일이 아니면
-		else if(!member.getMemberEmail().equals(mapper.selectMemberById(member.getMemberId()).getMemberEmail())) {
-
-		}else {
-			// 임시 비밀번호 생성
-			String pw = "";
-			for (int i = 0; i < 12; i++) {
-				pw += (char) ((Math.random() * 26) + 97);
-				
-			// 비밀번호 변경
-			member.setMemberPassword(pw);
-			result = mapper.updateMemberPassword(member);
-		}
-		
-		}
-		
-		return result;
-	}
-	
-	
+	// 임시비밀번호 메일 발송 내용 
 	public void findMemberPasswordEmail(HttpServletResponse response, String email, Member member) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		String setFrom = ".com"; 
@@ -112,9 +95,9 @@ public class EmailSendService {
 			    "<br>" + 
 			    "***임시비밀번호를 사용하여 로그인 하신 후 비밀번호를 변경 후 사용해주세요."; //이메일 내용 삽입
 		mailSend(setFrom, toMail, title, content);
-		
 	}
-
+	
+	
 	//이메일 전송 메소드
 	public void mailSend(String setFrom, String toMail, String title, String content) { 
 		MimeMessage message = mailSender.createMimeMessage();
