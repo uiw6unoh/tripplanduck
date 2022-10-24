@@ -67,33 +67,30 @@ public class PlannerController {
 				ModelAndView model,
 				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") int locationSelect,
-				@RequestParam("place") String place,
-				@RequestParam("imagea") String imagea,
-				@RequestParam("destNos") String destNos,
+				@RequestParam(value="place", required= false) String place,
+				@RequestParam(value="imagea", required= false) String imagea,
 				@SessionAttribute("loginMember") Member loginMember) {
 			MyPlanner myPlanner = new MyPlanner();
 			myPlanner.setMNo(loginMember.getMemberNo());
 			
-			
 			myPlanner.setLocationId(locationSelect);
-			myPlanner.setDestNo(Integer.parseInt(destNos));
 			myPlanner.setDemo(demo);
-			
-			service.insertPlanner(myPlanner);
-			
-			
 			
 			
 			String[] arrayPlace = place.split(",");
 			String[] arrayImage = imagea.split(",");
 			// 마이플래너에 넣기
-			// || arrayPlace.length == 0 배열에 0?? "" 아예 빈 배열 처리 방법 문의
-			if(arrayPlace.length <= 1 ) {
-				model.addObject("msg", "여행지를 두곳 이상 선택해주세요");
+			// || arrayPlace.length == 0 배열에 0?? "" 아예 빈 배열 처리 방법 문의 || arrayPlace == null
+			System.out.println(arrayPlace.length);
+			
+			
+			
+			if(arrayPlace.length <= 1) {
+				model.addObject("msg", "여행지를 두군데 이상 선택해주세요");
 				model.addObject("location", "/planner/myplanner");
 				
 			}else {
-				
+				service.insertPlanner(myPlanner);
 				// 마이플래너에 넣기
 				for (int i = 0; i < arrayPlace.length; i++) {
 					String place1 = arrayPlace[i];

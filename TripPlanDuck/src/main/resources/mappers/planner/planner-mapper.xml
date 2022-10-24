@@ -89,7 +89,7 @@
 	<!-- My planner insert -->
 	
 	<insert id="insertPlanner" parameterType="MyPlanner" keyColumn="P_NO" keyProperty="pNo">
-		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID,TOURDATE) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{destNo},#{mNo},#{locationId},#{demo})
+		INSERT INTO MY_PLANNER (P_NO,DEST_NO,M_NO,LOCATION_ID,TOURDATE) VALUES (SEQ_MY_PLANNER_NO.NEXTVAL,#{mNo},#{locationId},#{demo})
 	</insert>
 	
 	<insert id="detailInsert" parameterType="HashMap">
