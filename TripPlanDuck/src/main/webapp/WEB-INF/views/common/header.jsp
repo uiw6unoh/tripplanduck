@@ -112,7 +112,9 @@
 					  	
 					  	</c:choose>
 					  	
+					    <li><a class="dropdown-item" id="chatGo" onclick="location.replace('${ path }/chatgoDropDown')">내 위드덕</a></li>
 					    <li><a class="dropdown-item" id="logout" onclick="location.replace('${ path }/logout')">로그아웃</a></li>
+
 					  </ul>
 					</div>
                 </c:if>
