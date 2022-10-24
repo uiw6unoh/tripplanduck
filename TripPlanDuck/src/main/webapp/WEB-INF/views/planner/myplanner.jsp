@@ -197,8 +197,9 @@
 							</div>
 						</c:forEach>
 					</div>
-					<input type="hidden" name="place" id="place"> <input
-						type="text" name="imagea" id="imagea"> 
+					<input type="hidden" name="place" id="place"> 
+					<input type="hidden" name="imagea" id="imagea"> 
+					<input type="text" name="destNo" id="destNos"> 
 				</div>
 			</div>
 		</div>

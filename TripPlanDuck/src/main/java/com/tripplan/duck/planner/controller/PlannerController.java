@@ -67,12 +67,14 @@ public class PlannerController {
 				ModelAndView model,
 				@RequestParam("demo") String demo,
 				@RequestParam("locationSelect") int locationSelect,
+				@RequestParam("destNos") String destNos,
 				@RequestParam(value="place", required= false) String place,
 				@RequestParam(value="imagea", required= false) String imagea,
 				@SessionAttribute("loginMember") Member loginMember) {
 			MyPlanner myPlanner = new MyPlanner();
-			myPlanner.setMNo(loginMember.getMemberNo());
 			
+			myPlanner.setMNo(loginMember.getMemberNo());
+            myPlanner.setDestNo(Integer.parseInt(destNos));
 			myPlanner.setLocationId(locationSelect);
 			myPlanner.setDemo(demo);
 			
