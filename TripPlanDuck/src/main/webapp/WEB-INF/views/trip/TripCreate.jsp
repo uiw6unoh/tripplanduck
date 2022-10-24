@@ -1,93 +1,90 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:set var="path" value="${ pageContext.request.contextPath }" />
-<jsp:include page="../common/header.jsp" />
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:mm" var="now" />
 
-<link rel="stylesheet" type="text/css"
-	href="${ path }/resources/css/common/map/map.css">
+<jsp:include page="../common/header.jsp"/>
 
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+<!-- Map CSS-->
+<link rel="stylesheet" type="text/css"	href="${ path }/resources/css/common/map/map.css">
 
-
-
-<form id="sortBy" method="get">
+<section>
 	<div class="container">
-		<label for="projectName" class="form-label">제목</label> <input
-			type="text" class="form-control" name="title" id="title"
-			placeholder="제목을 적어주세요"> <label for="name"
-			class="form-label mt-2">관광지</label> <input type="text"
-			class="form-control" name="name" id="name" placeholder="이름을 적어주세요">
-		<label for="projectName" class="form-label mt-2">장소</label>
-
-		<div class="col-6" id="location_id" name="location_id ">
-			<select>
-				<c:forEach items="${ location }" var="location" varStatus="i">
-					<option id="location" name="location"
-					value="${ location.locationId }">${ location.location }</option>
-					<br>
-				</c:forEach>
-			</select>
-		</div>
-	
-
-		<div id="editor" class="ql-container ql-snow">
-			<textarea name="description" id="description" class="form-control"
-				data-gramm="false" contenteditable="true" maxlength='250' rows="8">
-				<c:out value="${content}" /></textarea>
-		</div>
-		<label class="mt-4 mb-4 form-label"></label>
-		<!-- file add -->
-		<input type="file" name="imageFile" id="image"> <input
-			type="hidden" id="user_id" name="user_id" value="${ id }"> <input
-			type="hidden" id="location_path" name="location_path"> <input
-			type="hidden" id="getlatitude" name="getlatitude"> <input
-			type="hidden" id="getlongitude" name="getlongitude">
-	</div>
-</form>
-
-<!-- map API  -->
-<div class="map_wrap">
-	<div id="map"
-		style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
-
-	<div id="menu_wrap" class="bg_white">
-		<div class="option">
-			<div>
-				<form onsubmit="searchPlaces(); return false;">
-					키워드 : <input type="text" value="제주도 맛집" id="keyword" size="15">
-					<button type="submit">검색하기</button>
-				</form>
+		<h2 class="mt-2">여행지 등록</h2>
+		<form id="sortBy" method="get">
+			<div class="container">
+				<label for="projectName" class="form-label">제목</label> <input
+					type="text" class="form-control" name="title" id="title"
+					placeholder="제목을 적어주세요"> <label for="name"
+					class="form-label mt-2">관광지</label> <input type="text"
+					class="form-control" name="name" id="name" placeholder="이름을 적어주세요">
+				<label for="projectName" class="form-label mt-2">장소</label>
+		
+				<div class="col-6" id="location_id" name="location_id ">
+					<select>
+						<c:forEach items="${ location }" var="location" varStatus="i">
+							<option id="location" name="location"
+							value="${ location.locationId }">${ location.location }</option>
+							<br>
+						</c:forEach>
+					</select>
+				</div>			
+		
+				<div id="editor" class="ql-container ql-snow">
+					<textarea name="description" id="description" class="form-control"
+						data-gramm="false" contenteditable="true" maxlength='250' rows="8">
+						<c:out value="${content}" /></textarea>
+				</div>
+				<label class="mt-3 mb-4 form-label"></label>
+				<!-- file add -->
+				<input type="file" name="imageFile" id="image"> <input
+					type="hidden" id="user_id" name="user_id" value="${ id }"> <input
+					type="hidden" id="location_path" name="location_path"> <input
+					type="hidden" id="getlatitude" name="getlatitude"> <input
+					type="hidden" id="getlongitude" name="getlongitude">
+			</div>
+		</form>
+		
+		<!-- map API  -->
+		<div class="map_wrap mt-3">
+			<div id="map"
+				style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
+		
+			<div id="menu_wrap" class="bg_white">
+				<div class="option">
+					<div>
+						<form onsubmit="searchPlaces(); return false;">
+							키워드 : <input type="text" value="제주도 맛집" id="keyword" size="15">
+							<button type="submit">검색하기</button>
+						</form>
+					</div>
+				</div>
+				<hr>
+				<ul id="placesList"></ul>
+				<div id="pagination"></div>
 			</div>
 		</div>
-		<hr>
-		<ul id="placesList"></ul>
-		<div id="pagination"></div>
+		위도 : <span id="latitude"></span>
+		경도 : <span id="longitude"></span>
+		
+		<div class="d-flex justify-content-end mt-4">
+			<button type="button" onclick="history.back()" name="button"
+				class="btn btn-light btn-outline-dark m-0">초기화</button>
+			<button id="btnSave" type="submit" class="btn btn-success m-0 ms-2">확인</button>
+		</div>
 	</div>
-</div>
-위도 :
-<div id="latitude"></div>
-경도 :
-<div id="longitude"></div>
+</section>
 
-<div class="d-flex justify-content-end mt-4">
-	<button type="button" onclick="history.back()" name="button"
-		class="btn btn-light btn-outline-dark m-0">초기화</button>
-	<button id="btnSave" type="submit" class="btn btn-success m-0 ms-2">확인</button>
-</div>
 <jsp:include page="../common/footer.jsp" />
 
-<script type="text/javascript"
-	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f7b032a05f94f4d597ccea28be03f94f&libraries=services"></script>
+<!-- sweetalert2 alert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<script type="text/javascript" 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f7b032a05f94f4d597ccea28be03f94f&libraries=services"></script>
 <script>
 	var markers = [];
 

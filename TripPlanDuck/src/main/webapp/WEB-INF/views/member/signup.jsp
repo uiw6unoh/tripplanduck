@@ -39,6 +39,7 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberId" name="memberId" placeholder="id(4글자이상)" required>
+                  <input type="hidden" name="idTest" value="0" />
                 </td>
                 <td><input type="button" class="form-control" id="idCheck" value="중복확인"></td>
               </tr> 
@@ -48,8 +49,12 @@
               <tr>
                 <td>
                   <input type="text" class="form-control" id="memberNickname" name="memberNickname" placeholder="닉네임" required>
+                  <input type="hidden" name="nicknameTest" value="0" />
                 </td>
-                <td><input type="button" class="form-control" id="nicknameCheck" value="중복확인"></td>
+                <td>
+                	<input type="button" class="form-control" id="nicknameCheck" value="중복확인">
+                	<span id="nickname_chk"></span>
+                </td>
               </tr> 
               <tr>
                 <td class="title">비밀번호</td>
@@ -57,6 +62,7 @@
               <tr>               
                 <td>
                   <input type="password" class="form-control" id="memberPassword" name="memberPassword" placeholder="비밀번호(8글자이상)" required>
+                  <span id="pwd_chk1"></span>
                 </td>
               </tr>
               <tr>
@@ -65,6 +71,7 @@
               <tr>
                 <td>
                   <input type="password" class="form-control" id="memberPassword2" name="memberPassword2" placeholder="비밀번호확인" required>
+                  <span id="pwd_chk2"></span>
                 </td>
               </tr>
               <tr>
@@ -77,10 +84,14 @@
                 <td><input type="button" class="form-control" id="emailCheck" value="인증하기"></td>
               </tr>
               <tr>
+              <td><span id="email_chk"></span></td>
+              </tr>
+              <tr>
                 <td>
                 <input type="text" class="form-control" id="memberEmailNumber" placeholder="인증번호 6자리 입력" required>
+                <input type="hidden" name="emailTest" value="0" />
                 </td>
-                <td><input type="hidden" class="form-control" id="emailCheck2" value="인증번호확인" disabled="disabled" maxlength="6"></td>
+                <td><input type="button" class="form-control" id="emailCheck2" value="인증번호확인" maxlength="6"></td>
               </tr>
               <tr>
                 <td>성별</td>
@@ -91,7 +102,7 @@
                   <label class="form-check-label" for="female" style="margin-left: 25px;">여성&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                   <input class="form-check-input" type="radio" name="memberGender" id="genderMale" value="M" style="width:18px; height:18px;">
                   <label class="form-check-label" for="genderMale">남성</label>
-                  <label for="" id="gender_chk" class="check"></label>
+                  <span id="gender_chk" class="check"></span>
                 </td>
               </tr>   
               <tr>
@@ -143,7 +154,6 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
 
 <script>
-
    $(document).ready(function () {
       $('#btnLogin').click(function (e) {
          e.preventDefault();
@@ -200,6 +210,7 @@
                 	  text: '이미 사용중인 아이디 입니다.',
                 	})
                } else {
+            	   $("[name=idTest]").val("1");
                   Swal.fire({
                 	  icon: 'success',
                 	  title: '성공!',
@@ -214,7 +225,11 @@
       });
    });
    
- 
+	 //아이디 중복검사 이후 id값 변경시 다시 중복검사 실행
+		$("#memberId").change(function(){
+			$("[name=idTest]").val("0");
+		});
+	   
    // 닉네임 중복 확인
    $(document).ready(() => {
       $("#nicknameCheck").on("click", () => {
@@ -243,6 +258,7 @@
                 	  text: '이미 사용중인 닉네임 입니다.',
                 	})
                } else {
+            	   $("[name=nicknameTest]").val("1");
                   Swal.fire({
                 	  icon: 'success',
                 	  title: '성공!',
@@ -257,12 +273,34 @@
       });
    });
    
+	 //닉네임 중복검사 이후 id값 변경시 다시 중복검사 실행
+	$("#memberNickname").change(function(){
+		$("[name=nicknameTest]").val("0");
+	});
+   
    
    // 이메일 인증
    $('#emailCheck').click(function() {
 		const email = $('#memberEmail').val() // 이메일 주소값 얻어오기
 		console.log('이메일 : ' + email); // 이메일 오는지 확인
 		const checkInput = $('#memberEmailNumber') // 인증번호 입력하는곳 
+		var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		
+		if (email == "") {
+			Swal.fire('이메일을 입력하세요.')
+			email.focus();
+			return false;
+		} else if(!emailCheck.test(email)){
+				Swal.fire('이메일 형식에 맞게 입력해주세요.')
+				email.focus();
+				return false;
+		} else{
+			Swal.fire({
+				  icon: 'success',
+				  title: '전송완료!',
+				  html: '인증번호가 전송되었습니다!<br/>*이메일이 도착하기까지 몇 분 정도 소요될 수 있습니다.<br/>*스팸 메일함으로 발송될 수 있으니 체크 바랍니다.',
+				})
+		}
 		
 		$.ajax({
 			type : 'get',
@@ -271,24 +309,23 @@
 				console.log("data : " +  data);
 				checkInput.attr('disabled',false);
 				code =data;
-				Swal.fire('인증번호가 전송되었습니다.')
 			}			
 		}); // end ajax
 	}); // end send eamil
 	
 	// 인증번호 비교 
-	// blur -> focus가 벗어나는 경우 발생
-	$('#memberEmailNumber').blur(function () {
-		const inputCode = $(this).val();
+	$('#emailCheck2').click(function () {
+		const inputCode = $('#memberEmailNumber').val();
 		
 		if(inputCode === code){
+			Swal.fire({
+	          	  icon: 'success',
+	          	  title: '일치!',
+	          	  text: '인증번호가 일치합니다!',
+				})
 			$('#emailCheck2').attr('disabled',true);
 			$('#memberEmail').attr('readonly',true);
-			Swal.fire({
-          	  icon: 'success',
-          	  title: '일치!',
-          	  text: '인증번호가 일치합니다!',
-			})
+			$("[name=emailTest]").val("1");
 		}else{
 			Swal.fire({
 	          	  icon: 'error',
@@ -299,6 +336,48 @@
 		
 	});
 	
+	
+	// 유효성 검사(span)
+	$(document).ready(function () {		
+		
+		$("#memberEmail").change(function(){
+			var email = $("#memberEmail");
+		
+			if (/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/.test(email.val()) == false) {
+				$("#email_chk").html("<b>유효한 이메일을 입력해주세요.</b>");
+				$("#email_chk").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+			}else{
+				$("#email_chk").html("");
+				$("#email_chk").attr('style', 'visibility:hidden;');
+			}
+		});
+		
+			$("#memberPassword").change(function(){
+				var p1 = $("#memberPassword");
+				
+				if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==false){
+					$("#pwd_chk1").html("<b>영문자+숫자+특수문자 조합으로 8자리 이상 입력해주세요.</b>");
+					$("#pwd_chk1").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+				}else if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==true){
+					$("#pwd_chk1").html("");
+					$("#pwd_chk1").attr('style', 'visibility:hidden;');
+				}
+			});
+		
+			$("#memberPassword2").change(function(){
+				var p1 = $("#memberPassword");
+				var p2 = $("#memberPassword2");
+				
+				if(p1.val() != p2.val()){
+					$("#pwd_chk2").html("<b>비밀번호가 일치하지 않습니다.</b>");
+					$("#pwd_chk2").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+				}else{
+					$("#pwd_chk2").html("");
+					$("#pwd_chk2").attr('style', 'visibility:hidden;');
+				}
+			});
+						
+	});
 	
 	
 	// 유효성 검사
@@ -317,6 +396,13 @@
 		var age50 = document.getElementById("age50");
 		var privacy_check = document.getElementById("privacy_check");
 		var termconditions_check = document.getElementById("termconditions_check");
+		
+		//중복검사 실시 유무
+		if($("[name=idTest]").val() != "1"){
+			Swal.fire("아이디 중복검사를 해주세요.");
+			$("#memberId").focus();
+			return false;
+		}
 		
 		if (memberId.value == "") { // if(!memberId.value) 로도 사용 가능 
 			Swal.fire('아이디를 입력하세요.')
@@ -361,6 +447,12 @@
 			return false;
 		}
 		
+		//중복검사 실시 유무
+		if($("[name=nicknameTest]").val() != "1"){
+			Swal.fire("닉네임 중복검사를 해주세요.");
+			$("#memberNickname").focus();
+			return false;
+		}
 		
 		// 이메일 형식
 		var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
@@ -388,6 +480,12 @@
 			return false;
 		} 
 		
+		//이메일 인증 실시 유무
+		if($("[name=emailTest]").val() != "1"){
+			Swal.fire("이메일 인증을 해주세요");
+			return false;
+		}
+		
 		if ($("input[name=memberGender]:radio:checked").length < 1) {
 			Swal.fire('성별을 선택해 주세요.')
 			female.focus();
@@ -412,9 +510,9 @@
 			return false;
 		} 
 		
+
 		//입력 값 전송
 		document.signup.submit(); 
-
 		
 }
 		

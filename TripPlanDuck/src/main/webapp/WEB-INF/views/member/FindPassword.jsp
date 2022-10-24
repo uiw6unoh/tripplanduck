@@ -81,12 +81,27 @@
 					memberId : $("#memberId").val(),
 					memberEmail : $("#memberEmail").val()
 				},
-				success : function(result) {
-					//Swal.fire('임시비밀번호가 전송되었습니다.');
-				},
-			})
-		});
-	})
+				success: (obj) => {
+		               console.log(obj);
+		               
+		               if(obj.result === 1) {
+		            	   Swal.fire({
+			                	  icon: 'success',
+			                	  title: '전송 성공!'
+			                	})
+		               } else {
+		            	   Swal.fire({
+			                	  icon: 'error',
+			                	  title: '전송 실패!'
+			                	})
+		               }
+		            }, 
+		            error: (error) => {
+		               console.log(error);
+		            }
+		         });
+		      });
+		   });
 </script>
 
 </body>

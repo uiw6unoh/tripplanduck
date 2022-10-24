@@ -98,7 +98,7 @@
 
 </style>
 <section>
-
+<c:if test="${ not empty loginMember }">
 	<form id="formId" name="frm" action="${path}/planner/myplannerAction"
 		method="post">
 		<div class="container-fluid">
@@ -139,10 +139,9 @@
 						</div>
 						<div class="col-12 my-3" style="text-align: center;">
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
-							<input type="submit" name="location"
-								class="col-5 btn btn-success" value="완 성"> <input
-								type="reset" class="col-5 btn btn-success" id="clear"
-								onclick="history.go(0)" value="초기화">
+								<input type="submit" name="location" class="col-5 btn btn-success" value="완 성"> 
+							
+							<input type="reset" class="col-5 btn btn-success" id="clear" onclick="history.go(0)" value="초기화">
 						</div>
 						<button type="button" class="btn btn-primary" data-toggle="modal"
 							data-target="#staticBackdrop" id="modalTest">경로 보기</button>
@@ -198,9 +197,9 @@
 							</div>
 						</c:forEach>
 					</div>
-					<input type="hidden" name="place" id="place"> <input
-						type="hidden" name="imagea" id="imagea"> <input
-						type="hidden" name="destNos" id="destNos">
+					<input type="hidden" name="place" id="place"> 
+					<input type="hidden" name="imagea" id="imagea"> 
+					<input type="text" name="destNos" id="destNos"> 
 				</div>
 			</div>
 		</div>
@@ -237,6 +236,7 @@
 		</div>
 
 	</form>
+</c:if>
 
 </section>
 
@@ -336,9 +336,7 @@
 													'#destMapX').val().trim();
 											let destMapY = $(this).children(
 													'#destMapY').val().trim();
-											let destSubject = $(this).children(
-													'#destSubject').val()
-													.replaceAll(" ", "");
+											let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
 											let destNo = $(this).children(
 													'#destNo').val().trim();
 											let destImage = $(this).children(
