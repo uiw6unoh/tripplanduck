@@ -138,7 +138,7 @@
             </svg>
           </div>
         <div class="detail-main row align-items-center position-relative" >
-            <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="..." />
+            <div class="col-md-6"><img referrerpolicy="no-referrer" class="card-img-top mb-5 mb-md-0" src="${dest.destImage eq null ? '/duck/images/trip/noImage.jpeg' : dest.destImage}" alt="..." />
             </div>
             <div class="detail-mail-desc col-md-6 pl-0 position-absolute">
               <div class="score"><span><svg class="mb-1" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#FABF42" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -147,7 +147,7 @@
               <div class="title">
                 <div>
                   <a href="${path}/trip/main">홈 ></a>
-                  <a href="${path}/trip/list?locationId=${location.locationId}">${dest.destCategory}</a>
+                  <a href="${path}/trip/list?locationId=${dest.locationId}">${dest.destCategory}</a>
                 </div>
                 <h2 class="stu_h2_title">${dest.destSubject}</h2>
                 <p>${dest.destSummary}</p>
@@ -367,7 +367,7 @@
 <script>
 // 등록 버튼
 $(document).ready(function () {
-	    $('[id="enrollAlert"]').on("click", function () {
+	$('[id="enrollAlert"]').on("click", function () {
   	
   	let member = "${member}";
   	

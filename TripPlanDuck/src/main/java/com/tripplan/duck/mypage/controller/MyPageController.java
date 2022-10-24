@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.member.model.service.MemberService;
@@ -40,22 +41,25 @@ public class MyPageController {
 
 	// 마이페이지 메인
 	@GetMapping("")
-	public ModelAndView Mypage(HttpSession session, @RequestParam(required = false, defaultValue = "1") int offset,
-			@RequestParam(defaultValue = "") String select, ModelAndView mav) throws Exception {
+	public ModelAndView Mypage(
+			HttpSession session, 
+			@RequestParam(required = false, defaultValue = "1") int offset,
+			@RequestParam(defaultValue = "") String select, 
+			ModelAndView model) throws Exception {
 
 		// 세션에 저장된 멤버 데이터
 		Member member = (Member) session.getAttribute("loginMember");
-		mav.addObject("member", member);
+		model.addObject("member", member);
 
 		// 회원만 접근 가능한 페이지 설정
 		if (member != null) {
-			mav.setViewName("mypage/MypageMain");
+			model.setViewName("mypage/MypageMain");
 		} else {
-			mav.addObject("msg", "권한이 없는 페이지입니다.");
-			mav.addObject("location", "/");
-			mav.setViewName("member/msg");
+			model.addObject("msg", "권한이 없는 페이지입니다.");
+			model.addObject("location", "/");
+			model.setViewName("member/msg");
 
-			return mav;
+			return model;
 		}
 
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -70,35 +74,36 @@ public class MyPageController {
 			// 데이터가 있을 경우에만 .get(index) 메서드 이용하도록 함
 			isEmpty = myPageService.selectMyPlannerByMNo(param).size() == 0;
 			MyPlanner myPlanner = !isEmpty ? myPageService.selectMyPlannerByMNo(param).get(0) : null;
-			mav.addObject("myPlannerFirst", myPlanner);
+			model.addObject("myPlannerFirst", myPlanner);
 			// 비어있는지 여부를 체크할 값, jsp에서 select한 페이지의 데이터가 없을때 isEmpty == true
-			mav.addObject("planIsEmpty", isEmpty);
+			model.addObject("planIsEmpty", isEmpty);
 		}
 
 		if ((!select.equals("planner") && !select.equals("comment"))) {
 			isEmpty = myPageService.selectTripByMNo(param).size() == 0;
 			Destination trip = !isEmpty ? myPageService.selectTripByMNo(param).get(0) : null;
-			mav.addObject("tripFirst", trip);
-			mav.addObject("tripIsEmpty", isEmpty);
+			model.addObject("tripFirst", trip);
+			model.addObject("tripIsEmpty", isEmpty);
 		}
 
 		if ((!select.equals("trip") && !select.equals("planner"))) {
 			isEmpty = myPageService.selectCommentsByMNo(param).size() == 0;
 			Comments comments = !isEmpty ? myPageService.selectCommentsByMNo(param).get(0) : null;
-			mav.addObject("commentFirst", comments);
-			mav.addObject("commentIsEmpty", isEmpty);
+			model.addObject("commentFirst", comments);
+			model.addObject("commentIsEmpty", isEmpty);
 		}
 
 		// 여행카드의 지역 옵션 리스트
-		mav.addObject("options", myPageService.getOptions());
+		model.addObject("options", myPageService.getOptions());
 
-		return mav;
+		return model;
 	}
 
 	// 더보기 ajax
 	@GetMapping("/ajax")
 	@ResponseBody
-	public Map<String, Object> mypageByAjax(HttpSession session,
+	public Map<String, Object> mypageByAjax(
+			HttpSession session,
 			@RequestParam(required = false, defaultValue = "1") int offset,
 			@RequestParam(defaultValue = "planner") String select,
 			@RequestParam(required = false, defaultValue = "999") int locationId, Model model) throws Exception {
@@ -160,7 +165,9 @@ public class MyPageController {
 	// 좋아요 해제
 	@GetMapping("/trip/unlike")
 	@ResponseBody
-	public String unLikeTrip(HttpSession session, @RequestParam int no) {
+	public String unLikeTrip(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -180,7 +187,9 @@ public class MyPageController {
 	// 리뷰 삭제
 	@GetMapping("/review/delete")
 	@ResponseBody
-	public String deleteReview(HttpSession session, @RequestParam int no) {
+	public String deleteReview(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -200,7 +209,9 @@ public class MyPageController {
 	// 내 플랜 삭제
 	@GetMapping("/plan/delete")
 	@ResponseBody
-	public String deletePlan(HttpSession session, @RequestParam int no) {
+	public String deletePlan(
+			HttpSession session, 
+			@RequestParam int no) {
 
 		try {
 
@@ -220,7 +231,9 @@ public class MyPageController {
 	// 마이페이지 - 회원정보수정 전 비밀번호 확인
 	@PostMapping("/confirm/password")
 	@ResponseBody
-	public String confirmPassword(HttpSession session, @RequestParam("password") String inputPassword) {
+	public String confirmPassword(
+			HttpSession session, 
+			@RequestParam("password") String inputPassword) {
 
 		Member member = (Member) session.getAttribute("loginMember");
 		member.setMemberPassword(inputPassword);
@@ -236,33 +249,49 @@ public class MyPageController {
 
 	// 회원 정보 수정
 	@GetMapping("/updateform")
-	public ModelAndView UpdateForm(HttpSession session, ModelAndView mav) throws Exception {
+	public ModelAndView UpdateForm(
+			HttpSession session, 
+			ModelAndView model) throws Exception {
 
 		Member loginMember = (Member) session.getAttribute("loginMember");
 
 		if (loginMember != null) {
-			mav.setViewName("mypage/UpdateForm");
+			model.setViewName("mypage/UpdateForm");
 		} else {
-			mav.addObject("msg", "권한이 없는 페이지입니다.");
-			mav.addObject("location", "/");
-			mav.setViewName("member/msg");
+			model.addObject("msg", "권한이 없는 페이지입니다.");
+			model.addObject("location", "/");
+			model.setViewName("member/msg");
 		}
 
-		return mav;
+		return model;
 
 	}
 
 	// 회원 탈퇴
 	@GetMapping("/dropout")
-	public String DropOut() throws Exception {
+	public ModelAndView DropOut(
+			HttpSession session, 
+			ModelAndView model) throws Exception {
+		
+		Member loginMember = (Member) session.getAttribute("loginMember");
+		
+		if (loginMember != null) {
+			model.setViewName("mypage/DropOut");
+		} else {
+			model.addObject("msg", "권한이 없는 페이지입니다.");
+			model.addObject("location", "/");
+			model.setViewName("member/msg");
+		}
 
-		return "mypage/DropOut";
+		return model;
 	}
 
 	// 회원 정보 수정
 	@PostMapping("/profile")
-	public ModelAndView UpdateProfile(HttpSession session, @ModelAttribute Member member, ModelAndView model)
-			throws Exception {
+	public ModelAndView UpdateProfile(
+			HttpSession session, 
+			@ModelAttribute Member member, 
+			ModelAndView model) throws Exception {
 		Member loginMember = (Member) session.getAttribute("loginMember");
 
 		member.setMemberId(loginMember.getMemberId());
@@ -287,4 +316,26 @@ public class MyPageController {
 
 		return model;
 	}
+	
+	// 회원 탈퇴
+		@PostMapping("/dropout")
+		public ModelAndView DropOut(
+				ModelAndView model,
+				@SessionAttribute("loginMember") Member loginMember) throws Exception {
+			
+			int result = myPageService.memberDropOut(loginMember.getMemberNo());
+			
+			if(result > 0) {
+				model.addObject("msg", "정상적으로 탈퇴되었습니다.");
+				model.addObject("location", "/logout");
+			} else {
+				model.addObject("msg", "회원 탈퇴에 실패하였습니다.");
+				model.addObject("location", "/mypage?select=planner");
+			}
+			
+			model.setViewName("member/msg");
+			
+			return model;
+			
+		}
 }

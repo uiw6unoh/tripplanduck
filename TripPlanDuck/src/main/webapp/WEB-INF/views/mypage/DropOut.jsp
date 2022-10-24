@@ -29,7 +29,7 @@
           <h3 style="color: #808080;">탈퇴 사유</h3>
         </div>
         <div class="p-2 top-container">
-          <form class="reason-dropout top-container" style="padding-bottom: 34px">
+          <form action="${path}/mypage/dropout" method="post" class="reason-dropout top-container" style="padding-bottom: 34px">
             <div class="dropout reason-dropout">
               <div class="form-check form-check-inline" id="dropoutOption">
                 <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
@@ -62,15 +62,12 @@
                 <label class="form-check-label" for="inlineRadio2">이용빈도 낮음</label>
               </div>
             </div>
-            <div class="memberOutBtn pt-3">
-              <button id="dropout" class="btn btn-secondary">탈퇴</button>
-              <button class="btn btn-warning">취소</button>
-            </div>
-          </form>
+        <div class="memberOutBtn pt-3">
+          <button type="submit" id="dropout" class="btn btn-secondary">탈퇴</button>
+          <button type="button" class="btn btn-warning" onclick="location.href='${path}/mypage/updateform'">취소</button>
         </div>
+        </form>
       </div>
+    </div>
 	
-	<jsp:include page="../common/footer.jsp"/>
-
-  
-  
+	<jsp:include page="../common/footer.jsp"/>  

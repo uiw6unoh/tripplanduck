@@ -14,7 +14,7 @@
 
 <section>
 	<div class="container">
-		<h1>여행지 등록</h1>
+		<h2 class="mt-2">여행지 등록</h2>
 		<form id="sortBy" method="get">
 			<div class="container">
 				<label for="projectName" class="form-label">제목</label> <input

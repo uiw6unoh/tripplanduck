@@ -25,9 +25,9 @@ body {
     margin-left: 160px;
 }
 
-:root {
+/* :root {
     accent-color: gold;
-}
+} */
 
 table {
     border-collapse: separate;
@@ -146,4 +146,10 @@ table {
 
 .memberOutBtn button:hover {
     color: #fabf42;
+}
+
+/* 인풋 */
+.form-contro:focus {
+    border-color: #fff8c6;
+    box-shadow: 0 0 0 0.2rem #fff8c6;
 }
