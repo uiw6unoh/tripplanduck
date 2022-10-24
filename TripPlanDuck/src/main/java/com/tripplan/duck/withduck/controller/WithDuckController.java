@@ -176,6 +176,7 @@ public class WithDuckController {
 									   @RequestParam(value = "end_val", required=false) String end_val,
 									   @RequestParam(value = "personnel_val", defaultValue = "0") int personnel_val,
 									   @RequestParam(value = "joinStatus", required=false) String joinStatus,
+									   @RequestParam(value = "joinStatus", required=false) String joinStatus,
 									   @RequestParam(value = "page", defaultValue = "1") int page ) {
 		
 		List<WithDuck> listFilter = null;

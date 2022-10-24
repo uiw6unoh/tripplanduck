@@ -150,13 +150,11 @@
                     <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton1" >
                     <fmt:formatNumber value="${personnel_val}" type="number" var="personnel_val"/>
                     <fmt:formatNumber value="${page}" type="number" var="page"/>
-                    <c:if test="${empty listFilter }">
-                    	<li><a class="dropdown-item" href="${path}/withduck/list?sort_name=최신순">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/sortList?sort_name=조회순">조회순</a></li>
+                    <c:if test="${joinStatus == '모집중'}">
+                    	<li><a class="dropdown-item" href="${path}/withduck/filter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=모집중">최신순</a></li>
                     </c:if>
-                    <c:if test="${not empty listFilter }">
-                    	<li><a class="dropdown-item" href="${path}/withduck/filter?sort_name=최신순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">최신순</a></li>
-	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}">조회순</a></li>
+                    <c:if test="${joinStatus != 모집중}">
+	                    <li><a class="dropdown-item" href="${path}/withduck/sortfilter?sort_name=조회순&location_val=${filter_val[0]}&gender_val=${filter_val[1]}&age_val=${filter_val[2]}&start_val=${filter_val[3]}&end_val=${filter_val[4]}&personnel_val=${filter_val[5]}&page=${filter_val[6]}&joinStatus=">조회순</a></li>
                     </c:if>
                     </ul>
                 </div>

@@ -134,7 +134,7 @@
 		<if test="joinStatus.equals('모집중')">
 			AND WITH_JOINSTATUS = '모집중'
 		</if>
-		ORDER BY WITH_CREATEDATE
+		ORDER BY WITH_CREATEDATE DESC
 	</select>
 	
 	<select id="withDuckJoinFilter" parameterType="map" resultMap="withDuckResultMap">
@@ -160,7 +160,7 @@
 		<if test="joinStatus.equals('모집중')">
 			AND WITH_JOINSTATUS = '모집중'
 		</if>
-		ORDER BY WITH_CREATEDATE
+		ORDER BY WITH_CREATEDATE DESC
 	</select>
 	
 	<!-- 위드덕 생성 -->	
