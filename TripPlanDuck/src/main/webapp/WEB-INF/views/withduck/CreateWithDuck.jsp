@@ -145,7 +145,7 @@
         <div class="filter_containerValue">
 				<div class="location_value" style="border-bottom: 0;">
                     <div><button class="location_btn" value="부산광역시" type="button" name="location">부산광역시</button></div>
-                    <input type="hidden" type="text" id="btnValueSaveLocation" name="withLocation">
+                    <input type="hidden" type="text" id="btnValueSaveLocation" name="withLocation" required="required"/>
                     <div><button class="location_btn" value="서울특별시" type="button" name="location">서울특별시</button></div>
                     <div><button class="location_btn" value="인천광역시" type="button" name="location">인천광역시</button></div>
                     <div><button class="location_btn" value="광주광역시" type="button" name="location">광주광역시</button></div>
@@ -163,14 +163,14 @@
                 </div>
     
                 <div class="gender_value">
-                    <input type="hidden" type="text" id="btnValueSaveGender" name="withGender">
+                    <input type="hidden" type="text" id="btnValueSaveGender" name="withGender" required="required">
                     <button class="gender_btn" value="남자" type="button" name="gender">남자</button>
                     <button class="gender_btn" value="여자" type="button" name="gender">여자</button>
                     <button class="gender_btn" value="성별무관" type="button" name="gender">성별무관</button>
                 </div>
 
                 <div class="age_value">
-                	<input type="hidden" type="text" id="btnValueSaveAge" name="withAge">
+                	<input type="hidden" type="text" id="btnValueSaveAge" name="withAge" required="required">
                     <button class="age_btn" value="~20대" type="button" name="age">~20대</button>
                     <button class="age_btn" value="30대" type="button" name="age">30대</button>
                     <button class="age_btn" value="40대" type="button" name="age">40대</button>
@@ -179,20 +179,20 @@
     
                     <label for="customRange2" class="form-label"></label>
                     <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px;     border-bottom: 1px solid #a7a2a28f ;">
-                        <input type="range" name="withPersonner" class="form-range" min="1" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
-                        <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">25명</span>
+                        <input required="required" type="range" name="withPersonner" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명';">
+                        <span id="value2"  style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;">명</span>
                         
                     </div>
                 <div class="date_container">
                     <div class="start_container">
                         <label for="start">출발일:</label>
     
-                        <input type="date" id="start" class="start" name="withStartDate"
+                        <input required="required" type="date" id="start" class="start" name="withStartDate"
                             value="2018-07-22"
                             min="2018-01-01" max="2030-12-31" style="margin-left:10px;">
                     </div>
                     <div class="end_container">
-                        <label for="start">도착일:</label>
+                        <label required="required" for="start">도착일:</label>
             
                         <input type="date" id="end" class="end" name="withEndDate"
                             value="2018-07-22"
@@ -291,6 +291,11 @@ $('#file_container3').on('click', function() {
 	
 
     $(document).ready(function() {
+    	$('.form-range').val(0);
+
+    	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
+    	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+    	
     	var date = new Date();
 
         var day = date.getDate();
@@ -301,8 +306,8 @@ $('#file_container3').on('click', function() {
         if (day < 10) day = "0" + day;
 
         var today = year + "-" + month + "-" + day;       
-        $("#start").attr("value", today);
-        $("#end").attr("value", today);
+        $("#start").attr("value", "");
+        $("#end").attr("value", "");
         
     	//여기 아래 부분
         $('#summernote').summernote({
@@ -313,6 +318,8 @@ $('#file_container3').on('click', function() {
               lang: "ko-KR",               // 한글 설정
               placeholder: '내용을 입력하세요!'   //placeholder 설정
         });
+    	
+    	$('.form-range').attr('value', '0');
     });
         $('.location_btn').on('click', function(){
         $('.location_btn').removeClass('selected');

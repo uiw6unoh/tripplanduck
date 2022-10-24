@@ -49,6 +49,7 @@ public class WithDuckController {
 	/////////////////////////////////////////////////위드덕 리스트////////////////////////////////////////////////////////////////////////
 	@GetMapping("/list")
 	public ModelAndView withDuckList(ModelAndView model,
+							  HttpSession session,
 							  @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 							  @RequestParam(value = "page", defaultValue = "1") int page) {
 		
@@ -74,6 +75,7 @@ public class WithDuckController {
 		
 		System.out.println(pageInfo +" " + list);
 		
+		//session.removeAttribute("joinStatus");
 		model.addObject("sort_name", sort_name);
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
@@ -82,183 +84,22 @@ public class WithDuckController {
 		return model;
 	}
 	
-	@GetMapping("/filter") 
-	public ModelAndView withDuckFilter(ModelAndView model,
-									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
-									   @RequestParam(value = "location_val") String location_val , 
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "personnel_val") int personnel_val,
-									   @RequestParam(value = "page", defaultValue = "1") int page){
-		List<WithDuck> listFilter = null;
-		List<Object> filter_val = new ArrayList<Object>();
-		
-		System.out.println(location_val);
-		System.out.println(gender_val);
-		System.out.println(age_val);
-		System.out.println(start_val);
-		System.out.println(end_val);
-		System.out.println(personnel_val);
-		
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckFilterCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
-		listFilter = service.withDuckFilter(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
-		
-		for(int i = 0; i < listFilter.size(); i++) {
-			if(listFilter.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = listFilter.get(i).getWithRenameFileName().split(", ");
-			listFilter.get(i).setReList(Arrays.asList(arr));
-			System.out.println(listFilter.get(i) + "\n");
-		}
-		
-		System.out.println(listFilter);
-		
-		filter_val.add(location_val);
-		filter_val.add(gender_val);
-		filter_val.add(age_val);
-		filter_val.add(start_val);
-		filter_val.add(end_val);
-		filter_val.add(personnel_val);
-		filter_val.add(page);
-		
-		System.out.println("asdfasdfsadf : " + filter_val);
-		
-		model.addObject("sort_name", sort_name);
-		model.addObject("filter_val", filter_val);
-		model.addObject("listFilter", listFilter);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
-		return model;
-	}
-	
-	@GetMapping("/sortfilter")
-	public ModelAndView withDuckReadcountSort(ModelAndView model,
-									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
-									   @RequestParam(value = "location_val") String location_val, 
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "personnel_val") int personnel_val,
-									   @RequestParam(value = "page", defaultValue = "1") int page ) {
-		
-		List<WithDuck> listFilter = null;
-		List<Object> filter_val = new ArrayList<Object>();
-		
-		System.out.println(location_val);
-		System.out.println(gender_val);
-		System.out.println(age_val);
-		System.out.println(start_val);
-		System.out.println(end_val);
-		System.out.println(personnel_val);
-		
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckFilterCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
-		listFilter = service.withDuckReadcountSort(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
-		
-		for(int i = 0; i < listFilter.size(); i++) {
-			if(listFilter.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = listFilter.get(i).getWithRenameFileName().split(", ");
-			listFilter.get(i).setReList(Arrays.asList(arr));
-			System.out.println(listFilter.get(i) + "\n");
-		}
-		
-		System.out.println(listFilter);
-		
-		filter_val.add(location_val);
-		filter_val.add(gender_val);
-		filter_val.add(age_val);
-		filter_val.add(start_val);
-		filter_val.add(end_val);
-		filter_val.add(personnel_val);
-		filter_val.add(page);
-		
-		model.addObject("sort_name", sort_name);
-		model.addObject("filter_val", filter_val);
-		model.addObject("listFilter", listFilter);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
-		return model;
-	}
-	
-	@GetMapping("/sortList")
-	public ModelAndView withDuckListSort(ModelAndView model,
-										 @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
-										 @RequestParam(value = "page", defaultValue = "1") int page) {
-		
-		List<WithDuck> list = null;
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
-		list = service.getWithDuckListReadCount(pageInfo);
-		
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = list.get(i).getWithRenameFileName().split(", ");
-			list.get(i).setReList(Arrays.asList(arr));
-			System.out.println(list.get(i) + "\n");
-		}
-		
-		System.out.println(pageInfo +" " + list);
-		
-		model.addObject("sort_name", sort_name);
-		model.addObject("list", list);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
-		
-		return model;
-	}
-	
-	@GetMapping("/joinFilter")
-	public ModelAndView withDuckJoinList(ModelAndView model, 
-							  @RequestParam(value = "page", defaultValue = "1") int page) {
-		
-		List<WithDuck> list = null;
-		PageInfo pageInfo = null;
-		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinCount(), 8);
-		list = service.getWithDuckJoinList(pageInfo);
-		
-		System.out.println(pageInfo +" " + list);
-		
-		for(int i = 0; i < list.size(); i++) {
-			if(list.get(i).getWithOriginFileName() == null) continue;
-			String[] arr = new String[3];
-			
-			arr = list.get(i).getWithRenameFileName().split(", ");
-			list.get(i).setReList(Arrays.asList(arr));
-			System.out.println(list.get(i) + "\n");
-		}
-		
-		model.addObject("list", list);
-		model.addObject("pageInfo", pageInfo);
-		model.setViewName("withduck/ListWithDuck");
-		
-		return model;
-	}
 	
 	@GetMapping("/joinValFilter")
 	public ModelAndView withDuckJoinValList(ModelAndView model,
-									   @RequestParam(value = "location_val") String location_val, 
-									   @RequestParam(value = "gender_val") String gender_val,
-									   @RequestParam(value = "age_val") String age_val,
-									   @RequestParam(value = "start_val") String start_val,
-									   @RequestParam(value = "end_val") String end_val,
-									   @RequestParam(value = "personnel_val") int personnel_val,
+									   @RequestParam(value = "location_val", required=false) String location_val, 
+									   @RequestParam(value = "gender_val", required=false) String gender_val,
+									   @RequestParam(value = "age_val", required=false) String age_val,
+									   @RequestParam(value = "start_val", required=false) String start_val,
+									   @RequestParam(value = "end_val", required=false) String end_val,
+									   @RequestParam(value = "personnel_val", defaultValue = "0") int personnel_val,
+									   @RequestParam(value = "joinStatus", required=false) String joinStatus,
+									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
 									   @RequestParam(value = "page", defaultValue = "1") int page ) {
 		
 		List<WithDuck> listFilter = null;
 		List<Object> filter_val = new ArrayList<Object>();
+		PageInfo pageInfo = null;
 		
 		System.out.println(location_val);
 		System.out.println(gender_val);
@@ -266,12 +107,14 @@ public class WithDuckController {
 		System.out.println(start_val);
 		System.out.println(end_val);
 		System.out.println(personnel_val);
+		System.out.println(joinStatus);
+		System.out.println(sort_name);
 		
-		PageInfo pageInfo = null;
 		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val), 8);		
-		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val);
+		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name), 8);		
+		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name);
 		
+		System.out.println("listFilter : " + listFilter);
 		for(int i = 0; i < listFilter.size(); i++) {
 			if(listFilter.get(i).getWithOriginFileName() == null) continue;
 			String[] arr = new String[3];
@@ -291,8 +134,10 @@ public class WithDuckController {
 		filter_val.add(personnel_val);
 		filter_val.add(page);
 		
+		model.addObject("sort_name", sort_name);
+		model.addObject("joinStatus", joinStatus);
 		model.addObject("filter_val", filter_val);
-		model.addObject("listFilter", listFilter);
+		model.addObject("list", listFilter);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("withduck/ListWithDuck");
 		return model;
@@ -328,29 +173,36 @@ public class WithDuckController {
 									   @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
 		String keyword = "";
-		
-		List<String> keyList = new ArrayList<String>();
-		System.out.println(keyword0);
-		System.out.println("인덱스 : " + keyword0.indexOf("X"));
-		if (keyword0 != null) {
-			keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
-			keyList.add(keyword0);
-			keyword += keyList.get(0) + ", ";
-		}
-		if(keyword1 != null) {
-			keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
-			keyList.add(keyword1);
-			keyword += keyList.get(1) + ", ";
-		}
-		if(keyword2 != null) {
-			keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
-			keyList.add(keyword2);
-			keyword += keyList.get(2) + ", ";
-		}
-		
-		withDuck.setWithkeyword(keyword);
-		
-		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
+		System.out.println("asdfasdf : " + withDuck);
+		if(withDuck.getWithLocation() == "" || withDuck.getWithGender() == "" || withDuck.getWithAge() == "" || withDuck.getWithPersonner() == 0) {
+			model.addObject("msg", "필터를 모두 선택해주십시오.");
+			model.addObject("location", "/withduck/create");
+			
+			model.setViewName("member/msg");
+		} else {
+			
+			List<String> keyList = new ArrayList<String>();
+			if (keyword0 != null) {
+				keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
+				keyList.add(keyword0);
+				keyword += keyList.get(0) + ", ";
+			}
+			if(keyword1 != null) {
+				keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
+				keyList.add(keyword1);
+				keyword += keyList.get(1) + ", ";
+			}
+			if(keyword2 != null) {
+				keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
+				keyList.add(keyword2);
+				keyword += keyList.get(2) + ", ";
+			}
+			if(keyList.size() != 0) {
+			withDuck.setWithkeyword(keyword);
+			}
+			
+			
+			// 1. 파일을 업로드 했는지 확인 후 파일을 저장
 			// 파일을 저장하는 로직 작성
 			String location = null;
 			String renamedFileName = "";
@@ -375,44 +227,47 @@ public class WithDuckController {
 			
 			System.out.println("list : " + list);
 			if(list.size()!=0) {
-			try {
-				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
-				for(int i = 0; i < list.size(); i++) {
-					renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+				try {
+					location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
+					for(int i = 0; i < list.size(); i++) {
+						renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 				
 				for(int i = 0; i < list.size(); i++) {
 					withDuck.setWithOriginFileName(list.get(i).getOriginalFilename() + ", ");
 					withDuck.setWithRenameFileName(renamedFileName);
 				}
 			}
-		
-		System.out.println(loginMember.getMemberNickname());
-		
-		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
-		withDuck.setWithWriterNo(loginMember.getMemberNo());
-		withDuck.setWithWriterNick(loginMember.getMemberNickname());
-		withDuck.setWithWriterAge(loginMember.getMemberAge());
-		withDuck.setWithWriterGender(loginMember.getMemberGender());
-		
-		int result2 = 0;
-		
-		result = service.createWithDuck(withDuck);
-		System.out.println("withNo : " + withDuck);
-		result2 = chatService.createChat(withDuck.getWithNo(), withDuck.getWithTitle(), withDuck.getWithWriterNick(), withDuck.getWithWriterNo());
-		
-		if(result > 0 && result2 > 0) {
-			model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
-			model.addObject("location", "/withduck/list");
-		} else {
-			model.addObject("msg", "게시글 등록을 실패하였습니다.");
-			model.addObject("location", "/withduck/create");
+			
+			System.out.println(loginMember.getMemberNickname());
+			
+			// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
+			withDuck.setWithWriterNo(loginMember.getMemberNo());
+			withDuck.setWithWriterNick(loginMember.getMemberNickname());
+			withDuck.setWithWriterAge(loginMember.getMemberAge());
+			withDuck.setWithWriterGender(loginMember.getMemberGender());
+			
+			int result2 = 0;
+			
+			result = service.createWithDuck(withDuck);
+			System.out.println("withNo : " + withDuck);
+			result2 = chatService.createChat(withDuck.getWithNo(), withDuck.getWithTitle(), withDuck.getWithWriterNick(), withDuck.getWithWriterNo());
+			
+			if(result > 0 && result2 > 0) {
+				model.addObject("msg", "게시글이 정상적으로 등록되었습니다.");
+				model.addObject("location", "/withduck/list");
+			} else {
+				model.addObject("msg", "게시글 등록을 실패하였습니다.");
+				model.addObject("location", "/withduck/create");
+			}
+			
+			model.setViewName("member/msg");
 		}
 		
-		model.setViewName("member/msg");
+		
 		
 		return model;
 	}
@@ -555,28 +410,27 @@ public class WithDuckController {
 										 @SessionAttribute("loginMember") Member loginMember) {
 		int result = 0;
 		String keyword = "";
-		
-		List<String> keyList = new ArrayList<String>();
-		System.out.println(keyword0);
-		System.out.println("인덱스 : " + keyword0.indexOf("X"));
-		if (keyword0 != null) {
-			keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
-			keyList.add(keyword0);
-			keyword += keyList.get(0) + ", ";
-		}
-		if(keyword1 != null) {
-			keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
-			keyList.add(keyword1);
-			keyword += keyList.get(1) + ", ";
-		}
-		if(keyword2 != null) {
-			keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
-			keyList.add(keyword2);
-			keyword += keyList.get(2) + ", ";
-		}
-		
-		withDuck.setWithkeyword(keyword);
-		// 1. 파일을 업로드 했는지 확인 후 파일을 저장
+			System.out.println("keyword0 : " + keyword0);
+			List<String> keyList = new ArrayList<String>();
+			if (keyword0 != null) {
+				keyword0 = keyword0.substring(0, keyword0.indexOf("X")-1);
+				keyList.add(keyword0);
+				keyword += keyList.get(0) + ", ";
+			}
+			if(keyword1 != null) {
+				keyword1 = keyword1.substring(0, keyword1.indexOf("X")-1);
+				keyList.add(keyword1);
+				keyword += keyList.get(1) + ", ";
+			}
+			if(keyword2 != null) {
+				keyword2 = keyword2.substring(0, keyword2.indexOf("X")-1);
+				keyList.add(keyword2);
+				keyword += keyList.get(2) + ", ";
+			}
+			if(keyList.size() != 0) {
+				withDuck.setWithkeyword(keyword);
+			}
+			// 1. 파일을 업로드 했는지 확인 후 파일을 저장
 			// 파일을 저장하는 로직 작성
 			String location = null;
 			String renamedFileName = "";
@@ -597,33 +451,33 @@ public class WithDuckController {
 			}
 			
 			if(list.size()!=0) {
-			try {
-				location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
-				for(int i = 0; i < list.size(); i++) {
-					renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+				try {
+					location = resourceLoader.getResource("resources/upload/withduck").getFile().getAbsolutePath();
+					for(int i = 0; i < list.size(); i++) {
+						renamedFileName += MultipartFileUtil.save(list.get(i), location) + ", ";
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 				
 				for(int i = 0; i < list.size(); i++) {
 					withDuck.setWithOriginFileName(list.get(i).getOriginalFilename() + ", ");
 					withDuck.setWithRenameFileName(renamedFileName);
 				}
 			}
+			System.out.println("keyword :" + withDuck.getWithkeyword());
+			// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
+			result = service.updateGoWithDuck(withDuck);
 			
-		// 2. 작성한 게시글 데이터를 데이터 베이스에 저장
-		result = service.updateGoWithDuck(withDuck);
-		
-		if(result > 0) {
-			model.addObject("msg", "게시글이 정상적으로 수정되었습니다.");
-			model.addObject("location", "/withduck/list");
-		} else {
-			model.addObject("msg", "게시글 수정을 실패하였습니다.");
-			model.addObject("location", "/withduck/create");
-		}
-		
-		model.setViewName("member/msg");
+			if(result > 0) {
+				model.addObject("msg", "게시글이 정상적으로 수정되었습니다.");
+				model.addObject("location", "/withduck/list");
+			} else {
+				model.addObject("msg", "게시글 수정을 실패하였습니다.");
+				model.addObject("location", "/withduck/update");
+			}
+			
+			model.setViewName("member/msg");
 		
 		return model;
 	}

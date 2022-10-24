@@ -26,6 +26,8 @@
 </head>
 
 <body class="stretched">
+<form action="${path}/withduck/detail" id="formobj">
+
     <div class="allDiv">
         <!--채팅 목록, 참여인원-->
         <div class="leftDiv">
@@ -37,17 +39,18 @@
                         </span>
                 </div>
 	                <div class="withTitle">
-                <c:forEach items="${loginChatList}" var="loginChatList">
+	                <input type="hidden" id="withNoValue" value="${withDuck.withNo }">
+                <c:forEach items="${loginChatList}" var="loginChatList" varStatus="status">
 	                    <div class="chatList">
 	                        <div class="imgdiv"><img src="${path}/resources/images/common/프사.png" alt=""></div>
 	                            <div class="imgdiv-right">
 	                                <div class="textdiv1">
-	                                    <a href="">${loginChatList.chatTitle}</a>
+	                                    <a href="${path}/chatFindGo?withNo=${loginChatList.withNo}">${loginChatList.chatTitle}</a>
 	                                </div>
 	                                <div class="textdiv2">34
-	                                    <a href="">
+	                                    <button class="chatOut" style="border: 0; background: white; padding:0px" value="${loginChatList.withNo }">
 	                                        <img src="${path}/resources/images/WithDuck/logout.png" alt="">
-	                                    </a>
+	                                    </button>
 	                                </div>
 	                            </div>
 	                    </div>
@@ -79,11 +82,14 @@
         <div class="rightDiv">
             <!-- 제목 부분 -->
             <div class="chatTitle">
-                <!-- 나가기 버튼 -->
-                <a href="">
-                    <img class="exit" src="${path}/resources/images/WithDuck/left-arrow.png">
-                </a>
-                <p class="withChat_title">${withDuck.withTitle }</p>
+            <button style="width: 50px; height: 50px; border: 0px; background: white;" id="backBtn" onclick="javascript: history.back();">
+            	<img alt="" style="width: 100%" src="${path}/resources/images/WithDuck/left-arrow.png">
+            </button>
+            <input type="hidden" value="${withDuck.withNo }" name="withNo">
+            <button id = "exitBtn" style="position: relative; left:760px;" type="submit">
+			 <img class="exit" src="${path}/resources/images/WithDuck/logout.png">
+			</button>
+                <p class="withChat_title" style="margin:0; margin-left: 10px; font-weight: bold; position:relative; right:50px;">${withDuck.withTitle }</p>
             </div>
             <!-- 내용 부분 -->
 
@@ -106,13 +112,14 @@
             <div class="inputChat">
                 <div class="message-box">
                     <textarea type="text" id="msg" class="message-input" placeholder="메시지를 입력하세요."></textarea>
-                    <button id="button-send" >
+                    <button type="button" id="button-send" >
                         <img src="${path}/resources/images/WithDuck/send.png" style="width: 50px; position:relative; right:20px; top:15px;">
                     </button>
                 </div>
             </div>
         </div>
     </div>
+    </form>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
@@ -132,15 +139,13 @@
 <jsp:include page="../common/footer.jsp"/>
 <script type="text/javascript">
 //전송 버튼 누르는 이벤트
-
-
+var withNoValue = $('#withNoValue').val();
 $(document).ready(function() {
-	
 $("#button-send").on("click", function(e) {
 	e.preventDefault();
 	if (socket.readyState !== 1) return;
-      
 	  let msg = $('#msg').val();
+      if(msg != ""){
 	  var str = '<div class="chat ch2">';
 		str += '<div class="icon"><i class="fa-solid fa-user">';
 		str += '<img src="${path}/resources/images/common/프사.png" alt="">';
@@ -164,10 +169,13 @@ $("#button-send").on("click", function(e) {
 	  $("#msg").val('');
 	  
 	  $('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+      } else {
+    	  return;
+      }
 });
 	$('#msg').on('keydown', function(e) {
-		
-		if(e.keyCode === 13) {
+		e.preventDefault();
+		if(e.keyCode === 13 && $('#msg').val() != '') {
 			 let msg = $('#msg').val();
 			 // 보내는사람에게 보여지는 채팅 
 			 var str = '<div class="chat ch2">';
@@ -207,7 +215,7 @@ function connect() {
 	var memberNo = '${loginMember.memberNo}';
 	var length = '${fn:length(joinChatList)}';
 	var joinChatList = "";
-	
+	ws.onclose = onClose;
 	ws.onopen = function (event) {
 	var count = 0;
 	console.log(length);
@@ -247,29 +255,63 @@ function connect() {
 			console.log(sessionId + " " + cur_session);
 			// 입장메시지가 아닌 받은 메시지
 			if(message.indexOf('님이 입장하셨습니다.') == -1){ 
+				if(message.indexOf('님이 퇴장하셨습니다.') != -1){
+					location.reload(true);
+				}
 				$(".wrap").append(arr[0]);
+				$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
 			// 입장메시지
 			} else {
-			    console.log('Info: connection opened.');
+			    location.reload(true);
+				console.log('Info: connection opened.');
 			    var str = arr[0];
 			$(".wrap").append(str);
-			}
+			$('.chatContent').scrollTop($('.chatContent')[0].scrollHeight);
+			} 
 
 		
 		console.log("ReceiveMessage:", event.data+'\n');
 	};
+	$('#exitBtn').click(function() { disconnect(); });
 	
-	ws.onclose = function (event) {
-		console.log('Info: connection closed.'); 
+	$('.chatOut').on('click', function() {
+		$('.chatOut').removeClass('selected');
+		$(this).addClass('selected');
+		$('#withNoValue').attr('value', $('.chatOut.selected').val());
+		withNoValue = $('#withNoValue').val();
+		
+		if(withNoValue != ${withDuck.withNo}){
+			var chatOut = $('.chatOut');
+				const formElement = $('#formobj');
+				formElement.attr("action", "${path}/chatFindGo?withNo=" + withNoValue);
+				formElement.attr("method", "get");
+				formElement.submit();
+
+		}
+		console.log("withNoValue : " + withNoValue);
+		disconnect(); 
+	});
+	
+	function disconnect() {
+	    var str = '<div class="chat_entry" id="msgArea">';
+	    console.log(withNoValue)
 		var user = '${loginMember.memberNickname}';
-		var str = user + " 님이 퇴장하셨습니다.";
-		
+		str += user + "님이 퇴장하셨습니다.";
+		str += '</div>';
+		console.log(withNoValue)
 		$("#msgArea").append(str);
+		socket.send(str + ':' + '${loginMember.memberNickname}' +':' + '${loginMember.memberNo}' + ':' + withNoValue);
 		
+		ws.close();
+	}
+	function onClose (event) {
+		console.log('Info: connection closed.'); 
+
 		setTimeout( function(){ connect(); }, 1000); // retry connection!!
 	};
 	
 	ws.onerror = function (err) { console.log('Error:', err); };
 }
+
 </script>
 </html>

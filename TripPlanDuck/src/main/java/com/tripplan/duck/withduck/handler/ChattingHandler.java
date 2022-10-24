@@ -56,9 +56,14 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		int result = 0;
 		int chatMemNo = Integer.parseInt(memNo);
 		int chatWithNo = Integer.parseInt(withNo);
+		String reload = "location.reload(true)";
 		String cur_withDuck = String.valueOf(session.getUri()).replace("ws://211.209.232.21//duck/chatting?withNo=", "");		
-
+	
 		service.putLog(chatContent, chatMemNickName, chatMemNo, chatWithNo);
+		
+		if(chatContent.contains("퇴장하셨습니다.")) {
+			result = service.deleteChatMember(chatMemNo, chatWithNo);
+		}
 		
 		System.out.println(Arrays.toString(arr));
 		for(WebSocketSession s : sessionList) {
@@ -66,11 +71,20 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 			if(session.getId() == s.getId()) {
 				continue;
 			}
-			if (!cur_withDuck.equals(every)) {
-				continue;
-			}
-				s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo ));
+			if(withNo.equals(cur_withDuck)) {
+				if (!cur_withDuck.equals(every)) {
+					continue;
+				}
+					s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo + ":" + reload ));
+					System.out.println(" s : " + s);
+			} else {
+				if (!withNo.equals(every)) {
+					continue;
+				}
+				s.sendMessage(new TextMessage(chatContent + ":" + chatMemNickName + ":" + memNo + ":" + withNo + ":" + reload ));
 				System.out.println(" s : " + s);
+				
+			}
 			
 		}
 		
@@ -84,9 +98,8 @@ private List<WebSocketSession> sessionList = new ArrayList<WebSocketSession>();
 		
 		log.info("#ChattingHandler, afterConnectionClosed");
 		sessionList.remove(session);
-		/*
+		System.out.println(session.getId() +" 퇴장햇네요");
+		log.info(session.getId() + "님이 퇴장하셨습니다.");
 		
-		log.info(session.getPrincipal().getName() + "님이 퇴장하셨습니다.");
-		*/
 	}
 }
