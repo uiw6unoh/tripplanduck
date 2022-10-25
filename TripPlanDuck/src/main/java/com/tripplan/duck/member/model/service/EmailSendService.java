@@ -1,6 +1,5 @@
 package com.tripplan.duck.member.model.service;
 
-import java.io.PrintWriter;
 import java.util.Random;
 
 import javax.mail.MessagingException;
@@ -12,7 +11,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.tripplan.duck.member.model.mapper.MemberMapper;
 import com.tripplan.duck.member.model.vo.Member;
@@ -26,6 +24,9 @@ public class EmailSendService {
 	
 	@Autowired
 	private MemberMapper mapper;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 		
 	// 인증번호 난수 설정
 	public void makeRandomNumber() {
@@ -38,9 +39,8 @@ public class EmailSendService {
 	
 
 	// 비밀번호 찾기
-	public int findMemberPassword(HttpServletResponse response, Member member) throws Exception {
+	public String tmpMemberPassword(HttpServletResponse response, Member member, String pw) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
-		int result = 0;
 		Member signupId = mapper.selectMemberById(member.getMemberId());
 		
 		// 아이디가 없으면
@@ -52,18 +52,30 @@ public class EmailSendService {
 
 		}else {
 			// 임시 비밀번호 생성
-			String pw = "";
 			for (int i = 0; i < 12; i++) {
 				pw += (char) ((Math.random() * 26) + 97);
-				
-			// 비밀번호 변경
-			member.setMemberPassword(pw);
-			result = mapper.updateMemberPassword(member);
-			}	
+			}
 		}
 		
-		return result;
+		return pw;
 	}
+	
+	public int setTmpMemberPassword(Member member, String pw) {
+		int result = 0;
+		
+		if(pw == null) return result;
+		else {
+			// 비밀번호 변경
+			System.out.println("pw() : " + pw);
+			System.out.println("encode() : " + passwordEncoder.encode(pw));
+			
+			member.setMemberPassword(passwordEncoder.encode(pw));
+			result = mapper.updateMemberPassword(member);
+			
+			return result;
+		}
+		
+	}	
 	
 	//이메일 보낼 양식!
 	//회원가입 이메일 인증 양식
@@ -83,7 +95,7 @@ public class EmailSendService {
 	}
 	
 	// 임시비밀번호 메일 발송 내용 
-	public void findMemberPasswordEmail(HttpServletResponse response, String email, Member member) throws Exception {
+	public void findMemberPasswordEmail(HttpServletResponse response, String email, Member member, String pw) throws Exception {
 		response.setContentType("text/html;charset=utf-8");
 		String setFrom = ".com"; 
 		String toMail = email;
@@ -91,13 +103,14 @@ public class EmailSendService {
 		String content = 
 				"트립플랜덕과 함께해주셔서 감사합니다." + 
                 "<br><br>" + 
-			    member.getMemberId() + "님의 임시 비밀번호는 " + member.getMemberPassword() + "입니다." + 
+			    member.getMemberId() + "님의 임시 비밀번호는 " + pw + "입니다." + 
 			    "<br>" + 
 			    "***임시비밀번호를 사용하여 로그인 하신 후 비밀번호를 변경 후 사용해주세요."; //이메일 내용 삽입
 		mailSend(setFrom, toMail, title, content);
 	}
 	
-	
+
+
 	//이메일 전송 메소드
 	public void mailSend(String setFrom, String toMail, String title, String content) { 
 		MimeMessage message = mailSender.createMimeMessage();
