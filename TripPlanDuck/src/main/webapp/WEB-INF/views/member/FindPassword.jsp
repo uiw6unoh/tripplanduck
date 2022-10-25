@@ -75,7 +75,7 @@
 			console.log('이메일 : ' + email); 
 			
 			$.ajax({
-				url : "${ path }/member/findMemberPassword",
+				url : "${ path }/member/tmpMemberPassword",
 				type : "POST",
 				data : {
 					memberId : $("#memberId").val(),

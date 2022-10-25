@@ -29,6 +29,17 @@
 		<result property="memberAge" column="M_AGE"/>
 	</resultMap>
 	
+	<resultMap type="Report" id="memberReportResultMap">
+		<id property="reportId" column="REPORT_ID" />
+		<result property="reportCategory" column="REPORT_CATEGORY" />
+		<result property="reportMemberNo" column="REPORT_M_NO" />
+		<result property="reportCreateDate" column="REPORT_CREATEDATE" />
+		<result property="reportCount" column="REPORT_COUNT" />
+		<result property="reportType" column="REPORT_TYPE" />
+		<result property="reportNoType" column="REPORT_NO_TYPE" />
+		<result property="memberNo" column="M_NO" />
+	</resultMap>
+	
 	<select id="memberFindNo" parameterType="int" resultMap="memberResultMap">
 		SELECT * FROM MEMBER 
 		WHERE M_NO = #{memberNo}
@@ -42,6 +53,16 @@
 		<include refid="selectMemberSql"/>
 		ORDER BY M_NO DESC
 	</select>
+	
+	<select id="selectMemberOld" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE M_STATUS = 'N'
+	</select>
+	
+	<select id="selectMemberLatest" resultMap="memberResultMap">
+		SELECT * FROM MEMBER
+		WHERE M_STATUS = 'Y'
+	</select>
 
 	<select id="selectMemberById" parameterType="string" resultMap="memberResultMap">
 		<include refid="selectMemberSql"/>
@@ -52,6 +73,57 @@
 		<include refid="selectMemberSql"/>
 		WHERE M_NICKNAME = #{memberNickname} AND M_STATUS = 'Y'
 	</select>
+	
+	<select id="memberReport" resultMap="memberReportResultMap">
+		SELECT * FROM REPORT
+	</select>
+	
+	<select id="memberReportCount1" resultMap="memberReportResultMap">
+		SELECT M_NO FROM REPORT
+		<![CDATA[ WHERE REPORT_COUNT = 3 ]]>
+	</select>
+	
+	<update id="memberReportCount2" parameterType="_int">
+		UPDATE MEMBER
+		SET M_STATUS = 'N'
+		WHERE MEMBER.M_NO IN (SELECT REPORT_M_NO 
+            FROM REPORT
+            GROUP BY REPORT_M_NO
+           	<![CDATA[
+            HAVING SUM(REPORT_COUNT) >= 3
+            ]]>
+		)
+	</update>
+	
+	<delete id="memberReportCount3">
+		DELETE 
+		FROM WITHDUK W
+		WHERE W.WITH_WRITER_NO IN (
+		        SELECT M.M_NO
+		        FROM MEMBER M
+		        WHERE M.M_STATUS = 'N'
+		)
+	</delete>
+	
+	<delete id="memberReportCount4">
+		DELETE 
+		FROM DESTINATION_COMMENTS D
+		WHERE D.M_NO IN (
+		        SELECT M.M_NO
+		        FROM MEMBER M
+		        WHERE M.M_STATUS = 'N'
+		)
+	</delete>
+	
+	<delete id="memberReportCount5">
+		DELETE 
+		FROM REPORT R
+		WHERE R.M_NO IN (
+		        SELECT M.M_NO
+		        FROM MEMBER M
+		        WHERE M.M_STATUS = 'N'
+		)
+	</delete>
 
 	<insert id="insertMember" parameterType="Member"
 			useGeneratedKeys="true" keyColumn="M_NO" keyProperty="memberNo"> 
@@ -92,9 +164,14 @@
 		WHERE NO = #{no}
 	</update>
 	
-	<update id="updateMemberStatus" parameterType="Member">
-		UPDATE MEMBER SET M_STATUS = 'N'
-		WHERE M_NO = #{memberNo}
+	
+	<update id="updateReportStatus" parameterType="Member">
+		UPDATE MEMBER
+			<set>
+				<if test="reportCount =='4'">
+					memberStatus = 'N'
+				</if>
+			</set>
 	</update>
 	
 	<delete id="deleteMember" parameterType="_int">

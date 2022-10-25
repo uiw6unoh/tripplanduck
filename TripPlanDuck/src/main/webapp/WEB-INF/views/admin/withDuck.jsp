@@ -14,8 +14,6 @@
     <div class="col-sm-2">
         <!-- 사이드 메뉴바 -->
         <div class="mySideMenu" style="display: grid;">
-            <a id="myListMain" href="${ path }/admin/visitor"> 방문자 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/member"> 회원 정보 관리 </a>
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>

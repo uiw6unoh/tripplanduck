@@ -1,11 +1,9 @@
 package com.tripplan.duck.member.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,8 +11,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
-import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,7 +29,6 @@ import com.tripplan.duck.member.model.service.KakaoService;
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -228,17 +223,20 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기
-	@RequestMapping(value = "/member/findMemberPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/tmpMemberPassword", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> find_pw(Member member, @RequestParam("memberEmail") String email, 
 						HttpServletResponse response) throws Exception{
 		int result = 0;
+		String tmpPw = null;
 		Map<String, Object> map = new HashMap<>();
 		
-		result = emailService.findMemberPassword(response, member);
+		tmpPw = emailService.tmpMemberPassword(response, member, tmpPw);
+		result = emailService.setTmpMemberPassword(member, tmpPw);
+		emailService.setTmpMemberPassword(member, tmpPw);
 		
 		if (result > 0) {
-			emailService.findMemberPasswordEmail(response, email, member);
+			emailService.findMemberPasswordEmail(response, email, member, tmpPw);
 			map.put("result", result);
 		} 
 		
