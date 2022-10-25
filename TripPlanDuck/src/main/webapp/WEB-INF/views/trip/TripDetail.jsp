@@ -232,13 +232,13 @@
 	                                  <c:choose>
 										<c:when test="${ comment.memberNo eq member.memberNo  }">
 											<button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="updateSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#updateBackdrop">수정</button>
-		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0" type="button">삭제</button>
+		                                  	<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-secondary py-0" type="button">삭제</button>
 		                                  	<input type="hidden" id="content${comment.commentsId }" value="${comment.commentsContent }"/>
 		                                  	<input type="hidden" id="rating${comment.commentsId }" value="${comment.commentsRating }"/>
 										</c:when>
 										
 										<c:when test="${ loginMember.memberId == 'admin' }">
-											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-outline-warning py-0" >삭제</button>
+											<button id="deleteAlert" onclick="deleteComment(${comment.commentsId})" class="btn btn-secondary py-0" >삭제</button>
 										</c:when>
 										
 										<c:otherwise>	
@@ -288,7 +288,7 @@
 				  </div>
 			      <div class="modal-footer">
 			        <button type="button" id="updateAlert" onclick="updateComment()" class="btn btn-outline-warning py-0">확인</button>
-			        <button type="button" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			        <button type="button" class="btn btn-secondary py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
 			  </div>
@@ -333,7 +333,7 @@
 				  </div>
 			      <div class="modal-footer">
 			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0" >신고</button>
-			        <button type="button" id="reportCancel" class="btn btn-outline-warning py-0" data-dismiss="modal">취소</button>
+			        <button type="button" id="reportCancel" class="btn btn-secondary py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>
 			  </div>
