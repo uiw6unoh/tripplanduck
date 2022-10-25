@@ -3,9 +3,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="path" value="${ pageContext.request.contextPath }" />
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:formatDate value="${now}" pattern="yyyy.MM.dd HH:mm" var="now" />
-<c:set var="path" value="${ pageContext.request.contextPath }" />
 
 <jsp:include page="../common/header.jsp" />
 
@@ -31,9 +31,6 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button type="button"
-						class="btn btn-outline-warning btn-sm btn-block"
-						onclick="location.href='${path}/chatgo'">내 위드덕</button>
 					<button class="btn btn-outline-warning btn-sm btn-block"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
@@ -41,6 +38,7 @@
 		</div>
 		<!-- 탭 메뉴 컨테이너 -->
 		<div class="nav-container">
+		<nav>
 			<div id="horizontal-underline"></div>
 			<ul class="nav justify-content-center">
 				<li class="mr-4 nav-item">
@@ -59,7 +57,8 @@
 						리뷰</button>
 				</li>
 			</ul>
-		</div>
+			</div>
+		</nav>
 
 		<!-- 하위 컨테이너 -->
 		<div class="content-container">
@@ -271,16 +270,16 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<input type="password" id="inputPwd" class="inputPwd"
+							<input type="password" id="inputPwdModal" class="inputPwd"
 								placeholder="비밀번호 입력">
 						</div>
 						<div class="modal-footer">
 							<div id="modal-msg-wrap"></div>
 							<div id="modal-btn-wrap">
-								<button type="button" class="btn btn-secondary"
-									data-dismiss="modal">취소</button>
 								<button type="button" class="btn btn-outline-warning"
 									onclick="confirmPW()">확인</button>
+								<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">취소</button>
 							</div>
 						</div>
 					</div>
@@ -316,7 +315,7 @@
 										v-model="ratings" /> <label for="1-star2" class="star">★</label>
 								</div>
 								<p class="pt-1" style="font-size: 0.9em;">별점을 선택해주세요</p>
-								<textarea id="commentsContent2" class="form-control shadow-none"
+								<textarea id="commentsContent2" class="modalForm-control shadow-none"
 									rows="3" placeholder="리뷰를 남겨주세요" style="resize: none;"></textarea>
 								<p class="mt-1 col p-0" style="font-size: 11px;">
 									<c:out value="${now}" />
@@ -325,14 +324,13 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" id="updateAlert" onclick="updateComment()"
-								class="btn btn-outline-warning py-0">확인</button>
-							<button type="button" class="btn btn-outline-warning py-0"
-								data-dismiss="modal">취소</button>
+								class="btn btn-outline-warning">확인</button>
+							<button type="button" class="btn btn-secondary"
+									data-dismiss="modal">취소</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
 
@@ -681,7 +679,7 @@
 	}
 
 	
-	  function updateComment() {
+	function updateComment() {
 		// 앞서 할당했던 엘리먼트에서 값 꺼내기
 	  	let rating = $('input[name=rating2]:checked').val();
 	  	let comment = $("#commentsContent2").val();
@@ -757,5 +755,24 @@
 	      }
 	    });
 	  };
-	
+
+	// 탭 메뉴
+	let horizontalBar = document.getElementById("horizontal-underline");
+	let horizontalMenus = document.querySelectorAll("nav ul li button");
+
+	console.log(horizontalBar);
+	console.log(horizontalMenus);
+
+	function horizontalIndicator(e) {
+		horizontalBar.style.left = e.offsetLeft + "px";
+		horizontalBar.style.width = e.offsetWidth + "px";
+		horizontalBar.style.top = e.offsetTop + e.offsetHeight + "px";
+	}
+
+	horizontalMenus.forEach((menu) =>
+		menu.addEventListener("click", (e) =>
+		horizontalIndicator(e.currentTarget)
+		)
+	);
+
 	</script>

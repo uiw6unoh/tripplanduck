@@ -25,14 +25,8 @@
 <link rel="stylesheet" type="text/css"
 	href="${ path }/resources/css/daterangepicker.css">
 <!--BootStrap JS-->
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-	crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
 
 <!--  데이트 피커 스크립트 -->
 <script type="text/javascript"
@@ -139,12 +133,11 @@
 						</div>
 						<div class="col-12 my-3" style="text-align: center;">
 							<!-- 정리되면 마이페이지로 이동하는 식으로 바꿔야함 -->
-								<input type="submit" name="location" class="col-5 btn btn-success" value="완 성"> 
+								<input type="submit" name="location" class="col-5 btn btn-outline-warning btn-sm" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" value="완 성"> 
 							
-							<input type="reset" class="col-5 btn btn-success" id="clear" onclick="history.go(0)" value="초기화">
+							<input type="reset" class="col-5 btn btn-outline-warning btn-sm" id="clear" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" onclick="history.go(0)" value="초기화">
 						</div>
-						<button type="button" class="btn btn-primary" data-toggle="modal"
-							data-target="#staticBackdrop" id="modalTest">경로 보기</button>
+						<button type="button" class="btn btn-outline-warning btn-sm" style="background-color: #FFF8C6; color:black; border: 1px solid gold;" data-toggle="modal" data-target="#staticBackdrop" id="modalTest">경로 보기</button>
 
 					</div>
 					<div class="left-box2">
@@ -183,23 +176,18 @@
 								<div class="addDesti">
 									<a id="checkButton" class="material-icons">check</a> <input
 										type="hidden" id="destMapX" name="destMapX"
-										value="${ destination.destMapX }" /> <input type="hidden"
-										id="destMapY" name="destMapY"
-										value="${ destination.destMapY }" /> <input type="hidden"
-										id="destImage" name="destImage"
-										value="${ destination.destImage }"> <input
-										type="hidden" id="destSubject" name="destSubject"
-										value="${ destination.destSubject }" /> <input type="hidden"
-										id="destNo" name="destNo" value="${ destination.destNo }" />
-									<input type="hidden" id="destContent" name="destContent"
-										value="${ destination.destContent }" />
+										value="${ destination.destMapX }" /> 
+										<input type="hidden" id="destMapY" name="destMapY"value="${ destination.destMapY }" /> 
+										<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }"> 
+										<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" /> 
+										<input type="hidden" id="destNo" name="destNo" value="${ destination.destNo }" />
+									    <input type="hidden" id="destContent" name="destContent" value="${ destination.destContent }" />
 								</div>
 							</div>
 						</c:forEach>
 					</div>
-					<input type="hidden" name="place" id="place"> <input
-						type="text" name="imagea" id="imagea"> <input
-						type="hidden" name="destNos" id="destNos">
+					<input type="hidden" name="place" id="place"> 
+					<input type="hidden" name="imagea" id="imagea"> 
 				</div>
 			</div>
 		</div>
@@ -311,86 +299,75 @@
 	//지도api변수들 선언
 	var count = 0;
 	var markers = [];
-	var ovarlays = [];
 	var lines = [];
-	var names = [];
-	var positions = [];
-	var data = new Array();
-	var imagehttp = new Array();
+	var names = []; // 여행지 이름
+	var positions = [];  
+	var polyline = new Array();
+	var path = new Array();
+	var data = new Array(); // 여행지 이름 담는 배열
+	var imagehttp = new Array(); // 이미지 주소
 	var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbj1sID%2FbtrOmc6KtD6%2FKF00nKO1xpe9nbUlbySxn1%2Fimg.png', // 마커이미지의 주소입니다    
 	imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
 	imageOption = {
 		offset : new kakao.maps.Point(15, 32)
 	}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
-			imageOption);
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageOption);
+	// 라인
+	
 
+	
+	
 	$(document).ready(function() {
 		var $set_val = $('#forecast_embed').contents().find('#styleID').attr('href');
 		
 		$("[class^=addDesti]").on("click",function(event) {
 
-											count = countF(1);
+					count = countF(1);
+					
+					
+					let destMapX = $(this).children('#destMapX').val().trim();
+					let destMapY = $(this).children('#destMapY').val().trim();
+					let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
+					let destNo = $(this).children('#destNo').val().trim();
+					let destImage = $(this).children('#destImage').val().trim();
+					// 마커 찍기
+					
+					names = destSubject.split(',');
+					
+					path.push(new kakao.maps.LatLng(destMapX, destMapY))
+					
+					polyline.push(new kakao.maps.Polyline({
+							map:map,
+							path:path,
+							endArrow: true, // 선의 끝을 화살표로 표시되도록 설정한다
+							strokeWeight: 4, // 선의 두께
+							strokeColor: '#82ebff', // 선 색
+							strokeOpacity: 0.9, // 선 투명도
+							strokeStyle: 'solid' // 선 스타일
+						}));
+					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 
-											let destMapX = $(this).children(
-													'#destMapX').val().trim();
-											let destMapY = $(this).children(
-													'#destMapY').val().trim();
-											let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
-											let destNo = $(this).children(
-													'#destNo').val().trim();
-											let destImage = $(this).children(
-													'#destImage').val().trim();
-											// 마커 찍기
+					data.push(destSubject);
+					
+					imagehttp.push(destImage);
+					// 타이틀
+					$("#place").val(data);
+					// 주소
+					$("#imagea").val(imagehttp);
+					
+			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
-											names = destSubject.split(',');
+			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a class="material-icons")>delete</a></div>');
 
-											addMarker(new kakao.maps.LatLng(
-													destMapX, destMapY),
-													destNo, count);
-
-											data.push(destSubject);
-											imagehttp.push(destImage);
-
-											$("#place").val(data);
-											$("#destNos").val(destNo);
-											$("#imagea").val(imagehttp);
-
-											$('#divOriginal_' + destNo)
-													.appendTo('#divCopy_chil');
-
-											$('#divCopy')
-													.find('.addDesti')
-													.replaceWith(
-															'<div class="deleteCopyBtn'
-																	+ destNo
-																	+ '" onclick=deleteDiv('
-																	+ destNo
-																	+ ',"'
-																	+ destSubject
-																	+ '","'
-																	+ destMapX
-																	+ '","'
-																	+ destMapY
-																	+ '")> <a class="material-icons")>delete</a></div>');
-
-											$('#modalTest')
-													.on(
-															"click",
-															function() {
+			$('#modalTest').on("click",function() {
 																// 모달창 복사
-																$(
-																		'#divOriginal_'
-																				+ destNo)
-																		.clone()
-																		.appendTo(
-																				'#placeCopy');
+			$(	'#divOriginal_'+ destNo).clone().appendTo('#placeCopy');
 
-															});
+				});
 
-										});
+		});
 
-					});
+});
 
 	// 이름 옆에 숫자 증가
 	function countF(a) {
@@ -404,10 +381,9 @@
 
 	}
 
-	// 마커를 생성하고 지도위에 표시하는 함수입니다
-	function addMarker(position, destNo, count) {
 
-		//  alert(destNo);
+// 마커를 생성하고 지도위에 표시하는 함수입니다
+function addMarker(position, destNo, count) {
 
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
@@ -433,71 +409,45 @@
 
 		// 생성된 마커를 배열에 추가합니다
 		markers.push(marker);
+		
 	}
-
-	/*
-	 * 
-	 //지도상의 선 긋기
-	 const lookCourseBtn = document.getElementById('lookCourseBtn');
-	 lookCourseBtn.addEventListener('click', event =>{
-	
-	 for (var i = 0; i < ovarlays.length; i++){
-	 ovarlays[i].setMap(null);
-	 }  
-	 ovarlays = [];
-	 addLine(markers);
-
-	 });
-	
-	 function addLine(markers){
-	 var linePath=[];      
-	 for (i=0; i < markers.length; ++i){
-	 linePath.push(markers[i].getPosition()); 
-	 }   
-
-	 // 지도에 표시할 선을 생성합니다
-	 var polyline = new kakao.maps.Polyline({
-	
-	 path: linePath, // 선을 구성하는 좌표배열 입니다
-	 strokeWeight: 2, // 선의 두께 입니다
-	 strokeColor: 'red', // 선의 색깔입니다
-	 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	 strokeStyle: 'solid' // 선의 스타일입니다
-	 });
-	
-	 lines.push(polyline);
-	 // 지도에 선을 표시합니다 
-	 polyline.setMap(map); 
-	 }
-	 */
 
 	//일반 딜리트
 	function deleteDiv(destNo, destSubject, destMapX, destMapY) {
-
+		
 		//names = destSubject.split(',');
 		$("#selectArea" + destNo).text("");
 
 		$('#divCopy_chil').children('#divOriginal_' + destNo).remove();
 
 		$('#placeCopy').children('#divOriginal_' + destNo).remove();
-
 		for (var i = 0; i < data.length; i++) {
-
 			if (data[i] == destSubject) {
+				polyline[i].setMap(null);
 				markers[i].setMap(null);
 				data.splice(i, 1);
+				polyline.splice(i,1);
 				imagehttp.splice(i, 1);
 				markers.splice(i, 1);
 				positions.splice(i, 1);
-				ovarlays.splice(i, 1);
+				path.splice(i,1);
+				
 				$("#place").val(data);
 				$("#imagea").val(imagehttp);
+				
 			}
+			
+		}
+		
+		for (var i = 0; i < polyline.length; i++) {
+			polyline[i].setMap(null);
+			
 		}
 
 		if (data == null || data == "") {
 			countF(2);
 		}
+		
 	};
 </script>
 

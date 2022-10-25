@@ -20,8 +20,6 @@ import lombok.NoArgsConstructor;
 public class MyPlanner {
 	private int pNo;
 	
-	private int destNo;
-	
 	private int mNo;
 	
 	private int locationId;

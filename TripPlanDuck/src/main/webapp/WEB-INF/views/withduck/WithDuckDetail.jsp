@@ -169,7 +169,7 @@
     </button>
 </c:if>
 
-    <button class="btn btn-outline-warning" type="button">
+    <button class="btn btn-outline-warning" type="button" id="listWithDuck">
         목록으로
     </button>
 
@@ -258,6 +258,16 @@ $(function() {
 	cancel.click(function() {
 		const formElement = $('#formobj');
 		formElement.attr("action", "${path}/withduck/delete");
+		formElement.attr("method", "get");
+		formElement.submit();
+	})
+});
+$(function() {
+	var cancel = $('#listWithDuck');
+	
+	cancel.click(function() {
+		const formElement = $('#formobj');
+		formElement.attr("action", "${path}/withduck/list");
 		formElement.attr("method", "get");
 		formElement.submit();
 	})

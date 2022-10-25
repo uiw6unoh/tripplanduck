@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.jmx.export.annotation.ManagedAttribute;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +29,6 @@ import com.tripplan.duck.member.model.service.KakaoService;
 import com.tripplan.duck.member.model.service.MemberService;
 import com.tripplan.duck.member.model.vo.Member;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -41,8 +40,12 @@ public class MemberController {
 
     
     @GetMapping("/member/login")
-    public String loginpage() {
+    public String loginpage(HttpServletRequest request, HttpSession session) {
         log.info("로그인 페이지 요청");
+        
+        String referer = request.getHeader("Referer");
+        
+        session.setAttribute("prepage", referer);
 
         return "member/login"; 
     }
@@ -100,14 +103,14 @@ public class MemberController {
     	log.info("{}, {}", memberId, memberPassword);
     	
     	Member loginMember = service.login(memberId, memberPassword);
-    	
-    	
+
     	if(loginMember != null) {
     		model.addObject("loginMember", loginMember);
     		model.setViewName("redirect:/");
+    		
     	} else {
     		model.addObject("msg", "아이디나 패스워드가 일치하지 않습니다.");
-    		model.addObject("location", "/");
+    		model.addObject("location", "/member/login");
     		model.setViewName("member/msg");
     	}
     	
@@ -220,27 +223,24 @@ public class MemberController {
 	}
 
 	// 비밀번호 찾기
-	@RequestMapping(value = "/member/findMemberPassword", method = RequestMethod.POST)
+	@RequestMapping(value = "/member/tmpMemberPassword", method = RequestMethod.POST)
 	@ResponseBody
-	public ModelAndView find_pw(ModelAndView model, @ModelAttribute Member member, @RequestParam("memberEmail") String email, 
+	public Map<String, Object> find_pw(Member member, @RequestParam("memberEmail") String email, 
 						HttpServletResponse response) throws Exception{
 		int result = 0;
+		String tmpPw = null;
+		Map<String, Object> map = new HashMap<>();
 		
-		result = emailService.findMemberPassword(model, response, member);
+		tmpPw = emailService.tmpMemberPassword(response, member, tmpPw);
+		result = emailService.setTmpMemberPassword(member, tmpPw);
+		emailService.setTmpMemberPassword(member, tmpPw);
 		
 		if (result > 0) {
-		emailService.findMemberPasswordEmail(response, email, member);
-			model.addObject("msg", "임시비밀번호가 전송되었습니다.");
-			model.addObject("location", "/member/login");
-		}
-		else {
-			model.addObject("msg", "임시비밀번호 발급에 실패하였습니다.");
-    		model.addObject("location", "/member/findMemberPassword");
-		}
+			emailService.findMemberPasswordEmail(response, email, member, tmpPw);
+			map.put("result", result);
+		} 
 		
-		model.setViewName("member/msg");
-		
-		return model;
+		return map;
 	}
 	
 	// 카카오 로그인
@@ -261,8 +261,6 @@ public class MemberController {
         String gender = (String)result.get("gender");
         String age = (String)result.get("age_range");
         
-        
-
         // 분기
         Member member = new Member();
         
@@ -297,6 +295,7 @@ public class MemberController {
 
          return "redirect:/";
     }
+    
 
 }
 

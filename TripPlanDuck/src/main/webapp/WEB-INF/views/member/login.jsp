@@ -52,22 +52,10 @@
         <button class="w-100 btn-outline-warning btn-lg mb-3" id="signup" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
       </form> 
       <div class="hr-sect mb-3">OR</div>
-      <div class="sns-logo">
-      	<!-- 구글 -->
-        <img src="${ path }/images/member/google_logo.png" style="width: 50px;">
-        
-        <!-- 카카오 -->
-        <form id="kakaoLoginForm" method="POST" action="${ path }/member/kakaoLogin">
-        	<img src="${ path }/images/member/kakao_login.png" onclick="loginWithKakao()" style="width: 50px; margin-left: 30px;">
-   			<input type="hidden" name="email"/>
-   			<input type="hidden" name="name"/>
-   			<input type="hidden" name="img"/>
-        </form>
-        
-        <!-- 네이버 -->
-        <img src="${ path }/images/member/naver.png" style="width: 50px; margin-left: 30px;">
+      <div class="sns-logo">       
+       <!-- 카카오 -->
+      	<img src="${ path }/images/member/kakao_login.png" onclick="loginWithKakao()">
       </div>
-       
       </main>
       
  
@@ -119,6 +107,7 @@
 	
 	 function fnInit(){
 	     var cookieid = getCookie("saveId");
+	     
 	     console.log(cookieid);
 	     if(cookieid !=""){
 	         $("input:checkbox[id='saveId']").prop("checked", true);
@@ -170,9 +159,7 @@
 	         expdate.setTime(expdate.getTime() + 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
 	         setCookie("saveId", $("#memberId").val(), expdate);
 	         }else{
-	        expdate.setTime(expdate.getTime() - 1000 * 3600 * 24 * 30); // 30일간 아이디 저장
-	         setCookie("saveId", $("#memberId").val(), expdate);
-	          
+	            
 	     }
 	 }
 	 

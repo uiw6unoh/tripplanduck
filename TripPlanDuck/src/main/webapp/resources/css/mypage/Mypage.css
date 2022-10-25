@@ -34,6 +34,17 @@ li {
 }
 
 /* 탭메뉴 */
+#horizontal-underline {
+    position: absolute;
+    left:0;
+    height: 4px;
+    width: 100%;
+    border-radius: 3px;
+    transition: 0.8s;
+    background-color: pink;
+    top:0;
+}
+
 .nav-link {
     color: black;
     font-size: 1.5rem;
@@ -221,9 +232,9 @@ font-size: 1.4rem;
 }
 
 /* 비밀번호 모달 */
-.modal-header {
+/* .modal-header {
     background-color: #fff8c6;
-}
+} */
 
 .inputPwd {
     border: 1px solid #fabf42;
@@ -232,7 +243,14 @@ font-size: 1.4rem;
     border-radius: 5px;
 }
 
-#inputPwd input[type="text"]:focus {
+.modal-body input:focus {
+    border: 1px solid #fabf42;
+    width: 300px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+#inputPwdModal input[type="text"]:focus {
 	/* border: 1px solid #fabf42; */
     /* width: 300px; */
     /* height: 40px; */
@@ -251,44 +269,10 @@ font-size: 1.4rem;
 	color : red
 }
 
-/* 애니메이션 */
-.send {
-	font-size: 30px;
-	border: none;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	margin-left: -0.5em;
-	margin-top: -0.5em;
-	background-color: transparent;
-	padding: 0;
-	cursor: pointer;
-	color: white;
-}
-.send:focus {
-		outline: none;
-		animation: fly 1000ms ease;
-}
-
-
-@keyframes fly {
-	10% {
-		transform: translate(-10px, 10px);
-	}
-	40% {
-		transform: translate(-15px, 15px);
-		opacity: 1;
-	}
-	100% {
-		transform: translate(100vw, -100vh);
-		opacity: 0;
-	}
-}
-
-/* 리뷰 수정 */
+/* 리뷰 수정 모달 */
 .star-rating-modal {
 	display: flex;
- 	flex-direction: row-reverse;
+    flex-direction: row-reverse;
 	font-size: 1.25rem;
 	line-height: 2rem;
 	justify-content: space-around;
@@ -297,28 +281,28 @@ font-size: 1.4rem;
 	width: 5em;
 }
 
-.star-rating input {
-  display: none;
+.star-rating-modal input {
+    display: none;
 }
 
-.star-rating label {
-  -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
-  -webkit-text-stroke-width: 1.2px;
-  -webkit-text-stroke-color: #2b2a29;
-  cursor: pointer;
-  margin-bottom: 0%;
+.star-rating-modal label {
+    -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
+    -webkit-text-stroke-width: 1.2px;
+    -webkit-text-stroke-color: #2b2a29;
+    cursor: pointer;
+    margin-bottom: 0%;
 }
 
-.star-rating :checked ~ label {
-  -webkit-text-fill-color: gold;
+.star-rating-modal :checked ~ label {
+    -webkit-text-fill-color: gold;
 }
 
-.star-rating label:hover,
-.star-rating label:hover ~ label {
-  -webkit-text-fill-color: #fff58c;
+.star-rating-modal label:hover,
+.star-rating-modal label:hover ~ label {
+    -webkit-text-fill-color: #fff58c;
 }
 
-  .star-count {
+.star-count {
 	position: relative;
     background-color: white;
     width: 47px;
@@ -331,13 +315,34 @@ font-size: 1.4rem;
     -webkit-text-fill-color: gold;
     padding-left: 0.2rem;
     margin-right: 3px;
-  }
+}
 
-  .star-rate {
+.star-rate {
     position: absolute;
     top: 0px;
     right: 5.5px;
     font-size: 0.9rem;
     -webkit-text-stroke-width: 0px;
     -webkit-text-fill-color: black;
-  }
+}
+
+.modalForm-control {
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+.modalForm-control:focus {
+    border: 1px solid #fabf42;
+}
+
+#commentsContent2 :focus {
+    border: 1px solid #fabf42;
+}

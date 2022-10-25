@@ -30,27 +30,30 @@
         </ol>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img src="${ path }/images/trip/건대.jpg" class="d-block w-100 h-auto" alt="...">
-            <div class="carousel-caption text-left mt-0">
+          	<div class="carousel_tone"></div>
+            <img src="${ path }/images/trip/전북무주.png" class="d-block w-100 h-auto" alt="...">
+            <div class="carousel-caption text-left">
               <h4>2022 겨울 여행지 제안</h4>
-              <h1>추천할 장소 적기</h1>
-              <h5><a style="color:white;" href="">자세히</a></h5>
+              <h1>무주 덕유산국립공원</h1>
+              <h5><a style="color:white;" href="${path}/trip/detail?destNo=2350">자세히</a></h5>
             </div>
           </div>
           <div class="carousel-item ">
-            <img src="${ path }/images/trip/야경.jpg" class="d-block w-100 h-auto" alt="...">
+          <div class="carousel_tone"></div>
+            <img src="${ path }/images/trip/창녕우포늪.png" class="d-block w-100 h-auto" alt="...">
             <div class="carousel-caption text-left">
               <h4>2022 겨울 여행지 제안</h4>
-              <h1>추천할 장소 적기</h1>
-              <h5><a style="color:white;" href="">자세히</a></h5>
+              <h1>창녕 우포늪</h1>
+              <h5><a style="color:white;" href="${path}/trip/detail?destNo=2351">자세히</a></h5>
             </div>
           </div>
           <div class="carousel-item">
-            <img src="${ path }/images/trip//제주도.jpg" class="d-block w-100 h-auto" alt="...">
-            <div class="carousel-caption text-left">
+          <div class="carousel_tone"></div>
+            <img src="${ path }/images/trip/강릉경포호.jpg" class="d-block w-100 h-auto" alt="...">
+            <div class="carousel-caption text-left mt-0">
               <h4>2022 겨울 여행지 제안</h4>
-              <h1>추천할 장소 적기</h1>
-              <h5><a style="color:white;" href="">자세히</a></h5>
+              <h1>강릉 경포호</h1>
+              <h5><a style="color:white;" href="${path}/trip/detail?destNo=2349">자세히</a></h5>
             </div>
           </div>
         </div>
