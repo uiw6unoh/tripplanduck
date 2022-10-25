@@ -53,5 +53,12 @@ public class WithDuckChatServiceImpl implements WithDuckChatService {
 		return mapper.selectChatLogList(withNo);
 	}
 
+	@Override
+	public int deleteChatMember(int chatMemNo, int chatWithNo) {
+		// TODO Auto-generated method stub
+		return mapper.deleteChatMember(chatMemNo, chatWithNo);
+		
+	}
+
 
 }
