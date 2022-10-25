@@ -181,14 +181,14 @@
     </button>
 </c:if>
 
-    <button class="btn btn-outline-warning" type="button" id="listWithDuck">
-        목록으로
-    </button>
-
+	    <button class="btn btn-outline-warning" type="button" id="listWithDuck">
+	        목록으로
+ 	   </button>
+<c:if test="${member.memberNo != withDuck.withWriterNo && not empty member}">
     <button class="btn btn-outline-warning" type="button" data-toggle="modal" id="reportBtn" data-target="#reportBackdrop"  id="reportBtn" name="${withDuck.withNo }">
         신고하기
     </button>
-		
+</c:if>
 	<c:if test="${loginMember.memberNo == withDuck.withWriterNo }">
 	    <button class="btn btn-outline-warning" type="submit">
 	        수정하기

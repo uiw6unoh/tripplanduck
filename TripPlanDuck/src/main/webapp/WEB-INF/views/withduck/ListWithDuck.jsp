@@ -85,8 +85,13 @@
 
                 <label for="customRange2" class="form-label"></label>
                 <div style="display: flex; align-items: center; justify-content: center; position: relative; bottom: 20px; height: 50.8px; border-bottom: 1px solid #a7a2a28f ;">
-                    <input type="range" name="personnel_val" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="document.getElementById('value2').innerHTML=this.value+'명'">
-                    <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;"> 명</span>
+                    <input type="range" name="personnel_val" class="form-range" min="0" step="1" max="50" id="customRange2" oninput="
+                            sessionStorage.setItem('personnel', $('.form-range').val())
+                            $('.form-range').attr('value', sessionStorage.getItem('personnel') );
+                            $('#value2').text(sessionStorage.getItem('personnel')+'명');    
+                            document.getElementById('value2').innerHTML=this.value+'명';
+                            ">
+                    <span id="value2" style="position:relative; left:5px; bottom:2px; display: inline-block; width: 40px;"> 0명</span>
                     
                 </div>
                 <div class="date_container">
@@ -378,11 +383,8 @@ $(document).on('click', '.age_btn', function(){
 });
 
 $(document).ready(function() {
-	$('.form-range').attr('value', 0);
 	$('#keywordSearch').attr("value", '${keywordSearch}');
-	var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
-	$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
-	
+
 	var date = new Date();
 
     var day = date.getDate();
@@ -421,19 +423,45 @@ $(document).ready(function() {
 		}
 	}
 	
-	document.querySelector('.form-range').addEventListener('input',function(event){
-	    var gradient_value = 100 / event.target.attributes.max.value;
-	  event.target.style.background = 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * event.target.value +'%, rgb(236, 236, 236) ' +gradient_value *  event.target.value + '%, rgb(236, 236, 236) 100%)';
-	});
-
 	if((sessionStorage.getItem('start') != undefined)){
 		$('#start').attr('value', sessionStorage.getItem("start"));
 	}
+
 	if((sessionStorage.getItem('end') != undefined)) {
 	$('#end').attr('value', sessionStorage.getItem("end"));
 	}
+
+		
+<!--
+	if(sessionStorage.getItem('personnel') == null){
+	    var gradient_value = 100 / $('.form-range').attr("max");
+		$('.form-range').val(0);
+	    $('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 0%'+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+	} else {
+		$('.form-range').on('change', function(){
+			sessionStorage.setItem('personnel', $('.form-range').val());
+			$('.form-range').attr('value', sessionStorage.getItem('personnel'))
+		    var gradient_value = 100 / $('.form-range').attr("max");
+		    $('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+		    $('.form-range').attr('value', sessionStorage.getItem('personnel'))
+		    console.log(gradient_value * $('.form-range').val());
+		});
+	}
+-->
+
+if(sessionStorage.getItem('personnel')== null) {
+	sessionStorage.setItem('personnel', 0);
 	
-	$('.form-range').val(0);
+	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
+	$('#value2').text(sessionStorage.getItem('personnel')+"명");		
+}else {
+	$('.form-range').attr('value', sessionStorage.getItem('personnel'));
+	$('#value2').text(sessionStorage.getItem('personnel')+"명");		
+}
+
+var gradient_value = 100 / document.querySelector('.form-range').attributes.max.value;
+$('.form-range').css('background', 'linear-gradient(to right, #FFE283 0%, #FFE283 '+gradient_value * $('.form-range').val() +'%, rgb(236, 236, 236) ' +gradient_value *  $('.form-range').val() + '%, rgb(236, 236, 236) 100%)');
+
 });
 
 function startValidity(e){
