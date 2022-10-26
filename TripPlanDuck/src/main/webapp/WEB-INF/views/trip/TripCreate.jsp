@@ -58,15 +58,11 @@
 				<label for="destAddress"  class="form-label mt-2">주소</label> 
 				<input type="text" class="form-control" name="destAddress" id="destAddress"  required placeholder="주소를 적어주세요">
 				
-				<label for="projectName" class="form-label mt-2">장소</label>
-		
-				<div class="col-6" id="location_id">
-					
-				</div>			
+				<label for="projectName" class="form-label mt-2">여행지 상세내용</label>
 		
 				<div id="editor" class="ql-container ql-snow">
 					<textarea name="destContent" id="destContent" class="form-control"
-						data-gramm="false" contenteditable="true" maxlength='250' required rows="8" placeholder="여행지의 주요 내용을 간략하게 적어주세요" > </textarea>
+						data-gramm="false" contenteditable="true" maxlength='250' rows="8" placeholder="여행지의 주요 내용을 간략하게 적어주세요" > </textarea>
 				</div>
 					<label class="mt-3 mb-4 form-label"></label>
 					<!-- file add -->
