@@ -162,12 +162,11 @@
 								class="card mb-3 modalCss" style="width: 27vh;">
 									<div class="row no-gutters">
 										<div class="col-md-4">
-											<img class="destImage"
-												src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
+											<img class="destImage" src="${ destination.destImage eq null ? '/duck/images/trip/noImage.jpeg' : destination.destImage}">
 										</div>
 										<div class="col-md-8">
 											<div style="position: absolute; top: 0; right: 0;">찜:
-												${destination.destHit}</div>
+												${destination.destLikeSum}</div>
 											<div class="card-body">
 
 
@@ -356,7 +355,6 @@
 					let destNo = $(this).children('#destNo').val().trim();
 					let destImage = $(this).children('#destImage').val().trim();
 					// 마커 찍기
-					
 					names = destSubject.split(',');
 					
 					path.push(new kakao.maps.LatLng(destMapX, destMapY))
@@ -370,7 +368,8 @@
 							strokeStyle: 'solid' // 선 스타일
 						}));
 					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
-
+					
+					
 					data.push(destSubject);
 					
 					imagehttp.push(destImage);
@@ -408,14 +407,13 @@
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, destNo, count) {
-
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
 			position : position,
 			image : markerImage
 
 		});
-
+		
 		var content = '<div class="customoverlay" id="selectArea'+destNo+'">'
 				+ '<a>' + '     <span id="numbers">' + count
 				+ '<span> <span class="title">' + names + '</span> ' + '</a>'
