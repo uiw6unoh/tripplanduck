@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tripplan.duck.admin.model.mapper.AdminMapper;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.report.model.vo.Report;
 import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
@@ -140,6 +141,69 @@ public class AdminServiceImpl implements AdminService {
 		
 		return mapper.Category(reviewNo);
 	}
+
+	@Override
+	public List<Member> getMemberLatestList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.selectMemberLatest(rowBounds);
+	}
+
+	@Override
+	public List<Member> getMemberOldList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.selectMemberOld(rowBounds);
+	}
+
+	@Override
+	public List<Member> getMemberReportList(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.memberReport(rowBounds);
+	}
+
+	@Override
+	public List<Report> getMemberReportList1(PageInfo pageInfo) {
+		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getListLimit();
+		int limit = pageInfo.getListLimit();
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		
+		return mapper.memberReportCount1(rowBounds);
+	}
+
+	@Override
+	public int getMemberReportList2() {
+		
+		return mapper.memberReportCount2();
+	}
+
+	@Override
+	public int getMemberReportList3() {
+		
+		return mapper.memberReportCount3();
+	}
+
+	@Override
+	public int getMemberReportList4() {
+		
+		return mapper.memberReportCount4();
+	}
+
+	@Override
+	public int getMemberReportList5() {
+		
+		return mapper.memberReportCount5();
+	}
+
+
+
 
 
 

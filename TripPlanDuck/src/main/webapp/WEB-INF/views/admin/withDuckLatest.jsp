@@ -14,8 +14,6 @@
     <div class="col-sm-2">
         <!-- 사이드 메뉴바 -->
         <div class="mySideMenu" style="display: grid;">
-            <a id="myListMain" href="${ path }/admin/visitor"> 방문자 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/member"> 회원 정보 관리 </a>
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
@@ -92,12 +90,12 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button onclick="location.href='${ path }/admin/withDuck?page=1'" 
+					<button onclick="location.href='${ path }/admin/withDuckLatest?page=1'" 
 					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.prevPage }'"
+					<button onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.prevPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &lt;</button>
 		
@@ -108,19 +106,19 @@
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button onclick="location.href='${ path }/admin/withDuck?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+							<button onclick="location.href='${ path }/admin/withDuckLatest?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.nextPage }'"
+					<button onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.nextPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button onclick="location.href='${ path }/admin/withDuck?page=${ pageInfo.maxPage }'"
+					<button onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.maxPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &gt;&gt;</button>
                 </ul>

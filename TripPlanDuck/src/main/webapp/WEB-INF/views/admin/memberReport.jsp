@@ -26,7 +26,7 @@
     <div class="col-sm-10" style="border: 3px solid rgb(221, 221, 221);">
         <!-- 컨테이너 -->
         <div class="container-chart">
-        <h2 style="margin-top: 15px;">리뷰 관리</h2>
+        <h2 style="margin-top: 15px;">회원 정보 관리</h2>
         <hr class="mt-1" style="border: 1px solid rgb(221, 221, 221);">
         </div>
 
@@ -34,26 +34,31 @@
             <div class="col-md-6">
                         <p style="margin-top: 6%; margin-bottom: 10px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg> 삭제 버튼을 클릭 시 리뷰가 삭제됩니다.</p>
+                        </svg> 회원정지를 누를 시 비회원으로 전환 됩니다.</p>
             </div>
-            <div class="col-md-6">
-                <form action="...">
-                    <button type="button" style="margin-top: 25px; margin-left: 280px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
-                     onclick="location.href='${ path }/admin/reviewLatest'">최신순</button>
+	         <div class="col-md-6">
+	         	<form action="">
+                    <button type="button" style="margin-top: 25px; margin-left: 190px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/memberLatest'">회원</button>
                     <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
-                     onclick="location.href='${ path }/admin/reviewOld'">오래된순</button>
-                </form>
+                     onclick="location.href='${ path }/admin/memberOld'">비회원</button>
+                     <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/memberReport'">신고 수</button>
+                     <button type="submit" id="btnclear" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
+                     >신고 정리</button>
+	         	</form>
             </div>
         </div>
         <div class="mt-3">
             <table class="table table-sm">
                 <thead>
                     <tr style="height: 10px; color:gray">
-                        <th style="width: 20%; text-align: center;">번호</th>
-                        <th style="width: 20%; text-align: center;">신고 내용</th>
-                        <th style="width: 15%; text-align: center;">신고받은 회원번호</th>
-                        <th style="width: 20%; text-align: center;">신고 접수</th>
-                        <th style="width: 10%; text-align: center;">리뷰 삭제</th>
+                        <th style="width: 20%; text-align: center;">회원 번호</th>
+                        <th style="width: 15%; text-align: center;">신고당한회원</th>
+                        <th style="width: 30%; text-align: center;">신고유형</th>
+                        <th style="width: 20%; text-align: center;">신고당한횟수</th>
+                        <th style="width: 20%; text-align: center;">신고카테고리</th>
+                        
                     </tr>
                 </thead>
 
@@ -61,21 +66,20 @@
                 <c:if test="${ empty list }">
                 	<tr>
                 		<td colspan="6">
-                			조회된 리뷰가 없습니다.
+                			조회된 회원이 없습니다.
                 		</td>
                 	</tr>
                 </c:if>
                 <c:if test="${ not empty list }">
-                	<c:forEach var="review" items="${list}">
+                	<c:forEach var="list" items="${list}">
                 		<tr>
-		                    <td style="text-align: center;">${review.reportNoType}</td>
-		                    <td style="text-align: center;">${review.reportType}</td>
-		                    <td style="text-align: center;">${review.reportMemberNo}</td>
-		                    <td style="text-align: center;">${review.reportCategory}</td>
+                			<td style="text-align: center;">${list.memberNo}</td>
+		                    <td style="text-align: center;">${list.reportMemberNo}</td>
+		                    <td style="text-align: center;">${list.reportType}</td>
+		                    <td style="text-align: center;">${list.reportCount}</td>
+		                    <td style="text-align: center;">${list.reportCategory}</td>
 		                    <td>
-	                        <button type="button" onclick="location.href='${path}/trip/detail?destNo=${review.reportNoType}'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-	                            리뷰삭제
-	                        </button>
+	                        
 		                    </td>
 		                </tr>
                 	</c:forEach>
@@ -89,12 +93,12 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button onclick="location.href='${ path }/admin/reviewLatest?page=1'" 
+					<button onclick="location.href='${ path }/admin/memberReport?page=1'" 
 					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button onclick="location.href='${ path }/admin/reviewLatest?page=${ pageInfo.prevPage }'"
+					<button onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.prevPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &lt;</button>
 		
@@ -105,19 +109,19 @@
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button onclick="location.href='${ path }/admin/reviewLatest?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
+							<button onclick="location.href='${ path }/admin/memberReport?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button onclick="location.href='${ path }/admin/reviewLatest?page=${ pageInfo.nextPage }'"
+					<button onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.nextPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button onclick="location.href='${ path }/admin/reviewLatest?page=${ pageInfo.maxPage }'"
+					<button onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.maxPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);">
 					 &gt;&gt;</button>
                 </ul>
@@ -133,6 +137,17 @@
     
 <!-- Bootstrap JS -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
+     
+      <script>
+		$(document).ready(() => {
+			$("#btnclear").on("click", () => {
+				if(confirm("비회원으로 전환 하시겠습니까?")) {
+					location.replace("${ path }/admin/memberReportClear");
+				}
+			});
+		});
+      
+	</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>

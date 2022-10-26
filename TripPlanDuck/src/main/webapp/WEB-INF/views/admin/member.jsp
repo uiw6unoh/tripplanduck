@@ -14,8 +14,6 @@
     <div class="col-sm-2">
         <!-- 사이드 메뉴바 -->
         <div class="mySideMenu" style="display: grid;">
-            <a id="myListMain" href="${ path }/admin/visitor"> 방문자 관리 </a>
-            <p></p>
             <a id="myListMain" href="${ path }/admin/member"> 회원 정보 관리 </a>
             <p></p>
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
@@ -38,7 +36,16 @@
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
                         </svg> 회원정지를 누를 시 비회원으로 전환 됩니다.</p>
             </div>
-
+	         <div class="col-md-6">
+                <form action="...">
+                    <button type="button" style="margin-top: 25px; margin-left: 280px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/memberLatest'">회원</button>
+                    <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/memberOld'">비회원</button>
+                     <button type="button" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198);"
+                     onclick="location.href='${ path }/admin/memberReport'">신고 수</button>
+                </form>
+            </div>
         </div>
         <div class="mt-3">
             <table class="table table-sm">

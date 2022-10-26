@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.report.model.vo.Report;
 import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
 import com.tripplan.duck.withduck.model.vo.WithDuck;
@@ -43,6 +44,28 @@ public interface AdminMapper {
 	void deleteComment(int commentsId);
 
 	Comments Category(int reviewNo);
+
+	List<Member> selectMemberLatest(RowBounds rowBounds);
+
+	List<Member> selectMemberOld(RowBounds rowBounds);
+
+	List<Member> memberReport(RowBounds rowBounds);
+
+	List<Report> memberReportCount1(RowBounds rowBounds);
+
+	int memberReportCount2();
+
+	int memberReportCount3();
+
+	int memberReportCount4();
+
+	int memberReportCount5();
+
+	
+
+	
+
+	
 
 	
 

@@ -355,7 +355,7 @@ $(window).scroll(function() {
 							    		"</div>" + 
 							    		"</a>" +
 							    		"</div>")
-							});
+							  });
 
 							
 						} else {

@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.tripplan.duck.admin.model.service.AdminService;
 import com.tripplan.duck.common.util.PageInfo;
 import com.tripplan.duck.member.model.vo.Member;
+import com.tripplan.duck.report.model.vo.Report;
 import com.tripplan.duck.trip.model.service.DestinationService;
 import com.tripplan.duck.trip.model.vo.Comments;
 import com.tripplan.duck.trip.model.vo.Destination;
@@ -206,6 +207,98 @@ public class AdminController {
     	model.addObject("list", list);
     	model.addObject("pageInfo", pageInfo);
     	model.setViewName("admin/member");
+    	return model;
+    }
+    
+    @GetMapping("/admin/memberLatest")
+    public ModelAndView memberLatest(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	List<Member> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
+    	list = service.getMemberLatestList(pageInfo);
+    	
+    	System.out.println(pageInfo);
+    	System.out.println(list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("admin/memberLatest");
+    	return model;
+    }
+    
+    @GetMapping("/admin/memberOld")
+    public ModelAndView memberOld(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	List<Member> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
+    	list = service.getMemberOldList(pageInfo);
+    	
+    	System.out.println(pageInfo);
+    	System.out.println(list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("/admin/memberOld");
+    	return model;
+    }
+    
+    @GetMapping("/admin/memberReport")
+    public ModelAndView memberReport(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	List<Member> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
+    	list = service.getMemberReportList(pageInfo);
+    	
+    	System.out.println(pageInfo);
+    	System.out.println(list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("/admin/memberReport");
+    	return model;
+    }
+    
+    @GetMapping("/admin/memberReportClear")
+    public ModelAndView memberReportClear(ModelAndView model,
+    		@RequestParam(value="page", defaultValue = "1") int page) {
+    	
+    	int result = 0;
+    	int result1 = 0;
+    	List<Report> list = null;
+    	PageInfo pageInfo = null;
+    	
+    	result = service.getMemberReportList2();
+    	if(result > 0) {
+    		result1 = service.getMemberReportList3();
+    		result1 = service.getMemberReportList4();
+    		result1 = service.getMemberReportList5();
+    	}
+    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
+    	list = service.getMemberReportList1(pageInfo);
+    	
+    	if(list != null) {
+    		model.addObject("msg", "비회원 전환이 정상적으로 되었습니다.");
+    		model.addObject("location", "/admin/memberReport");
+    	}else {
+    		model.addObject("msg", "비회원 전환에 실패하였습니다.");
+    		model.addObject("location", "/admin/memberReport");
+    	}
+    	
+    	System.out.println(pageInfo);
+    	System.out.println("list : " + list);
+    	
+    	model.addObject("list", list);
+    	model.addObject("pageInfo", pageInfo);
+    	model.setViewName("member/msg");
     	return model;
     }
     

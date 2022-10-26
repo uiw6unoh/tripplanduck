@@ -67,7 +67,7 @@
 
 #ModalCopy {
 	overflow-x: auto;
-	white-space: nowrap;
+	max-height: 300px;
 }
 
 #placeCopy {
@@ -92,6 +92,8 @@
 
 </style>
 <section>
+
+
 <c:if test="${ not empty loginMember }">
 	<form id="formId" name="frm" action="${path}/planner/myplannerAction"
 		method="post">
@@ -100,8 +102,7 @@
 				<div class="left-box" style="border: none;">
 					<div class="list-group" style="border: none;">
 						<div class="list-group-item" style="border: none;">
-							<select id="locationSelect" name="locationSelect" class="beom"
-								onchange="locationValue()" style="size: 30%;">
+							<select id="locationSelect" name="locationSelect" class="beom" onchange="locationValue()" style="size: 30%;">
 								<c:forEach items="${ loca }" var="loca" varStatus="status">
 									<c:if test="${loca.location == location.location}">
 										<option id="location" value="${ loca.locationId }"
@@ -119,8 +120,7 @@
 						</div>
 							<div class="lb-widget-011">
 								<div id="lbl-1" class="lb-left-weather">
-									<iframe
-										src="https://forecast.io/embed/#lat=${ location.lcenterx }&lon=${ location.lcentery }&name=${ location.locationId }&color=&font=&units=si"></iframe>
+									<iframe src="https://forecast.io/embed/#lat=${ location.lcenterx }&lon=${ location.lcentery }&name=${ location.locationId }&color=&font=&units=si"></iframe>
 								</div>
 							</div>
 							<!-- 기간 선택시 날짜 출력 -->
@@ -160,23 +160,47 @@
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 modalCss" style="width: 27vh;">
-								<div class="row no-gutters">
-									<div class="col-md-4">
-										<img class="destImage"
-											src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
-									</div>
-									<div class="col-md-8">
-										<div style="position: absolute; top: 0; right: 0;">찜:${destination.destLikeSum}</div>
-										<div class="card-body">
-											<h5 class="card-title" id="subject">${ destination.destSubject }</h5>
-											<p class="card-text">${ destination.destContent }</p>
+									<div class="row no-gutters">
+										<div class="col-md-4">
+											<img class="destImage"
+												src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
+										</div>
+										<div class="col-md-8">
+											<div style="position: absolute; top: 0; right: 0;">찜:
+												${destination.destHit}</div>
+											<div class="card-body">
+
+
+												<h5 class="card-title" id="subject" style="font-weight: bold;">${ destination.destSubject }</h5>
+
+												<span id="destDetail_${ destination.destNo }" title="여행지 설명" class="btn-outline-warning material-icons" data-toggle="modal" data-target="#exampleModal_${ destination.destNo }"> zoom_in </span>
+												
+												
+												<!-- 여행지 Modal -->
+												<div class="modal fade"id="exampleModal_${ destination.destNo }" style=" z-index: 1060;" tabindex="-1"aria-labelledby="exampleModalLabel_${ destination.destNo }" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																	<h5 class="modal-title"id="exampleModalLabel_${ destination.destNo }" style="font-weight: bold; font-size: 1.5em;">${ destination.destSubject }</h5>
+																<button type="button" class="close" data-dismiss="modal"aria-label="Close"> 
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="font-size: 1.2em;">${ destination.destContent }
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn-outline-warning btn-sm" data-dismiss="modal">확인</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="addDesti">
-									<a id="checkButton" class="material-icons">check</a> <input
-										type="hidden" id="destMapX" name="destMapX"
-										value="${ destination.destMapX }" /> 
+
+
+									<div class="addDesti">
+									<a title="여행지 추가하기" id="checkButton" class="btn-outline-warning material-icons">add</a> <input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
 										<input type="hidden" id="destMapY" name="destMapY"value="${ destination.destMapY }" /> 
 										<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }"> 
 										<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" /> 
@@ -188,21 +212,16 @@
 					</div>
 					<input type="hidden" name="place" id="place"> 
 					<input type="hidden" name="imagea" id="imagea"> 
-					<input type="hidden" id="destNos"> 
 				</div>
 			</div>
 		</div>
+		
 		<!-- Modal -->
-		<div class="modal fade" id="staticBackdrop" data-backdrop="static"
-			data-keyboard="false" tabindex="-1"
-			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl" id="dhdld">
 				<div class="modal-content" >
 					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">${ location.location } 
-						여행지</h5>
-						
-						
+						<h5 class="modal-title" id="staticBackdropLabel"> ${ location.location } 여행지</h5>
 						<div class="arrows">
 						  <div class="chevron">12313></div>
 						  <div class="chevron">12</div>
@@ -213,12 +232,11 @@
 					<div class="modalUp">
 							<div id="ModalCopy">
 								<div id="placeCopy"></div>
-							</div>
+						</div>
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal" onclick="divDelteBtn()">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="divDelteBtn()">확인</button>
 					</div>
 				</div>
 			</div>
@@ -289,31 +307,41 @@
 	 })
 	 });
 	 */
-
+	 
+	 
+	 //모달 트리거 버튼
+	 
+	 $('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').trigger('focus')
+		})
+		
+		
 	function locationValue() {
 		var locationValue = $('#locationSelect').val();
-		location.href = "${path}/planner/myplanner?locationSelect="
-				+ locationValue;
-
+		location.href = "${path}/planner/myplanner?locationSelect="+locationValue;
 	}
 
 	//지도api변수들 선언
 	var count = 0;
 	var markers = [];
-	var ovarlays = [];
 	var lines = [];
 	var names = []; // 여행지 이름
 	var positions = [];  
-	var data = new Array(); // 여행지 이름 담는 배열 
+	var polyline = new Array();
+	var path = new Array();
+	var data = new Array(); // 여행지 이름 담는 배열
 	var imagehttp = new Array(); // 이미지 주소
 	var imageSrc = 'https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fbj1sID%2FbtrOmc6KtD6%2FKF00nKO1xpe9nbUlbySxn1%2Fimg.png', // 마커이미지의 주소입니다    
 	imageSize = new kakao.maps.Size(40, 60), // 마커이미지의 크기입니다
 	imageOption = {
 		offset : new kakao.maps.Point(15, 32)
 	}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,
-			imageOption);
+	var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize,imageOption);
+	// 라인
+	
 
+	
+	
 	$(document).ready(function() {
 		var $set_val = $('#forecast_embed').contents().find('#styleID').attr('href');
 		
@@ -328,23 +356,32 @@
 					let destNo = $(this).children('#destNo').val().trim();
 					let destImage = $(this).children('#destImage').val().trim();
 					// 마커 찍기
-
+					
 					names = destSubject.split(',');
-
+					
+					path.push(new kakao.maps.LatLng(destMapX, destMapY))
+					
+					polyline.push(new kakao.maps.Polyline({
+							map:map,
+							path:path,
+							strokeWeight: 4, // 선의 두께
+							strokeColor: '#82ebff', // 선 색
+							strokeOpacity: 0.9, // 선 투명도
+							strokeStyle: 'solid' // 선 스타일
+						}));
 					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 
 					data.push(destSubject);
-					imagehttp.push(destImage);
 					
+					imagehttp.push(destImage);
 					// 타이틀
 					$("#place").val(data);
 					// 주소
 					$("#imagea").val(imagehttp);
 					
-					
 			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
-			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a class="material-icons")>delete</a></div>');
+			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a title="여행지 제거하기" class="material-icons")>delete</a></div>');
 
 			$('#modalTest').on("click",function() {
 																// 모달창 복사
@@ -367,47 +404,7 @@
 		return count;
 
 	}
-/*
- * 
- const lookCourseBtn = document.getElementById('lookCourseBtn');
-	 lookCourseBtn.addEventListener('click', event =>{
-	
-	 for (var i = 0; i < ovarlays.length; i++){
-	 ovarlays[i].setMap(null);
-	 }  
-	 ovarlays = [];
-	 addLine(markers);
 
-	 });
-	
-function addLine(markers){
-		 
-	 var linePath=[];     
-	 
-	 for (i=0; i < markers.length; ++i){
-		 
-	 linePath.push(markers[i].getPosition()); 
-	 
-	 }   
-
-	 // 지도에 표시할 선을 생성합니다
-	 var polyline = new kakao.maps.Polyline({
-	
-	 path: linePath, // 선을 구성하는 좌표배열 입니다
-	 strokeWeight: 2, // 선의 두께 입니다
-	 strokeColor: 'red', // 선의 색깔입니다
-	 strokeOpacity: 0.7, // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-	 strokeStyle: 'solid' // 선의 스타일입니다
-	 });
-	
-	 lines.push(polyline);
-	 
-	 // 지도에 선을 표시합니다 
-	 polyline.setMap(map); 
-	 
-	 }
-
- */
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, destNo, count) {
@@ -436,37 +433,45 @@ function addMarker(position, destNo, count) {
 
 		// 생성된 마커를 배열에 추가합니다
 		markers.push(marker);
+		
 	}
-
 
 	//일반 딜리트
 	function deleteDiv(destNo, destSubject, destMapX, destMapY) {
-
+		
 		//names = destSubject.split(',');
 		$("#selectArea" + destNo).text("");
 
 		$('#divCopy_chil').children('#divOriginal_' + destNo).remove();
 
 		$('#placeCopy').children('#divOriginal_' + destNo).remove();
-
 		for (var i = 0; i < data.length; i++) {
-			
 			if (data[i] == destSubject) {
+				polyline[i].setMap(null);
 				markers[i].setMap(null);
 				data.splice(i, 1);
+				polyline.splice(i,1);
 				imagehttp.splice(i, 1);
 				markers.splice(i, 1);
 				positions.splice(i, 1);
-				ovarlays.splice(i, 1);
+				path.splice(i,1);
+				
 				$("#place").val(data);
 				$("#imagea").val(imagehttp);
+				
 			}
+			
 		}
-	
+		
+		for (var i = 0; i < polyline.length; i++) {
+			polyline[i].setMap(null);
+			
+		}
+
 		if (data == null || data == "") {
 			countF(2);
 		}
-
+		
 	};
 </script>
 
