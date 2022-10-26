@@ -34,7 +34,7 @@
             <div class="col-md-6">
                         <p style="margin-top: 6%; margin-bottom: 10px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg> 회원정지를 누를 시 비회원으로 전환 됩니다.</p>
+                        </svg> 비회원 전환은 회원 정보에서 가능합니다.</p>
             </div>
 	         <div class="col-md-6">
                 <form action="...">
@@ -43,7 +43,7 @@
                     <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberOld'">비회원</button>
                      <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
-                     onclick="location.href='${ path }/admin/memberReport'">신고 수</button>
+                     onclick="location.href='${ path }/admin/memberReport'">신고내역</button>
                 </form>
             </div>
         </div>
@@ -57,7 +57,7 @@
                         <th style="width: 15%; text-align: center;">닉네임</th>
                         <th style="width: 13%; text-align: center;">회원타입</th>
                         <th style="width: 12%; text-align: center;">회원 여부</th>
-                        <th style="width: 8%; text-align: center;">계정 탈퇴</th>
+                        <th style="width: 8%; text-align: center;">회원 상세</th>
                     </tr>
                 </thead>
 
