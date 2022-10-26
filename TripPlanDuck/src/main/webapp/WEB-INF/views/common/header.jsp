@@ -103,7 +103,7 @@
 					  <ul class="dropdown-menu">
 					  	<c:choose>
 					  	<c:when test="${ loginMember.memberId == 'admin' }">
-					  		<li><a class="dropdown-item" href="${path}/admin/visitor">관리자페이지</a></li>
+					  		<li><a class="dropdown-item" href="${path}/admin/member">관리자페이지</a></li>
 					  	</c:when>
 					  	
 					  	<c:otherwise>
