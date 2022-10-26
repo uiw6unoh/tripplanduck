@@ -88,7 +88,7 @@
 	          </svg> ${destinations[i].destHit}</span></div>
 	          <div class="owl-text-over m-auto"> 
 	            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${destinations[i].destSubject}</h6>
-	            <h6 class="mt-1 ml-1 text-secondary">${destinations[i].destContent}</h6>
+	            <h6 class="mt-1 ml-1 text-secondary destContent">${destinations[i].destContent}</h6>
 	          </div>
 	        </div>
 		</c:forEach>
@@ -105,7 +105,7 @@
 			          </svg> ${dest.destHit}</span></div>
 			          <div class="owl-text-over m-auto"> 
 			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 			          </div>
 			        </div>
 		        </c:if>
@@ -125,7 +125,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -145,7 +145,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -165,7 +165,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -185,7 +185,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -205,7 +205,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -225,7 +225,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>

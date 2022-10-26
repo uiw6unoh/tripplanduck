@@ -103,7 +103,7 @@
 					  <ul class="dropdown-menu">
 					  	<c:choose>
 					  	<c:when test="${ loginMember.memberId == 'admin' }">
-					  		<li><a class="dropdown-item" href="${path}/admin/visitor">관리자페이지</a></li>
+					  		<li><a class="dropdown-item" href="${path}/admin/member">관리자페이지</a></li>
 					  	</c:when>
 					  	
 					  	<c:otherwise>
@@ -112,13 +112,17 @@
 					  	
 					  	</c:choose>
 					  	
+					    <li><a class="dropdown-item" id="chatGo" onclick="location.replace('${ path }/chatgoDropDown')">내 위드덕</a></li>
 					    <li><a class="dropdown-item" id="logout" onclick="location.replace('${ path }/logout')">로그아웃</a></li>
+
 					  </ul>
 					</div>
                 </c:if>
+                <c:if test="${ empty loginMember }">
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>
                   </li>
+                </c:if>
                 </ul>
               </nav>
               <!-- #primary-menu end -->

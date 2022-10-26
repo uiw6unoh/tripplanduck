@@ -74,6 +74,31 @@ public class ChatController {
 		
 		return model;
 	}
+	
+	@GetMapping("/chatgoDropDown")
+	public ModelAndView ChatGoDropDown(ModelAndView model, HttpSession session) {
+		Member loginMember = (Member)session.getAttribute("loginMember");
+		WithDuck withDuck = null;
+		if(loginMember == null) {
+			model.addObject("msg", "로그인 후 이용이 가능합니다.");
+			model.addObject("location", "/member/login");
+			model.setViewName("member/msg");
+		} else {
+			List<WithDuckChat> loginChatList = service.selectloginChatList(loginMember.getMemberNo());
+			List<WithDuckChat> joinChatList = service.selectjoinChatList(loginChatList.get(0).getWithNo());
+			List<WithDuckChatLog> chatLogList = service.selectChatLogList(loginChatList.get(0).getWithNo());
+			withDuck = serviceWith.detailWithDuck(loginChatList.get(0).getWithNo());
+			
+			model.addObject("loginChatList", loginChatList);
+			model.addObject("joinChatList", joinChatList);
+			model.addObject("chatLogList", chatLogList);
+			model.addObject("loginMember", loginMember);
+			model.addObject("withDuck", withDuck);
+			model.setViewName("withduck/WithDuckChat");
+		}
+			return model;
+	}
+	
 	@GetMapping("/chatFindGo")
 	public ModelAndView chatFindGo(ModelAndView model, HttpSession session, @RequestParam(value="withNo") int withNo) {
 		Member loginMember = (Member)session.getAttribute("loginMember");

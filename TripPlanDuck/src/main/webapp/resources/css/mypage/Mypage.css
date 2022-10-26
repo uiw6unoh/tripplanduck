@@ -33,6 +33,10 @@ li {
     background-color: #fff8c6;
 }
 
+.btn-updateForm {
+    margin-top: 40px;
+}
+
 /* 탭메뉴 */
 #horizontal-underline {
     position: absolute;
@@ -40,8 +44,8 @@ li {
     height: 4px;
     width: 100%;
     border-radius: 3px;
-    transition: 0.8s;
-    background-color: pink;
+    transition: 0.4s;
+    background-color: #fabf42;
     top:0;
 }
 
@@ -212,7 +216,6 @@ font-size: 1.4rem;
 /* 카드 버튼 */
 .plannerCard-btns {
 	float: right;
-    transform: translate(-31%, -460%);
 }
 .card-btns {
     float: right;

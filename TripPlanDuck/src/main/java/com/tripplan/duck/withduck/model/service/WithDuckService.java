@@ -17,10 +17,10 @@ public interface WithDuckService {
 	List<WithDuck> getWithDuckListReadCount(PageInfo pageInfo);
 
 	int getWithDuckJoinValCount(String location_val, String gender_val, String age_val, String start_val,
-			String end_val, int personnel_val, String joinStatus, String sort_name);
+			String end_val, int personnel_val, String joinStatus, String sort_name, String keywordSearch);
 
 	List<WithDuck> getWithDuckJoinValList(PageInfo pageInfo, String location_val, String gender_val, String age_val,
-			String start_val, String end_val, int personnel_val, String joinStatus, String sort_name);
+			String start_val, String end_val, int personnel_val, String joinStatus, String sort_name, String keywordSearch);
 
 	int createWithDuck(WithDuck withDuck);
 

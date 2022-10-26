@@ -31,7 +31,7 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button class="btn btn-outline-warning btn-sm btn-block"
+					<button class="btn btn-outline-warning btn-sm btn-block btn-updateForm"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
 			</div>
@@ -74,7 +74,6 @@
 						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
 							<div class="row g-0">
 								<div class="col-md-4">
-									<%--  <img src="${ path }/images/trip/${plan.getLoc().getLocationImage()}" --%>
 									<img
 										src="${ path }/images/trip/${plan.getLoc().getLocationImage()}"
 										class="img-fluid rounded-start imgSize" alt="...">
@@ -549,7 +548,7 @@
 	                	'</div> '
 				}
 				
-				
+
 				// 각자 카드에서 요청한 더보기 ajax 리턴 값을 해당 카드 아래에 append
 				if(select == 'planner'){
 					$("#appendPlan").append(appendData);

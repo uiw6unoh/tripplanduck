@@ -55,14 +55,17 @@ public class WithDuckController {
 		
 		List<WithDuck> list = null;
 		PageInfo pageInfo = null;
-		
 		pageInfo = new PageInfo(page, 8, service.getWithDuckCount(), 8);
 		list = service.getWithDuckList(pageInfo);
-		
 		for(int i = 0; i < list.size(); i++) {
-			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("<p>", ""));
-			list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("</p>", ""));
-			System.out.println(list.get(i).getWithContent());
+			if(list.get(i).getWithContent() != null) {
+				list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("<p>", ""));
+				list.get(i).setWithContent(list.get(i).getWithContent().replaceAll("</p>", ""));
+				
+				System.out.println(list.get(i).getWithContent());
+			} 
+			
+			
 
 			if(list.get(i).getWithOriginFileName() == null) continue;
 			String[] arr = new String[3];
@@ -95,6 +98,7 @@ public class WithDuckController {
 									   @RequestParam(value = "personnel_val", defaultValue = "0") int personnel_val,
 									   @RequestParam(value = "joinStatus", required=false) String joinStatus,
 									   @RequestParam(value = "sort_name", defaultValue = "최신순") String sort_name,
+									   @RequestParam(value = "keywordSearch") String keywordSearch,
 									   @RequestParam(value = "page", defaultValue = "1") int page ) {
 		
 		List<WithDuck> listFilter = null;
@@ -109,10 +113,11 @@ public class WithDuckController {
 		System.out.println(personnel_val);
 		System.out.println(joinStatus);
 		System.out.println(sort_name);
+		System.out.println(keywordSearch);
 		
 		
-		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name), 8);		
-		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name);
+		pageInfo = new PageInfo(page, 8, service.getWithDuckJoinValCount(location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name, keywordSearch), 8);		
+		listFilter = service.getWithDuckJoinValList(pageInfo, location_val, gender_val, age_val, start_val, end_val, personnel_val, joinStatus, sort_name, keywordSearch);
 		
 		System.out.println("listFilter : " + listFilter);
 		for(int i = 0; i < listFilter.size(); i++) {
@@ -122,6 +127,10 @@ public class WithDuckController {
 			arr = listFilter.get(i).getWithRenameFileName().split(", ");
 			listFilter.get(i).setReList(Arrays.asList(arr));
 			System.out.println(listFilter.get(i) + "\n");
+		}
+		
+		if(listFilter.size() != 0 && (keywordSearch != null || !keywordSearch.isEmpty())) {
+			model.addObject("keywordSearch", keywordSearch);
 		}
 		
 		System.out.println(listFilter);
@@ -348,6 +357,8 @@ public class WithDuckController {
 		boolean joinBool = false;
 		if(member != null) {
 			result = service.countChatMem(withNo, member.getMemberNo());
+			List<WithDuckChat> totalperson = chatService.selectjoinChatList(withNo);
+			System.out.println("totalperson : " + totalperson);
 			if(result == 0) {
 				joinBool = true;
 			}
@@ -358,6 +369,7 @@ public class WithDuckController {
 		System.out.println(request.getAttribute("withDuck"));
 		
 		session.setAttribute("member", member);
+		model.addObject("joinStatus", withDuck.getWithJoinStatus());
 		model.addObject("joinBool", joinBool);
 		model.addObject("withDuck", withDuck);
 		model.setViewName("withduck/WithDuckDetail");
