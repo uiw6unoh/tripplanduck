@@ -170,6 +170,11 @@
     align-items:center ;
     margin-left: 10px;
 }
+.content {
+	position: relative !important;
+	botton:20px!important;
+}
+
 .end_container {
     display: flex;
     justify-content: center;

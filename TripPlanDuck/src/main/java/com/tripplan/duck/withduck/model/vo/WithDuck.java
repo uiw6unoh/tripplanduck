@@ -45,7 +45,7 @@ public class WithDuck {
 	
 	private String withWriterGender;
 	
-	private int withWriterAge;
+	private String withWriterAge;
 	
 	private String withkeyword;
 	

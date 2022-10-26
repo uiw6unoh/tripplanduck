@@ -24,7 +24,7 @@
                     <i class="icon-twitter"></i>
                     <i class="icon-twitter"></i>
                   </a>
-                  <a href="#" class="social-icon si-small si-borderless si-gplus">
+                  <a href="tripplanduck@gmail.com" class="social-icon si-small si-borderless si-gplus">
                     <i class="icon-gplus"></i>
                     <i class="icon-gplus"></i>
                   </a>
