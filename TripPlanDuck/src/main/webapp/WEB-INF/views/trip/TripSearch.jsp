@@ -22,7 +22,7 @@
 <section>
   <div class="container px-4 px-lg-4 my-3">
 	<div class="place-title" >
-	  <h5>${keyword}의 검색 결과입니다.</h5>
+	  <h5>"${keyword}"의 검색 결과입니다.</h5>
     </div>
   
       <div class="tour-title">
@@ -37,7 +37,7 @@
 			          </svg> ${dest.destHit}</span></div>
 			          <div class="owl-text-over m-auto"> 
 			            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-			            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+			            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 			          </div>
 			        </div>
 		        </c:if>
@@ -57,7 +57,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -77,7 +77,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -97,7 +97,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -117,7 +117,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -137,7 +137,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>
@@ -157,7 +157,7 @@
 				          </svg> ${dest.destHit}</span></div>
 				          <div class="owl-text-over m-auto"> 
 				            <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-				            <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+				            <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 				          </div>
 				        </div>
 			        </c:if>

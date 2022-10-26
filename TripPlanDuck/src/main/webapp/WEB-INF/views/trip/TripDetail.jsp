@@ -169,7 +169,7 @@
 		                </div>
 		                <div class="card-body">
 		                  <h6 class="mt-1 mb-0 ml-1 font-weight-bold">${dest.destSubject}</h6>
-		                  <h6 class="mt-1 ml-1 text-secondary">${dest.destContent}</h6>
+		                  <h6 class="mt-1 ml-1 text-secondary destContent">${dest.destContent}</h6>
 		                </div>
 		              </div>
 		              </a>
