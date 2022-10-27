@@ -19,6 +19,8 @@
             <a id="myListMain" href="${ path }/admin/review"> 리뷰 관리 </a>
             <p></p>
             <a id="myListMain" href="${ path }/admin/withDuck"> 위드덕 관리 </a>
+            <p></p>
+            <a id="myListMain" href="${ path }/trip/create"> 여행지 생성 </a>
         </div>
     </div>
 
