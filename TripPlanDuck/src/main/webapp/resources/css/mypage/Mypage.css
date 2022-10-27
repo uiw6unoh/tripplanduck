@@ -299,7 +299,13 @@ font-size: 1.4rem;
 
 /* 비밀번호 모달의 오류 메세지  */
 .error-msg {
-	color : red
+	color : red;
+    text-align: left;
+}
+
+.pwdCheckFooter {
+    display: flex;
+	justify-content: space-between;
 }
 
 /* 리뷰 수정 모달 */

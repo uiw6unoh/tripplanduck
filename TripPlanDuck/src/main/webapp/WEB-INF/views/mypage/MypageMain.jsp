@@ -310,7 +310,7 @@
 							<input type="password" id="inputPwdModal" class="inputPwd"
 								placeholder="비밀번호 입력">
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer pwdCheckFooter">
 							<div id="modal-msg-wrap"></div>
 							<div id="modal-btn-wrap">
 								<button type="button" class="btn btn-outline-warning"
