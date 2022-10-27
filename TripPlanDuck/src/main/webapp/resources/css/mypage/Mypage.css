@@ -155,7 +155,7 @@ select option:focus {
 }
 
 .card-area {
-    margin-top: 7px;
+    margin-top: 8px;
     margin-left: 7px;
     font-size: 1.1rem;
 }
@@ -172,16 +172,19 @@ select option:focus {
 
 .text-content {
     color: black;
-    
     padding-left: 5px;
 }
 
 .commentContent {
     margin-left: 40px;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     overflow-y:scroll;
     width: 750px;
     height: 50px;
+}
+
+.commentContent::-webkit-scrollbar {
+    display: none;
 }
 
 .commentDate {
@@ -196,7 +199,7 @@ select option:focus {
 }
 
 /* 나의 리뷰 별점 */
-.star-rating {
+.commentStar-rating {
     display: flex;
     float: right;
     padding-right: 24px;
@@ -256,6 +259,10 @@ font-size: 1.4rem;
     transform: translate(122%, -1%);
 }
 
+.plannerNodata {
+    transform: translate(122%, -1%);
+}
+
 /* 비밀번호 모달 */
 .pwdCheckModal {
     background-color: #fff8c6;
@@ -287,6 +294,7 @@ font-size: 1.4rem;
 .modal-footer {
 	display: flex;
 	justify-content: space-between;
+    justify-content: flex-end;
 }
 
 /* 비밀번호 모달의 오류 메세지  */
@@ -295,7 +303,7 @@ font-size: 1.4rem;
 }
 
 /* 리뷰 수정 모달 */
-.star-rating-modal {
+.star-rating {
 	display: flex;
     flex-direction: row-reverse;
 	font-size: 1.25rem;
@@ -306,11 +314,11 @@ font-size: 1.4rem;
 	width: 5em;
 }
 
-.star-rating-modal input {
+.star-rating input {
     display: none;
 }
 
-.star-rating-modal label {
+.star-rating label {
     -webkit-text-fill-color: transparent; /* Will override color (regardless of order) */
     -webkit-text-stroke-width: 1.2px;
     -webkit-text-stroke-color: #2b2a29;
@@ -318,12 +326,12 @@ font-size: 1.4rem;
     margin-bottom: 0%;
 }
 
-.star-rating-modal :checked ~ label {
+.star-rating :checked ~ label {
     -webkit-text-fill-color: gold;
 }
 
-.star-rating-modal label:hover,
-.star-rating-modal label:hover ~ label {
+.star-rating label:hover,
+.star-rating label:hover ~ label {
     -webkit-text-fill-color: #fff58c;
 }
 

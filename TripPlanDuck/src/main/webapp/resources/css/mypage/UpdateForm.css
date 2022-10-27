@@ -25,9 +25,9 @@ body {
     margin-left: 160px;
 }
 
-/* :root {
+:root {
     accent-color: gold;
-} */
+} 
 
 table {
     border-collapse: separate;
@@ -146,6 +146,12 @@ table {
 
 .memberOutBtn button:hover {
     color: #fabf42;
+}
+
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle {
+    color: black;
+    background-color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* 인풋 */
