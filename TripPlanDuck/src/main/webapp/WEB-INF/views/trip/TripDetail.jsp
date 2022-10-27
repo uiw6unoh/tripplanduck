@@ -242,7 +242,7 @@
 										</c:when>
 										
 										<c:otherwise>	
-		                                    <button class="btn btn-outline-warning py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
+		                                    <button class="btn btn-outline-danger py-0" data-toggle="modal" onclick="reportSet(${comment.commentsId })" name="${comment.commentsId }" data-target="#reportBackdrop">신고</button>
 										</c:otherwise>
 									  </c:choose>
 	                                  </div>
@@ -332,7 +332,7 @@
 					</div>
 				  </div>
 			      <div class="modal-footer">
-			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-warning py-0" >신고</button>
+			        <button type="button" id="reportAlert" onclick="reportComment()" class="btn btn-outline-danger py-0" >신고</button>
 			        <button type="button" id="reportCancel" class="btn btn-secondary py-0" data-dismiss="modal">취소</button>
 			      </div>
 			    </div>

@@ -224,7 +224,7 @@
 	           COMMENTS_RATING = #{commentsRating},
 	           COMMENTS_UPDATEDATE = TO_CHAR(SYSDATE + (interval '9' hour), 'YYYY.MM.DD HH24:MI')
         WHERE DEST_NO = #{destNo}
-        AND	  COMMENTS_ID = #{commentsId}
+        AND	COMMENTS_ID = #{commentsId}
     </update>
     
     <delete id="deleteComment" parameterType="int">
@@ -237,6 +237,6 @@
 		SET DEST_RATING_AVG = NVL((SELECT AVG(COMMENTS_RATING) 
 		                       FROM DESTINATION_COMMENTS
 		                       WHERE DEST_NO = #{destNo}), 0)
-		WHERE ( DEST_NO = #{destNo})
+		WHERE DEST_NO = #{destNo}
     </update>
 </mapper>
