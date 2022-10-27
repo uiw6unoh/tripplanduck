@@ -312,7 +312,7 @@ window.scwEvents = window.scwEvents || {};
 			let elementScrollSpeed = $goToTopEl.attr('data-speed'),
 				elementScrollEasing = $goToTopEl.attr('data-easing');
 
-			if( !elementScrollSpeed ) { elementScrollSpeed = 700; }
+			if( !elementScrollSpeed ) { elementScrollSpeed = 500; }
 			if( !elementScrollEasing ) { elementScrollEasing = 'easeOutQuad'; }
 
 			$goToTopEl.off( 'click' ).on( 'click', function() {
