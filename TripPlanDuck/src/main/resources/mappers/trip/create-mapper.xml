@@ -14,8 +14,70 @@
 		<result property="lcentery" column="LCENTERY" />
 	</resultMap>
 	
+	<resultMap type="Destination" id="DestinationResultMap">
+		<id property="destNo" column="DEST_NO"/>
+		<result property="destCategory" column="DEST_CATEGORY"/>
+		<result property="destSubject" column="DEST_SUBJECT"/>
+		<result property="destSummary" column="DEST_SUMMARY"/>
+		<result property="destContent" column="DEST_CONTENT"/>
+		<result property="destAddress" column="DEST_ADDRESS"/>
+		<result property="destMapX" column="DEST_MAP_X"/>
+		<result property="destMapY" column="DEST_MAP_Y"/>
+		<result property="destHit" column="DEST_HIT"/>
+		<result property="destCreateDate" column="DEST_CREATEDATE"/>
+		<result property="destUpdateDate" column="DEST_UPDATEDATE"/>
+		<result property="locationId" column="LOCATION_ID"/>
+		<result property="destImage" column="DEST_IMAGE"/>
+		<result property="destLikeSum" column="DEST_LIKE_SUM"/>
+		<result property="destRatingAvg" column="DEST_RATING_AVG"/>
+	</resultMap>
+	
+	<select id="selectLoca" parameterType="int" resultMap="locationResultMap">
+		<include refid="createTrip"/>
+		WHERE LOCATION_ID = #{locationId}
+	</select>
+	
 	<select id="locationAll" resultMap="locationResultMap">
 		<include refid="createTrip"/>
 	</select>
 	
+	<insert id="insertDesti" parameterType="Destination" useGeneratedKeys="true" keyProperty="destNo" keyColumn="DEST_NO">
+		INSERT INTO DESTINATION(
+								DEST_NO,
+								DEST_CATEGORY,
+								DEST_SUBJECT,
+								DEST_SUMMARY,
+								DEST_CONTENT,
+								DEST_ADDRESS,
+								DEST_MAP_X,
+								DEST_MAP_Y,
+								DEST_HIT,
+								DEST_CREATEDATE,
+								DEST_UPDATEDATE,
+								LOCATION_ID,
+								DEST_IMAGE,
+								DEST_LIKE_SUM,
+								DEST_RATING_AVG
+							)
+							VALUES(
+								DEST_NO.NEXTVAL,
+								#{destCategory},
+								#{destSubject},
+								#{destSummary},
+								#{destContent},
+								#{destAddress},
+								#{destMapX},
+								#{destMapY},
+								DEFAULT,
+								DEFAULT,
+								DEFAULT,
+								#{locationId},
+								#{destImage},
+								DEFAULT,
+								DEFAULT
+							)
+						
+								
+	
+	</insert>
 </mapper>

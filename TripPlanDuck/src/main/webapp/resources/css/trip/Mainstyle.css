@@ -286,6 +286,16 @@ html {
   box-shadow: none !important;
 }
 
+.btn-outline-danger {
+  background-color: #ffb5b5 !important;
+  color: black;
+}
+
+.btn-outline-danger:hover {
+  background-color: #ffb5b5!important;
+  color: black;
+}
+
 /* 찜 버튼 */
 .Heart {
   width: 10%;
@@ -347,6 +357,13 @@ html {
 /*=== TripPlace.html ===*/
 .img-box {
   height: 470px;
+}
+
+.destContent {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	overflow: hidden;
 }
 
 .image-thumbnail {

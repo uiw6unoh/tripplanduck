@@ -110,17 +110,29 @@
 		SELECT * FROM LOCATION L
 		JOIN DESTINATION D ON (L.LOCATION_ID = D.LOCATION_ID)
 		WHERE L.LOCATION_ID = #{locationSelect}
+		ORDER BY DEST_LIKE_SUM DESC
 	</select>
 	
-	<select id="searchDest" resultMap="DestFindResultMap">
 	
-		SELECT * FROM DESTINATION D
-				JOIN LOCATION L ON(L.LOCATION_ID = D.LOCATION_ID)
-				
-				<trim prefix="WHERE" prefixOverrides="AND|OR">
-					D.DEST_SUBJECT LIKE '%' || #{destSubject} || '%'
-				</trim>
-				
-	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 </mapper>

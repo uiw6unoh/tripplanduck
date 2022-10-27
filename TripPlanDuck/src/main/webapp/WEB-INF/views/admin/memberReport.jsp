@@ -34,30 +34,31 @@
             <div class="col-md-6">
                         <p style="margin-top: 6%; margin-bottom: 10px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg> 회원정지를 누를 시 비회원으로 전환 됩니다.</p>
+                        </svg> 신고정리를 누를 시 신고 누적 3회 이상 회원을 비회원처리 합니다.</p>
             </div>
 	         <div class="col-md-6">
-                <form action="...">
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 20px; margin-left: 220px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+	         	<form action="">
+                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; margin-left: 130px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberLatest'">회원</button>
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 20px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberOld'">비회원</button>
-                     <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 20px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                     <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberReport'">신고 수</button>
-                </form>
+                     <button type="submit" class="btn  btn-outline-warning btn-warning" id="btnclear" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;"
+                     >신고 정리</button>
+	         	</form>
             </div>
         </div>
         <div class="mt-3">
             <table class="table table-sm">
                 <thead>
                     <tr style="height: 10px; color:gray">
-                        <th style="width: 15%; text-align: center;">회원 번호</th>
-                        <th style="width: 15%; text-align: center;">아이디</th>
+                        <th style="width: 20%; text-align: center;">회원 번호</th>
+                        <th style="width: 15%; text-align: center;">신고당한회원</th>
+                        <th style="width: 30%; text-align: center;">신고유형</th>
+                        <th style="width: 20%; text-align: center;">신고당한횟수</th>
+                        <th style="width: 20%; text-align: center;">신고카테고리</th>
                         
-                        <th style="width: 15%; text-align: center;">닉네임</th>
-                        <th style="width: 13%; text-align: center;">회원타입</th>
-                        <th style="width: 12%; text-align: center;">회원 여부</th>
-                        <th style="width: 8%; text-align: center;">계정 탈퇴</th>
                     </tr>
                 </thead>
 
@@ -72,15 +73,13 @@
                 <c:if test="${ not empty list }">
                 	<c:forEach var="list" items="${list}">
                 		<tr>
-		                    <td style="text-align: center;">${list.memberNo}</td>
-		                    <td style="text-align: center;">${list.memberId}</td>
-		                    <td style="text-align: center;">${list.memberNickname}</td>
-		                    <td style="text-align: center;">${list.memberType}</td>
-		                    <td style="text-align: center;">${list.memberStatus}</td>
+                			<td style="text-align: center;">${list.memberNo}</td>
+		                    <td style="text-align: center;">${list.reportMemberNo}</td>
+		                    <td style="text-align: center;">${list.reportType}</td>
+		                    <td style="text-align: center;">${list.reportCount}</td>
+		                    <td style="text-align: center;">${list.reportCategory}</td>
 		                    <td>
-	                        <button type="button" class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberInfo?memberNo=${ list.memberNo }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-	                            회원정보
-	                        </button>
+	                        
 		                    </td>
 		                </tr>
                 	</c:forEach>
@@ -94,12 +93,12 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/member?page=1'" 
+					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberReport?page=1'" 
 					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/member?page=${ pageInfo.prevPage }'"
+					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.prevPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
 					 &lt;</button>
 		
@@ -110,19 +109,19 @@
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/member?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+							<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberReport?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/member?page=${ pageInfo.nextPage }'"
+					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.nextPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/member?page=${ pageInfo.maxPage }'"
+					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberReport?page=${ pageInfo.maxPage }'"
 					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
 					 &gt;&gt;</button>
                 </ul>
@@ -138,6 +137,17 @@
     
 <!-- Bootstrap JS -->
 <!-- Option 1: Bootstrap Bundle with Popper -->
+     
+      <script>
+		$(document).ready(() => {
+			$("#btnclear").on("click", () => {
+				if(confirm("비회원으로 전환 하시겠습니까?")) {
+					location.replace("${ path }/admin/memberReportClear");
+				}
+			});
+		});
+      
+	</script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>

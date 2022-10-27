@@ -67,7 +67,7 @@
 
 #ModalCopy {
 	overflow-x: auto;
-	white-space: nowrap;
+	max-height: 300px;
 }
 
 #placeCopy {
@@ -92,6 +92,8 @@
 
 </style>
 <section>
+
+
 <c:if test="${ not empty loginMember }">
 	<form id="formId" name="frm" action="${path}/planner/myplannerAction"
 		method="post">
@@ -100,8 +102,7 @@
 				<div class="left-box" style="border: none;">
 					<div class="list-group" style="border: none;">
 						<div class="list-group-item" style="border: none;">
-							<select id="locationSelect" name="locationSelect" class="beom"
-								onchange="locationValue()" style="size: 30%;">
+							<select id="locationSelect" name="locationSelect" class="beom" onchange="locationValue()" style="size: 30%;">
 								<c:forEach items="${ loca }" var="loca" varStatus="status">
 									<c:if test="${loca.location == location.location}">
 										<option id="location" value="${ loca.locationId }"
@@ -119,8 +120,7 @@
 						</div>
 							<div class="lb-widget-011">
 								<div id="lbl-1" class="lb-left-weather">
-									<iframe
-										src="https://forecast.io/embed/#lat=${ location.lcenterx }&lon=${ location.lcentery }&name=${ location.locationId }&color=&font=&units=si"></iframe>
+									<iframe src="https://forecast.io/embed/#lat=${ location.lcenterx }&lon=${ location.lcentery }&name=${ location.locationId }&color=&font=&units=si"></iframe>
 								</div>
 							</div>
 							<!-- 기간 선택시 날짜 출력 -->
@@ -160,23 +160,46 @@
 							varStatus="status">
 							<div id="divOriginal_${ destination.destNo }"
 								class="card mb-3 modalCss" style="width: 27vh;">
-								<div class="row no-gutters">
-									<div class="col-md-4">
-										<img class="destImage"
-											src="${destination.destImage eq null ? '/duck/images/trip/no.jpeg' : destination.destImage}">
-									</div>
-									<div class="col-md-8">
-										<div style="position: absolute; top: 0; right: 0;">찜:${destination.destLikeSum}</div>
-										<div class="card-body">
-											<h5 class="card-title" id="subject">${ destination.destSubject }</h5>
-											<p class="card-text">${ destination.destContent }</p>
+									<div class="row no-gutters">
+										<div class="col-md-4">
+											<img class="destImage" src="${ destination.destImage eq null ? '/duck/images/trip/noImage.jpeg' : destination.destImage}">
+										</div>
+										<div class="col-md-8">
+											<div style="position: absolute; top: 0; right: 0;">찜:
+												${destination.destLikeSum}</div>
+											<div class="card-body">
+
+
+												<h5 class="card-title" id="subject" style="font-weight: bold;">${ destination.destSubject }</h5>
+
+												<span id="destDetail_${ destination.destNo }" title="여행지 설명" class="btn-outline-warning material-icons" data-toggle="modal" data-target="#exampleModal_${ destination.destNo }"> zoom_in </span>
+												
+												
+												<!-- 여행지 Modal -->
+												<div class="modal fade"id="exampleModal_${ destination.destNo }" style=" z-index: 1060;" tabindex="-1"aria-labelledby="exampleModalLabel_${ destination.destNo }" aria-hidden="true">
+													<div class="modal-dialog">
+														<div class="modal-content">
+															<div class="modal-header">
+																	<h5 class="modal-title"id="exampleModalLabel_${ destination.destNo }" style="font-weight: bold; font-size: 1.5em;">${ destination.destSubject }</h5>
+																<button type="button" class="close" data-dismiss="modal"aria-label="Close"> 
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body" style="font-size: 1.2em;">${ destination.destContent }
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn-outline-warning btn-sm" data-dismiss="modal">확인</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
-								</div>
-								<div class="addDesti">
-									<a id="checkButton" class="material-icons">check</a> <input
-										type="hidden" id="destMapX" name="destMapX"
-										value="${ destination.destMapX }" /> 
+
+
+									<div class="addDesti">
+									<a title="여행지 추가하기" id="checkButton" class="btn-outline-warning material-icons">add</a> <input type="hidden" id="destMapX" name="destMapX" value="${ destination.destMapX }" /> 
 										<input type="hidden" id="destMapY" name="destMapY"value="${ destination.destMapY }" /> 
 										<input type="hidden" id="destImage" name="destImage" value="${ destination.destImage }"> 
 										<input type="hidden" id="destSubject" name="destSubject" value="${ destination.destSubject }" /> 
@@ -191,17 +214,13 @@
 				</div>
 			</div>
 		</div>
+		
 		<!-- Modal -->
-		<div class="modal fade" id="staticBackdrop" data-backdrop="static"
-			data-keyboard="false" tabindex="-1"
-			aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 			<div class="modal-dialog modal-xl" id="dhdld">
 				<div class="modal-content" >
 					<div class="modal-header">
-						<h5 class="modal-title" id="staticBackdropLabel">${ location.location } 
-						여행지</h5>
-						
-						
+						<h5 class="modal-title" id="staticBackdropLabel"> ${ location.location } 여행지</h5>
 						<div class="arrows">
 						  <div class="chevron">12313></div>
 						  <div class="chevron">12</div>
@@ -212,12 +231,11 @@
 					<div class="modalUp">
 							<div id="ModalCopy">
 								<div id="placeCopy"></div>
-							</div>
+						</div>
 					</div>
 
 					<div class="modal-footer">
-						<button type="button" class="btn btn-secondary"
-							data-dismiss="modal" onclick="divDelteBtn()">확인</button>
+						<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="divDelteBtn()">확인</button>
 					</div>
 				</div>
 			</div>
@@ -288,12 +306,18 @@
 	 })
 	 });
 	 */
-
+	 
+	 
+	 //모달 트리거 버튼
+	 
+	 $('#myModal').on('shown.bs.modal', function () {
+		  $('#myInput').trigger('focus')
+		})
+		
+		
 	function locationValue() {
 		var locationValue = $('#locationSelect').val();
-		location.href = "${path}/planner/myplanner?locationSelect="
-				+ locationValue;
-
+		location.href = "${path}/planner/myplanner?locationSelect="+locationValue;
 	}
 
 	//지도api변수들 선언
@@ -331,7 +355,6 @@
 					let destNo = $(this).children('#destNo').val().trim();
 					let destImage = $(this).children('#destImage').val().trim();
 					// 마커 찍기
-					
 					names = destSubject.split(',');
 					
 					path.push(new kakao.maps.LatLng(destMapX, destMapY))
@@ -339,14 +362,14 @@
 					polyline.push(new kakao.maps.Polyline({
 							map:map,
 							path:path,
-							endArrow: true, // 선의 끝을 화살표로 표시되도록 설정한다
 							strokeWeight: 4, // 선의 두께
 							strokeColor: '#82ebff', // 선 색
 							strokeOpacity: 0.9, // 선 투명도
 							strokeStyle: 'solid' // 선 스타일
 						}));
 					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
-
+					
+					
 					data.push(destSubject);
 					
 					imagehttp.push(destImage);
@@ -357,7 +380,7 @@
 					
 			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
-			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a class="material-icons")>delete</a></div>');
+			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a title="여행지 제거하기" class="material-icons")>delete</a></div>');
 
 			$('#modalTest').on("click",function() {
 																// 모달창 복사
@@ -384,14 +407,13 @@
 
 // 마커를 생성하고 지도위에 표시하는 함수입니다
 function addMarker(position, destNo, count) {
-
 		// 마커를 생성합니다
 		var marker = new kakao.maps.Marker({
 			position : position,
 			image : markerImage
 
 		});
-
+		
 		var content = '<div class="customoverlay" id="selectArea'+destNo+'">'
 				+ '<a>' + '     <span id="numbers">' + count
 				+ '<span> <span class="title">' + names + '</span> ' + '</a>'

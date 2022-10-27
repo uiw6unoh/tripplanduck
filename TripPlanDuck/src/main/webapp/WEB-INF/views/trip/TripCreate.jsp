@@ -13,43 +13,71 @@
 <link rel="stylesheet" type="text/css"	href="${ path }/resources/css/common/map/map.css">
 
 <section>
+<c:if test="${ loginMember.memberNo eq 1}">
 	<div class="container">
 		<h2 class="mt-2">여행지 등록</h2>
-		<form id="sortBy" method="get">
-			<div class="container">
-				<label for="projectName" class="form-label">제목</label> <input
-					type="text" class="form-control" name="title" id="title"
-					placeholder="제목을 적어주세요"> <label for="name"
-					class="form-label mt-2">관광지</label> <input type="text"
-					class="form-control" name="name" id="name" placeholder="이름을 적어주세요">
-				<label for="projectName" class="form-label mt-2">장소</label>
+		<form id="sortBy" action="${ path }/trip/create" method="post" enctype="multipart/form-data">
 		
-				<div class="col-6" id="location_id" name="location_id ">
-					<select>
-						<c:forEach items="${ location }" var="location" varStatus="i">
-							<option id="location" name="location"
-							value="${ location.locationId }">${ location.location }</option>
-							<br>
-						</c:forEach>
-					</select>
-				</div>			
+			<div class="container">
+			<br><br>
+			
+			<label for="location" class="form-label" style="font-size: 2em;">지역명</label> 
+				<select id="locationId" name="locationId" onchange="locationValue()">
+						<c:forEach items="${ location }" var="location" varStatus="status">
+						
+									<c:if test="${loca.location == location.location}">
+										<option id="location" value="${ location.locationId }" selected="selected">${location.location}</option>
+									</c:if>
+									
+									<c:if test="${loca.location != location.location}">
+										<option id="location" value="${ location.locationId }">${ location.location }</option>
+									</c:if>
+								</c:forEach>
+				</select>
+				<label for="category" class="form-label" style="font-size: 2em;">여행지요약정보</label> 
+				<select id="destSummary" name="destSummary">
+					<option value="문화시설">문화시설</option>
+					<option value="축제/공연/행사">축제/공연/행사</option>
+					<option value="레포츠">레포츠</option>
+					<option value="음식">음식</option>
+					<option value="관광지">관광지</option>
+					<option value="쇼핑">쇼핑</option>
+					<option value="여행코스">여행코스</option>
+					<option value="숙박">숙박</option>
+				</select>
+				
+				
+				
+				
+				<br> <br>
+				
+				<label for="projectName" class="form-label" style="font-size: 2em;">관광지명</label> 
+				
+				<input type="text" required class="form-control" name="destSubject" id="destSubject" placeholder="제목을 적어주세요"> 
+				
+				<label for="destAddress"  class="form-label mt-2">주소</label> 
+				<input type="text" class="form-control" name="destAddress" id="destAddress"  required placeholder="주소를 적어주세요">
+				
+				<label for="projectName" class="form-label mt-2">여행지 상세내용</label>
 		
 				<div id="editor" class="ql-container ql-snow">
-					<textarea name="description" id="description" class="form-control"
-						data-gramm="false" contenteditable="true" maxlength='250' rows="8">
-						<c:out value="${content}" /></textarea>
+					<textarea name="destContent" id="destContent" class="form-control"
+						data-gramm="false" contenteditable="true" maxlength='250' rows="8" placeholder="여행지의 주요 내용을 간략하게 적어주세요" > </textarea>
 				</div>
-				<label class="mt-3 mb-4 form-label"></label>
-				<!-- file add -->
-				<input type="file" name="imageFile" id="image"> <input
-					type="hidden" id="user_id" name="user_id" value="${ id }"> <input
-					type="hidden" id="location_path" name="location_path"> <input
-					type="hidden" id="getlatitude" name="getlatitude"> <input
-					type="hidden" id="getlongitude" name="getlongitude">
+					<label class="mt-3 mb-4 form-label"></label>
+					<!-- file add -->
+					
+					<input type="file" name="upfile" id="upfile"> 
+					<input type="hidden" id="mNo" name="mNo"> 
+					<input type="hidden" id="destMapX" name="destMapX" value=""> 
+					<input type="hidden" id="destMapY" name="destMapY" value="">
+					<input type="hidden" id="destCategory" name="destCategory" value="${ loca.location }">
 			</div>
 		</form>
 		
 		<!-- map API  -->
+		<br>
+		<p style="font-weight: bold; font-size: 1.2em" >지도에서 마커를 클릭해주세요</p>
 		<div class="map_wrap mt-3">
 			<div id="map"
 				style="width: 100%; height: 100%; position: relative; overflow: hidden;"></div>
@@ -58,7 +86,7 @@
 				<div class="option">
 					<div>
 						<form onsubmit="searchPlaces(); return false;">
-							키워드 : <input type="text" value="제주도 맛집" id="keyword" size="15">
+							키워드 : <input type="text" value="맛집" id="keyword" size="15">
 							<button type="submit">검색하기</button>
 						</form>
 					</div>
@@ -68,15 +96,17 @@
 				<div id="pagination"></div>
 			</div>
 		</div>
-		위도 : <span id="latitude"></span>
-		경도 : <span id="longitude"></span>
+		<p style="font-weight: bold; font-size: 1.2em">위도, 경도가 표시되어야 완료입니다.</p>
+		위도 : <div id="MapX"></div>
+		경도 : <div id="MapY"></div>
 		
 		<div class="d-flex justify-content-end mt-4">
 			<button type="button" onclick="history.back()" name="button"
 				class="btn btn-light btn-outline-dark m-0">초기화</button>
-			<button id="btnSave" type="submit" class="btn btn-success m-0 ms-2">확인</button>
+			<button id="btnSave" type="submit" class="btn btn-success m-0 ms-2"  form="sortBy">확인</button>
 		</div>
 	</div>
+</c:if>
 </section>
 
 <jsp:include page="../common/footer.jsp" />
@@ -86,6 +116,12 @@
 
 <script type="text/javascript" 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=f7b032a05f94f4d597ccea28be03f94f&libraries=services"></script>
 <script>
+
+function locationValue() {
+	var locationValue = $('#locationId').val();
+	location.href = "${path}/trip/create?locationId="+locationValue;
+}
+
 	var markers = [];
 
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
@@ -243,7 +279,6 @@
 
 		el.innerHTML = itemStr;
 		el.className = 'item';
-
 		return el;
 	}
 
@@ -282,9 +317,10 @@
 
 			// 지도를 1레벨 올립니다 (지도가 축소됩니다)
 
-			latitude.innerHTML = Object.values(position)[1];
-			longitude.innerHTML = Object.values(position)[0];
-
+			MapX.innerHTML = Object.values(position)[1];
+			MapY.innerHTML = Object.values(position)[0];
+			$('input[name=destMapX]').attr('value',Object.values(position)[1]);
+			$('input[name=destMapY]').attr('value',Object.values(position)[0]);
 		});
 
 		marker.setMap(map); // 지도 위에 마커를 표출합니다
