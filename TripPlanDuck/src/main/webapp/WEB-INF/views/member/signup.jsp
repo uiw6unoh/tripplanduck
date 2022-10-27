@@ -138,7 +138,7 @@
              </label>
            </div>
            <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="button" onclick="signup_check();" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
-           <button class="w-50 btn-outline-warning btn-lg mb-3" id="btnLogin" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">뒤로가기</button>
+           <button class="w-50 btn btn-secondary btn-lg mb-3" id="btnLogin">뒤로가기</button>
       </form>
       </div>
       </main>
@@ -345,7 +345,7 @@
 		
 			if (/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/.test(email.val()) == false) {
 				$("#email_chk").html("<b>유효한 이메일을 입력해주세요.</b>");
-				$("#email_chk").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+				$("#email_chk").attr('style', 'visibility:visible; font-size:11px; color:#c4302b;');
 			}else{
 				$("#email_chk").html("");
 				$("#email_chk").attr('style', 'visibility:hidden;');
@@ -357,7 +357,7 @@
 				
 				if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==false){
 					$("#pwd_chk1").html("<b>영문자+숫자+특수문자 조합으로 8자리 이상 입력해주세요.</b>");
-					$("#pwd_chk1").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+					$("#pwd_chk1").attr('style', 'visibility:visible; font-size:11px; color:#c4302b;');
 				}else if(/^(?=.*[a-zA-Z])(?=.*[!@#$%^&*+=-])(?=.*[0-9]).{8,25}$/.test(p1.val())==true){
 					$("#pwd_chk1").html("");
 					$("#pwd_chk1").attr('style', 'visibility:hidden;');
@@ -370,7 +370,7 @@
 				
 				if(p1.val() != p2.val()){
 					$("#pwd_chk2").html("<b>비밀번호가 일치하지 않습니다.</b>");
-					$("#pwd_chk2").attr('style', 'visibility:visible; font-size:12px; color:#c4302b;');
+					$("#pwd_chk2").attr('style', 'visibility:visible; font-size:11px; color:#c4302b;');
 				}else{
 					$("#pwd_chk2").html("");
 					$("#pwd_chk2").attr('style', 'visibility:hidden;');
