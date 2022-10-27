@@ -35,3 +35,8 @@
 .memberOutBtn {
     text-align: center;
 }
+
+.btn-warning {
+    color: #212529;
+    background-color: #fff8c6;
+}

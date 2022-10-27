@@ -21,7 +21,7 @@
 <body>
 	<!-- Mypage 시작 -->
 	<!-- 전체 컨테이너 -->
-	<div class="container">
+	<div class="container" style="height: 719px;">
 		<!-- 상위 컨테이너 -->
 		<div class="p-5 top-container">
 			<div class="userMypageMenu">
@@ -209,7 +209,7 @@
 				<div class="empty">
 					<div class="empty">
 						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
-							<a href="'+ path+ '/trip/main">
+							<a href="${ path }/trip/main">
 							  <div class="row g-0"> 
 							   <div class="col-md-4">
 								 <div class=nodata> 
@@ -281,7 +281,7 @@
 			</c:if>
 			<c:if test="${commentIsEmpty}">
 				<div class="empty">
-					<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+					<div class="card mt-4 mb-5 likeCard" style="max-width: 800px;">
 		                  <div class="row g-0"> 
 		                   <div class="col-md-4">
 		                     <div class=nodata> 

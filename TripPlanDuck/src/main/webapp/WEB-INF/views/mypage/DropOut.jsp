@@ -71,7 +71,10 @@
             </div>
           <div class="memberOutBtn pt-3">
             <button type="submit" id="dropout" class="btn btn-secondary">탈퇴</button>
-            <button type="button" class="btn btn-warning" onclick="location.href='${path}/mypage/updateform'">취소</button>
+            <button type="button" class="btn btn-warning" onclick="location.href='${path}/mypage/updateform'"
+                    style="background-color: #fff8c6;">
+              취소
+            </button>
           </div>
         </form>
       </div>
