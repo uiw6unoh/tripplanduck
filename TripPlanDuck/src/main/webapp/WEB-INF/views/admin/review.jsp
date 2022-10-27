@@ -50,9 +50,9 @@
                 <thead>
                     <tr style="height: 10px; color:gray">
                         <th style="width: 20%; text-align: center;">번호</th>
-                        <th style="width: 20%; text-align: center;">신고 내용</th>
-                        <th style="width: 15%; text-align: center;">신고받은 회원번호</th>
-                        <th style="width: 20%; text-align: center;">신고 접수</th>
+                        <th style="width: 20%; text-align: center;">댓글 내용</th>
+                        <th style="width: 15%; text-align: center;">회원번호</th>
+                        <th style="width: 20%; text-align: center;">게시물 번호</th>
                         <th style="width: 10%; text-align: center;">리뷰 삭제</th>
                     </tr>
                 </thead>
@@ -68,12 +68,12 @@
                 <c:if test="${ not empty list }">
                 	<c:forEach var="review" items="${list}">
                 		<tr>
-		                    <td style="text-align: center;">${review.reportNoType}</td>
-		                    <td style="text-align: center;">${review.reportType}</td>
-		                    <td style="text-align: center;">${review.reportMemberNo}</td>
-		                    <td style="text-align: center;">${review.reportCategory}</td>
+		                    <td style="text-align: center;">${review.commentsId}</td>
+		                    <td style="text-align: center;">${review.commentsContent}</td>
+		                    <td style="text-align: center;">${review.memberNo}</td>
+		                    <td style="text-align: center;">${review.destNo}</td>
 		                    <td>
-	                        <button type="button" class="btn  btn-outline-warning" onclick="location.href='${path}/detail?reviewNo=${review.reportNoType}'" style=" outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: red;">
+	                        <button type="button" class="btn  btn-outline-warning" onclick="location.href='${path}/trip/detail?destNo=${review.destNo}'" style=" outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: red;">
 	                            리뷰삭제
 	                        </button>
 		                    </td>
@@ -89,11 +89,11 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button class="btn" onclick="location.href='${ path }/admin/member?page=1'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn" onclick="location.href='${ path }/admin/review?page=1'" style="outline: none !important; box-shadow: none !important;">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button class="btn" onclick="location.href='${ path }/admin/member?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn" onclick="location.href='${ path }/admin/review?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &lt;</button>
 		
 					<!--  10개 페이지 목록 -->
@@ -103,18 +103,18 @@
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button class="btn " onclick="location.href='${ path }/admin/member?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
+							<button class="btn " onclick="location.href='${ path }/admin/review?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn " onclick="location.href='${ path }/admin/review?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.maxPage }'"
+					<button class="btn " onclick="location.href='${ path }/admin/review?page=${ pageInfo.maxPage }'"
 					 style="outline: none !important; box-shadow: none !important;">
 					 &gt;&gt;</button>
                 </ul>

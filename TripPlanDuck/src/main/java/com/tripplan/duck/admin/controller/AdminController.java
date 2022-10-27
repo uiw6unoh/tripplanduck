@@ -238,17 +238,14 @@ public class AdminController {
     		result1 = service.getMemberReportList3();
     		result1 = service.getMemberReportList4();
     		result1 = service.getMemberReportList5();
-    	}
-    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
-    	list = service.getMemberReportList1(pageInfo);
-    	
-    	if(list != null) {
     		model.addObject("msg", "비회원 전환이 정상적으로 되었습니다.");
     		model.addObject("location", "/admin/memberReport");
-    	}else {
+    	} else {
     		model.addObject("msg", "비회원 전환에 실패하였습니다.");
     		model.addObject("location", "/admin/memberReport");
     	}
+    	pageInfo = new PageInfo(page, 10, service.getMemberCount(), 10);
+    	list = service.getMemberReportList1(pageInfo);
     	
     	System.out.println(pageInfo);
     	System.out.println("list : " + list);

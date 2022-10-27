@@ -57,9 +57,8 @@
 		<result property="memberNo" column="M_NO" />
 	</resultMap>
 	
-	<select id="selectReviewAll" resultMap="Report">		
-		SELECT * FROM REPORT
-		WHERE REPORT_CATEGORY = 'REVIEW'
+	<select id="selectReviewAll" resultMap="commentsResultMap">		
+		SELECT * FROM DESTINATION_COMMENTS
 	</select>
 
 	<select id="Category" parameterType="_int" resultMap="commentsResultMap">
@@ -76,16 +75,14 @@
 	    WHERE R.REPORT_NO_TYPE = #{reviewNo}
 	</select>
 	
-	<select id="selectReviewOld" resultMap="Report">
-		SELECT * FROM REPORT
-		WHERE REPORT_CATEGORY = 'REVIEW'
-        ORDER BY REPORT_CREATEDATE ASC
+	<select id="selectReviewOld" resultMap="commentsResultMap">
+		SELECT * FROM DESTINATION_COMMENTS
+        ORDER BY COMMENTS_CREATEDATE ASC
 	</select>
 	
-	<select id="selectReviewLatest" resultMap="Report">
-		SELECT * FROM REPORT
-		WHERE REPORT_CATEGORY = 'REVIEW'
-        ORDER BY REPORT_CREATEDATE DESC
+	<select id="selectReviewLatest" resultMap="commentsResultMap">
+		SELECT * FROM DESTINATION_COMMENTS
+        ORDER BY COMMENTS_CREATEDATE DESC
 	</select>
 	
 	<select id="reviewCount" resultType="_int">
