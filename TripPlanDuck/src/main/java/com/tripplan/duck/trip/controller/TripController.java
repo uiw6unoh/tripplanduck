@@ -142,14 +142,4 @@ public class TripController {
 		
 		return model;
 	}
-	
-
-
-	@GetMapping("/create")
-    public String create(Model model, HttpSession session) throws IllegalStateException, IOException {
-		
-		model.addAttribute("location", locationMapper.locationAll());
-		
-		return "/trip/TripCreate";
-    }
 }
