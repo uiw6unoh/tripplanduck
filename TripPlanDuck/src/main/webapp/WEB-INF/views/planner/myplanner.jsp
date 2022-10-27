@@ -256,12 +256,16 @@
 		$('#placeCopy').children('[id^=divOriginal_]').remove();
 	};
 
+	
+	
+	// 검색창
+	// 기존 검색창으로 검색하면 창이 바뀌어서 창이 바뀌지 않게 박스 안에서만 받아지는 검색으로 기능구현
 	//원래의 인풋 박스 값을 받는다.
 	var oldVal = $("#searchBox");
-
+	
 	/* 검색 내용 변경 감지 */
 	$("#searchBox").on("propertychange change keyup paste input", function() {
-		// 변화에 바로바로 반응하면 부하가 걸릴 수 있어서 1초 딜레이를 준다.
+		//1초 딜레이를 준다.
 		setTimeout(function() {
 			// 변경된 현재 박스 값을 받아온다.
 			var currentVal = $("#searchBox").val();
@@ -271,6 +275,7 @@
 			// forEach의 첫번째 인자값 = 배열 내 현재 값
 			// 두번째 값 = index
 			// 세번째 값 = 현재 배열
+			// Destination div를 배열화
 			var listArray = $(".modalCss").toArray();
 
 			listArray.forEach(function(c, i) {
@@ -293,20 +298,6 @@
 		}, 1000);
 	});
 
-	/*
-	 * submit 검색창 변형
-	 $(function() {
-	 var search = $('#shrud');
-	 search.click(function() {
-
-	 const formElement = $('#formId');
-	 formElement.attr("action", "${path}/planner/searchDesti");
-	 formElement.attr("method", "get");
-	 formElement.submit();
-	 })
-	 });
-	 */
-	 
 	 
 	 //모달 트리거 버튼
 	 
@@ -339,22 +330,23 @@
 	// 라인
 	
 
-	
+	// 
 	
 	$(document).ready(function() {
 		var $set_val = $('#forecast_embed').contents().find('#styleID').attr('href');
 		
 		$("[class^=addDesti]").on("click",function(event) {
-
+					// 마커 옆에 숫자 증가
 					count = countF(1);
-					
-					
+					// 마커가 찍힐때 그 속에있는 값들을 변수로 지정
 					let destMapX = $(this).children('#destMapX').val().trim();
 					let destMapY = $(this).children('#destMapY').val().trim();
 					let destSubject = $(this).children('#destSubject').val().replaceAll(" ", "");
 					let destNo = $(this).children('#destNo').val().trim();
 					let destImage = $(this).children('#destImage').val().trim();
 					// 마커 찍기
+					
+					// 배열로 지정한 name를 ,를 기준으로 나눔
 					names = destSubject.split(',');
 					
 					path.push(new kakao.maps.LatLng(destMapX, destMapY))
@@ -363,12 +355,13 @@
 							map:map,
 							path:path,
 							strokeWeight: 4, // 선의 두께
-							strokeColor: '#82ebff', // 선 색
+							strokeColor: '#4d377b', // 선 색
 							strokeOpacity: 0.9, // 선 투명도
 							strokeStyle: 'solid' // 선 스타일
 						}));
-					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 					
+					// 마커에 좌표값과 no값 숫자를 담아서 넘김
+					addMarker(new kakao.maps.LatLng(destMapX, destMapY),destNo, count);
 					
 					data.push(destSubject);
 					
@@ -377,14 +370,14 @@
 					$("#place").val(data);
 					// 주소
 					$("#imagea").val(imagehttp);
-					
-			$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
+			// 클릭하면 화면상의 이동 구현		
+		$('#divOriginal_' + destNo).appendTo('#divCopy_chil');
 
-			$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a title="여행지 제거하기" class="material-icons")>delete</a></div>');
+		$('#divCopy').find('.addDesti').replaceWith('<div class="deleteCopyBtn'+ destNo+ '" onclick=deleteDiv('+ destNo+ ',"'+ destSubject+'","'+ destMapX+ '","'+ destMapY+'")> <a title="여행지 제거하기" class="material-icons")>delete</a></div>');
 
-			$('#modalTest').on("click",function() {
-																// 모달창 복사
-			$(	'#divOriginal_'+ destNo).clone().appendTo('#placeCopy');
+		$('#modalTest').on("click",function() {
+		// 모달창 복사
+		$(	'#divOriginal_'+ destNo).clone().appendTo('#placeCopy');
 
 				});
 
@@ -413,7 +406,6 @@ function addMarker(position, destNo, count) {
 			image : markerImage
 
 		});
-		
 		var content = '<div class="customoverlay" id="selectArea'+destNo+'">'
 				+ '<a>' + '     <span id="numbers">' + count
 				+ '<span> <span class="title">' + names + '</span> ' + '</a>'
@@ -434,16 +426,18 @@ function addMarker(position, destNo, count) {
 		
 	}
 
-	//일반 딜리트
+	// 왼쪽창으로 넘어간 딜리트 버튼
 	function deleteDiv(destNo, destSubject, destMapX, destMapY) {
 		
-		//names = destSubject.split(',');
 		$("#selectArea" + destNo).text("");
 
 		$('#divCopy_chil').children('#divOriginal_' + destNo).remove();
 
 		$('#placeCopy').children('#divOriginal_' + destNo).remove();
+		// 제목값을 기준으로 돌아감
 		for (var i = 0; i < data.length; i++) {
+			// 해당 제목과 관련된 라인을 한번 지워주고 밑에서 한번 더 지워줘야 충돌이 안남
+			// 제목값 기준으로 돌면서 제목값이 같으면 배열에서 제거함 제거할때 
 			if (data[i] == destSubject) {
 				polyline[i].setMap(null);
 				markers[i].setMap(null);
@@ -460,7 +454,8 @@ function addMarker(position, destNo, count) {
 			}
 			
 		}
-		
+		// 여기서 안 지워 주면 충돌남
+		// 라인은 한번에 지우고 위에서 마커를 찍을때 다시 한번에 다시 그려줌
 		for (var i = 0; i < polyline.length; i++) {
 			polyline[i].setMap(null);
 			
