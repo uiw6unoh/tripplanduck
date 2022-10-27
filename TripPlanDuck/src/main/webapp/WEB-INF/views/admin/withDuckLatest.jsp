@@ -90,11 +90,11 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button class="btn" onclick="location.href='${ path }/admin/member?page=1'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn" onclick="location.href='${ path }/admin/withDuckLatest?page=1'" style="outline: none !important; box-shadow: none !important;">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button class="btn" onclick="location.href='${ path }/admin/member?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn" onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &lt;</button>
 		
 					<!--  10개 페이지 목록 -->
@@ -104,18 +104,18 @@
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button class="btn " onclick="location.href='${ path }/admin/member?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
+							<button class="btn " onclick="location.href='${ path }/admin/withDuckLatest?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
+					<button class="btn " onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.maxPage }'"
+					<button class="btn " onclick="location.href='${ path }/admin/withDuckLatest?page=${ pageInfo.maxPage }'"
 					 style="outline: none !important; box-shadow: none !important;">
 					 &gt;&gt;</button>
                 </ul>

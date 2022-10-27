@@ -34,7 +34,7 @@
             <div class="col-md-6">
                         <p style="margin-top: 6%; margin-bottom: 10px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg> 회원정지를 누를 시 비회원으로 전환 됩니다.</p>
+                        </svg> 회원 정보를 누를 시 비회원 전환이 가능합니다.</p>
             </div>
 	         <div class="col-md-6">
                 <form action="...">
@@ -57,7 +57,7 @@
                         <th style="width: 15%; text-align: center;">닉네임</th>
                         <th style="width: 13%; text-align: center;">회원타입</th>
                         <th style="width: 12%; text-align: center;">회원 여부</th>
-                        <th style="width: 8%; text-align: center;">계정 탈퇴</th>
+                        <th style="width: 8%; text-align: center;">회원 정보</th>
                     </tr>
                 </thead>
 
