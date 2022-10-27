@@ -123,7 +123,20 @@
 			</c:if>
 			<c:if test="${planIsEmpty}">
 				<div class="empty">
-					<span> 여행계획 데이터가 없습니다. </span>
+					<div class="empty">
+						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+							<a href="${ path }/planner/myplanner">
+							  <div class="row g-0"> 
+							   <div class="col-md-4">
+								 <div class="plannerNodata"> 
+								   <img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png">
+								   <div style="font-size: 1.2rem;">덕덕이와 플래너 만들어요 ~</div>
+								 </div>
+								   </div>
+								</div>
+								</a>
+							</div> 
+					</div>
 				</div>
 			</c:if>
 			<!-- 내 여행지 -->
@@ -194,7 +207,20 @@
 			</c:if>
 			<c:if test="${tripIsEmpty}">
 				<div class="empty">
-					<span> 여행 데이터가 없습니다. </span>
+					<div class="empty">
+						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+							<a href="'+ path+ '/trip/main">
+							  <div class="row g-0"> 
+							   <div class="col-md-4">
+								 <div class=nodata> 
+								   <img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png">
+								   <h5>덕덕이와 함께 떠나봐요🛫</h5>
+								 </div>
+								   </div>
+								</div>
+								</a>
+							</div> 
+					</div>
 				</div>
 			</c:if>
 			<!-- comment -->
@@ -205,7 +231,7 @@
 					<h3 class="section-title">나의 리뷰</h3>
 					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
 						<div>
-							<div class="star-rating">
+							<div class="commentStar-rating">
 								<span class="star">★</span>
 								<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
 							</div>
@@ -255,7 +281,16 @@
 			</c:if>
 			<c:if test="${commentIsEmpty}">
 				<div class="empty">
-					<span> 리뷰 데이터가 없습니다. </span>
+					<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
+		                  <div class="row g-0"> 
+		                   <div class="col-md-4">
+		                     <div class=nodata> 
+							   <img class="nodataImg" alt="nodata" src="${path}/images/mypage/덕덕이(풀샷).png">
+							   <h5>작성된 리뷰가 없어요 텅~</h5>
+						     </div>
+	                   		</div>
+	                  	  </div>
+	                	</div> 
 				</div>
 			</c:if>
 
@@ -304,7 +339,7 @@
 						</div>
 						<div class="modal-body">
 							<form class="mb-2 " id="commentForm2">
-								<div class="star-rating-modal space-x-4 mx-auto">
+								<div class="star-rating space-x-4 mx-auto">
 									<input type="radio" id="5-stars2" name="rating2" value="5"
 										v-model="ratings" /> <label for="5-stars2" class="star">★</label>
 									<input type="radio" id="4-stars2" name="rating2" value="4"
@@ -503,7 +538,7 @@
 						appendData += 
 				         '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
-							'<div class="star-rating"> ' +
+							'<div class="commentStar-rating"> ' +
 							  '<span class="star">★</span> ' +
 							  '<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
 							'</div> ' +

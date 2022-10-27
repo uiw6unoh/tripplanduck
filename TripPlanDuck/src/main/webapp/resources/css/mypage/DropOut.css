@@ -11,29 +11,27 @@
 }
 
 .dropout {
-    width: 800px;
-    border: 1px solid #808080;
+    width: 812px;
+    border: 2px solid #aeaeae;
+    border-radius: 4px;
+    padding: 20px 0 0 11px;
 }
 
-/* Å»Åð »çÀ¯ */
-.reason-dropout {
-    padding-bottom: 50px;
-}
-
+/* ?? ?? */
 #dropoutOption {
     /* display: grid; */
     /* grid-template-columns: 1fr 1fr 1fr; */
     /* grid-template-columns: repeat(3, 1fr); */
     /* gap: 20px 10px; */
-    padding-top: 35px;
-    padding-left: 20px;
+    
+    padding-bottom: 7px;
 }
 
 .form-check-input {
     color: #fabf42;
 }
 
-/* ¹öÆ° */
+/* ?? */
 .memberOutBtn {
     text-align: center;
 }
