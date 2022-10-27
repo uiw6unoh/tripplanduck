@@ -31,7 +31,7 @@
 					<div class="pt-1 nickName">${member.memberNickname }</div>
 				</div>
 				<div class="py-4 px-2 btn-UserMypageMenu">
-					<button class="btn btn-outline-warning btn-sm btn-block"
+					<button class="btn btn-outline-warning btn-sm btn-block btn-updateForm"
 						data-toggle="modal" data-target="#changeUserInfo">회원정보수정</button>
 				</div>
 			</div>
@@ -44,20 +44,23 @@
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
 						onclick="location.href='${path}/mypage?select=planner'">
-						내 플래너</button>
+						내 플래너
+					</button>
 				</li>
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
-						onclick="location.href='${path}/mypage?select=trip'">내
-						여행지</button>
+						onclick="location.href='${path}/mypage?select=trip'">
+						내 여행지
+					</button>
 				</li>
 				<li class="mr-4 nav-item">
 					<button type="button" class="nav-link"
-						onclick="location.href='${path}/mypage?select=comment'">나의
-						리뷰</button>
+						onclick="location.href='${path}/mypage?select=comment'">
+						나의 리뷰
+					</button>
 				</li>
 			</ul>
-			</div>
+		</div>
 		</nav>
 
 		<!-- 하위 컨테이너 -->
@@ -74,7 +77,6 @@
 						<div class="card mt-4 mb-3 likeCard" style="max-width: 800px;">
 							<div class="row g-0">
 								<div class="col-md-4">
-									<%--  <img src="${ path }/images/trip/${plan.getLoc().getLocationImage()}" --%>
 									<img
 										src="${ path }/images/trip/${plan.getLoc().getLocationImage()}"
 										class="img-fluid rounded-start imgSize" alt="...">
@@ -88,20 +90,21 @@
 											<div class="card-title text-content mt-3">
 												<h5>${plan.getLoc().getLocation()}</h5>
 											</div>
+											<div class="plannerCard-btns">
+												<button type="button" class="btn btn-secondary btn-plannerDelete"
+													onclick="delPlan(${plan.getPNo()})">삭제</button>
+											</div>
 										</div>
 										<div class="info-container-top">
 											<p class="card-text title">여행 일자</p>
 											<p class="card-text text-content">${plan.getDemo()}</p>
 										</div>
-										<div class="info-container-top">
-											<p class="card-text title">코스</p>
-											<p class="card-text text-content">${plan.getRoute()}</p>
+										<div class="route">
+											<span class="card-text title planRouteTitle">코스</span>
+											<span class="card-text text-content planRoute">${plan.getRoute()}</span>
 										</div>
 									</div>
-									<div class="plannerCard-btns">
-										<button type="button" class="btn btn-secondary"
-											onclick="delPlan(${plan.getPNo()})">삭제</button>
-									</div>
+									
 								</div>
 							</div>
 						</div>
@@ -131,7 +134,7 @@
 					<!-- 여행지 필터 -->
 					<div>
 						<select name="selectBox" id="selectBox"
-							onchange="changeOption(this.value)" style="width: 80px;"
+							onchange="changeOption(this.value)" style="width: 146px;"
 							class="form-control">
 							<c:forEach var="options" items="${options}" varStatus="i">
 					 			<option value="${options.locationId}">${options.location}</option>
@@ -169,9 +172,9 @@
 											<p class="card-text title">도시명</p>
 											<p class="card-text text-content">${trip.getDestCategory()}</p>
 										</div>
-										<div class="info-container-top">
-											<p class="card-text title">주소</p>
-											<p class="card-text text-content">${trip.getDestAddress()}</p>
+										<div class="destAddress">
+											<span class="card-text title">주소</span>
+											<span class="card-text text-content">${trip.getDestAddress()}</span>
 										</div>
 									</div>
 								</div>
@@ -202,19 +205,28 @@
 					<h3 class="section-title">나의 리뷰</h3>
 					<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;">
 						<div>
+							<div class="star-rating">
+								<span class="star">★</span>
+								<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
+							</div>
 							<div class="commentCard-body">
-								<div class="star-rating">
-									<span class="star">★</span>
-									<h5 class="commentsRating">${comments.getCommentsRating()}</h5>
-								</div>
 								<div class="destination">
 									<h4 class="card-title">${comments.getDestSubject()}</h4>
 									<span class="separator">|</span>
 									<h5 class="card-area">${comments.getDestCategory()}</h5>
 								</div>
-								<p class="card-text">${comments.getCommentsContent()}</p>
-								<p class="card-text">
-									<small class="text-muted">${comments.getCommentsCreateDate()}(수정일
+								<p class="card-text commentContent">${comments.getCommentsContent()}</p>
+								<div class="card-btns">
+									<button class="btn btn-outline-warning"
+										data-toggle="modal"
+										onclick="updateSet(${comments.getCommentsId()})"
+										name="${comments.getCommentsId()}"
+										data-target="#updateBackdrop">수정</button>
+									<button type="button" class="btn btn-secondary"
+										onclick="delReview(true, ${comments.getCommentsId()})">삭제</button>
+								</div>
+								<p class="card-text commentDate">
+									<small class="text-muted">${comments.getCommentsCreateDate()} (수정일
 										: ${comments.getCommentsUpdateDate()})</small>
 								</p>
 								<input type="hidden"
@@ -226,16 +238,6 @@
 								<input type="hidden"
 									id="hideCmtDest${comments.getCommentsId()}"
 									value="${comments.getDestNo()}"/> 	
-								<div class="card-btns">
-									<button class="btn btn-outline-warning"
-										data-toggle="modal"
-										onclick="updateSet(${comments.getCommentsId()})"
-										name="${comments.getCommentsId()}"
-										data-target="#updateBackdrop">수정</button>
-
-									<button type="button" class="btn btn-secondary"
-										onclick="delReview(true, ${comments.getCommentsId()})">삭제</button>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -262,7 +264,7 @@
 				aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<div class="modal-header">
+						<div class="modal-header pwdCheckModal">
 							<h5 class="modal-title" id="exampleModalLabel">비밀번호 재확인</h5>
 							<button type="button" class="close" data-dismiss="modal"
 								aria-label="Close">
@@ -323,7 +325,7 @@
 							</form>
 						</div>
 						<div class="modal-footer">
-							<button type="button" id="updateAlert" onclick="updateComment()"
+							<button type="button" id="updateAlert commentUpdate" onclick="updateComment()"
 								class="btn btn-outline-warning">확인</button>
 							<button type="button" class="btn btn-secondary"
 									data-dismiss="modal">취소</button>
@@ -445,20 +447,20 @@
 			                          '<div class="card-title text-content mt-3"> ' +
 			                            '<h5>'+ data.loc.location+'</h5> ' +
 			                          '</div> ' +
+									  '<div class="plannerCard-btns"> '+
+										'<button type="button" class="btn btn-secondary btn-plannerDelete" '+
+										'onclick="delPlan('+ data.pno +')">삭제</button> '+
+									  '</div>' +
 			                        '</div> ' +
 			                        '<div class="info-container-top"> ' +
 									  '<p class="card-text title">여행 일자</p> ' +
 									  '<p class="card-text text-content"> ' + data.demo +' </p> ' +
 								    '</div> ' +									
-			                        '<div class="info-container-top"> ' +
-			                          '<p class="card-text title">코스</p> ' +
-			                          '<p class="card-text text-content"> '+ data.route +' </p> ' +
+			                        '<div class="route"> ' +
+			                          '<span class="card-text title">코스</span> ' +
+			                          '<span class="card-text text-content"> '+ data.route +' </span> ' +
 			                        '</div> ' +
 									'</div> ' +
-			                        '<div class="plannerCard-btns"> '+
-									  '<button type="button" class="btn btn-secondary" '+
-									  'onclick="delPlan('+ data.pno +')">삭제</button> '+
-									'</div>' +
 			                    '</div> ' +
 			                  '</div> ' +
 			                '</div> '+
@@ -488,9 +490,9 @@
 				                        '<p class="card-text title">도시명</p> '+
 				                        '<p class="card-text text-content">'+data.destCategory+'</p> '+
 				                      '</div> '+
-				                      '<div class="info-container-top"> '+
-				                        '<p class="card-text title">주소</p> '+
-				                        '<p class="card-text text-content">'+data.destAddress+'</p> '+
+				                      '<div class="destAddress"> '+
+				                        '<span class="card-text title">주소</span> '+
+				                        '<span class="card-text text-content">'+data.destAddress+'</span> '+
 				                      '</div> '+
 				                    '</div> '+
 				                  '</div> '+
@@ -501,28 +503,27 @@
 						appendData += 
 				         '<div class="card mt-4 mb-2 commentCard" style="max-width: 900px;"> '+
 			              '<div> '+
+							'<div class="star-rating"> ' +
+							  '<span class="star">★</span> ' +
+							  '<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
+							'</div> ' +
 			                '<div class="commentCard-body"> '+
-			                  '<div class="star-rating"> ' +
-							    '<span class="star">★</span> ' +
-							    '<h5 class="commentsRating">'+data.commentsRating+'</h5> ' +
-						      '</div> ' +
 			                  '<div class="destination"> '+
 			                    '<h4 class="card-title">'+data.destSubject+'</h4> '+
 			                    '<span class="separator">|</span> '+
 			                    '<h5 class="card-area">'+data.destCategory+'</h5> '+
 			                  '</div> '+
-			                  '<p class="card-text">'+data.commentsContent+'</p> '+
-			                  '<p class="card-text"><small class="text-muted">'+ data.commentsCreateDate+ '(수정일 : '+data.commentsUpdateDate +'  ) </small></p> '+
-			                  '<input type="hidden" id="hideCmtContent'+ data.commentsId +'" value="'+ data.commentsContent +'"/> ' +  
-			                  '<input type="hidden" id="hideCmtRating'+ data.commentsId +'" value="'+ data.commentsRating +'"/> ' +
-			                  '<input type="hidden" id="hideCmtDest'+ data.commentsId +'" value="'+ data.destNo +'"/> ' +
+			                  '<p class="card-text commentContent">'+data.commentsContent+'</p> '+
 			                  '<div class="card-btns"> '+
 			                  '<button class="btn btn-outline-warning" data-toggle="modal" '+
 									'onclick="updateSet('+ data.commentsId +')" '+
 									'name="'+data.commentsId+'" data-target="#updateBackdrop">수정</button> '+
 			                    '<button type="button" class="btn btn-secondary" onclick="delReview(false, '+data.commentsId+')">삭제</button> '+
-			                    
 			                  '</div> '+
+			                  '<p class="card-text commentDate"><small class="text-muted">'+ data.commentsCreateDate+ ' (수정일 : '+data.commentsUpdateDate +'  ) </small></p> '+
+			                  '<input type="hidden" id="hideCmtContent'+ data.commentsId +'" value="'+ data.commentsContent +'"/> ' +  
+			                  '<input type="hidden" id="hideCmtRating'+ data.commentsId +'" value="'+ data.commentsRating +'"/> ' +
+			                  '<input type="hidden" id="hideCmtDest'+ data.commentsId +'" value="'+ data.destNo +'"/> ' +
 			                '</div> '+
 			              '</div> '+
 			             '</div> '
@@ -549,7 +550,7 @@
 	                	'</div> '
 				}
 				
-				
+
 				// 각자 카드에서 요청한 더보기 ajax 리턴 값을 해당 카드 아래에 append
 				if(select == 'planner'){
 					$("#appendPlan").append(appendData);
@@ -755,24 +756,5 @@
 	      }
 	    });
 	  };
-
-	// 탭 메뉴
-	let horizontalBar = document.getElementById("horizontal-underline");
-	let horizontalMenus = document.querySelectorAll("nav ul li button");
-
-	console.log(horizontalBar);
-	console.log(horizontalMenus);
-
-	function horizontalIndicator(e) {
-		horizontalBar.style.left = e.offsetLeft + "px";
-		horizontalBar.style.width = e.offsetWidth + "px";
-		horizontalBar.style.top = e.offsetTop + e.offsetHeight + "px";
-	}
-
-	horizontalMenus.forEach((menu) =>
-		menu.addEventListener("click", (e) =>
-		horizontalIndicator(e.currentTarget)
-		)
-	);
 
 	</script>

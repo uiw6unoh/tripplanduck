@@ -7,7 +7,7 @@
 
 <jsp:include page="../common/header.jsp" />
 
-<div class="container" style="margin-top: 70px; margin-bottom: 70px;">
+<div class="container" style="margin-top: 70px; margin-bottom: 70px; height:551px">
     <div class="row contatiner">
 
     <!-- 왼쪽 그리드 -->
@@ -34,13 +34,13 @@
             <div class="col-md-6">
                         <p style="margin-top: 6%; margin-bottom: 10px; color: red;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check2" viewBox="0 0 16 16">
                             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
-                        </svg> 리뷰삭제는 리뷰상세에서 가능합니다.</p>
+                        </svg> 삭제 버튼을 클릭 시 리뷰가 삭제됩니다.</p>
             </div>
             <div class="col-md-6">
                 <form action="...">
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; margin-left: 280px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                    <button type="button" class="btn  btn-outline-warning " style="margin-top: 25px; margin-left: 280px; outline: none !important; box-shadow: none !important;background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/reviewLatest'">최신순</button>
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                    <button type="button" class="btn  btn-outline-warning " style="margin-top: 25px; outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/reviewOld'">오래된순</button>
                 </form>
             </div>
@@ -53,7 +53,7 @@
                         <th style="width: 20%; text-align: center;">신고 내용</th>
                         <th style="width: 15%; text-align: center;">신고받은 회원번호</th>
                         <th style="width: 20%; text-align: center;">신고 접수</th>
-                        <th style="width: 10%; text-align: center;">리뷰 상세</th>
+                        <th style="width: 10%; text-align: center;">리뷰 삭제</th>
                     </tr>
                 </thead>
 
@@ -73,8 +73,8 @@
 		                    <td style="text-align: center;">${review.reportMemberNo}</td>
 		                    <td style="text-align: center;">${review.reportCategory}</td>
 		                    <td>
-	                        <button type="button" class="btn  btn-outline-warning btn-warning" onclick="location.href='${path}/detail?reviewNo=${review.reportNoType}'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
-	                            리뷰상세
+	                        <button type="button" class="btn  btn-outline-warning" onclick="location.href='${path}/detail?reviewNo=${review.reportNoType}'" style=" outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: red;">
+	                            리뷰삭제
 	                        </button>
 		                    </td>
 		                </tr>
@@ -89,36 +89,33 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/review?page=1'" 
-					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn" onclick="location.href='${ path }/admin/member?page=1'" style="outline: none !important; box-shadow: none !important;">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/review?page=${ pageInfo.prevPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn" onclick="location.href='${ path }/admin/member?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &lt;</button>
 		
 					<!--  10개 페이지 목록 -->
 					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 						<c:if test="${ status.current == pageInfo.currentPage }">
-							<button class="btn  btn-outline-warning btn-warning" disabled style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+							<button class="btn " disabled style="outline: none !important; box-shadow: none !important;">
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/review?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+							<button class="btn " onclick="location.href='${ path }/admin/member?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/review?page=${ pageInfo.nextPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/review?page=${ pageInfo.maxPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.maxPage }'"
+					 style="outline: none !important; box-shadow: none !important;">
 					 &gt;&gt;</button>
                 </ul>
             </div>

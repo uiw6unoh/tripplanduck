@@ -118,9 +118,11 @@
 					  </ul>
 					</div>
                 </c:if>
+                <c:if test="${ empty loginMember }">
                   <li class="menu-item">
                     <a class="menu-link" href="${path}/member/signup"><div>회원가입</div></a>
                   </li>
+                </c:if>
                 </ul>
               </nav>
               <!-- #primary-menu end -->

@@ -32,11 +32,6 @@ public class AdminController {
 	
 	@Autowired
 	private DestinationService destinationService;
-	
-    @GetMapping("/admin/visitor")
-    public void visitor() {
-		log.info("방문자 관리 페이지"); 
-    }
     
     @GetMapping("/admin/withDuck")
     public ModelAndView withDuck(ModelAndView model,
@@ -114,44 +109,6 @@ public class AdminController {
     	model.setViewName("admin/review");
     	return model;
     }
-    
-	@GetMapping("/detail")
-	public ModelAndView TripDetail(ModelAndView model, @RequestParam(value="reviewNo")int reviewNo,
-			HttpSession session) {
-		Comments comment = service.Category(reviewNo);
-		System.out.println(comment.getDestNo());
-		
-		int destNo = comment.getDestNo();
-		
-		Destination dest = destinationService.getDestination(destNo);
-		destinationService.updateCount(destNo);
-		List<Destination> destnations = destinationService.getDestinationsByCategory(destNo);
-		List<Comments> comments = destinationService.getDestinationComments(destNo);
-		
-		System.out.println("comments : " + comments);
-		int isLike = 0;
-		
-		Member member = (Member)session.getAttribute("loginMember");
-		
-		System.out.println(member);
-		
-		if(member != null) {
-			DestinationLike destinationLike = new DestinationLike();
-			destinationLike.setDestNo(destNo);
-			destinationLike.setMemberNo(member.getMemberNo());
-			isLike = destinationService.isLike(destinationLike);
-			model.addObject("member", member);
-
-		}
-		
-		model.addObject("isLike", isLike);
-		model.addObject("comments", comments);
-		model.addObject("dest", dest);
-		model.addObject("destnations", destnations);
-		model.setViewName("trip/TripDetail");
-		
-		return model;
-	}
     
     @GetMapping("/admin/reviewLatest")
     public ModelAndView reviewLatest(ModelAndView model,
