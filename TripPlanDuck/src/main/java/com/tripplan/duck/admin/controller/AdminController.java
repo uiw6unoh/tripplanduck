@@ -98,7 +98,7 @@ public class AdminController {
     	List<Comments> list = null;
     	PageInfo pageInfo = null;
     	
-    	pageInfo = new PageInfo(page, 10, service.getReviewCount(), 10);
+    	pageInfo = new PageInfo(page, 10, service.getReviewCount(), 4);
     	list = service.getReviewList(pageInfo);
     	
     	System.out.println(pageInfo);
