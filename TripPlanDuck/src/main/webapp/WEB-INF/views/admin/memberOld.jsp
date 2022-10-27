@@ -7,7 +7,7 @@
 
 <jsp:include page="../common/header.jsp" />
 
-<div class="container" style="margin-top: 70px; margin-bottom: 70px;">
+<div class="container" style="margin-top: 70px; margin-bottom: 70px; height:551px">
     <div class="row contatiner">
 
     <!-- 왼쪽 그리드 -->
@@ -38,11 +38,11 @@
             </div>
 	         <div class="col-md-6">
                 <form action="...">
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; margin-left: 220px; outline: none !important; box-shadow: none !important; border: 1px; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                    <button type="button" class="btn  btn-outline-warning" style="margin-top: 20px; margin-left: 220px; outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberLatest'">회원</button>
-                    <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                    <button type="button" class="btn  btn-outline-warning" style="margin-top: 20px; outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberOld'">비회원</button>
-                     <button type="button" class="btn  btn-outline-warning btn-warning" style="margin-top: 25px; border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;"
+                     <button type="button" class="btn  btn-outline-warning" style="margin-top: 20px; outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: black;"
                      onclick="location.href='${ path }/admin/memberReport'">신고 수</button>
                 </form>
             </div>
@@ -78,7 +78,7 @@
 		                    <td style="text-align: center;">${list.memberType}</td>
 		                    <td style="text-align: center;">${list.memberStatus}</td>
 		                    <td>
-	                        <button type="button" class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberInfo?memberNo=${ list.memberNo }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: red;">
+	                         <button type="button" class="btn  btn-outline-warning" onclick="location.href='${ path }/admin/memberInfo?memberNo=${ list.memberNo }'" style="outline: none !important; box-shadow: none !important; background-color: rgb(255,248,198); color: red;">
 	                            회원정보
 	                        </button>
 		                    </td>
@@ -94,36 +94,33 @@
             <div class="col-4">
                 <ul class="pagination justify-content-center">
                     <!-- 맨 처음으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberOld?page=1'" 
-					style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn" onclick="location.href='${ path }/admin/member?page=1'" style="outline: none !important; box-shadow: none !important;">
 					&lt;&lt;</button>
 		
 					<!-- 이전 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberOld?page=${ pageInfo.prevPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn" onclick="location.href='${ path }/admin/member?page=${ pageInfo.prevPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &lt;</button>
 		
 					<!--  10개 페이지 목록 -->
 					<c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" varStatus="status">
 						<c:if test="${ status.current == pageInfo.currentPage }">
-							<button class="btn  btn-outline-warning btn-warning" disabled style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;" >
+							<button class="btn " disabled style="outline: none !important; box-shadow: none !important;">
 							${ status.current }</button>
 						</c:if>
 						<c:if test="${ status.current != pageInfo.currentPage }">
-							<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberOld?page=${ status.current }'" style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+							<button class="btn " onclick="location.href='${ path }/admin/member?page=${ status.current }'" style="outline: none !important; box-shadow: none !important;" >
 							${ status.current }</button>
 						</c:if>
 					</c:forEach>
 		
 		
 					<!-- 다음 페이지로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberOld?page=${ pageInfo.nextPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.nextPage }'" style="outline: none !important; box-shadow: none !important;">
 					 &gt;</button>
 		
 					<!-- 맨 끝으로 -->
-					<button class="btn  btn-outline-warning btn-warning" onclick="location.href='${ path }/admin/memberOld?page=${ pageInfo.maxPage }'"
-					 style="border: 1px; outline: none !important; box-shadow: none !important; border-radius: 12px; background-color: rgb(255,248,198); color: black;">
+					<button class="btn " onclick="location.href='${ path }/admin/member?page=${ pageInfo.maxPage }'"
+					 style="outline: none !important; box-shadow: none !important;">
 					 &gt;&gt;</button>
                 </ul>
             </div>
