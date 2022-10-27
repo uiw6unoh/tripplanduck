@@ -12,7 +12,7 @@
 <body>
 	<!-- 회원 정보 수정 -->
 	<!-- 전체 컨테이너 -->
-	<div class="container">
+	<div class="container" style="height:700px">
 	<main class="form-signup m-auto">
 		<div>
 		<div class="updateFormInfo pt-3">
@@ -47,7 +47,7 @@
               	</tr>
             </table>
             <div class="updateBtn pt-2">
-            	<button type="button" class="btn  btn-outline-warning btn-warning" id="btnDelete" onclick="location.href=''">비회원 전환</button>
+            	<button type="button" class="btn  btn-outline-warning" id="btnDelete" onclick="location.href=''">비회원 전환</button>
             	<button type="button" class="btn btn-secondary" onclick="location.href='${ path }/admin/member'">돌아가기</button>
             </div>
         </form>

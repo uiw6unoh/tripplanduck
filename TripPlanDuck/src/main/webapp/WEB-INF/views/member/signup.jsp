@@ -132,9 +132,9 @@
             </table>
            <div class="checkbox mb-2 mt-4">
              <label>
-               <input type="checkbox" name="privacy_check" id="privacy_check" value="remember-id" required> 개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
+               <input type="checkbox" name="privacy_check" id="privacy_check" value="remember-id" required> <b>(필수)</b>개인정보수집에 동의합니다. <a href="#" class="ml-4" id="privacy" style="color:grey;">보기</a>
                <br>
-               <input class="auto-login" type="checkbox" name="termconditions_check" id="termconditions_check" value="auto-login" required> 이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
+               <input class="auto-login" type="checkbox" name="termconditions_check" id="termconditions_check" value="auto-login" required> <b>(필수)</b>이용약관에 동의합니다. <a href="#" id="termconditions" style="margin-left: 51px; color:grey;">보기</a>
              </label>
            </div>
            <button class="w-50 btn-outline-warning btn-lg mt-2 mb-3" type="button" onclick="signup_check();" style="background-color: #FFF8C6; color:black; border: 1px solid gold;">회원가입</button>
