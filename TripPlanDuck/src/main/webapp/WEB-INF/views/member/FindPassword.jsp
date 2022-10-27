@@ -53,7 +53,7 @@
         </div>
 
         <div class="btns-box">
-          <button class="form-control" type="button" id="back-btn" onclick="history.go(-1);" style="background-color: #FFF8C6; color:black; border: 1px solid gold; margin-bottom: 10px;">뒤로가기</button>
+          <button class="form-control btn btn-secondary" type="button" id="back-btn" onclick="history.go(-1);" style="margin-bottom: 10px;">뒤로가기</button>
         </div>
       </form>
     </div>

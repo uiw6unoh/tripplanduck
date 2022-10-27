@@ -40,7 +40,7 @@
         </div>
 
         <div class="btns-box">
-          <button class="form-control" type="button" id="back-btn" style="background-color: #FFF8C6; color:black; border: 1px solid gold; margin-bottom: 10px;" onclick="history.go(-1);" >뒤로가기</button>
+          <button class="form-control btn btn-secondary" type="button" id="back-btn" style="margin-bottom: 10px;" onclick="history.go(-1);" >뒤로가기</button>
         </div>
       </form>
     </div>
