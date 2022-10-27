@@ -51,7 +51,7 @@
 				
 				<br> <br>
 				
-				<label for="projectName" class="form-label" style="font-size: 2em;">관광지명</label> 
+				<label for="projectName" class="form-label" style="font-size: 2em;">여행지명</label> 
 				
 				<input type="text" required class="form-control" name="destSubject" id="destSubject" placeholder="제목을 적어주세요"> 
 				
