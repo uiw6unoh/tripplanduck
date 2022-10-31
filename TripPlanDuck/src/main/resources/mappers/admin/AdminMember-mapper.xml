@@ -95,6 +95,13 @@
 		)
 	</update>
 	
+	
+	<update id="updateMemberStatus">
+		update member
+			set m_status = 'N'
+			where
+				m_no = #{memberNo}
+	</update>
 	<delete id="memberReportCount3">
 		DELETE 
 		FROM WITHDUK W
